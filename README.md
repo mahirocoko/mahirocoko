@@ -1,10 +1,10 @@
-- 👋 Hi, I’m @mahirocoko
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
+# Cokawa Mahiro
 
-<!---
-mahirocoko/mahirocoko is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+Frontend Developer working at Mars space
+
+<a href="https://github.com/mahirocoko/github-readme-stats">
+  <img align="left" src="https://github-readme-stats.vercel.app/api?username=mahirocoko&count_private=true&theme=dracula" />
+</a>
+<a href="https://github.com/mahirocoko/convoychat">
+  <img align="left" src="https://github-readme-stats.vercel.app/api/top-langs/?username=mahirocoko&hide=jupyter%20notebook" />
+</a>
