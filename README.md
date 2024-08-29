@@ -1,4 +1,4 @@
-# Cokawa Mahiro
+# Mahiro Cokawa
 
 Frontend Developer working at Mars space
 
