@@ -3,1267 +3,6 @@
   "children": [
     {
       "type": "frame",
-      "id": "bi8Au",
-      "x": 0,
-      "y": 0,
-      "name": "Design Kit",
-      "width": 1200,
-      "fill": "#0A0A0A",
-      "layout": "vertical",
-      "gap": 24,
-      "padding": 24,
-      "children": [
-        {
-          "type": "frame",
-          "id": "iGjyP",
-          "name": "header",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 8,
-          "children": [
-            {
-              "type": "text",
-              "id": "qB9ga",
-              "name": "heading",
-              "fill": "#FFFFFF",
-              "textGrowth": "fixed-width",
-              "width": "fill_container",
-              "content": "Aurora Darkbold Kit",
-              "fontFamily": "Space Grotesk",
-              "fontSize": 40,
-              "fontWeight": "700"
-            },
-            {
-              "type": "text",
-              "id": "g3nYr",
-              "name": "subheading",
-              "fill": "#A1A1AA",
-              "textGrowth": "fixed-width",
-              "width": "fill_container",
-              "content": "Mobile-3-darkbold inspired palette and components",
-              "fontFamily": "Manrope",
-              "fontSize": 16,
-              "fontWeight": "normal"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "puBtX",
-          "name": "Foundations",
-          "width": "fill_container",
-          "fill": "#18181B",
-          "cornerRadius": 12,
-          "stroke": {
-            "align": "inside",
-            "thickness": 1,
-            "fill": "#27272A"
-          },
-          "layout": "vertical",
-          "gap": 20,
-          "padding": 20,
-          "children": [
-            {
-              "type": "text",
-              "id": "cV2UE",
-              "name": "tokensTitle",
-              "fill": "#FFFFFF",
-              "textGrowth": "fixed-width",
-              "width": "fill_container",
-              "content": "Foundations",
-              "fontFamily": "Space Grotesk",
-              "fontSize": 24,
-              "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "V4eCL",
-              "name": "colorRow",
-              "width": "fill_container",
-              "height": 96,
-              "gap": 12,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "ovL2P",
-                  "name": "swatch1",
-                  "width": "fill_container",
-                  "height": "fill_container",
-                  "fill": "#22C55E",
-                  "cornerRadius": 8
-                },
-                {
-                  "type": "frame",
-                  "id": "S1noq",
-                  "name": "swatch2",
-                  "width": "fill_container",
-                  "height": "fill_container",
-                  "fill": "#4ADE80",
-                  "cornerRadius": 8
-                },
-                {
-                  "type": "frame",
-                  "id": "PsGGt",
-                  "name": "swatch3",
-                  "width": "fill_container",
-                  "height": "fill_container",
-                  "fill": "#18181B",
-                  "cornerRadius": 8,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "#27272A"
-                  }
-                },
-                {
-                  "type": "frame",
-                  "id": "eGGB6",
-                  "name": "swatch4",
-                  "width": "fill_container",
-                  "height": "fill_container",
-                  "fill": "#0A0A0A",
-                  "cornerRadius": 8
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "nqJXV",
-              "name": "typeRow",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 8,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "aJkbz",
-                  "name": "typeSample1",
-                  "fill": "#FFFFFF",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Display / Space Grotesk 32 Bold",
-                  "fontFamily": "Space Grotesk",
-                  "fontSize": 32,
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "Iy5A3",
-                  "name": "typeSample2",
-                  "fill": "#A1A1AA",
-                  "textGrowth": "fixed-width",
-                  "width": "fill_container",
-                  "content": "Body / Manrope 16 Regular",
-                  "fontFamily": "Manrope",
-                  "fontSize": 16,
-                  "fontWeight": "normal"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "XEgpd",
-              "name": "Spacing Scale",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 8,
-              "children": [
-                {
-                  "type": "text",
-                  "id": "UYjYv",
-                  "fill": "#E7F0E8",
-                  "content": "Spacing Scale",
-                  "fontFamily": "Space Grotesk",
-                  "fontSize": 14,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "yHPk7",
-                  "width": "fill_container",
-                  "gap": 16,
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "Qj9y6",
-                      "width": 8,
-                      "height": 20,
-                      "fill": "#22C55E",
-                      "cornerRadius": 999
-                    },
-                    {
-                      "type": "text",
-                      "id": "sg3Qo",
-                      "fill": "#A1A1AA",
-                      "content": "space.2 = 8px",
-                      "fontFamily": "Manrope",
-                      "fontSize": 12,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "P3FJf",
-                      "width": 16,
-                      "height": 20,
-                      "fill": "#22C55E",
-                      "cornerRadius": 999
-                    },
-                    {
-                      "type": "text",
-                      "id": "x5oI6",
-                      "fill": "#A1A1AA",
-                      "content": "space.4 = 16px",
-                      "fontFamily": "Manrope",
-                      "fontSize": 12,
-                      "fontWeight": "normal"
-                    },
-                    {
-                      "type": "frame",
-                      "id": "ng4G1",
-                      "width": 24,
-                      "height": 20,
-                      "fill": "#22C55E",
-                      "cornerRadius": 999
-                    },
-                    {
-                      "type": "text",
-                      "id": "rsSof",
-                      "fill": "#A1A1AA",
-                      "content": "space.6 = 24px",
-                      "fontFamily": "Manrope",
-                      "fontSize": 12,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "text",
-              "id": "X4SVy",
-              "name": "legendTitle",
-              "fill": "#FFFFFF",
-              "content": "Color Foundations (Named)",
-              "fontFamily": "Space Grotesk",
-              "fontSize": 18,
-              "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "zd3zM",
-              "name": "brandSection",
-              "width": "fill_container",
-              "stroke": {
-                "align": "inside",
-                "thickness": {
-                  "top": 1
-                },
-                "fill": "#27272A"
-              },
-              "layout": "vertical",
-              "gap": 10,
-              "padding": [
-                10,
-                0,
-                0,
-                0
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "id": "RkPk0",
-                  "name": "brandTitle",
-                  "fill": "#FFFFFF",
-                  "content": "Brand Colors",
-                  "fontFamily": "Space Grotesk",
-                  "fontSize": 14,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "JBt5c",
-                  "name": "brandRow",
-                  "width": "fill_container",
-                  "gap": 10,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "KHySE",
-                      "name": "b1",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "rBQJZ",
-                          "name": "b1sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#22C55E",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "XA0fx",
-                          "name": "b1n",
-                          "fill": "#FFFFFF",
-                          "content": "Primary",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "2u02x",
-                          "name": "b1t",
-                          "fill": "#A1A1AA",
-                          "content": "color.primary #22C55E",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "micgb",
-                      "name": "b2",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "tlF0Q",
-                          "name": "b2sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#4ADE80",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "VQ2sH",
-                          "name": "b2n",
-                          "fill": "#FFFFFF",
-                          "content": "Primary Strong",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "VlQz3",
-                          "name": "b2t",
-                          "fill": "#A1A1AA",
-                          "content": "color.primary-strong #4ADE80",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "tWa8h",
-                      "name": "b3",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "Sqqpf",
-                          "name": "b3sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#1B2A24",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "sgkRT",
-                          "name": "b3n",
-                          "fill": "#FFFFFF",
-                          "content": "Secondary",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "R0nvb",
-                          "name": "b3t",
-                          "fill": "#A1A1AA",
-                          "content": "color.secondary #ECFDF5",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "ZEqnG",
-                      "name": "b4",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "HD8pT",
-                          "name": "b4sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#173127",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "NaWgx",
-                          "name": "b4n",
-                          "fill": "#FFFFFF",
-                          "content": "Accent",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "diOON",
-                          "name": "b4t",
-                          "fill": "#A1A1AA",
-                          "content": "color.accent #DCFCE7",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "pTsmF",
-              "name": "semanticSection",
-              "width": "fill_container",
-              "stroke": {
-                "align": "inside",
-                "thickness": {
-                  "top": 1
-                },
-                "fill": "#27272A"
-              },
-              "layout": "vertical",
-              "gap": 10,
-              "padding": [
-                10,
-                0,
-                0,
-                0
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "id": "FUPzl",
-                  "name": "semanticTitle",
-                  "fill": "#FFFFFF",
-                  "content": "Semantic Colors",
-                  "fontFamily": "Space Grotesk",
-                  "fontSize": 14,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "z6GVR",
-                  "name": "semanticRow",
-                  "width": "fill_container",
-                  "gap": 10,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "wCNmn",
-                      "name": "s1",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "6reNw",
-                          "name": "s1sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#0B1220",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "Voikh",
-                          "name": "s1n",
-                          "fill": "#FFFFFF",
-                          "content": "Background",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "TG3TR",
-                          "name": "s1t",
-                          "fill": "#A1A1AA",
-                          "content": "color.background #050706",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "3RdK8",
-                      "name": "s2",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "PZ6I1",
-                          "name": "s2sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#1F2937",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "yyzGc",
-                          "name": "s2n",
-                          "fill": "#FFFFFF",
-                          "content": "Muted",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "OTDWm",
-                          "name": "s2t",
-                          "fill": "#A1A1AA",
-                          "content": "color.muted #F0FDF4",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "h3jz2",
-                      "name": "s3",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "gwKUy",
-                          "name": "s3sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#EF4444",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "7uT5Q",
-                          "name": "s3n",
-                          "fill": "#FFFFFF",
-                          "content": "Destructive",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "1mSBn",
-                          "name": "s3t",
-                          "fill": "#A1A1AA",
-                          "content": "color.destructive #DC2626",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "q3CpC",
-                      "name": "s4",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "FQHaF",
-                          "name": "s4sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#27332B",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "iF5Gj",
-                          "name": "s4n",
-                          "fill": "#FFFFFF",
-                          "content": "Border",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "aCRlB",
-                          "name": "s4t",
-                          "fill": "#A1A1AA",
-                          "content": "color.border #BBF7D0",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "QD8oI",
-              "name": "stateSection",
-              "width": "fill_container",
-              "stroke": {
-                "align": "inside",
-                "thickness": {
-                  "top": 1
-                },
-                "fill": "#27272A"
-              },
-              "layout": "vertical",
-              "gap": 10,
-              "padding": [
-                10,
-                0,
-                0,
-                0
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "id": "oAJnp",
-                  "name": "stateTitle",
-                  "fill": "#FFFFFF",
-                  "content": "State Colors",
-                  "fontFamily": "Space Grotesk",
-                  "fontSize": 14,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "i6uic",
-                  "name": "stateRow",
-                  "width": "fill_container",
-                  "gap": 10,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "riiL2",
-                      "name": "st1",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "7Fz8F",
-                          "name": "st1sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#22C55E",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "XI45R",
-                          "name": "st1n",
-                          "fill": "#FFFFFF",
-                          "content": "Success",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "xLIu7",
-                          "name": "st1t",
-                          "fill": "#A1A1AA",
-                          "content": "color.success #16A34A",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "gUwEI",
-                      "name": "st2",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "CLjrc",
-                          "name": "st2sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#F59E0B",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "XZNLK",
-                          "name": "st2n",
-                          "fill": "#FFFFFF",
-                          "content": "Warning",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "7sgHB",
-                          "name": "st2t",
-                          "fill": "#A1A1AA",
-                          "content": "color.warning #D97706",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "RHfxv",
-                      "name": "st3",
-                      "width": "fill_container",
-                      "height": 140,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "layout": "vertical",
-                      "gap": 6,
-                      "padding": 8,
-                      "children": [
-                        {
-                          "type": "frame",
-                          "id": "hhxwN",
-                          "name": "st3sw",
-                          "width": "fill_container",
-                          "height": 56,
-                          "fill": "#38BDF8",
-                          "cornerRadius": 8
-                        },
-                        {
-                          "type": "text",
-                          "id": "nAEQx",
-                          "name": "st3n",
-                          "fill": "#FFFFFF",
-                          "content": "Info",
-                          "fontFamily": "Manrope",
-                          "fontSize": 12,
-                          "fontWeight": "600"
-                        },
-                        {
-                          "type": "text",
-                          "id": "zXyjb",
-                          "name": "st3t",
-                          "fill": "#A1A1AA",
-                          "content": "color.info #0284C7",
-                          "fontFamily": "Manrope",
-                          "fontSize": 11,
-                          "fontWeight": "normal"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "Epxak",
-              "name": "chartSection",
-              "width": "fill_container",
-              "stroke": {
-                "align": "inside",
-                "thickness": {
-                  "top": 1
-                },
-                "fill": "#27272A"
-              },
-              "layout": "vertical",
-              "gap": 10,
-              "padding": [
-                10,
-                0,
-                0,
-                0
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "id": "kgUZ5",
-                  "name": "chartTitle",
-                  "fill": "#FFFFFF",
-                  "content": "Chart Colors",
-                  "fontFamily": "Space Grotesk",
-                  "fontSize": 14,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "a62Hg",
-                  "name": "chartRow",
-                  "width": "fill_container",
-                  "layout": "vertical",
-                  "gap": 4,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "H9ePA",
-                      "name": "ch1",
-                      "fill": "#86EFAC",
-                      "content": "chart.1 #86EFAC",
-                      "fontFamily": "Manrope",
-                      "fontSize": 12,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "WEBBc",
-                      "name": "ch2",
-                      "fill": "#22C55E",
-                      "content": "chart.2 #22C55E",
-                      "fontFamily": "Manrope",
-                      "fontSize": 12,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "pzslN",
-                      "name": "ch3",
-                      "fill": "#16A34A",
-                      "content": "chart.3 #16A34A",
-                      "fontFamily": "Manrope",
-                      "fontSize": 12,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "xkeUE",
-                      "name": "ch4",
-                      "fill": "#F59E0B",
-                      "content": "chart.4 #F59E0B",
-                      "fontFamily": "Manrope",
-                      "fontSize": 12,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "3MAZt",
-                      "name": "ch5",
-                      "fill": "#0EA5E9",
-                      "content": "chart.5 #0EA5E9",
-                      "fontFamily": "Manrope",
-                      "fontSize": 12,
-                      "fontWeight": "600"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "jnued",
-          "name": "Component Catalog",
-          "width": "fill_container",
-          "fill": "#18181B",
-          "cornerRadius": 12,
-          "stroke": {
-            "align": "inside",
-            "thickness": 1,
-            "fill": "#27272A"
-          },
-          "layout": "vertical",
-          "gap": 16,
-          "padding": 20,
-          "children": [
-            {
-              "type": "text",
-              "id": "cyUop",
-              "name": "componentsTitle",
-              "fill": "#FFFFFF",
-              "textGrowth": "fixed-width",
-              "width": "fill_container",
-              "content": "Component Catalog",
-              "fontFamily": "Space Grotesk",
-              "fontSize": 24,
-              "fontWeight": "600"
-            },
-            {
-              "type": "frame",
-              "id": "twCZ6",
-              "name": "Component Playground",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 20,
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "NSVlQ",
-                  "name": "btnRow",
-                  "width": "fill_container",
-                  "gap": 12,
-                  "children": [
-                    {
-                      "type": "frame",
-                      "id": "KJoSV",
-                      "name": "Button/Primary",
-                      "reusable": true,
-                      "width": 160,
-                      "height": 44,
-                      "fill": "#22C55E",
-                      "cornerRadius": 8,
-                      "padding": [
-                        10,
-                        16
-                      ],
-                      "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "KhMrq",
-                          "name": "btnPrimaryLabel",
-                          "fill": "#052E16",
-                          "content": "Button",
-                          "fontFamily": "Space Grotesk",
-                          "fontSize": 15,
-                          "fontWeight": "600"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "zvbVw",
-                      "name": "Button/Secondary",
-                      "reusable": true,
-                      "width": 160,
-                      "height": 44,
-                      "fill": "#18181B",
-                      "cornerRadius": 8,
-                      "stroke": {
-                        "align": "inside",
-                        "thickness": 1,
-                        "fill": "#27272A"
-                      },
-                      "padding": [
-                        10,
-                        16
-                      ],
-                      "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "text",
-                          "id": "fCteu",
-                          "name": "btnSecondaryLabel",
-                          "fill": "#FFFFFF",
-                          "content": "Button",
-                          "fontFamily": "Space Grotesk",
-                          "fontSize": 15,
-                          "fontWeight": "600"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "XbkQ5",
-                  "name": "Input/Default",
-                  "reusable": true,
-                  "width": 360,
-                  "height": 48,
-                  "fill": "#18181B",
-                  "cornerRadius": 8,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "#27272A"
-                  },
-                  "padding": [
-                    0,
-                    14
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "V3iSO",
-                      "name": "inputText",
-                      "fill": "#A1A1AA",
-                      "content": "Placeholder",
-                      "fontFamily": "Manrope",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "qERdm",
-                  "name": "Badge/Neutral",
-                  "reusable": true,
-                  "width": 112,
-                  "height": 30,
-                  "fill": "#0A0A0A",
-                  "cornerRadius": 999,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "#27272A"
-                  },
-                  "padding": [
-                    6,
-                    10
-                  ],
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "tvsMS",
-                      "name": "badgeText",
-                      "fill": "#FFFFFF",
-                      "content": "Neutral",
-                      "fontFamily": "Manrope",
-                      "fontSize": 12,
-                      "fontWeight": "600"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "5lKcG",
-                  "name": "Card/Base",
-                  "reusable": true,
-                  "width": 360,
-                  "height": 200,
-                  "fill": "#18181B",
-                  "cornerRadius": 12,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 1,
-                    "fill": "#27272A"
-                  },
-                  "layout": "vertical",
-                  "gap": 12,
-                  "padding": 20,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "RHfJ8",
-                      "name": "cardTitle",
-                      "fill": "#FFFFFF",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "Card title",
-                      "fontFamily": "Space Grotesk",
-                      "fontSize": 18,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "Z92S8",
-                      "name": "cardBody",
-                      "fill": "#A1A1AA",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "Use this card as a reusable container for settings, metrics, or content blocks.",
-                      "fontFamily": "Manrope",
-                      "fontSize": 14,
-                      "fontWeight": "normal"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "2uVNv",
-                  "name": "previewTitle",
-                  "fill": "#FFFFFF",
-                  "content": "Usage Examples",
-                  "fontFamily": "Space Grotesk",
-                  "fontSize": 18,
-                  "fontWeight": "600"
-                },
-                {
-                  "type": "frame",
-                  "id": "7PFg5",
-                  "name": "previewRow",
-                  "width": "fill_container",
-                  "gap": 12,
-                  "children": [
-                    {
-                      "id": "h3RY4",
-                      "type": "ref",
-                      "ref": "KJoSV",
-                      "width": 160,
-                      "height": 44,
-                      "name": "p1"
-                    },
-                    {
-                      "id": "P9L7C",
-                      "type": "ref",
-                      "ref": "zvbVw",
-                      "width": 160,
-                      "height": 44,
-                      "name": "p2"
-                    },
-                    {
-                      "id": "1W58j",
-                      "type": "ref",
-                      "ref": "XbkQ5",
-                      "width": 280,
-                      "height": 48,
-                      "name": "p3"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
       "id": "EFpZ3",
       "x": 1320,
       "y": 0,
@@ -1285,7 +24,7 @@
           "name": "libTitle",
           "fill": "#E7F0E8",
           "content": "Color Source Library",
-          "fontFamily": "Space Grotesk",
+          "fontFamily": "Noto Sans Thai",
           "fontSize": 32,
           "fontWeight": "700"
         },
@@ -1294,8 +33,8 @@
           "id": "JzazO",
           "name": "libSub",
           "fill": "#A1A1AA",
-          "content": "Tailwind full shade ramps for color grooming",
-          "fontFamily": "Manrope",
+          "content": "Tailwind full shade ramps สำหรับปรับจูนพาเลต",
+          "fontFamily": "Noto Sans Thai",
           "fontSize": 14,
           "fontWeight": "normal"
         },
@@ -1321,7 +60,7 @@
               "name": "twTitle",
               "fill": "#E7F0E8",
               "content": "Tailwind Shading (All Colors)",
-              "fontFamily": "Space Grotesk",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 20,
               "fontWeight": "600"
             },
@@ -1331,7 +70,7 @@
               "name": "shadeLegend",
               "fill": "#A1A1AA",
               "content": "Shades: 50 100 200 300 400 500 600 700 800 900",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 12,
               "fontWeight": "normal"
             },
@@ -1341,7 +80,7 @@
               "name": "greenLabel",
               "fill": "#E7F0E8",
               "content": "Green (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -1465,7 +204,7 @@
                   "width": 106.6,
                   "content": "50\n#F0FDF4",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1477,7 +216,7 @@
                   "width": 106.6,
                   "content": "100\n#DCFCE7",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1489,7 +228,7 @@
                   "width": 106.6,
                   "content": "200\n#BBF7D0",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1501,7 +240,7 @@
                   "width": 106.6,
                   "content": "300\n#86EFAC",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1513,7 +252,7 @@
                   "width": 106.6,
                   "content": "400\n#4ADE80",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1525,7 +264,7 @@
                   "width": 106.6,
                   "content": "500\n#22C55E",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1537,7 +276,7 @@
                   "width": 106.6,
                   "content": "600\n#16A34A",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1549,7 +288,7 @@
                   "width": 106.6,
                   "content": "700\n#15803D",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1561,7 +300,7 @@
                   "width": 106.6,
                   "content": "800\n#166534",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1573,7 +312,7 @@
                   "width": 106.6,
                   "content": "900\n#14532D",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -1585,7 +324,7 @@
               "name": "emeraldLabel",
               "fill": "#E7F0E8",
               "content": "Emerald (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -1709,7 +448,7 @@
                   "width": 106.6,
                   "content": "50\n#ECFDF5",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1721,7 +460,7 @@
                   "width": 106.6,
                   "content": "100\n#D1FAE5",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1733,7 +472,7 @@
                   "width": 106.6,
                   "content": "200\n#A7F3D0",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1745,7 +484,7 @@
                   "width": 106.6,
                   "content": "300\n#6EE7B7",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1757,7 +496,7 @@
                   "width": 106.6,
                   "content": "400\n#34D399",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1769,7 +508,7 @@
                   "width": 106.6,
                   "content": "500\n#10B981",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1781,7 +520,7 @@
                   "width": 106.6,
                   "content": "600\n#059669",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1793,7 +532,7 @@
                   "width": 106.6,
                   "content": "700\n#047857",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1805,7 +544,7 @@
                   "width": 106.6,
                   "content": "800\n#065F46",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1817,7 +556,7 @@
                   "width": 106.6,
                   "content": "900\n#064E3B",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -1829,7 +568,7 @@
               "name": "slateLabel",
               "fill": "#E7F0E8",
               "content": "Slate (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -1953,7 +692,7 @@
                   "width": 106.6,
                   "content": "50\n#F8FAFC",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1965,7 +704,7 @@
                   "width": 106.6,
                   "content": "100\n#F1F5F9",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1977,7 +716,7 @@
                   "width": 106.6,
                   "content": "200\n#E2E8F0",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -1989,7 +728,7 @@
                   "width": 106.6,
                   "content": "300\n#CBD5E1",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2001,7 +740,7 @@
                   "width": 106.6,
                   "content": "400\n#94A3B8",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2013,7 +752,7 @@
                   "width": 106.6,
                   "content": "500\n#64748B",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2025,7 +764,7 @@
                   "width": 106.6,
                   "content": "600\n#475569",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2037,7 +776,7 @@
                   "width": 106.6,
                   "content": "700\n#334155",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2049,7 +788,7 @@
                   "width": 106.6,
                   "content": "800\n#1E293B",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2061,7 +800,7 @@
                   "width": 106.6,
                   "content": "900\n#0F172A",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -2073,7 +812,7 @@
               "name": "grayLabel",
               "fill": "#E7F0E8",
               "content": "Gray (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -2197,7 +936,7 @@
                   "width": 106.6,
                   "content": "50\n#F9FAFB",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2209,7 +948,7 @@
                   "width": 106.6,
                   "content": "100\n#F3F4F6",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2221,7 +960,7 @@
                   "width": 106.6,
                   "content": "200\n#E5E7EB",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2233,7 +972,7 @@
                   "width": 106.6,
                   "content": "300\n#D1D5DB",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2245,7 +984,7 @@
                   "width": 106.6,
                   "content": "400\n#9CA3AF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2257,7 +996,7 @@
                   "width": 106.6,
                   "content": "500\n#6B7280",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2269,7 +1008,7 @@
                   "width": 106.6,
                   "content": "600\n#4B5563",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2281,7 +1020,7 @@
                   "width": 106.6,
                   "content": "700\n#374151",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2293,7 +1032,7 @@
                   "width": 106.6,
                   "content": "800\n#1F2937",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2305,7 +1044,7 @@
                   "width": 106.6,
                   "content": "900\n#111827",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -2317,7 +1056,7 @@
               "name": "zincLabel",
               "fill": "#E7F0E8",
               "content": "Zinc (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -2441,7 +1180,7 @@
                   "width": 106.6,
                   "content": "50\n#FAFAFA",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2453,7 +1192,7 @@
                   "width": 106.6,
                   "content": "100\n#F4F4F5",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2465,7 +1204,7 @@
                   "width": 106.6,
                   "content": "200\n#E4E4E7",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2477,7 +1216,7 @@
                   "width": 106.6,
                   "content": "300\n#D4D4D8",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2489,7 +1228,7 @@
                   "width": 106.6,
                   "content": "400\n#A1A1AA",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2501,7 +1240,7 @@
                   "width": 106.6,
                   "content": "500\n#71717A",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2513,7 +1252,7 @@
                   "width": 106.6,
                   "content": "600\n#52525B",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2525,7 +1264,7 @@
                   "width": 106.6,
                   "content": "700\n#3F3F46",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2537,7 +1276,7 @@
                   "width": 106.6,
                   "content": "800\n#27272A",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2549,7 +1288,7 @@
                   "width": 106.6,
                   "content": "900\n#18181B",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -2561,7 +1300,7 @@
               "name": "neutralLabel",
               "fill": "#E7F0E8",
               "content": "Neutral (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -2685,7 +1424,7 @@
                   "width": 106.6,
                   "content": "50\n#FAFAFA",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2697,7 +1436,7 @@
                   "width": 106.6,
                   "content": "100\n#F5F5F5",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2709,7 +1448,7 @@
                   "width": 106.6,
                   "content": "200\n#E5E5E5",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2721,7 +1460,7 @@
                   "width": 106.6,
                   "content": "300\n#D4D4D4",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2733,7 +1472,7 @@
                   "width": 106.6,
                   "content": "400\n#A3A3A3",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2745,7 +1484,7 @@
                   "width": 106.6,
                   "content": "500\n#737373",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2757,7 +1496,7 @@
                   "width": 106.6,
                   "content": "600\n#525252",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2769,7 +1508,7 @@
                   "width": 106.6,
                   "content": "700\n#404040",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2781,7 +1520,7 @@
                   "width": 106.6,
                   "content": "800\n#262626",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2793,7 +1532,7 @@
                   "width": 106.6,
                   "content": "900\n#171717",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -2805,7 +1544,7 @@
               "name": "stoneLabel",
               "fill": "#E7F0E8",
               "content": "Stone (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -2929,7 +1668,7 @@
                   "width": 106.6,
                   "content": "50\n#FAFAF9",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2941,7 +1680,7 @@
                   "width": 106.6,
                   "content": "100\n#F5F5F4",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2953,7 +1692,7 @@
                   "width": 106.6,
                   "content": "200\n#E7E5E4",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2965,7 +1704,7 @@
                   "width": 106.6,
                   "content": "300\n#D6D3D1",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2977,7 +1716,7 @@
                   "width": 106.6,
                   "content": "400\n#A8A29E",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -2989,7 +1728,7 @@
                   "width": 106.6,
                   "content": "500\n#78716C",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3001,7 +1740,7 @@
                   "width": 106.6,
                   "content": "600\n#57534E",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3013,7 +1752,7 @@
                   "width": 106.6,
                   "content": "700\n#44403C",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3025,7 +1764,7 @@
                   "width": 106.6,
                   "content": "800\n#292524",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3037,7 +1776,7 @@
                   "width": 106.6,
                   "content": "900\n#1C1917",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -3049,7 +1788,7 @@
               "name": "redLabel",
               "fill": "#E7F0E8",
               "content": "Red (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -3173,7 +1912,7 @@
                   "width": 106.6,
                   "content": "50\n#FEF2F2",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3185,7 +1924,7 @@
                   "width": 106.6,
                   "content": "100\n#FEE2E2",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3197,7 +1936,7 @@
                   "width": 106.6,
                   "content": "200\n#FECACA",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3209,7 +1948,7 @@
                   "width": 106.6,
                   "content": "300\n#FCA5A5",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3221,7 +1960,7 @@
                   "width": 106.6,
                   "content": "400\n#F87171",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3233,7 +1972,7 @@
                   "width": 106.6,
                   "content": "500\n#EF4444",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3245,7 +1984,7 @@
                   "width": 106.6,
                   "content": "600\n#DC2626",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3257,7 +1996,7 @@
                   "width": 106.6,
                   "content": "700\n#B91C1C",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3269,7 +2008,7 @@
                   "width": 106.6,
                   "content": "800\n#991B1B",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3281,7 +2020,7 @@
                   "width": 106.6,
                   "content": "900\n#7F1D1D",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -3293,7 +2032,7 @@
               "name": "orangeLabel",
               "fill": "#E7F0E8",
               "content": "Orange (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -3417,7 +2156,7 @@
                   "width": 106.6,
                   "content": "50\n#FFF7ED",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3429,7 +2168,7 @@
                   "width": 106.6,
                   "content": "100\n#FFEDD5",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3441,7 +2180,7 @@
                   "width": 106.6,
                   "content": "200\n#FED7AA",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3453,7 +2192,7 @@
                   "width": 106.6,
                   "content": "300\n#FDBA74",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3465,7 +2204,7 @@
                   "width": 106.6,
                   "content": "400\n#FB923C",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3477,7 +2216,7 @@
                   "width": 106.6,
                   "content": "500\n#F97316",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3489,7 +2228,7 @@
                   "width": 106.6,
                   "content": "600\n#EA580C",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3501,7 +2240,7 @@
                   "width": 106.6,
                   "content": "700\n#C2410C",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3513,7 +2252,7 @@
                   "width": 106.6,
                   "content": "800\n#9A3412",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3525,7 +2264,7 @@
                   "width": 106.6,
                   "content": "900\n#7C2D12",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -3537,7 +2276,7 @@
               "name": "amberLabel",
               "fill": "#E7F0E8",
               "content": "Amber (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -3661,7 +2400,7 @@
                   "width": 106.6,
                   "content": "50\n#FFFBEB",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3673,7 +2412,7 @@
                   "width": 106.6,
                   "content": "100\n#FEF3C7",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3685,7 +2424,7 @@
                   "width": 106.6,
                   "content": "200\n#FDE68A",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3697,7 +2436,7 @@
                   "width": 106.6,
                   "content": "300\n#FCD34D",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3709,7 +2448,7 @@
                   "width": 106.6,
                   "content": "400\n#FBBF24",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3721,7 +2460,7 @@
                   "width": 106.6,
                   "content": "500\n#F59E0B",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3733,7 +2472,7 @@
                   "width": 106.6,
                   "content": "600\n#D97706",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3745,7 +2484,7 @@
                   "width": 106.6,
                   "content": "700\n#B45309",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3757,7 +2496,7 @@
                   "width": 106.6,
                   "content": "800\n#92400E",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3769,7 +2508,7 @@
                   "width": 106.6,
                   "content": "900\n#78350F",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -3781,7 +2520,7 @@
               "name": "yellowLabel",
               "fill": "#E7F0E8",
               "content": "Yellow (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -3905,7 +2644,7 @@
                   "width": 106.6,
                   "content": "50\n#FEFCE8",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3917,7 +2656,7 @@
                   "width": 106.6,
                   "content": "100\n#FEF9C3",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3929,7 +2668,7 @@
                   "width": 106.6,
                   "content": "200\n#FEF08A",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3941,7 +2680,7 @@
                   "width": 106.6,
                   "content": "300\n#FDE047",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3953,7 +2692,7 @@
                   "width": 106.6,
                   "content": "400\n#FACC15",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3965,7 +2704,7 @@
                   "width": 106.6,
                   "content": "500\n#EAB308",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3977,7 +2716,7 @@
                   "width": 106.6,
                   "content": "600\n#CA8A04",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -3989,7 +2728,7 @@
                   "width": 106.6,
                   "content": "700\n#A16207",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4001,7 +2740,7 @@
                   "width": 106.6,
                   "content": "800\n#854D0E",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4013,7 +2752,7 @@
                   "width": 106.6,
                   "content": "900\n#713F12",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -4025,7 +2764,7 @@
               "name": "limeLabel",
               "fill": "#E7F0E8",
               "content": "Lime (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -4149,7 +2888,7 @@
                   "width": 106.6,
                   "content": "50\n#F7FEE7",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4161,7 +2900,7 @@
                   "width": 106.6,
                   "content": "100\n#ECFCCB",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4173,7 +2912,7 @@
                   "width": 106.6,
                   "content": "200\n#D9F99D",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4185,7 +2924,7 @@
                   "width": 106.6,
                   "content": "300\n#BEF264",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4197,7 +2936,7 @@
                   "width": 106.6,
                   "content": "400\n#A3E635",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4209,7 +2948,7 @@
                   "width": 106.6,
                   "content": "500\n#84CC16",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4221,7 +2960,7 @@
                   "width": 106.6,
                   "content": "600\n#65A30D",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4233,7 +2972,7 @@
                   "width": 106.6,
                   "content": "700\n#4D7C0F",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4245,7 +2984,7 @@
                   "width": 106.6,
                   "content": "800\n#3F6212",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4257,7 +2996,7 @@
                   "width": 106.6,
                   "content": "900\n#365314",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -4269,7 +3008,7 @@
               "name": "tealLabel",
               "fill": "#E7F0E8",
               "content": "Teal (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -4393,7 +3132,7 @@
                   "width": 106.6,
                   "content": "50\n#F0FDFA",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4405,7 +3144,7 @@
                   "width": 106.6,
                   "content": "100\n#CCFBF1",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4417,7 +3156,7 @@
                   "width": 106.6,
                   "content": "200\n#99F6E4",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4429,7 +3168,7 @@
                   "width": 106.6,
                   "content": "300\n#5EEAD4",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4441,7 +3180,7 @@
                   "width": 106.6,
                   "content": "400\n#2DD4BF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4453,7 +3192,7 @@
                   "width": 106.6,
                   "content": "500\n#14B8A6",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4465,7 +3204,7 @@
                   "width": 106.6,
                   "content": "600\n#0D9488",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4477,7 +3216,7 @@
                   "width": 106.6,
                   "content": "700\n#0F766E",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4489,7 +3228,7 @@
                   "width": 106.6,
                   "content": "800\n#115E59",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4501,7 +3240,7 @@
                   "width": 106.6,
                   "content": "900\n#134E4A",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -4513,7 +3252,7 @@
               "name": "cyanLabel",
               "fill": "#E7F0E8",
               "content": "Cyan (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -4637,7 +3376,7 @@
                   "width": 106.6,
                   "content": "50\n#ECFEFF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4649,7 +3388,7 @@
                   "width": 106.6,
                   "content": "100\n#CFFAFE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4661,7 +3400,7 @@
                   "width": 106.6,
                   "content": "200\n#A5F3FC",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4673,7 +3412,7 @@
                   "width": 106.6,
                   "content": "300\n#67E8F9",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4685,7 +3424,7 @@
                   "width": 106.6,
                   "content": "400\n#22D3EE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4697,7 +3436,7 @@
                   "width": 106.6,
                   "content": "500\n#06B6D4",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4709,7 +3448,7 @@
                   "width": 106.6,
                   "content": "600\n#0891B2",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4721,7 +3460,7 @@
                   "width": 106.6,
                   "content": "700\n#0E7490",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4733,7 +3472,7 @@
                   "width": 106.6,
                   "content": "800\n#155E75",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4745,7 +3484,7 @@
                   "width": 106.6,
                   "content": "900\n#164E63",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -4757,7 +3496,7 @@
               "name": "skyLabel",
               "fill": "#E7F0E8",
               "content": "Sky (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -4881,7 +3620,7 @@
                   "width": 106.6,
                   "content": "50\n#F0F9FF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4893,7 +3632,7 @@
                   "width": 106.6,
                   "content": "100\n#E0F2FE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4905,7 +3644,7 @@
                   "width": 106.6,
                   "content": "200\n#BAE6FD",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4917,7 +3656,7 @@
                   "width": 106.6,
                   "content": "300\n#7DD3FC",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4929,7 +3668,7 @@
                   "width": 106.6,
                   "content": "400\n#38BDF8",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4941,7 +3680,7 @@
                   "width": 106.6,
                   "content": "500\n#0EA5E9",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4953,7 +3692,7 @@
                   "width": 106.6,
                   "content": "600\n#0284C7",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4965,7 +3704,7 @@
                   "width": 106.6,
                   "content": "700\n#0369A1",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4977,7 +3716,7 @@
                   "width": 106.6,
                   "content": "800\n#075985",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -4989,7 +3728,7 @@
                   "width": 106.6,
                   "content": "900\n#0C4A6E",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -5001,7 +3740,7 @@
               "name": "blueLabel",
               "fill": "#E7F0E8",
               "content": "Blue (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -5125,7 +3864,7 @@
                   "width": 106.6,
                   "content": "50\n#EFF6FF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5137,7 +3876,7 @@
                   "width": 106.6,
                   "content": "100\n#DBEAFE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5149,7 +3888,7 @@
                   "width": 106.6,
                   "content": "200\n#BFDBFE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5161,7 +3900,7 @@
                   "width": 106.6,
                   "content": "300\n#93C5FD",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5173,7 +3912,7 @@
                   "width": 106.6,
                   "content": "400\n#60A5FA",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5185,7 +3924,7 @@
                   "width": 106.6,
                   "content": "500\n#3B82F6",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5197,7 +3936,7 @@
                   "width": 106.6,
                   "content": "600\n#2563EB",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5209,7 +3948,7 @@
                   "width": 106.6,
                   "content": "700\n#1D4ED8",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5221,7 +3960,7 @@
                   "width": 106.6,
                   "content": "800\n#1E40AF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5233,7 +3972,7 @@
                   "width": 106.6,
                   "content": "900\n#1E3A8A",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -5245,7 +3984,7 @@
               "name": "indigoLabel",
               "fill": "#E7F0E8",
               "content": "Indigo (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -5369,7 +4108,7 @@
                   "width": 106.6,
                   "content": "50\n#EEF2FF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5381,7 +4120,7 @@
                   "width": 106.6,
                   "content": "100\n#E0E7FF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5393,7 +4132,7 @@
                   "width": 106.6,
                   "content": "200\n#C7D2FE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5405,7 +4144,7 @@
                   "width": 106.6,
                   "content": "300\n#A5B4FC",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5417,7 +4156,7 @@
                   "width": 106.6,
                   "content": "400\n#818CF8",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5429,7 +4168,7 @@
                   "width": 106.6,
                   "content": "500\n#6366F1",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5441,7 +4180,7 @@
                   "width": 106.6,
                   "content": "600\n#4F46E5",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5453,7 +4192,7 @@
                   "width": 106.6,
                   "content": "700\n#4338CA",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5465,7 +4204,7 @@
                   "width": 106.6,
                   "content": "800\n#3730A3",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5477,7 +4216,7 @@
                   "width": 106.6,
                   "content": "900\n#312E81",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -5489,7 +4228,7 @@
               "name": "violetLabel",
               "fill": "#E7F0E8",
               "content": "Violet (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -5613,7 +4352,7 @@
                   "width": 106.6,
                   "content": "50\n#F5F3FF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5625,7 +4364,7 @@
                   "width": 106.6,
                   "content": "100\n#EDE9FE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5637,7 +4376,7 @@
                   "width": 106.6,
                   "content": "200\n#DDD6FE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5649,7 +4388,7 @@
                   "width": 106.6,
                   "content": "300\n#C4B5FD",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5661,7 +4400,7 @@
                   "width": 106.6,
                   "content": "400\n#A78BFA",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5673,7 +4412,7 @@
                   "width": 106.6,
                   "content": "500\n#8B5CF6",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5685,7 +4424,7 @@
                   "width": 106.6,
                   "content": "600\n#7C3AED",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5697,7 +4436,7 @@
                   "width": 106.6,
                   "content": "700\n#6D28D9",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5709,7 +4448,7 @@
                   "width": 106.6,
                   "content": "800\n#5B21B6",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5721,7 +4460,7 @@
                   "width": 106.6,
                   "content": "900\n#4C1D95",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -5733,7 +4472,7 @@
               "name": "purpleLabel",
               "fill": "#E7F0E8",
               "content": "Purple (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -5857,7 +4596,7 @@
                   "width": 106.6,
                   "content": "50\n#FAF5FF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5869,7 +4608,7 @@
                   "width": 106.6,
                   "content": "100\n#F3E8FF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5881,7 +4620,7 @@
                   "width": 106.6,
                   "content": "200\n#E9D5FF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5893,7 +4632,7 @@
                   "width": 106.6,
                   "content": "300\n#D8B4FE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5905,7 +4644,7 @@
                   "width": 106.6,
                   "content": "400\n#C084FC",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5917,7 +4656,7 @@
                   "width": 106.6,
                   "content": "500\n#A855F7",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5929,7 +4668,7 @@
                   "width": 106.6,
                   "content": "600\n#9333EA",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5941,7 +4680,7 @@
                   "width": 106.6,
                   "content": "700\n#7E22CE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5953,7 +4692,7 @@
                   "width": 106.6,
                   "content": "800\n#6B21A8",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -5965,7 +4704,7 @@
                   "width": 106.6,
                   "content": "900\n#581C87",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -5977,7 +4716,7 @@
               "name": "fuchsiaLabel",
               "fill": "#E7F0E8",
               "content": "Fuchsia (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -6101,7 +4840,7 @@
                   "width": 106.6,
                   "content": "50\n#FDF4FF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6113,7 +4852,7 @@
                   "width": 106.6,
                   "content": "100\n#FAE8FF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6125,7 +4864,7 @@
                   "width": 106.6,
                   "content": "200\n#F5D0FE",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6137,7 +4876,7 @@
                   "width": 106.6,
                   "content": "300\n#F0ABFC",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6149,7 +4888,7 @@
                   "width": 106.6,
                   "content": "400\n#E879F9",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6161,7 +4900,7 @@
                   "width": 106.6,
                   "content": "500\n#D946EF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6173,7 +4912,7 @@
                   "width": 106.6,
                   "content": "600\n#C026D3",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6185,7 +4924,7 @@
                   "width": 106.6,
                   "content": "700\n#A21CAF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6197,7 +4936,7 @@
                   "width": 106.6,
                   "content": "800\n#86198F",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6209,7 +4948,7 @@
                   "width": 106.6,
                   "content": "900\n#701A75",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -6221,7 +4960,7 @@
               "name": "pinkLabel",
               "fill": "#E7F0E8",
               "content": "Pink (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -6345,7 +5084,7 @@
                   "width": 106.6,
                   "content": "50\n#FDF2F8",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6357,7 +5096,7 @@
                   "width": 106.6,
                   "content": "100\n#FCE7F3",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6369,7 +5108,7 @@
                   "width": 106.6,
                   "content": "200\n#FBCFE8",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6381,7 +5120,7 @@
                   "width": 106.6,
                   "content": "300\n#F9A8D4",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6393,7 +5132,7 @@
                   "width": 106.6,
                   "content": "400\n#F472B6",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6405,7 +5144,7 @@
                   "width": 106.6,
                   "content": "500\n#EC4899",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6417,7 +5156,7 @@
                   "width": 106.6,
                   "content": "600\n#DB2777",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6429,7 +5168,7 @@
                   "width": 106.6,
                   "content": "700\n#BE185D",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6441,7 +5180,7 @@
                   "width": 106.6,
                   "content": "800\n#9D174D",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6453,7 +5192,7 @@
                   "width": 106.6,
                   "content": "900\n#831843",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -6465,7 +5204,7 @@
               "name": "roseLabel",
               "fill": "#E7F0E8",
               "content": "Rose (50-900)",
-              "fontFamily": "Manrope",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "600"
             },
@@ -6589,7 +5328,7 @@
                   "width": 106.6,
                   "content": "50\n#FFF1F2",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6601,7 +5340,7 @@
                   "width": 106.6,
                   "content": "100\n#FFE4E6",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6613,7 +5352,7 @@
                   "width": 106.6,
                   "content": "200\n#FECDD3",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6625,7 +5364,7 @@
                   "width": 106.6,
                   "content": "300\n#FDA4AF",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6637,7 +5376,7 @@
                   "width": 106.6,
                   "content": "400\n#FB7185",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6649,7 +5388,7 @@
                   "width": 106.6,
                   "content": "500\n#F43F5E",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6661,7 +5400,7 @@
                   "width": 106.6,
                   "content": "600\n#E11D48",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6673,7 +5412,7 @@
                   "width": 106.6,
                   "content": "700\n#BE123C",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6685,7 +5424,7 @@
                   "width": 106.6,
                   "content": "800\n#9F1239",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 },
@@ -6697,7 +5436,7 @@
                   "width": 106.6,
                   "content": "900\n#881337",
                   "textAlign": "center",
-                  "fontFamily": "Manrope",
+                  "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
                   "fontWeight": "600"
                 }
@@ -6731,7 +5470,7 @@
           "name": "foundationTitle",
           "fill": "#E7F0E8",
           "content": "Design System / Foundations",
-          "fontFamily": "Space Grotesk",
+          "fontFamily": "Noto Sans Thai",
           "fontSize": 28,
           "fontWeight": "700"
         },
@@ -6740,8 +5479,8 @@
           "id": "u1xKD",
           "name": "foundationSub",
           "fill": "#9CA3AF",
-          "content": "Single source of truth for typography, color, spacing, radius, border, shadow, motion, and component usage.",
-          "fontFamily": "Manrope",
+          "content": "แหล่งอ้างอิงหลักเดียวสำหรับตัวอักษร สี ระยะห่าง รัศมี เส้นขอบ เงา โมชัน และแนวทางใช้คอมโพเนนต์",
+          "fontFamily": "Noto Sans Thai",
           "fontSize": 13,
           "fontWeight": "500"
         },
@@ -6775,7 +5514,7 @@
               "name": "typographyTitle",
               "fill": "#E7F0E8",
               "content": "Typography",
-              "fontFamily": "Space Grotesk",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 18,
               "fontWeight": "700"
             },
@@ -6800,8 +5539,8 @@
                       "id": "oeyFI",
                       "name": "rowDisplayMeta",
                       "fill": "#7A838B",
-                      "content": "Display · 48/56 · Space Grotesk 700",
-                      "fontFamily": "Manrope",
+                      "content": "Display · 48/56 · Noto Sans Thai 700",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
                       "fontWeight": "600"
                     },
@@ -6810,8 +5549,8 @@
                       "id": "iQTZO",
                       "name": "rowDisplaySample",
                       "fill": "#E7F0E8",
-                      "content": "Display 48 - Create with clarity",
-                      "fontFamily": "Space Grotesk",
+                      "content": "Display 48 - สื่อสารอย่างชัดเจน",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 48,
                       "fontWeight": "700"
                     }
@@ -6830,8 +5569,8 @@
                       "id": "4IMBL",
                       "name": "rowH1Meta",
                       "fill": "#7A838B",
-                      "content": "H1 · 36/44 · Space Grotesk 700",
-                      "fontFamily": "Manrope",
+                      "content": "H1 · 36/44 · Noto Sans Thai 700",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
                       "fontWeight": "600"
                     },
@@ -6840,8 +5579,8 @@
                       "id": "DppCg",
                       "name": "rowH1Sample",
                       "fill": "#E7F0E8",
-                      "content": "Heading 1 - Product Foundations",
-                      "fontFamily": "Space Grotesk",
+                      "content": "Heading 1 - พื้นฐานผลิตภัณฑ์",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 36,
                       "fontWeight": "700"
                     }
@@ -6860,8 +5599,8 @@
                       "id": "a0l5Y",
                       "name": "rowH2Meta",
                       "fill": "#7A838B",
-                      "content": "H2 · 30/38 · Space Grotesk 700",
-                      "fontFamily": "Manrope",
+                      "content": "H2 · 30/38 · Noto Sans Thai 700",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
                       "fontWeight": "600"
                     },
@@ -6870,8 +5609,8 @@
                       "id": "lLfrF",
                       "name": "rowH2Sample",
                       "fill": "#E7F0E8",
-                      "content": "Heading 2 - Semantic Tokens",
-                      "fontFamily": "Space Grotesk",
+                      "content": "Heading 2 - โทเคนเชิงความหมาย",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 30,
                       "fontWeight": "700"
                     }
@@ -6890,8 +5629,8 @@
                       "id": "OE8pq",
                       "name": "rowH3Meta",
                       "fill": "#7A838B",
-                      "content": "H3 · 24/32 · Space Grotesk 700",
-                      "fontFamily": "Manrope",
+                      "content": "H3 · 24/32 · Noto Sans Thai 700",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
                       "fontWeight": "600"
                     },
@@ -6900,8 +5639,8 @@
                       "id": "86A24",
                       "name": "rowH3Sample",
                       "fill": "#E7F0E8",
-                      "content": "Heading 3 - Component Styles",
-                      "fontFamily": "Space Grotesk",
+                      "content": "Heading 3 - สไตล์คอมโพเนนต์",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 24,
                       "fontWeight": "700"
                     }
@@ -6920,8 +5659,8 @@
                       "id": "Gmqat",
                       "name": "rowH4Meta",
                       "fill": "#7A838B",
-                      "content": "H4 · 20/28 · Space Grotesk 700",
-                      "fontFamily": "Manrope",
+                      "content": "H4 · 20/28 · Noto Sans Thai 700",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
                       "fontWeight": "600"
                     },
@@ -6930,9 +5669,39 @@
                       "id": "rc5dc",
                       "name": "rowH4Sample",
                       "fill": "#E7F0E8",
-                      "content": "Heading 4 - Forms and Inputs",
-                      "fontFamily": "Space Grotesk",
+                      "content": "Heading 4 - ฟอร์มและอินพุต",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 20,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YenQA",
+                  "name": "type-h5",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 2,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "rfjL7",
+                      "name": "rowH5Meta",
+                      "fill": "#7A838B",
+                      "content": "H5 · 18/26 · Noto Sans Thai 700",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "6sRMO",
+                      "name": "rowH5Sample",
+                      "fill": "#E7F0E8",
+                      "content": "Heading 5 - รายละเอียดย่อย",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 18,
                       "fontWeight": "700"
                     }
                   ]
@@ -6950,8 +5719,8 @@
                       "id": "4ewHG",
                       "name": "rowBodyMeta",
                       "fill": "#7A838B",
-                      "content": "Body · 16/24 · Manrope 500",
-                      "fontFamily": "Manrope",
+                      "content": "Body · 16/24 · Noto Sans Thai 500",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
                       "fontWeight": "600"
                     },
@@ -6960,8 +5729,8 @@
                       "id": "sWgZF",
                       "name": "rowBodySample",
                       "fill": "#C7D0C9",
-                      "content": "Body text is used for paragraphs, descriptions, and support content across cards and pages.",
-                      "fontFamily": "Manrope",
+                      "content": "ข้อความเนื้อหาใช้สำหรับย่อหน้า คำอธิบาย และข้อมูลสนับสนุนในคาร์ดและหน้าเพจ",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 16,
                       "fontWeight": "500"
                     }
@@ -6980,8 +5749,8 @@
                       "id": "VzPDU",
                       "name": "rowBodySmMeta",
                       "fill": "#7A838B",
-                      "content": "Body Small · 14/20 · Manrope 500",
-                      "fontFamily": "Manrope",
+                      "content": "Body Small · 14/20 · Noto Sans Thai 500",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
                       "fontWeight": "600"
                     },
@@ -6990,8 +5759,8 @@
                       "id": "Qcdsk",
                       "name": "rowBodySmSample",
                       "fill": "#B3BCB5",
-                      "content": "Body small text for helper notes and compact UI contexts.",
-                      "fontFamily": "Manrope",
+                      "content": "ข้อความขนาดเล็กสำหรับหมายเหตุและบริบท UI ที่กระชับ",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 14,
                       "fontWeight": "500"
                     }
@@ -7010,8 +5779,8 @@
                       "id": "JoKar",
                       "name": "rowCaptionMeta",
                       "fill": "#7A838B",
-                      "content": "Caption · 12/16 · Manrope 600",
-                      "fontFamily": "Manrope",
+                      "content": "Caption · 12/16 · Noto Sans Thai 600",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
                       "fontWeight": "600"
                     },
@@ -7020,8 +5789,8 @@
                       "id": "MPJCM",
                       "name": "rowCaptionSample",
                       "fill": "#9FA8A1",
-                      "content": "Caption text for timestamps, hints, and metadata.",
-                      "fontFamily": "Manrope",
+                      "content": "ข้อความกำกับสำหรับเวลา คำใบ้ และเมทาดาทา",
+                      "fontFamily": "Noto Sans Thai",
                       "fontSize": 12,
                       "fontWeight": "600"
                     }
@@ -7053,19 +5822,1124 @@
               "name": "colorTitle",
               "fill": "#E7F0E8",
               "content": "Color",
-              "fontFamily": "Space Grotesk",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 18,
               "fontWeight": "700"
             },
             {
-              "type": "text",
-              "id": "Dlsa1",
-              "name": "colorBody",
-              "fill": "#A1A1AA",
-              "content": "Semantic tokens\n- Background: bg.base, bg.surface, bg.elevated\n- Foreground: text.primary, text.secondary, text.muted\n- Action: primary, primary-foreground\n- State: success, warning, danger, info\n- Border: border.default, border.subtle, border.strong\nUse Color Source Library (right frame) for shade grooming.",
-              "fontFamily": "Manrope",
-              "fontSize": 13,
-              "fontWeight": "500"
+              "type": "frame",
+              "id": "r8bxb",
+              "name": "Color Tables Only",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "hbpIQ",
+                  "name": "tableOnlyNote",
+                  "fill": "#A1A1AA",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Color section is table-first: core tokens + css variables + resolved hex",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ep95G",
+              "name": "Color Mapping Table",
+              "width": "fill_container",
+              "fill": "#0F1312",
+              "cornerRadius": 10,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#1F2937"
+              },
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 10,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "7Dynl",
+                  "name": "tableTitle",
+                  "fill": "#E7F0E8",
+                  "content": "Core Token Table (Internal)",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "Jsk4t",
+                  "name": "header",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "padding": [
+                    0,
+                    0,
+                    4,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "9ghLQ",
+                      "name": "hRole",
+                      "fill": "#C7D0C9",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Color",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Krbto",
+                      "name": "hClass",
+                      "fill": "#C7D0C9",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Description (EN/TH)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DA6v0",
+                      "name": "hHex",
+                      "fill": "#C7D0C9",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "CSS Variable",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "BizIK",
+                      "name": "hShade",
+                      "fill": "#C7D0C9",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Value / Source",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "CoCMA",
+                  "name": "rowPrimary",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ojQ7W",
+                      "name": "cellColorPrimary",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "N6ZQY",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#C4F82A",
+                          "cornerRadius": 999
+                        },
+                        {
+                          "type": "text",
+                          "id": "Cq2wf",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "Core / Primary",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "gGy2P",
+                      "name": "r1c2",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Main CTA & primary action surfaces (ปุ่มหลัก/จุดเน้นหลัก)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ckyZt",
+                      "name": "r1c3",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-primary / --color-primary-foreground",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UbboO",
+                      "name": "r1c4",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "resolved: #C4F82A / #0A0A0A",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kbwU1",
+                  "name": "rowSecondary",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "C9XpK",
+                      "name": "cellColorSecondary",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "oepph",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#3F3F46",
+                          "cornerRadius": 999,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#52525B"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "eoZHa",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "Core / Secondary",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "w5lYm",
+                      "name": "r2c2",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Secondary actions (แอ็กชันรองที่ไม่ต้องเน้นมาก)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KmJ9L",
+                      "name": "r2c3",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-secondary / --color-secondary-foreground",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V69BB",
+                      "name": "r2c4",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "resolved: #3F3F46 / #FFFFFF",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VprW8",
+                  "name": "rowMuted",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "dGbQs",
+                      "name": "cellColorMuted",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "9goOh",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#27272A",
+                          "cornerRadius": 999,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#3F3F46"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "QXgbU",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "Core / Muted",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "Qna4m",
+                      "name": "r3c2",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Quiet surfaces & low-emphasis areas (พื้นผิวรอง/โซนเบา)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QRrTB",
+                      "name": "r3c3",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-muted / --color-muted-foreground",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "6VIwS",
+                      "name": "r3c4",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "resolved: #27272A / #71717A",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "FML9p",
+                  "name": "rowSuccess",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "UXPPC",
+                      "name": "cellColorSuccess",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "wYpHP",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#15803D",
+                          "cornerRadius": 999
+                        },
+                        {
+                          "type": "text",
+                          "id": "VlPwN",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "State / Success",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "GD0j8",
+                      "name": "r4c2",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Success feedback (สถานะสำเร็จ/positive result)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vwI6e",
+                      "name": "r4c3",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-success / --color-success-foreground",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "r5inw",
+                      "name": "r4c4",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "resolved: #15803D / #FFFFFF",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "7iV7v",
+                  "name": "rowWarning",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "phhD6",
+                      "name": "cellColorWarning",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ml2ZB",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#FA541C",
+                          "cornerRadius": 999
+                        },
+                        {
+                          "type": "text",
+                          "id": "gAsk6",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "State / Warning",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "7ktEM",
+                      "name": "r5c2",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Warning feedback (คำเตือน/ต้องระวัง)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jRXQk",
+                      "name": "r5c3",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-warning / --color-warning-foreground",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ksvVE",
+                      "name": "r5c4",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "resolved: #FA541C / #FFFFFF",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "M9SAJ",
+                  "name": "rowDestructive",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "UXdMa",
+                      "name": "cellColorDestructive",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "n4p9s",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#DC2626",
+                          "cornerRadius": 999
+                        },
+                        {
+                          "type": "text",
+                          "id": "pLejx",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "State / Destructive",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "nR5Iq",
+                      "name": "r6c2",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Destructive / error actions (ลบ/ยืนยันความเสี่ยง)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "IB93Q",
+                      "name": "r6c3",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-destructive / --color-destructive-foreground",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ilwGR",
+                      "name": "r6c4",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "resolved: #DC2626 / #FFFFFF",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kgvA0",
+                  "name": "rowInfo",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "FJ5Xa",
+                      "name": "cellColorInfo",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "f5SQz",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#2563EB",
+                          "cornerRadius": 999
+                        },
+                        {
+                          "type": "text",
+                          "id": "MF9RV",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "State / Info",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "MvIZP",
+                      "name": "r7c2",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Informational messages (ข้อความแจ้งข้อมูลทั่วไป)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hD6D6",
+                      "name": "r7c3",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-info / --color-info-foreground",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "U8TUl",
+                      "name": "r7c4",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "resolved: #2563EB / #FFFFFF",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dANAG",
+                  "name": "rowAccent",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "1fKoS",
+                      "name": "cellColorBackground",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "mM0MB",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#0A0A0A",
+                          "cornerRadius": 999,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#3F3F46"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "CWaN3",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "Core / Background",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "UBuDY",
+                      "name": "a2",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "App background + default foreground (พื้นหลังหลักของหน้า)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "oWvFb",
+                      "name": "a3",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-background / --color-foreground",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "6K7jT",
+                      "name": "a4",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "resolved: #0A0A0A / #FFFFFF",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "fOMC4",
+                  "name": "rowBase100",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "5UjpJ",
+                      "name": "cellColorSurface",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "0K0s0",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#18181B",
+                          "cornerRadius": 999,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#3F3F46"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "eXHeh",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "Core / Surface",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "ogMdd",
+                      "name": "b12",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Elevated surfaces e.g. card/panel (พื้นผิวยกชั้น)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "th5Rk",
+                      "name": "b13",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-surface / --color-surface-foreground",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "itpWt",
+                      "name": "b14",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "resolved: #18181B / #FFFFFF",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ELeSE",
+                  "name": "rowBase300",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "AOQCj",
+                      "name": "cellColorBorder",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "3YYwU",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#27272A",
+                          "cornerRadius": 999,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#52525B"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "g6rOT",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "Core / Border",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "YMcZn",
+                      "name": "b32",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Borders, dividers, input outlines (เส้นคั่น/เส้นขอบ)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "1RXnG",
+                      "name": "b33",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-border",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wS7HC",
+                      "name": "b34",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "resolved: #27272A",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "mJnzx",
+                  "name": "rowCardPlaceholder",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "5M0Se",
+                      "name": "colorCell",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "kzpFU",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#18181B",
+                          "cornerRadius": 999,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#3F3F46"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "DjPo4",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "Future / Card",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "d3UEc",
+                      "name": "cardDesc",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Reserved for card background/border variants (เตรียมไว้สำหรับ card variants)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "cL3wX",
+                      "name": "cardVar",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-card / --color-card-line / --color-card-divider",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Ljgdx",
+                      "name": "cardHex",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "alias -> var(--color-surface) (default)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "vHBQh",
+                  "name": "rowPopoverPlaceholder",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "9YPR7",
+                      "name": "colorCell",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "sOT9D",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#18181B",
+                          "cornerRadius": 999,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#3F3F46"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "qZe73",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "Future / Popup",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "C27Im",
+                      "name": "popDesc",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Reserved for popup/popover/dropdown surfaces (กลุ่ม popup)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "lUnJO",
+                      "name": "popVar",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-popover / --color-popover-line / --color-dropdown",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HqkRX",
+                      "name": "popHex",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "alias -> var(--color-popover) (default)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "e7MbE",
+                  "name": "rowDialogPlaceholder",
+                  "width": "fill_container",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "RSkG1",
+                      "name": "colorCell",
+                      "width": "fill_container",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "BNSNB",
+                          "name": "swatch",
+                          "width": 12,
+                          "height": 12,
+                          "fill": "#0A0A0A",
+                          "cornerRadius": 999,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#3F3F46"
+                          }
+                        },
+                        {
+                          "type": "text",
+                          "id": "PYF76",
+                          "name": "label",
+                          "fill": "#E7F0E8",
+                          "content": "Future / Dialog",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "Eqpfg",
+                      "name": "ovDesc",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Reserved for dialog/modal/backdrop tokens (ชั้น dialog)",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "VuinK",
+                      "name": "ovVar",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "--color-dialog / --color-dialog-line",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kRYJz",
+                      "name": "ovHex",
+                      "fill": "#A1A1AA",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "alias -> var(--color-dialog) + backdrop alpha",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 10,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
             }
           ]
         },
@@ -7091,7 +6965,7 @@
               "name": "spacingTitle",
               "fill": "#E7F0E8",
               "content": "Spacing",
-              "fontFamily": "Space Grotesk",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 18,
               "fontWeight": "700"
             },
@@ -7100,8 +6974,8 @@
               "id": "EfeR2",
               "name": "spacingBody",
               "fill": "#A1A1AA",
-              "content": "Scale (px): 2, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64\nUsage\n- Tight controls: 6/8\n- Cards/Sections: 16/24\n- Screen gutters: 24/32",
-              "fontFamily": "Manrope",
+              "content": "สเกล (px): 2, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64\nแนวทางใช้งาน\n- คอนโทรลที่แน่น: 6/8\n- การ์ด/เซกชัน: 16/24\n- ระยะขอบหน้าจอ: 24/32",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "500"
             }
@@ -7129,7 +7003,7 @@
               "name": "radiusTitle",
               "fill": "#E7F0E8",
               "content": "Border Radius",
-              "fontFamily": "Space Grotesk",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 18,
               "fontWeight": "700"
             },
@@ -7138,8 +7012,8 @@
               "id": "v11NP",
               "name": "radiusBody",
               "fill": "#A1A1AA",
-              "content": "Radius tokens\n- none: 0\n- sm: 6\n- md: 10\n- lg: 14\n- xl: 18\n- 2xl: 24\nComponent defaults\n- Inputs/Buttons: md\n- Cards: lg\n- Modals: xl",
-              "fontFamily": "Manrope",
+              "content": "โทเคนรัศมี\n- none: 0\n- sm: 6\n- md: 10\n- lg: 14\n- xl: 18\n- 2xl: 24\nค่าเริ่มต้นของคอมโพเนนต์\n- Inputs/Buttons: md\n- Cards: lg\n- Modals: xl",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "500"
             }
@@ -7167,7 +7041,7 @@
               "name": "etcTitle",
               "fill": "#E7F0E8",
               "content": "ETC (Border, Shadow, Motion, Opacity)",
-              "fontFamily": "Space Grotesk",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 18,
               "fontWeight": "700"
             },
@@ -7176,8 +7050,8 @@
               "id": "qhAcN",
               "name": "borderBody",
               "fill": "#A1A1AA",
-              "content": "Border\n- thin: 1\n- strong: 2\n- focus-ring: 2\n\nShadow\n- sm: 0 1 2 / 20%\n- md: 0 6 20 / 24%\n- lg: 0 12 32 / 28%\n\nMotion\n- fast: 120ms\n- normal: 200ms\n- slow: 320ms\n- easing: ease-out quint\n\nOpacity\n- disabled: 0.45\n- muted: 0.72\n- overlay: 0.6",
-              "fontFamily": "Manrope",
+              "content": "เส้นขอบ\n- thin: 1\n- strong: 2\n- focus-ring: 2\n\nเงา\n- sm: 0 1 2 / 20%\n- md: 0 6 20 / 24%\n- lg: 0 12 32 / 28%\n\nโมชัน\n- fast: 120ms\n- normal: 200ms\n- slow: 320ms\n- easing: ease-out quint\n\nความทึบ\n- disabled: 0.45\n- muted: 0.72\n- overlay: 0.6",
+              "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "500"
             }
@@ -7293,11 +7167,25 @@
     },
     "color.secondary": {
       "type": "color",
-      "value": "#27272A"
+      "value": [
+        {
+          "value": "#27272A"
+        },
+        {
+          "value": "#3F3F46"
+        }
+      ]
     },
     "color.secondary-foreground": {
       "type": "color",
-      "value": "#FFFFFF"
+      "value": [
+        {
+          "value": "#FFFFFF"
+        },
+        {
+          "value": "#FFFFFF"
+        }
+      ]
     },
     "color.success": {
       "type": "color",
@@ -7321,11 +7209,31 @@
     },
     "font.body": {
       "type": "string",
-      "value": "Manrope"
+      "value": [
+        {
+          "value": "Manrope"
+        },
+        {
+          "value": "IBM Plex Sans Thai"
+        },
+        {
+          "value": "Noto Sans Thai"
+        }
+      ]
     },
     "font.display": {
       "type": "string",
-      "value": "Space Grotesk"
+      "value": [
+        {
+          "value": "Space Grotesk"
+        },
+        {
+          "value": "Sora"
+        },
+        {
+          "value": "Noto Sans Thai"
+        }
+      ]
     },
     "font.mono": {
       "type": "string",
@@ -7366,6 +7274,10 @@
     "text.primary": {
       "type": "color",
       "value": "#FFFFFF"
+    },
+    "font.latin": {
+      "type": "string",
+      "value": "Inter"
     }
   }
 }
