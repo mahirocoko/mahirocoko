@@ -199,7 +199,7 @@
                 {
                   "type": "text",
                   "id": "58jbb",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#F0FDF4",
@@ -211,7 +211,7 @@
                 {
                   "type": "text",
                   "id": "TVNPR",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#DCFCE7",
@@ -223,7 +223,7 @@
                 {
                   "type": "text",
                   "id": "r2WIf",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#BBF7D0",
@@ -235,7 +235,7 @@
                 {
                   "type": "text",
                   "id": "QYuvk",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#86EFAC",
@@ -247,7 +247,7 @@
                 {
                   "type": "text",
                   "id": "qoYQ8",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#4ADE80",
@@ -259,7 +259,7 @@
                 {
                   "type": "text",
                   "id": "7KDye",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#22C55E",
@@ -271,7 +271,7 @@
                 {
                   "type": "text",
                   "id": "ADD9Y",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#16A34A",
@@ -283,7 +283,7 @@
                 {
                   "type": "text",
                   "id": "VysvM",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#15803D",
@@ -295,7 +295,7 @@
                 {
                   "type": "text",
                   "id": "3xwue",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#166534",
@@ -307,7 +307,7 @@
                 {
                   "type": "text",
                   "id": "jk72B",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#14532D",
@@ -443,7 +443,7 @@
                 {
                   "type": "text",
                   "id": "atOdB",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#ECFDF5",
@@ -455,7 +455,7 @@
                 {
                   "type": "text",
                   "id": "dPr9t",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#D1FAE5",
@@ -467,7 +467,7 @@
                 {
                   "type": "text",
                   "id": "tQKp8",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#A7F3D0",
@@ -479,7 +479,7 @@
                 {
                   "type": "text",
                   "id": "pD8Qf",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#6EE7B7",
@@ -491,7 +491,7 @@
                 {
                   "type": "text",
                   "id": "OCcxP",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#34D399",
@@ -503,7 +503,7 @@
                 {
                   "type": "text",
                   "id": "K566C",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#10B981",
@@ -515,7 +515,7 @@
                 {
                   "type": "text",
                   "id": "8vSx7",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#059669",
@@ -527,7 +527,7 @@
                 {
                   "type": "text",
                   "id": "E2lTl",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#047857",
@@ -539,7 +539,7 @@
                 {
                   "type": "text",
                   "id": "9o2FS",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#065F46",
@@ -551,7 +551,7 @@
                 {
                   "type": "text",
                   "id": "BK3BG",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#064E3B",
@@ -687,7 +687,7 @@
                 {
                   "type": "text",
                   "id": "2g8gC",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#F8FAFC",
@@ -699,7 +699,7 @@
                 {
                   "type": "text",
                   "id": "ReLum",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#F1F5F9",
@@ -711,7 +711,7 @@
                 {
                   "type": "text",
                   "id": "UPAPr",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#E2E8F0",
@@ -723,7 +723,7 @@
                 {
                   "type": "text",
                   "id": "FqRGp",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#CBD5E1",
@@ -735,7 +735,7 @@
                 {
                   "type": "text",
                   "id": "NNE8T",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#94A3B8",
@@ -747,7 +747,7 @@
                 {
                   "type": "text",
                   "id": "X9PK9",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#64748B",
@@ -759,7 +759,7 @@
                 {
                   "type": "text",
                   "id": "Sc8wS",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#475569",
@@ -771,7 +771,7 @@
                 {
                   "type": "text",
                   "id": "TIHRI",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#334155",
@@ -783,7 +783,7 @@
                 {
                   "type": "text",
                   "id": "09S7W",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#1E293B",
@@ -795,7 +795,7 @@
                 {
                   "type": "text",
                   "id": "aShzr",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#0F172A",
@@ -931,7 +931,7 @@
                 {
                   "type": "text",
                   "id": "6vZMj",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#F9FAFB",
@@ -943,7 +943,7 @@
                 {
                   "type": "text",
                   "id": "UdP3z",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#F3F4F6",
@@ -955,7 +955,7 @@
                 {
                   "type": "text",
                   "id": "GaRlT",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#E5E7EB",
@@ -967,7 +967,7 @@
                 {
                   "type": "text",
                   "id": "u9Lxu",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#D1D5DB",
@@ -979,7 +979,7 @@
                 {
                   "type": "text",
                   "id": "7qdxT",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#9CA3AF",
@@ -991,7 +991,7 @@
                 {
                   "type": "text",
                   "id": "9sZsi",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#6B7280",
@@ -1003,7 +1003,7 @@
                 {
                   "type": "text",
                   "id": "0wEZe",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#4B5563",
@@ -1015,7 +1015,7 @@
                 {
                   "type": "text",
                   "id": "6PrUF",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#374151",
@@ -1027,7 +1027,7 @@
                 {
                   "type": "text",
                   "id": "N2MKp",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#1F2937",
@@ -1039,7 +1039,7 @@
                 {
                   "type": "text",
                   "id": "wyGMB",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#111827",
@@ -1175,7 +1175,7 @@
                 {
                   "type": "text",
                   "id": "ECnBU",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FAFAFA",
@@ -1187,7 +1187,7 @@
                 {
                   "type": "text",
                   "id": "9ctOa",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#F4F4F5",
@@ -1199,7 +1199,7 @@
                 {
                   "type": "text",
                   "id": "ikRMP",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#E4E4E7",
@@ -1211,7 +1211,7 @@
                 {
                   "type": "text",
                   "id": "M2Ja3",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#D4D4D8",
@@ -1223,7 +1223,7 @@
                 {
                   "type": "text",
                   "id": "F55no",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#A1A1AA",
@@ -1235,7 +1235,7 @@
                 {
                   "type": "text",
                   "id": "nePT7",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#71717A",
@@ -1247,7 +1247,7 @@
                 {
                   "type": "text",
                   "id": "2Vuc9",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#52525B",
@@ -1259,7 +1259,7 @@
                 {
                   "type": "text",
                   "id": "BYCXi",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#3F3F46",
@@ -1271,7 +1271,7 @@
                 {
                   "type": "text",
                   "id": "aPmer",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#27272A",
@@ -1283,7 +1283,7 @@
                 {
                   "type": "text",
                   "id": "HtSau",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#18181B",
@@ -1419,7 +1419,7 @@
                 {
                   "type": "text",
                   "id": "4vkxi",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FAFAFA",
@@ -1431,7 +1431,7 @@
                 {
                   "type": "text",
                   "id": "F8AyR",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#F5F5F5",
@@ -1443,7 +1443,7 @@
                 {
                   "type": "text",
                   "id": "MzCT3",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#E5E5E5",
@@ -1455,7 +1455,7 @@
                 {
                   "type": "text",
                   "id": "k7U6Z",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#D4D4D4",
@@ -1467,7 +1467,7 @@
                 {
                   "type": "text",
                   "id": "J8Dvz",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#A3A3A3",
@@ -1479,7 +1479,7 @@
                 {
                   "type": "text",
                   "id": "qJH3L",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#737373",
@@ -1491,7 +1491,7 @@
                 {
                   "type": "text",
                   "id": "fmUmj",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#525252",
@@ -1503,7 +1503,7 @@
                 {
                   "type": "text",
                   "id": "RorpF",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#404040",
@@ -1515,7 +1515,7 @@
                 {
                   "type": "text",
                   "id": "sYSi5",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#262626",
@@ -1527,7 +1527,7 @@
                 {
                   "type": "text",
                   "id": "AMVBh",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#171717",
@@ -1663,7 +1663,7 @@
                 {
                   "type": "text",
                   "id": "UF2GJ",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FAFAF9",
@@ -1675,7 +1675,7 @@
                 {
                   "type": "text",
                   "id": "TBbUn",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#F5F5F4",
@@ -1687,7 +1687,7 @@
                 {
                   "type": "text",
                   "id": "TwiDs",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#E7E5E4",
@@ -1699,7 +1699,7 @@
                 {
                   "type": "text",
                   "id": "3wTFf",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#D6D3D1",
@@ -1711,7 +1711,7 @@
                 {
                   "type": "text",
                   "id": "H1T36",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#A8A29E",
@@ -1723,7 +1723,7 @@
                 {
                   "type": "text",
                   "id": "Uwq9a",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#78716C",
@@ -1735,7 +1735,7 @@
                 {
                   "type": "text",
                   "id": "3wMjm",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#57534E",
@@ -1747,7 +1747,7 @@
                 {
                   "type": "text",
                   "id": "8q2PY",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#44403C",
@@ -1759,7 +1759,7 @@
                 {
                   "type": "text",
                   "id": "0ZXVw",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#292524",
@@ -1771,7 +1771,7 @@
                 {
                   "type": "text",
                   "id": "LQE5e",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#1C1917",
@@ -1907,7 +1907,7 @@
                 {
                   "type": "text",
                   "id": "88eq1",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FEF2F2",
@@ -1919,7 +1919,7 @@
                 {
                   "type": "text",
                   "id": "48DW3",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#FEE2E2",
@@ -1931,7 +1931,7 @@
                 {
                   "type": "text",
                   "id": "gimVT",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#FECACA",
@@ -1943,7 +1943,7 @@
                 {
                   "type": "text",
                   "id": "hMzM9",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#FCA5A5",
@@ -1955,7 +1955,7 @@
                 {
                   "type": "text",
                   "id": "iuFBB",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#F87171",
@@ -1967,7 +1967,7 @@
                 {
                   "type": "text",
                   "id": "Lkv6O",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#EF4444",
@@ -1979,7 +1979,7 @@
                 {
                   "type": "text",
                   "id": "F37n1",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#DC2626",
@@ -1991,7 +1991,7 @@
                 {
                   "type": "text",
                   "id": "lnOMD",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#B91C1C",
@@ -2003,7 +2003,7 @@
                 {
                   "type": "text",
                   "id": "RKPL6",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#991B1B",
@@ -2015,7 +2015,7 @@
                 {
                   "type": "text",
                   "id": "1HKCk",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#7F1D1D",
@@ -2151,7 +2151,7 @@
                 {
                   "type": "text",
                   "id": "MxKCt",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FFF7ED",
@@ -2163,7 +2163,7 @@
                 {
                   "type": "text",
                   "id": "GKQk2",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#FFEDD5",
@@ -2175,7 +2175,7 @@
                 {
                   "type": "text",
                   "id": "eVrPk",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#FED7AA",
@@ -2187,7 +2187,7 @@
                 {
                   "type": "text",
                   "id": "lRwP2",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#FDBA74",
@@ -2199,7 +2199,7 @@
                 {
                   "type": "text",
                   "id": "JbQ73",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#FB923C",
@@ -2211,7 +2211,7 @@
                 {
                   "type": "text",
                   "id": "OoPjC",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#F97316",
@@ -2223,7 +2223,7 @@
                 {
                   "type": "text",
                   "id": "AJuLm",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#EA580C",
@@ -2235,7 +2235,7 @@
                 {
                   "type": "text",
                   "id": "awkgX",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#C2410C",
@@ -2247,7 +2247,7 @@
                 {
                   "type": "text",
                   "id": "ZLNnS",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#9A3412",
@@ -2259,7 +2259,7 @@
                 {
                   "type": "text",
                   "id": "5g1o2",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#7C2D12",
@@ -2395,7 +2395,7 @@
                 {
                   "type": "text",
                   "id": "CZmGB",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FFFBEB",
@@ -2407,7 +2407,7 @@
                 {
                   "type": "text",
                   "id": "9gIgq",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#FEF3C7",
@@ -2419,7 +2419,7 @@
                 {
                   "type": "text",
                   "id": "tOIgq",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#FDE68A",
@@ -2431,7 +2431,7 @@
                 {
                   "type": "text",
                   "id": "tHAT8",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#FCD34D",
@@ -2443,7 +2443,7 @@
                 {
                   "type": "text",
                   "id": "eLi8a",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#FBBF24",
@@ -2455,7 +2455,7 @@
                 {
                   "type": "text",
                   "id": "4XZBl",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#F59E0B",
@@ -2467,7 +2467,7 @@
                 {
                   "type": "text",
                   "id": "m05iI",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#D97706",
@@ -2479,7 +2479,7 @@
                 {
                   "type": "text",
                   "id": "yFl4C",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#B45309",
@@ -2491,7 +2491,7 @@
                 {
                   "type": "text",
                   "id": "rVWlJ",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#92400E",
@@ -2503,7 +2503,7 @@
                 {
                   "type": "text",
                   "id": "U9TNZ",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#78350F",
@@ -2639,7 +2639,7 @@
                 {
                   "type": "text",
                   "id": "TnXLX",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FEFCE8",
@@ -2651,7 +2651,7 @@
                 {
                   "type": "text",
                   "id": "7lXw9",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#FEF9C3",
@@ -2663,7 +2663,7 @@
                 {
                   "type": "text",
                   "id": "ed6Sq",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#FEF08A",
@@ -2675,7 +2675,7 @@
                 {
                   "type": "text",
                   "id": "EGSdG",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#FDE047",
@@ -2687,7 +2687,7 @@
                 {
                   "type": "text",
                   "id": "bk7uS",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#FACC15",
@@ -2699,7 +2699,7 @@
                 {
                   "type": "text",
                   "id": "BsuON",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#EAB308",
@@ -2711,7 +2711,7 @@
                 {
                   "type": "text",
                   "id": "mR9xr",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#CA8A04",
@@ -2723,7 +2723,7 @@
                 {
                   "type": "text",
                   "id": "xgexv",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#A16207",
@@ -2735,7 +2735,7 @@
                 {
                   "type": "text",
                   "id": "YBjK6",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#854D0E",
@@ -2747,7 +2747,7 @@
                 {
                   "type": "text",
                   "id": "Zvaol",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#713F12",
@@ -2883,7 +2883,7 @@
                 {
                   "type": "text",
                   "id": "p56Sf",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#F7FEE7",
@@ -2895,7 +2895,7 @@
                 {
                   "type": "text",
                   "id": "DSM2m",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#ECFCCB",
@@ -2907,7 +2907,7 @@
                 {
                   "type": "text",
                   "id": "EUYf4",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#D9F99D",
@@ -2919,7 +2919,7 @@
                 {
                   "type": "text",
                   "id": "eKJXW",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#BEF264",
@@ -2931,7 +2931,7 @@
                 {
                   "type": "text",
                   "id": "RQap9",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#A3E635",
@@ -2943,7 +2943,7 @@
                 {
                   "type": "text",
                   "id": "RQicC",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#84CC16",
@@ -2955,7 +2955,7 @@
                 {
                   "type": "text",
                   "id": "LMFx3",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#65A30D",
@@ -2967,7 +2967,7 @@
                 {
                   "type": "text",
                   "id": "obNC7",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#4D7C0F",
@@ -2979,7 +2979,7 @@
                 {
                   "type": "text",
                   "id": "pOTQt",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#3F6212",
@@ -2991,7 +2991,7 @@
                 {
                   "type": "text",
                   "id": "iTzCH",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#365314",
@@ -3127,7 +3127,7 @@
                 {
                   "type": "text",
                   "id": "2D4wa",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#F0FDFA",
@@ -3139,7 +3139,7 @@
                 {
                   "type": "text",
                   "id": "YX1y5",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#CCFBF1",
@@ -3151,7 +3151,7 @@
                 {
                   "type": "text",
                   "id": "qx4Qv",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#99F6E4",
@@ -3163,7 +3163,7 @@
                 {
                   "type": "text",
                   "id": "Nu08b",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#5EEAD4",
@@ -3175,7 +3175,7 @@
                 {
                   "type": "text",
                   "id": "h17Il",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#2DD4BF",
@@ -3187,7 +3187,7 @@
                 {
                   "type": "text",
                   "id": "c6ZW3",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#14B8A6",
@@ -3199,7 +3199,7 @@
                 {
                   "type": "text",
                   "id": "GxiYZ",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#0D9488",
@@ -3211,7 +3211,7 @@
                 {
                   "type": "text",
                   "id": "xENu7",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#0F766E",
@@ -3223,7 +3223,7 @@
                 {
                   "type": "text",
                   "id": "MGCBb",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#115E59",
@@ -3235,7 +3235,7 @@
                 {
                   "type": "text",
                   "id": "BJ0fe",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#134E4A",
@@ -3371,7 +3371,7 @@
                 {
                   "type": "text",
                   "id": "yhqtC",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#ECFEFF",
@@ -3383,7 +3383,7 @@
                 {
                   "type": "text",
                   "id": "zLRMq",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#CFFAFE",
@@ -3395,7 +3395,7 @@
                 {
                   "type": "text",
                   "id": "B00pC",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#A5F3FC",
@@ -3407,7 +3407,7 @@
                 {
                   "type": "text",
                   "id": "bw8Gz",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#67E8F9",
@@ -3419,7 +3419,7 @@
                 {
                   "type": "text",
                   "id": "uSPQr",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#22D3EE",
@@ -3431,7 +3431,7 @@
                 {
                   "type": "text",
                   "id": "hyGHx",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#06B6D4",
@@ -3443,7 +3443,7 @@
                 {
                   "type": "text",
                   "id": "Fi1RC",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#0891B2",
@@ -3455,7 +3455,7 @@
                 {
                   "type": "text",
                   "id": "yIwgG",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#0E7490",
@@ -3467,7 +3467,7 @@
                 {
                   "type": "text",
                   "id": "P4PVi",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#155E75",
@@ -3479,7 +3479,7 @@
                 {
                   "type": "text",
                   "id": "bCHMv",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#164E63",
@@ -3615,7 +3615,7 @@
                 {
                   "type": "text",
                   "id": "3i8jO",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#F0F9FF",
@@ -3627,7 +3627,7 @@
                 {
                   "type": "text",
                   "id": "HE32L",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#E0F2FE",
@@ -3639,7 +3639,7 @@
                 {
                   "type": "text",
                   "id": "OGF7v",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#BAE6FD",
@@ -3651,7 +3651,7 @@
                 {
                   "type": "text",
                   "id": "fqqVq",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#7DD3FC",
@@ -3663,7 +3663,7 @@
                 {
                   "type": "text",
                   "id": "xefKc",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#38BDF8",
@@ -3675,7 +3675,7 @@
                 {
                   "type": "text",
                   "id": "JuOCx",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#0EA5E9",
@@ -3687,7 +3687,7 @@
                 {
                   "type": "text",
                   "id": "c4PzX",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#0284C7",
@@ -3699,7 +3699,7 @@
                 {
                   "type": "text",
                   "id": "hya6X",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#0369A1",
@@ -3711,7 +3711,7 @@
                 {
                   "type": "text",
                   "id": "5L02U",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#075985",
@@ -3723,7 +3723,7 @@
                 {
                   "type": "text",
                   "id": "fwiKe",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#0C4A6E",
@@ -3859,7 +3859,7 @@
                 {
                   "type": "text",
                   "id": "37cuz",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#EFF6FF",
@@ -3871,7 +3871,7 @@
                 {
                   "type": "text",
                   "id": "v5NSq",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#DBEAFE",
@@ -3883,7 +3883,7 @@
                 {
                   "type": "text",
                   "id": "RP4DY",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#BFDBFE",
@@ -3895,7 +3895,7 @@
                 {
                   "type": "text",
                   "id": "79Kyk",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#93C5FD",
@@ -3907,7 +3907,7 @@
                 {
                   "type": "text",
                   "id": "VQftZ",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#60A5FA",
@@ -3919,7 +3919,7 @@
                 {
                   "type": "text",
                   "id": "iHlsq",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#3B82F6",
@@ -3931,7 +3931,7 @@
                 {
                   "type": "text",
                   "id": "dhcX6",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#2563EB",
@@ -3943,7 +3943,7 @@
                 {
                   "type": "text",
                   "id": "6u4GK",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#1D4ED8",
@@ -3955,7 +3955,7 @@
                 {
                   "type": "text",
                   "id": "IdsQ3",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#1E40AF",
@@ -3967,7 +3967,7 @@
                 {
                   "type": "text",
                   "id": "1nRuo",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#1E3A8A",
@@ -4103,7 +4103,7 @@
                 {
                   "type": "text",
                   "id": "8gUbA",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#EEF2FF",
@@ -4115,7 +4115,7 @@
                 {
                   "type": "text",
                   "id": "sruBY",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#E0E7FF",
@@ -4127,7 +4127,7 @@
                 {
                   "type": "text",
                   "id": "NJlYE",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#C7D2FE",
@@ -4139,7 +4139,7 @@
                 {
                   "type": "text",
                   "id": "W8qDL",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#A5B4FC",
@@ -4151,7 +4151,7 @@
                 {
                   "type": "text",
                   "id": "iwi8M",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#818CF8",
@@ -4163,7 +4163,7 @@
                 {
                   "type": "text",
                   "id": "xhRMh",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#6366F1",
@@ -4175,7 +4175,7 @@
                 {
                   "type": "text",
                   "id": "0FRyu",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#4F46E5",
@@ -4187,7 +4187,7 @@
                 {
                   "type": "text",
                   "id": "T29BL",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#4338CA",
@@ -4199,7 +4199,7 @@
                 {
                   "type": "text",
                   "id": "gI3bC",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#3730A3",
@@ -4211,7 +4211,7 @@
                 {
                   "type": "text",
                   "id": "6vaPo",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#312E81",
@@ -4347,7 +4347,7 @@
                 {
                   "type": "text",
                   "id": "QLk9V",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#F5F3FF",
@@ -4359,7 +4359,7 @@
                 {
                   "type": "text",
                   "id": "2M9AA",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#EDE9FE",
@@ -4371,7 +4371,7 @@
                 {
                   "type": "text",
                   "id": "WBnQi",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#DDD6FE",
@@ -4383,7 +4383,7 @@
                 {
                   "type": "text",
                   "id": "LNTji",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#C4B5FD",
@@ -4395,7 +4395,7 @@
                 {
                   "type": "text",
                   "id": "ervFW",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#A78BFA",
@@ -4407,7 +4407,7 @@
                 {
                   "type": "text",
                   "id": "4vZG7",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#8B5CF6",
@@ -4419,7 +4419,7 @@
                 {
                   "type": "text",
                   "id": "HesV0",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#7C3AED",
@@ -4431,7 +4431,7 @@
                 {
                   "type": "text",
                   "id": "Qhm4l",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#6D28D9",
@@ -4443,7 +4443,7 @@
                 {
                   "type": "text",
                   "id": "LSzZt",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#5B21B6",
@@ -4455,7 +4455,7 @@
                 {
                   "type": "text",
                   "id": "2awMn",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#4C1D95",
@@ -4591,7 +4591,7 @@
                 {
                   "type": "text",
                   "id": "befIk",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FAF5FF",
@@ -4603,7 +4603,7 @@
                 {
                   "type": "text",
                   "id": "b9GOL",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#F3E8FF",
@@ -4615,7 +4615,7 @@
                 {
                   "type": "text",
                   "id": "phFN6",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#E9D5FF",
@@ -4627,7 +4627,7 @@
                 {
                   "type": "text",
                   "id": "JeEh5",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#D8B4FE",
@@ -4639,7 +4639,7 @@
                 {
                   "type": "text",
                   "id": "Jt04C",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#C084FC",
@@ -4651,7 +4651,7 @@
                 {
                   "type": "text",
                   "id": "zDE16",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#A855F7",
@@ -4663,7 +4663,7 @@
                 {
                   "type": "text",
                   "id": "7UF1X",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#9333EA",
@@ -4675,7 +4675,7 @@
                 {
                   "type": "text",
                   "id": "TP3G4",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#7E22CE",
@@ -4687,7 +4687,7 @@
                 {
                   "type": "text",
                   "id": "q5n1M",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#6B21A8",
@@ -4699,7 +4699,7 @@
                 {
                   "type": "text",
                   "id": "o7dTW",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#581C87",
@@ -4835,7 +4835,7 @@
                 {
                   "type": "text",
                   "id": "O1050",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FDF4FF",
@@ -4847,7 +4847,7 @@
                 {
                   "type": "text",
                   "id": "Mlv8c",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#FAE8FF",
@@ -4859,7 +4859,7 @@
                 {
                   "type": "text",
                   "id": "VUfvl",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#F5D0FE",
@@ -4871,7 +4871,7 @@
                 {
                   "type": "text",
                   "id": "4LvE1",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#F0ABFC",
@@ -4883,7 +4883,7 @@
                 {
                   "type": "text",
                   "id": "36ojw",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#E879F9",
@@ -4895,7 +4895,7 @@
                 {
                   "type": "text",
                   "id": "fowkE",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#D946EF",
@@ -4907,7 +4907,7 @@
                 {
                   "type": "text",
                   "id": "f9K9r",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#C026D3",
@@ -4919,7 +4919,7 @@
                 {
                   "type": "text",
                   "id": "yk5gT",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#A21CAF",
@@ -4931,7 +4931,7 @@
                 {
                   "type": "text",
                   "id": "NFsMi",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#86198F",
@@ -4943,7 +4943,7 @@
                 {
                   "type": "text",
                   "id": "xO2MO",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#701A75",
@@ -5079,7 +5079,7 @@
                 {
                   "type": "text",
                   "id": "hfa3z",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FDF2F8",
@@ -5091,7 +5091,7 @@
                 {
                   "type": "text",
                   "id": "rfb7U",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#FCE7F3",
@@ -5103,7 +5103,7 @@
                 {
                   "type": "text",
                   "id": "x0Xna",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#FBCFE8",
@@ -5115,7 +5115,7 @@
                 {
                   "type": "text",
                   "id": "jSlyN",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#F9A8D4",
@@ -5127,7 +5127,7 @@
                 {
                   "type": "text",
                   "id": "2w1GM",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#F472B6",
@@ -5139,7 +5139,7 @@
                 {
                   "type": "text",
                   "id": "mqwN8",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#EC4899",
@@ -5151,7 +5151,7 @@
                 {
                   "type": "text",
                   "id": "aiIOy",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#DB2777",
@@ -5163,7 +5163,7 @@
                 {
                   "type": "text",
                   "id": "izaDg",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#BE185D",
@@ -5175,7 +5175,7 @@
                 {
                   "type": "text",
                   "id": "86rCr",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#9D174D",
@@ -5187,7 +5187,7 @@
                 {
                   "type": "text",
                   "id": "Zeysr",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#831843",
@@ -5323,7 +5323,7 @@
                 {
                   "type": "text",
                   "id": "23Uyx",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "50\n#FFF1F2",
@@ -5335,7 +5335,7 @@
                 {
                   "type": "text",
                   "id": "4Xrih",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "100\n#FFE4E6",
@@ -5347,7 +5347,7 @@
                 {
                   "type": "text",
                   "id": "RwbDK",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "200\n#FECDD3",
@@ -5359,7 +5359,7 @@
                 {
                   "type": "text",
                   "id": "BLDV0",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "300\n#FDA4AF",
@@ -5371,7 +5371,7 @@
                 {
                   "type": "text",
                   "id": "jIFn6",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "400\n#FB7185",
@@ -5383,7 +5383,7 @@
                 {
                   "type": "text",
                   "id": "U0d89",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "500\n#F43F5E",
@@ -5395,7 +5395,7 @@
                 {
                   "type": "text",
                   "id": "WP8m8",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "600\n#E11D48",
@@ -5407,7 +5407,7 @@
                 {
                   "type": "text",
                   "id": "n9rPN",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "700\n#BE123C",
@@ -5419,7 +5419,7 @@
                 {
                   "type": "text",
                   "id": "rXEFd",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "800\n#9F1239",
@@ -5431,7 +5431,7 @@
                 {
                   "type": "text",
                   "id": "mirk9",
-                  "fill": "$text.muted",
+                  "fill": "#A1A1AA",
                   "textGrowth": "fixed-width",
                   "width": 106.6,
                   "content": "900\n#881337",
@@ -5538,7 +5538,7 @@
                       "type": "text",
                       "id": "oeyFI",
                       "name": "rowDisplayMeta",
-                      "fill": "#7A838B",
+                      "fill": "#A1A1AA",
                       "content": "Display · 48/56 · Noto Sans Thai 700",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
@@ -5548,7 +5548,7 @@
                       "type": "text",
                       "id": "iQTZO",
                       "name": "rowDisplaySample",
-                      "fill": "#E7F0E8",
+                      "fill": "#A1A1AA",
                       "content": "Display 48 - สื่อสารอย่างชัดเจน",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 48,
@@ -5568,7 +5568,7 @@
                       "type": "text",
                       "id": "4IMBL",
                       "name": "rowH1Meta",
-                      "fill": "#7A838B",
+                      "fill": "#A1A1AA",
                       "content": "H1 · 36/44 · Noto Sans Thai 700",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
@@ -5578,7 +5578,7 @@
                       "type": "text",
                       "id": "DppCg",
                       "name": "rowH1Sample",
-                      "fill": "#E7F0E8",
+                      "fill": "#A1A1AA",
                       "content": "Heading 1 - พื้นฐานผลิตภัณฑ์",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 36,
@@ -5598,7 +5598,7 @@
                       "type": "text",
                       "id": "a0l5Y",
                       "name": "rowH2Meta",
-                      "fill": "#7A838B",
+                      "fill": "#A1A1AA",
                       "content": "H2 · 30/38 · Noto Sans Thai 700",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
@@ -5608,7 +5608,7 @@
                       "type": "text",
                       "id": "lLfrF",
                       "name": "rowH2Sample",
-                      "fill": "#E7F0E8",
+                      "fill": "#A1A1AA",
                       "content": "Heading 2 - โทเคนเชิงความหมาย",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 30,
@@ -5628,7 +5628,7 @@
                       "type": "text",
                       "id": "OE8pq",
                       "name": "rowH3Meta",
-                      "fill": "#7A838B",
+                      "fill": "#A1A1AA",
                       "content": "H3 · 24/32 · Noto Sans Thai 700",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
@@ -5638,7 +5638,7 @@
                       "type": "text",
                       "id": "86A24",
                       "name": "rowH3Sample",
-                      "fill": "#E7F0E8",
+                      "fill": "#A1A1AA",
                       "content": "Heading 3 - สไตล์คอมโพเนนต์",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 24,
@@ -5658,7 +5658,7 @@
                       "type": "text",
                       "id": "Gmqat",
                       "name": "rowH4Meta",
-                      "fill": "#7A838B",
+                      "fill": "#A1A1AA",
                       "content": "H4 · 20/28 · Noto Sans Thai 700",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
@@ -5668,7 +5668,7 @@
                       "type": "text",
                       "id": "rc5dc",
                       "name": "rowH4Sample",
-                      "fill": "#E7F0E8",
+                      "fill": "#A1A1AA",
                       "content": "Heading 4 - ฟอร์มและอินพุต",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 20,
@@ -5688,7 +5688,7 @@
                       "type": "text",
                       "id": "rfjL7",
                       "name": "rowH5Meta",
-                      "fill": "#7A838B",
+                      "fill": "#A1A1AA",
                       "content": "H5 · 18/26 · Noto Sans Thai 700",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
@@ -5698,7 +5698,7 @@
                       "type": "text",
                       "id": "6sRMO",
                       "name": "rowH5Sample",
-                      "fill": "#E7F0E8",
+                      "fill": "#A1A1AA",
                       "content": "Heading 5 - รายละเอียดย่อย",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 18,
@@ -5718,7 +5718,7 @@
                       "type": "text",
                       "id": "4ewHG",
                       "name": "rowBodyMeta",
-                      "fill": "#7A838B",
+                      "fill": "#A1A1AA",
                       "content": "Body · 16/24 · Noto Sans Thai 500",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
@@ -5728,7 +5728,7 @@
                       "type": "text",
                       "id": "sWgZF",
                       "name": "rowBodySample",
-                      "fill": "#C7D0C9",
+                      "fill": "#A1A1AA",
                       "content": "ข้อความเนื้อหาใช้สำหรับย่อหน้า คำอธิบาย และข้อมูลสนับสนุนในคาร์ดและหน้าเพจ",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 16,
@@ -5748,7 +5748,7 @@
                       "type": "text",
                       "id": "VzPDU",
                       "name": "rowBodySmMeta",
-                      "fill": "#7A838B",
+                      "fill": "#A1A1AA",
                       "content": "Body Small · 14/20 · Noto Sans Thai 500",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
@@ -5758,7 +5758,7 @@
                       "type": "text",
                       "id": "Qcdsk",
                       "name": "rowBodySmSample",
-                      "fill": "#B3BCB5",
+                      "fill": "#A1A1AA",
                       "content": "ข้อความขนาดเล็กสำหรับหมายเหตุและบริบท UI ที่กระชับ",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 14,
@@ -5778,7 +5778,7 @@
                       "type": "text",
                       "id": "JoKar",
                       "name": "rowCaptionMeta",
-                      "fill": "#7A838B",
+                      "fill": "#A1A1AA",
                       "content": "Caption · 12/16 · Noto Sans Thai 600",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 11,
@@ -5788,7 +5788,7 @@
                       "type": "text",
                       "id": "MPJCM",
                       "name": "rowCaptionSample",
-                      "fill": "#9FA8A1",
+                      "fill": "#A1A1AA",
                       "content": "ข้อความกำกับสำหรับเวลา คำใบ้ และเมทาดาทา",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 12,
@@ -5868,7 +5868,7 @@
                   "type": "text",
                   "id": "7Dynl",
                   "name": "tableTitle",
-                  "fill": "#E7F0E8",
+                  "fill": "#A1A1AA",
                   "content": "Core Token Table (Internal)",
                   "fontFamily": "Noto Sans Thai",
                   "fontSize": 12,
@@ -5891,7 +5891,7 @@
                       "type": "text",
                       "id": "9ghLQ",
                       "name": "hRole",
-                      "fill": "#C7D0C9",
+                      "fill": "#A1A1AA",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "Color",
@@ -5903,7 +5903,7 @@
                       "type": "text",
                       "id": "Krbto",
                       "name": "hClass",
-                      "fill": "#C7D0C9",
+                      "fill": "#A1A1AA",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "Description (EN/TH)",
@@ -5915,7 +5915,7 @@
                       "type": "text",
                       "id": "DA6v0",
                       "name": "hHex",
-                      "fill": "#C7D0C9",
+                      "fill": "#A1A1AA",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "CSS Variable",
@@ -5927,7 +5927,7 @@
                       "type": "text",
                       "id": "BizIK",
                       "name": "hShade",
-                      "fill": "#C7D0C9",
+                      "fill": "#A1A1AA",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "Value / Source",
@@ -5965,7 +5965,7 @@
                           "type": "text",
                           "id": "Cq2wf",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "Core / Primary",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6044,7 +6044,7 @@
                           "type": "text",
                           "id": "eoZHa",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "Core / Secondary",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6123,7 +6123,7 @@
                           "type": "text",
                           "id": "QXgbU",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "Core / Muted",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6197,7 +6197,7 @@
                           "type": "text",
                           "id": "VlPwN",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "State / Success",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6271,7 +6271,7 @@
                           "type": "text",
                           "id": "gAsk6",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "State / Warning",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6345,7 +6345,7 @@
                           "type": "text",
                           "id": "pLejx",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "State / Destructive",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6419,7 +6419,7 @@
                           "type": "text",
                           "id": "MF9RV",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "State / Info",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6498,7 +6498,7 @@
                           "type": "text",
                           "id": "CWaN3",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "Core / Background",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6577,7 +6577,7 @@
                           "type": "text",
                           "id": "eXHeh",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "Core / Surface",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6656,7 +6656,7 @@
                           "type": "text",
                           "id": "g6rOT",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "Core / Border",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6735,7 +6735,7 @@
                           "type": "text",
                           "id": "DjPo4",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "Future / Card",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6814,7 +6814,7 @@
                           "type": "text",
                           "id": "qZe73",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "Future / Popup",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6893,7 +6893,7 @@
                           "type": "text",
                           "id": "PYF76",
                           "name": "label",
-                          "fill": "#E7F0E8",
+                          "fill": "#A1A1AA",
                           "content": "Future / Dialog",
                           "fontFamily": "Noto Sans Thai",
                           "fontSize": 10,
@@ -6964,7 +6964,7 @@
               "id": "zIBjx",
               "name": "spacingTitle",
               "fill": "#E7F0E8",
-              "content": "Spacing",
+              "content": "Spacing (Minimal)",
               "fontFamily": "Noto Sans Thai",
               "fontSize": 18,
               "fontWeight": "700"
@@ -6974,7 +6974,7 @@
               "id": "EfeR2",
               "name": "spacingBody",
               "fill": "#A1A1AA",
-              "content": "สเกล (px): 2, 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 64\nแนวทางใช้งาน\n- คอนโทรลที่แน่น: 6/8\n- การ์ด/เซกชัน: 16/24\n- ระยะขอบหน้าจอ: 24/32",
+              "content": "เวอร์ชันนี้ลดการล็อก spacing token ในเอกสารลง\nแนะนำให้ใช้ spacing ตาม component defaults ของ shadcn/ui เป็นหลัก\nแล้วปรับเฉพาะจุดจากการใช้งานจริงในหน้า",
               "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "500"
@@ -7002,7 +7002,7 @@
               "id": "JmCCz",
               "name": "radiusTitle",
               "fill": "#E7F0E8",
-              "content": "Border Radius",
+              "content": "Border Radius (Shadcn-first)",
               "fontFamily": "Noto Sans Thai",
               "fontSize": 18,
               "fontWeight": "700"
@@ -7012,10 +7012,237 @@
               "id": "v11NP",
               "name": "radiusBody",
               "fill": "#A1A1AA",
-              "content": "โทเคนรัศมี\n- none: 0\n- sm: 6\n- md: 10\n- lg: 14\n- xl: 18\n- 2xl: 24\nค่าเริ่มต้นของคอมโพเนนต์\n- Inputs/Buttons: md\n- Cards: lg\n- Modals: xl",
+              "content": "Base token (Shadcn-style)\n- --radius: 0.625rem (10px)\n\nDerived scale\n- --radius-sm: calc(var(--radius) - 4px)\n- --radius-md: calc(var(--radius) - 2px)\n- --radius-lg: var(--radius)\n- --radius-xl: calc(var(--radius) + 4px)\n- --radius-2xl: calc(var(--radius) + 8px)\n- --radius-3xl: calc(var(--radius) + 12px)\n- --radius-4xl: calc(var(--radius) + 16px)\n\nDefault mapping (แนะนำ)\n- Tight control/chip: sm\n- Button/Input/Select/Badge: md\n- Card/Popover/Dropdown: lg\n- Dialog/Drawer: xl ถึง 2xl\n- Hero/Large panels: 3xl ถึง 4xl\n\nหลักคิด\n- ใช้ base เดียว แล้วให้ scale อื่น derive ตามระบบ",
               "fontFamily": "Noto Sans Thai",
               "fontSize": 13,
               "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "rrTJ4",
+              "name": "Radius Preview",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "IyVt1",
+                  "name": "itemSm",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "9Cuya",
+                      "name": "smBox",
+                      "width": "fill_container",
+                      "height": 34,
+                      "fill": "#0F1312",
+                      "cornerRadius": 4,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#1F2937"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "hP4LH",
+                      "name": "smText",
+                      "fill": "#A1A1AA",
+                      "content": "sm / 6",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "thtQh",
+                  "name": "itemMd",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "WCyuZ",
+                      "name": "mdBox",
+                      "width": "fill_container",
+                      "height": 34,
+                      "fill": "#0F1312",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#1F2937"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "gcOeq",
+                      "name": "mdText",
+                      "fill": "#A1A1AA",
+                      "content": "md / 8",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "j7mGL",
+                  "name": "itemLg",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "qdbkO",
+                      "name": "lgBox",
+                      "width": "fill_container",
+                      "height": 34,
+                      "fill": "#0F1312",
+                      "cornerRadius": 10,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#1F2937"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "NfIXv",
+                      "name": "lgText",
+                      "fill": "#A1A1AA",
+                      "content": "lg / 10",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "39Ko3",
+                  "name": "itemXl",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "LAQ4g",
+                      "name": "xlBox",
+                      "width": "fill_container",
+                      "height": 34,
+                      "fill": "#0F1312",
+                      "cornerRadius": 14,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#1F2937"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "id": "1VaHF",
+                      "name": "xlText",
+                      "fill": "#A1A1AA",
+                      "content": "xl / 14",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "IpQBZ",
+              "name": "Radius Playbook",
+              "width": "fill_container",
+              "fill": "#0F1312",
+              "cornerRadius": 10,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#1F2937"
+              },
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "iCrRD",
+                  "name": "playbookTitle",
+                  "fill": "#E7F0E8",
+                  "content": "Implementation Playbook",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "wnhMx",
+                  "name": "playbookBody",
+                  "fill": "#A1A1AA",
+                  "content": "Component → Radius\n- Chip / Tiny indicator: sm\n- Button / Input / Select / Badge: md\n- Card / Popover / Dropdown: lg\n- Dialog / Drawer / Sheet: xl หรือ 2xl\n- Marketing hero / Large panel: 3xl หรือ 4xl\n\nRules\n- อย่าผสมหลาย radius ในคอมโพเนนต์เดียวกัน\n- ใช้ระดับใหญ่ขึ้นเฉพาะพื้นที่ใหญ่จริง\n- เริ่มจาก lg เป็น default แล้วค่อยขยับตามบริบท",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "xTFTM",
+              "name": "Code Hand-off",
+              "width": "fill_container",
+              "fill": "#0F1312",
+              "cornerRadius": 10,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#1F2937"
+              },
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Dbsih",
+                  "name": "codeTitle",
+                  "fill": "#E7F0E8",
+                  "content": "Shadcn CSS Tokens",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "uKQ4d",
+                  "name": "codeText",
+                  "fill": "#A1A1AA",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": ":root {\n  --radius: 0.625rem;\n  --radius-sm: calc(var(--radius) - 4px);\n  --radius-md: calc(var(--radius) - 2px);\n  --radius-lg: var(--radius);\n  --radius-xl: calc(var(--radius) + 4px);\n  --radius-2xl: calc(var(--radius) + 8px);\n  --radius-3xl: calc(var(--radius) + 12px);\n  --radius-4xl: calc(var(--radius) + 16px);\n}",
+                  "fontFamily": "Space Mono",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
             }
           ]
         },
@@ -7058,12 +7285,2103 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "BhHZ4",
+      "x": 3960,
+      "y": 0,
+      "name": "Components / Button",
+      "width": 1200,
+      "fill": "#0B0D0C",
+      "cornerRadius": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "#1F2937"
+      },
+      "layout": "vertical",
+      "gap": 16,
+      "padding": 24,
+      "children": [
+        {
+          "type": "text",
+          "id": "JOpZA",
+          "name": "buttonTitle",
+          "fill": "#E7F0E8",
+          "content": "Component / Button",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 28,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "Zy2YE",
+          "name": "buttonSub",
+          "fill": "#9CA3AF",
+          "content": "Shadcn-based button variants and states",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 13,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "22adU",
+          "name": "buttonDiv",
+          "width": "fill_container",
+          "height": 1,
+          "fill": "#27272A"
+        },
+        {
+          "type": "frame",
+          "id": "efNA4",
+          "name": "Button Variants",
+          "width": "fill_container",
+          "fill": "#111514",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#1F2937"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "odGzQ",
+              "name": "variantTitle",
+              "fill": "#E7F0E8",
+              "content": "Variants",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "dKejm",
+              "name": "variantColumns",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "CzLyo",
+                  "name": "Primary Column",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KHcVC",
+                      "fill": "#A1A1AA",
+                      "content": "Primary",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "cejVf",
+                      "name": "pDef",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "$color.primary",
+                      "cornerRadius": "$radius",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "vV721",
+                          "fill": "$color.primary-foreground",
+                          "content": "Button",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "v8Hvl",
+                      "width": "fill_container",
+                      "fill": "#A3E635",
+                      "cornerRadius": "$radius",
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "235vE",
+                          "fill": "#0A0A0A",
+                          "content": "Hover",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Bkb40",
+                      "opacity": 0.55,
+                      "width": "fill_container",
+                      "fill": "$color.muted",
+                      "cornerRadius": "$radius",
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "EVx2D",
+                          "fill": "$color.muted-foreground",
+                          "content": "Disabled",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "PNqHE",
+                  "name": "Secondary Column",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "RJ1y5",
+                      "fill": "#A1A1AA",
+                      "content": "Secondary",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "5Lw8X",
+                      "name": "sDef",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "$color.secondary",
+                      "cornerRadius": "$radius",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "gLsnz",
+                          "fill": "$color.secondary-foreground",
+                          "content": "Button",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "KMBMG",
+                      "width": "fill_container",
+                      "fill": "#52525B",
+                      "cornerRadius": "$radius",
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "khmpU",
+                          "fill": "$color.secondary-foreground",
+                          "content": "Hover",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "KOo93",
+                      "opacity": 0.55,
+                      "width": "fill_container",
+                      "fill": "$color.muted",
+                      "cornerRadius": "$radius",
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "1MhV7",
+                          "fill": "$color.muted-foreground",
+                          "content": "Disabled",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "lGHvL",
+                  "name": "Outline Column",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Y7j7a",
+                      "fill": "#A1A1AA",
+                      "content": "Outline",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "IGbgE",
+                      "name": "oDef",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "#00000000",
+                      "cornerRadius": "$radius",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color.border"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "zsThI",
+                          "fill": "$text.primary",
+                          "content": "Button",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ba0Wj",
+                      "width": "fill_container",
+                      "fill": "$color.muted",
+                      "cornerRadius": "$radius",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color.border"
+                      },
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "FR7kj",
+                          "fill": "$text.primary",
+                          "content": "Hover",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Lz0xk",
+                      "opacity": 0.55,
+                      "width": "fill_container",
+                      "fill": "#00000000",
+                      "cornerRadius": "$radius",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$color.border"
+                      },
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "uLdW6",
+                          "fill": "$color.muted-foreground",
+                          "content": "Disabled",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "PMh96",
+                  "name": "Destructive Column",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PAmTl",
+                      "fill": "#A1A1AA",
+                      "content": "Destructive",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BZb9y",
+                      "name": "dDef",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "$color.destructive",
+                      "cornerRadius": "$radius",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "SPRyQ",
+                          "fill": "$color.destructive-foreground",
+                          "content": "Delete",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "sYgGJ",
+                      "width": "fill_container",
+                      "fill": "#B91C1C",
+                      "cornerRadius": "$radius",
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "x5obw",
+                          "fill": "$color.destructive-foreground",
+                          "content": "Hover",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "YmUzQ",
+                      "opacity": 0.55,
+                      "width": "fill_container",
+                      "fill": "$color.muted",
+                      "cornerRadius": "$radius",
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "xChtR",
+                          "fill": "$color.muted-foreground",
+                          "content": "Disabled",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "2bRuR",
+                  "name": "Ghost Column",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "qwjNn",
+                      "fill": "#A1A1AA",
+                      "content": "Ghost",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "sHMZl",
+                      "name": "gDef",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "#00000000",
+                      "cornerRadius": "$radius",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "R0ANh",
+                          "fill": "$text.primary",
+                          "content": "Button",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "hWr8E",
+                      "width": "fill_container",
+                      "fill": "$color.muted",
+                      "cornerRadius": "$radius",
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "HMdUt",
+                          "fill": "$text.primary",
+                          "content": "Hover",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "oMzk4",
+                      "opacity": 0.55,
+                      "width": "fill_container",
+                      "fill": "#00000000",
+                      "cornerRadius": "$radius",
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "LVsi2",
+                          "fill": "$color.muted-foreground",
+                          "content": "Disabled",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 11,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "REqei",
+          "name": "Button Sizes",
+          "width": "fill_container",
+          "fill": "#111514",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#1F2937"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "ldmvz",
+              "name": "sizeTitle",
+              "fill": "#E7F0E8",
+              "content": "Sizes",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "hz0cJ",
+              "name": "sizeRow",
+              "width": "fill_container",
+              "gap": 10,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "A0GRP",
+                  "name": "xsInst",
+                  "width": 120,
+                  "height": 34,
+                  "fill": "$color.primary",
+                  "cornerRadius": "$radius",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "fgDlE",
+                      "fill": "$color.primary-foreground",
+                      "content": "Button",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bz2eG",
+                  "name": "smInst",
+                  "width": 120,
+                  "height": 34,
+                  "fill": "$color.primary",
+                  "cornerRadius": "$radius",
+                  "padding": [
+                    8,
+                    12
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "4zrJL",
+                      "fill": "$color.primary-foreground",
+                      "content": "Button",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "7xT5q",
+                  "name": "mdInst",
+                  "width": 140,
+                  "height": 40,
+                  "fill": "$color.primary",
+                  "cornerRadius": "$radius",
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Nlrz9",
+                      "fill": "$color.primary-foreground",
+                      "content": "Button",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "W6UIl",
+                  "name": "lgInst",
+                  "width": 170,
+                  "height": 46,
+                  "fill": "$color.primary",
+                  "cornerRadius": "$radius",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Z1ZHl",
+                      "fill": "$color.primary-foreground",
+                      "content": "Button",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 13,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "qKncs",
+                  "name": "iconInst",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "$color.primary",
+                  "cornerRadius": "$radius",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "UcICe",
+                      "fill": "$color.primary-foreground",
+                      "content": "◎",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "ADUz6",
+              "name": "sizeNote",
+              "fill": "#A1A1AA",
+              "content": "Default แนะนำ: md (padding 10/16) และ radius ใช้ --radius เป็นฐาน",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 12,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QwF2r",
+          "name": "Button Icon Positions",
+          "width": "fill_container",
+          "fill": "#111514",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#1F2937"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "PEqlp",
+              "name": "iconTitle",
+              "fill": "#E7F0E8",
+              "content": "Icon Prefix / Suffix",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "xMMhg",
+              "name": "iconRow",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "stfdA",
+                  "name": "prefixInst",
+                  "width": 200,
+                  "height": 40,
+                  "fill": "$color.primary",
+                  "cornerRadius": "$radius",
+                  "gap": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Wii89",
+                      "fill": "$color.primary-foreground",
+                      "content": "◎",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "3UiV4",
+                      "fill": "$color.primary-foreground",
+                      "content": "Button",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kp1R2",
+                  "name": "suffixInst",
+                  "width": 200,
+                  "height": 40,
+                  "fill": "$color.primary",
+                  "cornerRadius": "$radius",
+                  "gap": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "3Kfhs",
+                      "fill": "$color.primary-foreground",
+                      "content": "Button",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "c4k7y",
+                      "fill": "$color.primary-foreground",
+                      "content": "◎",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "V2IW5",
+              "name": "iconNote",
+              "fill": "#A1A1AA",
+              "content": "แนะนำใช้ gap 8 และ icon ขนาดคงที่ เพื่อบาลานซ์ข้อความ",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 12,
+              "fontWeight": "500"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "o2USL",
+      "x": 5280,
+      "y": 0,
+      "name": "Components / Input",
+      "width": 1200,
+      "fill": "#0B0D0C",
+      "cornerRadius": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "#1F2937"
+      },
+      "layout": "vertical",
+      "gap": 16,
+      "padding": 24,
+      "children": [
+        {
+          "type": "text",
+          "id": "H0VFd",
+          "name": "inputTitle",
+          "fill": "#E7F0E8",
+          "content": "Component / Input",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 28,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "NQedq",
+          "name": "inputSub",
+          "fill": "#9CA3AF",
+          "content": "Text input with states and icon slots",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 13,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "V6nS3",
+          "name": "inputDiv",
+          "width": "fill_container",
+          "height": 1,
+          "fill": "#27272A"
+        },
+        {
+          "type": "frame",
+          "id": "PVXoR",
+          "name": "Input States",
+          "width": "fill_container",
+          "fill": "#111514",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#1F2937"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "mE1nh",
+              "name": "inputStateTitle",
+              "fill": "#E7F0E8",
+              "content": "States",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "xjXJM",
+              "name": "inputRows",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "wOQNy",
+                  "name": "Component/Input/Default",
+                  "width": "fill_container",
+                  "fill": "#0F1312",
+                  "cornerRadius": "$radius",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "pDT4k",
+                      "name": "defaultText",
+                      "fill": "$text.muted",
+                      "content": "Default input",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Hehnx",
+                  "name": "inputFocus",
+                  "width": "fill_container",
+                  "fill": "#0F1312",
+                  "cornerRadius": "$radius",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 2,
+                    "fill": "$color.ring"
+                  },
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "j8wLh",
+                      "name": "focusText",
+                      "fill": "$text.primary",
+                      "content": "Focused input",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "DoPpj",
+                  "name": "inputError",
+                  "width": "fill_container",
+                  "fill": "#0F1312",
+                  "cornerRadius": "$radius",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.destructive"
+                  },
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "LFVeH",
+                      "name": "errorText",
+                      "fill": "$color.destructive",
+                      "content": "Email is required",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "0BACg",
+                  "name": "inputDisabled",
+                  "opacity": 0.55,
+                  "width": "fill_container",
+                  "fill": "$color.muted",
+                  "cornerRadius": "$radius",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "tZFMU",
+                      "name": "disabledText",
+                      "fill": "$color.muted-foreground",
+                      "content": "Disabled input",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "qFeOY",
+          "name": "Input Prefix / Suffix",
+          "width": "fill_container",
+          "fill": "#111514",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#1F2937"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "pEfOc",
+              "name": "inputIconTitle",
+              "fill": "#E7F0E8",
+              "content": "Prefix / Suffix Icon",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "fpFTT",
+              "name": "Component/Input/PrefixIcon",
+              "width": "fill_container",
+              "fill": "#0F1312",
+              "cornerRadius": "$radius",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$color.border"
+              },
+              "gap": 8,
+              "padding": [
+                10,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "m5qiw",
+                  "name": "prefixIcon",
+                  "fill": "$text.muted",
+                  "content": "◎",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "KeHbJ",
+                  "name": "prefixValue",
+                  "fill": "$text.muted",
+                  "content": "Search...",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "zN1WN",
+              "name": "Component/Input/SuffixIcon",
+              "width": "fill_container",
+              "fill": "#0F1312",
+              "cornerRadius": "$radius",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$color.border"
+              },
+              "padding": [
+                10,
+                12
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mB0YC",
+                  "name": "suffixValue",
+                  "fill": "$text.primary",
+                  "content": "name@example.com",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "o1DO8",
+                  "name": "suffixIcon",
+                  "fill": "$text.muted",
+                  "content": "◎",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "aX8Y1",
+      "x": 6600,
+      "y": 0,
+      "name": "Components / Select",
+      "width": 1200,
+      "fill": "#0B0D0C",
+      "cornerRadius": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "#1F2937"
+      },
+      "layout": "vertical",
+      "gap": 16,
+      "padding": 24,
+      "children": [
+        {
+          "type": "text",
+          "id": "5oWn8",
+          "name": "selectTitle",
+          "fill": "#E7F0E8",
+          "content": "Component / Select",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 28,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "tt88i",
+          "name": "selectSub",
+          "fill": "#9CA3AF",
+          "content": "Trigger, menu and option states",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 13,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "Pwjph",
+          "name": "selectDiv",
+          "width": "fill_container",
+          "height": 1,
+          "fill": "#27272A"
+        },
+        {
+          "type": "frame",
+          "id": "ogZkg",
+          "name": "Trigger States",
+          "width": "fill_container",
+          "fill": "#111514",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#1F2937"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "xc37i",
+              "name": "triggerTitle",
+              "fill": "#E7F0E8",
+              "content": "Trigger",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "C1Tt8",
+              "name": "triggerRows",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "xFjSy",
+                  "name": "Component/Select/Trigger",
+                  "width": "fill_container",
+                  "fill": "#0F1312",
+                  "cornerRadius": "$radius",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "8nEBn",
+                      "name": "trgDefLabel",
+                      "fill": "$text.muted",
+                      "content": "Select category",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "MQFCh",
+                      "name": "trgDefIcon",
+                      "fill": "$text.muted",
+                      "content": "▾",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "gyhAR",
+                  "name": "triggerOpen",
+                  "width": "fill_container",
+                  "fill": "#0F1312",
+                  "cornerRadius": "$radius",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 2,
+                    "fill": "$color.ring"
+                  },
+                  "padding": [
+                    10,
+                    12
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Z2nuX",
+                      "name": "trgOpenLabel",
+                      "fill": "$text.primary",
+                      "content": "Design System",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ScYSy",
+                      "name": "trgOpenIcon",
+                      "fill": "$text.primary",
+                      "content": "▴",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "opqAh",
+          "name": "Menu / Options",
+          "width": "fill_container",
+          "fill": "#111514",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#1F2937"
+          },
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "QXJvH",
+              "name": "menuTitle",
+              "fill": "#E7F0E8",
+              "content": "Options",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "d9sFB",
+              "name": "Component/Select/OptionDefault",
+              "width": "fill_container",
+              "fill": "#00000000",
+              "cornerRadius": "$radius",
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "pqsbx",
+                  "name": "optDefaultTxt",
+                  "fill": "$text.primary",
+                  "content": "Dashboard",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "z9yhX",
+              "name": "optHover",
+              "width": "fill_container",
+              "fill": "$color.muted",
+              "cornerRadius": "$radius",
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Y02y4",
+                  "name": "optHoverTxt",
+                  "fill": "$text.primary",
+                  "content": "Analytics (Hover)",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pGtWN",
+              "name": "Component/Select/OptionSelected",
+              "width": "fill_container",
+              "fill": "$color.primary",
+              "cornerRadius": "$radius",
+              "padding": [
+                8,
+                10
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "0x426",
+                  "name": "optSelectedTxt",
+                  "fill": "$color.primary-foreground",
+                  "content": "Design System",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "8q8XK",
+                  "name": "optSelectedCheck",
+                  "fill": "$color.primary-foreground",
+                  "content": "✓",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "WfY5G",
+              "name": "optDisabled",
+              "opacity": 0.55,
+              "width": "fill_container",
+              "fill": "#00000000",
+              "cornerRadius": "$radius",
+              "padding": [
+                8,
+                10
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "qf253",
+                  "name": "optDisabledTxt",
+                  "fill": "$color.muted-foreground",
+                  "content": "Billing (Disabled)",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "rnTxW",
+      "x": 7920,
+      "y": 0,
+      "name": "Components / Card",
+      "width": 1200,
+      "fill": "#0B0D0C",
+      "cornerRadius": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "#1F2937"
+      },
+      "layout": "vertical",
+      "gap": 16,
+      "padding": 24,
+      "children": [
+        {
+          "type": "text",
+          "id": "AdYEI",
+          "name": "cardTitle",
+          "fill": "#E7F0E8",
+          "content": "Component / Card",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 28,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "rfpWZ",
+          "name": "cardSub",
+          "fill": "#9CA3AF",
+          "content": "Container patterns for dashboard and content blocks",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 13,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "i1XvA",
+          "name": "cardDiv",
+          "width": "fill_container",
+          "height": 1,
+          "fill": "#27272A"
+        },
+        {
+          "type": "frame",
+          "id": "33oQa",
+          "name": "Card Structure",
+          "width": "fill_container",
+          "fill": "#111514",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#1F2937"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "VKBf1",
+              "name": "structureTitle",
+              "fill": "#E7F0E8",
+              "content": "Header / Body / Footer",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "yWB9R",
+              "name": "Component/Card/Base",
+              "width": "fill_container",
+              "fill": "$color.surface",
+              "cornerRadius": "$radius",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$color.border"
+              },
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "46nXk",
+                  "name": "cardHeader",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dpCw4",
+                      "name": "headerTitle",
+                      "fill": "$text.primary",
+                      "content": "Monthly Revenue",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 14,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DmOUr",
+                      "name": "headerSub",
+                      "fill": "$text.muted",
+                      "content": "Updated 5 minutes ago",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "NwFyi",
+                  "name": "headerDivider",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "$color.border"
+                },
+                {
+                  "type": "frame",
+                  "id": "Htoan",
+                  "name": "cardBody",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "w0bXq",
+                      "name": "bodyValue",
+                      "fill": "$text.primary",
+                      "content": "$124,580",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 22,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "9uXWM",
+                      "name": "bodyMeta",
+                      "fill": "$color.success",
+                      "content": "+12.4% from last month",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "2MteO",
+                  "name": "footerDivider",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "$color.border"
+                },
+                {
+                  "type": "frame",
+                  "id": "aWIAw",
+                  "name": "cardFooter",
+                  "width": "fill_container",
+                  "padding": 12,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "eekGa",
+                      "name": "footerLeft",
+                      "fill": "$text.muted",
+                      "content": "View details",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Hqgc0",
+                      "name": "footerRight",
+                      "fill": "$text.primary",
+                      "content": "→",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "sJqxu",
+          "name": "Card Styles",
+          "width": "fill_container",
+          "gap": 10,
+          "children": [
+            {
+              "type": "frame",
+              "id": "UflGU",
+              "name": "flatCard",
+              "width": "fill_container",
+              "fill": "$color.surface",
+              "cornerRadius": "$radius",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$color.border"
+              },
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "BBMh0",
+                  "name": "flatLabel",
+                  "fill": "$text.primary",
+                  "content": "Flat Card",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "Bbqa9",
+                  "name": "flatSub",
+                  "fill": "$text.muted",
+                  "content": "Standard container",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "PdXKS",
+              "name": "Component/Card/Elevated",
+              "width": "fill_container",
+              "fill": "$color.surface",
+              "cornerRadius": "$radius",
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$color.border"
+              },
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#0000003D",
+                "offset": {
+                  "x": 0,
+                  "y": 6
+                },
+                "blur": 20
+              },
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "2NHFB",
+                  "name": "elevLabel",
+                  "fill": "$text.primary",
+                  "content": "Elevated Card",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "QXQsh",
+                  "name": "elevSub",
+                  "fill": "$text.muted",
+                  "content": "Use for modal-like emphasis",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "3uXzB",
+      "x": 9240,
+      "y": 0,
+      "name": "Components / Dialog",
+      "width": 1200,
+      "fill": "#0B0D0C",
+      "cornerRadius": 16,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "#1F2937"
+      },
+      "layout": "vertical",
+      "gap": 16,
+      "padding": 24,
+      "children": [
+        {
+          "type": "text",
+          "id": "SgmKc",
+          "name": "dialogTitle",
+          "fill": "#E7F0E8",
+          "content": "Component / Dialog",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 28,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "JEW3O",
+          "name": "dialogSub",
+          "fill": "#9CA3AF",
+          "content": "Overlay, modal anatomy, sizes, and action patterns",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 13,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "mnm6r",
+          "name": "dialogDiv",
+          "width": "fill_container",
+          "height": 1,
+          "fill": "#27272A"
+        },
+        {
+          "type": "frame",
+          "id": "OCKZx",
+          "name": "Dialog Anatomy",
+          "width": "fill_container",
+          "fill": "#111514",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#1F2937"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "zOglm",
+              "name": "anatomyTitle",
+              "fill": "#E7F0E8",
+              "content": "Overlay + Panel",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "XtizY",
+              "name": "canvas",
+              "width": "fill_container",
+              "height": 300,
+              "fill": "#00000099",
+              "cornerRadius": "$radius",
+              "layout": "vertical",
+              "padding": 20,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YJKkp",
+                  "name": "Component/Dialog/Panel",
+                  "width": 560,
+                  "fill": "$color.surface",
+                  "cornerRadius": "$radius",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "NgfAC",
+                      "name": "panelHead",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "f2een",
+                          "name": "headTitle",
+                          "fill": "$text.primary",
+                          "content": "Delete this project?",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZM5RG",
+                          "name": "headDesc",
+                          "fill": "$text.muted",
+                          "content": "This action cannot be undone. All related data will be removed.",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Hcgi1",
+                      "name": "panelDiv",
+                      "width": "fill_container",
+                      "height": 1,
+                      "fill": "$color.border"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "i6BHd",
+                      "name": "panelFoot",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "padding": 12,
+                      "justifyContent": "end",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "6kGbu",
+                          "name": "cancelBtn",
+                          "fill": "$color.secondary",
+                          "cornerRadius": "$radius",
+                          "padding": [
+                            9,
+                            14
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "mayKx",
+                              "name": "cancelTxt",
+                              "fill": "$color.secondary-foreground",
+                              "content": "Cancel",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 12,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "mPvZt",
+                          "name": "confirmBtn",
+                          "fill": "$color.destructive",
+                          "cornerRadius": "$radius",
+                          "padding": [
+                            9,
+                            14
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ksczK",
+                              "name": "confirmTxt",
+                              "fill": "$color.destructive-foreground",
+                              "content": "Delete",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 12,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "RjVbN",
+          "name": "Dialog Sizes",
+          "width": "fill_container",
+          "fill": "#111514",
+          "cornerRadius": 12,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "#1F2937"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "text",
+              "id": "1Ak57",
+              "name": "sizeTitle",
+              "fill": "#E7F0E8",
+              "content": "Recommended Width",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "lG4DW",
+              "name": "sizeRow",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "2lyOp",
+                  "name": "sizeSm",
+                  "width": "fill_container",
+                  "fill": "#0F1312",
+                  "cornerRadius": "$radius",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "JKyPt",
+                      "name": "smTxt",
+                      "fill": "$text.muted",
+                      "content": "sm: 420px",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "FSrXM",
+                  "name": "sizeMd",
+                  "width": "fill_container",
+                  "fill": "#0F1312",
+                  "cornerRadius": "$radius",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "eccDk",
+                      "name": "mdTxt",
+                      "fill": "$text.muted",
+                      "content": "md: 560px",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "sQ3q3",
+                  "name": "sizeLg",
+                  "width": "fill_container",
+                  "fill": "#0F1312",
+                  "cornerRadius": "$radius",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$color.border"
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "28KTr",
+                      "name": "lgTxt",
+                      "fill": "$text.muted",
+                      "content": "lg: 720px",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "LmdDC",
+          "name": "behavior",
+          "fill": "#A1A1AA",
+          "content": "Behavior: Esc closes dialog | click outside closes (optional) | primary action right-aligned",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 12,
+          "fontWeight": "500"
+        }
+      ]
     }
   ],
   "variables": {
     "color.accent": {
       "type": "color",
-      "value": "#7C3AED"
+      "value": "#3F3F46"
     },
     "color.accent-foreground": {
       "type": "color",
@@ -7077,10 +9395,6 @@
       "type": "color",
       "value": "#27272A"
     },
-    "color.canvas": {
-      "type": "color",
-      "value": "#0A0A0A"
-    },
     "color.card": {
       "type": "color",
       "value": "#18181B"
@@ -7088,26 +9402,6 @@
     "color.card-foreground": {
       "type": "color",
       "value": "#FFFFFF"
-    },
-    "color.chart.1": {
-      "type": "color",
-      "value": "#C4F82A"
-    },
-    "color.chart.2": {
-      "type": "color",
-      "value": "#7C3AED"
-    },
-    "color.chart.3": {
-      "type": "color",
-      "value": "#2563EB"
-    },
-    "color.chart.4": {
-      "type": "color",
-      "value": "#FA541C"
-    },
-    "color.chart.5": {
-      "type": "color",
-      "value": "#15803D"
     },
     "color.destructive": {
       "type": "color",
@@ -7157,35 +9451,17 @@
       "type": "color",
       "value": "#0A0A0A"
     },
-    "color.primary-strong": {
-      "type": "color",
-      "value": "#A3E635"
-    },
     "color.ring": {
       "type": "color",
-      "value": "#C4F82A"
+      "value": "#84CC16"
     },
     "color.secondary": {
       "type": "color",
-      "value": [
-        {
-          "value": "#27272A"
-        },
-        {
-          "value": "#3F3F46"
-        }
-      ]
+      "value": "#3F3F46"
     },
     "color.secondary-foreground": {
       "type": "color",
-      "value": [
-        {
-          "value": "#FFFFFF"
-        },
-        {
-          "value": "#FFFFFF"
-        }
-      ]
+      "value": "#FFFFFF"
     },
     "color.success": {
       "type": "color",
@@ -7207,65 +9483,16 @@
       "type": "color",
       "value": "#FFFFFF"
     },
-    "font.body": {
-      "type": "string",
+    "radius": {
+      "type": "number",
       "value": [
         {
-          "value": "Manrope"
+          "value": 10
         },
         {
-          "value": "IBM Plex Sans Thai"
-        },
-        {
-          "value": "Noto Sans Thai"
+          "value": 10
         }
       ]
-    },
-    "font.display": {
-      "type": "string",
-      "value": [
-        {
-          "value": "Space Grotesk"
-        },
-        {
-          "value": "Sora"
-        },
-        {
-          "value": "Noto Sans Thai"
-        }
-      ]
-    },
-    "font.mono": {
-      "type": "string",
-      "value": "Space Mono"
-    },
-    "radius.md": {
-      "type": "number",
-      "value": 20
-    },
-    "radius.sm": {
-      "type": "number",
-      "value": 10
-    },
-    "space.1": {
-      "type": "number",
-      "value": 4
-    },
-    "space.2": {
-      "type": "number",
-      "value": 8
-    },
-    "space.3": {
-      "type": "number",
-      "value": 12
-    },
-    "space.4": {
-      "type": "number",
-      "value": 16
-    },
-    "space.6": {
-      "type": "number",
-      "value": 24
     },
     "text.muted": {
       "type": "color",
@@ -7274,10 +9501,6 @@
     "text.primary": {
       "type": "color",
       "value": "#FFFFFF"
-    },
-    "font.latin": {
-      "type": "string",
-      "value": "Inter"
     }
   }
 }
