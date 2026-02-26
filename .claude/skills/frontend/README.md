@@ -26,10 +26,17 @@ The skill reads:
 2. **Section rendering**
    - Renders stable sections in fixed order for predictable output
 
-3. **Focus mode**
+3. **Stack profile resolution**
+   - Forced via args: `next`, `vite`, `rr`
+   - Otherwise auto-detected from project files/dependencies
+   - Appends stack-specific additions per section
+
+   Detection reference: `resources/profiles/detect-rules.md`
+
+4. **Focus mode**
    - Applies keyword-based line extraction when arguments are provided
 
-4. **Runtime fallback**
+5. **Runtime fallback**
    - Runs with Bun by default, supports Node + `tsx` fallback
 
 ## Usage
@@ -43,6 +50,9 @@ The skill reads:
 /frontend patterns
 /frontend verify
 /frontend anti
+/frontend next
+/frontend vite
+/frontend rr
 ```
 
 See runnable prompt examples in `examples/README.md`.
@@ -56,6 +66,9 @@ See runnable prompt examples in `examples/README.md`.
 - `patterns` - focus on implementation patterns/examples
 - `anti` - focus on anti-patterns
 - `verify` - focus on verification cadence
+- `next` - force Next.js stack profile additions
+- `vite` - force Vite React TS stack profile additions
+- `rr` - force React Router framework stack profile additions
 - Any free-form text is also supported (substring search in source docs)
 
 ## Output Structure
@@ -68,6 +81,8 @@ See runnable prompt examples in `examples/README.md`.
 - Anti-Patterns
 
 With an argument, the skill adds a `Focus` section with matching lines.
+
+When a profile is forced or auto-detected, stack additions are appended per section.
 
 ## Runtime Compatibility
 

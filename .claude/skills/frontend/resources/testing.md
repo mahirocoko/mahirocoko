@@ -3,6 +3,8 @@
 - Place tests under `test/` or outside route discovery paths
 - Keep tests deterministic
 - Avoid network calls in unit tests without mocks
+- Keep a predictable quality gate sequence before PR: lint -> typecheck -> test
+- Prefer one shared setup file for test environment bootstrapping
 
 ## Test Types
 

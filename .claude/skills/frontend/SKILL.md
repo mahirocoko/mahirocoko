@@ -25,9 +25,12 @@ Show project frontend conventions from `AGENTS.md`, with automatic fallback to `
 /frontend state
 /frontend verify
 /frontend anti
+/frontend next
+/frontend vite
+/frontend rr
 ```
 
-Common arguments: `style`, `navigation`, `route`, `test`, `state`, `data`, `patterns`, `anti`, `verify`.
+Common arguments: `style`, `navigation`, `route`, `test`, `state`, `data`, `patterns`, `anti`, `verify`, `next`, `vite`, `rr`.
 
 ## How It Works
 
@@ -46,11 +49,16 @@ Common arguments: `style`, `navigation`, `route`, `test`, `state`, `data`, `patt
   - Implementation Patterns
   - Anti-Patterns
 
-### 3. Focus Filtering
+### 3. Stack Profile
+
+- Resolve profile from args (`next`, `vite`, `rr`) or auto-detect from project config/dependencies
+- Append stack-specific additions per section
+
+### 4. Focus Filtering
 
 - If arguments are provided, append `Focus` lines by keyword match
 
-### 4. Runtime Fallback
+### 5. Runtime Fallback
 
 - Primary: Bun
 - Fallback: Node + `tsx`
