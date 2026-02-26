@@ -10,49 +10,103 @@ Use detailed examples from:
 - `resources/testing.md`
 - `resources/state-data.md`
 - `resources/implementation-patterns.md`
+- `resources/review-checklist.md`
 
 ## Overview
 
-This document is intentionally runtime-neutral and package-manager-neutral.
-Use it as a baseline for any frontend project, then override with project-specific rules in `AGENTS.md`.
+This fallback is distilled from Mahiro's current working style and split into:
+- `Non-negotiable` = do this by default
+- `Preference` = preferred unless project constraints differ
+- `Contextual` = apply only when stack/context matches
 
 ## Code Style Guide
 
-- Use 2-space indentation
-- Use single quotes in JS/TS/TSX
-- Keep line width <= 120 where practical
-- Prefer `import type` for type-only imports
-- Keep file names kebab-case where possible
-- Let formatter handle trailing commas and spacing
-- Use `I` prefix for interface names (required)
-- Use Lingui for internationalization (`t` macro / `Trans`)
+- Non-negotiable: 2-space indentation, single quotes, line width around 120
+- Non-negotiable: use `import type` for type-only imports
+- Non-negotiable: keep files kebab-case and constants SCREAMING_SNAKE_CASE
+- Non-negotiable: interface names use `I` prefix
+- Preference: page files use explicit component declaration (`const Page = () => ...`) then `export default Page`
+- Preference: component files use named export when the folder convention supports it
+- Contextual: Lingui-first copy (`t` and `Trans`) with Thai source strings when Thai is source locale
 
 ## Navigation and Screen Rules
 
-- Keep navigation strategy consistent across the app
-- Separate screen-level concerns from reusable UI components
-- Keep framework-specific routing details in project docs, not in generic style rules
+- Non-negotiable: keep route modules in `app/routes/` as page orchestration units
+- Non-negotiable: keep reusable UI in `app/components/` and do not push page logic into shared UI
+- Preference: route discovery should stay file-based and centralized in one routing entry
+- Preference: keep auth shell decision in root (authenticated layout vs guest outlet)
+- Contextual: put landing redirects in index route (for example, auth + bootstrap redirect flow)
 
 ## Testing Rules
 
-- Place tests under `test/` or outside route discovery paths
-- Keep tests deterministic
-- Avoid network in unit tests without mocks
+- Non-negotiable: keep tests outside route discovery paths (`test/` or `__tests__/` in non-route dirs)
+- Non-negotiable: deterministic tests only (no hidden time/network coupling)
+- Non-negotiable: run quality gate before PR -> `lint`, `typecheck`, `test`
+- Preference: keep one setup file for shared test env (for example `test/setup.ts`)
+- Contextual: when using Vitest + jsdom, wire DOM assertions once via `@testing-library/jest-dom`
 
 ## State and Data Rules
 
-- Use the server-state library already chosen by the project (for example React Query, SWR, Apollo)
-- Use one local-state strategy consistently (for example Context, Zustand, Redux Toolkit)
-- Keep shared providers in the app root shell
-- Keep API access in dedicated modules, not inline in UI components
+- Non-negotiable: split server-state and client-state responsibilities clearly
+- Non-negotiable: keep API/data calls in service modules, not inline inside presentational UI
+- Non-negotiable: keep global providers in app root shell
+- Preference: server-state via React Query and local app state via Zustand
+- Preference: auth token/session sync should be centralized (hook/store boundary), not scattered in pages
+- Contextual: persist only required store fields with explicit partialization
 
 ## Implementation Patterns
 
-### Route Pattern
+### Page Orchestrator Pattern
 
 ```tsx
-export default function SomeRoute() {
-  return <main>...</main>
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+
+const GoalsPage = () => {
+  const queryClient = useQueryClient()
+
+  const { data: goals = [] } = useQuery({
+    queryKey: ['goals'],
+    queryFn: () => GoalService.getAll(),
+  })
+
+  const createMutation = useMutation({
+    mutationFn: GoalService.create,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['goals'] }),
+  })
+
+  void createMutation
+
+  return <main>{goals.length}</main>
+}
+
+export default GoalsPage
+```
+
+### Layout Guard Pattern
+
+```tsx
+export function AuthLayout({ children }: { children: React.ReactNode }) {
+  const isAuth = useAuthStore((state) => state.isAuth())
+
+  if (!isAuth) {
+    return <NavigateToLogin />
+  }
+
+  return <>{children}</>
+}
+```
+
+### Root Bootstrap Pattern
+
+```tsx
+export function AppRoot({ children }: { children: React.ReactNode }) {
+  return (
+    <I18nProvider i18n={i18n}>
+      <QueryClientProvider client={queryClient}>
+        <ToastProvider>{children}</ToastProvider>
+      </QueryClientProvider>
+    </I18nProvider>
+  )
 }
 ```
 
@@ -68,71 +122,111 @@ export default function SomeRoute() {
 8. `_Event`
 9. `_Effect`
 
-### Test Pattern
-
-```tsx
-import { render, screen } from '@testing-library/react'
-
-describe('Page', () => {
-  it('renders heading', () => {
-    render(<h1>Heading</h1>)
-    expect(screen.getByRole('heading')).toBeInTheDocument()
-  })
-})
-```
-
-### Data Pattern
+### Service Pattern (Supabase-first)
 
 ```ts
-export async function fetchEmployees() {
-  const response = await fetch('/api/employees')
-  if (!response.ok) {
-    throw new Error('Failed to fetch employees')
+import { supabase } from '@/services/supabase'
+
+export class GoalService {
+  static async getAll() {
+    const { data, error } = await supabase.from('goals').select('*').order('created_at', { ascending: false })
+    if (error) throw error
+    return data ?? []
   }
-  return response.json()
 }
 ```
 
-### i18n Pattern (Lingui)
+### Base Transport Pattern
+
+```ts
+export async function postJSON<T>(url: string, body: unknown, token?: string): Promise<T> {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: JSON.stringify(body),
+  })
+
+  if (!response.ok) {
+    throw new Error('Request failed')
+  }
+
+  return (await response.json()) as T
+}
+```
+
+### Store Pattern (auth/session sync)
+
+```ts
+import { create } from 'zustand'
+import { supabase } from '@/services/supabase'
+
+export const useAuthStore = create<{ accessToken: string }>(() => ({ accessToken: '' }))
+
+void supabase.auth.getSession().then(({ data }) => {
+  useAuthStore.setState({ accessToken: data.session?.access_token ?? '' })
+})
+```
+
+### Provider Composition Pattern
 
 ```tsx
-import { Trans, useLingui } from '@lingui/react/macro'
-
-export function WelcomeMessage() {
-  const { t } = useLingui()
-
+export const PageProvider = ({ children }: { children: React.ReactNode }) => {
   return (
-    <section>
-      <h1>{t`Welcome`}</h1>
-      <Trans>
-        Please review <strong>your profile</strong> before continuing.
-      </Trans>
-    </section>
+    <I18nProvider i18n={i18n}>
+      <ConfigProvider>
+        <PopupProvider>
+          <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        </PopupProvider>
+      </ConfigProvider>
+    </I18nProvider>
   )
 }
 ```
 
-### Component System Pattern (shadcn-style)
+### Error Boundary + Feedback Pattern
 
 ```tsx
-import { Button } from '@/components/ui/button'
-
-interface ILoadingButtonProps {
-  loading?: boolean
-  children: React.ReactNode
+export function RouteErrorBoundary() {
+  return <main>Something went wrong. Please try again.</main>
 }
 
-export function LoadingButton({ loading = false, children }: ILoadingButtonProps) {
-  return <Button disabled={loading}>{loading ? 'Loading...' : children}</Button>
+export function showRequestError(message: string) {
+  toast.error(message)
+}
+```
+
+### Feature Slice Pattern
+
+```text
+src/
+  features/
+    orders/
+      pages/
+      services/
+      hooks/
+      components/
+      types/
+```
+
+### Action File Pattern
+
+```ts
+// actions/create-order.ts
+export async function createOrderAction(input: CreateOrderInput) {
+  return OrderService.create(input)
 }
 ```
 
 ## Anti-Patterns
 
-- Do not place tests in `app/routes/`
-- Do not bypass type safety with `any`
-- Do not add formatter/linter tools that conflict with current setup
-- Do not mix multiple lockfiles in the same repository
+- Non-negotiable: do not place tests in `app/routes/`
+- Non-negotiable: do not bypass type safety with `any`
+- Non-negotiable: do not mix multiple formatter/linter stacks or multiple lockfiles
+- Preference: do not call backend directly in route/component body without service boundary
+- Preference: do not spread auth state logic across many modules when one hook/store boundary is enough
 
 ## Verification Cadence
 

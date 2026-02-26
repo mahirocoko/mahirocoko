@@ -1,32 +1,40 @@
 # Implementation Patterns
 
-## Route Pattern
+## Page Orchestrator Pattern
 
 ```tsx
-export default function SomeRoute() {
-  return <main>...</main>
-}
-```
-
-### Route Pattern with Typed Props
-
-```tsx
-import type { Route } from './+types/dashboard'
-
-export default function DashboardRoute(_props: Route.ComponentProps) {
+const DashboardPage = () => {
   return <main>Dashboard</main>
 }
+
+export default DashboardPage
 ```
 
-### Route Pattern with Error Guard
+## Layout Guard Pattern
 
 ```tsx
-export default function EmployeeRoute() {
-  return <main>Employees</main>
-}
+export function AuthLayout({ children }: { children: React.ReactNode }) {
+  const isAuth = useAuthStore((state) => state.isAuth())
 
-export function ErrorBoundary() {
-  return <main>Something went wrong</main>
+  if (!isAuth) {
+    return <NavigateToLogin />
+  }
+
+  return <>{children}</>
+}
+```
+
+## Root Bootstrap Pattern
+
+```tsx
+export function AppRoot({ children }: { children: React.ReactNode }) {
+  return (
+    <I18nProvider i18n={i18n}>
+      <QueryClientProvider client={queryClient}>
+        <ToastProvider>{children}</ToastProvider>
+      </QueryClientProvider>
+    </I18nProvider>
+  )
 }
 ```
 
@@ -74,32 +82,86 @@ export const useUIStore = create<UIState>((set) => ({
 ## Service Pattern
 
 ```ts
-type Employee = { id: string; name: string }
+import { supabase } from '@/services/supabase'
 
-export async function getEmployees(): Promise<Employee[]> {
-  const response = await fetch('/api/employees')
-  if (!response.ok) {
-    throw new Error('Failed to load employees')
+export class GoalService {
+  static async getAll() {
+    const { data, error } = await supabase.from('goals').select('*')
+    if (error) throw error
+    return data ?? []
   }
-  return response.json()
+}
+```
+
+## Base Transport Pattern
+
+```ts
+export async function postJSON<T>(url: string, body: unknown, token?: string): Promise<T> {
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+    body: JSON.stringify(body),
+  })
+
+  if (!response.ok) {
+    throw new Error('Request failed')
+  }
+
+  return (await response.json()) as T
 }
 ```
 
 ## Mutation Pattern
 
 ```ts
-type CreateEmployeeInput = { name: string }
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-export async function createEmployee(input: CreateEmployeeInput) {
-  const response = await fetch('/api/employees', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(input),
+export function useCreateGoal() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: GoalService.create,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['goals'] })
+    },
   })
-  if (!response.ok) {
-    throw new Error('Failed to create employee')
-  }
-  return response.json()
+}
+```
+
+## Error Boundary + Feedback Pattern
+
+```tsx
+export function RouteErrorBoundary() {
+  return <main>Something went wrong. Please try again.</main>
+}
+
+export function showRequestError(message: string) {
+  toast.error(message)
+}
+```
+
+## Feature Slice Pattern
+
+```text
+src/
+  features/
+    orders/
+      pages/
+      services/
+      hooks/
+      components/
+      types/
+```
+
+## Action File Pattern
+
+```ts
+// actions/create-order.ts
+export async function createOrderAction(input: CreateOrderInput) {
+  return OrderService.create(input)
 }
 ```
 

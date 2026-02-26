@@ -81,3 +81,6 @@ $RECYCLE.BIN/
 
 # Oracle-specific (keep ψ structure but ignore certain things)
 .awaken-state.json
+
+# Ignore learn source symlinks, keep markdown docs tracked
+ψ/learn/**/origin

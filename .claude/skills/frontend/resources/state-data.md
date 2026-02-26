@@ -1,10 +1,11 @@
 # State and Data Rules
 
 - Separate server state from UI state
-- Use one server-state approach consistently across features
-- Use one local-state approach consistently across features
-- Keep API calls in service modules
+- Keep one server-state approach across features (prefer React Query if already used)
+- Keep one local-state approach across features (prefer Zustand for app-level shared state)
+- Keep API calls in service modules (Supabase or BaseService boundaries)
 - Keep shared providers in root shell
+- Keep auth token/session synchronization centralized (hook/store), not spread in pages
 
 ## Option Matrix
 
@@ -15,24 +16,27 @@
 ## Example: Service + Hook Boundary
 
 ```ts
-// services/employee-service.ts
-export async function listEmployees() {
-  const response = await fetch('/api/employees')
-  if (!response.ok) {
-    throw new Error('Failed to fetch employees')
+// services/goal.ts
+import { supabase } from '@/services/supabase'
+
+export class GoalService {
+  static async getAll() {
+    const { data, error } = await supabase.from('goals').select('*')
+    if (error) throw error
+    return data ?? []
   }
-  return response.json()
 }
 ```
 
 ```ts
-// hooks/use-employees.ts
-import { listEmployees } from '@/services/employee-service'
+// hooks/use-goals.ts
+import { useQuery } from '@tanstack/react-query'
+import { GoalService } from '@/services/goal'
 
-export function useEmployees() {
-  return {
-    queryKey: ['employees'],
-    queryFn: listEmployees,
-  }
+export function useGoals() {
+  return useQuery({
+    queryKey: ['goals'],
+    queryFn: () => GoalService.getAll(),
+  })
 }
 ```

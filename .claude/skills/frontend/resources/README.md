@@ -20,6 +20,11 @@ All docs are written to be:
 - `anti-patterns.md` - Things to avoid
 - `verification.md` - Verification cadence and runtime examples
 - `runtime.md` - Runner/tooling fallback details
+- `review-checklist.md` - Fast pre-merge checklist for Mahiro-style frontend PR review
+- `profiles/detect-rules.md` - Stack profile selection and auto-detection rules
+- `profiles/next.md` - Stack additions for Next.js App Router projects
+- `profiles/vite-react-ts.md` - Stack additions for Vite + React + TypeScript projects
+- `profiles/react-router-framework.md` - Stack additions for React Router framework mode projects
 
 ## Authoring Rule
 
