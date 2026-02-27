@@ -50,6 +50,8 @@ This fallback is distilled from Mahiro's current working style and split into:
 - Non-negotiable: split server-state and client-state responsibilities clearly
 - Non-negotiable: keep API/data calls in service modules, not inline inside presentational UI
 - Non-negotiable: keep global providers in app root shell
+- Non-negotiable: keep providers organized in `app/providers/` with barrel exports for stable imports
+- Non-negotiable: create React Query clients via utility boundary (`app/utils/react-query/get-query-client.ts`), not ad-hoc in multiple modules
 - Preference: server-state via React Query and local app state via Zustand
 - Preference: auth token/session sync should be centralized (hook/store boundary), not scattered in pages
 - Contextual: persist only required store fields with explicit partialization
@@ -174,6 +176,8 @@ void supabase.auth.getSession().then(({ data }) => {
 
 ```tsx
 export const PageProvider = ({ children }: { children: React.ReactNode }) => {
+  const queryClient = getQueryClient()
+
   return (
     <I18nProvider i18n={i18n}>
       <ConfigProvider>

@@ -5,6 +5,8 @@
 - Keep one local-state approach across features (prefer Zustand for app-level shared state)
 - Keep API calls in service modules (Supabase or BaseService boundaries)
 - Keep shared providers in root shell
+- Keep React Query client creation behind a utility boundary (`app/utils/react-query/get-query-client.ts`)
+- Re-export React Query utilities from `app/utils/react-query/index.ts` for stable imports
 - Keep auth token/session synchronization centralized (hook/store), not spread in pages
 
 ## Option Matrix
