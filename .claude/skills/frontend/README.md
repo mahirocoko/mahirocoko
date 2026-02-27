@@ -57,6 +57,79 @@ The skill reads:
 
 See runnable prompt examples in `examples/README.md`.
 
+## Practical Examples
+
+Token-first (recommended default):
+
+```text
+/frontend style token
+/frontend verify token
+```
+
+React Router assets (fonts/favicon via root links):
+
+```text
+/frontend rr route
+```
+
+Cleanup after deleting routes/modules:
+
+```text
+/frontend verify route
+```
+
+Vite plugin/type conflict triage:
+
+```text
+/frontend verify vite
+```
+
+Intent-driven usage (what you asked for):
+
+```text
+/frontend rr "ช่วย init โปรเจคตามนี้หน่อย"
+/frontend rr guide "ช่วย setup project frontend ตามนี้หน่อย"
+```
+
+Recommended execution style (2-step):
+
+```text
+/frontend rr guide
+ช่วย setup project frontend ตามนี้หน่อย: [requirements]
+```
+
+Reason: first command locks conventions, second message executes implementation against those conventions.
+
+## Prompt Presets
+
+Copy-paste ready commands:
+
+```text
+# INIT (React Router + token-first)
+/frontend rr guide "ช่วยวางโครง init frontend project" --context "token-first, shadcn new-york, root links() สำหรับ font/favicon, provider/query boundary"
+
+# SETUP โครงพร้อมเริ่มทำงาน
+/frontend rr patterns "ช่วย setup โครงโปรเจกต์ให้เริ่ม implement ได้ทันที" --context "app/root.tsx, app/routes, app/providers, app/components/ui, test/setup.ts"
+
+# IMPLEMENT หน้า/ฟีเจอร์ใหม่
+/frontend rr patterns "ช่วย implement หน้า login" --context "ใช้ semantic tokens เท่านั้น, ใช้ base ui primitives, รองรับ mobile"
+
+# REVIEW ก่อน commit
+/frontend rr verify "ช่วย review ชุดแก้นี้ก่อน commit" --context "ห้าม direct palette colors, เช็ก size contract ของ Button/Input, เช็ก stale imports"
+
+# CLEANUP หลังลบ route/module
+/frontend rr verify "ช่วยตรวจหลังลบ route/module" --context "ทำ reference sweep, test sweep, typecheck แล้วสรุปจุดเสี่ยง"
+
+# FIX style inconsistency
+/frontend style token "ช่วยแก้ความไม่สม่ำเสมอของ UI" --context "normalize spacing/height ที่ primitives ก่อน, หลีกเลี่ยง page-level override"
+
+# FIX Vite type conflict
+/frontend verify vite "ช่วย triage error vite plugin type mismatch" --context "เริ่มจาก pnpm why vite, ตรวจ dependency graph ก่อนแก้เวอร์ชัน"
+
+# FAST checklist mode
+/frontend rr verify "ขอ checklist สั้นๆ ก่อนส่ง PR" --context "token-first, route safety, tests, build gate"
+```
+
 ## Arguments
 
 - `style` - focus on code style conventions
