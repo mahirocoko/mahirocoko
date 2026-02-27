@@ -1,6 +1,15 @@
-# Mahiro Cokawa
+<div align="center">
+  <img src="public/cat-avatar.svg" alt="Mahiro Cat Avatar" width="180" />
+  
+  # Mahiro Cokawa
+  
+  **Frontend Developer working at Mars space**
+  
+  *I'm just a cat! 555* 🐱
+  
+</div>
 
-Frontend Developer working at Mars space
+---
 
 <a href="https://github.com/mahirocoko/github-readme-stats">
   <img align="left" src="https://github-readme-stats.vercel.app/api?username=mahirocoko&show_icons=true&rank_icon=github" />
