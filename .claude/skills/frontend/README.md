@@ -50,6 +50,7 @@ The skill reads:
 /frontend patterns
 /frontend verify
 /frontend anti
+/frontend i18n
 /frontend next
 /frontend vite
 /frontend rr
@@ -64,6 +65,14 @@ Token-first (recommended default):
 ```text
 /frontend style token
 /frontend verify token
+```
+
+i18n (Lingui patterns):
+
+```text
+/frontend i18n
+/frontend i18n lingui
+/frontend rr i18n
 ```
 
 React Router assets (fonts/favicon via root links):
@@ -137,6 +146,7 @@ Copy-paste ready commands:
 - `test` - focus on testing patterns and rules
 - `state` or `data` - focus on state and data boundaries
 - `patterns` - focus on implementation patterns/examples
+- `i18n` - focus on Lingui i18n patterns and conventions
 - `anti` - focus on anti-patterns
 - `verify` - focus on verification cadence
 - `next` - force Next.js stack profile additions

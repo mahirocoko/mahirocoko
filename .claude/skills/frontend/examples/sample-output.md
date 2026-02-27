@@ -105,3 +105,43 @@ Source: AGENTS.md
 4. Add test setup outside route discovery paths
 5. Run quality gate and fix issues before feature work
 ```
+
+## Example Response - `/frontend rr i18n`
+
+```markdown
+# Frontend Guide
+
+Source: AGENTS.md
+
+## Stack Profile
+- Selected: react-router-framework (forced)
+
+## i18n (Lingui)
+- Source language = DEFAULT_LANG — if `DEFAULT_LANG = 'th'`, use Thai in `t` macro
+- Constants like APP_NAME don't need translation
+- Use `useLingui()` + `t` for plain strings
+- Use `Trans` for markup-containing strings
+
+### Folder Structure
+```text
+app/
+  constants/config.ts     # DEFAULT_LANG, APP_NAME
+  libs/lingui/            # config.ts, index.ts (loadCatalog)
+  locales/                # *.po (track), *.js (gitignore)
+  stores/setting/         # lang state with persist
+```
+
+### Example
+```tsx
+// DEFAULT_LANG = 'th' → use Thai
+const { t } = useLingui()
+return <h1>{t`เข้าสู่ระบบ`}</h1>
+
+// Constants don't translate
+import { APP_NAME } from '@/constants/config'
+return <p>{APP_NAME}</p>
+```
+
+## Focus
+- matched: i18n, lingui, locale, translation, source language
+```

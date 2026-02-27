@@ -18,6 +18,16 @@ This uses auto-detection for stack profile when possible.
 /frontend test
 /frontend patterns
 /frontend verify token
+/frontend i18n
+```
+
+## i18n (Lingui)
+
+```text
+/frontend i18n
+/frontend i18n lingui
+/frontend rr i18n
+/frontend rr patterns i18n
 ```
 
 ## Stack Profiles
