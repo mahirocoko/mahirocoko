@@ -29,13 +29,41 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
 ```tsx
 export function AppRoot({ children }: { children: React.ReactNode }) {
   return (
-    <I18nProvider i18n={i18n}>
-      <QueryClientProvider client={queryClient}>
-        <ToastProvider>{children}</ToastProvider>
-      </QueryClientProvider>
-    </I18nProvider>
+    <PageProvider>{children}</PageProvider>
   )
 }
+```
+
+## React Query Utility Pattern
+
+```ts
+// app/utils/react-query/get-query-client.ts
+import { QueryClient, isServer } from '@tanstack/react-query'
+
+const makeQueryClient = () => {
+  return new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 30_000,
+        refetchOnWindowFocus: false,
+        retry: 1,
+      },
+    },
+  })
+}
+
+let browserQueryClient: QueryClient | undefined
+
+export const getQueryClient = () => {
+  if (isServer) return makeQueryClient()
+  if (!browserQueryClient) browserQueryClient = makeQueryClient()
+  return browserQueryClient
+}
+```
+
+```ts
+// app/utils/react-query/index.ts
+export { getQueryClient } from './get-query-client'
 ```
 
 ## Component/Hook Section Order
@@ -182,6 +210,7 @@ src/
 Guideline:
 - Treat `components/ui/` as base primitives
 - Put product-specific behavior in wrapper/composed components
+- Keep design-system backend consistent per project (for example Base UI or Radix), avoid mixing primitive stacks in one app
 
 ### Variant Pattern
 
