@@ -1,0 +1,3 @@
+# Learning: Provider Boundaries and Base UI Consistency
+
+When implementing frontend foundations quickly, the highest leverage is to stabilize boundaries first: provider composition, query-client creation, and base component layering. A durable pattern is to keep provider modules grouped under `app/providers/`, expose them through a barrel, and keep React Query client creation in `app/utils/react-query/get-query-client.ts` with explicit server/client-safe behavior. In parallel, `components/ui` should remain true primitives only; feature-specific compositions belong outside that layer. This reduces drift, prevents abstraction leakage, and makes the codebase easier to scale and hand off.
