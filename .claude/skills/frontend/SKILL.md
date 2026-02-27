@@ -9,6 +9,7 @@ Show project frontend conventions from `AGENTS.md`, with automatic fallback to `
 
 ## Core Principles
 
+- Token-first UI is the default: prefer semantic design tokens over direct palette/absolute colors
 - Keep guidance predictable and section-based
 - Prefer project source of truth (`AGENTS.md`) over fallback docs
 - Keep output runtime-neutral and package-manager-neutral
@@ -93,6 +94,9 @@ npx tsx scripts/main.ts "$ARGUMENTS"
 
 - `AGENTS.md` missing: ensure project root has `AGENTS.md`, or maintain `resources/guide.md`
 - Empty focus results: try broader keywords (`style`, `test`, `state`, `patterns`)
+- Token consistency issue: run token enforcement sweep in `resources/verification.md` and fix primitives first
 - Runtime issue with Bun: use fallback `npx tsx scripts/main.ts "$ARGUMENTS"`
+- React Router font/favicon confusion: check `resources/profiles/react-router-framework.md` document asset playbook
+- Vite plugin overload mismatch: follow `resources/verification.md` Vite type conflict triage before dependency changes
 
 ARGUMENTS: $ARGUMENTS

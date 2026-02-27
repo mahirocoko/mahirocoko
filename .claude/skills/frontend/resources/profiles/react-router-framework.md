@@ -10,6 +10,12 @@
 - Keep auth shell/layout split in `app/root.tsx` so nested routes remain focused.
 - Keep shared providers grouped under `app/providers/` with a barrel export (`app/providers/index.ts`).
 
+## Document Asset Playbook
+- Keep document-level assets (fonts, favicon, global stylesheet links) in `app/root.tsx` via route `links()` export.
+- Ensure `<Links />` is rendered in root `<head>` so route links aggregate correctly.
+- For web fonts, prefer `preconnect` + `stylesheet` entries in `links()` rather than page-level injection.
+- Keep bilingual font stacks explicit in global CSS (for example `Inter` first, Thai fallback second) after links are configured.
+
 ## Testing Rules
 - Test route-level states (loading/error/redirect) with deterministic query and mutation mocks.
 - Keep route tests outside discovery paths to avoid runtime/build coupling.

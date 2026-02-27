@@ -43,3 +43,51 @@ Run build when at least one is true:
 - bundler/runtime config changed
 - environment variable contract changed
 - release branch or production deployment target
+
+## Cleanup Safety Sweep
+
+After deleting routes/modules/components:
+
+- Run a reference sweep for stale imports/usages before full gate.
+- Remove or update tests tied to deleted modules.
+- Re-run typecheck immediately after sweep to catch orphaned symbols early.
+
+Suggested sweep commands:
+
+```bash
+rg "deleted-module-name|DeletedSymbol|old/route/path" app test
+```
+
+## Token Enforcement Sweep
+
+Before final verification, scan for direct palette classes in app code.
+
+Preferred: semantic tokens (for example `bg-background`, `text-foreground`, `border-border`).
+Avoid: direct palette/absolute color classes (for example `text-slate-900`, `bg-emerald-50`, `text-white`, `bg-black/50`).
+
+Suggested scan:
+
+```bash
+rg "(text|bg|border|from|to|via)-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-[0-9]{2,3}" app
+rg "(text|bg|border|from|to|via)-(white|black)(/[0-9]+)?" app
+```
+
+## Vite Type Conflict Triage
+
+When TypeScript reports plugin overload/type mismatch in `vite.config.ts`:
+
+1. Confirm active Vite graph first:
+
+```bash
+pnpm why vite
+```
+
+2. If graph is correct but editor still errors, refresh local install state and TS cache:
+
+```bash
+pnpm install --force
+```
+
+3. Restart TypeScript server in editor before changing package versions.
+
+Rule: do dependency-graph proof first; avoid immediate manifest surgery.

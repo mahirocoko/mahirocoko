@@ -14,8 +14,10 @@ This uses auto-detection for stack profile when possible.
 
 ```text
 /frontend style
+/frontend style token
 /frontend test
 /frontend patterns
+/frontend verify token
 ```
 
 ## Stack Profiles
@@ -30,8 +32,10 @@ This uses auto-detection for stack profile when possible.
 
 ```text
 /frontend rr patterns
+/frontend rr route
 /frontend next test
 /frontend vite state
+/frontend verify vite
 ```
 
 ## Free-form
@@ -40,3 +44,19 @@ This uses auto-detection for stack profile when possible.
 /frontend lingui
 /frontend selectors
 ```
+
+## Intent-style (natural language)
+
+```text
+/frontend rr "ช่วย init โปรเจคตามนี้หน่อย"
+/frontend rr guide "ช่วย setup project frontend ตามนี้หน่อย"
+```
+
+## Recommended 2-step flow
+
+```text
+/frontend rr guide
+ช่วย setup project frontend ตามนี้หน่อย: [requirements]
+```
+
+This flow gives better results than packing everything into one command.

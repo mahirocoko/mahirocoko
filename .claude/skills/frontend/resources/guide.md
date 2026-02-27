@@ -19,12 +19,18 @@ This fallback is distilled from Mahiro's current working style and split into:
 - `Preference` = preferred unless project constraints differ
 - `Contextual` = apply only when stack/context matches
 
+Priority order when rules conflict:
+1. Token-first consistency
+2. Existing project architecture boundaries
+3. Local style preferences
+
 ## Code Style Guide
 
 - Non-negotiable: 2-space indentation, single quotes, line width around 120
 - Non-negotiable: use `import type` for type-only imports
 - Non-negotiable: keep files kebab-case and constants SCREAMING_SNAKE_CASE
 - Non-negotiable: interface names use `I` prefix
+- Non-negotiable: in UI classes, prefer semantic tokens (`bg-background`, `text-foreground`, `border-border`) over direct palette/absolute color classes
 - Preference: page files use explicit component declaration (`const Page = () => ...`) then `export default Page`
 - Preference: component files use named export when the folder convention supports it
 - Contextual: Lingui-first copy (`t` and `Trans`) with Thai source strings when Thai is source locale
@@ -35,6 +41,7 @@ This fallback is distilled from Mahiro's current working style and split into:
 - Non-negotiable: keep reusable UI in `app/components/` and do not push page logic into shared UI
 - Preference: route discovery should stay file-based and centralized in one routing entry
 - Preference: keep auth shell decision in root (authenticated layout vs guest outlet)
+- Contextual (React Router framework): keep document assets (fonts/favicon/link tags) in `app/root.tsx` via `links()` and render `<Links />` in `<head>`
 - Contextual: put landing redirects in index route (for example, auth + bootstrap redirect flow)
 
 ## Testing Rules
@@ -236,6 +243,9 @@ export async function createOrderAction(input: CreateOrderInput) {
 
 - Always run: lint, format, typecheck, and test
 - Run build for routing/build changes, release prep, or production-sensitive PRs
+- After route/module deletion: run reference sweep (`rg` in `app` + `test`) before full gate
+- Before final check: scan app code for direct palette classes and replace with semantic tokens
+- For Vite plugin type mismatch: verify graph with `pnpm why vite`, then reinstall/TS-server refresh before version changes
 
 ### Command Examples (choose your project runtime)
 
