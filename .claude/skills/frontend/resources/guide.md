@@ -36,6 +36,35 @@ Priority order when rules conflict:
 - Preference: component files use named export when the folder convention supports it
 - Contextual: Lingui-first copy (`t` and `Trans`) with Thai source strings when Thai is source locale
 
+### Component Scale Contract
+
+- Non-negotiable: form controls should share consistent height/size scale
+- Non-negotiable: checkbox/radio should be sized to visually align with input/button default heights
+- Preference: default form control height is `h-10` (40px) for desktop-friendly touch targets
+- Preference: checkbox uses `size-5` (20px) to balance with `h-10` inputs
+- Preference: disabled states use `bg-muted` background with reduced opacity for clear visual feedback
+
+**Reference scale:**
+
+| Component | Default | Disabled Style |
+|---|---|---|
+| Input | `h-10` (40px) | `opacity-50` |
+| Button | `h-10` (40px) | `opacity-50` |
+| Checkbox | `size-5` (20px) | `bg-muted opacity-60` |
+| Checkbox icon | `size-4.5` (18px) | fallback: `size-4` + slightly heavier stroke |
+
+**Shadow tokens for elevated surfaces:**
+
+- `shadow-soft` — cards, default elevation
+- `shadow-soft-md` — medium elevation, hover states
+- `shadow-soft-lg` — high elevation, dialogs/modals
+- Avoid Tailwind default `shadow-sm/md/lg` in favor of semantic shadow tokens
+
+Notes:
+
+- `size-4.5` is acceptable when arbitrary sizing is supported in the project setup.
+- If arbitrary sizing is restricted, use `size-4` with a slightly heavier icon stroke as the fallback.
+
 ## Navigation and Screen Rules
 
 - Non-negotiable: keep route modules in `app/routes/` as page orchestration units
