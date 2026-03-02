@@ -241,18 +241,41 @@ Before styling route-level screens, verify primitive size contracts are consiste
 
 Checklist:
 - Align default control heights across primitives (`Button`, `Input`, `Select`, etc.).
-- Keep size variants mapped to the same semantic scale (`sm`, `default`, `lg`).
+- Keep size variants mapped to the same semantic scale (`xs`, `sm`, `default`, `lg`).
 - Fix inconsistencies in `components/ui/*` first, then update composed components.
+- Checkbox should be sized to visually align with input/button default heights.
+
+**Reference scale (40px default):**
+
+| Component | Default | Notes |
+|---|---|---|
+| Input | `h-10` (40px) | desktop-friendly touch target |
+| Button | `h-10` (40px) | matches input |
+| Checkbox | `size-5` (20px) | balances with h-10 controls |
+| Checkbox icon | `size-4.5` (18px) | fallback: `size-4` + slightly heavier stroke |
+
+**Disabled states:**
+
+- Input/Button: `opacity-50`
+- Checkbox: `bg-muted opacity-60` (muted background + reduced opacity)
+
+Notes:
+
+- Use `size-4.5` when arbitrary sizing is available in your Tailwind setup.
+- If arbitrary sizing is restricted, fallback to `size-4` and adjust icon stroke for visual balance.
 
 Example contract:
 
 ```ts
-// Example only: use one default height across core controls
+// Example: consistent size scale across controls
 size: {
-  default: 'h-9 px-4 py-2',
-  sm: 'h-8 px-3',
+  xs: 'h-7 px-2 text-xs',
+  sm: 'h-9 px-3 text-sm',
+  default: 'h-10 px-4 text-sm',
+  lg: 'h-11 px-6 text-base',
 }
 ```
+
 
 ### Wrapper Composition Pattern
 
