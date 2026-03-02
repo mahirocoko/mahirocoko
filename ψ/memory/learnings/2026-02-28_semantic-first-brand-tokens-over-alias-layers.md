@@ -11,12 +11,16 @@ When a project already treats `primary` as the main brand color, adding intermed
 
 ## Pattern
 
-- Use semantic tokens directly as brand source-of-truth when possible (`primary`, `accent`)
+- Use semantic tokens directly as brand source-of-truth when possible:
+  - `--primary` (with `--primary-end` for gradient) — main brand CTA, identity color
+  - `--accent` (with `--accent-end` for gradient) — secondary brand color (warm)
+  - `--secondary` — cancel/neutral actions
 - Keep gradient definition composable with stop tokens only:
-  - `--brand-gradient-primary-start`
-  - `--brand-gradient-primary-end`
-- Avoid redundant combined alias token if it doesn’t unlock a real implementation benefit
-
+  - `--brand-gradient-primary-start: var(--primary)`
+  - `--brand-gradient-primary-end: var(--primary-end)`
+  - `--brand-gradient-accent-start: var(--accent)`
+  - `--brand-gradient-accent-end: var(--accent-end)`
+- Avoid redundant combined alias token if it doesn't unlock a real implementation benefit
 ## UI Implications
 
 - Remove overlapping component variants (`brand` vs `default`) early
