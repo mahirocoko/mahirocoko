@@ -30,6 +30,7 @@ Priority order when rules conflict:
 - Non-negotiable: use `import type` for type-only imports
 - Non-negotiable: keep files kebab-case and constants SCREAMING_SNAKE_CASE
 - Non-negotiable: interface names use `I` prefix
+- Non-negotiable: type aliases do not use `I` prefix
 - Non-negotiable: in UI classes, prefer semantic tokens (`bg-background`, `text-foreground`, `border-border`) over direct palette/absolute color classes
 - Preference: page files use explicit component declaration (`const Page = () => ...`) then `export default Page`
 - Preference: component files use named export when the folder convention supports it
@@ -94,7 +95,7 @@ export default GoalsPage
 ### Layout Guard Pattern
 
 ```tsx
-export function AuthLayout({ children }: { children: React.ReactNode }) {
+export const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   const isAuth = useAuthStore((state) => state.isAuth())
 
   if (!isAuth) {
@@ -108,7 +109,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
 ### Root Bootstrap Pattern
 
 ```tsx
-export function AppRoot({ children }: { children: React.ReactNode }) {
+export const AppRoot = ({ children }: { children: React.ReactNode }) => {
   return (
     <I18nProvider i18n={i18n}>
       <QueryClientProvider client={queryClient}>
@@ -200,7 +201,7 @@ export const PageProvider = ({ children }: { children: React.ReactNode }) => {
 ### Error Boundary + Feedback Pattern
 
 ```tsx
-export function RouteErrorBoundary() {
+export const RouteErrorBoundary = () => {
   return <main>Something went wrong. Please try again.</main>
 }
 

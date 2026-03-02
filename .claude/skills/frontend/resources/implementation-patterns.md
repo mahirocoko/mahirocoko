@@ -13,7 +13,7 @@ export default DashboardPage
 ## Layout Guard Pattern
 
 ```tsx
-export function AuthLayout({ children }: { children: React.ReactNode }) {
+export const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   const isAuth = useAuthStore((state) => state.isAuth())
 
   if (!isAuth) {
@@ -27,7 +27,7 @@ export function AuthLayout({ children }: { children: React.ReactNode }) {
 ## Root Bootstrap Pattern
 
 ```tsx
-export function AppRoot({ children }: { children: React.ReactNode }) {
+export const AppRoot = ({ children }: { children: React.ReactNode }) => {
   return (
     <PageProvider>{children}</PageProvider>
   )
@@ -162,7 +162,7 @@ export function useCreateGoal() {
 ## Error Boundary + Feedback Pattern
 
 ```tsx
-export function RouteErrorBoundary() {
+export const RouteErrorBoundary = () => {
   return <main>Something went wrong. Please try again.</main>
 }
 
@@ -265,7 +265,7 @@ interface ILoadingButtonProps {
   onClick?: () => void
 }
 
-export function LoadingButton({ loading = false, children, onClick }: ILoadingButtonProps) {
+export const LoadingButton = ({ loading = false, children, onClick }: ILoadingButtonProps) => {
   return (
     <Button disabled={loading} onClick={onClick}>
       {loading ? 'Loading...' : children}

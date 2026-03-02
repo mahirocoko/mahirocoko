@@ -58,6 +58,57 @@ The skill reads:
 
 See runnable prompt examples in `examples/README.md`.
 
+## Refactor Workflow (Recommended)
+
+Use this flow when you want to refactor safely without losing project conventions:
+
+1. **Lock profile first**
+
+```text
+/frontend rr
+```
+
+2. **Read boundaries before touching code**
+
+```text
+/frontend route
+/frontend state
+/frontend test
+```
+
+3. **Pick one refactor scope at a time**
+
+```text
+/frontend patterns
+/frontend anti
+```
+
+4. **Run a short pre-commit checklist**
+
+```text
+/frontend rr verify
+```
+
+### Why this works
+
+- `rr` locks React Router conventions so output stays aligned with this repo.
+- `route/state/test` reduces accidental boundary breakage during refactor.
+- `patterns/anti` gives "do this / avoid this" in one pass.
+- `verify` is best used as checklist context, not as a strict linter replacement.
+
+### Practical command bundle for refactor prompts
+
+```text
+/frontend rr
+/frontend route state test patterns anti
+```
+
+Then ask your refactor task in plain language, for example:
+
+```text
+Refactor this module but keep route boundaries, token-first classes, and existing provider/query patterns.
+```
+
 ## Practical Examples
 
 Token-first (recommended default):
@@ -196,3 +247,11 @@ Package manager is not fixed by this skill. Use the package manager selected by 
 - `AGENTS.md not found` in output: run the skill in a project folder that includes `AGENTS.md`
 - Focus output too noisy: use narrower arguments like `style`, `test`, `state`, `patterns`
 - Bun unavailable: run fallback `npx tsx scripts/main.ts "$ARGUMENTS"`
+
+## Known Limits (Current)
+
+- Focus mode is keyword-based, so broad inputs can return noisy lines.
+- `verify` focus may return little or no direct matches in some projects.
+- Forcing a wrong profile (`vite`/`next`) in a React Router repo can mix in irrelevant guidance.
+
+If this happens, use `rr` first, then run focused commands separately (`route`, `state`, `test`, `anti`).
