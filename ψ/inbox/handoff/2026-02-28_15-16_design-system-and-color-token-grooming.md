@@ -4,11 +4,16 @@
 **Context**: 95%
 
 ## What We Did
-- Standardized HRM branding tokens to semantic-first model (`primary` + `accent`) and removed redundant brand alias layers.
+- Standardized HRM branding tokens to semantic-first model with dual-brand palette:
+  - **Primary (Blue Brand)**: `--primary` + `--primary-end` for gradients
+  - **Accent (Warm Brand)**: `--accent` + `--accent-end` for secondary brand actions
+  - **Secondary (Cancel/Neutral)**: For dismissive/neutral actions
+- Added `accent-gradient` button variant for warm brand CTAs.
+- Updated `primary-gradient` to use `--primary-end` instead of `--accent` for monochromatic blue gradient.
 - Tuned gradient and hover behavior for CTA buttons and link actions to improve contrast on login UI.
 - Simplified button variants (removed overlap), then aligned usage in login route and docs.
 - Synced documentation across `AGENTS.md`, `docs/onboarding.md`, and `README.md` to match the latest token contract.
-- Completed `/rrr` and committed both repos for this session’s major refactors.
+- Completed `/rrr` and committed both repos for this session's major refactors.
 
 ## Pending
 - [ ] Visual QA pass on login page (desktop + mobile, light + dark) focused on gradient readability and hover states.
