@@ -51,9 +51,9 @@ import './widget.css'
 import type { ComponentProps } from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-interface WidgetProps extends ComponentProps<'div'> {}
+interface IWidgetProps extends ComponentProps<'div'> {}
 
-export function Widget({ className, ...props }: WidgetProps) {
+const Widget = ({ className, ...props }: IWidgetProps) => {
   // _Ref
   const previousValue = useRef<string | null>(null)
 
@@ -74,6 +74,8 @@ export function Widget({ className, ...props }: WidgetProps) {
     </div>
   )
 }
+
+export { Widget }
 ```
 
 ## Example: Utility Function
