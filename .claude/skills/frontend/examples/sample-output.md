@@ -69,7 +69,7 @@ Source: AGENTS.md
 
 ## Code Style Guide
 - Non-negotiable: use semantic design tokens (`bg-background`, `text-foreground`, `border-border`)
-- Preference: route pages use explicit `const Page = ...; export default Page`
+- Preference: route pages use explicit `const Page = ...; export default Page` when aligned with project snippets/templates
 
 ## Navigation and Screen Rules
 - Keep route modules in `app/routes/`

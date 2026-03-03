@@ -1,5 +1,10 @@
 # Implementation Patterns
 
+Notes:
+
+- Treat code blocks here as examples/pattern references.
+- When project snippets/templates disagree, follow project snippets/templates first.
+
 ## Page Orchestrator Pattern
 
 ```tsx
@@ -193,7 +198,7 @@ export async function createOrderAction(input: CreateOrderInput) {
 }
 ```
 
-## Component System Pattern (shadcn-style, adaptable)
+## Component System Pattern (primitives-first, adaptable)
 
 ### Keep base primitives stable
 

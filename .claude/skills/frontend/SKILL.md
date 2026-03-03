@@ -23,7 +23,8 @@ Show project frontend conventions from `AGENTS.md`, with automatic fallback to `
 |----------|-----------|
 | 1 | Token-first consistency (semantic over direct palette) |
 | 2 | Existing project architecture boundaries |
-| 3 | Local style preferences |
+| 3 | Project-local snippets/templates over fallback examples |
+| 4 | Local style preferences |
 
 ## Quick Commands
 

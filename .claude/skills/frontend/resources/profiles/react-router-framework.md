@@ -2,7 +2,7 @@
 
 ## Code Style Guide
 - Use typed route component props (`Route.ComponentProps`) from generated route types when available.
-- Keep route exports explicit and consistent (`const Page = ...; export default Page`).
+- Keep route exports explicit and consistent (for example `const Page = ...; export default Page`) while following project-local snippets/templates.
 
 ## Navigation and Screen Rules
 - Keep file-based route modules under `app/routes/` with `flatRoutes()` registration in `app/routes.ts`.

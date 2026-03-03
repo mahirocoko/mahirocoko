@@ -166,7 +166,7 @@ Copy-paste ready commands:
 
 ```text
 # INIT (React Router + token-first)
-/frontend rr guide "ช่วยวางโครง init frontend project" --context "token-first, shadcn new-york, root links() สำหรับ font/favicon, provider/query boundary"
+/frontend rr guide "ช่วยวางโครง init frontend project" --context "token-first, base ui primitives, root links() สำหรับ font/favicon, provider/query boundary"
 
 # SETUP โครงพร้อมเริ่มทำงาน
 /frontend rr patterns "ช่วย setup โครงโปรเจกต์ให้เริ่ม implement ได้ทันที" --context "app/root.tsx, app/routes, app/providers, app/components/ui, test/setup.ts"
