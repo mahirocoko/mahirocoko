@@ -9,17 +9,18 @@ source: rrr: mahirocoko
 
 When building checkbox components with shadcn/ui styling, the Tailwind variant syntax differs between Base UI and Radix UI:
 
-| Library  | Attribute on checked state | Tailwind syntax        |
-| -------- | -------------------------- | ---------------------- |
-| Radix UI | `data-state="checked"`       | `data-[state=checked]:`  |
-| Base UI  | `data-checked` (boolean)   | `data-checked:`          |
+| Library  | Attribute on checked state | Tailwind syntax         |
+| -------- | -------------------------- | ----------------------- |
+| Radix UI | `data-state="checked"`     | `data-[state=checked]:` |
+| Base UI  | `data-checked` (boolean)   | `data-checked:`         |
 
 shadcn's `shadcn/tailwind.css` includes custom variants that support both:
 
 ```css
 @custom-variant data-checked {
   &:where([data-state="checked"]),    /* Radix */
-  &:where([data-checked]:not([data-checked="false"])) {  /* Base UI */
+  &:where([data-checked]:not([data-checked="false"])) {
+    /* Base UI */
     @slot;
   }
 }
@@ -28,5 +29,6 @@ shadcn's `shadcn/tailwind.css` includes custom variants that support both:
 **Key insight**: Always check `shadcn/tailwind.css` for available custom variants before assuming syntax. The file documents all supported state variants.
 
 **Reference**: shadcn/ui repo at `/Users/mahiro/ghq/github.com/shadcn-ui/ui`
+
 - Base UI patterns: `apps/v4/registry/bases/base/ui/`
 - Radix patterns: `apps/v4/registry/new-york-v4/ui/`
