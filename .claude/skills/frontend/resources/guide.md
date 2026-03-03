@@ -33,7 +33,7 @@ Priority order when rules conflict:
 - Non-negotiable: type aliases do not use `I` prefix
 - Non-negotiable: in UI classes, prefer semantic tokens (`bg-background`, `text-foreground`, `border-border`) over direct palette/absolute color classes
 - Preference: page files use explicit component declaration (`const Page = () => ...`) then `export default Page`
-- Preference: component files use named export when the folder convention supports it
+- Preference: component export style follows project snippets/templates; both default and named exports are valid when aligned with local scaffolding
 - Contextual: Lingui-first copy (`t` and `Trans`) with Thai source strings when Thai is source locale
 
 ### Component Scale Contract
