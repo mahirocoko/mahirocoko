@@ -1,211 +1,438 @@
 # frontend skill
 
-This skill outputs frontend coding conventions and implementation patterns from project docs, with a consistent section layout for onboarding.
+Mahiro frontend doctrine for React work.
 
-## Overview
+This skill exists to make AI write and review frontend code in Mahiro's style. It is not a strict checker, not a linter replacement, and not a generic frontend best-practices pack. It is a reusable doctrine loader for how Mahiro structures React code, judges tradeoffs, and reviews implementation quality.
 
-The skill reads:
+## What this skill is for
 
-1. `AGENTS.md` (primary source)
-2. `resources/guide.md` (fallback source when `AGENTS.md` is unavailable)
+Use `/frontend` when you want AI to:
 
-`resources/guide.md` is the fallback source.
+- write new React code in Mahiro style
+- refactor without drifting into generic patterns
+- review code with Mahiro's review lens
+- load route, state, test, i18n, and token-first preferences before implementation
+- adapt the same doctrine across `react-router`, `next`, or `vite`
 
-## When to use
+Use this skill before asking for implementation when style consistency matters.
 
-- Onboarding new contributors/agents
-- Aligning implementation to project conventions
-- Quickly checking route/test/state patterns before coding
+## What this skill is not
 
-## How It Works
+- not a deterministic verifier
+- not a project bootstrap generator by itself
+- not a generic ecosystem tutorial
+- not a replacement for lint, typecheck, test, or build
 
-1. **Source selection**
-   - Uses `AGENTS.md` as primary source
-   - Falls back to `resources/guide.md` when `AGENTS.md` is unavailable
+The point is retrieval and steering. The AI loads the doctrine first, then applies it in the next prompt.
 
-2. **Section rendering**
-   - Renders stable sections in fixed order for predictable output
+## Mental model
 
-3. **Stack profile resolution**
-   - Forced via args: `next`, `vite`, `rr`
-   - Otherwise auto-detected from project files/dependencies
-   - Appends stack-specific additions per section
+Think of `/frontend` as loading Mahiro's frontend operating system into context.
 
-   Detection reference: `resources/profiles/detect-rules.md`
+It carries:
 
-4. **Focus mode**
-   - Applies keyword-based line extraction when arguments are provided
+- architecture taste
+- naming and file organization rules
+- review priorities
+- preferred implementation patterns
+- stack-specific adaptations
 
-5. **Runtime fallback**
-   - Runs with Bun by default, supports Node + `tsx` fallback
+When the doctrine conflicts with project constraints, follow this order:
 
-## Usage
+1. Existing project architecture boundaries
+2. Mahiro non-negotiables
+3. Mahiro preferences
+4. Contextual stack adaptations
 
-```bash
+## How to use it
+
+Default to natural language first.
+
+These are all valid:
+
+```text
+/frontend "ช่วย refactor ให้เป็นในแบบของฉัน"
+/frontend "ช่วย setup หน้า login ตาม style ของฉัน"
+/frontend "ช่วย review frontend ชุดนี้แบบของฉัน"
+```
+
+This skill should understand those prompts as:
+
+- load Mahiro doctrine
+- infer the most relevant lens
+- steer the next implementation or review toward Mahiro style
+
+If you want more control, add stack or lens hints:
+
+```text
+/frontend rr "ช่วย refactor ให้เป็นในแบบของฉัน"
+/frontend route verify "ช่วย review frontend ชุดนี้แบบของฉัน"
+/frontend rr state patterns "ช่วย setup feature นี้ตาม style ของฉัน"
+```
+
+Think of it like this:
+
+- natural prompt = default mode
+- lenses = precision controls
+
+## Quick start
+
+If you are not sure what to run, start here:
+
+```text
+/frontend "ช่วยทำ frontend งานนี้ให้เป็นในแบบของฉัน"
+```
+
+If you want a plain doctrine dump:
+
+```text
 /frontend
-/frontend route
-/frontend test
-/frontend state
-/frontend style
-/frontend patterns
-/frontend verify
-/frontend anti
-/frontend i18n
+```
+
+If you know the stack:
+
+```text
+/frontend rr
 /frontend next
 /frontend vite
-/frontend rr
 ```
 
-See runnable prompt examples in `examples/README.md`.
-
-## Refactor Workflow (Recommended)
-
-Use this flow when you want to refactor safely without losing project conventions:
-
-1. **Lock profile first**
+If you know the area:
 
 ```text
-/frontend rr
-```
-
-2. **Read boundaries before touching code**
-
-```text
+/frontend style
 /frontend route
-/frontend state
 /frontend test
-```
-
-3. **Pick one refactor scope at a time**
-
-```text
+/frontend state
 /frontend patterns
 /frontend anti
+/frontend verify
+/frontend i18n
 ```
 
-4. **Run a short pre-commit checklist**
+## What "my style" means
+
+When you say:
+
+```text
+/frontend "ช่วย refactor ให้เป็นในแบบของฉัน"
+```
+
+the skill should bias the AI toward these defaults:
+
+- routes are page orchestration units, not dumping grounds
+- shared UI stays reusable and does not absorb page-specific logic
+- service boundaries stay explicit for transport and backend integration
+- provider boundaries stay near app shell or page shell, not scattered everywhere
+- server-state and UI-state are split intentionally
+- semantic tokens come before direct palette classes
+- naming, file structure, and section order stay disciplined
+- review should catch architecture drift, token drift, stale imports, and weak boundaries
+
+In short: clean orchestration, clear boundaries, token-first styling, and controlled complexity.
+
+## Recommended workflows
+
+### 1. Start a new feature
+
+```text
+/frontend "ช่วย implement feature ใหม่ตาม style ของฉัน"
+```
+
+More guided:
+
+```text
+/frontend rr patterns
+Implement an orders page with list, filter, and create action. Keep route orchestration in the page, data access in services, and UI primitives reusable.
+```
+
+### 2. Refactor existing code
+
+```text
+/frontend "ช่วย refactor โค้ดนี้ให้เป็นในแบบของฉัน"
+```
+
+More guided:
+
+```text
+/frontend rr route state test anti
+Refactor this module but keep route boundaries, provider structure, and existing query flow intact.
+```
+
+### 3. Review before commit
+
+```text
+/frontend "ช่วย review frontend ชุดนี้แบบของฉัน"
+```
+
+More guided:
 
 ```text
 /frontend rr verify
+Review this change with Mahiro's frontend lens. Focus on route safety, token usage, provider boundaries, and stale imports.
 ```
 
-### Why this works
-
-- `rr` locks React Router conventions so output stays aligned with this repo.
-- `route/state/test` reduces accidental boundary breakage during refactor.
-- `patterns/anti` gives "do this / avoid this" in one pass.
-- `verify` is best used as checklist context, not as a strict linter replacement.
-
-### Practical command bundle for refactor prompts
+### 4. Fix UI inconsistency
 
 ```text
-/frontend rr
-/frontend route state test patterns anti
+/frontend "ช่วยแก้ UI ให้เป็นในแบบของฉัน"
 ```
 
-Then ask your refactor task in plain language, for example:
-
-```text
-Refactor this module but keep route boundaries, token-first classes, and existing provider/query patterns.
-```
-
-## Practical Examples
-
-Token-first (recommended default):
+More guided:
 
 ```text
 /frontend style token
-/frontend verify token
+Normalize the form controls in this screen. Fix spacing and sizing at the primitive level first.
 ```
 
-i18n (Lingui patterns):
+### 5. Work on i18n
+
+```text
+/frontend "ช่วยดูเรื่อง i18n ให้เป็นในแบบของฉัน"
+```
+
+More guided:
 
 ```text
 /frontend i18n
-/frontend i18n lingui
-/frontend rr i18n
+Update this feature to follow Lingui patterns and keep source strings aligned with DEFAULT_LANG.
 ```
 
-React Router assets (fonts/favicon via root links):
+## Common patterns
+
+### Natural prompt first
 
 ```text
-/frontend rr route
+/frontend "ช่วย setup project frontend ตาม style ของฉัน"
+/frontend "ช่วย refactor โค้ดนี้ให้เป็นในแบบของฉัน"
+/frontend "ช่วย review frontend งานนี้แบบของฉัน"
 ```
 
-Cleanup after deleting routes/modules:
+Use this when you want the skill to infer the right emphasis on its own.
+
+### Add stack when it matters
 
 ```text
-/frontend verify route
+/frontend rr "ช่วย refactor ให้เป็นในแบบของฉัน"
+/frontend next "ช่วย review หน้า settings แบบของฉัน"
+/frontend vite "ช่วย setup feature นี้ตาม style ของฉัน"
 ```
 
-Vite plugin/type conflict triage:
+### Add lenses when you want tighter control
 
 ```text
-/frontend verify vite
+/frontend route verify "ช่วย review frontend ชุดนี้แบบของฉัน"
+/frontend state patterns "ช่วย refactor feature นี้ให้เป็นในแบบของฉัน"
+/frontend i18n verify "ช่วยตรวจ i18n แบบของฉัน"
 ```
 
-Intent-driven usage (what you asked for):
+### Load doctrine with free-form steering
 
 ```text
-/frontend rr "ช่วย init โปรเจคตามนี้หน่อย"
-/frontend rr guide "ช่วย setup project frontend ตามนี้หน่อย"
+/frontend rr "token-first route review"
+/frontend next "review server/client boundary"
+/frontend vite "setup clean feature slice structure"
+/frontend "review this in Mahiro frontend style"
 ```
 
-Recommended execution style (2-step):
+## Command reference
+
+### Natural prompt
+
+```text
+/frontend "ช่วย xxx"
+```
+
+This is the default usage style. Use it when you want the AI to infer the right doctrine automatically.
+
+### Full doctrine
+
+```text
+/frontend
+```
+
+Loads the full Mahiro frontend doctrine.
+
+### Stack profile
+
+```text
+/frontend rr
+/frontend next
+/frontend vite
+```
+
+Locks stack-specific adaptations before implementation.
+
+### Retrieval lenses
+
+```text
+/frontend style
+/frontend route
+/frontend test
+/frontend state
+/frontend patterns
+/frontend anti
+/frontend verify
+/frontend i18n
+```
+
+Each lens tells the AI which part of the doctrine to prioritize. Lenses are optional, not required.
+
+### Mixed lenses
+
+```text
+/frontend rr route state test
+/frontend rr patterns verify
+/frontend next style i18n
+```
+
+Use mixed lenses when a task spans multiple concerns.
+
+## Best usage style
+
+The best usage style is usually:
+
+1. Start with a natural prompt
+2. Add stack only if it matters
+3. Add lenses only if you want tighter control
+
+Example:
+
+```text
+/frontend "ช่วย refactor โค้ดนี้ให้เป็นในแบบของฉัน"
+```
+
+Refined version:
+
+```text
+/frontend rr route test
+Refactor this route module. Keep route discovery clean, tests outside route files, and shared UI reusable.
+```
+
+Start simple. Add precision only when needed.
+
+## Practical examples
+
+### Init a project
+
+```text
+/frontend "ช่วยวางโครง init frontend project ตาม style ของฉัน"
+```
+
+More guided:
 
 ```text
 /frontend rr guide
-ช่วย setup project frontend ตามนี้หน่อย: [requirements]
+ช่วยวางโครง init frontend project โดยมี app/root.tsx, app/routes, app/providers, test/setup.ts และใช้ token-first classes
 ```
 
-Reason: first command locks conventions, second message executes implementation against those conventions.
-
-## Prompt Presets
-
-Copy-paste ready commands:
+### Setup a login page
 
 ```text
-# INIT (React Router + token-first)
-/frontend rr guide "ช่วยวางโครง init frontend project" --context "token-first, base ui primitives, root links() สำหรับ font/favicon, provider/query boundary"
-
-# SETUP โครงพร้อมเริ่มทำงาน
-/frontend rr patterns "ช่วย setup โครงโปรเจกต์ให้เริ่ม implement ได้ทันที" --context "app/root.tsx, app/routes, app/providers, app/components/ui, test/setup.ts"
-
-# IMPLEMENT หน้า/ฟีเจอร์ใหม่
-/frontend rr patterns "ช่วย implement หน้า login" --context "ใช้ semantic tokens เท่านั้น, ใช้ base ui primitives, รองรับ mobile"
-
-# REVIEW ก่อน commit
-/frontend rr verify "ช่วย review ชุดแก้นี้ก่อน commit" --context "ห้าม direct palette colors, เช็ก size contract ของ Button/Input, เช็ก stale imports"
-
-# CLEANUP หลังลบ route/module
-/frontend rr verify "ช่วยตรวจหลังลบ route/module" --context "ทำ reference sweep, test sweep, typecheck แล้วสรุปจุดเสี่ยง"
-
-# FIX style inconsistency
-/frontend style token "ช่วยแก้ความไม่สม่ำเสมอของ UI" --context "normalize spacing/height ที่ primitives ก่อน, หลีกเลี่ยง page-level override"
-
-# FIX Vite type conflict
-/frontend verify vite "ช่วย triage error vite plugin type mismatch" --context "เริ่มจาก pnpm why vite, ตรวจ dependency graph ก่อนแก้เวอร์ชัน"
-
-# FAST checklist mode
-/frontend rr verify "ขอ checklist สั้นๆ ก่อนส่ง PR" --context "token-first, route safety, tests, build gate"
+/frontend "ช่วย setup หน้า login ตาม style ของฉัน"
 ```
 
-## Arguments
+More guided:
 
-- `style` - focus on code style conventions
-- `navigation` or `route` - focus on navigation/screen organization
-- `test` - focus on testing patterns and rules
-- `state` or `data` - focus on state and data boundaries
-- `patterns` - focus on implementation patterns/examples
-- `i18n` - focus on Lingui i18n patterns and conventions
-- `anti` - focus on anti-patterns
-- `verify` - focus on verification cadence
-- `next` - force Next.js stack profile additions
-- `vite` - force Vite React TS stack profile additions
-- `rr` - force React Router framework stack profile additions
-- Any free-form text is also supported (substring search in source docs)
+```text
+/frontend rr patterns
+ช่วย implement หน้า login โดยใช้ semantic tokens, reusable form primitives, และแยก API call ไปที่ service
+```
 
-## Output Structure
+### Review a messy feature
+
+```text
+/frontend "ช่วย review feature นี้แบบของฉัน"
+```
+
+More guided:
+
+```text
+/frontend rr verify anti
+ช่วย review feature นี้ก่อน commit โดยเน้น route boundary, direct color classes, และ logic ที่หลุดไปอยู่ใน shared components
+```
+
+### Clean up after deleting a route
+
+```text
+/frontend "ช่วยตรวจหลังลบ route/module นี้แบบของฉัน"
+```
+
+More guided:
+
+```text
+/frontend rr verify route
+ช่วยตรวจหลังลบ route/module นี้ โดยดู stale imports, reference sweep, test fallout, และ redirect behavior
+```
+
+### Enforce i18n discipline
+
+```text
+/frontend "ช่วยดู i18n หน้านี้แบบของฉัน"
+```
+
+More guided:
+
+```text
+/frontend i18n verify
+ช่วย review หน้านี้ว่ามี string ไหนที่ควรใช้ t หรือ Trans และมีจุดไหนหลุดจาก DEFAULT_LANG บ้าง
+```
+
+### Improve primitives first
+
+```text
+/frontend "ช่วยแก้ UI ให้เป็นในแบบของฉัน"
+```
+
+More guided:
+
+```text
+/frontend style patterns
+ช่วยแก้ความไม่สม่ำเสมอของ UI โดยเริ่มจาก primitive components ก่อน แล้วค่อยดู page-level override
+```
+
+### Keep feature slice clean
+
+```text
+/frontend "ช่วยจัดโครง feature นี้ให้เป็นในแบบของฉัน"
+```
+
+More guided:
+
+```text
+/frontend patterns state
+ช่วยจัดโครง feature orders ใหม่ให้แยก pages, services, hooks, components, types ชัดขึ้น
+```
+
+### Review a Next.js page
+
+```text
+/frontend "ช่วย review หน้า Next.js นี้แบบของฉัน"
+```
+
+More guided:
+
+```text
+/frontend next verify
+Review this page with focus on client/server boundary, token usage, and shared UI discipline.
+```
+
+### Review a Vite React app
+
+```text
+/frontend "ช่วย review feature นี้แบบของฉัน"
+```
+
+More guided:
+
+```text
+/frontend vite verify
+Review this feature for architecture drift, state boundary issues, and testing gaps.
+```
+
+## Output shape
+
+Depending on the prompt, the skill can surface:
 
 - Code Style Guide
 - Navigation and Screen Rules
@@ -213,45 +440,79 @@ Copy-paste ready commands:
 - State and Data Rules
 - Implementation Patterns
 - Anti-Patterns
+- Verification Cadence
+- I18n Rules
+- Stack additions
+- Focus hints for the current task
 
-With an argument, the skill adds a `Focus` section with matching lines.
+It also prints per-section source so the AI can tell project-local doctrine from fallback doctrine.
 
-When a profile is forced or auto-detected, stack additions are appended per section.
+## Source model
 
-## Runtime Compatibility
+This skill reads from:
 
-Primary runner:
+1. `AGENTS.md`
+2. `resources/guide.md`
+3. `resources/i18n.md`
+4. `resources/profiles/*.md`
+
+Interpretation:
+
+- `AGENTS.md` = project-local doctrine if available
+- `resources/guide.md` = portable Mahiro baseline
+- `resources/i18n.md` = dedicated i18n doctrine
+- `profiles/*.md` = stack adaptations, not a replacement for the doctrine
+
+## Runtime
+
+Primary:
 
 ```bash
 bun scripts/main.ts "$ARGUMENTS"
 ```
 
-Fallback runner:
+Fallback:
 
 ```bash
 npx tsx scripts/main.ts "$ARGUMENTS"
 ```
 
-Package manager is not fixed by this skill. Use the package manager selected by each project.
+## Writing good prompts after loading the skill
 
-## Maintenance Notes
+Good follow-up prompts usually say:
 
-- Keep `AGENTS.md` current; it is the source of truth
-- Keep `resources/guide.md` generic and runtime-neutral
-- Keep i18n conventions aligned to Lingui (`resources/i18n.md`)
-- Keep supporting resource docs in sync (`resources/code-style.md`, `resources/testing.md`, etc.)
-- Keep section headings identical across both docs
+- what to build, refactor, or review
+- which boundary must stay intact
+- which Mahiro preference matters most
 
-## Troubleshooting
+Examples:
 
-- `AGENTS.md not found` in output: run the skill in a project folder that includes `AGENTS.md`
-- Focus output too noisy: use narrower arguments like `style`, `test`, `state`, `patterns`
-- Bun unavailable: run fallback `npx tsx scripts/main.ts "$ARGUMENTS"`
+```text
+Implement this page in Mahiro style. Keep route orchestration in the route module and move all transport logic to services.
+```
 
-## Known Limits (Current)
+```text
+Review this diff with Mahiro frontend lens. Focus on token-first styling, route safety, and provider/query boundaries.
+```
 
-- Focus mode is keyword-based, so broad inputs can return noisy lines.
-- `verify` focus may return little or no direct matches in some projects.
-- Forcing a wrong profile (`vite`/`next`) in a React Router repo can mix in irrelevant guidance.
+```text
+Refactor this feature but do not collapse shared UI into page-specific code.
+```
 
-If this happens, use `rr` first, then run focused commands separately (`route`, `state`, `test`, `anti`).
+## Known limits
+
+- retrieval is still text-based, so very broad prompts can be noisy
+- focus results are guidance, not proof of compliance
+- wrong stack selection can pull in irrelevant adaptations
+- this skill works best when followed by a plain-language implementation or review request
+
+## Maintenance notes
+
+- Keep `AGENTS.md` current when a project has local doctrine worth overriding
+- Keep `resources/guide.md` portable and runtime-neutral
+- Keep `resources/i18n.md` aligned with actual Lingui usage
+- Keep section headings stable so retrieval stays predictable
+
+## More examples
+
+See [examples/README.md](/Users/mahiro/Git/me/mahirocoko/.agents/skills/frontend/examples/README.md) for additional prompt samples.

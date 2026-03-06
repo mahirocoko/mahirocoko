@@ -1,12 +1,12 @@
 ---
 name: frontend
-description: Frontend coding conventions and implementation patterns for Mahiro-style React projects. Covers code style, navigation, testing, state management, i18n, and verification workflows. Use when implementing or reviewing frontend code, setting up new routes, refactoring, or aligning with project conventions.
+description: Mahiro frontend doctrine for React projects. Encodes Mahiro's personal frontend style across code structure, navigation, testing, state, i18n, and review lenses. Use when implementing, reviewing, refactoring, or aligning AI output to Mahiro-style React patterns.
 user-invocable: true
 ---
 
-# /frontend - Frontend Guide
+# /frontend - Mahiro Frontend Doctrine
 
-Show project frontend conventions from `AGENTS.md`, with automatic fallback to `resources/guide.md`.
+Load Mahiro's frontend operating model from project docs, with fallback guidance when project-local doctrine is incomplete.
 
 ## When to Use
 
@@ -16,6 +16,7 @@ Show project frontend conventions from `AGENTS.md`, with automatic fallback to `
 - Fixing style inconsistencies
 - Aligning with project conventions
 - Refactoring with boundary safety
+- Steering AI output toward Mahiro's React style instead of generic ecosystem defaults
 
 ## Core Principles
 
@@ -29,15 +30,15 @@ Show project frontend conventions from `AGENTS.md`, with automatic fallback to `
 ## Quick Commands
 
 ```bash
-/frontend              # Full guide
-/frontend style        # Code style focus
-/frontend route        # Navigation/screen rules
-/frontend test         # Testing patterns
-/frontend state        # State/data rules
-/frontend patterns     # Implementation patterns
-/frontend anti         # Anti-patterns
-/frontend verify       # Verification cadence
-/frontend i18n         # Lingui i18n patterns
+/frontend              # Full doctrine
+/frontend style        # Code style lens
+/frontend route        # Navigation and route lens
+/frontend test         # Testing lens
+/frontend state        # State and data lens
+/frontend patterns     # Implementation pattern lens
+/frontend anti         # Anti-pattern lens
+/frontend verify       # Review/checklist lens
+/frontend i18n         # Translation/copy lens
 /frontend rr           # React Router framework mode
 /frontend next         # Next.js App Router mode
 /frontend vite         # Vite React TS mode
@@ -51,6 +52,16 @@ Show project frontend conventions from `AGENTS.md`, with automatic fallback to `
 4. **State and Data Rules** - Server-state, client-state, providers
 5. **Implementation Patterns** - Page orchestrator, services, stores
 6. **Anti-Patterns** - Things to avoid
+7. **Verification Cadence** - Review lens and safety sweeps
+8. **I18n Rules** - Translation posture when relevant
+
+## Doctrine Model
+
+- `Non-negotiable`: Mahiro defaults unless the project has a hard constraint
+- `Preference`: Mahiro-leaning implementation choice when multiple good options exist
+- `Contextual`: stack- or project-specific adaptation of the same doctrine
+
+This skill is not a strict checker. It is a retrieval layer for Mahiro's frontend judgment so the AI can continue the work in the same style.
 
 ## Component Scale Contract
 
@@ -69,66 +80,6 @@ Show project frontend conventions from `AGENTS.md`, with automatic fallback to `
 
 Avoid Tailwind default `shadow-sm/md/lg` in favor of semantic shadow tokens.
 
-## Code Style (Non-negotiable)
-
-- 2-space indentation, single quotes, line width around 120
-- Use `import type` for type-only imports
-- Files kebab-case, constants SCREAMING_SNAKE_CASE
-- Interface names use `I` prefix, type aliases do not
-- Prefer semantic tokens (`bg-background`, `text-foreground`) over direct palette
-
-## Navigation Rules (Non-negotiable)
-
-- Route modules in `app/routes/` as page orchestration units
-- Reusable UI in `app/components/`, no page logic in shared UI
-- File-based route discovery, centralized in one routing entry
-- Auth shell decision in root (authenticated layout vs guest outlet)
-
-## Testing Rules (Non-negotiable)
-
-- Tests outside route discovery paths (`test/` or `__tests__/`)
-- Deterministic tests only (no hidden time/network coupling)
-- Quality gate before PR: `lint`, `typecheck`, `test`
-
-## State Rules (Non-negotiable)
-
-- Split server-state and client-state responsibilities
-- API calls in service modules, not inline in UI
-- Global providers in app root shell
-- React Query clients via utility boundary, not ad-hoc
-
-## Stack Profiles
-
-| Profile | Use When |
-|---------|----------|
-| `rr` | React Router framework mode |
-| `next` | Next.js App Router |
-| `vite` | Vite + React + TypeScript |
-
-Auto-detection based on project config/dependencies.
-
-## Verification Cadence
-
-Always run before PR:
-```bash
-pnpm lint && pnpm format && pnpm typecheck && pnpm test
-```
-
-Run build when:
-- Route definitions changed
-- Bundler/runtime config changed
-- Release preparation
-
-After deleting routes/modules:
-```bash
-rg "deleted-module-name" app test
-```
-
-Token enforcement sweep:
-```bash
-rg "(text|bg|border)-(slate|gray|emerald|white|black)-[0-9]{2,3}" app
-```
-
 ## Refactor Workflow
 
 1. Lock profile: `/frontend rr`
@@ -140,17 +91,19 @@ rg "(text|bg|border)-(slate|gray|emerald|white|black)-[0-9]{2,3}" app
 
 ### 1. Source Selection
 - Read `AGENTS.md` from current project if available
-- Otherwise read `resources/guide.md`
+- Fall back to `resources/guide.md` when project-local doctrine is missing or incomplete
+- Load `resources/i18n.md` as a dedicated i18n lens
 
 ### 2. Section Assembly
-Print sections in fixed order for predictable output.
+Render doctrine sections in a stable order for predictable retrieval.
 
 ### 3. Stack Profile
 - Resolve from args (`next`, `vite`, `rr`) or auto-detect
-- Append stack-specific additions per section
+- Append stack-specific adaptations per section
 
-### 4. Focus Filtering
-- If arguments provided, append `Focus` lines by keyword match
+### 4. Retrieval Lenses
+- Arguments such as `style`, `route`, `test`, `state`, `patterns`, `verify`, and `i18n` act as retrieval lenses
+- Free-form prompts are still allowed and are used to bias what the AI should pay attention to
 
 ### 5. Runtime Fallback
 - Primary: Bun
@@ -166,7 +119,7 @@ npx tsx scripts/main.ts "$ARGUMENTS"
 
 | File | Purpose |
 |------|---------|
-| `resources/guide.md` | Consolidated fallback guide |
+| `resources/guide.md` | Portable Mahiro doctrine baseline |
 | `resources/code-style.md` | Formatting and TypeScript rules |
 | `resources/i18n.md` | Lingui i18n conventions |
 | `resources/testing.md` | Test placement and quality |
@@ -174,13 +127,13 @@ npx tsx scripts/main.ts "$ARGUMENTS"
 | `resources/implementation-patterns.md` | Code snippets and patterns |
 | `resources/anti-patterns.md` | Things to avoid |
 | `resources/verification.md` | Verification cadence |
-| `resources/review-checklist.md` | Pre-merge checklist |
-| `resources/profiles/*.md` | Stack-specific additions |
+| `resources/review-checklist.md` | Pre-merge review lens |
+| `resources/profiles/*.md` | Stack-specific adaptations |
 
 ## Troubleshooting
 
 - `AGENTS.md` missing: ensure project root has `AGENTS.md`, or maintain `resources/guide.md`
-- Empty focus results: try broader keywords (`style`, `test`, `state`, `patterns`)
+- Empty focus results: try a doctrine lens first (`style`, `route`, `test`, `state`, `patterns`, `verify`, `i18n`)
 - Token consistency issue: run token enforcement sweep in `resources/verification.md`
 - Runtime issue with Bun: use fallback `npx tsx scripts/main.ts "$ARGUMENTS"`
 - React Router font/favicon: check `resources/profiles/react-router-framework.md`
