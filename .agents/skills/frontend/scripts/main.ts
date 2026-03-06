@@ -4,12 +4,24 @@ import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 type ProfileName = 'next' | 'vite-react-ts' | 'react-router-framework'
+type SectionConfig = {
+  title: string
+  key: string
+  aliases: string[]
+  lookupTitles?: string[]
+  resourcePath?: string
+}
+type RenderedLine = {
+  line: string
+  sectionKey: string
+}
 
 const args = process.argv.slice(2)
 const focus = args.join(' ').trim().toLowerCase()
 const tokens = focus.length > 0 ? focus.split(/\s+/).filter(Boolean) : []
 const agentsPath = resolve(process.cwd(), 'AGENTS.md')
 const resourcesGuidePath = fileURLToPath(new URL('../resources/guide.md', import.meta.url))
+const i18nGuidePath = fileURLToPath(new URL('../resources/i18n.md', import.meta.url))
 const packageJsonPath = resolve(process.cwd(), 'package.json')
 
 const sourcePath = existsSync(agentsPath)
@@ -26,6 +38,7 @@ if (!sourcePath) {
 const text = readFileSync(sourcePath, 'utf8')
 const lines = text.split('\n')
 const fallbackGuideLines = readFileSync(resourcesGuidePath, 'utf8').split('\n')
+const i18nGuideLines = readFileSync(i18nGuidePath, 'utf8').split('\n')
 
 const readSection = (sectionLines: string[], title: string): string => {
   const marker = `## ${title}`
@@ -55,6 +68,12 @@ const readFirstSection = (sectionLines: string[], titles: string[]): string => {
     }
   }
   return '(not found)'
+}
+
+const readWholeDocumentBody = (documentLines: string[]): string => {
+  const firstSectionIndex = documentLines.findIndex((line) => line.startsWith('## '))
+  const contentLines = firstSectionIndex >= 0 ? documentLines.slice(firstSectionIndex) : documentLines
+  return contentLines.join('\n').trim()
 }
 
 const fileExists = (relativePath: string): boolean => existsSync(resolve(process.cwd(), relativePath))
@@ -141,13 +160,15 @@ const loadProfileLines = (profile: ProfileName): string[] => {
   return readFileSync(profilePath, 'utf8').split('\n')
 }
 
-const sections = [
-  'Code Style Guide',
-  'Navigation and Screen Rules',
-  'Testing Rules',
-  'State and Data Rules',
-  'Implementation Patterns',
-  'Anti-Patterns',
+const sections: SectionConfig[] = [
+  { title: 'Code Style Guide', key: 'style', aliases: ['style', 'code-style'] },
+  { title: 'Navigation and Screen Rules', key: 'route', aliases: ['route', 'routes', 'navigation'], lookupTitles: ['Navigation and Screen Rules', 'Routing Rules'] },
+  { title: 'Testing Rules', key: 'test', aliases: ['test', 'tests', 'testing'] },
+  { title: 'State and Data Rules', key: 'state', aliases: ['state', 'data'] },
+  { title: 'Implementation Patterns', key: 'patterns', aliases: ['patterns', 'pattern'] },
+  { title: 'Anti-Patterns', key: 'anti', aliases: ['anti', 'antipatterns'] },
+  { title: 'Verification Cadence', key: 'verify', aliases: ['verify', 'verification', 'review'] },
+  { title: 'I18n Rules', key: 'i18n', aliases: ['i18n', 'lingui', 'translation'], resourcePath: i18nGuidePath },
 ]
 
 const normalizeText = (value: string): string =>
@@ -166,18 +187,6 @@ const FOCUS_STOPWORDS = new Set([
   'frontend',
   'guide',
   'focus',
-  'style',
-  'patterns',
-  'pattern',
-  'route',
-  'routes',
-  'navigation',
-  'state',
-  'data',
-  'test',
-  'tests',
-  'verify',
-  'anti',
   'next',
   'vite',
   'rr',
@@ -201,10 +210,24 @@ const NATURAL_ACTION_KEYWORDS = [
   'align',
   'clean',
   'improve',
+  'setup',
+  'build',
+  'create',
   'ปรับ',
   'แก้',
   'รีแฟคเตอร์',
+  'ทำ',
+  'วาง',
+  'ช่วย',
 ]
+
+const sectionAliasToKey = new Map<string, string>()
+for (const section of sections) {
+  sectionAliasToKey.set(normalizeText(section.key), section.key)
+  for (const alias of section.aliases) {
+    sectionAliasToKey.set(normalizeText(alias), section.key)
+  }
+}
 
 const extractFileTargets = (query: string): string[] => {
   const matches = query.match(/[a-z0-9._-]+\.(tsx|ts|jsx|js)\b/gi) ?? []
@@ -223,34 +246,45 @@ const summarizeFocusHints = (hints: string[]): string[] => {
     .map((line) => line.replace(/^[-*]\s+/, ''))
 }
 
-const buildFocusTokens = (query: string): { direct: Set<string>, expanded: Set<string> } => {
+const buildFocusTokens = (query: string): { direct: Set<string>, expanded: Set<string>, sectionKeys: Set<string> } => {
   const raw = tokenize(query).filter((token) => !FOCUS_STOPWORDS.has(token))
   const direct = new Set<string>()
   const expanded = new Set<string>()
+  const sectionKeys = new Set<string>()
 
   for (const token of raw) {
+    const sectionKey = sectionAliasToKey.get(token)
+    if (sectionKey) {
+      sectionKeys.add(sectionKey)
+    }
+
     direct.add(token)
     expanded.add(token)
+
     const aliases = FOCUS_ALIASES[token] ?? []
     for (const alias of aliases) {
       expanded.add(alias)
     }
   }
 
-  return { direct, expanded }
+  return { direct, expanded, sectionKeys }
 }
 
-const scoreLine = (line: string, focusTokens: { direct: Set<string>, expanded: Set<string> }): number => {
-  if (focusTokens.expanded.size === 0) {
+const scoreLine = (entry: RenderedLine, focusTokens: { direct: Set<string>, expanded: Set<string>, sectionKeys: Set<string> }): number => {
+  if (focusTokens.expanded.size === 0 && focusTokens.sectionKeys.size === 0) {
     return 0
   }
 
-  const normalizedLine = normalizeText(line)
+  const normalizedLine = normalizeText(entry.line)
   if (!normalizedLine) {
     return 0
   }
 
   let score = 0
+  if (focusTokens.sectionKeys.has(entry.sectionKey)) {
+    score += 5
+  }
+
   for (const token of focusTokens.direct) {
     if (normalizedLine.includes(token)) {
       score += 4
@@ -273,15 +307,36 @@ const scoreLine = (line: string, focusTokens: { direct: Set<string>, expanded: S
   return score
 }
 
-console.log('# Frontend Guide')
+const resolveSectionContent = (section: SectionConfig): { content: string, sourceLabel: string } => {
+  if (section.resourcePath === i18nGuidePath) {
+    return {
+      content: readWholeDocumentBody(i18nGuideLines),
+      sourceLabel: 'resources/i18n.md',
+    }
+  }
+
+  const titles = section.lookupTitles ?? [section.title]
+  const readFromLines = (sectionLines: string[]): string =>
+    titles.length > 1 ? readFirstSection(sectionLines, titles) : readSection(sectionLines, titles[0])
+
+  const primaryContent = readFromLines(lines)
+  if (primaryContent !== '(not found)' && primaryContent !== '(empty)') {
+    return {
+      content: primaryContent,
+      sourceLabel: sourcePath.endsWith('AGENTS.md') ? 'AGENTS.md' : 'resources/guide.md',
+    }
+  }
+
+  return {
+    content: readFromLines(fallbackGuideLines),
+    sourceLabel: 'resources/guide.md',
+  }
+}
+
+console.log('# Mahiro Frontend Doctrine')
 console.log('')
-console.log(
-  `Source: ${
-    sourcePath.endsWith('AGENTS.md')
-      ? 'AGENTS.md'
-      : 'resources/guide.md'
-  }`,
-)
+console.log(`Primary source: ${sourcePath.endsWith('AGENTS.md') ? 'AGENTS.md' : 'resources/guide.md'}`)
+console.log('Doctrine mode: personal frontend judgment, not strict lint output')
 console.log('')
 
 if (selectedProfile) {
@@ -291,38 +346,26 @@ if (selectedProfile) {
 }
 
 const profileLines = selectedProfile ? loadProfileLines(selectedProfile) : []
-const isPrimaryAgents = sourcePath.endsWith('AGENTS.md')
-const renderedLines: string[] = []
+const renderedLines: RenderedLine[] = []
 
 for (const section of sections) {
-  console.log(`## ${section}`)
-  let coreSection = '(not found)'
-
-  if (section === 'Navigation and Screen Rules') {
-    coreSection = readFirstSection(lines, ['Navigation and Screen Rules', 'Routing Rules'])
-    if ((coreSection === '(not found)' || coreSection === '(empty)') && isPrimaryAgents) {
-      coreSection = readFirstSection(fallbackGuideLines, ['Navigation and Screen Rules', 'Routing Rules'])
-    }
-  } else {
-    coreSection = readSection(lines, section)
-    if ((coreSection === '(not found)' || coreSection === '(empty)') && isPrimaryAgents) {
-      coreSection = readSection(fallbackGuideLines, section)
-    }
-  }
-
-  console.log(coreSection)
-  renderedLines.push(...coreSection.split('\n'))
+  console.log(`## ${section.title}`)
+  const resolved = resolveSectionContent(section)
+  console.log(`Source: ${resolved.sourceLabel}`)
+  console.log('')
+  console.log(resolved.content)
+  renderedLines.push(...resolved.content.split('\n').map((line) => ({ line, sectionKey: section.key })))
 
   if (profileLines.length > 0) {
-    const profileSection = section === 'Navigation and Screen Rules'
-      ? readFirstSection(profileLines, ['Navigation and Screen Rules', 'Routing Rules'])
-      : readSection(profileLines, section)
+    const profileSection = section.lookupTitles
+      ? readFirstSection(profileLines, section.lookupTitles)
+      : readSection(profileLines, section.title)
 
     if (profileSection !== '(not found)' && profileSection !== '(empty)') {
       console.log('')
       console.log(`### Stack Additions (${selectedProfile})`)
       console.log(profileSection)
-      renderedLines.push(...profileSection.split('\n'))
+      renderedLines.push(...profileSection.split('\n').map((line) => ({ line, sectionKey: section.key })))
     }
   }
   console.log('')
@@ -331,9 +374,9 @@ for (const section of sections) {
 if (focus.length > 0) {
   const focusTokens = buildFocusTokens(focus)
   const scored = renderedLines
-    .map((line, index) => ({
-      line: line.trim().replace(/^[-*]\s+/, ''),
-      score: scoreLine(line, focusTokens),
+    .map((entry, index) => ({
+      line: entry.line.trim().replace(/^[-*]\s+/, ''),
+      score: scoreLine(entry, focusTokens),
       index,
     }))
     .filter((entry) => entry.line.length > 0 && entry.score >= 2)
@@ -351,7 +394,7 @@ if (focus.length > 0) {
 
   console.log(`## Focus: ${focus}`)
   if (uniqueFocused.length === 0) {
-    console.log('- No matching lines found')
+    console.log('- No direct doctrine lines matched')
   } else {
     for (const line of uniqueFocused) {
       console.log(`- ${line}`)
@@ -364,15 +407,15 @@ if (focus.length > 0) {
 
   if (shouldFallback) {
     console.log('')
-    console.log('## AI Fallback')
-    console.log('- Interpreted mode: natural-language implementation intent')
+    console.log('## AI Handoff')
+    console.log('- Interpreted mode: doctrine-guided implementation intent')
     if (fileTargets.length > 0) {
       console.log(`- File targets: ${fileTargets.join(', ')}`)
     }
 
     const hintLines = summarizeFocusHints(uniqueFocused)
     if (hintLines.length > 0) {
-      console.log('- Relevant guidance to keep while implementing:')
+      console.log('- Relevant doctrine to keep while implementing:')
       for (const hint of hintLines) {
         console.log(`  - ${hint}`)
       }
@@ -380,7 +423,7 @@ if (focus.length > 0) {
 
     console.log('- Suggested handoff prompt:')
     console.log(
-      `  Refactor/implement based on this request: "${focus}". Follow project-local snippets/templates first, preserve token-first semantic classes, and verify with lint/typecheck/test/build.`
+      `  Implement this request in Mahiro frontend style: "${focus}". Keep route orchestration clean, preserve token-first semantic classes, respect service/provider boundaries, and use verify as a review lens before calling it done.`
     )
   }
 }
