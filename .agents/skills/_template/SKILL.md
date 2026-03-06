@@ -51,7 +51,7 @@ Display results from script.
 
 ```
 your-skill/
-├── SKILL.md          ← Instructions for Claude
+├── SKILL.md          ← Instructions for Codex
 └── scripts/
     └── main.ts       ← Bun Shell logic
 ```
