@@ -84,3 +84,6 @@ $RECYCLE.BIN/
 
 # Ignore learn source symlinks, keep markdown docs tracked
 ψ/learn/**/origin
+
+# Design exploration artifacts
+lab/hrm-figma-prototype/
