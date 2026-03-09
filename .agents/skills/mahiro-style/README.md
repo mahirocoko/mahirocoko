@@ -2,38 +2,59 @@
 
 `/mahiro-style` is Mahiro's cross-repo code-shape doctrine.
 
-This skill exists for work that is broader than a frontend stack guide. It helps AI match how Mahiro tends to structure code, split responsibilities, name things, preserve i18n, and review architecture drift.
+It is a human-facing overview for the skill, not the doctrine itself. Use it to understand what the skill does, how it should be read, and where the real topic guidance now lives.
 
 ## What this skill is for
 
 Use it when you want AI to:
 
-- refactor code to match Mahiro style
-- review code for structure and naming drift
-- decide what should be a route, component, constants module, service, or store
-- preserve Lingui patterns when extracting config
-- compare implementation choices against Mahiro's recurring repo habits
+- shape code so it feels more like Mahiro wrote it
+- review naming, file boundaries, extraction choices, and architecture drift
+- decide what belongs in routes, components, constants, services, or stores
+- preserve translation-safe and Lingui-safe patterns when refactoring
+- apply Mahiro defaults only where the current repo has not already decided the rule
 
 ## What this skill is not
 
-- not a replacement for local `AGENTS.md`
-- not a linter
-- not a frontend framework tutorial
-- not a generic architecture manifesto detached from code
+- not a replacement for repo-local doctrine
+- not a linter or formatter spec
+- not a framework tutorial
+- not a second source of truth that repeats every doctrine page
 
-## Mental model
+## Hybrid posture
 
-Think of `/mahiro-style` as loading Mahiro's code-shaping taste:
+This skill is hybrid on purpose: it helps code feel Mahiro-shaped, but repo-local doctrine wins first.
 
-- files should have one job
-- names should reflect domain meaning
-- constants and i18n should be extraction-safe
-- services, state, and UI should not bleed into each other
-- code should look intentional, not improvised
+When rules conflict, use this order:
 
-## First rule
+1. `AGENTS.md`
+2. Other repo-local instruction files such as `CLAUDE.md`
+3. Established repo patterns already in use
+4. Mahiro fallback doctrine
 
-If the current repo has `AGENTS.md`, that file wins. This skill is the fallback doctrine and review lens.
+That means `/mahiro-style` is strongest when the repo is silent, partial, or drifting. It should fill gaps and sharpen reviews, not bulldoze local decisions.
+
+## How to read the docs
+
+The root docs stay thin on purpose:
+
+- `SKILL.md` is the agent hub and retrieval map
+- `README.md` is this human overview
+- `foundations/` holds stable doctrine about how to read repo rules, structure work, and review drift
+- `patterns/` holds practical implementation guidance for components, hooks, services, state, naming, and i18n-adjacent choices
+
+If you need the actual doctrine, start from the canonical pages under `foundations/` and `patterns/`, not from a separate examples tree.
+
+## Canonical map
+
+Start with these pages depending on the question:
+
+- `foundations/overview.md` for the mental model and why the skill exists
+- `foundations/precedence.md` for rule priority and conflict resolution
+- `foundations/project-structure.md` for repo and feature layout
+- `foundations/code-style.md` for imports, TypeScript surface choices, section order, and export posture
+- `foundations/review-checklist.md` for review prompts and drift detection
+- `patterns/*.md` for topic-specific implementation guidance such as components, hooks, route boundaries, shared UI boundaries, services, stores/state, naming, constants+i18n, and best practices
 
 ## Recommended usage
 
@@ -44,40 +65,6 @@ If the current repo has `AGENTS.md`, that file wins. This skill is the fallback 
 /mahiro-style review "ช่วย list จุดที่ยังไม่เป็น style ของฉัน"
 ```
 
-## Main lenses
+## Working rule
 
-- `code-style`
-- `structure`
-- `i18n`
-- `boundaries`
-- `review`
-- `anti`
-
-## Output shape
-
-The skill should usually surface:
-
-- Code Style Guide
-- Structure Rules
-- Constants and I18n Rules
-- Services and State Rules
-- Review Checklist
-- Anti-Patterns
-
-## Examples
-
-See `examples/README.md` for concrete `Do / Avoid` examples covering:
-
-- `interface` vs `type`
-- route boundaries
-- constants plus i18n
-- naming
-- shared UI boundaries
-- services
-- stores
-- section order
-- export style
-
-## Maintenance rule
-
-Keep this skill general enough to work across Mahiro repos, but specific enough to produce actionable code review advice.
+Keep this skill broad enough to travel across Mahiro repos, but narrow enough to stay useful in real reviews and refactors. The README should orient humans quickly; the canonical topic pages should carry the doctrine.

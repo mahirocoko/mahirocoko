@@ -1,0 +1,43 @@
+# Task 1 - Example Coverage and Successor Mapping
+
+Scope: `.agents/skills/mahiro-style/examples/*.md`
+Inventory date: 2026-03-08
+Example markdown files found: 10
+Example markdown files mapped: 10
+Unmapped example markdown files: 0
+
+## Per-file successor handling
+
+| Example file | Canonical successor target | Handling | Notes |
+|---|---|---|---|
+| `.agents/skills/mahiro-style/examples/README.md` | Canonical topic pages with embedded `Examples` + `Anti-Examples` sections | retire | Remove separate map once all topic pages own examples inline. |
+| `.agents/skills/mahiro-style/examples/interface-vs-type.md` | `foundations/code-style.md` | merge | Move Do/Avoid/Why contrast into the type-system section. |
+| `.agents/skills/mahiro-style/examples/route-boundaries.md` | `patterns/route-boundaries.md` | merge | Keep thin-route vs giant-route contrast as canonical pattern examples. |
+| `.agents/skills/mahiro-style/examples/constants-i18n.md` | `patterns/constants-i18n.md` | merge | Preserve `msg` descriptors + render-layer `t(...)` example pair. |
+| `.agents/skills/mahiro-style/examples/naming.md` | `foundations/code-style.md` or `patterns/naming.md` | merge | IA-dependent owner; content preserved either way. |
+| `.agents/skills/mahiro-style/examples/shared-ui-boundaries.md` | `patterns/shared-ui-boundaries.md` | merge | Keep business-logic leakage contrast in reusable UI guidance. |
+| `.agents/skills/mahiro-style/examples/services.md` | `patterns/services.md` | merge | Keep service boundary contrast for transport leakage prevention. |
+| `.agents/skills/mahiro-style/examples/stores.md` | `patterns/stores-state.md` | merge | Keep focused-store vs dumping-ground-store contrasts. |
+| `.agents/skills/mahiro-style/examples/section-order.md` | `foundations/code-style.md` | merge | Preserve stable internal section-order example. |
+| `.agents/skills/mahiro-style/examples/export-style.md` | `foundations/code-style.md` | merge | Preserve local-convention export-style contrasts. |
+
+## Guidance currently existing only in `examples/*`
+
+The following guidance is currently example-only and not canonically owned in `resources/*` prose pages:
+
+1. Concrete Do/Avoid code blocks for `interface` vs `type` with naming interplay.
+2. Concrete thin-route vs giant-route side-by-side snippets.
+3. Explicit Lingui `msg` constants + render-boundary `useLingui`/`t(...)` pairing example.
+4. Concrete domain-naming versus generic-name snippets and filename contrasts.
+5. Shared UI boundary examples showing feature logic leakage anti-pattern.
+6. Service transport leakage example (inline fetch/queryFn anti-pattern in route).
+7. Store dumping-ground anti-pattern example in a single monolithic store.
+8. Stable component/hook section-order code sample.
+9. Export-convention examples (named vs default) tied to local repo convention.
+10. Standardized `Do`/`Avoid`/`Why` pedagogical format itself.
+
+## Example retention guarantee
+
+- Every `examples/*.md` file has explicit successor handling: PASS
+- Every successor route preserves meaning (merge target or retirement behavior): PASS
+- No example file is dropped without destination/retirement note: PASS
