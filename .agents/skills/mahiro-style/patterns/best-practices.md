@@ -6,9 +6,49 @@ This page owns cross-cutting implementation heuristics that connect multiple pat
 
 Use it when the problem crosses boundaries, such as deciding between route extraction, hook extraction, shared UI wrapping, service placement, or state scope.
 
+## Detect
+
+- Code crosses two or more ownership boundaries (e.g., transport + state + rendering in one file)
+- New abstraction created (hook, component, shared UI) without checking if the current owner is still the right home
+- Feature-specific code promoted to shared package or `ui/` folder after only one usage
+- Refactor makes files smaller but ownership less obvious
+
 ## Choosing the Right Owner
 
 The main question is not "how do I shrink this file". The main question is "which owner makes this code easiest to understand and change later".
+
+## Ownership Decision Tree
+
+```
+Where should this code live?
+│
+├── API transport, request/response shaping?
+│   └── services.md → service module
+│
+├── Client state shared across screens or long-lived?
+│   └── stores-state.md → store or provider
+│
+├── Server state (remote data, cache)?
+│   └── stores-state.md → query cache (React Query), not client store
+│
+├── Reusable UI primitive used across features?
+│   └── shared-ui-boundaries.md → shared UI + feature wrapper
+│
+├── Feature-specific UI section or domain component?
+│   └── components.md → feature component
+│
+├── Reusable stateful behavior or query wiring?
+│   └── hooks.md → custom hook
+│
+├── Route too thick with config, types, rendering?
+│   └── route-boundaries.md → extract to domain owners
+│
+├── Extracted copy or config with user-facing text?
+│   └── constants-i18n.md → msg descriptors + render-boundary translation
+│
+└── Short-lived UI toggle, form state, hover?
+    └── Keep as local component state
+```
 
 ## Non-negotiable
 
@@ -34,13 +74,105 @@ The main question is not "how do I shrink this file". The main question is "whic
 
 ## Examples
 
-- If a route is thick because it mixes config and section rendering, move the section into a component and the config into a domain constant, then keep route composition readable.
-- If a component needs remote data and cache invalidation, keep transport in a service and let a hook or route own the query wiring.
-- If a shared primitive starts speaking approval or payroll vocabulary, stop and wrap it with a feature component instead.
+- A thick route mixes config, types, and rendering. Split by ownership: section into a component, config into domain constants, route stays as compositor.
+
+```tsx
+// Before: route owns everything
+const Page = () => {
+  const statusColors = { pending: 'yellow', approved: 'green' }
+  const items = [{ title: 'Review', count: 3 }, { title: 'Pending', count: 7 }]
+
+  return (
+    <main>
+      {items.map((item) => (
+        <div style={{ color: statusColors[item.title.toLowerCase()] }}>
+          {item.title}: {item.count}
+        </div>
+      ))}
+    </main>
+  )
+}
+```
+
+```tsx
+// After: each owner carries its own responsibility
+import { DashboardSummarySection } from '@/components/dashboard/dashboard-summary-section'
+import { dashboardSummaryCards } from '@/constants/dashboard-summary'
+
+const Page = () => {
+  return (
+    <main>
+      <DashboardSummarySection items={dashboardSummaryCards} />
+    </main>
+  )
+}
+```
+
+- A component needs remote data. Keep transport in a service, let a hook own query wiring, and keep the component focused on rendering.
+
+```tsx
+// service owns transport
+export class GoalService {
+  static getSummary() {
+    return getJSON<IGoalSummary>('/goals.summary')
+  }
+}
+
+// hook owns query wiring
+const useGoalSummary = () => {
+  return useQuery({
+    queryKey: ['goal-summary'],
+    queryFn: GoalService.getSummary,
+  })
+}
+
+// component owns rendering
+const GoalSummaryCard = () => {
+  const { data, isLoading } = useGoalSummary()
+  if (isLoading) return <Skeleton />
+  return <Card title={data.title} progress={data.progress} />
+}
+```
+
+- A shared primitive starts speaking domain vocabulary. Wrap it with a feature component instead of polluting the primitive.
+
+```tsx
+// shared: stays generic
+const ProgressBar = ({ value, max, tone }: IProgressBarProps) => { ... }
+
+// feature wrapper: carries domain meaning
+const AttendanceProgressBar = ({ rate }: { rate: number }) => {
+  const tone = rate >= 0.9 ? 'success' : rate >= 0.7 ? 'warning' : 'danger'
+  return <ProgressBar value={rate} max={1} tone={tone} />
+}
+```
 
 ## Anti-Examples
 
 - Fixing every readability problem by creating another hook, even when the route or component is still the better owner.
+
+```tsx
+// unnecessary hook for one-off route logic
+const useSettingsRedirect = () => {
+  const { tab } = useParams()
+  const navigate = useNavigate()
+  useEffect(() => {
+    if (!VALID_TABS.includes(tab)) navigate('/settings/general')
+  }, [tab])
+}
+
+// better: keep the redirect inline in the route where it is the only consumer
+```
+
 - Promoting one feature-specific widget into shared UI after a single usage because reuse feels possible.
+
+```tsx
+// premature: only used by the payroll page
+// packages/ui/src/components/payroll-summary-card.tsx
+export const PayrollSummaryCard = ({ period, total, breakdown }: IPayrollSummaryProps) => {
+  // carries payroll domain vocabulary in a "shared" package
+}
+```
+
 - Copying repo-local mechanics from one reference project into another without checking local doctrine first.
 - Repeating full service, state, route, and naming doctrine here instead of routing to their canonical pages.

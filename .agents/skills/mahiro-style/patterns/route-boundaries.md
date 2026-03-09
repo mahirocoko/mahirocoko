@@ -6,6 +6,14 @@ This page owns thin route posture, route orchestration, and what stays in route 
 
 Use it when the question is whether a route is too thick, what logic belongs in the route entry file, and how to hand work off to feature-owned modules without hiding the screen's entry-point responsibility.
 
+## Detect
+
+- Route file defines `type` or `interface` for backend response shapes
+- Route file contains config maps, status-color maps, or mock data arrays
+- Route file exceeds two screenfuls and mixes orchestration with implementation detail
+- Route file hides behind a single monolithic `*Screen` component instead of composing visible section owners
+- Route file contains inline `fetch` calls or direct service class usage mixed with JSX
+
 ## Thin Route Boundary Rules
 
 Routes are entry points. They should tell the reader how the screen is assembled, not force the reader to decode every implementation detail inside one file.

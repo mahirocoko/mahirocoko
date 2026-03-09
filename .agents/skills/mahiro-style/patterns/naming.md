@@ -6,6 +6,14 @@ This page owns domain naming for files, components, hooks, variables, modules, q
 
 Use it when the question is what something should be called so that the domain stays obvious without reading surrounding implementation details.
 
+## Detect
+
+- Variables named `data`, `items`, `list`, `config`, or `meta` when the business concept has a real name
+- Component named `Section`, `Content`, or `Card` without domain context in a multi-domain app
+- File named `api.ts` or `utils.ts` in a repo with multiple domain areas
+- Hook named `useData` or `useFilters` without a domain qualifier
+- Folder named `common`, `misc`, or `general` that hides domain intent
+
 ## Naming Boundaries
 
 Mahiro-style naming should expose the business concept, the artifact role, and the scope.

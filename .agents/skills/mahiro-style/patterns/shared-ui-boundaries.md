@@ -6,6 +6,13 @@ This page owns reusable UI versus feature-specific UI boundaries, especially the
 
 Use it when the question is whether something belongs in shared UI, in a feature wrapper around shared UI, or entirely inside one feature.
 
+## Detect
+
+- Shared component imports a feature-specific service, store, or domain constant
+- Shared component contains hardcoded domain labels like status workflow names or feature-specific copy
+- Component in `ui/` or a shared package is only used by one feature
+- Feature-specific mapping logic (status-to-tone, domain-to-label) lives inside a shared primitive instead of a feature wrapper
+
 ## Reusable UI Boundary Rules
 
 Shared UI should stay broad enough to serve multiple domains without importing one domain's business rules into every caller.
