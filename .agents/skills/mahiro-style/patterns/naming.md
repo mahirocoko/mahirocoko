@@ -20,7 +20,8 @@ Mahiro-style naming should expose the business concept, the artifact role, and t
 
 ## Preference
 
-- Prefer names like `approval-queue-card.tsx`, `useApprovalFilters`, `ApprovalService`, and `console-layout-header.tsx` over generic placeholders.
+- Prefer names like `approval-queue-card.tsx`, `useApprovalFilters`, `ApprovalService`, and `header.tsx` inside a domain-revealing folder over generic placeholders.
+- Prefer using folder context to shorten file names when the folder already carries the domain, while keeping component exports explicit enough to preserve searchability.
 - Prefer folder names that show business area, such as `attendance`, `approval`, `journey`, or `console`, instead of broad buckets like `common-work`.
 - Prefer query keys that mirror domain concepts and list/detail intent rather than anonymous arrays.
 - Prefer small naming systems that stay internally consistent inside one feature.
@@ -43,11 +44,19 @@ const attendanceRiskCards = []
 ```
 
 - `approval-queue-card.tsx` is clearer than `card.tsx` because the feature and UI job are both visible.
+- Inside a nested feature folder, the file can often drop redundant domain prefixes that the path already supplies, while the exported component keeps the domain signal.
 
 ```text
 approval-queue-card.tsx
 employee-onboarding-checklist.tsx
 attendance-risk-summary.tsx
+```
+
+```text
+app/components/layouts/console/header.tsx            -> ConsoleLayoutHeader
+app/components/layouts/console/sidebar.tsx           -> ConsoleLayoutSidebar
+app/components/layouts/console/main-nav.tsx          -> MainNav
+app/components/layouts/console/user-menu.tsx         -> UserMenu
 ```
 
 - `useEmployeeAttendanceFilters` is clearer than `useFilters` because the caller knows which filters the hook owns.
@@ -65,5 +74,6 @@ const config = []
 
 - Naming a service `api.ts` in a repo that already has multiple domains and transport layers.
 - Naming a component `Section` or `Content` when it is really the approval summary grid.
+- Repeating the same domain word in both folder and file when the path already makes the ownership obvious, such as `console/console-layout-header.tsx`.
 - Naming a store `useAppStore` when it only owns one local feature concern.
 - Letting this page expand into generic formatting rules that belong elsewhere.

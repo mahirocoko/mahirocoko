@@ -28,6 +28,8 @@ At project level, Mahiro-style prefers explicit homes for routes, components, ho
 - Prefer colocating related domain modules when they change together often.
 - Prefer top-level app folders that match recurring responsibilities seen across Mahiro repos, such as `routes`, `components`, `hooks`, `services`, `stores`, `constants`, `providers`, `types`, and `locales`.
 - Prefer extraction that makes future ownership clearer, not just smaller files.
+- Prefer owner-local data and config inside the owning component or module when that data is not reused across siblings.
+- Prefer composition parents that stay thin when child modules can own their own local mock data, labels, or static options without prop drilling.
 
 ## Contextual
 
@@ -41,6 +43,7 @@ The exact tree can differ by repo.
 
 - A new domain with routes, queries, and view components gets a feature home that makes the business area visible instead of scattering files into unrelated shared folders.
 - Constants that belong to one domain stay with that domain or feature ownership, while repo-wide constants live in a clearly shared location.
+- Layout child data that is only used by one child can stay inside that child instead of being lifted into a parent compose file or a generic constants page.
 - Providers live where app-wide scope is obvious, such as root-level provider files, instead of being hidden inside unrelated feature modules.
 
 ## Anti-Examples
@@ -49,3 +52,4 @@ The exact tree can differ by repo.
 - Expanding this page into detailed route, shared UI, hook, or service mechanics that belong in `patterns/` docs.
 - Forcing every repo into the same folder tree even when the local repo already has a stable documented shape.
 - Treating extraction as "move code anywhere smaller" instead of clarifying ownership.
+- Extracting single-owner layout data into `constants/` only to make the component look shorter, even though the move makes the reader jump farther to understand the feature.

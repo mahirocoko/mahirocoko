@@ -27,6 +27,7 @@ Read the formatter and local repo rules first, then keep imports and type surfac
 - Prefer formatter-led consistency over manual styling.
 - Prefer `import type` where the repo uses it and the import is type-only.
 - Prefer explicit section order in larger components and hooks when it improves scanability.
+- Prefer section comments that mirror local doctrine labels when the repo explicitly names an internal order and the file is complex enough to benefit from visible structure.
 - Prefer export posture that matches local scaffolding and repeated repo files.
 - Prefer simple TypeScript surfaces that expose domain meaning without unnecessary alias churn.
 
@@ -36,6 +37,7 @@ This page is intentionally narrow because local repos vary a lot here.
 
 - `jit-flow` explicitly calls out Biome, `import type`, named exports for components, and a stable section order for components and hooks.
 - `haabiz-hrm-fe` also centers Biome, `import type`, kebab-case file posture, and section ordering when complexity grows, while allowing both default and named exports if local scaffolding does.
+- In repos like `haabiz-hrm-fe`, when `AGENTS.md` explicitly names section order (`_Ref`, `_State`, `_Query`, `_Mutation`, `_Memo`, `_Callback`, `_Form`, `_Event`, `_Effect`), that documented order should be applied to new complex files even if older files still look inconsistent.
 - `eizypay-fe` shows a stronger local rule set with required section comments, service-class patterns, and colocated type exports beside implementations.
 
 The cross-repo pattern is not "one exact syntax everywhere." The real pattern is to respect the local code-style surface first, then use Mahiro fallback doctrine to keep new files internally clean and predictable.
@@ -72,6 +74,27 @@ const ApprovalQueueSection = () => {
 ```
 
 - A repo with named-export component scaffolds keeps named exports for components, while route entry files still use default exports if that is how the local router works.
+- A larger feature component can add visible section comments that match the local doctrine when those comments make the internal order easier to scan.
+
+```tsx
+const TeamSwitcher = () => {
+  const { t } = useLingui()
+
+  // _State
+  const [activeTeamName, setActiveTeamName] = useState<string | null>(null)
+
+  // _Memo
+  const teams = []
+  const activeTeam = teams.find((team) => team.name === activeTeamName) ?? teams[0]
+
+  // _Event
+  const handleSelectTeam = (teamName: string) => {
+    setActiveTeamName(teamName)
+  }
+
+  return null
+}
+```
 
 ## Anti-Examples
 

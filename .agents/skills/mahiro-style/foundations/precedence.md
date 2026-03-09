@@ -25,6 +25,7 @@ This page defines the exact rule order for `/mahiro-style`.
 
 - Resolve conflicts by walking the order top to bottom, without skipping levels.
 - Prefer repeated active-code patterns over isolated examples or migration leftovers.
+- Prefer explicit local doctrine over active-code snapshots when the repo is mid-migration or applying a rule unevenly.
 - Prefer one winning rule over compromise blends between conflicting layers.
 - Prefer topic-specific local rules over broad local philosophy statements.
 
@@ -35,6 +36,7 @@ Use the same winner order in every repo, but let the local evidence change the o
 - In `eizypay-fe`, explicit rules in `AGENTS.md` about service classes, section comments, Lingui macros, and state ownership win before any Mahiro fallback preference.
 - In `jit-flow`, file structure, named export conventions, and route-file patterns in `AGENTS.md` beat fallback doctrine even when Mahiro would often shape the code differently elsewhere.
 - In `haabiz-hrm-fe`, the local rule that quality checks and Biome posture are part of done-ness wins before cross-repo taste.
+- In `haabiz-hrm-fe`, `AGENTS.md` explicitly defines component section order even though many current files still apply that rule unevenly. The explicit doc wins over the partial snapshot of active code.
 
 ## Examples
 
@@ -47,5 +49,6 @@ Use the same winner order in every repo, but let the local evidence change the o
 
 - Treating `AGENTS.md` as just a suggestion.
 - Jumping straight from a vague local gap to Mahiro fallback doctrine without checking repeated repo patterns.
+- Treating an in-progress codebase snapshot as stronger than an explicit local doctrine rule just because the migration is incomplete.
 - Mixing two conflicting layers into a compromise shape for new code.
 - Using one exceptional file as proof of a repo-wide rule.
