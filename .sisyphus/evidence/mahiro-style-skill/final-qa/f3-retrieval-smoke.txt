@@ -1,0 +1,67 @@
+VERDICT: APPROVE
+
+Smoke contract source
+- `.sisyphus/evidence/mahiro-style-skill/task-4-verification-spec.md`
+- Task 14 baseline reused: `.sisyphus/evidence/mahiro-style-skill/task-14-full-verification.txt` V-06 PASS
+- Independent final-QA recheck: exact contract doc+heading still exists and each target file still contains the answer anchors for its prompt.
+- LSP note: `.txt` evidence files have no configured local LSP in this environment, so final QA remains content-validated per the Task 4 spec.
+
+S-01 PROMPT: Which rule wins when repo AGENTS conflicts with Mahiro style?
+S-01 CONTRACT: .agents/skills/mahiro-style/foundations/precedence.md | ## Precedence Order
+S-01 TASK14 BASELINE: .agents/skills/mahiro-style/foundations/precedence.md | ## Precedence Order | score=27
+S-01 CURRENT HEADING COUNT: 1
+S-01 ANCHORS: 4/4 -> `AGENTS.md`, Other repo-local instruction files, Established repo patterns, Mahiro fallback doctrine
+S-01 STATUS: PASS
+
+S-02 PROMPT: How should Mahiro structure a new feature module and where should constants live?
+S-02 CONTRACT: .agents/skills/mahiro-style/foundations/project-structure.md | ## Feature Structure and Ownership
+S-02 TASK14 BASELINE: .agents/skills/mahiro-style/foundations/project-structure.md | ## Feature Structure and Ownership | score=37
+S-02 CURRENT HEADING COUNT: 1
+S-02 ANCHORS: 7/7 -> routes, components, hooks, services, stores, constants, providers
+S-02 STATUS: PASS
+
+S-03 PROMPT: What import and type-shape defaults should I follow before touching code?
+S-03 CONTRACT: .agents/skills/mahiro-style/foundations/code-style.md | ## Imports and Type Shape
+S-03 TASK14 BASELINE: .agents/skills/mahiro-style/foundations/code-style.md | ## Imports and Type Shape | score=37
+S-03 CURRENT HEADING COUNT: 1
+S-03 ANCHORS: 4/4 -> import type, `interface` versus `type`, section order, export conventions
+S-03 STATUS: PASS
+
+S-04 PROMPT: Should this hook call services directly or through boundaries?
+S-04 CONTRACT: .agents/skills/mahiro-style/patterns/hooks.md | ## Hook Boundaries
+S-04 TASK14 BASELINE: .agents/skills/mahiro-style/patterns/hooks.md | ## Hook Boundaries | score=26
+S-04 CURRENT HEADING COUNT: 1
+S-04 ANCHORS: 3/3 -> reusable stateful behavior, Prefer calling services from hooks, route-only orchestration
+S-04 STATUS: PASS
+
+S-05 PROMPT: Where should API transport and mapping logic live?
+S-05 CONTRACT: .agents/skills/mahiro-style/patterns/services.md | ## Service Responsibilities
+S-05 TASK14 BASELINE: .agents/skills/mahiro-style/patterns/services.md | ## Service Responsibilities | score=18
+S-05 CURRENT HEADING COUNT: 1
+S-05 ANCHORS: 4/4 -> endpoint calls, request shaping, response mapping, service boundary
+S-05 STATUS: PASS
+
+S-06 PROMPT: What is the recommended split between global state and local UI state?
+S-06 CONTRACT: .agents/skills/mahiro-style/patterns/stores-state.md | ## State Placement and Provider Scope
+S-06 TASK14 BASELINE: .agents/skills/mahiro-style/patterns/stores-state.md | ## State Placement and Provider Scope | score=34
+S-06 CURRENT HEADING COUNT: 1
+S-06 ANCHORS: 4/4 -> smallest scope, server state, client stores, provider scope
+S-06 STATUS: PASS
+
+S-07 PROMPT: When do I keep copy in React vs extract descriptors with msg for Lingui?
+S-07 CONTRACT: .agents/skills/mahiro-style/patterns/constants-i18n.md | ## Render Boundary and Translation Responsibility
+S-07 TASK14 BASELINE: .agents/skills/mahiro-style/patterns/constants-i18n.md | ## Render Boundary and Translation Responsibility | score=35
+S-07 CURRENT HEADING COUNT: 1
+S-07 ANCHORS: 5/5 -> msg, t(...), i18n._(...), <Trans>, translation at render
+S-07 STATUS: PASS
+
+S-08 PROMPT: How do we reject thick-route files and enforce route/component boundaries?
+S-08 CONTRACT: .agents/skills/mahiro-style/patterns/route-boundaries.md | ## Thin Route Boundary Rules
+S-08 TASK14 BASELINE: .agents/skills/mahiro-style/patterns/route-boundaries.md | ## Thin Route Boundary Rules | score=45
+S-08 CURRENT HEADING COUNT: 1
+S-08 ANCHORS: 3/3 -> Routes are entry points, Keep route files focused on composition, Do not let route files become mixed homes
+S-08 STATUS: PASS
+
+Result
+- All eight smoke prompts still resolve to the exact Task 4 canonical winners.
+- Task 14 V-06 baseline and the current doc/heading anchor recheck agree.

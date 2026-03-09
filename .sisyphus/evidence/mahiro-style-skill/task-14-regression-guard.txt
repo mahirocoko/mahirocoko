@@ -1,0 +1,21 @@
+Task 14 Regression Guard
+Target check: V-04 stale reference guards
+Controlled break: temporary required-reading line added to .agents/skills/mahiro-style/SKILL.md -> `examples/README.md`
+
+BROKEN STATE
+- SKILL.md hash: 552d6403ac2471e5c5f2f891d28b24019faa3d0b84710762e21bbb7d654148e3
+- Expected result: FAIL
+- Observed result: FAIL
+- Offending line: .agents/skills/mahiro-style/SKILL.md:11: Required reading: `examples/README.md` before canonical docs.
+
+RESTORED STATE
+- Original SKILL.md hash: 2b44c76d53e466257b5aba319aa169e993c3bf7086510ceecac821894e3add32
+- Restored SKILL.md hash: 2b44c76d53e466257b5aba319aa169e993c3bf7086510ceecac821894e3add32
+- Hash restored exactly: YES
+- Observed result after restore: PASS
+- Remaining stale-reference matches after restore:
+  - ALLOWED: .agents/skills/mahiro-style/examples/README.md:5: Canonical example knowledge no longer lives in `examples/`.
+  - ALLOWED: .agents/skills/mahiro-style/examples/README.md:24: - Do not treat `examples/` as a required or canonical doctrine source.
+  - ALLOWED: .agents/skills/mahiro-style/resources/guide.md:5: Keep this page only as a compatibility redirect for older references to `resources/guide.md`.
+
+FINAL RESULT: PASS
