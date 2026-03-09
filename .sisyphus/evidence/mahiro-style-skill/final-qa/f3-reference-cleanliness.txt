@@ -1,0 +1,23 @@
+VERDICT: APPROVE
+
+Reference cleanliness scope
+- `.agents/skills/mahiro-style/**/*.md`
+- Task 14 baselines reused: V-04 PASS and V-05 PASS from `.sisyphus/evidence/mahiro-style-skill/task-14-full-verification.txt`.
+- Independent final-QA recheck reran stale-reference inventory and internal link/anchor resolution locally.
+- LSP note: `.txt` evidence files have no configured local LSP in this environment, so final QA remains content-validated per the Task 4 spec.
+
+Stale-reference inventory
+- Total matches for guarded legacy paths: 3
+- Grep-correlated counts: `examples/`=2, `resources/guide.md`=1, `resources/README.md`=0
+- ALLOWED: .agents/skills/mahiro-style/examples/README.md:5: Canonical example knowledge no longer lives in `examples/`.
+- ALLOWED: .agents/skills/mahiro-style/examples/README.md:24: - Do not treat `examples/` as a required or canonical doctrine source.
+- ALLOWED: .agents/skills/mahiro-style/resources/guide.md:5: Keep this page only as a compatibility redirect for older references to `resources/guide.md`.
+
+Link/reference check
+- Resolution rules: relative `./` and `../` from source file, skill-root `foundations/|patterns/|resources/|examples/`, bare repo docs `AGENTS.md|CLAUDE.md` from repo root, same-file `#anchor` supported.
+- Concrete internal refs checked: 96
+- Broken refs: 0
+
+Result
+- Only compatibility-marked legacy mentions remain, and none acts as canonical guidance.
+- Internal Markdown links and anchors are clean under the pinned local resolution rules.

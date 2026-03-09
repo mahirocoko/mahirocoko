@@ -1,24 +1,8 @@
-# Services and State
+# Deprecated: Compatibility Redirect
 
-## Service boundaries
+This legacy path is retained for compatibility only and is not a canonical doctrine source.
 
-- API intent belongs in services
-- Screens should consume service outputs, not build transport details inline
-- Reuse base transport patterns when the repo already has them
+Canonical owners:
 
-## State boundaries
-
-- Server state belongs in query layers
-- Client state belongs in stores or local component state
-- Avoid mixing long-lived app state with transient screen rendering concerns
-
-## Provider placement
-
-- Global providers belong at app shell level
-- Feature-level providers should exist only when the scope is truly local to that feature
-
-## Review cues
-
-- Did screen code start owning transport logic?
-- Did a store become a dumping ground for unrelated UI details?
-- Did service logic leak into reusable components?
+- `../patterns/services.md`
+- `../patterns/stores-state.md`

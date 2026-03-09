@@ -1,0 +1,76 @@
+Task 13 legacy example preservation verification
+Date: 2026-03-09
+Worktree: /Users/mahiro/Git/me/mahirocoko-mahiro-style-skill
+
+Command:
+`for f in .agents/skills/mahiro-style/examples/*.md; do if [ "$(basename "$f")" = "README.md" ]; then continue; fi; printf "\n[%s]\n" "$f"; rtk grep -n "Canonical owner:" "$f"; done`
+
+Output:
+```
+[.agents/skills/mahiro-style/examples/constants-i18n.md]
+🔍 1 in 1F:
+
+📄 .agents/.../examples/constants-i18n.md (1):
+     5: Canonical owner: `../patterns/constants-i18n.md`
+
+
+[.agents/skills/mahiro-style/examples/export-style.md]
+🔍 1 in 1F:
+
+📄 .agents/.../examples/export-style.md (1):
+     5: Canonical owner: `../foundations/code-style.md`
+
+
+[.agents/skills/mahiro-style/examples/interface-vs-type.md]
+🔍 1 in 1F:
+
+📄 .agents/.../examples/interface-vs-type.md (1):
+     5: Canonical owner: `../foundations/code-style.md`
+
+
+[.agents/skills/mahiro-style/examples/naming.md]
+🔍 1 in 1F:
+
+📄 .agents/skills/mahiro-style/examples/naming.md (1):
+     5: Canonical owner: `../patterns/naming.md`
+
+
+[.agents/skills/mahiro-style/examples/route-boundaries.md]
+🔍 1 in 1F:
+
+📄 .agents/.../examples/route-boundaries.md (1):
+     5: Canonical owner: `../patterns/route-boundaries.md`
+
+
+[.agents/skills/mahiro-style/examples/section-order.md]
+🔍 1 in 1F:
+
+📄 .agents/.../examples/section-order.md (1):
+     5: Canonical owner: `../foundations/code-style.md`
+
+
+[.agents/skills/mahiro-style/examples/services.md]
+🔍 1 in 1F:
+
+📄 .agents/skills/mahiro-style/examples/services.md (1):
+     5: Canonical owner: `../patterns/services.md`
+
+
+[.agents/skills/mahiro-style/examples/shared-ui-boundaries.md]
+🔍 1 in 1F:
+
+📄 .agents/.../examples/shared-ui-boundaries.md (1):
+     5: Canonical owner: `../patterns/shared-ui-boundaries.md`
+
+
+[.agents/skills/mahiro-style/examples/stores.md]
+🔍 1 in 1F:
+
+📄 .agents/skills/mahiro-style/examples/stores.md (1):
+     5: Canonical owner: `../patterns/stores-state.md`
+```
+
+Interpretation:
+- Every retired legacy example file has an explicit canonical successor path.
+- Successors match the Task 1/Task 2 ownership map exactly.
+- Legacy files are preserved as redirect-style compatibility paths rather than deleted.
