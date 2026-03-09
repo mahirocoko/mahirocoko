@@ -6,6 +6,13 @@ This page owns service layer intent, transport boundaries, API contracts, and wh
 
 Use it when the question is where API transport should live, where mapping should happen, and how route, hook, and service responsibilities should stay separate.
 
+## Detect
+
+- Route or component file contains inline `fetch` calls with endpoint strings
+- Component builds request headers, query params, or POST bodies directly
+- Service module manages Zustand state, dialog visibility, or router navigation alongside transport
+- Multiple files duplicate the same endpoint URL or request-building logic
+
 ## Service Responsibilities
 
 Services own transport intent. They are the home for endpoint calls, request shaping, response mapping decisions, and shared transport mechanics that the repo already standardizes.

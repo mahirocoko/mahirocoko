@@ -6,6 +6,13 @@ This page owns hook shape, hook extraction, and the boundary between route or co
 
 Use it when the question is whether a hook should exist, what it should return, and whether a hook is carrying transport, state, or UI responsibilities in the right place.
 
+## Detect
+
+- Custom hook returns more than five unrelated values (queries, setters, handlers, formatted strings)
+- Hook named `usePage` or `use[ScreenName]` that owns fetch, state, navigation, and formatting for one route only
+- Simple two-line `useState` wrapped in a custom hook with no reuse or ownership benefit
+- Hook imports service classes AND manages dialog/modal state AND performs navigation
+
 ## Hook Boundaries
 
 Mahiro-style hooks package behavior, not confusion.
@@ -38,13 +45,123 @@ Mahiro-style hooks package behavior, not confusion.
 
 ## Examples
 
-- A feature hook owns `useQuery` or `useMutation` wiring around `ApprovalService.listQueue`, then returns query state plus domain actions the screen needs.
-- A local interaction hook owns disclosure state, keyboard handlers, and derived booleans for a reusable screen section.
+- A feature hook owns query wiring around a service, then returns shaped state plus domain actions the screen needs.
+
+```tsx
+const useApprovalQueue = (filters: IApprovalFilters) => {
+  const queueQuery = useQuery({
+    queryKey: ['approval-queue', filters],
+    queryFn: () => ApprovalService.listQueue(filters),
+  })
+
+  const approveMutation = useMutation({
+    mutationFn: ApprovalService.approve,
+    onSuccess: () => queueQuery.refetch(),
+  })
+
+  return {
+    items: queueQuery.data?.items ?? [],
+    isLoading: queueQuery.isLoading,
+    approve: approveMutation.mutate,
+    isApproving: approveMutation.isPending,
+  }
+}
+```
+
+- A local interaction hook owns disclosure state and keyboard behavior for a reusable screen section.
+
+```tsx
+const useCommandPalette = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [query, setQuery] = useState('')
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault()
+        setIsOpen((prev) => !prev)
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  }, [])
+
+  return { isOpen, setIsOpen, query, setQuery }
+}
+```
+
 - A route keeps loader-like navigation decisions inline when they are unique to that route instead of creating a one-off hook with no reusable boundary.
+
+```tsx
+const SettingsPage = () => {
+  const { tab } = useParams()
+  const navigate = useNavigate()
+
+  if (!VALID_TABS.includes(tab)) {
+    navigate('/settings/general', { replace: true })
+    return null
+  }
+
+  return <SettingsLayout activeTab={tab} />
+}
+```
 
 ## Anti-Examples
 
 - A `usePage` hook that quietly fetches data, opens dialogs, navigates, formats display strings, and shapes JSX copy for one route only.
-- A hook that returns raw service payloads plus ten unrelated setters because it became a dumping ground for screen state.
+
+```tsx
+const useApprovalPage = () => {
+  const router = useRouter()
+  const { data } = useQuery({ queryKey: ['approvals'], queryFn: fetchApprovals })
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const formattedTitle = `Approvals (${data?.length ?? 0})`
+
+  const handleRowClick = (id: string) => {
+    setSelectedId(id)
+    setIsModalOpen(true)
+  }
+
+  const handleClose = () => {
+    setIsModalOpen(false)
+    router.push('/dashboard')
+  }
+
+  return { data, isModalOpen, selectedId, formattedTitle, handleRowClick, handleClose }
+}
+```
+
+- A hook that returns raw service payloads plus unrelated setters because it became a dumping ground for screen state.
+
+```tsx
+const useEmployeeDashboard = () => {
+  const employees = useQuery({ ... })
+  const attendance = useQuery({ ... })
+  const [searchTerm, setSearchTerm] = useState('')
+  const [sortBy, setSortBy] = useState('name')
+  const [isExporting, setIsExporting] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
+
+  return {
+    employees: employees.data,
+    attendance: attendance.data,
+    searchTerm, setSearchTerm,
+    sortBy, setSortBy,
+    isExporting, setIsExporting,
+    toastMessage, setToastMessage,
+  }
+}
+```
+
 - Moving a simple two-line `useState` block into a custom hook even though no reuse or clearer ownership appears.
+
+```tsx
+const useDisclosure = () => {
+  const [isOpen, setIsOpen] = useState(false)
+  return { isOpen, setIsOpen }
+}
+```
+
 - Treating this page as the owner of provider scope or global state policy. Those belong to `stores-state.md`.

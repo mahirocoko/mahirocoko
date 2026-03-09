@@ -6,6 +6,13 @@ This page owns client state placement, store scope, server-state versus client-s
 
 Use it when the question is whether state belongs in component state, a store, a query cache, or a provider, and how wide that state scope should be.
 
+## Detect
+
+- Store combines auth state, modal flags, domain filters, and mutation handlers in one object
+- Query result data is copied into a Zustand store instead of staying in the query cache
+- Global provider wraps the entire app for state only used in one route subtree
+- Component uses `useAppStore` for a concern that only affects one screen or feature
+
 ## State Placement and Provider Scope
 
 State should live at the smallest scope that still matches its lifetime and sharing needs.

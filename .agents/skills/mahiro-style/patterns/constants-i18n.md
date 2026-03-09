@@ -6,6 +6,14 @@ This page owns constants extraction with Lingui-safe posture, `msg`-based descri
 
 Use it when the question is whether copy should stay in React, move into config, or be reshaped into translation-safe descriptors without making `msg`, `t`, and `<Trans>` responsibilities fuzzy.
 
+## Detect
+
+- Extracted constants contain plain string literals for user-facing copy with no `msg` wrapper
+- `i18n._()` or `t()` called inside a constants file or outside a render boundary
+- Mock data objects use `t()` on data-shaped fields like names, team labels, or IDs
+- Copy extracted into constants only to reduce component line count while the component is still the only consumer
+- Component-local headings, placeholders, or empty-state text moved into a separate file with no reuse
+
 ## Render Boundary and Translation Responsibility
 
 The component that renders UI text owns the final translation call.
