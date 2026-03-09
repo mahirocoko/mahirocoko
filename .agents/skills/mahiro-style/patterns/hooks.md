@@ -31,9 +31,9 @@ Mahiro-style hooks package behavior, not confusion.
 
 ## Contextual
 
-- `jit-flow` is the clearest reference for hooks that sit beside services and React Query wiring. The pattern works because transport still belongs to services and the hook owns consumption.
-- `eizypay-fe` reinforces the same split with query-state helpers and shared packages. Hooks coordinate, but they do not replace service contracts.
-- `haabiz-hrm-fe` shows a lighter app shape where many screens can stay simple without custom hooks until behavior actually repeats.
+- In a responsibility-first app, hooks can sit beside services and React Query wiring cleanly because transport still belongs to services and the hook owns consumption.
+- In a monorepo, hooks can coordinate query-state helpers and shared packages without replacing service contracts.
+- In a lighter app, many screens can stay simple without custom hooks until behavior actually repeats.
 - Follow local formatter, snippet, and import rules from the active repo. This page decides hook responsibility, not tool-specific syntax.
 
 ## Examples

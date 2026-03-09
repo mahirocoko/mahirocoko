@@ -33,10 +33,10 @@ This page defines the exact rule order for `/mahiro-style`.
 
 Use the same winner order in every repo, but let the local evidence change the outcome.
 
-- In `eizypay-fe`, explicit rules in `AGENTS.md` about service classes, section comments, Lingui macros, and state ownership win before any Mahiro fallback preference.
-- In `jit-flow`, file structure, named export conventions, and route-file patterns in `AGENTS.md` beat fallback doctrine even when Mahiro would often shape the code differently elsewhere.
-- In `haabiz-hrm-fe`, the local rule that quality checks and Biome posture are part of done-ness wins before cross-repo taste.
-- In `haabiz-hrm-fe`, `AGENTS.md` explicitly defines component section order even though many current files still apply that rule unevenly. The explicit doc wins over the partial snapshot of active code.
+- In a monorepo app, explicit `AGENTS.md` rules about service classes, section comments, Lingui macros, and state ownership win before any fallback preference.
+- In a responsibility-first single app, file structure, named export conventions, and route-file patterns in `AGENTS.md` beat fallback doctrine even when the fallback would often shape the code differently elsewhere.
+- In a lean route-first app, the local rule that quality checks and formatter posture are part of done-ness wins before cross-repo taste.
+- In any repo where `AGENTS.md` explicitly defines component section order, that explicit doc wins over a partial active-code snapshot, even if the migration is still uneven.
 
 ## Examples
 

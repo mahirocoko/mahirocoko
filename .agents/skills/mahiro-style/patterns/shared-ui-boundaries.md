@@ -27,9 +27,9 @@ Shared UI should stay broad enough to serve multiple domains without importing o
 
 ## Contextual
 
-- `haabiz-hrm-fe` is a strong reference for token-first primitives under `app/components/ui/`, plus feature-specific screens that sit on top of them. The shared layer stays generic because the feature layer carries HRM vocabulary.
-- `eizypay-fe` shows the package version of the same rule. Shared UI and shared query-state helpers live in packages, but app code still owns product-specific wording and workflow behavior.
-- `jit-flow` shows that even in a single app, shared layout and reusable UI should not become a silent home for domain service calls or route-specific business branching.
+- A token-first app can keep feature-specific screens on top of shared primitives. The shared layer stays generic because the feature layer carries product vocabulary.
+- A monorepo can keep shared UI and shared query-state helpers in packages while app code still owns product-specific wording and workflow behavior.
+- Even in a single app, shared layout and reusable UI should not become a silent home for domain service calls or route-specific business branching.
 - Follow the local repo's component package, token system, and export conventions. This page decides reuse boundaries, not packaging syntax.
 
 ## Examples

@@ -72,7 +72,7 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 
 ## Examples
 
-- "`AGENTS.md` says routes stay thin, but this diff moves view config, route metadata, and rendering back into `app/routes/console.tsx`. Keep orchestration in the route and move owned data back to a domain file." 
+- "`AGENTS.md` says routes stay thin, but this diff moves view config, route metadata, and rendering back into the route entry file. Keep orchestration in the route and move owned data back to a domain file." 
 - "The repo already repeats `useLingui` and render-boundary translation. This constants extraction introduces plain string blobs without preserving that posture. Keep the extraction, but preserve the repo's i18n boundary." 
 - "`UserList` and `employeeRows` are clearer than `data` and `items` here because the diff is shaping domain contracts, not generic collections." 
 - "This shared component now knows page-specific approval rules. Keep the reusable shell generic and move the approval logic back to the feature-owned layer." 

@@ -35,10 +35,10 @@ Read the formatter and local repo rules first, then keep imports and type surfac
 
 This page is intentionally narrow because local repos vary a lot here.
 
-- `jit-flow` explicitly calls out Biome, `import type`, named exports for components, and a stable section order for components and hooks.
-- `haabiz-hrm-fe` also centers Biome, `import type`, kebab-case file posture, and section ordering when complexity grows, while allowing both default and named exports if local scaffolding does.
-- In repos like `haabiz-hrm-fe`, when `AGENTS.md` explicitly names section order (`_Ref`, `_State`, `_Query`, `_Mutation`, `_Memo`, `_Callback`, `_Form`, `_Event`, `_Effect`), that documented order should be applied to new complex files even if older files still look inconsistent.
-- `eizypay-fe` shows a stronger local rule set with required section comments, service-class patterns, and colocated type exports beside implementations.
+- Some repos explicitly call out Biome, `import type`, named exports for components, and a stable section order for components and hooks.
+- Other repos center Biome, `import type`, kebab-case file posture, and section ordering when complexity grows, while allowing both default and named exports if local scaffolding does.
+- When `AGENTS.md` explicitly names section order (`_Ref`, `_State`, `_Query`, `_Mutation`, `_Memo`, `_Callback`, `_Form`, `_Event`, `_Effect`), that documented order should be applied to new complex files even if older files still look inconsistent.
+- Some stronger local rule sets also require visible section comments, service-class patterns, or colocated type exports beside implementations.
 
 The cross-repo pattern is not "one exact syntax everywhere." The real pattern is to respect the local code-style surface first, then use Mahiro fallback doctrine to keep new files internally clean and predictable.
 

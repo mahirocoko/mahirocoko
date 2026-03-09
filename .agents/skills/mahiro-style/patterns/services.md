@@ -27,9 +27,9 @@ Services own transport intent. They are the home for endpoint calls, request sha
 
 ## Contextual
 
-- `jit-flow` is the strongest service reference because it uses an explicit `BaseService` pattern and keeps auth or transport behavior centralized.
-- `eizypay-fe` reinforces the same class-based service boundary in a monorepo. The exact package path changes, but the ownership rule does not.
-- `haabiz-hrm-fe` is still lighter, but its guidance already points toward introducing `app/services/` when transport volume grows. That makes it a good example of keeping the service boundary ready without forcing it too early.
+- A responsibility-first app can use an explicit base service pattern and keep auth or transport behavior centralized.
+- A monorepo can keep the same class-based or module-based service boundary across packages even though the exact package path changes.
+- A lighter app can keep the service boundary ready without forcing `app/services/` too early, introducing it only when transport volume grows.
 - Local HTTP clients, JSDoc rules, and exact method style belong to the repo. This page decides who owns transport and mapping.
 
 ## Examples

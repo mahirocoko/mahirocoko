@@ -28,9 +28,9 @@ Mahiro-style naming should expose the business concept, the artifact role, and t
 
 ## Contextual
 
-- `jit-flow` shows strong domain-first file and service naming across routes, hooks, and services. Even with a large tree, the domain stays searchable.
-- `haabiz-hrm-fe` shows why naming matters even more in a lean repo: with fewer folders, file names and component names have to carry more ownership signal.
-- `eizypay-fe` shows the monorepo version, where package names, app names, and shared exports all need to reveal scope clearly.
+- In a larger responsibility-first app, strong domain-first naming across routes, hooks, and services keeps the tree searchable.
+- In a leaner repo, naming matters even more because file names and component names have to carry more ownership signal.
+- In a monorepo, package names, app names, and shared exports all need to reveal scope clearly.
 - Local file casing, interface naming, and export conventions still come from the active repo. This page decides domain clarity, not syntax-level style.
 
 ## Examples
@@ -53,10 +53,10 @@ attendance-risk-summary.tsx
 ```
 
 ```text
-app/components/layouts/console/header.tsx            -> ConsoleLayoutHeader
-app/components/layouts/console/sidebar.tsx           -> ConsoleLayoutSidebar
-app/components/layouts/console/main-nav.tsx          -> MainNav
-app/components/layouts/console/user-menu.tsx         -> UserMenu
+app/components/layouts/dashboard/header.tsx          -> DashboardLayoutHeader
+app/components/layouts/dashboard/sidebar.tsx         -> DashboardLayoutSidebar
+app/components/layouts/dashboard/main-nav.tsx        -> MainNav
+app/components/layouts/dashboard/user-menu.tsx       -> UserMenu
 ```
 
 - `useEmployeeAttendanceFilters` is clearer than `useFilters` because the caller knows which filters the hook owns.
@@ -74,6 +74,6 @@ const config = []
 
 - Naming a service `api.ts` in a repo that already has multiple domains and transport layers.
 - Naming a component `Section` or `Content` when it is really the approval summary grid.
-- Repeating the same domain word in both folder and file when the path already makes the ownership obvious, such as `console/console-layout-header.tsx`.
+- Repeating the same domain word in both folder and file when the path already makes the ownership obvious, such as `dashboard/dashboard-layout-header.tsx`.
 - Naming a store `useAppStore` when it only owns one local feature concern.
 - Letting this page expand into generic formatting rules that belong elsewhere.

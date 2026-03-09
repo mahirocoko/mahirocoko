@@ -24,11 +24,11 @@ Use this directory when the question is about how code should be shaped inside a
 
 ## Reference posture
 
-These pages are grounded in repeated patterns across `jit-flow`, `haabiz-hrm-fe`, and `eizypay-fe`.
+These pages are grounded in repeated patterns across a few stable repo archetypes.
 
-- `jit-flow` shows the heavier app shape with explicit services, stores, providers, and domain hooks.
-- `haabiz-hrm-fe` shows the leaner route-first shape where boundaries still need to stay explicit as the app grows.
-- `eizypay-fe` shows the monorepo version of the same ownership rules, especially for shared UI, service classes, and query-state patterns.
+- A responsibility-first single app shows the heavier shape with explicit services, stores, providers, and domain hooks.
+- A lean route-first app shows that boundaries still need to stay explicit even when the tree is smaller.
+- A monorepo with shared packages shows the same ownership rules at package level, especially for shared UI, service classes, and query-state patterns.
 
 ## How to use Patterns
 
