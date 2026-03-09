@@ -11,9 +11,6 @@
 
 ---
 
-<a href="https://github.com/mahirocoko/github-readme-stats">
-  <img align="left" src="https://github-readme-stats.vercel.app/api?username=mahirocoko&show_icons=true&rank_icon=github" />
-</a>
-<a href="https://github.com/mahirocoko/convoychat">
-  <img align="left" src="https://github-readme-stats.vercel.app/api/top-langs/?username=mahirocoko&layout=compact" />
-</a>
+<div align="center">
+  <img src="public/mahiro-profile-card.svg" alt="Mahiro profile card" width="720" />
+</div>
