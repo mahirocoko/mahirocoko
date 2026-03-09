@@ -1,0 +1,21 @@
+# Task 12 Evidence - Guide Transition Behavior Check
+
+Command:
+`grep -nE 'deprecated|compatibility|foundations/|patterns/' .agents/skills/mahiro-style/resources/guide.md`
+
+Output:
+3:This file is deprecated as a primary doctrine source.
+5:Keep this page only as a compatibility redirect for older references to `resources/guide.md`.
+11:- `../foundations/overview.md`
+12:- `../foundations/precedence.md`
+13:- `../foundations/code-style.md`
+14:- `../foundations/project-structure.md`
+15:- `../foundations/review-checklist.md`
+16:- `../patterns/*.md`
+25:4. Mahiro fallback doctrine from `foundations/` and `patterns/`
+30:- If a reference points to this page, redirect it to the canonical `foundations/` or `patterns/` owner.
+
+Interpretation:
+- `resources/guide.md` clearly declares deprecated compatibility-shim status.
+- Successor canonical paths are explicit under `foundations/` and `patterns/`.
+- Transition instructions are thin and redirect-oriented, not a second doctrine copy.

@@ -1,0 +1,42 @@
+# Task 1 - Mahiro-Style File Crosswalk
+
+Scope: `.agents/skills/mahiro-style/**/*.md`
+Inventory date: 2026-03-08
+Total markdown files found: 20
+Total markdown files classified: 20
+Unclassified markdown files: 0
+
+Legend:
+- keep = keep file path as canonical location (content may still refresh)
+- rewrite = keep file with full content rewrite as canonical source
+- merge = fold content into one or more new canonical pages; source file later retired
+- retire = remove as standalone source after successor is canonical
+- compatibility shim = keep temporarily as redirect/deprecation bridge to canonical docs
+
+| Current file | Action | Canonical successor target | Notes |
+|---|---|---|---|
+| `.agents/skills/mahiro-style/SKILL.md` | rewrite | `.agents/skills/mahiro-style/SKILL.md` | Keep as thin hub; stop routing to split `examples/` or `resources/guide.md`. |
+| `.agents/skills/mahiro-style/README.md` | rewrite | `.agents/skills/mahiro-style/README.md` | Human-facing overview only; align with new foundations/Patterns map. |
+| `.agents/skills/mahiro-style/resources/README.md` | compatibility shim | `.agents/skills/mahiro-style/SKILL.md` + canonical foundations/Patterns index pages | Temporary redirect doc for old `resources/` entrypoint consumers. |
+| `.agents/skills/mahiro-style/resources/guide.md` | compatibility shim | `foundations/overview` + `foundations/precedence` + `foundations/code-style` + `foundations/project-structure` + `patterns/*` | Retire as primary source; keep short deprecation redirect until stale references are cleaned. |
+| `.agents/skills/mahiro-style/resources/code-style.md` | rewrite | `foundations/code-style.md` | Canonical ownership for naming/imports/interface-type/section-order baseline. |
+| `.agents/skills/mahiro-style/resources/structure.md` | merge | `foundations/project-structure.md` + `patterns/route-boundaries.md` + `patterns/shared-ui-boundaries.md` | Split general structure doctrine from concrete boundary patterns. |
+| `.agents/skills/mahiro-style/resources/constants-i18n.md` | rewrite | `patterns/constants-i18n.md` | Keep as canonical doctrine page with embedded examples/anti-examples. |
+| `.agents/skills/mahiro-style/resources/services-state.md` | merge | `patterns/services.md` + `patterns/stores-state.md` | Separate service transport posture from state/store posture. |
+| `.agents/skills/mahiro-style/resources/review-checklist.md` | rewrite | `foundations/review-checklist.md` | Keep checklist but strengthen repo-rule drift and operational prompts. |
+| `.agents/skills/mahiro-style/resources/anti-patterns.md` | merge | `foundations/review-checklist.md` + topic `Anti-Examples` sections | Anti-patterns become embedded where ownership lives; avoid separate orphan list. |
+| `.agents/skills/mahiro-style/examples/README.md` | retire | Embedded `Examples`/`Anti-Examples` sections in canonical topic pages | Remove as separate source-of-truth map after migration. |
+| `.agents/skills/mahiro-style/examples/interface-vs-type.md` | merge | `foundations/code-style.md` (`interface` vs `type` section) | Example content migrates inline under type system guidance. |
+| `.agents/skills/mahiro-style/examples/route-boundaries.md` | merge | `patterns/route-boundaries.md` | Becomes canonical pattern page with Do/Avoid/Why retained. |
+| `.agents/skills/mahiro-style/examples/constants-i18n.md` | merge | `patterns/constants-i18n.md` | Preserve Lingui-safe `msg` + render-boundary examples in canonical page. |
+| `.agents/skills/mahiro-style/examples/naming.md` | merge | `foundations/code-style.md` or `patterns/naming.md` (Task 2 IA lock) | Keep all Do/Avoid naming contrasts; final owner decided in IA step. |
+| `.agents/skills/mahiro-style/examples/shared-ui-boundaries.md` | merge | `patterns/shared-ui-boundaries.md` | Canonical boundary guidance for reusable vs feature-specific UI. |
+| `.agents/skills/mahiro-style/examples/services.md` | merge | `patterns/services.md` | Service boundary examples become canonical under service pattern doc. |
+| `.agents/skills/mahiro-style/examples/stores.md` | merge | `patterns/stores-state.md` | Store anti-dumping-ground examples become canonical under state doc. |
+| `.agents/skills/mahiro-style/examples/section-order.md` | merge | `foundations/code-style.md` (`internal section order`) | Keep scan-first ordering examples near code-style rules. |
+| `.agents/skills/mahiro-style/examples/export-style.md` | merge | `foundations/code-style.md` (`export conventions`) | Keep local-convention-first export guidance in style doctrine. |
+
+Classification QA:
+- Every markdown file from inventory appears exactly once in the table: PASS
+- Every row has one action from {keep, rewrite, merge, retire, compatibility shim}: PASS
+- No markdown files remain unclassified: PASS
