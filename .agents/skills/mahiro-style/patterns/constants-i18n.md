@@ -37,13 +37,23 @@ The component that renders UI text owns the final translation call.
 - Prefer translating as late as possible, near the component that decides badges, buttons, headings, and conditional copy.
 - Prefer leaving one-off JSX copy in place when extraction would split one sentence across constants and component branches.
 
+## Decision Table
+
+| Situation | Keep as | Translate with | Why |
+|---|---|---|---|
+| Owner-local UI copy such as headings, helper text, empty states, button labels | Inline React copy | `t` in the owner component | The component already owns the rendered wording |
+| Extracted shared config used by multiple owners | `msg` descriptors in config | `t` or `i18n._(...)` at render | Shared config needs descriptor safety |
+| Mock data that stands in for future API payload shape | Plain strings or values | Do not pre-translate inside the mock object | Data should stay data-shaped until UI decides how to present it |
+| Frontend-computed labels from local state or mock state, such as status badges | Derived UI copy near render | `t` in the owner component | The label is UI-owned even if the state came from data |
+
 ## Contextual
 
 Repo-local posture decides the final shape.
 
-- In `haabiz-hrm-fe`, the HRM console refactor showed the useful split clearly: extracted console config can store shared labels as `MessageDescriptor` values created with `msg`, while owner components such as `header.tsx`, `console-overview-screen.tsx`, and `sidebar.tsx` perform the final translation at the render boundary.
-- That same review also showed the limit of extraction. Later layout cleanup moved header and sidebar copy back into the owning components because the extracted constants were not buying real reuse and made the read path worse.
-- In the same repo, `const { t } = useLingui()` became the preferred owner-local posture for layout components when the copy stayed inside the component instead of traveling through shared descriptor config.
+- In a route-first app with Lingui, extracted feature config can store shared labels as `MessageDescriptor` values created with `msg`, while owner render components perform the final translation at the render boundary.
+- That same pattern also shows the limit of extraction. If layout or section copy is only consumed by one owner, moving it back into the owning component can improve readability when the extracted constants are not buying real reuse.
+- In owner-local render files, `const { t } = useLingui()` is usually the clearest posture when the copy stays inside the component instead of traveling through shared descriptor config.
+- A later section-level refactor sharpened the mock-data boundary too: section owners kept `mock*` collections as plain API-shaped values, while headings, placeholders, table headers, and computed badge labels used `t` at render time.
 - Some repos may prefer `t(...)` from `useLingui`, others may use `i18n._(...)`, and some rich text cases need `<Trans>`. The stable rule is not one exact API everywhere. The stable rule is that extracted config holds descriptors, and rendering code performs the final translation call.
 - If a repo already repeats a different but translation-safe pattern, keep the local winner. Mahiro fallback doctrine exists to resolve the gap, not to flatten working local conventions.
 
@@ -55,15 +65,15 @@ Keep reusable route and nav metadata in constants with `msg`, then translate ins
 import type { MessageDescriptor } from '@lingui/core'
 import { msg } from '@lingui/core/macro'
 
-interface IConsoleRouteMeta {
+interface IDashboardRouteMeta {
   label: MessageDescriptor
   description: MessageDescriptor
 }
 
-const CONSOLE_ROUTE_META_MAP: Record<string, IConsoleRouteMeta> = {
-  '/console': {
-    label: msg`โต๊ะควบคุมงานบุคคล`,
-    description: msg`สรุปคิวอนุมัติ งานเอกสาร และความเสี่ยงของทีม HRM เพื่อเริ่มวันจากมุมมองเดียว`,
+const DASHBOARD_ROUTE_META_MAP: Record<string, IDashboardRouteMeta> = {
+  '/dashboard': {
+    label: msg`Operations dashboard`,
+    description: msg`Summarize approvals, tasks, and the signals that should shape the next action.`,
   },
 }
 ```
@@ -71,14 +81,14 @@ const CONSOLE_ROUTE_META_MAP: Record<string, IConsoleRouteMeta> = {
 ```tsx
 import { useLingui } from '@lingui/react/macro'
 
-const ConsoleLayoutHeader = () => {
-  const { i18n } = useLingui()
-  const currentRoute = CONSOLE_ROUTE_META_MAP['/console']
+const DashboardHeader = () => {
+  const { t } = useLingui()
+  const currentRoute = DASHBOARD_ROUTE_META_MAP['/dashboard']
 
   return (
     <>
-      <h1>{i18n._(currentRoute.label)}</h1>
-      <p>{i18n._(currentRoute.description)}</p>
+      <h1>{t(currentRoute.label)}</h1>
+      <p>{t(currentRoute.description)}</p>
     </>
   )
 }
@@ -106,12 +116,50 @@ const EmptyState = ({ isFiltered }: { isFiltered: boolean }) => {
 }
 ```
 
-Good review call from the HRM console refactor:
+Good review call from a route-first app refactor:
 
-- `msg` belongs in extracted console config such as route meta, sidebar sections, badges, metrics, and checklist items.
-- `i18n._(...)` belongs in owner render files such as `header.tsx`, `console-overview-screen.tsx`, and `sidebar.tsx` because those files render the final UI.
+- `msg` belongs in extracted shared config such as route meta, sidebar sections, badges, metrics, and checklist items.
+- `t` is the clearest default in owner render files such as layout headers, section owners, and sidebars when those files render the final UI directly.
 - Copy that only exists to support one JSX branch should stay in the component unless there is a stronger domain-sharing reason to extract it.
-- If the console layout child owns the only rendering site, moving that child's copy back into the child with `t` is often clearer than keeping a detached constants file.
+- If the layout child owns the only rendering site, moving that child's copy back into the child with `t` is often clearer than keeping a detached constants file.
+- Mock collections that stand in for future API responses should stay plain and unlocalized until the UI decides how to present them.
+
+Concrete `Do / Avoid` from a section-owner refactor:
+
+```ts
+// Do
+const mockEmployees = [
+  {
+    id: 'EMP-1172',
+    name: 'ภูวดล วัฒนกิจ',
+    team: 'Engineering',
+    attendance: 'สาย 2 ครั้ง',
+    status: 'warning',
+  },
+]
+```
+
+```tsx
+const { t } = useLingui()
+
+<Input placeholder={t`ค้นหาจากชื่อพนักงาน หรือรหัสพนักงาน`} />
+<Badge>{employee.status === 'warning' ? t`ต้องติดตาม` : t`ปกติ`}</Badge>
+```
+
+```ts
+// Avoid
+const mockEmployees = [
+  {
+    id: 'EMP-1172',
+    name: t`ภูวดล วัฒนกิจ`,
+    team: t`Engineering`,
+    attendance: t`สาย 2 ครั้ง`,
+    statusLabel: t`ต้องติดตาม`,
+  },
+]
+```
+
+That shape blurs API-shaped data with UI-owned presentation labels.
 
 ## Anti-Examples
 

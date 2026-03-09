@@ -24,26 +24,27 @@ Routes are entry points. They should tell the reader how the screen is assembled
 - Prefer moving repeated screen sections into domain components and repeated config into domain constants.
 - Prefer route names and exports that follow the local router conventions exactly, then keep the route thin inside that local shape.
 - Prefer making the route the place where domain pieces are composed, not the place where every domain detail is defined.
+- Prefer route files that compose section modules directly when the page naturally reads as a matrix of domain sections.
 
 ## Contextual
 
-- `haabiz-hrm-fe` is the clearest thin-route reference because it starts route-first. As the app grows, route files need to stay readable by pushing section rendering and config ownership outward.
-- `jit-flow` shows the same rule in a larger codebase: routes can stay as orchestration units even when services, stores, providers, and hooks are richer.
-- `eizypay-fe` adds the monorepo angle, where route-level app screens still need to stay thin even though shared packages exist elsewhere.
+- A lean route-first app is the clearest thin-route reference because route files need to stay readable by pushing section rendering and config ownership outward as the app grows.
+- A larger responsibility-first app shows the same rule at heavier scale: routes can stay as orchestration units even when services, stores, providers, and hooks are richer.
+- A monorepo adds the package angle, where route-level app screens still need to stay thin even though shared packages exist elsewhere.
 - Local router APIs, loader conventions, and export syntax belong to the repo. This page only decides how much responsibility the route should carry.
 
 ## Examples
 
-- A route imports `approvalOverviewCards` and `ApprovalOverviewSection`, then composes the screen instead of defining card contracts, tone maps, and every card row inline.
+- A route imports `dashboardSummaryCards` and `DashboardSummarySection`, then composes the screen instead of defining card contracts, tone maps, and every card row inline.
 
 ```tsx
-import { approvalOverviewCards } from '@/constants/approval-overview'
-import { ApprovalOverviewSection } from '@/components/approval/approval-overview-section'
+import { dashboardSummaryCards } from '@/constants/dashboard-summary'
+import { DashboardSummarySection } from '@/components/dashboard/dashboard-summary-section'
 
 const Page = () => {
   return (
     <main>
-      <ApprovalOverviewSection items={approvalOverviewCards} />
+      <DashboardSummarySection items={dashboardSummaryCards} />
     </main>
   )
 }
@@ -51,6 +52,37 @@ const Page = () => {
 
 - A route keeps auth guard composition, route shell decisions, and route params near the entry file, while feature sections, config maps, and bulky view trees move outward.
 - A route passes navigation callbacks or route params into a feature screen component when that keeps the entry point readable without hiding what the screen assembles.
+- A route can stay thin even without a single screen component. A page-composer route can import section modules directly and keep only the page-level grid wrappers that explain how the sections are arranged.
+
+Before:
+
+```tsx
+const Page = () => {
+  return (
+    <main>
+      <DashboardOverviewScreen />
+    </main>
+  )
+}
+```
+
+After:
+
+```tsx
+import { DashboardHeroSection } from '@/components/dashboard/hero-section'
+import { DashboardMetricsSection } from '@/components/dashboard/metrics-section'
+
+const Page = () => {
+  return (
+    <div className="flex flex-col gap-6">
+      <DashboardHeroSection />
+      <DashboardMetricsSection />
+    </div>
+  )
+}
+```
+
+The improvement is not "more files" by itself. The route now explains the page structure directly, while each section file owns its own local detail.
 
 ## Anti-Examples
 
@@ -73,5 +105,6 @@ const items = [
 ```
 
 - Extracting everything out of the route until the route no longer explains what the screen actually is.
+- Hiding the whole page behind one monolithic `*-screen.tsx` when the route could read more clearly by composing a few explicit section owners directly.
 - Using route files as a fallback home for service logic because no one chose a proper service boundary.
 - Pushing reusable shared UI rules into route doctrine instead of resolving them in `shared-ui-boundaries.md`.

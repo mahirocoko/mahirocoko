@@ -30,20 +30,24 @@ At project level, Mahiro-style prefers explicit homes for routes, components, ho
 - Prefer extraction that makes future ownership clearer, not just smaller files.
 - Prefer owner-local data and config inside the owning component or module when that data is not reused across siblings.
 - Prefer composition parents that stay thin when child modules can own their own local mock data, labels, or static options without prop drilling.
+- Prefer child-local mock or static data until real reuse, transport wiring, or a clearer shared owner actually appears.
+- Prefer small feature-local config files only when multiple sibling modules truly share the same runtime mapping or contract.
 
 ## Contextual
 
 The exact tree can differ by repo.
 
-- `jit-flow` uses an app-first structure with `app/routes/`, `app/services/`, `app/stores/`, `app/constants/`, `app/providers/`, and other responsibility-first folders. That is a strong example of visible ownership.
-- `eizypay-fe` uses a monorepo, so ownership exists at both workspace level and package level. The same rule still applies: package purpose should stay explicit, and services, hooks, and shared UI should have clear homes inside each app or package.
-- `haabiz-hrm-fe` currently has a leaner route-first tree. In that kind of repo, new structure should stay proportional. Do not force a larger feature tree unless the code volume actually needs it.
+- A responsibility-first app can keep `routes`, `services`, `stores`, `constants`, and `providers` visible from the top level. That is a strong example of explicit ownership.
+- A monorepo can carry the same ownership rules at both workspace level and package level. Package purpose, services, hooks, and shared UI should still have clear homes inside each app or package.
+- A lean route-first app needs proportional structure. Do not force a larger feature tree unless the code volume actually needs it.
 
 ## Examples
 
 - A new domain with routes, queries, and view components gets a feature home that makes the business area visible instead of scattering files into unrelated shared folders.
 - Constants that belong to one domain stay with that domain or feature ownership, while repo-wide constants live in a clearly shared location.
 - Layout child data that is only used by one child can stay inside that child instead of being lifted into a parent compose file or a generic constants page.
+- A feature section folder can keep `mockChecklistItems`, `mockMetrics`, or `mockEmployees` inside the owning section modules while the route compose file stays focused on page structure.
+- A small feature-local config helper is justified when several sibling modules share the same runtime maps or contract, but it should stay feature-local until another feature truly needs the same contract.
 - Providers live where app-wide scope is obvious, such as root-level provider files, instead of being hidden inside unrelated feature modules.
 
 ## Anti-Examples
@@ -53,3 +57,4 @@ The exact tree can differ by repo.
 - Forcing every repo into the same folder tree even when the local repo already has a stable documented shape.
 - Treating extraction as "move code anywhere smaller" instead of clarifying ownership.
 - Extracting single-owner layout data into `constants/` only to make the component look shorter, even though the move makes the reader jump farther to understand the feature.
+- Promoting a feature-local config helper into shared app structure before another real consumer exists.

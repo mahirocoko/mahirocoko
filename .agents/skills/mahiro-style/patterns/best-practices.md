@@ -27,9 +27,9 @@ The main question is not "how do I shrink this file". The main question is "whic
 
 ## Contextual
 
-- In `jit-flow`, the codebase is large enough that ownership mistakes compound quickly. The useful lesson is to respect the service, hook, store, and route layers before adding new abstractions.
-- In `haabiz-hrm-fe`, the app is leaner, so the useful lesson is proportionality. Do not create enterprise layers before the feature volume asks for them.
-- In `eizypay-fe`, the monorepo adds package boundaries. The useful lesson is to check whether something is truly shared across apps before promoting it into a shared package.
+- In a larger app, ownership mistakes compound quickly. Respect the service, hook, store, and route layers before adding new abstractions.
+- In a leaner app, proportionality matters. Do not create enterprise layers before the feature volume asks for them.
+- In a monorepo, package boundaries add another ownership layer. Check whether something is truly shared across apps before promoting it into a shared package.
 - If a local repo has stronger snippet, package, or export rules, follow them. This page is about choosing the owner, not overriding local mechanics.
 
 ## Examples

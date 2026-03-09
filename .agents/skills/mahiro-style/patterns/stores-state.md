@@ -27,9 +27,9 @@ State should live at the smallest scope that still matches its lifetime and shar
 
 ## Contextual
 
-- `jit-flow` is the clearest example of the server-state versus client-state split: React Query for remote data, Zustand for client state, providers near the app shell for app-wide concerns.
-- `haabiz-hrm-fe` states the same split even with a smaller surface area. That is useful because it shows the doctrine still applies before the app grows large.
-- `eizypay-fe` reinforces the same boundary inside a monorepo, where shared query helpers exist but app-level state still needs clear ownership.
+- A responsibility-first app makes the server-state versus client-state split very visible: React Query for remote data, Zustand for client state, and providers near the app shell for app-wide concerns.
+- The same split still applies in a smaller app before the feature surface grows large.
+- A monorepo reinforces the same boundary, where shared query helpers can exist but app-level state still needs clear ownership.
 - Local persistence middleware, provider APIs, and package wrappers belong to the repo. This page decides scope and lifetime, not library syntax.
 
 ## Examples

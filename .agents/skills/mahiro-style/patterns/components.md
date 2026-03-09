@@ -24,23 +24,23 @@ Mahiro-style components should make ownership visible.
 
 ## Preference
 
-- Prefer components whose names reveal the screen section or domain job, such as `ApprovalOverviewSection` or `ConsoleLayoutHeader`.
+- Prefer components whose names reveal the screen section or domain job, such as `ApprovalOverviewSection` or `DashboardLayoutHeader`.
 - Prefer passing already-shaped props instead of making a component derive feature meaning from raw backend payloads.
 - Prefer extracting large visual sections, card groups, filter bars, and tables into components before a route becomes difficult to scan.
 - Prefer small wrapper components when a shared primitive needs domain-specific labels, icons, or mapping.
 
 ## Contextual
 
-- `haabiz-hrm-fe` is a good reference for token-first UI primitives plus screen-specific layout wrappers. The shared primitives stay generic, while console and module screens can stay domain-aware.
-- `jit-flow` shows a larger app where domain components, layout components, and reusable UI all coexist. The useful lesson is not the exact folder shape, it is that each component tier keeps a readable job.
-- `eizypay-fe` shows the same split inside a monorepo, where package-level shared UI exists, but app-level components still own product wording and feature composition.
+- A token-first app can keep shared primitives generic while screen-specific layout wrappers and domain sections stay feature-aware.
+- A larger app can let domain components, layout components, and reusable UI all coexist as long as each tier keeps a readable job.
+- A monorepo can keep package-level shared UI while app-level components still own product wording and feature composition.
 - Local snippet, formatter, and export conventions are repo-owned concerns. Follow those locally, then shape the component boundary with this doctrine.
 
 ## Examples
 
 - A route hands `overviewCards` to `ApprovalOverviewSection` instead of mixing card config, status mapping, and JSX layout in the route file.
 - A reusable `StatusBadge` accepts `label` and `tone`, while a feature component decides how approval statuses map into those props.
-- A `ConsoleLayoutHeader` owns screen-specific header composition, while low-level button, badge, and dialog primitives stay generic.
+- A `DashboardLayoutHeader` owns screen-specific header composition, while low-level button, badge, and dialog primitives stay generic.
 
 ## Anti-Examples
 

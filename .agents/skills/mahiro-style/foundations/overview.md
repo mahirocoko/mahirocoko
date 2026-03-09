@@ -18,16 +18,16 @@ This page explains the mental model for the skill and why the Foundations docs e
 
 - Prefer a thin root hub and clear canonical owners over broad mixed pages.
 - Prefer rules that help an agent answer, "which page owns this question?" fast.
-- Prefer doctrine that survives across Mahiro repos, even when stack details differ.
-- Prefer examples grounded in real repos such as `eizypay-fe`, `jit-flow`, and `haabiz-hrm-fe`.
+- Prefer doctrine that survives across different repo shapes, even when stack details differ.
+- Prefer examples grounded in repeated real-world repo archetypes instead of one named project.
 
 ## Contextual
 
 The shape stays stable across repos, but the concrete rules still depend on local context.
 
-- `eizypay-fe` shows a monorepo posture with detailed component section comments, service classes, and explicit React Query versus Zustand separation.
-- `jit-flow` shows a single-app structure with `app/routes/`, `app/services/`, `app/stores/`, `app/constants/`, and clear file-based route ownership.
-- `haabiz-hrm-fe` shows a leaner app-first structure where route files, root providers, tests, and Biome-driven formatting rules are called out directly in `AGENTS.md`.
+- A monorepo with shared packages can still keep package purpose, state boundaries, and shared UI ownership explicit.
+- A responsibility-first single app can keep `routes`, `services`, `stores`, and `constants` visible without collapsing into one giant feature bucket.
+- A lean route-first app can still document route files, root providers, tests, and formatter rules clearly in `AGENTS.md`.
 
 Those repos differ in shape, but the shared pattern is consistent: local doctrine wins, repeated structure matters, and fallback style should sharpen the repo's existing direction instead of flattening it.
 
