@@ -1,0 +1,3 @@
+# RTK command shape starts with the repo
+
+When using RTK in shell workflows, the stable rule is not "pick the shortest RTK command." The stable rule is: preserve the repo's original command shape first, then prepend `rtk`. In practice that means `pnpm lint` becomes `rtk pnpm lint`, `npm run build` becomes `rtk npm run build`, and generic commands like `git status` become `rtk git status`. If local guidance frames RTK as a universal shorthand layer without restating this rule, people will naturally drift toward incorrect forms like `rtk lint` even when the repo contract lives in the package manager.
