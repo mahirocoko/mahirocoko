@@ -37,6 +37,7 @@ If a diff feels wrong, first identify which layer it violates. Do not jump strai
 - Prefer comments that name the ownership problem directly, such as route thickness, naming drift, contract leakage, or i18n-boundary breakage.
 - Prefer refactors that make the next edit location more obvious, not just files that are smaller.
 - Prefer domain-owned constants, services, hooks, and components over convenience extractions into generic shared buckets.
+- Prefer owner-local data when the extracted constants or compose props do not buy meaningful reuse or clarity.
 - Prefer review comments that compare the diff against repeated repo examples instead of isolated one-off files.
 
 ## Contextual
@@ -57,6 +58,7 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - Did the change separate ownership cleanly between routes, components, hooks, services, stores, and constants?
 - Did naming become more domain-specific and contract-aware, or more generic?
 - If contracts or config moved, do they now live in a clearer domain home?
+- Did the diff extract constants or parent-owned props only to reduce line count, even though the child component was the real owner?
 - If copy moved into constants, is the result still aligned with the repo's Lingui or translation posture?
 - Did reusable UI stay generic, or did business logic leak into shared components?
 
@@ -66,6 +68,7 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - Lingui and constants posture: extraction is only a win if translation-safe behavior stays intact.
 - Naming and contracts: names should reveal business meaning, and contracts should live with clear owners.
 - Repo-local doctrine first: check local rules before asking for fallback Mahiro cleanup.
+- Owner-local versus shared extraction: if a layout child or feature child is the only consumer, prefer keeping the data and translation close to that owner.
 
 ## Examples
 

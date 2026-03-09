@@ -15,12 +15,14 @@ The component that renders UI text owns the final translation call.
 - Do not move user-facing copy into constants just to make a component shorter.
 - Keep component-local copy in React when it is tightly coupled to JSX structure, interaction flow, conditional rendering, or nearby event intent.
 - Use `msg` for extracted descriptors and shared config. Use `t` or `i18n._` inside components and hooks that already own a live translation context. Use `<Trans>` when the rendered output needs JSX composition, inline markup, or rich text.
+- When a component already owns the UI text directly, prefer `const { t } = useLingui()` as the default posture before reaching for a broader extracted-config shape.
 
 ## Non-negotiable
 
 - Follow repo-local doctrine first, then other repo-local instruction files, then established repo patterns, and only then use Mahiro fallback doctrine.
 - Keep component-local copy in React when the wording is tightly bound to JSX layout, button flow, empty states, form help text, or conditional UI branches.
 - Extract only data-like or reusable structures, such as nav items, route metadata, table column descriptors, status maps, and screen configuration that already wants a constants owner.
+- Do not extract layout-local or component-local copy into `constants/` when the data is only consumed by one owner and stays easier to scan in place.
 - When extracted config contains user-facing copy, store translation-safe descriptors such as `msg`, not plain source-locale strings with no Lingui path.
 - Make the render boundary explicit. Constants define descriptors, renderers translate them.
 - Do not extract copy only to reduce line count or make a file look tidier.
@@ -29,6 +31,7 @@ The component that renders UI text owns the final translation call.
 ## Preference
 
 - Prefer domain-owned constants files when a screen, layout, or module already shares the same labels across multiple renderers.
+- Prefer component-local `t` usage when one component is the only renderer and the extracted constants would create a longer read path.
 - Prefer `msg` in extracted config because it keeps Lingui extraction-safe while avoiding early translation outside render context.
 - Prefer small translation helpers only when the repo already uses them and they keep responsibility clearer, not more abstract.
 - Prefer translating as late as possible, near the component that decides badges, buttons, headings, and conditional copy.
@@ -38,8 +41,9 @@ The component that renders UI text owns the final translation call.
 
 Repo-local posture decides the final shape.
 
-- In `haabiz-hrm-fe`, the HRM console refactor showed the useful split clearly: `app/constants/console.ts` stores shared labels as `MessageDescriptor` values created with `msg`, while `console-layout-header.tsx`, `console-overview-screen.tsx`, and `app-sidebar.tsx` translate at the render boundary with `i18n._(...)`.
-- That same review also showed the limit of extraction. The overview screen still keeps tightly coupled hero copy, checklist framing, and interaction-adjacent text inside React because those strings live with JSX structure and flow.
+- In `haabiz-hrm-fe`, the HRM console refactor showed the useful split clearly: extracted console config can store shared labels as `MessageDescriptor` values created with `msg`, while owner components such as `header.tsx`, `console-overview-screen.tsx`, and `sidebar.tsx` perform the final translation at the render boundary.
+- That same review also showed the limit of extraction. Later layout cleanup moved header and sidebar copy back into the owning components because the extracted constants were not buying real reuse and made the read path worse.
+- In the same repo, `const { t } = useLingui()` became the preferred owner-local posture for layout components when the copy stayed inside the component instead of traveling through shared descriptor config.
 - Some repos may prefer `t(...)` from `useLingui`, others may use `i18n._(...)`, and some rich text cases need `<Trans>`. The stable rule is not one exact API everywhere. The stable rule is that extracted config holds descriptors, and rendering code performs the final translation call.
 - If a repo already repeats a different but translation-safe pattern, keep the local winner. Mahiro fallback doctrine exists to resolve the gap, not to flatten working local conventions.
 
@@ -105,8 +109,9 @@ const EmptyState = ({ isFiltered }: { isFiltered: boolean }) => {
 Good review call from the HRM console refactor:
 
 - `msg` belongs in extracted console config such as route meta, sidebar sections, badges, metrics, and checklist items.
-- `i18n._(...)` belongs in `console-layout-header.tsx`, `console-overview-screen.tsx`, and `app-sidebar.tsx` because those files render the final UI.
+- `i18n._(...)` belongs in owner render files such as `header.tsx`, `console-overview-screen.tsx`, and `sidebar.tsx` because those files render the final UI.
 - Copy that only exists to support one JSX branch should stay in the component unless there is a stronger domain-sharing reason to extract it.
+- If the console layout child owns the only rendering site, moving that child's copy back into the child with `t` is often clearer than keeping a detached constants file.
 
 ## Anti-Examples
 
