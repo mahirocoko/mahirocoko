@@ -3,9 +3,9 @@
   
   # Mahiro Cokawa
   
-  **Frontend Developer working at Mars space**
+  **Frontend Developer crafting polished web experiences from Mars**
   
-  *I'm just a cat! 555* 🐱
+  *Playful by nature, precise by craft.* 🐱
   
 </div>
 
