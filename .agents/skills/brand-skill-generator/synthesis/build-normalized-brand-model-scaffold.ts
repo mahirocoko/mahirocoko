@@ -110,6 +110,36 @@ const stopWords = new Set([
   "guide",
   "guidance",
 ])
+const genericCtaLabels = new Set(["learn more", "read more", "submit", "click here", "view more", "more info"])
+const voiceMetaStopWords = new Set([
+  "phase",
+  "plan",
+  "implementation",
+  "objective",
+  "source",
+  "bundle",
+  "delivery",
+  "status",
+  "approved",
+  "draft",
+  "summary",
+  "project",
+  "single",
+  "multiple",
+  "inputs",
+  "weight",
+  "rendering",
+  "scaffolding",
+  "ingestion",
+  "extraction",
+  "synthesis",
+  "conflict",
+  "spec",
+  "docs",
+  "design",
+])
+const infraExportPrefixes = ["build", "run", "parse", "print", "resolve", "detect", "collect", "read", "render", "format", "create"]
+const infraExportSuffixes = ["Command", "Report", "Inventory", "Model", "Mode", "Type", "Freshness", "Confidence", "Resolution", "Level"]
 
 const readJsonArray = (value: string | undefined) => {
   if (!value) {
@@ -215,6 +245,54 @@ const collectSourceIds = (sourceInventory: IBrandSourceInventory, sourceType: Br
   sourceInventory.sourceRecords
     .filter((sourceRecord) => sourceRecord.sourceType === sourceType)
     .map((sourceRecord) => sourceRecord.id)
+
+const collectSourceMetadataValues = (
+  sourceInventory: IBrandSourceInventory,
+  sourceType: BrandSourceType,
+  key: string,
+) =>
+  sourceInventory.sourceRecords
+    .filter((sourceRecord) => sourceRecord.sourceType === sourceType)
+    .flatMap((sourceRecord) => readJsonArray(sourceRecord.metadata[key]))
+
+const collectSourceSamples = (sourceInventory: IBrandSourceInventory, sourceType: BrandSourceType) =>
+  sourceInventory.sourceRecords
+    .filter((sourceRecord) => sourceRecord.sourceType === sourceType)
+    .flatMap((sourceRecord) => sourceRecord.textSamples.map((sample) => sample.content))
+
+const buildKeywordCounts = (values: string[]) => {
+  const counts = new Map<string, number>()
+
+  for (const value of values) {
+    for (const token of tokenize(value)) {
+      counts.set(token, (counts.get(token) ?? 0) + 1)
+    }
+  }
+
+  return counts
+}
+
+const pickTopKeywords = (values: string[], maxKeywords: number, blockedWords?: Set<string>) => {
+  return [...buildKeywordCounts(values).entries()]
+    .filter(([token]) => !blockedWords?.has(token))
+    .sort((left, right) => right[1] - left[1])
+    .slice(0, maxKeywords)
+    .map(([token]) => token)
+}
+
+const quoteList = (values: string[]) => values.map((value) => `"${value}"`).join(", ")
+
+const isLikelySystemExport = (value: string) => {
+  if (infraExportPrefixes.some((prefix) => value.startsWith(prefix))) {
+    return false
+  }
+
+  if (infraExportSuffixes.some((suffix) => value.endsWith(suffix))) {
+    return false
+  }
+
+  return /^[A-Z]/.test(value) || /(Token|Theme|Palette|Typography|Button|Input|Card|Modal|Badge|Avatar|Icon)/.test(value)
+}
 
 const buildTokenOverlap = (leftTokens: string[], rightTokens: string[]) => {
   const overlappingTokens = leftTokens.filter((token) => rightTokens.includes(token))
@@ -344,6 +422,153 @@ const buildProfileRules = (
   )
 }
 
+const buildVoiceRules = (
+  evidenceRecords: IBrandEvidenceRecord[],
+  sourceInventory: IBrandSourceInventory,
+) => {
+  const fallbackRules = buildCategoryRules(
+    "voice",
+    "Voice direction",
+    "Voice rules will deepen as explicit copy extraction improves.",
+    evidenceRecords,
+    sourceInventory,
+  )
+  const docsIds = collectSourceIds(sourceInventory, "brand-docs")
+  const screenshotIds = collectSourceIds(sourceInventory, "screenshot-dir")
+  const websiteIds = collectSourceIds(sourceInventory, "website")
+  const docsVoiceSignals = [
+    ...collectSourceMetadataValues(sourceInventory, "brand-docs", "headings"),
+    ...collectSourceSamples(sourceInventory, "brand-docs"),
+  ]
+  const screenshotVoiceSignals = collectSourceSignals(sourceInventory, "screenshot-dir", "brand-identity")
+  const websiteCtas = collectSourceMetadataValues(sourceInventory, "website", "ctas").slice(0, 4)
+  const docsConstraints = collectSourceSignals(sourceInventory, "brand-docs", "constraints").slice(0, 2)
+  const voiceAnchorSignals = screenshotVoiceSignals.length > 0 ? screenshotVoiceSignals : docsVoiceSignals
+  const voiceKeywords = pickTopKeywords(voiceAnchorSignals, 6, voiceMetaStopWords)
+  const rules: IBrandRuleRecord[] = []
+
+  if (voiceKeywords.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "voice-preferred-language",
+        "Voice anchor",
+        `Anchor copy around recurring brand language such as ${voiceKeywords.join(", ")}.`,
+        unique([...docsIds, ...screenshotIds]),
+        docsIds.length > 0 && screenshotIds.length > 0 ? "high" : docsIds.length > 0 ? "high" : "medium",
+        "Synthesized from repeated terms in explicit brand-doc language, then grounded with visible screenshot copy when available.",
+      ),
+    )
+  }
+
+  if (websiteCtas.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "voice-cta-posture",
+        "CTA posture",
+        `Keep calls to action short and direct. Current live examples include ${quoteList(websiteCtas)}.`,
+        websiteIds,
+        "medium",
+        "Derived from CTA labels extracted from the live website.",
+      ),
+    )
+  }
+
+  const genericCtas = websiteCtas.filter((cta) => genericCtaLabels.has(cta.toLowerCase()))
+
+  if (genericCtas.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "voice-avoid-generic-cta",
+        "Avoid generic fallback copy",
+        `Avoid overusing generic CTA language such as ${quoteList(genericCtas)} when stronger brand-specific verbs are available.`,
+        websiteIds,
+        "medium",
+        "Flagged from live CTA extraction because the current labels are generic and should not automatically become the long-term voice rule.",
+      ),
+    )
+  } else if (docsConstraints.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "voice-guardrails",
+        "Voice guardrails",
+        `Honor explicit brand directives from docs, including guidance like: ${docsConstraints.join(" | ")}.`,
+        docsIds,
+        "high",
+        "Pulled from directive-style language found in brand docs.",
+      ),
+    )
+  }
+
+  return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
+}
+
+const buildDesignSystemRules = (
+  evidenceRecords: IBrandEvidenceRecord[],
+  sourceInventory: IBrandSourceInventory,
+) => {
+  const fallbackRules = buildCategoryRules(
+    "design-system",
+    "Design system direction",
+    "Design-system posture will deepen as code and component references are parsed more deeply.",
+    evidenceRecords,
+    sourceInventory,
+  )
+  const codeIds = collectSourceIds(sourceInventory, "code-reference")
+  const screenshotIds = collectSourceIds(sourceInventory, "screenshot-dir")
+  const exportNames = collectSourceMetadataValues(sourceInventory, "code-reference", "export_names")
+    .filter(isLikelySystemExport)
+    .slice(0, 8)
+  const styleTokens = collectSourceMetadataValues(sourceInventory, "code-reference", "style_tokens").slice(0, 8)
+  const screenshotColors = collectSourceMetadataValues(sourceInventory, "screenshot-dir", "svg_colors").slice(0, 6)
+  const rules: IBrandRuleRecord[] = []
+
+  if (exportNames.length >= 2) {
+    rules.push(
+      createRuleRecord(
+        "design-system-component-vocabulary",
+        "Component vocabulary",
+        `Keep a reusable component vocabulary with explicit exported primitives such as ${exportNames.join(", ")}.`,
+        codeIds,
+        "medium",
+        "Derived from exported symbols found in code references.",
+      ),
+    )
+  }
+
+  if (styleTokens.length > 0 || screenshotColors.length > 0) {
+    const summaryParts = [
+      styleTokens.length > 0 ? `style tokens like ${styleTokens.join(", ")}` : null,
+      screenshotColors.length > 0 ? `visual palette references such as ${screenshotColors.join(", ")}` : null,
+    ].filter((value): value is string => Boolean(value))
+
+    rules.push(
+      createRuleRecord(
+        "design-system-token-posture",
+        "Token posture",
+        `Express visual decisions through reusable named primitives, backed by ${summaryParts.join(" and ")}.`,
+        unique([...codeIds, ...screenshotIds]),
+        summaryParts.length > 1 ? "high" : "medium",
+        "Synthesized from implementation tokens and visual references instead of isolated one-off values.",
+      ),
+    )
+  }
+
+  if (codeIds.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "design-system-implementation-boundary",
+        "Implementation boundary",
+        "Keep brand primitives centralized behind explicit exports so downstream surfaces compose the system instead of redefining it ad hoc.",
+        codeIds,
+        "medium",
+        "Inferred from the presence of reusable exports and shared reference files in the code source.",
+      ),
+    )
+  }
+
+  return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
+}
+
 const buildConflicts = (
   evidenceRecords: IBrandEvidenceRecord[],
   sourceInventory: IBrandSourceInventory,
@@ -417,63 +642,57 @@ export const buildNormalizedBrandModelScaffold = (
 ): INormalizedBrandModel => {
   const overallConfidence = buildConfidenceFromEvidence(evidenceRecords)
   const conflicts = buildConflicts(evidenceRecords, sourceInventory)
+  const brandIdentity = buildCategoryRules(
+    "brand-identity",
+    `${brandName} brand identity`,
+    "Core brand identity extraction remains light until richer source analysis lands.",
+    evidenceRecords,
+    sourceInventory,
+  )
+  const voice = buildVoiceRules(evidenceRecords, sourceInventory)
+  const visualSystem = buildCategoryRules(
+    "visual-system",
+    "Visual system direction",
+    "Visual system rules will deepen as visual adapters expand.",
+    evidenceRecords,
+    sourceInventory,
+  )
+  const interactionBehavior = buildCategoryRules(
+    "interaction-behavior",
+    "Interaction behavior direction",
+    "Interaction behavior rules will deepen as website and product references are parsed more deeply.",
+    evidenceRecords,
+    sourceInventory,
+  )
+  const designSystem = buildDesignSystemRules(evidenceRecords, sourceInventory)
+  const dashboardRules = buildProfileRules("dashboard", "constraints", evidenceRecords, sourceInventory)
 
   return {
-    brandIdentity: buildCategoryRules(
-      "brand-identity",
-      `${brandName} brand identity`,
-      "Core brand identity extraction remains light until richer source analysis lands.",
-      evidenceRecords,
-      sourceInventory,
-    ),
-    voice: buildCategoryRules(
-      "voice",
-      "Voice direction",
-      "Voice rules will deepen as explicit copy extraction improves.",
-      evidenceRecords,
-      sourceInventory,
-    ),
-    visualSystem: buildCategoryRules(
-      "visual-system",
-      "Visual system direction",
-      "Visual system rules will deepen as visual adapters expand.",
-      evidenceRecords,
-      sourceInventory,
-    ),
-    interactionBehavior: buildCategoryRules(
-      "interaction-behavior",
-      "Interaction behavior direction",
-      "Interaction behavior rules will deepen as website and product references are parsed more deeply.",
-      evidenceRecords,
-      sourceInventory,
-    ),
-    designSystem: buildCategoryRules(
-      "design-system",
-      "Design system direction",
-      "Design-system posture will deepen as code and component references are parsed more deeply.",
-      evidenceRecords,
-      sourceInventory,
-    ),
+    brandIdentity,
+    voice,
+    visualSystem,
+    interactionBehavior,
+    designSystem,
     profiles: [
       {
         profileName: "design-system",
         confidence: overallConfidence,
-        rules: buildProfileRules("design-system", "design-system", evidenceRecords, sourceInventory),
+        rules: designSystem,
       },
       {
         profileName: "marketing",
         confidence: overallConfidence,
-        rules: buildProfileRules("marketing", "brand-identity", evidenceRecords, sourceInventory),
+        rules: brandIdentity,
       },
       {
         profileName: "product-ui",
         confidence: overallConfidence,
-        rules: buildProfileRules("product-ui", "interaction-behavior", evidenceRecords, sourceInventory),
+        rules: interactionBehavior,
       },
       {
         profileName: "dashboard",
         confidence: overallConfidence,
-        rules: buildProfileRules("dashboard", "constraints", evidenceRecords, sourceInventory),
+        rules: dashboardRules,
       },
     ],
     evidence: evidenceRecords,
