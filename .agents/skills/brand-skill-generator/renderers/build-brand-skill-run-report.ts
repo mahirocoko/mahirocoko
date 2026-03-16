@@ -43,6 +43,17 @@ const buildMissingSourceSuggestions = (sourceInventory: IBrandSourceInventory) =
     suggestions.push("Add screenshots or Figma references.")
   }
 
+  const hasThinTextCoverage = sourceInventory.sourceRecords.some(
+    (sourceRecord) =>
+      sourceRecord.sourceType !== "screenshot-dir" &&
+      sourceRecord.sourceType !== "figma-url" &&
+      sourceRecord.textSamples.length === 0,
+  )
+
+  if (hasThinTextCoverage) {
+    suggestions.push("Add richer text-based sources or point docs/code paths at readable files.")
+  }
+
   return suggestions
 }
 

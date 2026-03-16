@@ -3,7 +3,7 @@ import { parseBrandSkillCommand } from "./parse-brand-skill-command"
 import { printBrandSkillHelp } from "./print-brand-skill-help"
 import { runBrandSkillCommand } from "../runtime/run-brand-skill-command"
 
-const printTextOutput = (executionPlan: ReturnType<typeof runBrandSkillCommand>) => {
+const printTextOutput = (executionPlan: Awaited<ReturnType<typeof runBrandSkillCommand>>) => {
   console.log(`# brand-skill ${executionPlan.command.mode}`)
   console.log("")
   console.log(`Brand: ${executionPlan.command.brandName}`)
@@ -18,6 +18,23 @@ const printTextOutput = (executionPlan: ReturnType<typeof runBrandSkillCommand>)
 
   for (const [sourceType, count] of Object.entries(executionPlan.report.sourceSummary.byType)) {
     console.log(`- ${sourceType}: ${count}`)
+  }
+
+  console.log("")
+  console.log("## Source Details")
+
+  for (const sourceRecord of executionPlan.sourceInventory.sourceRecords) {
+    console.log(`- ${sourceRecord.id} (${sourceRecord.sourceType})`)
+    console.log(`  summary: ${sourceRecord.sourceSummary}`)
+    console.log(`  confidence baseline: ${sourceRecord.explicitnessBaseline}`)
+
+    if (sourceRecord.discoveredPaths.length > 0) {
+      console.log(`  discovered: ${sourceRecord.discoveredPaths.join(", ")}`)
+    }
+
+    if (sourceRecord.notes.length > 0) {
+      console.log(`  notes: ${sourceRecord.notes.join(" | ")}`)
+    }
   }
 
   console.log("")
@@ -51,11 +68,11 @@ const printTextOutput = (executionPlan: ReturnType<typeof runBrandSkillCommand>)
 
   console.log("")
   console.log(
-    "Phase 1 note: this CLI currently scaffolds contracts, validation, and execution planning. Real synthesis and file rendering land in later phases.",
+    "Phase 2 note: source ingestion and first-pass evidence extraction are live. Weighted synthesis depth, conflict handling, and file rendering still land in later phases.",
   )
 }
 
-const main = () => {
+const main = async () => {
   try {
     const command = parseBrandSkillCommand(process.argv)
 
@@ -64,7 +81,7 @@ const main = () => {
       return
     }
 
-    const executionPlan = runBrandSkillCommand(command)
+    const executionPlan = await runBrandSkillCommand(command)
 
     if (command.outputFormat === "json") {
       console.log(JSON.stringify(executionPlan, null, 2))
@@ -82,4 +99,4 @@ const main = () => {
   }
 }
 
-main()
+await main()

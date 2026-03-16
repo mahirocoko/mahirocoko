@@ -14,6 +14,11 @@ export type EvidenceSignalType = "explicit" | "inferred"
 export type ConfidenceLevel = "low" | "medium" | "high"
 export type ConflictResolutionMode = "adopt" | "split-by-profile" | "unresolved"
 
+export interface IBrandSourceTextSample {
+  label: string
+  content: string
+}
+
 export interface IBrandSkillCommand {
   mode: BrandSkillMode
   brandName: string
@@ -33,12 +38,18 @@ export interface IBrandSourceRecord {
   sourceType: BrandSourceType
   locationType: SourceLocationType
   location: string
+  resolvedLocation: string
   pathKind: SourcePathKind
   exists: boolean
   modifiedAt: string | null
   freshness: SourceFreshness
   explicitnessBaseline: ConfidenceLevel
   coverageEstimate: ConfidenceLevel
+  itemCount: number
+  discoveredPaths: string[]
+  textSamples: IBrandSourceTextSample[]
+  metadata: Record<string, string>
+  sourceSummary: string
   notes: string[]
 }
 
@@ -139,5 +150,5 @@ export interface IBrandSkillExecutionPlan {
   report: IBrandSkillRunReport
   plannedFiles: IBrandSkillPlannedFile[]
   updateMode: "create" | "update"
-  status: "scaffold-ready"
+  status: "source-extracted"
 }
