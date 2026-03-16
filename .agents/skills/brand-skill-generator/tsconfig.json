@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "moduleDetection": "force",
+    "lib": ["ES2023"],
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "verbatimModuleSyntax": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "types": ["bun-types"]
+  },
+  "include": ["cli/**/*.ts", "diff/**/*.ts", "evidence/**/*.ts", "model/**/*.ts", "renderers/**/*.ts", "runtime/**/*.ts", "sources/**/*.ts", "synthesis/**/*.ts", "validation/**/*.ts", "scripts/**/*.ts"]
+}
