@@ -111,6 +111,41 @@ const stopWords = new Set([
   "guidance",
 ])
 const genericCtaLabels = new Set(["learn more", "read more", "submit", "click here", "view more", "more info"])
+const identityMetaStopWords = new Set([
+  "phase",
+  "plan",
+  "implementation",
+  "objective",
+  "source",
+  "bundle",
+  "delivery",
+  "status",
+  "approved",
+  "draft",
+  "summary",
+  "project",
+  "single",
+  "multiple",
+  "inputs",
+  "weight",
+  "rendering",
+  "scaffolding",
+  "ingestion",
+  "extraction",
+  "synthesis",
+  "conflict",
+  "spec",
+  "docs",
+  "design",
+  "date",
+  "local",
+  "flexible",
+  "sources",
+  "strategy",
+  "current",
+  "example",
+  "domain",
+])
 const voiceMetaStopWords = new Set([
   "phase",
   "plan",
@@ -153,6 +188,8 @@ const readJsonArray = (value: string | undefined) => {
     return []
   }
 }
+
+const normalizePhrase = (value: string) => value.replace(/\s+/g, " ").trim()
 
 const tokenize = (value: string) =>
   unique(
@@ -281,6 +318,112 @@ const pickTopKeywords = (values: string[], maxKeywords: number, blockedWords?: S
 }
 
 const quoteList = (values: string[]) => values.map((value) => `"${value}"`).join(", ")
+
+const isLikelyMetaPhrase = (value: string) => {
+  const normalizedValue = normalizePhrase(value)
+
+  if (!normalizedValue) {
+    return true
+  }
+
+  return /(implementation plan|source spec|approved design draft|weighted synthesis|bundle rendering|phase \d|objective|delivery strategy|v1 cut line|status:)/i.test(
+    normalizedValue,
+  )
+}
+
+const pickMeaningfulPhrases = (
+  values: string[],
+  maxPhrases: number,
+  options?: {
+    minWords?: number
+    maxWords?: number
+    allowAllCaps?: boolean
+  },
+) => {
+  const minWords = options?.minWords ?? 1
+  const maxWords = options?.maxWords ?? 12
+  const allowAllCaps = options?.allowAllCaps ?? true
+
+  return unique(
+    values
+      .map((value) => normalizePhrase(value))
+      .filter((value) => !isLikelyMetaPhrase(value))
+      .filter((value) => value.length > 0 && value.length <= 120)
+      .filter((value) => {
+        const words = value.split(/\s+/).filter(Boolean)
+
+        if (words.length < minWords || words.length > maxWords) {
+          return false
+        }
+
+        if (allowAllCaps) {
+          return true
+        }
+
+        return value !== value.toUpperCase()
+      }),
+  ).slice(0, maxPhrases)
+}
+
+const pickRepresentativeSentence = (values: string[]) => {
+  const phrases = pickMeaningfulPhrases(values, 6, { minWords: 4, maxWords: 18 })
+
+  return phrases
+    .sort((left, right) => right.length - left.length)
+    .find((phrase) => /[a-z]/i.test(phrase)) ?? null
+}
+
+const extractSentences = (values: string[]) => {
+  return unique(
+    values
+      .flatMap((value) => value.split(/(?<=[.!?])\s+/))
+      .map((value) => normalizePhrase(value))
+      .filter(Boolean),
+  )
+}
+
+const extractGuardrailSnippet = (values: string[]) => {
+  for (const value of values) {
+    const normalizedValue = normalizePhrase(value)
+    const matchedFragment = normalizedValue.match(/\b(avoid|never|must|without)\b[^.?!]*/i)
+
+    if (matchedFragment?.[0]) {
+      return normalizePhrase(matchedFragment[0])
+    }
+  }
+
+  return null
+}
+
+const isDarkHexColor = (value: string) => {
+  const normalized = value.trim().replace("#", "")
+
+  if (!/^[0-9a-fA-F]{6}$/.test(normalized)) {
+    return false
+  }
+
+  const red = parseInt(normalized.slice(0, 2), 16)
+  const green = parseInt(normalized.slice(2, 4), 16)
+  const blue = parseInt(normalized.slice(4, 6), 16)
+  const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+  return luminance < 110
+}
+
+const isBrightHexColor = (value: string) => {
+  const normalized = value.trim().replace("#", "")
+
+  if (!/^[0-9a-fA-F]{6}$/.test(normalized)) {
+    return false
+  }
+
+  const red = parseInt(normalized.slice(0, 2), 16)
+  const green = parseInt(normalized.slice(2, 4), 16)
+  const blue = parseInt(normalized.slice(4, 6), 16)
+  const luminance = 0.2126 * red + 0.7152 * green + 0.0722 * blue
+
+  return luminance > 180
+}
 
 const isLikelySystemExport = (value: string) => {
   if (infraExportPrefixes.some((prefix) => value.startsWith(prefix))) {
@@ -502,6 +645,165 @@ const buildVoiceRules = (
   return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
 }
 
+const buildBrandIdentityRules = (
+  brandName: string,
+  evidenceRecords: IBrandEvidenceRecord[],
+  sourceInventory: IBrandSourceInventory,
+) => {
+  const fallbackRules = buildCategoryRules(
+    "brand-identity",
+    `${brandName} brand identity`,
+    "Core brand identity extraction remains light until richer source analysis lands.",
+    evidenceRecords,
+    sourceInventory,
+  )
+  const docsIds = collectSourceIds(sourceInventory, "brand-docs")
+  const websiteIds = collectSourceIds(sourceInventory, "website")
+  const screenshotIds = collectSourceIds(sourceInventory, "screenshot-dir")
+  const websiteIdentitySignals = [
+    ...collectSourceSignals(sourceInventory, "website", "brand-identity"),
+    ...collectSourceSignals(sourceInventory, "website", "voice"),
+  ]
+  const docsIdentitySignals = collectSourceSignals(sourceInventory, "brand-docs", "brand-identity")
+  const screenshotIdentitySignals = collectSourceSignals(sourceInventory, "screenshot-dir", "brand-identity")
+  const primaryLabels = pickMeaningfulPhrases(
+    [...screenshotIdentitySignals, ...websiteIdentitySignals],
+    3,
+    { minWords: 1, maxWords: 6 },
+  )
+  const positioningLine = pickRepresentativeSentence([
+    ...screenshotIdentitySignals,
+    ...websiteIdentitySignals,
+    ...docsIdentitySignals,
+  ])
+  const supportingCues = pickTopKeywords(
+    [...screenshotIdentitySignals, ...websiteIdentitySignals],
+    5,
+    identityMetaStopWords,
+  )
+  const rules: IBrandRuleRecord[] = []
+
+  if (primaryLabels.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "brand-identity-surface-labels",
+        "Surface identity",
+        `Keep the brand instantly legible through surface labels such as ${quoteList(primaryLabels)}.`,
+        unique([...websiteIds, ...screenshotIds]),
+        screenshotIds.length > 0 ? "high" : "medium",
+        "Synthesized from visible website and screenshot labels rather than abstract internal docs alone.",
+      ),
+    )
+  }
+
+  if (positioningLine) {
+    rules.push(
+      createRuleRecord(
+        "brand-identity-positioning-line",
+        "Positioning line",
+        `Reinforce the brand with a clear positioning statement in the spirit of "${positioningLine}".`,
+        unique([...docsIds, ...websiteIds, ...screenshotIds]),
+        screenshotIds.length > 0 || websiteIds.length > 0 ? "high" : "medium",
+        "Derived from the strongest surface-facing sentence found across website, docs, and visual references.",
+      ),
+    )
+  }
+
+  if (supportingCues.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "brand-identity-supporting-cues",
+        "Supporting cues",
+        `Use secondary cues such as ${supportingCues.join(", ")} to quickly place the brand's domain and personality.`,
+        unique([...websiteIds, ...screenshotIds]),
+        "medium",
+        "Built from repeated non-meta surface terms that help orient the audience fast.",
+      ),
+    )
+  }
+
+  return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
+}
+
+const buildInteractionBehaviorRules = (
+  evidenceRecords: IBrandEvidenceRecord[],
+  sourceInventory: IBrandSourceInventory,
+) => {
+  const fallbackRules = buildCategoryRules(
+    "interaction-behavior",
+    "Interaction behavior direction",
+    "Interaction behavior rules will deepen as website and product references are parsed more deeply.",
+    evidenceRecords,
+    sourceInventory,
+  )
+  const websiteIds = collectSourceIds(sourceInventory, "website")
+  const docsIds = collectSourceIds(sourceInventory, "brand-docs")
+  const websiteCtas = collectSourceMetadataValues(sourceInventory, "website", "ctas").slice(0, 4)
+  const websiteHeadings = collectSourceMetadataValues(sourceInventory, "website", "headings").slice(0, 4)
+  const websiteSentences = extractSentences(collectSourceSamples(sourceInventory, "website"))
+  const docsConstraints = collectSourceSignals(sourceInventory, "brand-docs", "constraints").slice(0, 2)
+  const cautionSentence = extractGuardrailSnippet(collectSourceSamples(sourceInventory, "website"))
+    ?? websiteSentences.find((sentence) => /\b(avoid|must|never|warning|without)\b/i.test(sentence))
+  const explanatorySentence = websiteSentences
+    .filter((sentence) => sentence !== cautionSentence)
+    .find((sentence) => sentence.split(/\s+/).length >= 6)
+  const cleanedExplanatorySentence = explanatorySentence
+    ? websiteHeadings.reduce((currentSentence, heading) => {
+        const repeatedHeadingPattern = new RegExp(`^(?:${heading}\\s+)+`, "i")
+        return normalizePhrase(currentSentence.replace(repeatedHeadingPattern, ""))
+      }, explanatorySentence)
+    : null
+  const rules: IBrandRuleRecord[] = []
+
+  if (websiteCtas.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "interaction-primary-actions",
+        "Primary action labels",
+        `Keep primary actions concise and scannable. Current examples include ${quoteList(websiteCtas)}.`,
+        websiteIds,
+        "medium",
+        "Derived from CTA labels extracted from the live website.",
+      ),
+    )
+  }
+
+  if (websiteHeadings.length > 0 || explanatorySentence) {
+    const headingPart = websiteHeadings.length > 0 ? `short headings like ${quoteList(websiteHeadings.slice(0, 2))}` : "short headings"
+    const sentencePart = cleanedExplanatorySentence
+      ? `followed by one explanatory sentence such as "${cleanedExplanatorySentence}"`
+      : "followed by one explanatory sentence"
+
+    rules.push(
+      createRuleRecord(
+        "interaction-content-rhythm",
+        "Interaction rhythm",
+        `Structure interactive surfaces with ${headingPart}, ${sentencePart}, then the action.`,
+        websiteIds,
+        "medium",
+        "Synthesized from the heading plus body rhythm of the live website.",
+      ),
+    )
+  }
+
+  if (cautionSentence || docsConstraints.length > 0) {
+    const guardrailSnippet = cautionSentence ?? docsConstraints[0]
+
+    rules.push(
+      createRuleRecord(
+        "interaction-operational-guardrails",
+        "Operational guardrails",
+        `Surface cautionary or boundary-setting guidance clearly when needed, following patterns like "${guardrailSnippet}".`,
+        cautionSentence ? unique([...websiteIds, ...docsIds]) : docsIds,
+        cautionSentence && docsConstraints.length > 0 ? "high" : "medium",
+        "Pulled from cautionary live copy and explicit directive language in docs.",
+      ),
+    )
+  }
+
+  return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
+}
+
 const buildDesignSystemRules = (
   evidenceRecords: IBrandEvidenceRecord[],
   sourceInventory: IBrandSourceInventory,
@@ -562,6 +864,74 @@ const buildDesignSystemRules = (
         codeIds,
         "medium",
         "Inferred from the presence of reusable exports and shared reference files in the code source.",
+      ),
+    )
+  }
+
+  return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
+}
+
+const buildVisualSystemRules = (
+  evidenceRecords: IBrandEvidenceRecord[],
+  sourceInventory: IBrandSourceInventory,
+) => {
+  const fallbackRules = buildCategoryRules(
+    "visual-system",
+    "Visual system direction",
+    "Visual system rules will deepen as visual adapters expand.",
+    evidenceRecords,
+    sourceInventory,
+  )
+  const screenshotIds = collectSourceIds(sourceInventory, "screenshot-dir")
+  const codeIds = collectSourceIds(sourceInventory, "code-reference")
+  const screenshotColors = collectSourceMetadataValues(sourceInventory, "screenshot-dir", "svg_colors")
+    .filter((value) => /^#[0-9a-fA-F]{6}$/.test(value))
+    .slice(0, 10)
+  const darkColors = screenshotColors.filter(isDarkHexColor).slice(0, 3)
+  const brightColors = screenshotColors.filter(isBrightHexColor).slice(0, 4)
+  const styleTokens = collectSourceMetadataValues(sourceInventory, "code-reference", "style_tokens").slice(0, 8)
+  const rules: IBrandRuleRecord[] = []
+
+  if (darkColors.length > 0 || brightColors.length > 0) {
+    const paletteParts = [
+      darkColors.length > 0 ? `dark anchors like ${darkColors.join(", ")}` : null,
+      brightColors.length > 0 ? `bright accents like ${brightColors.join(", ")}` : null,
+    ].filter((value): value is string => Boolean(value))
+
+    rules.push(
+      createRuleRecord(
+        "visual-system-palette-balance",
+        "Palette balance",
+        `Balance the visual palette through ${paletteParts.join(" and ")}.`,
+        screenshotIds,
+        "medium",
+        "Derived from repeated color usage in visual references.",
+      ),
+    )
+  }
+
+  if (darkColors.length > 0 && brightColors.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "visual-system-contrast-posture",
+        "Contrast posture",
+        "Use strong contrast between dark structural surfaces and lighter or brighter highlights so key moments read immediately.",
+        screenshotIds,
+        "medium",
+        "Inferred from the coexistence of dark anchor colors and bright accent colors in the visual references.",
+      ),
+    )
+  }
+
+  if (styleTokens.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "visual-system-tokenized-styling",
+        "Tokenized styling",
+        `Route styling choices through reusable tokens or utilities such as ${styleTokens.join(", ")} instead of one-off visual values.`,
+        unique([...codeIds, ...screenshotIds]),
+        "medium",
+        "Synthesized from implementation style tokens paired with visual references.",
       ),
     )
   }
@@ -642,28 +1012,10 @@ export const buildNormalizedBrandModelScaffold = (
 ): INormalizedBrandModel => {
   const overallConfidence = buildConfidenceFromEvidence(evidenceRecords)
   const conflicts = buildConflicts(evidenceRecords, sourceInventory)
-  const brandIdentity = buildCategoryRules(
-    "brand-identity",
-    `${brandName} brand identity`,
-    "Core brand identity extraction remains light until richer source analysis lands.",
-    evidenceRecords,
-    sourceInventory,
-  )
+  const brandIdentity = buildBrandIdentityRules(brandName, evidenceRecords, sourceInventory)
   const voice = buildVoiceRules(evidenceRecords, sourceInventory)
-  const visualSystem = buildCategoryRules(
-    "visual-system",
-    "Visual system direction",
-    "Visual system rules will deepen as visual adapters expand.",
-    evidenceRecords,
-    sourceInventory,
-  )
-  const interactionBehavior = buildCategoryRules(
-    "interaction-behavior",
-    "Interaction behavior direction",
-    "Interaction behavior rules will deepen as website and product references are parsed more deeply.",
-    evidenceRecords,
-    sourceInventory,
-  )
+  const visualSystem = buildVisualSystemRules(evidenceRecords, sourceInventory)
+  const interactionBehavior = buildInteractionBehaviorRules(evidenceRecords, sourceInventory)
   const designSystem = buildDesignSystemRules(evidenceRecords, sourceInventory)
   const dashboardRules = buildProfileRules("dashboard", "constraints", evidenceRecords, sourceInventory)
 
