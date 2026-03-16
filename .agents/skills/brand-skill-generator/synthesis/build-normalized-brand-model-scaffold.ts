@@ -550,20 +550,24 @@ const buildCategoryRules = (
   )
 }
 
-const buildProfileRules = (
+const buildProfileFallbackRules = (
   profileName: "design-system" | "marketing" | "product-ui" | "dashboard",
   category: IBrandEvidenceRecord["category"],
   evidenceRecords: IBrandEvidenceRecord[],
   sourceInventory: IBrandSourceInventory,
-) => {
-  return buildCategoryRules(
+) =>
+  buildCategoryRules(
     category,
     `${profileName} guidance`,
     `No direct evidence was extracted for the ${profileName} profile yet.`,
     evidenceRecords,
     sourceInventory,
   )
-}
+
+const combineRuleSourceIds = (rules: IBrandRuleRecord[]) =>
+  unique(rules.flatMap((rule) => rule.sourceIds))
+
+const findRuleById = (rules: IBrandRuleRecord[], id: string) => rules.find((rule) => rule.id === id)
 
 const buildVoiceRules = (
   evidenceRecords: IBrandEvidenceRecord[],
@@ -939,6 +943,199 @@ const buildVisualSystemRules = (
   return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
 }
 
+const buildMarketingProfileRules = ({
+  brandIdentity,
+  voice,
+  visualSystem,
+  evidenceRecords,
+  sourceInventory,
+}: {
+  brandIdentity: IBrandRuleRecord[]
+  voice: IBrandRuleRecord[]
+  visualSystem: IBrandRuleRecord[]
+  evidenceRecords: IBrandEvidenceRecord[]
+  sourceInventory: IBrandSourceInventory
+}) => {
+  const fallbackRules = buildProfileFallbackRules("marketing", "brand-identity", evidenceRecords, sourceInventory)
+  const surfaceIdentity = findRuleById(brandIdentity, "brand-identity-surface-labels")
+  const positioningLine = findRuleById(brandIdentity, "brand-identity-positioning-line")
+  const voiceAnchor = findRuleById(voice, "voice-preferred-language")
+  const ctaPosture = findRuleById(voice, "voice-cta-posture")
+  const paletteBalance = findRuleById(visualSystem, "visual-system-palette-balance")
+  const contrastPosture = findRuleById(visualSystem, "visual-system-contrast-posture")
+  const rules: IBrandRuleRecord[] = []
+
+  if (surfaceIdentity || positioningLine) {
+    rules.push(
+      createRuleRecord(
+        "marketing-message-hierarchy",
+        "Message hierarchy",
+        `Lead marketing surfaces with an instantly readable identity layer, then reinforce it with a positioning line.${positioningLine ? ` Preferred posture: ${positioningLine.summary}` : ""}`,
+        combineRuleSourceIds([surfaceIdentity, positioningLine].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        "high",
+        "Composed from the synthesized brand-identity rules so marketing pages open with recognition first and explanation second.",
+      ),
+    )
+  }
+
+  if (voiceAnchor || ctaPosture) {
+    rules.push(
+      createRuleRecord(
+        "marketing-copy-posture",
+        "Marketing copy posture",
+        `Keep campaign copy anchored in the core voice, then close with short direct CTAs.${voiceAnchor ? ` Voice anchor: ${voiceAnchor.summary}` : ""}${ctaPosture ? ` CTA posture: ${ctaPosture.summary}` : ""}`,
+        combineRuleSourceIds([voiceAnchor, ctaPosture].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        "high",
+        "Composed from voice rules so marketing copy stays on-brand without drifting into generic campaign language.",
+      ),
+    )
+  }
+
+  if (paletteBalance || contrastPosture) {
+    rules.push(
+      createRuleRecord(
+        "marketing-visual-expression",
+        "Visual expression",
+        `Let marketing surfaces carry the stronger end of the brand's visual personality through deliberate palette and contrast choices.${paletteBalance ? ` ${paletteBalance.summary}` : ""}${contrastPosture ? ` ${contrastPosture.summary}` : ""}`,
+        combineRuleSourceIds([paletteBalance, contrastPosture].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        "medium",
+        "Composed from visual-system rules so campaigns feel expressive without inventing a separate visual language.",
+      ),
+    )
+  }
+
+  return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
+}
+
+const buildProductUiProfileRules = ({
+  interactionBehavior,
+  voice,
+  designSystem,
+  evidenceRecords,
+  sourceInventory,
+}: {
+  interactionBehavior: IBrandRuleRecord[]
+  voice: IBrandRuleRecord[]
+  designSystem: IBrandRuleRecord[]
+  evidenceRecords: IBrandEvidenceRecord[]
+  sourceInventory: IBrandSourceInventory
+}) => {
+  const fallbackRules = buildProfileFallbackRules("product-ui", "interaction-behavior", evidenceRecords, sourceInventory)
+  const primaryActions = findRuleById(interactionBehavior, "interaction-primary-actions")
+  const interactionRhythm = findRuleById(interactionBehavior, "interaction-content-rhythm")
+  const guardrails = findRuleById(interactionBehavior, "interaction-operational-guardrails")
+  const ctaPosture = findRuleById(voice, "voice-cta-posture")
+  const avoidGenericCta = findRuleById(voice, "voice-avoid-generic-cta")
+  const tokenPosture = findRuleById(designSystem, "design-system-token-posture")
+  const implementationBoundary = findRuleById(designSystem, "design-system-implementation-boundary")
+  const rules: IBrandRuleRecord[] = []
+
+  if (primaryActions || interactionRhythm) {
+    rules.push(
+      createRuleRecord(
+        "product-ui-flow-clarity",
+        "Flow clarity",
+        `Keep in-product flows terse and readable: the user should see the heading, understand the context, and spot the action immediately.${primaryActions ? ` ${primaryActions.summary}` : ""}${interactionRhythm ? ` ${interactionRhythm.summary}` : ""}`,
+        combineRuleSourceIds([primaryActions, interactionRhythm].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        "high",
+        "Composed from interaction-behavior rules to optimize product surfaces for task completion rather than campaign storytelling.",
+      ),
+    )
+  }
+
+  if (ctaPosture || avoidGenericCta || guardrails) {
+    rules.push(
+      createRuleRecord(
+        "product-ui-copy-discipline",
+        "Product copy discipline",
+        `Keep in-product copy direct and operational, and surface boundaries clearly when they matter.${ctaPosture ? ` ${ctaPosture.summary}` : ""}${avoidGenericCta ? ` ${avoidGenericCta.summary}` : ""}${guardrails ? ` ${guardrails.summary}` : ""}`,
+        combineRuleSourceIds([ctaPosture, avoidGenericCta, guardrails].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        "medium",
+        "Composed from voice and behavior rules so product copy stays useful, not promotional.",
+      ),
+    )
+  }
+
+  if (tokenPosture || implementationBoundary) {
+    rules.push(
+      createRuleRecord(
+        "product-ui-system-reuse",
+        "System reuse",
+        `Build product screens from the shared system first, then customize only where the product truly needs it.${tokenPosture ? ` ${tokenPosture.summary}` : ""}${implementationBoundary ? ` ${implementationBoundary.summary}` : ""}`,
+        combineRuleSourceIds([tokenPosture, implementationBoundary].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        "medium",
+        "Composed from design-system rules so product UI scales through reuse instead of one-off screen styling.",
+      ),
+    )
+  }
+
+  return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
+}
+
+const buildDashboardProfileRules = ({
+  interactionBehavior,
+  visualSystem,
+  designSystem,
+  evidenceRecords,
+  sourceInventory,
+}: {
+  interactionBehavior: IBrandRuleRecord[]
+  visualSystem: IBrandRuleRecord[]
+  designSystem: IBrandRuleRecord[]
+  evidenceRecords: IBrandEvidenceRecord[]
+  sourceInventory: IBrandSourceInventory
+}) => {
+  const fallbackRules = buildProfileFallbackRules("dashboard", "constraints", evidenceRecords, sourceInventory)
+  const primaryActions = findRuleById(interactionBehavior, "interaction-primary-actions")
+  const guardrails = findRuleById(interactionBehavior, "interaction-operational-guardrails")
+  const paletteBalance = findRuleById(visualSystem, "visual-system-palette-balance")
+  const contrastPosture = findRuleById(visualSystem, "visual-system-contrast-posture")
+  const tokenPosture = findRuleById(designSystem, "design-system-token-posture")
+  const implementationBoundary = findRuleById(designSystem, "design-system-implementation-boundary")
+  const rules: IBrandRuleRecord[] = []
+
+  if (primaryActions || guardrails) {
+    rules.push(
+      createRuleRecord(
+        "dashboard-operational-clarity",
+        "Operational clarity",
+        `Dashboard actions and labels should be terse, obvious, and safe to scan under time pressure.${primaryActions ? ` ${primaryActions.summary}` : ""}${guardrails ? ` ${guardrails.summary}` : ""}`,
+        combineRuleSourceIds([primaryActions, guardrails].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        "high",
+        "Composed from behavior rules so dense operational surfaces privilege clarity and boundaries over flourish.",
+      ),
+    )
+  }
+
+  if (contrastPosture || paletteBalance) {
+    rules.push(
+      createRuleRecord(
+        "dashboard-visual-restraint",
+        "Visual restraint",
+        `Use the visual system for hierarchy, not decoration. Let contrast do most of the work and keep accents purposeful.${contrastPosture ? ` ${contrastPosture.summary}` : ""}${paletteBalance ? ` ${paletteBalance.summary}` : ""}`,
+        combineRuleSourceIds([contrastPosture, paletteBalance].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        "medium",
+        "Composed from visual-system rules so dashboards stay legible while still feeling on-brand.",
+      ),
+    )
+  }
+
+  if (tokenPosture || implementationBoundary) {
+    rules.push(
+      createRuleRecord(
+        "dashboard-system-consistency",
+        "System consistency",
+        `Keep dashboard surfaces tightly coupled to the shared design system so dense views remain consistent across states and modules.${tokenPosture ? ` ${tokenPosture.summary}` : ""}${implementationBoundary ? ` ${implementationBoundary.summary}` : ""}`,
+        combineRuleSourceIds([tokenPosture, implementationBoundary].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        "medium",
+        "Composed from design-system rules to prevent dense information surfaces from drifting into bespoke UI patterns.",
+      ),
+    )
+  }
+
+  return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
+}
+
 const buildConflicts = (
   evidenceRecords: IBrandEvidenceRecord[],
   sourceInventory: IBrandSourceInventory,
@@ -1017,7 +1214,27 @@ export const buildNormalizedBrandModelScaffold = (
   const visualSystem = buildVisualSystemRules(evidenceRecords, sourceInventory)
   const interactionBehavior = buildInteractionBehaviorRules(evidenceRecords, sourceInventory)
   const designSystem = buildDesignSystemRules(evidenceRecords, sourceInventory)
-  const dashboardRules = buildProfileRules("dashboard", "constraints", evidenceRecords, sourceInventory)
+  const marketingRules = buildMarketingProfileRules({
+    brandIdentity,
+    voice,
+    visualSystem,
+    evidenceRecords,
+    sourceInventory,
+  })
+  const productUiRules = buildProductUiProfileRules({
+    interactionBehavior,
+    voice,
+    designSystem,
+    evidenceRecords,
+    sourceInventory,
+  })
+  const dashboardRules = buildDashboardProfileRules({
+    interactionBehavior,
+    visualSystem,
+    designSystem,
+    evidenceRecords,
+    sourceInventory,
+  })
 
   return {
     brandIdentity,
@@ -1034,12 +1251,12 @@ export const buildNormalizedBrandModelScaffold = (
       {
         profileName: "marketing",
         confidence: overallConfidence,
-        rules: brandIdentity,
+        rules: marketingRules,
       },
       {
         profileName: "product-ui",
         confidence: overallConfidence,
-        rules: interactionBehavior,
+        rules: productUiRules,
       },
       {
         profileName: "dashboard",
