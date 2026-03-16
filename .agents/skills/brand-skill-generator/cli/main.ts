@@ -94,8 +94,8 @@ const printTextOutput = (executionPlan: Awaited<ReturnType<typeof runBrandSkillC
   console.log("")
   console.log(
     executionPlan.status === "bundle-rendered"
-      ? "Phase 3 note: weighted synthesis and bundle rendering are active. Conflict handling is still shallow and will deepen in later phases."
-      : "Phase 3 note: weighted synthesis is active. Bundle rendering runs during generate/refresh when validation passes.",
+      ? "Phase 3 note: weighted synthesis and bundle rendering are active. Conflict handling is now source-aware, but still heuristic and will deepen in later phases."
+      : "Phase 3 note: weighted synthesis is active. Conflict handling is source-aware, and bundle rendering runs during generate/refresh when validation passes.",
   )
 }
 

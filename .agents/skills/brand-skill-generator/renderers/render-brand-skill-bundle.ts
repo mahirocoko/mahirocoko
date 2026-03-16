@@ -194,6 +194,39 @@ ${changedFiles.length > 0 ? changedFiles.map((filePath) => `- ${filePath}`).join
 `
 }
 
+const buildReportJsonPayload = ({
+  command,
+  sourceInventory,
+  normalizedBrandModel,
+  report,
+  updateMode,
+}: {
+  command: IBrandSkillCommand
+  sourceInventory: IBrandSourceInventory
+  normalizedBrandModel: INormalizedBrandModel
+  report: IBrandSkillRunReport
+  updateMode: "create" | "update"
+}) => {
+  return {
+    command: {
+      mode: command.mode,
+      brandName: command.brandName,
+      brandSlug: command.brandSlug,
+      destinationDir: toWorkspaceRelativePath(command.workspaceRoot, command.destinationDir),
+      websiteUrls: command.websiteUrls,
+      docsPaths: command.docsPaths,
+      screenshotPaths: command.screenshotPaths,
+      codePaths: command.codePaths,
+      figmaUrls: command.figmaUrls,
+      dryRun: command.dryRun,
+    },
+    updateMode,
+    sourceInventory,
+    normalizedBrandModel,
+    report,
+  }
+}
+
 export const renderBrandSkillBundle = ({
   command,
   sourceInventory,
@@ -207,6 +240,13 @@ export const renderBrandSkillBundle = ({
   report: IBrandSkillRunReport
   updateMode: "create" | "update"
 }) => {
+  const reportJsonPayload = buildReportJsonPayload({
+    command,
+    sourceInventory,
+    normalizedBrandModel,
+    report,
+    updateMode,
+  })
   const files = new Map<string, string>([
     [path.join(command.destinationDir, "SKILL.md"), buildSkillEntrypoint(command, report)],
     [
@@ -243,7 +283,7 @@ export const renderBrandSkillBundle = ({
       path.join(command.destinationDir, "report", "report.md"),
       buildReportMarkdown(command, sourceInventory, normalizedBrandModel, report),
     ],
-    [path.join(command.destinationDir, "report", "report.json"), `${JSON.stringify(report, null, 2)}\n`],
+    [path.join(command.destinationDir, "report", "report.json"), `${JSON.stringify(reportJsonPayload, null, 2)}\n`],
   ])
 
   const changedFiles: string[] = []
