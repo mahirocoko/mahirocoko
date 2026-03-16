@@ -11,7 +11,16 @@ import type {
 } from "../model/normalized-brand-model"
 import {
   collectTextSamples,
+  extractCodeExportNames,
+  extractHtmlCtas,
+  extractHtmlHeadings,
+  extractMarkdownHeadings,
+  extractStyleTokens,
+  extractSvgColors,
+  extractSvgText,
   isImageFile,
+  isLikelyTextFile,
+  readFileText,
   summarizeFileTypes,
   toRelativePath,
   walkDirectoryFiles,
@@ -99,6 +108,8 @@ const readWebsiteDetails = async (location: string) => {
     const descriptionMatch = html.match(
       /<meta[^>]+name=["']description["'][^>]+content=["']([\s\S]*?)["'][^>]*>/i,
     )
+    const headings = extractHtmlHeadings(html).slice(0, 6)
+    const ctas = extractHtmlCtas(html).slice(0, 8)
     const strippedText = stripHtml(html).slice(0, 560)
 
     if (titleMatch?.[1]) {
@@ -107,6 +118,14 @@ const readWebsiteDetails = async (location: string) => {
 
     if (descriptionMatch?.[1]) {
       metadata.description = descriptionMatch[1].replace(/\s+/g, " ").trim()
+    }
+
+    if (headings.length > 0) {
+      metadata.headings = JSON.stringify(headings)
+    }
+
+    if (ctas.length > 0) {
+      metadata.ctas = JSON.stringify(ctas)
     }
 
     if (strippedText) {
@@ -182,8 +201,19 @@ const readLocalPathDetails = (sourceType: BrandSourceType, location: string, pat
 
   if (sourceType === "screenshot-dir") {
     const imageFiles = allFiles.filter((filePath) => isImageFile(filePath))
+    const svgFiles = imageFiles.filter((filePath) => path.extname(filePath).toLowerCase() === ".svg")
+    const svgColors = svgFiles.flatMap((filePath) => extractSvgColors(readFileText(filePath))).slice(0, 12)
+    const svgText = svgFiles.flatMap((filePath) => extractSvgText(readFileText(filePath))).slice(0, 12)
     metadata.image_count = String(imageFiles.length)
     metadata.file_types = JSON.stringify(summarizeFileTypes(imageFiles))
+
+    if (svgColors.length > 0) {
+      metadata.svg_colors = JSON.stringify(svgColors)
+    }
+
+    if (svgText.length > 0) {
+      metadata.svg_text = JSON.stringify(svgText)
+    }
 
     return {
       exists: true,
@@ -203,6 +233,39 @@ const readLocalPathDetails = (sourceType: BrandSourceType, location: string, pat
   metadata.file_count = String(allFiles.length)
   metadata.file_types = JSON.stringify(summarizeFileTypes(allFiles))
   metadata.modified_at = stats.mtime.toISOString()
+
+  if (sourceType === "brand-docs") {
+    const headings = allFiles
+      .filter((filePath) => isLikelyTextFile(filePath))
+      .flatMap((filePath) => {
+        const rawText = readFileText(filePath)
+        return [...extractMarkdownHeadings(rawText), ...extractHtmlHeadings(rawText)]
+      })
+      .slice(0, 10)
+
+    if (headings.length > 0) {
+      metadata.headings = JSON.stringify(headings)
+    }
+  }
+
+  if (sourceType === "code-reference") {
+    const exportNames = allFiles
+      .filter((filePath) => /\.(ts|tsx|js|jsx)$/.test(path.extname(filePath).toLowerCase()))
+      .flatMap((filePath) => extractCodeExportNames(readFileText(filePath)))
+      .slice(0, 20)
+    const styleTokens = allFiles
+      .filter((filePath) => isLikelyTextFile(filePath))
+      .flatMap((filePath) => extractStyleTokens(readFileText(filePath)))
+      .slice(0, 20)
+
+    if (exportNames.length > 0) {
+      metadata.export_names = JSON.stringify(exportNames)
+    }
+
+    if (styleTokens.length > 0) {
+      metadata.style_tokens = JSON.stringify(styleTokens)
+    }
+  }
 
   if (pathKind === "directory") {
     notes.push("Directory source scanned recursively with common build and dependency directories ignored.")

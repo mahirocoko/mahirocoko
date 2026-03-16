@@ -43,6 +43,8 @@ const confidenceRank: Record<ConfidenceLevel, number> = {
 const maxConfidence = (left: ConfidenceLevel, right: ConfidenceLevel): ConfidenceLevel =>
   confidenceRank[left] >= confidenceRank[right] ? left : right
 
+const unique = <T>(values: T[]) => [...new Set(values)]
+
 const pickCategory = (sourceType: BrandSourceType): IBrandEvidenceRecord["category"] => {
   if (sourceType === "brand-docs") {
     return "voice"
@@ -61,6 +63,19 @@ const pickCategory = (sourceType: BrandSourceType): IBrandEvidenceRecord["catego
   }
 
   return "constraints"
+}
+
+const readJsonArray = (value: string | undefined) => {
+  if (!value) {
+    return []
+  }
+
+  try {
+    const parsed = JSON.parse(value)
+    return Array.isArray(parsed) ? parsed.filter((item): item is string => typeof item === "string") : []
+  } catch {
+    return []
+  }
 }
 
 const buildKeywordSummary = (sourceRecord: IBrandSourceRecord) => {
@@ -83,55 +98,227 @@ const buildKeywordSummary = (sourceRecord: IBrandSourceRecord) => {
     .map(([word]) => word)
 }
 
-const buildSourceStatement = (sourceRecord: IBrandSourceRecord) => {
-  if (sourceRecord.sourceType === "website") {
-    const title = sourceRecord.metadata.title
-    const description = sourceRecord.metadata.description
+const createEvidenceRecord = (
+  id: string,
+  category: IBrandEvidenceRecord["category"],
+  signalType: IBrandEvidenceRecord["signalType"],
+  statement: string,
+  sourceRecord: IBrandSourceRecord,
+  confidence = sourceRecord.explicitnessBaseline,
+): IBrandEvidenceRecord => ({
+  id,
+  category,
+  signalType,
+  statement,
+  sourceIds: [sourceRecord.id],
+  confidence,
+})
 
-    if (title && description) {
-      return `Website title and meta description suggest positioning around "${title}" and "${description}".`
-    }
+const buildWebsiteEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: number) => {
+  const title = sourceRecord.metadata.title
+  const description = sourceRecord.metadata.description
+  const headings = readJsonArray(sourceRecord.metadata.headings).slice(0, 4)
+  const ctas = readJsonArray(sourceRecord.metadata.ctas).slice(0, 6)
+  const evidenceRecords: IBrandEvidenceRecord[] = []
 
-    if (title) {
-      return `Website title suggests brand framing around "${title}".`
-    }
+  if (title || description) {
+    const titlePart = title ? `title "${title}"` : null
+    const descriptionPart = description ? `description "${description}"` : null
+    const parts = [titlePart, descriptionPart].filter(Boolean)
 
-    return sourceRecord.sourceSummary
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-website-brand`,
+        "brand-identity",
+        "inferred",
+        `Website metadata frames the brand through ${parts.join(" and ")}.`,
+        sourceRecord,
+      ),
+    )
   }
 
-  if (sourceRecord.sourceType === "brand-docs") {
-    const keywords = buildKeywordSummary(sourceRecord)
-
-    if (keywords.length > 0) {
-      return `Brand documents repeatedly emphasize: ${keywords.join(", ")}.`
-    }
-
-    return sourceRecord.sourceSummary
+  if (headings.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-website-headings`,
+        "voice",
+        "inferred",
+        `Website headings emphasize: ${headings.join(" | ")}.`,
+        sourceRecord,
+      ),
+    )
   }
 
-  if (sourceRecord.sourceType === "screenshot-dir") {
-    return sourceRecord.itemCount > 0
-      ? `Visual references include ${sourceRecord.itemCount} image assets across ${sourceRecord.discoveredPaths.join(", ")}.`
-      : sourceRecord.sourceSummary
+  if (ctas.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-website-ctas`,
+        "interaction-behavior",
+        "inferred",
+        `Website calls to action include: ${ctas.join(", ")}.`,
+        sourceRecord,
+      ),
+    )
   }
 
-  if (sourceRecord.sourceType === "code-reference") {
-    const keywords = buildKeywordSummary(sourceRecord)
+  return evidenceRecords
+}
 
-    if (keywords.length > 0) {
-      return `Code references suggest implementation patterns around ${keywords.join(", ")}.`
-    }
+const buildBrandDocsEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: number) => {
+  const headings = readJsonArray(sourceRecord.metadata.headings).slice(0, 6)
+  const keywords = buildKeywordSummary(sourceRecord)
+  const directiveSamples = sourceRecord.textSamples
+    .map((sample) => sample.content)
+    .filter((content) => /\b(must|should|avoid|prefer|never)\b/i.test(content))
+    .slice(0, 2)
+  const evidenceRecords: IBrandEvidenceRecord[] = []
 
-    return sourceRecord.sourceSummary
+  if (headings.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-docs-identity`,
+        "brand-identity",
+        "explicit",
+        `Brand documentation headings define themes around: ${headings.join(" | ")}.`,
+        sourceRecord,
+      ),
+    )
   }
 
-  return sourceRecord.sourceSummary
+  if (keywords.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-docs-voice`,
+        "voice",
+        "explicit",
+        `Brand documents repeatedly emphasize: ${keywords.join(", ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  directiveSamples.forEach((directiveSample, directiveIndex) => {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-docs-constraint-${directiveIndex + 1}`,
+        "constraints",
+        "explicit",
+        `Brand docs include directive language: ${directiveSample}`,
+        sourceRecord,
+      ),
+    )
+  })
+
+  return evidenceRecords
+}
+
+const buildScreenshotEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: number) => {
+  const svgColors = readJsonArray(sourceRecord.metadata.svg_colors).slice(0, 8)
+  const svgText = readJsonArray(sourceRecord.metadata.svg_text).slice(0, 6)
+  const evidenceRecords: IBrandEvidenceRecord[] = []
+
+  if (svgColors.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-screens-colors`,
+        "visual-system",
+        "inferred",
+        `Visual references use colors such as ${svgColors.join(", ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (svgText.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-screens-text`,
+        "brand-identity",
+        "inferred",
+        `Visible text inside visual references includes: ${svgText.join(" | ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (evidenceRecords.length === 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-screens-summary`,
+        "visual-system",
+        "inferred",
+        `Visual references include ${sourceRecord.itemCount} image assets across ${sourceRecord.discoveredPaths.join(", ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  return evidenceRecords
+}
+
+const buildCodeReferenceEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: number) => {
+  const keywords = buildKeywordSummary(sourceRecord)
+  const exportNames = readJsonArray(sourceRecord.metadata.export_names).slice(0, 10)
+  const styleTokens = readJsonArray(sourceRecord.metadata.style_tokens).slice(0, 12)
+  const evidenceRecords: IBrandEvidenceRecord[] = []
+
+  if (exportNames.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-code-exports`,
+        "design-system",
+        "inferred",
+        `Code references expose symbols such as ${exportNames.join(", ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (styleTokens.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-code-style-tokens`,
+        "visual-system",
+        "inferred",
+        `Implementation references contain style tokens like ${styleTokens.join(", ")}.`,
+        sourceRecord,
+        maxConfidence("medium", sourceRecord.explicitnessBaseline),
+      ),
+    )
+  }
+
+  if (keywords.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-code-keywords`,
+        "design-system",
+        "inferred",
+        `Code references suggest implementation patterns around ${keywords.join(", ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  return evidenceRecords
+}
+
+const buildFigmaEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: number) => {
+  return [
+    createEvidenceRecord(
+      `evidence-${baseIndex}-figma-ref`,
+      "visual-system",
+      "explicit",
+      `Figma reference recorded at ${sourceRecord.location}.`,
+      sourceRecord,
+      "high",
+    ),
+  ]
 }
 
 const buildSampleEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: number): IBrandEvidenceRecord[] => {
-  return sourceRecord.textSamples.slice(0, 2).map((sample, sampleIndex) => ({
-    id: `evidence-${baseIndex}-sample-${sampleIndex + 1}`,
-    category:
+  return sourceRecord.textSamples.slice(0, 2).map((sample, sampleIndex) =>
+    createEvidenceRecord(
+      `evidence-${baseIndex}-sample-${sampleIndex + 1}`,
       sourceRecord.sourceType === "brand-docs"
         ? "voice"
         : sourceRecord.sourceType === "website"
@@ -139,13 +326,46 @@ const buildSampleEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: number
           : sourceRecord.sourceType === "code-reference"
             ? "design-system"
             : "visual-system",
-    signalType: sourceRecord.sourceType === "brand-docs" ? "explicit" : "inferred",
-    statement: `${sample.label}: ${sample.content}`,
-    sourceIds: [sourceRecord.id],
-    confidence: sourceRecord.sourceType === "brand-docs"
-      ? sourceRecord.explicitnessBaseline
-      : maxConfidence("low", sourceRecord.explicitnessBaseline),
-  }))
+      sourceRecord.sourceType === "brand-docs" ? "explicit" : "inferred",
+      `${sample.label}: ${sample.content}`,
+      sourceRecord,
+      sourceRecord.sourceType === "brand-docs"
+        ? sourceRecord.explicitnessBaseline
+        : maxConfidence("low", sourceRecord.explicitnessBaseline),
+    ),
+  )
+}
+
+const buildSourceEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: number) => {
+  if (sourceRecord.sourceType === "website") {
+    return buildWebsiteEvidence(sourceRecord, baseIndex)
+  }
+
+  if (sourceRecord.sourceType === "brand-docs") {
+    return buildBrandDocsEvidence(sourceRecord, baseIndex)
+  }
+
+  if (sourceRecord.sourceType === "screenshot-dir") {
+    return buildScreenshotEvidence(sourceRecord, baseIndex)
+  }
+
+  if (sourceRecord.sourceType === "code-reference") {
+    return buildCodeReferenceEvidence(sourceRecord, baseIndex)
+  }
+
+  if (sourceRecord.sourceType === "figma-url") {
+    return buildFigmaEvidence(sourceRecord, baseIndex)
+  }
+
+  return [
+    createEvidenceRecord(
+      `evidence-${baseIndex}-summary`,
+      pickCategory(sourceRecord.sourceType),
+      "inferred",
+      sourceRecord.sourceSummary,
+      sourceRecord,
+    ),
+  ]
 }
 
 export const buildBrandEvidenceRecords = (
@@ -154,19 +374,11 @@ export const buildBrandEvidenceRecords = (
   const evidenceRecords: IBrandEvidenceRecord[] = []
 
   sourceInventory.sourceRecords.forEach((sourceRecord, index) => {
-    evidenceRecords.push({
-      id: `evidence-${index + 1}`,
-      category: pickCategory(sourceRecord.sourceType),
-      signalType: sourceRecord.sourceType === "brand-docs" || sourceRecord.sourceType === "figma-url"
-        ? "explicit"
-        : "inferred",
-      statement: buildSourceStatement(sourceRecord),
-      sourceIds: [sourceRecord.id],
-      confidence: sourceRecord.explicitnessBaseline,
-    })
-
+    evidenceRecords.push(...buildSourceEvidence(sourceRecord, index + 1))
     evidenceRecords.push(...buildSampleEvidence(sourceRecord, index + 1))
   })
 
-  return evidenceRecords
+  return unique(evidenceRecords.map((record) => JSON.stringify(record))).map((record) =>
+    JSON.parse(record) as IBrandEvidenceRecord,
+  )
 }
