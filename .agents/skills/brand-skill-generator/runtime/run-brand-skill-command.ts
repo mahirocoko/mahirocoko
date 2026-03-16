@@ -4,6 +4,7 @@ import type { IBrandSkillCommand, IBrandSkillExecutionPlan } from "../model/norm
 import { buildNormalizedBrandModelScaffold } from "../synthesis/build-normalized-brand-model-scaffold"
 import { buildBrandSkillRunReport } from "../renderers/build-brand-skill-run-report"
 import { planBrandSkillBundleRender } from "../renderers/plan-brand-skill-bundle-render"
+import { renderBrandSkillBundle } from "../renderers/render-brand-skill-bundle"
 import { buildSourceInventory } from "../sources/build-source-inventory"
 import { validateBrandSkillRun } from "../validation/validate-brand-skill-run"
 
@@ -13,7 +14,11 @@ export const runBrandSkillCommand = async (
   const sourceInventory = await buildSourceInventory(command)
   const validation = validateBrandSkillRun(command, sourceInventory)
   const evidenceRecords = buildBrandEvidenceRecords(sourceInventory)
-  const normalizedBrandModel = buildNormalizedBrandModelScaffold(command.brandName, evidenceRecords)
+  const normalizedBrandModel = buildNormalizedBrandModelScaffold(
+    command.brandName,
+    evidenceRecords,
+    sourceInventory,
+  )
   const report = buildBrandSkillRunReport(
     command,
     sourceInventory,
@@ -22,6 +27,19 @@ export const runBrandSkillCommand = async (
   )
   const plannedFiles = planBrandSkillBundleRender(command)
   const updateMode = detectBrandSkillUpdateMode(command.destinationDir)
+  const shouldRender =
+    validation.canContinue &&
+    !command.dryRun &&
+    (command.mode === "generate" || command.mode === "refresh")
+  const renderedFiles = shouldRender
+    ? renderBrandSkillBundle({
+        command,
+        sourceInventory,
+        normalizedBrandModel,
+        report,
+        updateMode,
+      })
+    : []
 
   return {
     command,
@@ -30,7 +48,8 @@ export const runBrandSkillCommand = async (
     normalizedBrandModel,
     report,
     plannedFiles,
+    renderedFiles,
     updateMode,
-    status: "source-extracted",
+    status: renderedFiles.length > 0 ? "bundle-rendered" : "source-extracted",
   }
 }

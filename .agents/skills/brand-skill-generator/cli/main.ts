@@ -8,7 +8,7 @@ const printTextOutput = (executionPlan: Awaited<ReturnType<typeof runBrandSkillC
   console.log("")
   console.log(`Brand: ${executionPlan.command.brandName}`)
   console.log(`Slug: ${executionPlan.command.brandSlug}`)
-  console.log(`Destination: ${executionPlan.command.destinationDir}`)
+  console.log(`Destination: ${executionPlan.report.destinationDir}`)
   console.log(`Update mode: ${executionPlan.updateMode}`)
   console.log(`Status: ${executionPlan.status}`)
   console.log("")
@@ -49,10 +49,35 @@ const printTextOutput = (executionPlan: Awaited<ReturnType<typeof runBrandSkillC
   }
 
   console.log("")
+  console.log("## Conflicts")
+
+  if (executionPlan.report.topConflicts.length === 0) {
+    console.log("- None")
+  } else {
+    for (const conflict of executionPlan.report.topConflicts) {
+      console.log(`- ${conflict.summary}`)
+      console.log(`  resolution: ${conflict.chosenDirection}`)
+
+      if (conflict.suggestedOverride) {
+        console.log(`  suggested override: ${conflict.suggestedOverride}`)
+      }
+    }
+  }
+
+  console.log("")
   console.log("## Planned Files")
 
   for (const plannedFile of executionPlan.plannedFiles) {
     console.log(`- ${plannedFile.path} — ${plannedFile.reason}`)
+  }
+
+  if (executionPlan.renderedFiles.length > 0) {
+    console.log("")
+    console.log("## Rendered Files")
+
+    for (const renderedFile of executionPlan.renderedFiles) {
+      console.log(`- ${renderedFile}`)
+    }
   }
 
   console.log("")
@@ -68,7 +93,9 @@ const printTextOutput = (executionPlan: Awaited<ReturnType<typeof runBrandSkillC
 
   console.log("")
   console.log(
-    "Phase 2 note: source ingestion and first-pass evidence extraction are live. Weighted synthesis depth, conflict handling, and file rendering still land in later phases.",
+    executionPlan.status === "bundle-rendered"
+      ? "Phase 3 note: weighted synthesis and bundle rendering are active. Conflict handling is still shallow and will deepen in later phases."
+      : "Phase 3 note: weighted synthesis is active. Bundle rendering runs during generate/refresh when validation passes.",
   )
 }
 

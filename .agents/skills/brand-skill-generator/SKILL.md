@@ -76,7 +76,7 @@ bun --cwd .agents/skills/brand-skill-generator run brand-skill inspect \
 
 ## Current Phase
 
-The current implementation is in Phase 1.
+The current implementation is in Phase 3.
 
 What works now:
 
@@ -84,16 +84,14 @@ What works now:
 - source inventory with real local scanning and website fetch support
 - validation gates
 - first-pass evidence extraction from source summaries and text samples
-- normalized brand model with category-derived rules
-- planned output structure
+- weighted brand model synthesis with category-derived rules
+- real bundle and report rendering during `generate` and `refresh`
 
 What lands in later phases:
 
-- real source fetching and parsing
-- real evidence extraction
-- weighted synthesis
-- real bundle rendering
-- update-in-place diffing
+- deeper conflict handling
+- stronger rule quality and brand inference
+- richer update-in-place diffing
 
 ## Files
 

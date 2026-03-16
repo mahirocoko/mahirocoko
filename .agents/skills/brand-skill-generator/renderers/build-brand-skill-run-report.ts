@@ -7,6 +7,7 @@ import type {
   IBrandSourceInventory,
   INormalizedBrandModel,
 } from "../model/normalized-brand-model"
+import { toWorkspaceRelativePath } from "../utils/workspace-paths"
 
 const buildSourceSummary = (sourceInventory: IBrandSourceInventory) => {
   const byType: Partial<Record<BrandSourceType, number>> = {}
@@ -78,7 +79,7 @@ export const buildBrandSkillRunReport = (
     brandName: command.brandName,
     brandSlug: command.brandSlug,
     mode: command.mode,
-    destinationDir: command.destinationDir,
+    destinationDir: toWorkspaceRelativePath(command.workspaceRoot, command.destinationDir),
     overallConfidence: buildOverallConfidence(validation, normalizedBrandModel),
     sourceSummary: buildSourceSummary(sourceInventory),
     topConflicts: normalizedBrandModel.conflicts,
@@ -91,7 +92,7 @@ export const buildBrandSkillRunReport = (
         summary: evidenceRecord.statement,
         sourceIds: evidenceRecord.sourceIds,
         confidence: evidenceRecord.confidence,
-        rationale: "Phase 1 scaffold inferred signal.",
+        rationale: "Derived from first-pass source extraction and weighted source posture.",
       })),
     missingSourceSuggestions: buildMissingSourceSuggestions(sourceInventory),
     validationIssues: validation.issues,
