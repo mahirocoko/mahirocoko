@@ -23,6 +23,7 @@ export interface IBrandSkillCommand {
   mode: BrandSkillMode
   brandName: string
   brandSlug: string
+  workspaceRoot: string
   destinationDir: string
   websiteUrls: string[]
   docsPaths: string[]
@@ -149,6 +150,7 @@ export interface IBrandSkillExecutionPlan {
   normalizedBrandModel: INormalizedBrandModel
   report: IBrandSkillRunReport
   plannedFiles: IBrandSkillPlannedFile[]
+  renderedFiles: string[]
   updateMode: "create" | "update"
-  status: "source-extracted"
+  status: "source-extracted" | "bundle-rendered"
 }

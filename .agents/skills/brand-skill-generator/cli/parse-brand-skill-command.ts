@@ -1,6 +1,7 @@
 import path from "node:path"
 
 import type { BrandSkillMode, IBrandSkillCommand } from "../model/normalized-brand-model"
+import { resolveWorkspacePath, resolveWorkspaceRoot } from "../utils/workspace-paths"
 
 const brandSkillModes = new Set<BrandSkillMode>(["inspect", "generate", "refresh", "reconcile"])
 
@@ -127,12 +128,18 @@ export const parseBrandSkillCommand = (argv: string[]): IBrandSkillCommand | nul
   }
 
   const brandSlug = slugifyBrandName(brandName)
+  const workspaceRoot = resolveWorkspaceRoot()
+  const resolvedDestinationDir = resolveWorkspacePath(
+    workspaceRoot,
+    destinationDir || path.join(".agents", "skills", brandSlug || "brand-skill"),
+  )
 
   return {
     mode: firstArg as BrandSkillMode,
     brandName,
     brandSlug,
-    destinationDir: destinationDir || path.join(".agents", "skills", brandSlug || "brand-skill"),
+    workspaceRoot,
+    destinationDir: resolvedDestinationDir,
     websiteUrls,
     docsPaths,
     screenshotPaths,
