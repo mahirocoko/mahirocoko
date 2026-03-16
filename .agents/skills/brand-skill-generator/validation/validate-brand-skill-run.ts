@@ -75,6 +75,22 @@ export const validateBrandSkillRun = (
     })
   }
 
+  const emptyReadableSources = sourceInventory.sourceRecords.filter(
+    (sourceRecord) =>
+      sourceRecord.exists &&
+      sourceRecord.sourceType !== "screenshot-dir" &&
+      sourceRecord.sourceType !== "figma-url" &&
+      sourceRecord.textSamples.length === 0,
+  )
+
+  for (const sourceRecord of emptyReadableSources) {
+    issues.push({
+      level: "warning",
+      code: "thin-readable-source",
+      message: `Readable source produced no text samples: ${sourceRecord.location}`,
+    })
+  }
+
   return {
     canContinue: !issues.some((issue) => issue.level === "error"),
     issues,

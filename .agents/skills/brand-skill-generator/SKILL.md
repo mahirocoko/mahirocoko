@@ -81,9 +81,10 @@ The current implementation is in Phase 1.
 What works now:
 
 - CLI entrypoint
-- source inventory scaffolding
+- source inventory with real local scanning and website fetch support
 - validation gates
-- normalized brand model scaffold
+- first-pass evidence extraction from source summaries and text samples
+- normalized brand model with category-derived rules
 - planned output structure
 
 What lands in later phases:

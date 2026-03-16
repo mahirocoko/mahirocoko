@@ -1,7 +1,5 @@
-import {
-  buildBrandEvidenceScaffold,
-} from "../evidence/build-brand-evidence-scaffold"
 import { detectBrandSkillUpdateMode } from "../diff/detect-brand-skill-update-mode"
+import { buildBrandEvidenceRecords } from "../evidence/build-brand-evidence-records"
 import type { IBrandSkillCommand, IBrandSkillExecutionPlan } from "../model/normalized-brand-model"
 import { buildNormalizedBrandModelScaffold } from "../synthesis/build-normalized-brand-model-scaffold"
 import { buildBrandSkillRunReport } from "../renderers/build-brand-skill-run-report"
@@ -9,12 +7,12 @@ import { planBrandSkillBundleRender } from "../renderers/plan-brand-skill-bundle
 import { buildSourceInventory } from "../sources/build-source-inventory"
 import { validateBrandSkillRun } from "../validation/validate-brand-skill-run"
 
-export const runBrandSkillCommand = (
+export const runBrandSkillCommand = async (
   command: IBrandSkillCommand,
-): IBrandSkillExecutionPlan => {
-  const sourceInventory = buildSourceInventory(command)
+): Promise<IBrandSkillExecutionPlan> => {
+  const sourceInventory = await buildSourceInventory(command)
   const validation = validateBrandSkillRun(command, sourceInventory)
-  const evidenceRecords = buildBrandEvidenceScaffold(sourceInventory)
+  const evidenceRecords = buildBrandEvidenceRecords(sourceInventory)
   const normalizedBrandModel = buildNormalizedBrandModelScaffold(command.brandName, evidenceRecords)
   const report = buildBrandSkillRunReport(
     command,
@@ -33,6 +31,6 @@ export const runBrandSkillCommand = (
     report,
     plannedFiles,
     updateMode,
-    status: "scaffold-ready",
+    status: "source-extracted",
   }
 }
