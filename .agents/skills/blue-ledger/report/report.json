@@ -1,0 +1,343 @@
+{
+  "command": {
+    "mode": "generate",
+    "brandName": "Blue Ledger",
+    "brandSlug": "blue-ledger",
+    "destinationDir": ".agents/skills/blue-ledger",
+    "websiteUrls": [],
+    "docsPaths": [
+      "./docs/brand/blue-ledger",
+      "./docs/superpowers/specs/2026-03-17-personal-finance-tracker-design.md"
+    ],
+    "screenshotPaths": [],
+    "codePaths": [],
+    "figmaUrls": [],
+    "dryRun": false
+  },
+  "updateMode": "create",
+  "sourceInventory": {
+    "brandName": "Blue Ledger",
+    "destinationDir": "/Users/mahiro/Git/me/mahirocoko/.agents/skills/blue-ledger",
+    "sourceRecords": [
+      {
+        "id": "brand-docs-1",
+        "sourceType": "brand-docs",
+        "locationType": "path",
+        "location": "./docs/brand/blue-ledger",
+        "resolvedLocation": "/Users/mahiro/Git/me/mahirocoko/docs/brand/blue-ledger",
+        "pathKind": "directory",
+        "exists": true,
+        "modifiedAt": "2026-03-17T07:15:11.895Z",
+        "freshness": "current",
+        "explicitnessBaseline": "high",
+        "coverageEstimate": "high",
+        "itemCount": 1,
+        "discoveredPaths": [
+          "2026-03-17-brand-brief.md"
+        ],
+        "textSamples": [
+          {
+            "label": "2026-03-17-brand-brief.md",
+            "content": "# Blue Ledger Brand Brief Date: 2026-03-17 Status: Working brand brief for generated skill input ## Brand Name Blue Ledger ## Product Summary Blue Ledger is a simple personal income and expense tracker for one person. It helps the user log daily financial activity quickly, see cu"
+          }
+        ],
+        "metadata": {
+          "file_count": "1",
+          "file_types": "{\".md\":1}",
+          "modified_at": "2026-03-17T07:15:11.895Z",
+          "headings": "[\"Blue Ledger Brand Brief\",\"Brand Name\",\"Product Summary\",\"Product Scope for V1\",\"Audience\",\"Positioning\",\"Reference Posture\",\"Visual System\",\"Voice and Copy\",\"Interaction Behavior\"]"
+        },
+        "sourceSummary": "Scanned 1 brand document files.",
+        "notes": [
+          "Directory source scanned recursively with common build and dependency directories ignored."
+        ]
+      },
+      {
+        "id": "brand-docs-2",
+        "sourceType": "brand-docs",
+        "locationType": "path",
+        "location": "./docs/superpowers/specs/2026-03-17-personal-finance-tracker-design.md",
+        "resolvedLocation": "/Users/mahiro/Git/me/mahirocoko/docs/superpowers/specs/2026-03-17-personal-finance-tracker-design.md",
+        "pathKind": "file",
+        "exists": true,
+        "modifiedAt": "2026-03-17T07:07:14.649Z",
+        "freshness": "current",
+        "explicitnessBaseline": "high",
+        "coverageEstimate": "high",
+        "itemCount": 1,
+        "discoveredPaths": [
+          "2026-03-17-personal-finance-tracker-design.md"
+        ],
+        "textSamples": [
+          {
+            "label": "2026-03-17-personal-finance-tracker-design.md",
+            "content": "# Personal Finance Tracker Design Date: 2026-03-17 Status: Approved design draft ## Summary Build a simple personal income and expense web app with a white-and-blue visual system. The product should feel clean, calm, and reliable, with a Stripe-like sense of structure without cop"
+          }
+        ],
+        "metadata": {
+          "file_count": "1",
+          "file_types": "{\".md\":1}",
+          "modified_at": "2026-03-17T07:07:14.649Z",
+          "headings": "[\"Personal Finance Tracker Design\",\"Summary\",\"Product Direction\",\"Goals\",\"Non-Goals\",\"Visual Reference Posture\",\"Primary User\",\"Core User Flow\",\"Information Architecture\",\"Screen Structure\"]"
+        },
+        "sourceSummary": "Scanned 1 brand document files.",
+        "notes": []
+      }
+    ]
+  },
+  "normalizedBrandModel": {
+    "brandIdentity": [
+      {
+        "id": "brand-identity-positioning-line",
+        "title": "Positioning line",
+        "summary": "Reinforce the brand with a clear positioning statement in the spirit of \"Personal Finance Tracker Design\".",
+        "sourceIds": [
+          "brand-docs-1",
+          "brand-docs-2"
+        ],
+        "confidence": "medium",
+        "rationale": "Derived from the strongest surface-facing sentence found across website, docs, and visual references."
+      }
+    ],
+    "voice": [
+      {
+        "id": "voice-preferred-language",
+        "title": "Voice anchor",
+        "summary": "Anchor copy around recurring brand language such as product, blue, visual, personal, tracker, user.",
+        "sourceIds": [
+          "brand-docs-1",
+          "brand-docs-2"
+        ],
+        "confidence": "high",
+        "rationale": "Synthesized from repeated terms in explicit brand-doc language, then grounded with visible screenshot copy when available."
+      },
+      {
+        "id": "voice-guardrails",
+        "title": "Voice guardrails",
+        "summary": "Honor explicit brand directives from docs, including guidance like: # Personal Finance Tracker Design Date: 2026-03-17 Status: Approved design draft ## Summary Build a simple personal income and expense web app with a white-and-blue visual system. The product should feel clean, calm, and reliable, with a Stripe-like sense of structure without cop.",
+        "sourceIds": [
+          "brand-docs-1",
+          "brand-docs-2"
+        ],
+        "confidence": "high",
+        "rationale": "Pulled from directive-style language found in brand docs."
+      }
+    ],
+    "visualSystem": [
+      {
+        "id": "visual-system-fallback",
+        "title": "Visual system direction",
+        "summary": "Visual system rules will deepen as visual adapters expand.",
+        "sourceIds": [],
+        "confidence": "low",
+        "rationale": "No direct evidence was extracted for this category yet."
+      }
+    ],
+    "interactionBehavior": [
+      {
+        "id": "interaction-operational-guardrails",
+        "title": "Operational guardrails",
+        "summary": "Surface cautionary or boundary-setting guidance clearly when needed, following patterns like \"# Personal Finance Tracker Design Date: 2026-03-17 Status: Approved design draft ## Summary Build a simple personal income and expense web app with a white-and-blue visual system. The product should feel clean, calm, and reliable, with a Stripe-like sense of structure without cop\".",
+        "sourceIds": [
+          "brand-docs-1",
+          "brand-docs-2"
+        ],
+        "confidence": "medium",
+        "rationale": "Pulled from cautionary live copy and explicit directive language in docs."
+      }
+    ],
+    "designSystem": [
+      {
+        "id": "design-system-fallback",
+        "title": "Design system direction",
+        "summary": "Design-system posture will deepen as code and component references are parsed more deeply.",
+        "sourceIds": [],
+        "confidence": "low",
+        "rationale": "No direct evidence was extracted for this category yet."
+      }
+    ],
+    "profiles": [
+      {
+        "profileName": "design-system",
+        "confidence": "high",
+        "rules": [
+          {
+            "id": "design-system-fallback",
+            "title": "Design system direction",
+            "summary": "Design-system posture will deepen as code and component references are parsed more deeply.",
+            "sourceIds": [],
+            "confidence": "low",
+            "rationale": "No direct evidence was extracted for this category yet."
+          }
+        ]
+      },
+      {
+        "profileName": "marketing",
+        "confidence": "high",
+        "rules": [
+          {
+            "id": "marketing-message-hierarchy",
+            "title": "Message hierarchy",
+            "summary": "Lead marketing surfaces with an instantly readable identity layer, then reinforce it with a positioning line. Preferred posture: Reinforce the brand with a clear positioning statement in the spirit of \"Personal Finance Tracker Design\".",
+            "sourceIds": [
+              "brand-docs-1",
+              "brand-docs-2"
+            ],
+            "confidence": "high",
+            "rationale": "Composed from the synthesized brand-identity rules so marketing pages open with recognition first and explanation second."
+          },
+          {
+            "id": "marketing-copy-posture",
+            "title": "Marketing copy posture",
+            "summary": "Keep campaign copy anchored in the core voice, then close with short direct CTAs. Voice anchor: Anchor copy around recurring brand language such as product, blue, visual, personal, tracker, user.",
+            "sourceIds": [
+              "brand-docs-1",
+              "brand-docs-2"
+            ],
+            "confidence": "high",
+            "rationale": "Composed from voice rules so marketing copy stays on-brand without drifting into generic campaign language."
+          }
+        ]
+      },
+      {
+        "profileName": "product-ui",
+        "confidence": "high",
+        "rules": [
+          {
+            "id": "product-ui-copy-discipline",
+            "title": "Product copy discipline",
+            "summary": "Keep in-product copy direct and operational, and surface boundaries clearly when they matter. Surface cautionary or boundary-setting guidance clearly when needed, following patterns like \"# Personal Finance Tracker Design Date: 2026-03-17 Status: Approved design draft ## Summary Build a simple personal income and expense web app with a white-and-blue visual system. The product should feel clean, calm, and reliable, with a Stripe-like sense of structure without cop\".",
+            "sourceIds": [
+              "brand-docs-1",
+              "brand-docs-2"
+            ],
+            "confidence": "medium",
+            "rationale": "Composed from voice and behavior rules so product copy stays useful, not promotional."
+          }
+        ]
+      },
+      {
+        "profileName": "dashboard",
+        "confidence": "high",
+        "rules": [
+          {
+            "id": "dashboard-operational-clarity",
+            "title": "Operational clarity",
+            "summary": "Dashboard actions and labels should be terse, obvious, and safe to scan under time pressure. Surface cautionary or boundary-setting guidance clearly when needed, following patterns like \"# Personal Finance Tracker Design Date: 2026-03-17 Status: Approved design draft ## Summary Build a simple personal income and expense web app with a white-and-blue visual system. The product should feel clean, calm, and reliable, with a Stripe-like sense of structure without cop\".",
+            "sourceIds": [
+              "brand-docs-1",
+              "brand-docs-2"
+            ],
+            "confidence": "high",
+            "rationale": "Composed from behavior rules so dense operational surfaces privilege clarity and boundaries over flourish."
+          }
+        ]
+      }
+    ],
+    "evidence": [
+      {
+        "id": "evidence-1-docs-identity",
+        "category": "brand-identity",
+        "signalType": "explicit",
+        "statement": "Brand documentation headings define themes around: Blue Ledger Brand Brief | Brand Name | Product Summary | Product Scope for V1 | Audience | Positioning.",
+        "sourceIds": [
+          "brand-docs-1"
+        ],
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-1-docs-voice",
+        "category": "voice",
+        "signalType": "explicit",
+        "statement": "Brand documents repeatedly emphasize: blue, ledger, brand, brief, date.",
+        "sourceIds": [
+          "brand-docs-1"
+        ],
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-1-sample-1",
+        "category": "voice",
+        "signalType": "explicit",
+        "statement": "2026-03-17-brand-brief.md: # Blue Ledger Brand Brief Date: 2026-03-17 Status: Working brand brief for generated skill input ## Brand Name Blue Ledger ## Product Summary Blue Ledger is a simple personal income and expense tracker for one person. It helps the user log daily financial activity quickly, see cu",
+        "sourceIds": [
+          "brand-docs-1"
+        ],
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-2-docs-identity",
+        "category": "brand-identity",
+        "signalType": "explicit",
+        "statement": "Brand documentation headings define themes around: Personal Finance Tracker Design | Summary | Product Direction | Goals | Non-Goals | Visual Reference Posture.",
+        "sourceIds": [
+          "brand-docs-2"
+        ],
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-2-docs-voice",
+        "category": "voice",
+        "signalType": "explicit",
+        "statement": "Brand documents repeatedly emphasize: personal, design, finance, tracker, date.",
+        "sourceIds": [
+          "brand-docs-2"
+        ],
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-2-docs-constraint-1",
+        "category": "constraints",
+        "signalType": "explicit",
+        "statement": "Brand docs include directive language: # Personal Finance Tracker Design Date: 2026-03-17 Status: Approved design draft ## Summary Build a simple personal income and expense web app with a white-and-blue visual system. The product should feel clean, calm, and reliable, with a Stripe-like sense of structure without cop",
+        "sourceIds": [
+          "brand-docs-2"
+        ],
+        "confidence": "high"
+      },
+      {
+        "id": "evidence-2-sample-1",
+        "category": "voice",
+        "signalType": "explicit",
+        "statement": "2026-03-17-personal-finance-tracker-design.md: # Personal Finance Tracker Design Date: 2026-03-17 Status: Approved design draft ## Summary Build a simple personal income and expense web app with a white-and-blue visual system. The product should feel clean, calm, and reliable, with a Stripe-like sense of structure without cop",
+        "sourceIds": [
+          "brand-docs-2"
+        ],
+        "confidence": "high"
+      }
+    ],
+    "conflicts": [],
+    "overallConfidence": "high"
+  },
+  "report": {
+    "brandName": "Blue Ledger",
+    "brandSlug": "blue-ledger",
+    "mode": "generate",
+    "destinationDir": ".agents/skills/blue-ledger",
+    "overallConfidence": "high",
+    "sourceSummary": {
+      "totalSources": 2,
+      "byType": {
+        "brand-docs": 2
+      }
+    },
+    "topConflicts": [],
+    "topInferredRules": [],
+    "missingSourceSuggestions": [
+      "Add a website or live product reference.",
+      "Add screenshots or Figma references."
+    ],
+    "validationIssues": [
+      {
+        "level": "warning",
+        "code": "missing-live-product-reference",
+        "message": "No website or live product URL was provided. Live-behavior confidence will stay lower."
+      },
+      {
+        "level": "warning",
+        "code": "missing-visual-references",
+        "message": "No screenshots or Figma references were provided. Visual-system confidence will stay lower."
+      }
+    ]
+  }
+}
