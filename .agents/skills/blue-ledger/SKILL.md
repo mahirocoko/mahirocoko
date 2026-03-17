@@ -31,5 +31,5 @@ Generated brand skill bundle for Blue Ledger.
 ## Current Status
 
 - Overall confidence: high
-- Last mode: generate
+- Last mode: refresh
 - Destination: .agents/skills/blue-ledger

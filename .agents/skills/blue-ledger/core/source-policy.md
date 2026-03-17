@@ -9,5 +9,7 @@ Weighted hybrid priority:
 
 ## Sources In This Run
 
+- website-1 (website) -> Website metadata extracted (title: blue-ledger).
 - brand-docs-1 (brand-docs) -> Scanned 1 brand document files.
 - brand-docs-2 (brand-docs) -> Scanned 1 brand document files.
+- code-reference-1 (code-reference) -> Scanned 25 reference files.
