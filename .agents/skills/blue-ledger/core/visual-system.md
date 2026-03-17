@@ -1,6 +1,6 @@
 # Visual System
 
-- Visual system direction: Visual system rules will deepen as visual adapters expand.
-  Sources: none
-  Confidence: low
-  Why: No direct evidence was extracted for this category yet.
+- Tokenized styling: Route styling choices through reusable tokens or utilities such as color-text-muted, color-primary, color-border, color-surface, color-primary-deep, color-expense, color-surface-muted, color-text instead of one-off visual values.
+  Sources: code-reference-1
+  Confidence: medium
+  Why: Synthesized from implementation style tokens paired with visual references.

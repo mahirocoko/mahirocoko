@@ -6,3 +6,7 @@ Confidence: high
   Sources: brand-docs-1, brand-docs-2
   Confidence: high
   Why: Composed from behavior rules so dense operational surfaces privilege clarity and boundaries over flourish.
+- System consistency: Keep dashboard surfaces tightly coupled to the shared design system so dense views remain consistent across states and modules. Express visual decisions through reusable named primitives, backed by style tokens like color-text-muted, color-primary, color-border, color-surface, color-primary-deep, color-expense, color-surface-muted, color-text. Keep brand primitives centralized behind explicit exports so downstream surfaces compose the system instead of redefining it ad hoc.
+  Sources: code-reference-1
+  Confidence: medium
+  Why: Composed from design-system rules to prevent dense information surfaces from drifting into bespoke UI patterns.

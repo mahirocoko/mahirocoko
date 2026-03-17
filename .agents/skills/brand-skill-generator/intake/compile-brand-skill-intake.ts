@@ -66,6 +66,22 @@ const filterValuesByRole = ({
   }
 }
 
+const fillMissingRolesFromSourcePlan = ({
+  preflight,
+  roles,
+  sourceType,
+}: {
+  preflight: IBrandSkillPreflightResult
+  roles: Array<BrandSourceRole | null>
+  sourceType: IBrandSkillSourcePlanItem["sourceType"]
+}) => {
+  const plannedRoles = preflight.sourcePlan
+    .filter((sourceItem) => sourceItem.sourceType === sourceType)
+    .map((sourceItem) => sourceItem.role)
+
+  return roles.map((role, index) => role ?? plannedRoles[index] ?? null)
+}
+
 const buildCompiledSourcePlan = ({
   generatedBriefPath,
   preflight,
@@ -117,7 +133,31 @@ export const compileBrandSkillIntake = ({
 
   let generatedBriefPath: string | null = null
   const docsPaths = [...command.docsPaths]
-  const docsRoles = [...command.docsRoles]
+  const websiteRoles = fillMissingRolesFromSourcePlan({
+    preflight,
+    roles: command.websiteRoles,
+    sourceType: "website",
+  })
+  const docsRoles = fillMissingRolesFromSourcePlan({
+    preflight,
+    roles: command.docsRoles,
+    sourceType: "brand-docs",
+  })
+  const screenshotRoles = fillMissingRolesFromSourcePlan({
+    preflight,
+    roles: command.screenshotRoles,
+    sourceType: "screenshot-dir",
+  })
+  const codeRoles = fillMissingRolesFromSourcePlan({
+    preflight,
+    roles: command.codeRoles,
+    sourceType: "code-reference",
+  })
+  const figmaRoles = fillMissingRolesFromSourcePlan({
+    preflight,
+    roles: command.figmaRoles,
+    sourceType: "figma-url",
+  })
 
   if (command.writeBriefDoc && command.brief.trim() && docsPaths.length === 0) {
     generatedBriefPath = buildGeneratedBriefPath(command)
@@ -129,7 +169,7 @@ export const compileBrandSkillIntake = ({
 
   const websiteFilter = filterValuesByRole({
     values: command.websiteUrls,
-    roles: command.websiteRoles,
+    roles: websiteRoles,
     shouldInclude: (role) => role !== "mood-reference",
   })
 
@@ -139,6 +179,9 @@ export const compileBrandSkillIntake = ({
     docsRoles,
     websiteUrls: websiteFilter.keptValues,
     websiteRoles: websiteFilter.keptRoles,
+    screenshotRoles,
+    codeRoles,
+    figmaRoles,
   }
 
   return {
