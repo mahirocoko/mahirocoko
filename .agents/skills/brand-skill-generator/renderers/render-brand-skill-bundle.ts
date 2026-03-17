@@ -113,6 +113,7 @@ const buildReportMarkdown = (
       return `### ${sourceRecord.id}
 
 - Type: ${sourceRecord.sourceType}
+- Role: ${sourceRecord.sourceRole ?? "unspecified"}
 - Location: ${sourceRecord.location}
 - Summary: ${sourceRecord.sourceSummary}
 - Confidence baseline: ${sourceRecord.explicitnessBaseline}
@@ -126,6 +127,25 @@ const buildReportMarkdown = (
 - Mode: ${report.mode}
 - Destination: ${report.destinationDir}
 - Overall confidence: ${report.overallConfidence}
+- Preflight status: ${report.preflightStatus}
+
+## Preflight
+
+### Known Inputs
+
+${report.preflightKnownInputs.length > 0 ? report.preflightKnownInputs.map((knownInput) => `- ${knownInput}`).join("\n") : "- None"}
+
+### Missing Coverage
+
+${report.preflightMissingCoverage.length > 0 ? report.preflightMissingCoverage.map((missingCoverage) => `- ${missingCoverage}`).join("\n") : "- None"}
+
+### Ambiguities
+
+${report.preflightAmbiguities.length > 0 ? report.preflightAmbiguities.map((ambiguity) => `- ${ambiguity}`).join("\n") : "- None"}
+
+### Preflight Warnings
+
+${report.preflightWarnings.length > 0 ? report.preflightWarnings.map((warning) => `- ${warning}`).join("\n") : "- None"}
 
 ## Source Summary
 

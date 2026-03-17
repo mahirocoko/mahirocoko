@@ -15,6 +15,7 @@ This skill is the orchestration layer. It does not own synthesis logic itself. I
 - You want to refresh an existing brand skill in place
 - You want to inspect source coverage, confidence posture, or planned outputs before rendering
 - You want project-local brand synthesis instead of a generic style doctrine
+- You want the system to identify missing source coverage and ask clarifying questions before execution
 
 ## Command Shape
 
@@ -32,6 +33,15 @@ Modes:
 - `reconcile`
 
 ## Common Examples
+
+Minimal inspect from a live website plus screenshots:
+
+```bash
+bun --cwd .agents/skills/brand-skill-generator run brand-skill inspect \
+  --brand "Acme" \
+  --website https://acme.com \
+  --screenshots ./captures
+```
 
 Inspect a brand run before rendering:
 
@@ -66,13 +76,48 @@ bun --cwd .agents/skills/brand-skill-generator run brand-skill inspect \
   --json
 ```
 
+Refresh an existing generated brand skill in place:
+
+```bash
+bun --cwd .agents/skills/brand-skill-generator run brand-skill refresh \
+  --brand "Acme" \
+  --website https://acme.com \
+  --docs ./brand \
+  --screenshots ./captures \
+  --code ./app
+```
+
+## Current Input Model
+
+This version is source-driven.
+
+Supported inputs right now:
+
+- `--brief`
+- `--website`
+- `--docs`
+- `--screenshots`
+- `--code`
+- `--figma`
+- per-source role flags such as `--website-role mood-reference`
+
+Behavior in v2:
+
+- the skill runs intake preflight first
+- if source posture is incomplete, it should summarize what is known, what is missing, and what is ambiguous
+- it should ask one clarifying question at a time
+- websites must be classified before execution when their role is ambiguous
+- a short brief can be turned into a temporary brand doc with `--write-brief-doc`
+- mood-reference websites should not be treated as equivalent to brand truth
+
 ## Workflow
 
-1. Gather available brand sources
-2. Run `inspect` first when source quality is unclear
-3. Review validation issues, missing-source suggestions, and planned files
-4. Run `generate` or `refresh`
-5. Review the generated reports before applying the skill broadly
+1. Gather available brand sources or a short brief
+2. Run intake preflight and review known inputs, gaps, ambiguities, and the next question
+3. Resolve missing brand identity, website roles, or brief-doc decisions
+4. Run `inspect` first when source quality is unclear
+5. Run `generate` or `refresh`
+6. Review the generated reports before applying the skill broadly
 
 ## Current Phase
 
@@ -81,6 +126,7 @@ The current implementation is in Phase 3.
 What works now:
 
 - CLI entrypoint
+- intake preflight with one-question-at-a-time next-question planning
 - source inventory with real local scanning and website fetch support
 - validation gates
 - first-pass evidence extraction from source summaries and text samples
@@ -89,7 +135,7 @@ What works now:
 
 What lands in later phases:
 
-- deeper conflict handling
+- deeper role-aware synthesis instead of filtering mood-reference websites out of engine execution
 - stronger rule quality and brand inference
 - richer update-in-place diffing
 

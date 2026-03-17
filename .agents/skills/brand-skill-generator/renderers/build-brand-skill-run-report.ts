@@ -2,6 +2,7 @@ import type {
   BrandSourceType,
   ConfidenceLevel,
   IBrandSkillCommand,
+  IBrandSkillPreflightResult,
   IBrandSkillRunReport,
   IBrandSkillValidationResult,
   IBrandSourceInventory,
@@ -22,13 +23,33 @@ const buildSourceSummary = (sourceInventory: IBrandSourceInventory) => {
   }
 }
 
-const buildMissingSourceSuggestions = (sourceInventory: IBrandSourceInventory) => {
-  const hasWebsite = sourceInventory.sourceRecords.some((sourceRecord) => sourceRecord.sourceType === "website")
-  const hasDocs = sourceInventory.sourceRecords.some((sourceRecord) => sourceRecord.sourceType === "brand-docs")
-  const hasVisualReference = sourceInventory.sourceRecords.some(
-    (sourceRecord) =>
-      sourceRecord.sourceType === "figma-url" || sourceRecord.sourceType === "screenshot-dir",
-  )
+const buildMissingSourceSuggestions = ({
+  preflight,
+  sourceInventory,
+}: {
+  preflight: IBrandSkillPreflightResult
+  sourceInventory: IBrandSourceInventory
+}) => {
+  const sourcePlan = preflight.sourcePlan
+  const hasWebsite =
+    sourceInventory.sourceRecords.some((sourceRecord) => sourceRecord.sourceType === "website") ||
+    sourcePlan.some((sourceItem) => sourceItem.sourceType === "website")
+  const hasDocs =
+    sourceInventory.sourceRecords.some((sourceRecord) => sourceRecord.sourceType === "brand-docs") ||
+    sourcePlan.some(
+      (sourceItem) =>
+        sourceItem.sourceType === "brand-docs" ||
+        (sourceItem.sourceType === "brief" && sourceItem.includedInExecution),
+    )
+  const hasVisualReference =
+    sourceInventory.sourceRecords.some(
+      (sourceRecord) =>
+        sourceRecord.sourceType === "figma-url" || sourceRecord.sourceType === "screenshot-dir",
+    ) ||
+    sourcePlan.some(
+      (sourceItem) =>
+        sourceItem.sourceType === "figma-url" || sourceItem.sourceType === "screenshot-dir",
+    )
 
   const suggestions: string[] = []
 
@@ -58,10 +79,36 @@ const buildMissingSourceSuggestions = (sourceInventory: IBrandSourceInventory) =
   return suggestions
 }
 
+const buildValidationIssues = ({
+  preflight,
+  validation,
+}: {
+  preflight: IBrandSkillPreflightResult
+  validation: IBrandSkillValidationResult
+}) => {
+  const seenKeys = new Set<string>()
+
+  return [...preflight.issues, ...validation.issues].filter((issue) => {
+    const issueKey = `${issue.level}:${issue.code}:${issue.message}`
+
+    if (seenKeys.has(issueKey)) {
+      return false
+    }
+
+    seenKeys.add(issueKey)
+    return true
+  })
+}
+
 const buildOverallConfidence = (
+  preflight: IBrandSkillPreflightResult,
   validation: IBrandSkillValidationResult,
   normalizedBrandModel: INormalizedBrandModel,
 ): ConfidenceLevel => {
+  if (preflight.status !== "ready") {
+    return "low"
+  }
+
   if (!validation.canContinue) {
     return "low"
   }
@@ -71,6 +118,7 @@ const buildOverallConfidence = (
 
 export const buildBrandSkillRunReport = (
   command: IBrandSkillCommand,
+  preflight: IBrandSkillPreflightResult,
   sourceInventory: IBrandSourceInventory,
   validation: IBrandSkillValidationResult,
   normalizedBrandModel: INormalizedBrandModel,
@@ -80,7 +128,14 @@ export const buildBrandSkillRunReport = (
     brandSlug: command.brandSlug,
     mode: command.mode,
     destinationDir: toWorkspaceRelativePath(command.workspaceRoot, command.destinationDir),
-    overallConfidence: buildOverallConfidence(validation, normalizedBrandModel),
+    overallConfidence: buildOverallConfidence(preflight, validation, normalizedBrandModel),
+    preflightStatus: preflight.status,
+    preflightKnownInputs: preflight.knownInputs,
+    preflightMissingCoverage: preflight.missingCoverage,
+    preflightAmbiguities: preflight.ambiguities,
+    preflightWarnings: preflight.warnings,
+    preflightNextQuestion: preflight.nextQuestion,
+    sourcePlan: preflight.sourcePlan,
     sourceSummary: buildSourceSummary(sourceInventory),
     topConflicts: normalizedBrandModel.conflicts,
     topInferredRules: normalizedBrandModel.evidence
@@ -94,7 +149,7 @@ export const buildBrandSkillRunReport = (
         confidence: evidenceRecord.confidence,
         rationale: "Derived from first-pass source extraction and weighted source posture.",
       })),
-    missingSourceSuggestions: buildMissingSourceSuggestions(sourceInventory),
-    validationIssues: validation.issues,
+    missingSourceSuggestions: buildMissingSourceSuggestions({ preflight, sourceInventory }),
+    validationIssues: buildValidationIssues({ preflight, validation }),
   }
 }
