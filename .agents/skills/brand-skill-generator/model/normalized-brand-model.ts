@@ -1,4 +1,9 @@
 export type BrandSkillMode = "inspect" | "generate" | "refresh" | "reconcile"
+export type BrandSourceRole =
+  | "brand-truth"
+  | "live-product"
+  | "mood-reference"
+  | "supporting-reference"
 
 export type BrandSourceType =
   | "website"
@@ -13,6 +18,7 @@ export type SourceFreshness = "unknown" | "current" | "aging" | "stale"
 export type EvidenceSignalType = "explicit" | "inferred"
 export type ConfidenceLevel = "low" | "medium" | "high"
 export type ConflictResolutionMode = "adopt" | "split-by-profile" | "unresolved"
+export type BrandSkillPreflightStatus = "needs-clarification" | "ready"
 
 export interface IBrandSourceTextSample {
   label: string
@@ -25,11 +31,18 @@ export interface IBrandSkillCommand {
   brandSlug: string
   workspaceRoot: string
   destinationDir: string
+  brief: string
+  writeBriefDoc: boolean
   websiteUrls: string[]
+  websiteRoles: Array<BrandSourceRole | null>
   docsPaths: string[]
+  docsRoles: Array<BrandSourceRole | null>
   screenshotPaths: string[]
+  screenshotRoles: Array<BrandSourceRole | null>
   codePaths: string[]
+  codeRoles: Array<BrandSourceRole | null>
   figmaUrls: string[]
+  figmaRoles: Array<BrandSourceRole | null>
   outputFormat: "text" | "json"
   dryRun: boolean
 }
@@ -44,6 +57,7 @@ export interface IBrandSourceRecord {
   exists: boolean
   modifiedAt: string | null
   freshness: SourceFreshness
+  sourceRole: BrandSourceRole | null
   explicitnessBaseline: ConfidenceLevel
   coverageEstimate: ConfidenceLevel
   itemCount: number
@@ -122,6 +136,31 @@ export interface IBrandSkillValidationResult {
   issues: IBrandSkillValidationIssue[]
 }
 
+export interface IBrandSkillPreflightQuestion {
+  code: string
+  prompt: string
+}
+
+export interface IBrandSkillSourcePlanItem {
+  sourceType: BrandSourceType | "brief"
+  location: string
+  role: BrandSourceRole | null
+  roleOrigin: "explicit" | "default" | "generated" | "unknown"
+  includedInExecution: boolean
+  exclusionReason: string | null
+}
+
+export interface IBrandSkillPreflightResult {
+  status: BrandSkillPreflightStatus
+  knownInputs: string[]
+  missingCoverage: string[]
+  ambiguities: string[]
+  warnings: string[]
+  issues: IBrandSkillValidationIssue[]
+  nextQuestion: IBrandSkillPreflightQuestion | null
+  sourcePlan: IBrandSkillSourcePlanItem[]
+}
+
 export interface IBrandSkillPlannedFile {
   path: string
   reason: string
@@ -133,6 +172,13 @@ export interface IBrandSkillRunReport {
   mode: BrandSkillMode
   destinationDir: string
   overallConfidence: ConfidenceLevel
+  preflightStatus: BrandSkillPreflightStatus
+  preflightKnownInputs: string[]
+  preflightMissingCoverage: string[]
+  preflightAmbiguities: string[]
+  preflightWarnings: string[]
+  preflightNextQuestion: IBrandSkillPreflightQuestion | null
+  sourcePlan: IBrandSkillSourcePlanItem[]
   sourceSummary: {
     totalSources: number
     byType: Partial<Record<BrandSourceType, number>>
@@ -145,6 +191,8 @@ export interface IBrandSkillRunReport {
 
 export interface IBrandSkillExecutionPlan {
   command: IBrandSkillCommand
+  compiledCommand: IBrandSkillCommand | null
+  preflight: IBrandSkillPreflightResult
   sourceInventory: IBrandSourceInventory
   validation: IBrandSkillValidationResult
   normalizedBrandModel: INormalizedBrandModel
@@ -152,5 +200,5 @@ export interface IBrandSkillExecutionPlan {
   plannedFiles: IBrandSkillPlannedFile[]
   renderedFiles: string[]
   updateMode: "create" | "update"
-  status: "source-extracted" | "bundle-rendered"
+  status: "needs-user-input" | "source-extracted" | "bundle-rendered"
 }

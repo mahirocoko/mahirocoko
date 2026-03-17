@@ -36,7 +36,20 @@ export const buildSourceInventory = async (
 
   for (const sourceGroup of sourceGroups) {
     for (const [index, value] of sourceGroup.values.entries()) {
-      sourceRecords.push(await loadSourceRecordDetails(sourceGroup.sourceType, value, index + 1))
+      const sourceRole =
+        sourceGroup.sourceType === "website"
+          ? command.websiteRoles[index] ?? null
+          : sourceGroup.sourceType === "brand-docs"
+            ? command.docsRoles[index] ?? null
+            : sourceGroup.sourceType === "screenshot-dir"
+              ? command.screenshotRoles[index] ?? null
+              : sourceGroup.sourceType === "code-reference"
+                ? command.codeRoles[index] ?? null
+                : command.figmaRoles[index] ?? null
+
+      sourceRecords.push(
+        await loadSourceRecordDetails(sourceGroup.sourceType, value, index + 1, sourceRole),
+      )
     }
   }
 

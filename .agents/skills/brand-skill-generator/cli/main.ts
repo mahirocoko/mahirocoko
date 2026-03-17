@@ -13,6 +13,69 @@ const printTextOutput = (executionPlan: Awaited<ReturnType<typeof runBrandSkillC
   console.log(`Status: ${executionPlan.status}`)
   console.log("")
 
+  console.log("## Preflight")
+  console.log(`Status: ${executionPlan.preflight.status}`)
+
+  if (executionPlan.report.preflightKnownInputs.length > 0) {
+    console.log("")
+    console.log("### Known Inputs")
+
+    for (const knownInput of executionPlan.report.preflightKnownInputs) {
+      console.log(`- ${knownInput}`)
+    }
+  }
+
+  if (executionPlan.report.preflightMissingCoverage.length > 0) {
+    console.log("")
+    console.log("### Missing Coverage")
+
+    for (const missingCoverage of executionPlan.report.preflightMissingCoverage) {
+      console.log(`- ${missingCoverage}`)
+    }
+  }
+
+  if (executionPlan.report.preflightAmbiguities.length > 0) {
+    console.log("")
+    console.log("### Ambiguities")
+
+    for (const ambiguity of executionPlan.report.preflightAmbiguities) {
+      console.log(`- ${ambiguity}`)
+    }
+  }
+
+  if (executionPlan.report.preflightWarnings.length > 0) {
+    console.log("")
+    console.log("### Preflight Warnings")
+
+    for (const warning of executionPlan.report.preflightWarnings) {
+      console.log(`- ${warning}`)
+    }
+  }
+
+  if (executionPlan.report.preflightNextQuestion) {
+    console.log("")
+    console.log("### Next Question")
+    console.log(
+      `- [${executionPlan.report.preflightNextQuestion.code}] ${executionPlan.report.preflightNextQuestion.prompt}`,
+    )
+  }
+
+  console.log("")
+  console.log("### Source Plan")
+
+  for (const sourceItem of executionPlan.report.sourcePlan) {
+    const inclusionLine = sourceItem.includedInExecution ? "included" : "excluded"
+    const roleLine = sourceItem.role ?? "unspecified"
+    const exclusionReason = sourceItem.exclusionReason
+      ? ` (${sourceItem.exclusionReason})`
+      : ""
+
+    console.log(`- ${sourceItem.sourceType}: ${sourceItem.location}`)
+    console.log(`  role: ${roleLine} [${sourceItem.roleOrigin}]`)
+    console.log(`  execution: ${inclusionLine}${exclusionReason}`)
+  }
+
+  console.log("")
   console.log("## Source Summary")
   console.log(`Total sources: ${executionPlan.report.sourceSummary.totalSources}`)
 
@@ -25,6 +88,7 @@ const printTextOutput = (executionPlan: Awaited<ReturnType<typeof runBrandSkillC
 
   for (const sourceRecord of executionPlan.sourceInventory.sourceRecords) {
     console.log(`- ${sourceRecord.id} (${sourceRecord.sourceType})`)
+    console.log(`  role: ${sourceRecord.sourceRole ?? "unspecified"}`)
     console.log(`  summary: ${sourceRecord.sourceSummary}`)
     console.log(`  confidence baseline: ${sourceRecord.explicitnessBaseline}`)
 
@@ -116,7 +180,7 @@ const main = async () => {
       printTextOutput(executionPlan)
     }
 
-    if (!executionPlan.validation.canContinue) {
+    if (executionPlan.status === "needs-user-input" || !executionPlan.validation.canContinue) {
       process.exitCode = 1
     }
   } catch (error) {

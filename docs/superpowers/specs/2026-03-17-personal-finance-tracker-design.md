@@ -13,6 +13,7 @@ Build a simple personal income and expense web app with a white-and-blue visual 
 - White-and-blue tone with a restrained, trustworthy look
 - Thai-first copy with selective English labels such as `Balance`, `Income`, `Expense`, and `Recent activity`
 - Responsive for both desktop and mobile, with neither treated as a degraded experience
+- Implemented as a standalone `Vite + React + TypeScript` app inside `apps/blue-ledger`
 
 ## Goals
 
@@ -114,7 +115,7 @@ Behavior:
 Contents:
 - type selector: `income` or `expense`
 - amount input
-- category input or select
+- category input with reusable suggestions
 - note input
 - date input
 - submit action
@@ -127,6 +128,7 @@ Behavior:
 - validation is inline and minimal
 - submit writes to local storage
 - successful submit clears or resets fields to a sensible default
+- if the user submits a new category that does not yet exist, that category becomes available in future suggestions automatically
 
 ### 4. Recent Activity
 
@@ -138,6 +140,9 @@ Contents:
 Purpose:
 - confirm what was just saved
 - give enough history to stay oriented without another page
+
+Behavior:
+- show the latest `8` entries on the first screen
 
 ## Data Model
 
@@ -158,6 +163,7 @@ Derived state:
 - `totalExpense`
 - `recentEntries`
 - `categorySummary`
+- `categorySuggestions`
 
 ## Persistence
 
@@ -169,6 +175,7 @@ Rules:
 - read on initial load
 - handle corrupted or unreadable stored data by falling back to an empty safe state
 - avoid backend assumptions in UI copy and architecture
+- keep all browser persistence behind an explicit storage helper boundary rather than inside leaf UI components
 
 ## Interaction Rules
 
@@ -177,6 +184,7 @@ Rules:
 - `Balance`, `Income`, and `Expense` cards are always computed from the same entry source
 - Empty state should encourage the user to add the first entry
 - The form should not feel modal or hidden behind another step
+- Category suggestions should combine default starter categories with categories already used in saved entries
 
 ## Validation and Error States
 
@@ -207,6 +215,7 @@ Mobile:
 - balance card remains visually dominant
 - form controls remain large enough for quick thumb entry
 - recent activity stays readable without dense table patterns
+- mobile should still preserve a clear section rhythm rather than becoming one undifferentiated stack
 
 ## Visual System
 

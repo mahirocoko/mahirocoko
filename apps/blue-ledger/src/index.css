@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+:root {
+  color-scheme: light;
+  font-family: 'IBM Plex Sans Thai', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #10233b;
+  background: #f4f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-background: #f7fafc;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f5f8fc;
+  --color-border: #d9e4f2;
+  --color-border-strong: #bfd1e6;
+  --color-text: #10233b;
+  --color-text-muted: #60758d;
+  --color-primary: #1d5fd4;
+  --color-primary-deep: #123d8e;
+  --color-income: #154fb3;
+  --color-expense: #c04022;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+body,
+button,
+input,
+textarea {
+  font-family: 'IBM Plex Sans Thai', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+code {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+#root {
+  min-height: 100vh;
+}

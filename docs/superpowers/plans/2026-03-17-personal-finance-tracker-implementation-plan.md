@@ -12,6 +12,7 @@ Implement `v1` of a personal income and expense tracker as a frontend-only web a
 - shows `Balance`, `Income`, and `Expense` summaries
 - displays recent activity on the same screen
 - persists data locally in the browser with `localStorage`
+- lives in `apps/blue-ledger` as a standalone `Vite + React + TypeScript` app
 
 ## Delivery Strategy
 
@@ -34,6 +35,8 @@ The target is one polished single-screen experience, not a broad feature set.
 - balance overview with three summary cards
 - quick-add form for new entries
 - recent activity list ordered newest first
+- category suggestions that learn newly submitted categories automatically
+- first-screen recent activity capped to `8` entries
 - browser persistence with `localStorage`
 - Thai-first copy with selected English labels
 - responsive behavior for mobile and desktop
@@ -61,7 +64,7 @@ Deliverables:
 
 Tasks:
 
-- identify the existing frontend stack and entry file
+- scaffold `apps/blue-ledger` with `Vite + React + TypeScript`
 - create the single-screen shell for the finance app
 - define shared layout tokens or local style constants for spacing, radius, border, and shadows
 - establish white-and-blue color usage for primary, secondary, and muted states
@@ -79,6 +82,7 @@ Deliverables:
 - `entry` type or interface
 - storage read and write helpers
 - summary calculation helpers
+- category suggestion helpers
 
 Tasks:
 
@@ -86,6 +90,7 @@ Tasks:
 - implement `localStorage` read on initial load
 - implement safe parsing and corrupted-state fallback
 - implement derived calculations for balance, total income, total expense, and recent ordering
+- implement category suggestion derivation from starter values plus saved entries
 
 Acceptance checks:
 
@@ -126,6 +131,7 @@ Deliverables:
 - secondary `Income` and `Expense` cards
 - recent activity list
 - empty state for first use
+- recent activity cap for the first `8` entries
 
 Tasks:
 
@@ -167,12 +173,12 @@ Acceptance checks:
 
 Use this sequence to keep rework low:
 
-1. inspect current frontend stack and app entry
+1. scaffold `apps/blue-ledger`
 2. create the layout shell and style foundation
 3. define entry model, storage helpers, and derived calculations
 4. build and wire the quick-add form
 5. build summary cards and recent activity
-6. implement empty state and corrupted-storage fallback
+6. implement empty state, learned categories, and corrupted-storage fallback
 7. polish responsive behavior and copy
 8. run verification
 
@@ -180,7 +186,7 @@ Use this sequence to keep rework low:
 
 Recommended split, adapted to the existing stack once confirmed:
 
-- app screen or page file
+- app screen file
   owns composition of the finance screen
 - finance domain module
   owns `entry` model, calculations, and storage helpers

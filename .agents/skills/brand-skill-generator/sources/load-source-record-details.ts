@@ -2,6 +2,7 @@ import fs from "node:fs"
 import path from "node:path"
 
 import type {
+  BrandSourceRole,
   BrandSourceType,
   ConfidenceLevel,
   IBrandSourceRecord,
@@ -289,6 +290,7 @@ export const loadSourceRecordDetails = async (
   sourceType: BrandSourceType,
   location: string,
   recordIndex: number,
+  sourceRole: BrandSourceRole | null,
 ): Promise<IBrandSourceRecord> => {
   const locationType: SourceLocationType = isUrl(location) ? "url" : "path"
   const resolvedLocation = locationType === "url" ? location : path.resolve(location)
@@ -325,6 +327,7 @@ export const loadSourceRecordDetails = async (
     exists: detailResult.exists,
     modifiedAt,
     freshness,
+    sourceRole,
     explicitnessBaseline: explicitnessBySourceType[sourceType],
     coverageEstimate: coverageBySourceType[sourceType],
     itemCount: detailResult.itemCount,
