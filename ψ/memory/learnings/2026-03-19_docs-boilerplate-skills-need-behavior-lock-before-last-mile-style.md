@@ -1,0 +1,5 @@
+# Docs boilerplate skills need behavior lock before last-mile style
+
+When building a reusable docs-init skill, improving templates alone is not enough. If the skill behaves like a research agent, it will still drift into exploration, unsupported tools, or improvised page shapes before writing. The stable order is: lock the orchestration first, then refine the boilerplates. Once the skill reliably inspects only the local repo, classifies the stack, and writes from source-faithful templates immediately, the remaining work becomes a narrow style-fit problem on a few high-signal pages rather than a full-system problem.
+
+The practical signal from this session was clear: `development-commands.md` and `commit-guide.md` improved quickly once the grammar tightened and the behavior became more conservative, while `formatting.md` and `services-pattern.md` remained the last mile. That suggests the right iteration pattern is to freeze the system when it becomes broadly usable, then attack the final style gaps page-by-page instead of reopening the full design space.
