@@ -1,56 +1,16 @@
 # Formatting ([Formatter Name])
 
-## Configuration
+## Current Reality
 
-All formatting is handled by [formatter name and version if known]. Configuration is in `[config file path]`.
+- **Formatter**: [formatter name and version if known]
+- **Config file**: `[config file path]`
+- **Auto-run posture**: [runs through formatter only / runs through lint + formatter / handled by pre-commit or CI / manual only]
 
-## Rules
+If formatting is only partially enforced, say that clearly instead of implying the repo already has a strict formatter pipeline.
 
-### Indentation & Spacing
+## Formatting Commands
 
-- **Indent width**: [value]
-- **Indent style**: [Space/Tab]
-- **Line ending**: [LF/CRLF]
-
-### Quotes
-
-- **JavaScript/TypeScript**: [Single/Double]
-- **JSX**: [Single/Double]
-- **JSON**: [Trailing comma policy or formatter default]
-
-### Line Width
-
-- **Maximum**: [value]
-- [formatter] [automatically wraps long lines / follows default behavior]
-
-### Semicolons
-
-- **Policy**: [As needed / Always / Omit where possible]
-
-### Trailing Commas
-
-- **JavaScript/TypeScript**: [All / ES5 / None]
-- **JSON**: [None / formatter default]
-
-### Arrow Functions
-
-- **Parentheses**: [Always required / formatter default]
-
-```ts
-// Correct
-items.map((item) => item.id)
-
-// Avoid if the repo requires parentheses
-items.map(item => item.id)
-```
-
-### Other Rules
-
-- **Bracket spacing**: [Enabled/Disabled]
-- **Bracket same line**: [Enabled/Disabled]
-- **Attribute position**: [Auto / repo-specific note]
-
-## Usage
+Use only verified repo commands here.
 
 ```bash
 # Check formatting
@@ -72,15 +32,72 @@ items.map(item => item.id)
 [verified combined write command if available]
 ```
 
-## Example
+If the repo only exposes one combined command, keep only that instead of padding the section with guesses.
+
+## Core Rules
+
+### Indentation & Spacing
+
+- **Indent width**: [value]
+- **Indent style**: [Space/Tab]
+- **Line ending**: [LF/CRLF]
+- **Trailing whitespace**: [trimmed by formatter / not explicitly enforced]
+
+### Quotes & Semicolons
+
+- **JavaScript/TypeScript quotes**: [Single/Double]
+- **JSX quotes**: [Single/Double]
+- **Semicolons**: [Always / Omit where possible / formatter default]
+
+### Line Width & Wrapping
+
+- **Maximum width**: [value]
+- **Wrap behavior**: [[formatter] wraps automatically / repo follows formatter default]
+
+### Trailing Commas
+
+- **JavaScript/TypeScript**: [All / ES5 / None]
+- **JSON**: [None / formatter default]
+
+### Brackets & Attributes
+
+- **Bracket spacing**: [Enabled/Disabled]
+- **Closing bracket placement**: [Same line / formatter default]
+- **Multi-line attributes or props**: [formatter default / repo-specific note]
+
+### Arrow Functions
+
+- **Parentheses**: [Always required / omitted for single param / formatter default]
+
+```ts
+// Preferred
+items.map((item) => item.id)
+
+// Avoid if the repo keeps arrow params wrapped
+items.map(item => item.id)
+```
+
+## Repo-Faithful Example
+
+Use a real-looking example that matches the repo's import order, quote style, semicolon posture, and JSX wrapping behavior.
 
 ```tsx
 [repo-faithful example that matches the formatter and export posture]
 ```
 
-## Override Rules in Files
+## Ignore and Override Syntax
+
+Document this only if the repo actually uses inline ignore comments or file-level formatter escape hatches.
 
 ```ts
 // [real ignore syntax]
 const data: any = fetchData()
 ```
+
+If the repo has no local override syntax in use, replace this block with a short note instead of inventing one.
+
+## Preferred Direction
+
+- Keep formatting guidance aligned with the actual formatter config, not team habit.
+- Prefer one verified write command contributors can run before commit.
+- If lint and formatting overlap, document which tool is the source of truth.
