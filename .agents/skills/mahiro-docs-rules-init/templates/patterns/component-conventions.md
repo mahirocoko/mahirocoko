@@ -1,8 +1,12 @@
 # Component Conventions
 
+This page is blueprint-allowed. It should reflect current repo component ownership, but it may also preserve the preferred component shape the repo is expected to grow into.
+
 ## Code Organization
 
 Use clear section comments to organize component and hook code when complexity grows. This keeps files easier to scan and review.
+
+If the repo follows Mahiro-style component structure, keep that posture visible here even when some files are still simpler in practice.
 
 ### Section Order
 
@@ -37,8 +41,25 @@ Use clear section comments to organize component and hook code when complexity g
 
 ## Template
 
+If props are typed with interfaces in the target repo, keep the `I` prefix visible in the template rather than flattening it into a generic props alias.
+
 ```tsx
-[boilerplate component template aligned with the repo's import, typing, and export posture]
+interface IProfileCardProps {
+  name: string
+  description?: string
+}
+
+export const ProfileCard = ({ name, description }: IProfileCardProps) => {
+  // _Memo
+  const title = name.trim()
+
+  return (
+    <article>
+      <h2>{title}</h2>
+      {description ? <p>{description}</p> : null}
+    </article>
+  )
+}
 ```
 
 ## Route Components
@@ -52,3 +73,10 @@ When a page grows beyond a single clean file, extract partials into a feature-ow
 ## Owner-Local Data
 
 When copy, nav items, badges, or placeholder options belong to one component only, keep them with the owner by default.
+
+## Preferred Direction
+
+- Keep the component template opinionated enough to show the intended React posture for this repo family.
+- Preserve interface naming and section-comment conventions when they are part of the house style.
+- Do not mislabel blueprint structure as already universal in the target repo.
+- Let the example itself demonstrate `I`-prefixed props when that is the intended house posture.

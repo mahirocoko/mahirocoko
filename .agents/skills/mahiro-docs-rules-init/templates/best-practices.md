@@ -1,5 +1,7 @@
 # Best Practices
 
+This page is blueprint-allowed. It should preserve the house coding posture strongly enough to guide a new repo, while still staying honest about which layers are or are not established yet.
+
 ## Code Quality
 
 ### Always Run Verification Commands
@@ -19,6 +21,8 @@ export { MyComponent, type IMyComponentProps }
 // Incorrect
 export { MyComponent }
 ```
+
+If the repo follows Mahiro-style interface naming, keep the `I` prefix in examples instead of flattening the type posture away.
 
 ### Avoid `any`
 
@@ -73,6 +77,8 @@ const CardHeader = ({ children }: ICardHeaderProps) => <header>{children}</heade
 const CardFooter = ({ children }: ICardFooterProps) => <footer>{children}</footer>
 ```
 
+Keep examples aligned with the repo's intended component typing posture, including `I`-prefixed interface props when that is part of the house style.
+
 ## Service Best Practices
 
 ### Keep Transport Out of Components
@@ -93,6 +99,8 @@ const mutation = useMutation({
 
 ### Use `cn()` for Class Merging
 
+Document this only when the repo actually has `cn()` or an equivalent helper. If not, replace the section with the real class-merging or styling posture instead of leaving a generic pattern.
+
 ```tsx
 import { cn } from '@/utils/cn'
 
@@ -100,6 +108,8 @@ import { cn } from '@/utils/cn'
 ```
 
 ### Semantic Tokens Over Raw Palette
+
+If the repo does not use tokenized utility classes, adapt this example to the real styling system while preserving the doctrine of semantic naming over raw values.
 
 ```tsx
 // Avoid
@@ -123,11 +133,13 @@ import { cn } from '@/utils/cn'
 [repo-faithful selector example]
 ```
 
+If the repo does not have a server-state or client-state layer yet, say so directly and keep the guidance in `Preferred Direction` language instead of pretending the layers already exist.
+
 ## Development Workflow
 
 1. Make changes
 2. Run the repo's verification commands
-3. Run i18n extraction if copy changed
+3. Run i18n extraction if the repo actually has an i18n workflow and copy changed
 4. Run build when the task requires it
 5. Commit changes
 
@@ -148,7 +160,13 @@ export { MyComponent, type IMyComponentProps }
 Before committing:
 
 - [ ] Ran the repo's verification commands
-- [ ] Ran i18n extraction if changing copy
+- [ ] Ran i18n extraction if the repo has that workflow and copy changed
 - [ ] Exported types alongside implementations
 - [ ] Used the repo's class-merging utility when needed
-- [ ] Used selectors for client-state stores
+- [ ] Used selectors for client-state stores if that layer exists
+
+## Preferred Direction
+
+- Keep this page opinionated enough to transfer house style into early repos.
+- Prefer repo-faithful examples, but do not erase useful blueprint guidance just because the repo is still small.
+- Separate established repo behavior from suggested best-practice posture whenever the codebase is still immature.

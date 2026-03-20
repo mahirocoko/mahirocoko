@@ -1,10 +1,10 @@
 ---
-name: docs-rules-init
-description: Bootstrap AGENTS.md and a repo-aware docs family from reference grammar plus local React repo reality. Use when a project is new, under-documented, or needs an init pass for docs and rules.
+name: mahiro-docs-rules-init
+description: Bootstrap AGENTS.md and a Mahiro-style docs family from reference grammar plus local repo reality. Use when a project is new, under-documented, or needs an init pass for docs and rules with Mahiro doctrine.
 user-invocable: true
 ---
 
-# /docs-rules-init - Bootstrap Docs and Rules
+# /mahiro-docs-rules-init - Bootstrap Docs and Rules
 
 Create an initial `AGENTS.md` plus a coherent docs family for a repo that has no docs, weak docs, or scattered rules. This hub stays thin on purpose. Use the resource pages and templates instead of duplicating their guidance here.
 
@@ -143,9 +143,9 @@ Treat this skill as a bootstrap initializer, not a fiction generator. The goal i
 ## Example Invocation
 
 ```text
-/docs-rules-init
-/docs-rules-init "initialize docs and AGENTS for this repo from our reference grammar"
-/docs-rules-init "bootstrap a docs family for this React app and keep it honest to current code"
+/mahiro-docs-rules-init
+/mahiro-docs-rules-init "initialize docs and AGENTS for this repo from our reference grammar"
+/mahiro-docs-rules-init "bootstrap a docs family for this React app and keep it honest to current code"
 ```
 
 ## Future Expansion
