@@ -1,0 +1,3 @@
+# Watch Skill Paths and Slug Registry Fix
+
+The `/watch` workflow becomes trustworthy only when the installed OpenCode skill paths match the real environment and the save helper can always persist output. In this session, the practical failure came from two small mismatches: documentation that still pointed at repo-style `src/skills/watch/...` paths instead of the installed OpenCode skill directory, and a save helper that referenced an undefined `SLUGS_FILE`. The reliable pattern is to validate the installed path first, save the learning artifact even if automation partially fails, and keep the helper's registry paths explicit so knowledge capture does not depend on hidden globals.
