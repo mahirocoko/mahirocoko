@@ -1,5 +1,7 @@
 # Formatting ([Formatter Name])
 
+This page may carry both observed repo behavior and the preferred formatting blueprint the repo should stay close to.
+
 ## Current Reality
 
 - **Formatter**: [formatter name and version if known]
@@ -7,6 +9,14 @@
 - **Auto-run posture**: [runs through formatter only / runs through lint + formatter / handled by pre-commit or CI / manual only]
 
 If formatting is only partially enforced, say that clearly instead of implying the repo already has a strict formatter pipeline.
+
+## Preferred Formatting Blueprint
+
+Use this section to preserve the repo or house style posture when the skill is bootstrapping docs for an early codebase.
+
+- Keep the formatting doctrine strong enough that contributors can see the intended style direction immediately.
+- If the repo is aligned to a house style such as Mahiro style, reflect that shape here even if enforcement is still incomplete.
+- Do not fabricate local commands or config files just to support the blueprint.
 
 ## Formatting Commands
 
@@ -79,7 +89,7 @@ items.map(item => item.id)
 
 ## Repo-Faithful Example
 
-Use a real-looking example that matches the repo's import order, quote style, semicolon posture, and JSX wrapping behavior.
+Use a real-looking example that matches the repo's intended formatting posture, not just the most accidental current file shape.
 
 ```tsx
 [repo-faithful example that matches the formatter and export posture]
@@ -101,3 +111,4 @@ If the repo has no local override syntax in use, replace this block with a short
 - Keep formatting guidance aligned with the actual formatter config, not team habit.
 - Prefer one verified write command contributors can run before commit.
 - If lint and formatting overlap, document which tool is the source of truth.
+- Keep enough blueprint in the page that a new repo still inherits the intended style posture on day one.

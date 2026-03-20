@@ -12,6 +12,46 @@ These rules control how the skill writes each page.
 - Commands must come from the repo, not from habit.
 - Prefer repo-local doctrine over imported taste.
 
+## Template Posture Rules
+
+Not every page in this skill has the same job.
+
+### Reality-First Pages
+
+These pages must stay tightly anchored to the repo as it exists today:
+
+- `AGENTS.md`
+- `docs/project-overview.md`
+- `docs/development-commands.md`
+- `docs/file-organization.md`
+
+Rules:
+
+- lead with current repo reality
+- use verified commands, folders, tools, and boundaries only
+- if a layer is missing, say so directly
+- keep future direction short and clearly labeled
+
+### Blueprint-Allowed Pages
+
+These pages may carry more shaping doctrine and starter guidance, as long as they do not lie about current repo facts:
+
+- `docs/code-style/formatting.md`
+- `docs/code-style/typescript.md`
+- `docs/code-style/imports.md`
+- `docs/patterns/component-conventions.md`
+- `docs/patterns/hooks-pattern.md`
+- `docs/patterns/services-pattern.md`
+- `docs/best-practices.md`
+
+Rules:
+
+- keep the page's blueprint shape when it helps bootstrap repo doctrine
+- allow stronger preferred patterns and starter examples even if the repo is still early
+- do not present blueprint guidance as if it is already enforced or fully established
+- label observed behavior separately from suggested or preferred shape when both appear
+- if the target repo is clearly aligned to a house style, preserve that guiding posture instead of flattening the page into pure observation
+
 ## Boilerplate Rule
 
 - Start from the closest template under `templates/`.
@@ -31,6 +71,7 @@ These rules control how the skill writes each page.
 - `docs/commit-guide.md` must not invent enforced conventions from thin air. If there is no `.git` history, no commitlint, and no hook config, keep the guide explicitly conservative and say it reflects a suggested local baseline rather than observed enforced policy.
 - `docs/development-commands.md` should mirror the reference grammar closely: prefer `Quick Start`, `Building`, `Linting & Formatting`, `Type Checking`, `Internationalization`, `Dependency Management`, and `Verification Cadence` when they fit the repo.
 - `docs/patterns/services-pattern.md` should keep the service-doc shape even when the repo's service layer is still small; trim sections carefully instead of collapsing the page into a short summary.
+- `docs/code-style/formatting.md` may intentionally establish a stronger formatting blueprint for the repo or house style, but any actual commands or enforced config still need to be verified locally.
 
 ## Reality Labels
 
@@ -44,7 +85,7 @@ Use these labels as needed inside pages:
 ## Hard Do-Not Rules
 
 - do not guess commands
-- do not invent architecture
+- do not invent current architecture
 - do not copy reference repo facts into the target repo
 - do not over-document future plans as if they are current behavior
 - do not use `grep_app_searchGitHub`, `context7_*`, `webfetch`, `websearch_*`, or subagents for this skill

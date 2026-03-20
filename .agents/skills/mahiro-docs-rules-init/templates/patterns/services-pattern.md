@@ -1,11 +1,13 @@
 # Services Pattern
 
+This page can act as both a reality check and a bootstrap blueprint. Keep the service-doc shape even when the repo is still small, but label clearly what exists today versus what is the preferred service posture.
+
 ## Current Status
 
 - **Current reality**: [Say clearly whether the repo already has a shared service layer, owner-local service files, hook-owned fetch logic, or no service abstraction yet.]
 - **Confidence**: [Established / Partial / Not established yet]
 
-If the repo does not have a real shared service layer yet, keep the document shape but say so directly. Do not pretend a future `services/` tree already exists.
+If the repo does not have a real shared service layer yet, keep the document shape but say so directly. The blueprint may still show the intended service posture, but it must not be mislabeled as current architecture.
 
 ## BaseService
 
@@ -19,7 +21,7 @@ If the repo uses a shared transport wrapper, document the real one here. If it d
 
 ## Service Template
 
-Show the smallest believable service example that matches the repo's current architecture. If the repo is still feature-local, the template should stay feature-local too.
+Show the smallest believable service example that matches the repo's intended service posture. If the repo is still early, it is fine for this example to act as a bootstrap blueprint as long as the page still states what is and is not established yet.
 
 ```ts
 [repo-faithful service template]
@@ -43,7 +45,7 @@ If the repo does not use request config or fallbacks, keep these sections only a
 
 ## Service File Structure
 
-Mirror the smallest real structure that the repo supports today.
+Mirror the smallest real structure that the repo supports today, or the smallest truthful blueprint when the page is intentionally setting a service shape for future work.
 
 ```text
 services/
@@ -54,7 +56,7 @@ services/
 └── ...
 ```
 
-If the service layer is minimal, keep the real one-file structure instead of forcing domain folders.
+If the service layer is minimal, keep the real one-file structure instead of forcing domain folders. If the repo is bootstrap-stage but clearly wants a house service pattern, it is acceptable to show that shape as `Preferred Direction` rather than deleting it.
 
 ## Adoption Triggers
 
@@ -130,6 +132,7 @@ Prefer showing the real usage owner for this repo: component, route loader, cust
 - Keep raw transport details out of unrelated UI files once repetition starts.
 - Let feature owners keep small service helpers local before introducing shared folders.
 - Extract shared request logic only when the repo has enough repeated evidence to support it.
+- When the skill is bootstrapping a repo, preserve the intended service blueprint even if the current repo only shows fragments of that shape.
 
 ## Best Practices Summary
 
