@@ -1,5 +1,5 @@
 {
-  "version": "2.8",
+  "version": "2.9",
   "children": [
     {
       "type": "frame",
@@ -11839,6 +11839,645 @@
                       "content": "159 W 25th St, NY\n+1 212 555 0920",
                       "fontFamily": "Noto Sans Thai",
                       "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "N8RKJ",
+      "x": 14240,
+      "y": 0,
+      "name": "Study / Pricing Card / Business Plan",
+      "width": 1600,
+      "height": 1600,
+      "fill": "#ECE9E6"
+    },
+    {
+      "type": "frame",
+      "id": "XAcW8",
+      "x": 14640,
+      "y": 350,
+      "name": "businessPlanCard",
+      "width": 820,
+      "height": 930,
+      "fill": "#FFFFFF",
+      "cornerRadius": 58,
+      "stroke": {
+        "align": "inside",
+        "thickness": 8,
+        "fill": "#F8F8F7"
+      },
+      "effect": {
+        "type": "shadow",
+        "shadowType": "outer",
+        "color": "#00000014",
+        "offset": {
+          "x": 0,
+          "y": 18
+        },
+        "blur": 54
+      }
+    },
+    {
+      "type": "frame",
+      "id": "GYZON",
+      "x": 14690,
+      "y": 430,
+      "name": "pricingContent",
+      "width": 720,
+      "layout": "vertical",
+      "gap": 36,
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "bhfhR",
+          "name": "intro",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 22,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "F5G5y",
+              "name": "iconBox",
+              "width": 84,
+              "height": 84,
+              "fill": "#F4FAFDCC",
+              "cornerRadius": 22,
+              "stroke": {
+                "align": "inside",
+                "thickness": 2,
+                "fill": "#F7FBFD"
+              },
+              "layout": "vertical",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "eW3u7",
+                  "name": "iconMark",
+                  "fill": "#111111",
+                  "content": "◆",
+                  "textAlign": "center",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 26,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "vrxKx",
+              "name": "planTitle",
+              "fill": "#1A1A1A",
+              "content": "Business plan",
+              "textAlign": "center",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 32,
+              "fontWeight": "600"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QIqrB",
+          "name": "priceWrap",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 6,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "jD5S5",
+              "name": "priceText",
+              "fill": "#0A0A0A",
+              "content": "$20/mth",
+              "textAlign": "center",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 78,
+              "fontWeight": "800"
+            },
+            {
+              "type": "text",
+              "id": "5rSpu",
+              "name": "billedText",
+              "fill": "#2E2E2E",
+              "content": "Billed annually",
+              "textAlign": "center",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 26,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "LQonC",
+          "name": "ctaButton",
+          "width": 716,
+          "height": 92,
+          "fill": "#111111",
+          "cornerRadius": 30,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#00000040",
+            "offset": {
+              "x": 0,
+              "y": 14
+            },
+            "blur": 28
+          },
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "fc3Yo",
+              "name": "ctaLabel",
+              "fill": "#FFFFFF",
+              "content": "Choose Plan →",
+              "textAlign": "center",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 24,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "y6bie",
+          "name": "features",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "children": [
+            {
+              "type": "text",
+              "id": "KnC6i",
+              "name": "featureList",
+              "fill": "#6F6F6F",
+              "content": "✓  Unlimited emails\n\n✓  10 phone numbers per month\n\n✓  12K /mth export limit\n\n✓  CRM integration",
+              "fontFamily": "Noto Sans Thai",
+              "fontSize": 24,
+              "fontWeight": "500"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "rectangle",
+      "id": "P0BUV",
+      "x": 15872,
+      "y": -324,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "image 49.jpg",
+        "mode": "fill"
+      },
+      "width": 2048,
+      "height": 2048
+    },
+    {
+      "type": "frame",
+      "id": "TXUjr",
+      "x": 18040,
+      "y": -324,
+      "name": "Card Build - Agent Slot",
+      "width": 760,
+      "height": 980,
+      "fill": "#F5F5F5",
+      "layout": "vertical",
+      "gap": 16,
+      "padding": 24,
+      "children": [
+        {
+          "type": "frame",
+          "id": "WmxIk",
+          "layoutPosition": "absolute",
+          "x": 560,
+          "y": 24,
+          "name": "Feature Row/Compact",
+          "reusable": true,
+          "width": 176,
+          "gap": 10,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "fYZpT",
+              "name": "featureIcon",
+              "width": 14,
+              "height": 14,
+              "iconFontName": "check",
+              "iconFontFamily": "lucide",
+              "fill": "$color.accent"
+            },
+            {
+              "type": "text",
+              "id": "jdzBw",
+              "name": "featureLabel",
+              "fill": "$color.accent",
+              "content": "Feature item",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "8z3SQ",
+          "name": "Feature List / Pricing",
+          "width": "fill_container",
+          "height": "fit_content(106)",
+          "layout": "vertical",
+          "gap": 10,
+          "padding": [
+            8,
+            0,
+            0,
+            0
+          ],
+          "children": [
+            {
+              "id": "Fq6Jd",
+              "type": "ref",
+              "ref": "WmxIk",
+              "width": "fill_container(712)",
+              "name": "row1",
+              "x": 0,
+              "y": 8,
+              "descendants": {
+                "jdzBw": {
+                  "content": "Unlimited projects"
+                }
+              }
+            },
+            {
+              "id": "kAQdo",
+              "type": "ref",
+              "ref": "WmxIk",
+              "width": "fill_container(712)",
+              "name": "row2",
+              "x": 0,
+              "y": 35,
+              "descendants": {
+                "jdzBw": {
+                  "content": "Advanced analytics"
+                }
+              }
+            },
+            {
+              "id": "T4wmu",
+              "type": "ref",
+              "ref": "WmxIk",
+              "width": "fill_container(712)",
+              "name": "row3",
+              "x": 0,
+              "y": 62,
+              "descendants": {
+                "jdzBw": {
+                  "content": "Priority email support"
+                }
+              }
+            },
+            {
+              "id": "s7bKq",
+              "type": "ref",
+              "ref": "WmxIk",
+              "width": "fill_container(712)",
+              "name": "row4",
+              "x": 0,
+              "y": 89,
+              "descendants": {
+                "jdzBw": {
+                  "content": "Custom domain"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "gT6sv",
+      "x": 18860,
+      "y": -324,
+      "name": "Pricing Card Component - Done",
+      "width": 760,
+      "height": 980,
+      "fill": "#E9E9EA",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 48,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "RH2u4",
+          "name": "Component/Pricing Card",
+          "reusable": true,
+          "width": 380,
+          "fill": [
+            {
+              "type": "gradient",
+              "gradientType": "linear",
+              "enabled": true,
+              "rotation": 180,
+              "size": {
+                "height": 1
+              },
+              "colors": [
+                {
+                  "color": "#F5FBFF",
+                  "position": 0
+                },
+                {
+                  "color": "#FFFFFF",
+                  "position": 1
+                }
+              ]
+            },
+            "#FFFFFFCC"
+          ],
+          "cornerRadius": 30,
+          "stroke": {
+            "thickness": 2,
+            "fill": "#FFFFFF"
+          },
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001A",
+            "offset": {
+              "x": 0,
+              "y": 10
+            },
+            "blur": 24
+          },
+          "layout": "vertical",
+          "gap": 14,
+          "padding": [
+            22,
+            24,
+            24,
+            24
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "jyBPK",
+              "name": "head",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "IMS8V",
+                  "name": "iconBox",
+                  "width": 34,
+                  "height": 34,
+                  "fill": "#E8EDF2",
+                  "cornerRadius": 10,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KXDVZ",
+                      "name": "iconTxt",
+                      "fill": "#111111",
+                      "content": "◈",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "curBu",
+                  "name": "planTxt",
+                  "fill": "#1E1E1E",
+                  "content": "Business plan",
+                  "fontFamily": "Inter",
+                  "fontSize": 29,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "ONLdI",
+                  "name": "priceTxt",
+                  "fill": "#101010",
+                  "content": "$20/mth",
+                  "fontFamily": "Inter",
+                  "fontSize": 52,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "9GKnj",
+                  "name": "billTxt",
+                  "fill": "#3D3D3D",
+                  "content": "Billed annually",
+                  "fontFamily": "Inter",
+                  "fontSize": 22,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "JHztV",
+              "name": "cta",
+              "width": "fill_container",
+              "fill": "#0A0A0A",
+              "cornerRadius": 16,
+              "effect": [
+                {
+                  "type": "shadow",
+                  "shadowType": "outer",
+                  "color": "#00000066",
+                  "offset": {
+                    "x": 0,
+                    "y": 6
+                  },
+                  "blur": 18
+                },
+                {
+                  "type": "shadow",
+                  "shadowType": "outer",
+                  "color": "#FFFFFF33",
+                  "blur": 3
+                }
+              ],
+              "padding": [
+                12,
+                18
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "5Jaox",
+                  "name": "ctaTxt",
+                  "fill": "#FFFFFF",
+                  "content": "Choose Plan →",
+                  "fontFamily": "Inter",
+                  "fontSize": 20,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GsANN",
+              "name": "features",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 10,
+              "padding": [
+                4,
+                2,
+                0,
+                2
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "wWjm7",
+                  "name": "row1",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "tcnvg",
+                      "name": "check1",
+                      "fill": "#4A4A4A",
+                      "content": "✓",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tBC7S",
+                      "name": "label1",
+                      "fill": "#4A4A4A",
+                      "content": "Unlimited emails",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Vpbtd",
+                  "name": "row2",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "z1Pbx",
+                      "name": "check2",
+                      "fill": "#4A4A4A",
+                      "content": "✓",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "uPU1w",
+                      "name": "label2",
+                      "fill": "#4A4A4A",
+                      "content": "10 phone numbers per month",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "LFnMC",
+                  "name": "row3",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "51otf",
+                      "name": "check3",
+                      "fill": "#4A4A4A",
+                      "content": "✓",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "uPdHI",
+                      "name": "label3",
+                      "fill": "#4A4A4A",
+                      "content": "12K /mth export limit",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "3zHQZ",
+                  "name": "row4",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "X0gQO",
+                      "name": "check4",
+                      "fill": "#4A4A4A",
+                      "content": "✓",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V2fZL",
+                      "name": "label4",
+                      "fill": "#4A4A4A",
+                      "content": "CRM integration",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
                       "fontWeight": "500"
                     }
                   ]
