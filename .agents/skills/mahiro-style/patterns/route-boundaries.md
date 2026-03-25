@@ -11,6 +11,7 @@ Use it when the question is whether a route is too thick, what logic belongs in 
 - Route file defines `type` or `interface` for backend response shapes
 - Route file contains config maps, status-color maps, or mock data arrays
 - Route file exceeds two screenfuls and mixes orchestration with implementation detail
+- Route only renders a single `*Workspace` or `*Screen` wrapper after extraction, even though the route still owns the page-level composition
 - Route file hides behind a single monolithic `*Screen` component instead of composing visible section owners
 - Route file contains inline `fetch` calls or direct service class usage mixed with JSX
 
@@ -23,6 +24,7 @@ Routes are entry points. They should tell the reader how the screen is assembled
 - Keep route files focused on composition, route context, and high-level screen orchestration.
 - Extract bulky view sections, config maps, mock data, and feature helpers when they make the route hard to scan.
 - Keep route-specific navigation and route-level shell wiring in the route when that is the real entry-point responsibility.
+- Do not extract page-level composition into a single `*Workspace` or `*Screen` wrapper just to make the route shorter.
 - Do not let route files become mixed homes for contracts, transport calls, style maps, and full rendering trees.
 - Keep route thickness doctrine here, not in `foundations/project-structure.md` and not in `components.md`.
 
@@ -33,6 +35,7 @@ Routes are entry points. They should tell the reader how the screen is assembled
 - Prefer route names and exports that follow the local router conventions exactly, then keep the route thin inside that local shape.
 - Prefer making the route the place where domain pieces are composed, not the place where every domain detail is defined.
 - Prefer route files that compose section modules directly when the page naturally reads as a matrix of domain sections.
+- Prefer extracting hooks, helpers, and sections before introducing a page-wrapper component that hides the route's composition responsibility.
 
 ## Contextual
 
@@ -113,6 +116,7 @@ const items = [
 ```
 
 - Extracting everything out of the route until the route no longer explains what the screen actually is.
+- Replacing a readable route compose file with one `<TimeOffWorkspace />` or `<DashboardScreen />` wrapper even though the route is the natural page-level owner.
 - Hiding the whole page behind one monolithic `*-screen.tsx` when the route could read more clearly by composing a few explicit section owners directly.
 - Using route files as a fallback home for service logic because no one chose a proper service boundary.
 - Pushing reusable shared UI rules into route doctrine instead of resolving them in `shared-ui-boundaries.md`.

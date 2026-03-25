@@ -12,6 +12,7 @@ Use it when the question is whether a hook should exist, what it should return, 
 - Hook named `usePage` or `use[ScreenName]` that owns fetch, state, navigation, and formatting for one route only
 - Simple two-line `useState` wrapped in a custom hook with no reuse or ownership benefit
 - Hook imports service classes AND manages dialog/modal state AND performs navigation
+- Reusable feature hook lives under a component folder even though the repo has a clearer hook-owned home
 
 ## Hook Boundaries
 
@@ -35,6 +36,7 @@ Mahiro-style hooks package behavior, not confusion.
 - Prefer calling services from hooks when the hook owns server-state wiring, cache invalidation, or mutation orchestration.
 - Prefer returning named values and handlers over opaque arrays unless the local repo has a strong established pattern.
 - Prefer keeping rich JSX decisions in components and keeping hooks focused on behavior, state, and orchestration.
+- Prefer hook-owned folders such as a repo's `hooks/` area or a feature-scoped hooks subtree instead of hiding reusable hooks under `components/`.
 
 ## Contextual
 
