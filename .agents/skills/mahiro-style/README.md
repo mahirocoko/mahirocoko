@@ -10,6 +10,7 @@ Use it when you want AI to:
 
 - shape code so it feels more like Mahiro wrote it
 - review naming, file boundaries, extraction choices, and architecture drift
+- keep UI structure depth proportional to the real job
 - decide what belongs in routes, components, constants, services, or stores
 - preserve translation-safe and Lingui-safe patterns when refactoring
 - apply Mahiro defaults only where the current repo has not already decided the rule

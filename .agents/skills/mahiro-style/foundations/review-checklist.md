@@ -30,6 +30,7 @@ If a diff feels wrong, first identify which layer it violates. Do not jump strai
 - Flag extracted constants or config if the move weakens translation posture, especially in repos that already use Lingui or another explicit i18n flow.
 - Flag naming that hides domain meaning behind vague buckets such as `data`, `items`, `list`, `meta`, or `config` when the business concept can be named directly.
 - Flag shared UI changes that absorb page-specific business rules just to reduce line count in a route or feature file.
+- Flag UI trees that get deeper without earning a real semantic, layout, accessibility, state, or ownership boundary.
 
 ## Preference
 
@@ -39,6 +40,7 @@ If a diff feels wrong, first identify which layer it violates. Do not jump strai
 - Prefer domain-owned constants, services, hooks, and components over convenience extractions into generic shared buckets.
 - Prefer owner-local data when the extracted constants or compose props do not buy meaningful reuse or clarity.
 - Prefer review comments that compare the diff against repeated repo examples instead of isolated one-off files.
+- Prefer shallow, explicit UI structure with locally owned styling over wrapper-on-wrapper trees, wrapper components that do not earn a real boundary, and fragile descendant styling.
 
 ## Contextual
 
@@ -58,9 +60,12 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - Did the change separate ownership cleanly between routes, components, hooks, services, stores, and constants?
 - Did naming become more domain-specific and contract-aware, or more generic?
 - If contracts or config moved, do they now live in a clearer domain home?
-- Did the diff extract constants or parent-owned props only to reduce line count, even though the child component was the real owner?
+- Did the diff extract constants or child props only to reduce line count, even though the child component was still the natural owner?
 - If copy moved into constants, is the result still aligned with the repo's Lingui or translation posture?
 - Did reusable UI stay generic, or did business logic leak into shared components?
+- Are long props still expressing one clear component contract, or are scattered parent internals leaking through the boundary?
+- Did the refactor add HTML wrapper layers or wrapper components that only mirror visual grouping, even though the same UI could stay readable with fewer layers?
+- Does each UI layer have a visible job, or is the depth just hiding weak component boundaries?
 
 ### Real review themes to keep active
 
@@ -69,6 +74,7 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - Naming and contracts: names should reveal business meaning, and contracts should live with clear owners.
 - Repo-local doctrine first: check local rules before asking for fallback Mahiro cleanup.
 - Owner-local versus shared extraction: if a layout child or feature child is the only consumer, prefer keeping the data and translation close to that owner.
+- UI structure restraint: extra wrappers need a reason; do not approve anonymous nesting or wrapper components that do not earn a real boundary.
 
 ## Examples
 
@@ -77,6 +83,8 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - "`UserList` and `employeeRows` are clearer than `data` and `items` here because the diff is shaping domain contracts, not generic collections." 
 - "This shared component now knows page-specific approval rules. Keep the reusable shell generic and move the approval logic back to the feature-owned layer." 
 - "No local doc covers this exact hook split, but the repo repeatedly keeps query hooks near feature services. Review against that repeated pattern before applying Mahiro fallback taste." 
+- "This refactor added three wrapper layers, but none of them own layout, semantics, state, or a real boundary. Keep the UI flatter and let the real section or row own the structure directly." 
+- "The prop list is long, but it still reads as one clear component contract. That is acceptable here; the real issue to watch is leaking parent internals, not prop count by itself." 
 
 ## Anti-Examples
 
@@ -86,3 +94,5 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - Asking for generic reuse when the extracted component now carries route-specific business rules.
 - Accepting vague names such as `config`, `items`, or `data` when the domain contract is already known.
 - Treating anti-pattern guidance as a separate source to go read later instead of catching the drift directly in this review.
+- Treating long props as an automatic smell without checking whether they still express one clear component contract.
+- Approving deeper UI trees just because the JSX was split up, even though the extra wrappers do not add a real responsibility.

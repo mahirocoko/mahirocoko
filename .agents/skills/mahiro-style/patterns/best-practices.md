@@ -12,6 +12,7 @@ Use it when the problem crosses boundaries, such as deciding between route extra
 - New abstraction created (hook, component, shared UI) without checking if the current owner is still the right home
 - Feature-specific code promoted to shared package or `ui/` folder after only one usage
 - Refactor makes files smaller but ownership less obvious
+- UI structure gets deeper, but no new semantic, layout, state, or ownership boundary was earned
 
 ## Choosing the Right Owner
 
@@ -57,6 +58,7 @@ Where should this code live?
 - Follow repo-local tooling, exports, and formatter rules first, then apply Mahiro-shaped ownership decisions.
 - Use the more specific canonical pattern page when the decision clearly belongs there.
 - Keep examples here short and cross-cutting instead of turning this page into a framework tutorial.
+- Treat UI structure depth as an ownership signal too; if a layer has no job, remove it or name the real owner.
 
 ## Preference
 
@@ -64,6 +66,7 @@ Where should this code live?
 - Prefer extraction that improves searchability, naming, and reviewability together.
 - Prefer keeping data transport, client state, and presentational UI in separate homes even when one file could technically hold all three.
 - Prefer feature wrappers around shared primitives when domain meaning starts to leak.
+- Prefer shallow, explicit UI structure over deep anonymous element trees, pass-through wrapper chains, and fragile descendant styling.
 
 ## Contextual
 
@@ -175,4 +178,5 @@ export const PayrollSummaryCard = ({ period, total, breakdown }: IPayrollSummary
 ```
 
 - Copying repo-local mechanics from one reference project into another without checking local doctrine first.
+- Adding three more wrapper layers during a refactor even though the same layout could stay readable with one named section or row.
 - Repeating full service, state, route, and naming doctrine here instead of routing to their canonical pages.
