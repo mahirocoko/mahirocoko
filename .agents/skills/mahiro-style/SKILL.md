@@ -1,6 +1,6 @@
 ---
 name: mahiro-style
-description: Mahiro cross-repo code style doctrine. Encodes Mahiro's preferences for naming, file structure, interface/type usage, constants plus i18n, component boundaries, and review heuristics. Use when implementing, reviewing, refactoring, or aligning code to Mahiro style.
+description: Mahiro cross-repo code style doctrine. Encodes Mahiro's preferences for naming, file structure, interface/type usage, constants plus i18n, component boundaries, UI structure restraint, and review heuristics. Use when implementing, reviewing, refactoring, or aligning code to Mahiro style.
 user-invocable: true
 ---
 
@@ -13,6 +13,7 @@ Load Mahiro's cross-repo code-shape doctrine before implementing, refactoring, o
 - Refactoring code to feel more like Mahiro wrote it
 - Reviewing AI-written code for style drift
 - Deciding whether something should live in routes, components, constants, services, or stores
+- Checking whether UI structure depth or wrapper layers are justified
 - Checking `interface` vs `type` usage
 - Preserving i18n posture when extracting config/constants
 - Building a reusable review checklist for repo-specific work
