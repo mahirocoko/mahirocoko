@@ -29,6 +29,7 @@ If a diff feels wrong, first identify which layer it violates. Do not jump strai
 - Flag route or screen files that grow into mixed ownership modules containing orchestration, domain contracts, config, helper maps, mock data, and rendering in one place.
 - Flag extracted constants or config if the move weakens translation posture, especially in repos that already use Lingui or another explicit i18n flow.
 - Flag naming that hides domain meaning behind vague buckets such as `data`, `items`, `list`, `meta`, or `config` when the business concept can be named directly.
+- Flag nested feature exports that become too generic for code search, such as `Sidebar` or `Avatar` from `profile/sidebar.tsx` or `profile/avatar.tsx`.
 - Flag shared UI changes that absorb page-specific business rules just to reduce line count in a route or feature file.
 - Flag UI trees that get deeper without earning a real semantic, layout, accessibility, state, or ownership boundary.
 
@@ -38,6 +39,7 @@ If a diff feels wrong, first identify which layer it violates. Do not jump strai
 - Prefer comments that name the ownership problem directly, such as route thickness, naming drift, contract leakage, or i18n-boundary breakage.
 - Prefer refactors that make the next edit location more obvious, not just files that are smaller.
 - Prefer domain-owned constants, services, hooks, and components over convenience extractions into generic shared buckets.
+- Prefer review comments that ask whether a new hook earned a reusable or shared boundary, instead of assuming extraction is a win because the route got shorter.
 - Prefer owner-local data when the extracted constants or compose props do not buy meaningful reuse or clarity.
 - Prefer review comments that compare the diff against repeated repo examples instead of isolated one-off files.
 - Prefer shallow, explicit UI structure with locally owned styling over wrapper-on-wrapper trees, wrapper components that do not earn a real boundary, and fragile descendant styling.
@@ -57,8 +59,10 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 ### Mahiro-shape drift prompts
 
 - Did the route or screen get thinner and more orchestration-focused after the refactor, or did it just move code around?
+- Did a new hook earn a real reusable or shared boundary, or did route-local orchestration just move into `hooks/` to reduce line count?
 - Did the change separate ownership cleanly between routes, components, hooks, services, stores, and constants?
 - Did naming become more domain-specific and contract-aware, or more generic?
+- Did owner-local filenames keep exported component names contextual enough for code search, such as `ProfileSidebar` from `profile/sidebar.tsx`?
 - If contracts or config moved, do they now live in a clearer domain home?
 - Did the diff extract constants or child props only to reduce line count, even though the child component was still the natural owner?
 - If copy moved into constants, is the result still aligned with the repo's Lingui or translation posture?
@@ -70,6 +74,7 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 ### Real review themes to keep active
 
 - Route thickness: route files should orchestrate, not become giant domain dumps.
+- Hook extraction discipline: route-local state can stay in the route until a real reusable boundary appears.
 - Lingui and constants posture: extraction is only a win if translation-safe behavior stays intact.
 - Naming and contracts: names should reveal business meaning, and contracts should live with clear owners.
 - Repo-local doctrine first: check local rules before asking for fallback Mahiro cleanup.
@@ -84,6 +89,8 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - "This shared component now knows page-specific approval rules. Keep the reusable shell generic and move the approval logic back to the feature-owned layer." 
 - "No local doc covers this exact hook split, but the repo repeatedly keeps query hooks near feature services. Review against that repeated pattern before applying Mahiro fallback taste." 
 - "This refactor added three wrapper layers, but none of them own layout, semantics, state, or a real boundary. Keep the UI flatter and let the real section or row own the structure directly." 
+- "The filename `profile/sidebar.tsx` is fine, but the export should still carry folder context. Prefer `ProfileSidebar` over `Sidebar` so the component stays searchable outside this folder." 
+- "The route got shorter, but the new hook still owns one-off selection, disclosure, and URL-state logic for a single route. Keep that orchestration inline until a reusable boundary actually appears." 
 - "The prop list is long, but it still reads as one clear component contract. That is acceptable here; the real issue to watch is leaking parent internals, not prop count by itself." 
 
 ## Anti-Examples
@@ -92,6 +99,7 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - Approving a refactor because the biggest file got shorter even though ownership became more confusing.
 - Praising constants extraction while ignoring that the diff broke Lingui-safe or translation-safe flow.
 - Asking for generic reuse when the extracted component now carries route-specific business rules.
+- Praising a hook extraction just because the route file got shorter, without proving that a reusable or shared hook boundary now exists.
 - Accepting vague names such as `config`, `items`, or `data` when the domain contract is already known.
 - Treating anti-pattern guidance as a separate source to go read later instead of catching the drift directly in this review.
 - Treating long props as an automatic smell without checking whether they still express one clear component contract.
