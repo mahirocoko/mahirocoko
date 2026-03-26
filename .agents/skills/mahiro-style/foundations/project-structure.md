@@ -29,6 +29,7 @@ At project level, Mahiro-style prefers explicit homes for routes, components, ho
 - Prefer top-level app folders that match recurring responsibilities seen across Mahiro repos, such as `routes`, `components`, `hooks`, `services`, `stores`, `constants`, `providers`, `types`, and `locales`.
 - Prefer extraction that makes future ownership clearer, not just smaller files.
 - Prefer owner-local data and config inside the owning component or module when that data is not reused across siblings.
+- Prefer owner-local filenames inside nested feature folders while keeping exported component names contextual to the nearest meaningful feature owner.
 - Prefer composition parents that stay thin when child modules can own their own local mock data, labels, or static options without prop drilling.
 - Prefer child-local mock or static data until real reuse, transport wiring, or a clearer shared owner actually appears.
 - Prefer small feature-local config files only when multiple sibling modules truly share the same runtime mapping or contract.
@@ -47,6 +48,7 @@ The exact tree can differ by repo.
 - Constants that belong to one domain stay with that domain or feature ownership, while repo-wide constants live in a clearly shared location.
 - Layout child data that is only used by one child can stay inside that child instead of being lifted into a parent compose file or a generic constants page.
 - A feature section folder can keep `mockChecklistItems`, `mockMetrics`, or `mockEmployees` inside the owning section modules while the route compose file stays focused on page structure.
+- A nested folder like `profile/` can use files such as `sidebar.tsx` or `avatar.tsx`, while the exports stay explicit as `ProfileSidebar` and `ProfileAvatar`.
 - A small feature-local config helper is justified when several sibling modules share the same runtime maps or contract, but it should stay feature-local until another feature truly needs the same contract.
 - Providers live where app-wide scope is obvious, such as root-level provider files, instead of being hidden inside unrelated feature modules.
 

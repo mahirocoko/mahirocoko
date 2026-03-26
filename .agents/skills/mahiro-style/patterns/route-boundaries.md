@@ -22,6 +22,7 @@ Routes are entry points. They should tell the reader how the screen is assembled
 ## Non-negotiable
 
 - Keep route files focused on composition, route context, and high-level screen orchestration.
+- Keep layout-level guards in the parent route or layout when multiple child routes share the same access rule.
 - Extract bulky view sections, config maps, mock data, and feature helpers when they make the route hard to scan.
 - Keep route-specific navigation and route-level shell wiring in the route when that is the real entry-point responsibility.
 - Do not extract page-level composition into a single `*Workspace` or `*Screen` wrapper just to make the route shorter.
@@ -36,6 +37,7 @@ Routes are entry points. They should tell the reader how the screen is assembled
 - Prefer making the route the place where domain pieces are composed, not the place where every domain detail is defined.
 - Prefer route files that compose section modules directly when the page naturally reads as a matrix of domain sections.
 - Prefer extracting hooks, helpers, and sections before introducing a page-wrapper component that hides the route's composition responsibility.
+- Prefer extracting loading shells into feature-owned components once the skeleton starts describing a real screen or layout shell.
 
 ## Contextual
 
@@ -62,8 +64,10 @@ const Page = () => {
 ```
 
 - A route keeps auth guard composition, route shell decisions, and route params near the entry file, while feature sections, config maps, and bulky view trees move outward.
+- A private route subtree keeps its auth or membership guard in the shared layout so child routes can stay focused on content composition.
 - A route passes navigation callbacks or route params into a feature screen component when that keeps the entry point readable without hiding what the screen assembles.
 - A route can stay thin even without a single screen component. A page-composer route can import section modules directly and keep only the page-level grid wrappers that explain how the sections are arranged.
+- A route can import `SignInLoadingState` or `ConsoleLoadingState` instead of inlining a long skeleton tree once the loading UI starts acting like a screen shell.
 
 Before:
 
@@ -118,5 +122,7 @@ const items = [
 - Extracting everything out of the route until the route no longer explains what the screen actually is.
 - Replacing a readable route compose file with one `<TimeOffWorkspace />` or `<DashboardScreen />` wrapper even though the route is the natural page-level owner.
 - Hiding the whole page behind one monolithic `*-screen.tsx` when the route could read more clearly by composing a few explicit section owners directly.
+- Repeating the same auth guard across every child route when a parent layout could own that decision once.
+- Leaving a large loading skeleton inline in the route after it has clearly become a feature-owned shell.
 - Using route files as a fallback home for service logic because no one chose a proper service boundary.
 - Pushing reusable shared UI rules into route doctrine instead of resolving them in `shared-ui-boundaries.md`.

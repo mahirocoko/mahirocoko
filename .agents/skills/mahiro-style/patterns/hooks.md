@@ -37,12 +37,14 @@ Mahiro-style hooks package behavior, not confusion.
 - Prefer returning named values and handlers over opaque arrays unless the local repo has a strong established pattern.
 - Prefer keeping rich JSX decisions in components and keeping hooks focused on behavior, state, and orchestration.
 - Prefer hook-owned folders such as a repo's `hooks/` area or a feature-scoped hooks subtree instead of hiding reusable hooks under `components/`.
+- Prefer leaving route-local filtering, selection, disclosure, and URL-state orchestration inline when the route is still the only real owner and no reuse boundary has emerged.
 
 ## Contextual
 
 - In a responsibility-first app, hooks can sit beside services and React Query wiring cleanly because transport still belongs to services and the hook owns consumption.
 - In a monorepo, hooks can coordinate query-state helpers and shared packages without replacing service contracts.
 - In a lighter app, many screens can stay simple without custom hooks until behavior actually repeats.
+- Some route files will stay a little thick on purpose because the logic is still route-owned; that is healthier than inventing a hook boundary too early.
 - Follow local formatter, snippet, and import rules from the active repo. This page decides hook responsibility, not tool-specific syntax.
 
 ## Examples

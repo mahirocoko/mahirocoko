@@ -30,6 +30,7 @@ Mahiro-style naming should expose the business concept, the artifact role, and t
 
 - Prefer names like `approval-queue-card.tsx`, `useApprovalFilters`, `ApprovalService`, and `header.tsx` inside a domain-revealing folder over generic placeholders.
 - Prefer using folder context to shorten file names when the folder already carries the domain, while keeping component exports explicit enough to preserve searchability.
+- Prefer owner-local filenames such as `loading-state.tsx`, `sidebar.tsx`, or `avatar.tsx` inside nested feature folders, while keeping the exported component name contextual to the nearest meaningful folder owner.
 - Prefer folder names that show business area, such as `attendance`, `approval`, `journey`, or `console`, instead of broad buckets like `common-work`.
 - Prefer query keys that mirror domain concepts and list/detail intent rather than anonymous arrays.
 - Prefer small naming systems that stay internally consistent inside one feature.
@@ -55,16 +56,16 @@ const attendanceRiskCards = []
 - Inside a nested feature folder, the file can often drop redundant domain prefixes that the path already supplies, while the exported component keeps the domain signal.
 
 ```text
-approval-queue-card.tsx
-employee-onboarding-checklist.tsx
-attendance-risk-summary.tsx
+app/components/modules/sign-in/loading-state.tsx        -> SignInLoadingState
+app/components/modules/people/profile/sidebar.tsx      -> ProfileSidebar
+app/components/modules/people/profile/avatar.tsx       -> ProfileAvatar
 ```
 
 ```text
 app/components/layouts/dashboard/header.tsx          -> DashboardLayoutHeader
 app/components/layouts/dashboard/sidebar.tsx         -> DashboardLayoutSidebar
-app/components/layouts/dashboard/main-nav.tsx        -> MainNav
-app/components/layouts/dashboard/user-menu.tsx       -> UserMenu
+app/components/layouts/dashboard/main-nav.tsx        -> DashboardMainNav
+app/components/layouts/dashboard/user-menu.tsx       -> DashboardUserMenu
 ```
 
 - `useEmployeeAttendanceFilters` is clearer than `useFilters` because the caller knows which filters the hook owns.
@@ -83,5 +84,6 @@ const config = []
 - Naming a service `api.ts` in a repo that already has multiple domains and transport layers.
 - Naming a component `Section` or `Content` when it is really the approval summary grid.
 - Repeating the same domain word in both folder and file when the path already makes the ownership obvious, such as `dashboard/dashboard-layout-header.tsx`.
+- Using a generic export like `Sidebar` or `Avatar` from `profile/sidebar.tsx` or `profile/avatar.tsx` even though the folder context should still be reflected in code search.
 - Naming a store `useAppStore` when it only owns one local feature concern.
 - Letting this page expand into generic formatting rules that belong elsewhere.
