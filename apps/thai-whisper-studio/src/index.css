@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+
+:root {
+  color-scheme: light;
+  font-family: 'IBM Plex Sans Thai', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #0f2138;
+  background:
+    radial-gradient(circle at top, #eef6ff 0%, #f5f8ff 32%, #f4f8fb 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --color-text-muted: #5f738d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+body,
+button,
+input,
+textarea {
+  font-family: 'IBM Plex Sans Thai', 'Manrope', ui-sans-serif, system-ui, sans-serif;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+code {
+  font-family: 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+#root {
+  min-height: 100vh;
+}
