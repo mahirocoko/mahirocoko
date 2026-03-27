@@ -32,6 +32,8 @@ If a diff feels wrong, first identify which layer it violates. Do not jump strai
 - Flag nested feature exports that become too generic for code search, such as `Sidebar` or `Avatar` from `profile/sidebar.tsx` or `profile/avatar.tsx`.
 - Flag shared UI changes that absorb page-specific business rules just to reduce line count in a route or feature file.
 - Flag UI trees that get deeper without earning a real semantic, layout, accessibility, state, or ownership boundary.
+- Flag refactors that preserve logic but noticeably drift from the established product feel of a screen, such as turning a sparse premium surface into a verbose instructional one.
+- Flag spacing overrides on shared primitives when they appear reflexive rather than driven by a clear visual requirement.
 
 ## Preference
 
@@ -43,6 +45,7 @@ If a diff feels wrong, first identify which layer it violates. Do not jump strai
 - Prefer owner-local data when the extracted constants or compose props do not buy meaningful reuse or clarity.
 - Prefer review comments that compare the diff against repeated repo examples instead of isolated one-off files.
 - Prefer shallow, explicit UI structure with locally owned styling over wrapper-on-wrapper trees, wrapper components that do not earn a real boundary, and fragile descendant styling.
+- Prefer comments that ask whether new UI copy genuinely helps the user act, or merely explains internal implementation that should stay in docs.
 
 ## Contextual
 
@@ -70,6 +73,8 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - Are long props still expressing one clear component contract, or are scattered parent internals leaking through the boundary?
 - Did the refactor add HTML wrapper layers or wrapper components that only mirror visual grouping, even though the same UI could stay readable with fewer layers?
 - Does each UI layer have a visible job, or is the depth just hiding weak component boundaries?
+- Did the change preserve the screen's established product feel, or did technically correct logic come with heavier copy, denser spacing, or a less intentional tone?
+- Did shared primitives keep their default spacing where appropriate, or did the diff add overrides before proving a visual need?
 
 ### Real review themes to keep active
 
@@ -80,6 +85,7 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - Repo-local doctrine first: check local rules before asking for fallback Mahiro cleanup.
 - Owner-local versus shared extraction: if a layout child or feature child is the only consumer, prefer keeping the data and translation close to that owner.
 - UI structure restraint: extra wrappers need a reason; do not approve anonymous nesting or wrapper components that do not earn a real boundary.
+- Product-feel preservation: if the screen used to feel spare, premium, or direct, refactors should not make it louder or more instructional by accident.
 
 ## Examples
 
