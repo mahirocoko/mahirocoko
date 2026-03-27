@@ -13,6 +13,7 @@ Read the formatter and local repo rules first, then keep imports and type surfac
 - Prefer `import type` for type-only imports when the repo uses it.
 - Keep TypeScript surfaces explicit enough that props, payloads, and store shapes are easy to scan.
 - Treat `interface` versus `type` as a local convention plus repeated repo pattern question, not a universal rule.
+- Keep reusable value lists and domain constants in constants owners, then derive types from them in type owners when the repo follows a constants-versus-types split.
 
 ## Non-negotiable
 
@@ -21,6 +22,7 @@ Read the formatter and local repo rules first, then keep imports and type surfac
 - Do not move naming doctrine into this page.
 - Keep internal file sections predictable when the repo uses section ordering conventions.
 - Match the winning local export style before applying fallback preference.
+- Do not mix reusable domain constants into type files once the constants are shared enough to deserve a constants owner.
 
 ## Preference
 
@@ -30,6 +32,7 @@ Read the formatter and local repo rules first, then keep imports and type surfac
 - Prefer section comments that mirror local doctrine labels when the repo explicitly names an internal order and the file is complex enough to benefit from visible structure.
 - Prefer export posture that matches local scaffolding and repeated repo files.
 - Prefer simple TypeScript surfaces that expose domain meaning without unnecessary alias churn.
+- Prefer deriving reusable unions from constants that live in explicit constants owners instead of hiding those value lists inside type files.
 
 ## Contextual
 
@@ -39,6 +42,7 @@ This page is intentionally narrow because local repos vary a lot here.
 - Other repos center Biome, `import type`, kebab-case file posture, and section ordering when complexity grows, while allowing both default and named exports if local scaffolding does.
 - When `AGENTS.md` explicitly names section order (`_Ref`, `_State`, `_Query`, `_Mutation`, `_Memo`, `_Callback`, `_Form`, `_Event`, `_Effect`), that documented order should be applied to new complex files even if older files still look inconsistent.
 - Some stronger local rule sets also require visible section comments, service-class patterns, or colocated type exports beside implementations.
+- Some stronger local rule sets also split reusable domain constants into `constants/` and keep `types/` focused on declarations only.
 
 The cross-repo pattern is not "one exact syntax everywhere." The real pattern is to respect the local code-style surface first, then use Mahiro fallback doctrine to keep new files internally clean and predictable.
 
@@ -74,6 +78,13 @@ const ApprovalQueueSection = () => {
 ```
 
 - A repo with named-export component scaffolds keeps named exports for components, while route entry files still use default exports if that is how the local router works.
+- A repo with a constants-versus-types split keeps the value list in a constants owner and derives the type where declarations belong.
+
+```ts
+export const MEMBERSHIP_ROLES = ['owner', 'hr-admin', 'manager', 'employee'] as const
+
+export type MembershipRole = (typeof MEMBERSHIP_ROLES)[number]
+```
 - A larger feature component can add visible section comments that match the local doctrine when those comments make the internal order easier to scan.
 
 ```tsx
@@ -112,3 +123,4 @@ type IApprovalQueueItem = {
 - Mixing queries, handlers, refs, and effects in the order they happened to be written when the repo already relies on section order to keep larger files readable.
 - Mixing named and default exports randomly inside one repo when local scaffolding already signals a winner.
 - Turning `interface` versus `type` into a universal rule without checking the local repo first.
+- Leaving reusable domain constants inside type files after the repo has already established a clearer `constants/` owner.

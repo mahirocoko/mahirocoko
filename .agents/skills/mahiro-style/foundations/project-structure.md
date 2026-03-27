@@ -33,6 +33,8 @@ At project level, Mahiro-style prefers explicit homes for routes, components, ho
 - Prefer composition parents that stay thin when child modules can own their own local mock data, labels, or static options without prop drilling.
 - Prefer child-local mock or static data until real reuse, transport wiring, or a clearer shared owner actually appears.
 - Prefer small feature-local config files only when multiple sibling modules truly share the same runtime mapping or contract.
+- Prefer app-wide providers that stay ambient, while feature-domain records and workflows live in hooks, queries, services, or route owners.
+- Prefer domain wording that stays stable across the tree. If a product-facing label differs from the real persistence or policy entity, keep the deeper data-model name stable and let the softer label stay in UX/runtime language.
 
 ## Contextual
 
@@ -51,6 +53,7 @@ The exact tree can differ by repo.
 - A nested folder like `profile/` can use files such as `sidebar.tsx` or `avatar.tsx`, while the exports stay explicit as `ProfileSidebar` and `ProfileAvatar`.
 - A small feature-local config helper is justified when several sibling modules share the same runtime maps or contract, but it should stay feature-local until another feature truly needs the same contract.
 - Providers live where app-wide scope is obvious, such as root-level provider files, instead of being hidden inside unrelated feature modules.
+- A feature can expose a softer product label in UI while still keeping folders, schemas, and types centered on the actual persistence and permission entities underneath.
 
 ## Anti-Examples
 
@@ -60,3 +63,4 @@ The exact tree can differ by repo.
 - Treating extraction as "move code anywhere smaller" instead of clarifying ownership.
 - Extracting single-owner layout data into `constants/` only to make the component look shorter, even though the move makes the reader jump farther to understand the feature.
 - Promoting a feature-local config helper into shared app structure before another real consumer exists.
+- Letting a provider become the persistence owner for domain entities such as companies, memberships, or invites when a query-backed hook or service would keep ownership clearer.

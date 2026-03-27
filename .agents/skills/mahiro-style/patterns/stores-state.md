@@ -24,6 +24,7 @@ State should live at the smallest scope that still matches its lifetime and shar
 - Keep provider scope aligned with the lifetime of the state or context it owns.
 - Do not let a store become a dumping ground for unrelated UI flags, domain data, transport helpers, and side effects.
 - Keep provider and state-scope rules here, not in `services.md`.
+- Keep providers ambient. Auth session bootstrapping, query clients, theme, and i18n are good provider jobs. Feature-domain collections, remote records, and workflow validation should stay in query-backed hooks or services.
 
 ## Preference
 
@@ -31,6 +32,7 @@ State should live at the smallest scope that still matches its lifetime and shar
 - Prefer feature-scoped stores before app-wide stores when the state is only shared inside one feature area.
 - Prefer root-level providers only for app-wide concerns such as query clients, theming, auth session bootstrapping, or global shell state.
 - Prefer explicit persistence decisions instead of automatically persisting every store field.
+- Prefer stores for lightweight client selectors such as active-scope choice, sidebar openness, or the current portal mode, while remote entity records stay in React Query.
 
 ## Contextual
 
@@ -60,6 +62,7 @@ export const useAuthStore = create<IAuthState>((set) => ({
 - Query data for an approval list stays in React Query, while a local filter panel open state stays in the screen component or a small feature store.
 - A provider lives in `root` or an app shell only when multiple routes need the context, otherwise the provider stays close to the owning feature.
 - A feature-scoped store can own a route subtree concern, but it should not automatically become the app-wide home for unrelated UI and transport state.
+- A scope switcher can persist only the selected scope id in a store, while the actual remote records still come from the query layer.
 
 ## Anti-Examples
 
@@ -79,3 +82,4 @@ export const useAppStore = create((set) => ({
 
 - Mounting a global provider for a feature concern that is only used by one route subtree.
 - Treating stores as the right answer for any state that feels inconvenient in a component.
+- Using a provider or Zustand store as the source of truth for remote domain records that already belong in the backend plus a query cache.

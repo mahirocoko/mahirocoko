@@ -48,16 +48,16 @@ Routes are entry points. They should tell the reader how the screen is assembled
 
 ## Examples
 
-- A route imports `dashboardSummaryCards` and `DashboardSummarySection`, then composes the screen instead of defining card contracts, tone maps, and every card row inline.
+- A route imports `overviewCards` and `OverviewSummarySection`, then composes the screen instead of defining card contracts, tone maps, and every card row inline.
 
 ```tsx
-import { dashboardSummaryCards } from '@/constants/dashboard-summary'
-import { DashboardSummarySection } from '@/components/dashboard/dashboard-summary-section'
+import { overviewCards } from '@/constants/overview-cards'
+import { OverviewSummarySection } from '@/components/overview/summary-section'
 
 const Page = () => {
   return (
     <main>
-      <DashboardSummarySection items={dashboardSummaryCards} />
+      <OverviewSummarySection items={overviewCards} />
     </main>
   )
 }
@@ -67,7 +67,7 @@ const Page = () => {
 - A private route subtree keeps its auth or membership guard in the shared layout so child routes can stay focused on content composition.
 - A route passes navigation callbacks or route params into a feature screen component when that keeps the entry point readable without hiding what the screen assembles.
 - A route can stay thin even without a single screen component. A page-composer route can import section modules directly and keep only the page-level grid wrappers that explain how the sections are arranged.
-- A route can import `SignInLoadingState` or `ConsoleLoadingState` instead of inlining a long skeleton tree once the loading UI starts acting like a screen shell.
+- A route can import a feature-owned loading shell instead of inlining a long skeleton tree once the loading UI starts acting like a screen shell.
 
 Before:
 
@@ -75,7 +75,7 @@ Before:
 const Page = () => {
   return (
     <main>
-      <DashboardOverviewScreen />
+      <OverviewScreen />
     </main>
   )
 }
@@ -84,14 +84,14 @@ const Page = () => {
 After:
 
 ```tsx
-import { DashboardHeroSection } from '@/components/dashboard/hero-section'
-import { DashboardMetricsSection } from '@/components/dashboard/metrics-section'
+import { OverviewHeroSection } from '@/components/overview/hero-section'
+import { OverviewMetricsSection } from '@/components/overview/metrics-section'
 
 const Page = () => {
   return (
     <div className="flex flex-col gap-6">
-      <DashboardHeroSection />
-      <DashboardMetricsSection />
+      <OverviewHeroSection />
+      <OverviewMetricsSection />
     </div>
   )
 }
@@ -120,7 +120,7 @@ const items = [
 ```
 
 - Extracting everything out of the route until the route no longer explains what the screen actually is.
-- Replacing a readable route compose file with one `<TimeOffWorkspace />` or `<DashboardScreen />` wrapper even though the route is the natural page-level owner.
+- Replacing a readable route compose file with one `<FeatureWorkspace />` or `<OverviewScreen />` wrapper even though the route is the natural page-level owner.
 - Hiding the whole page behind one monolithic `*-screen.tsx` when the route could read more clearly by composing a few explicit section owners directly.
 - Repeating the same auth guard across every child route when a parent layout could own that decision once.
 - Leaving a large loading skeleton inline in the route after it has clearly become a feature-owned shell.

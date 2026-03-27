@@ -60,10 +60,10 @@ Start with these pages depending on the question:
 ## Recommended usage
 
 ```text
-/mahiro-style "ช่วย review โค้ดนี้ว่าเป็น style ของฉันไหม"
-/mahiro-style structure "ช่วยจัดโครง feature นี้ให้เป็นแบบของฉัน"
-/mahiro-style i18n "ช่วยแยก constants โดยไม่พัง i18n"
-/mahiro-style review "ช่วย list จุดที่ยังไม่เป็น style ของฉัน"
+/mahiro-style "review this diff for Mahiro-style drift"
+/mahiro-style structure "help shape this feature tree in my style"
+/mahiro-style i18n "extract constants without breaking translation posture"
+/mahiro-style review "list the places this still does not feel like my style"
 ```
 
 ## Working rule

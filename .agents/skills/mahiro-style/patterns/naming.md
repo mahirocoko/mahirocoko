@@ -34,6 +34,7 @@ Mahiro-style naming should expose the business concept, the artifact role, and t
 - Prefer folder names that show business area, such as `attendance`, `approval`, `journey`, or `console`, instead of broad buckets like `common-work`.
 - Prefer query keys that mirror domain concepts and list/detail intent rather than anonymous arrays.
 - Prefer small naming systems that stay internally consistent inside one feature.
+- Prefer stable domain words in persistence and permissions layers. If the UI label differs from the actual tenant or policy model, keep the data model named after the real entity and let the runtime selection use the softer UX term.
 
 ## Contextual
 
@@ -70,6 +71,7 @@ app/components/layouts/dashboard/user-menu.tsx       -> DashboardUserMenu
 
 - `useEmployeeAttendanceFilters` is clearer than `useFilters` because the caller knows which filters the hook owns.
 - `['approval-queue', employeeId]` is clearer than `['list', employeeId]` because the cache meaning survives outside the current file.
+- The persistence-layer entity names should communicate the real business model more clearly than flattening everything into a softer runtime label. The runtime selection can still use the product-facing term when that is how the UI speaks.
 
 ## Anti-Examples
 
@@ -87,3 +89,4 @@ const config = []
 - Using a generic export like `Sidebar` or `Avatar` from `profile/sidebar.tsx` or `profile/avatar.tsx` even though the folder context should still be reflected in code search.
 - Naming a store `useAppStore` when it only owns one local feature concern.
 - Letting this page expand into generic formatting rules that belong elsewhere.
+- Renaming the underlying domain entity to a softer UI label everywhere, then losing clarity around persistence, permission, or policy boundaries.
