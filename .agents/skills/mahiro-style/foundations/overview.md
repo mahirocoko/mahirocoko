@@ -20,6 +20,7 @@ This page explains the mental model for the skill and why the Foundations docs e
 - Prefer rules that help an agent answer, "which page owns this question?" fast.
 - Prefer doctrine that survives across different repo shapes, even when stack details differ.
 - Prefer examples grounded in repeated real-world repo archetypes instead of one named project.
+- Prefer preserving product feel during implementation and refactors; technically correct behavior is not enough if the screen loses the intended tone, density, or interaction character.
 
 ## Contextual
 

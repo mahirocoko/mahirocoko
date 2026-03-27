@@ -68,6 +68,9 @@ Where should this code live?
 - Prefer feature wrappers around shared primitives when domain meaning starts to leak.
 - Prefer shallow, explicit UI structure over deep anonymous element trees, pass-through wrapper chains, and fragile descendant styling.
 - Prefer query-backed feature hooks over domain-heavy providers when the real question is how to resolve remote entities, workflow state, or active business context.
+- Prefer preserving the intended product feel of an existing screen during refactors. A change that is structurally cleaner but visually heavier, more explanatory, or less intentional is still a regression.
+- Prefer shared component defaults first. Reach for spacing and padding overrides only after proving that the screen truly needs them.
+- Prefer UI copy that helps the next user action, not copy that explains internal architecture or permission rules.
 
 ## Contextual
 
@@ -80,6 +83,7 @@ Where should this code live?
 
 - A thick route mixes config, types, and rendering. Split by ownership: section into a component, config into domain constants, route stays as compositor.
 - A remote domain flow keeps the backend as the source of truth, lets a feature hook own query and mutation wiring, and uses a small store only for lightweight runtime selection.
+- A screen regains its original form after a workflow change by restoring layout, density, and tone, not merely by reconnecting the same fields to new logic.
 
 ```tsx
 // Before: route owns everything
