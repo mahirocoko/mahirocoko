@@ -73,15 +73,15 @@ Keep reusable route and nav metadata in constants with `msg`, then translate ins
 import type { MessageDescriptor } from '@lingui/core'
 import { msg } from '@lingui/core/macro'
 
-interface IDashboardRouteMeta {
+interface IRouteMeta {
   label: MessageDescriptor
   description: MessageDescriptor
 }
 
-const DASHBOARD_ROUTE_META_MAP: Record<string, IDashboardRouteMeta> = {
-  '/dashboard': {
-    label: msg`Operations dashboard`,
-    description: msg`Summarize approvals, tasks, and the signals that should shape the next action.`,
+const ROUTE_META_MAP: Record<string, IRouteMeta> = {
+  '/overview': {
+    label: msg`Operations overview`,
+    description: msg`Summarize open work, recent signals, and the next actions worth attention.`,
   },
 }
 ```
@@ -89,9 +89,9 @@ const DASHBOARD_ROUTE_META_MAP: Record<string, IDashboardRouteMeta> = {
 ```tsx
 import { useLingui } from '@lingui/react/macro'
 
-const DashboardHeader = () => {
+const OverviewHeader = () => {
   const { t } = useLingui()
-  const currentRoute = DASHBOARD_ROUTE_META_MAP['/dashboard']
+  const currentRoute = ROUTE_META_MAP['/overview']
 
   return (
     <>
@@ -111,13 +111,13 @@ const EmptyState = ({ isFiltered }: { isFiltered: boolean }) => {
   const { t } = useLingui()
 
   if (isFiltered) {
-    return <p>{t`No employees match this filter.`}</p>
+    return <p>{t`No records match this filter.`}</p>
   }
 
   return (
     <p>
       <Trans>
-        Start by inviting your first teammate. You can add profile details later.
+        Start by creating your first item. You can add more details later.
       </Trans>
     </p>
   )
@@ -136,12 +136,12 @@ Concrete `Do / Avoid` from a section-owner refactor:
 
 ```ts
 // Do
-const mockEmployees = [
+const mockRecords = [
   {
-    id: 'EMP-1172',
-    name: 'ภูวดล วัฒนกิจ',
-    team: 'Engineering',
-    attendance: 'สาย 2 ครั้ง',
+    id: 'REC-1172',
+    name: 'Jordan Reeves',
+    group: 'Operations',
+    summary: 'Needs follow-up',
     status: 'warning',
   },
 ]
@@ -150,19 +150,19 @@ const mockEmployees = [
 ```tsx
 const { t } = useLingui()
 
-<Input placeholder={t`ค้นหาจากชื่อพนักงาน หรือรหัสพนักงาน`} />
-<Badge>{employee.status === 'warning' ? t`ต้องติดตาม` : t`ปกติ`}</Badge>
+<Input placeholder={t`Search by name or record id`} />
+<Badge>{record.status === 'warning' ? t`Needs attention` : t`Normal`}</Badge>
 ```
 
 ```ts
 // Avoid
-const mockEmployees = [
+const mockRecords = [
   {
-    id: 'EMP-1172',
-    name: t`ภูวดล วัฒนกิจ`,
-    team: t`Engineering`,
-    attendance: t`สาย 2 ครั้ง`,
-    statusLabel: t`ต้องติดตาม`,
+    id: 'REC-1172',
+    name: t`Jordan Reeves`,
+    group: t`Operations`,
+    summary: t`Needs follow-up`,
+    statusLabel: t`Needs attention`,
   },
 ]
 ```
@@ -174,9 +174,9 @@ That shape blurs API-shaped data with UI-owned presentation labels.
 Do not extract plain strings into config with no Lingui-safe descriptor type.
 
 ```ts
-const consoleHeaderActions = [
-  { href: '/console/approvals', label: 'Open approvals' },
-  { href: '/console/employees', label: 'Employee directory' },
+const headerActions = [
+  { href: '/overview/open', label: 'Open work' },
+  { href: '/directory', label: 'Directory' },
 ]
 ```
 
@@ -185,8 +185,8 @@ Do not translate too early in constants or outside the render owner.
 ```ts
 import { i18n } from '@/i18n'
 
-const consoleHeaderActions = [
-  { href: '/console/approvals', label: i18n._('Open approvals') },
+const headerActions = [
+  { href: '/overview/open', label: i18n._('Open work') },
 ]
 ```
 
@@ -194,8 +194,8 @@ Do not extract copy just to shrink the component when the text is branch-specifi
 
 ```ts
 const EMPTY_STATE_COPY = {
-  filtered: 'No employees match this filter.',
-  default: 'Start by inviting your first teammate.',
+  filtered: 'No records match this filter.',
+  default: 'Start by creating your first item.',
 }
 ```
 
