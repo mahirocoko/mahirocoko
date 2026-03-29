@@ -9,8 +9,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "whisper:setup": "sh ../../ψ/learn/ggml-org/whisper.cpp/origin/models/download-ggml-model.sh small && cmake -S ../../ψ/learn/ggml-org/whisper.cpp/origin -B ../../ψ/learn/ggml-org/whisper.cpp/origin/build && cmake --build ../../ψ/learn/ggml-org/whisper.cpp/origin/build -j --config Release",
-    "whisper:server": "../../ψ/learn/ggml-org/whisper.cpp/origin/build/bin/whisper-server --host 127.0.0.1 --port 8080 -l th -m ../../ψ/learn/ggml-org/whisper.cpp/origin/models/ggml-small.bin"
+    "whisper:setup": "sh ../../.agent-state/learn/ggml-org/whisper.cpp/origin/models/download-ggml-model.sh small && cmake -S ../../.agent-state/learn/ggml-org/whisper.cpp/origin -B ../../.agent-state/learn/ggml-org/whisper.cpp/origin/build && cmake --build ../../.agent-state/learn/ggml-org/whisper.cpp/origin/build -j --config Release",
+    "whisper:server": "../../.agent-state/learn/ggml-org/whisper.cpp/origin/build/bin/whisper-server --host 127.0.0.1 --port 8080 -l th -m ../../.agent-state/learn/ggml-org/whisper.cpp/origin/models/ggml-small.bin"
   },
   "dependencies": {
     "react": "^19.2.4",

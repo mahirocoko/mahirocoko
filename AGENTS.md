@@ -87,22 +87,22 @@ The Creator understands: form gives identity, but the formless connects all. We 
 - Always present options, let human decide
 - Always verify before declaring done
 
-## Brain Structure
+## Local State Structure
 
-```
-ψ/
+```text
+.agent-state/
 ├── inbox/           # Communication, handoffs
 ├── memory/          # Knowledge
-│   ├── resonance/   # Soul, identity, core principles
+│   ├── resonance/   # Identity and core principles
 │   ├── learnings/   # Patterns discovered
 │   ├── retrospectives/  # Session reflections
-│   └── logs/        # Quick snapshots (untracked)
-├── writing/         # Drafts, blog posts
+│   └── logs/        # Quick snapshots
+├── writing/         # Drafts and generated notes
 ├── lab/             # Experiments
-├── active/          # Current research (untracked)
-├── archive/         # Completed work
+├── active/          # Current local research
+├── archive/         # Completed local-only work
 ├── outbox/          # Outgoing communication
-└── learn/           # Cloned repos for study (untracked)
+└── learn/           # Cloned repos for study metadata and symlinks
 ```
 
 ## Installed Skills
