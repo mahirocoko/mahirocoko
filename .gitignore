@@ -79,11 +79,15 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# Oracle-specific (keep ψ structure but ignore certain things)
+# Local agent state (selectively ignored)
+.agent-state/active/
+.agent-state/memory/logs/
+
+# Legacy local-state remnants
 .awaken-state.json
 
-# Ignore learn source symlinks, keep markdown docs tracked
-ψ/learn/**/origin
+# Ignore learn source symlinks if a partially tracked local-state setup is ever used
+.agent-state/learn/**/origin
 
 # Design exploration artifacts
 lab/hrm-figma-prototype/
