@@ -26,6 +26,9 @@ Where should this code live?
 ├── API transport, request/response shaping?
 │   └── services.md → service module
 │
+├── Shared failure flow, stable error code, or final fallback ownership?
+│   └── error-handling.md → service normalization + hook surfacing + render-boundary translation
+│
 ├── Client state shared across screens or long-lived?
 │   └── stores-state.md → store or provider
 │

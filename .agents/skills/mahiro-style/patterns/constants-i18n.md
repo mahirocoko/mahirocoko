@@ -6,6 +6,8 @@ This page owns constants extraction with Lingui-safe posture, `msg`-based descri
 
 Use it when the question is whether copy should stay in React, move into config, or be reshaped into translation-safe descriptors without making `msg`, `t`, and `<Trans>` responsibilities fuzzy.
 
+For the full shared failure-flow doctrine, see `error-handling.md`.
+
 ## Detect
 
 - Extracted constants contain plain string literals for user-facing copy with no `msg` wrapper
@@ -22,7 +24,7 @@ The component that renders UI text owns the final translation call.
 - Components and render boundaries call `i18n._(...)`, `t(...)`, or render `<Trans>` at the point where text becomes UI.
 - Do not move user-facing copy into constants just to make a component shorter.
 - Keep component-local copy in React when it is tightly coupled to JSX structure, interaction flow, conditional rendering, or nearby event intent.
-- Use `msg` for extracted descriptors and shared config. Use `t` or `i18n._` inside components and hooks that already own a live translation context. Use `<Trans>` when the rendered output needs JSX composition, inline markup, or rich text.
+- Use `msg` for extracted descriptors and shared config. Use `t` or `i18n._` inside render owners that already own a live translation context. Use `<Trans>` when the rendered output needs JSX composition, inline markup, or rich text.
 - When a component already owns the UI text directly, prefer `const { t } = useLingui()` as the default posture before reaching for a broader extracted-config shape.
 
 ## Non-negotiable
@@ -44,6 +46,7 @@ The component that renders UI text owns the final translation call.
 - Prefer small translation helpers only when the repo already uses them and they keep responsibility clearer, not more abstract.
 - Prefer translating as late as possible, near the component that decides badges, buttons, headings, and conditional copy.
 - Prefer leaving one-off JSX copy in place when extraction would split one sentence across constants and component branches.
+- Prefer shared error labels or error descriptions in descriptor form only when multiple render owners resolve the same stable app-owned error codes or failure signals.
 
 ## Decision Table
 
@@ -53,6 +56,7 @@ The component that renders UI text owns the final translation call.
 | Extracted shared config used by multiple owners | `msg` descriptors in config | `t` or `i18n._(...)` at render | Shared config needs descriptor safety |
 | Mock data that stands in for future API payload shape | Plain strings or values | Do not pre-translate inside the mock object | Data should stay data-shaped until UI decides how to present it |
 | Frontend-computed labels from local state or mock state, such as status badges | Derived UI copy near render | `t` in the owner component | The label is UI-owned even if the state came from data |
+| Shared error-code map used by multiple render owners | `msg` descriptors keyed by stable app-owned error codes or failure signals | `t` or `i18n._(...)` at render | Shared failures need consistent wording without early translation |
 
 ## Contextual
 
@@ -169,6 +173,23 @@ const mockRecords = [
 
 That shape blurs API-shaped data with UI-owned presentation labels.
 
+Shared error descriptors can live in config when multiple owners resolve the same stable app-owned error code or failure signal.
+
+```ts
+import { msg } from '@lingui/core/macro'
+
+const ERROR_MESSAGE_MAP = {
+  'invite-email-taken': msg`This email already has a pending invite.`,
+  'network-unavailable': msg`Please check your connection and try again.`,
+} as const
+```
+
+```tsx
+const { t } = useLingui()
+
+<Alert>{t(ERROR_MESSAGE_MAP[inviteError.code] ?? msg`Something went wrong.`)}</Alert>
+```
+
 ## Anti-Examples
 
 Do not extract plain strings into config with no Lingui-safe descriptor type.
@@ -188,6 +209,14 @@ import { i18n } from '@/i18n'
 const headerActions = [
   { href: '/overview/open', label: i18n._('Open work') },
 ]
+```
+
+Do not build shared error config with plain strings when the repo already expects descriptor-safe extracted copy. The full failure-flow policy still belongs to `error-handling.md`.
+
+```ts
+const ERROR_MESSAGE_MAP = {
+  'invite-email-taken': 'This email already has a pending invite.',
+}
 ```
 
 Do not extract copy just to shrink the component when the text is branch-specific and JSX-bound.

@@ -13,6 +13,7 @@ Read the formatter and local repo rules first, then keep imports and type surfac
 - Prefer `import type` for type-only imports when the repo uses it.
 - Keep TypeScript surfaces explicit enough that props, payloads, and store shapes are easy to scan.
 - Treat `interface` versus `type` as a local convention plus repeated repo pattern question, not a universal rule.
+- If the local repo uses `I` prefixes, keep that prefix for interfaces only. Do not carry `I` into type aliases.
 - Keep reusable value lists and domain constants in constants owners, then derive types from them in type owners when the repo follows a constants-versus-types split.
 
 ## Non-negotiable
@@ -32,6 +33,7 @@ Read the formatter and local repo rules first, then keep imports and type surfac
 - Prefer section comments that mirror local doctrine labels when the repo explicitly names an internal order and the file is complex enough to benefit from visible structure.
 - Prefer export posture that matches local scaffolding and repeated repo files.
 - Prefer simple TypeScript surfaces that expose domain meaning without unnecessary alias churn.
+- Prefer unprefixed `type` aliases for unions, utility compositions, and derived shapes even in repos that reserve `I*` names for interfaces.
 - Prefer deriving reusable unions from constants that live in explicit constants owners instead of hiding those value lists inside type files.
 
 ## Contextual
@@ -59,6 +61,18 @@ interface IApprovalQueueItem {
 
 type ApprovalStatus = IApprovalQueueItem['status']
 type ApprovalToneMap = Record<ApprovalStatus, string>
+```
+
+- A repo that reserves `I*` for interfaces keeps aliases clean and unprefixed.
+
+```ts
+interface IEmployeeRecord {
+  id: string
+  fullName: string
+}
+
+type EmployeeRecordMap = Record<string, IEmployeeRecord>
+type EmployeeRecordStatus = 'active' | 'inactive'
 ```
 
 - A Biome repo keeps import ordering and formatting aligned with Biome output instead of preserving hand-grouped imports, and keeps `import type` when the import is type-only.
@@ -119,6 +133,7 @@ type IApprovalQueueItem = {
 }
 ```
 
+- Keeping `import type` available in the repo, then still importing pure types as runtime values without a local reason.
 - Using this page to decide file naming, domain naming, or route/shared UI ownership.
 - Mixing queries, handlers, refs, and effects in the order they happened to be written when the repo already relies on section order to keep larger files readable.
 - Mixing named and default exports randomly inside one repo when local scaffolding already signals a winner.

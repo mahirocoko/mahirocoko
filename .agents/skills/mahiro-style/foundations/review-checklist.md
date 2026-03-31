@@ -34,6 +34,8 @@ If a diff feels wrong, first identify which layer it violates. Do not jump strai
 - Flag UI trees that get deeper without earning a real semantic, layout, accessibility, state, or ownership boundary.
 - Flag refactors that preserve logic but noticeably drift from the established product feel of a screen, such as turning a sparse premium surface into a verbose instructional one.
 - Flag spacing overrides on shared primitives when they appear reflexive rather than driven by a clear visual requirement.
+- Flag local one-off error message mappers when the repo already has a shared error resolver or stable error-code path.
+- Flag raw upstream error strings shown directly in UI when the repo already normalizes shared failures.
 
 ## Preference
 
@@ -46,6 +48,7 @@ If a diff feels wrong, first identify which layer it violates. Do not jump strai
 - Prefer review comments that compare the diff against repeated repo examples instead of isolated one-off files.
 - Prefer shallow, explicit UI structure with locally owned styling over wrapper-on-wrapper trees, wrapper components that do not earn a real boundary, and fragile descendant styling.
 - Prefer comments that ask whether new UI copy genuinely helps the user act, or merely explains internal implementation that should stay in docs.
+- Prefer review comments that ask where a recoverable failure is normalized, surfaced, and finally translated instead of treating all error handling as one concern.
 
 ## Contextual
 
@@ -69,6 +72,8 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - If contracts or config moved, do they now live in a clearer domain home?
 - Did the diff extract constants or child props only to reduce line count, even though the child component was still the natural owner?
 - If copy moved into constants, is the result still aligned with the repo's Lingui or translation posture?
+- If the diff adds error handling, is the failure shape shared at the right owner layer, or is each hook and component inventing its own fallback text?
+- If the diff adds a repeated shared failure flow, did the implementation follow `patterns/error-handling.md` as the canonical owner?
 - Did reusable UI stay generic, or did business logic leak into shared components?
 - Are long props still expressing one clear component contract, or are scattered parent internals leaking through the boundary?
 - Did the refactor add HTML wrapper layers or wrapper components that only mirror visual grouping, even though the same UI could stay readable with fewer layers?
@@ -81,6 +86,7 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - Route thickness: route files should orchestrate, not become giant domain dumps.
 - Hook extraction discipline: route-local state can stay in the route until a real reusable boundary appears.
 - Lingui and constants posture: extraction is only a win if translation-safe behavior stays intact.
+- Error ownership: transport normalization, shared resolvers, and render-time fallback copy should not collapse into one local helper.
 - Naming and contracts: names should reveal business meaning, and contracts should live with clear owners.
 - Repo-local doctrine first: check local rules before asking for fallback Mahiro cleanup.
 - Owner-local versus shared extraction: if a layout child or feature child is the only consumer, prefer keeping the data and translation close to that owner.
@@ -98,6 +104,7 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - "The filename `profile/sidebar.tsx` is fine, but the export should still carry folder context. Prefer `ProfileSidebar` over `Sidebar` so the component stays searchable outside this folder." 
 - "The route got shorter, but the new hook still owns one-off selection, disclosure, and URL-state logic for a single route. Keep that orchestration inline until a reusable boundary actually appears." 
 - "The prop list is long, but it still reads as one clear component contract. That is acceptable here; the real issue to watch is leaking parent internals, not prop count by itself." 
+- "This diff adds `getInviteErrorMessage()` inside one hook, but the repo already repeats a shared resolver and stable error codes for this failure family. Keep normalization shared and let the render owner translate the final message." 
 
 ## Anti-Examples
 
@@ -110,3 +117,4 @@ Apply the same review order everywhere, but let the local repo decide the winnin
 - Treating anti-pattern guidance as a separate source to go read later instead of catching the drift directly in this review.
 - Treating long props as an automatic smell without checking whether they still express one clear component contract.
 - Approving deeper UI trees just because the JSX was split up, even though the extra wrappers do not add a real responsibility.
+- Approving a diff that surfaces raw backend error text directly in UI even though the repo already uses a shared error normalization path.
