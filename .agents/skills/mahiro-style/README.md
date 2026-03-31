@@ -2,6 +2,8 @@
 
 `/mahiro-style` is Mahiro's cross-repo code-shape doctrine.
 
+The canonical packaged copy now lives in `~/ghq/github.com/mahirocoko/mahiro-skills`. This local copy remains here as a compatibility surface for the current repo.
+
 It is a human-facing overview for the skill, not the doctrine itself. Use it to understand what the skill does, how it should be read, and where the real topic guidance now lives.
 
 ## What this skill is for

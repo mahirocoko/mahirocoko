@@ -4,16 +4,16 @@ Use this flow for `init` mode.
 
 ## 1. Inspect Context
 
-- read the repo tree
+- read the target repo tree
 - find `AGENTS.md`, `README.md`, `docs/`, and toolchain files
 - detect framework, package manager, state, data, styling, and i18n signals
-- do this with local repo tools only
+- do this with local target-repo tools only
 
 ## 2. Read Local Truth
 
 - read existing `AGENTS.md` first if present
 - read existing docs hub or core docs if present
-- note repeated patterns that should beat template assumptions
+- note repeated target-repo patterns that should beat template assumptions
 
 ## 3. Select Reference Grammar
 
@@ -56,7 +56,7 @@ Write from templates directly. Replace facts and trim sections. Do not invent a 
 
 ## 9. Run Self-Check
 
-- verify every command against the repo
+- verify every command against the target repo
 - remove or soften overclaims
 - check that no page is obvious filler
 - verify the tone feels like one docs family

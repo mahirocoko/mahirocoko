@@ -8,6 +8,8 @@ user-invocable: true
 
 Load Mahiro's cross-repo code-shape doctrine before implementing, refactoring, or reviewing. This hub stays thin on purpose. It routes to canonical pages under `foundations/` and `patterns/` instead of acting like a second doctrine source.
 
+The canonical packaged copy of this skill now lives in `~/ghq/github.com/mahirocoko/mahiro-skills`. This local tree remains in place for compatibility inside the current repo.
+
 ## When to Use
 
 - Refactoring code to feel more like Mahiro wrote it

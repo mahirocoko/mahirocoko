@@ -2,6 +2,10 @@
 
 `/mahiro-docs-rules-init` bootstraps a repo-local `AGENTS.md` plus an initial docs family.
 
+The canonical packaged copy now lives in `~/ghq/github.com/mahirocoko/mahiro-skills`. This local copy remains here as a compatibility surface for the current repo.
+
+This README describes the skill package itself; the generated docs are always written into the target repo being initialized.
+
 It is for repos that are new, under-documented, or missing a trustworthy rules layer. The skill uses reference grammar for structure and tone, but it must stay anchored to the target repo's actual code, scripts, and folders.
 
 Unlike a neutral docs initializer, this skill is allowed to carry Mahiro-style doctrine where appropriate, especially on blueprint-allowed pages.
