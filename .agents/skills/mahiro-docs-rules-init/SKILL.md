@@ -8,6 +8,10 @@ user-invocable: true
 
 Create an initial `AGENTS.md` plus a coherent docs family for a repo that has no docs, weak docs, or scattered rules. This hub stays thin on purpose. Use the resource pages and templates instead of duplicating their guidance here.
 
+The canonical packaged copy of this skill now lives in `~/ghq/github.com/mahirocoko/mahiro-skills`. This local tree remains in place for compatibility inside the current repo.
+
+Terminology note: this skill may be packaged in one repo, but it always inspects and writes docs for the target repo you are currently working on.
+
 ## When to Use
 
 - Initializing docs for a new repo
@@ -63,12 +67,12 @@ Do not generate files from template assumptions alone.
 
 This skill is a local boilerplate generator, not a research task.
 
-- Stay inside the current repo only.
+- Stay inside the target repo only.
 - Do not use web search, GitHub search, Context7, subagents, or any external documentation lookup.
 - Do not use unsupported local commands such as `sg`.
 - Do not run the dev server, preview server, or long-running app processes.
 - Do not do broad exploratory loops once the repo shape is clear.
-- After local inspection and topic classification, start writing files immediately.
+- After local inspection of the target repo and topic classification, start writing files immediately.
 
 If the repo is small but already proves the stack, write the docs from the local evidence plus the templates. Do not keep searching for more examples.
 

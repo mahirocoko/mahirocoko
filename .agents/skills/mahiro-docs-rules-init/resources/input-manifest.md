@@ -2,6 +2,8 @@
 
 Inspect these facts before writing any file.
 
+Every item below refers to the target repo being initialized, not the repo that happens to package this skill.
+
 ## Repo Identity
 
 - repo name
