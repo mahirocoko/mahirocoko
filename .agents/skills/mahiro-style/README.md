@@ -12,6 +12,7 @@ Use it when you want AI to:
 - review naming, file boundaries, extraction choices, and architecture drift
 - keep UI structure depth proportional to the real job
 - decide what belongs in routes, components, constants, services, or stores
+- shape shared error handling across enums, constants, hooks, services, and render owners
 - preserve translation-safe and Lingui-safe patterns when refactoring
 - apply Mahiro defaults only where the current repo has not already decided the rule
 
@@ -42,7 +43,7 @@ The root docs stay thin on purpose:
 - `SKILL.md` is the agent hub and retrieval map
 - `README.md` is this human overview
 - `foundations/` holds stable doctrine about how to read repo rules, structure work, and review drift
-- `patterns/` holds practical implementation guidance for components, hooks, services, state, naming, and i18n-adjacent choices
+- `patterns/` holds practical implementation guidance for components, hooks, services, state, naming, i18n-adjacent choices, and shared error flow
 
 If you need the actual doctrine, start from the canonical pages under `foundations/` and `patterns/`, not from a separate examples tree.
 
@@ -55,13 +56,14 @@ Start with these pages depending on the question:
 - `foundations/project-structure.md` for repo and feature layout
 - `foundations/code-style.md` for imports, TypeScript surface choices, section order, and export posture
 - `foundations/review-checklist.md` for review prompts and drift detection
-- `patterns/*.md` for topic-specific implementation guidance such as components, hooks, route boundaries, shared UI boundaries, services, stores/state, naming, constants+i18n, and best practices
+- `patterns/*.md` for topic-specific implementation guidance such as components, hooks, route boundaries, shared UI boundaries, services, stores/state, naming, constants+i18n, error handling, and best practices
 
 ## Recommended usage
 
 ```text
 /mahiro-style "review this diff for Mahiro-style drift"
 /mahiro-style structure "help shape this feature tree in my style"
+/mahiro-style error "review this failure flow and where the error message should be owned"
 /mahiro-style i18n "extract constants without breaking translation posture"
 /mahiro-style review "list the places this still does not feel like my style"
 ```

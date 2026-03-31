@@ -34,6 +34,7 @@ If rules conflict, explicit beats implicit, specific beats general, and repeated
 /mahiro-style code-style
 /mahiro-style structure
 /mahiro-style i18n
+/mahiro-style error
 /mahiro-style boundaries
 /mahiro-style review
 /mahiro-style anti
@@ -43,6 +44,7 @@ If rules conflict, explicit beats implicit, specific beats general, and repeated
 
 - `code-style` -> `foundations/code-style.md`
 - `structure` -> `foundations/project-structure.md`, `patterns/route-boundaries.md`, `patterns/shared-ui-boundaries.md`
+- `error` -> `patterns/error-handling.md`, `patterns/services.md`, `patterns/hooks.md`, `patterns/constants-i18n.md`
 - `i18n` -> `patterns/constants-i18n.md`
 - `boundaries` -> `patterns/services.md`, `patterns/stores-state.md`, `patterns/shared-ui-boundaries.md`
 - `review` -> `foundations/review-checklist.md`
@@ -61,6 +63,7 @@ If rules conflict, explicit beats implicit, specific beats general, and repeated
 ### Patterns
 
 - `patterns/constants-i18n.md` - extraction-safe copy, `msg`, render-boundary translation posture
+- `patterns/error-handling.md` - stable error signals, resolver ownership, and render-boundary fallback flow
 - `patterns/route-boundaries.md` - route thickness, extraction boundaries, feature ownership
 - `patterns/shared-ui-boundaries.md` - shared UI, reuse thresholds, cross-feature seams
 - `patterns/services.md` - transport and service layering

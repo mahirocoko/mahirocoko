@@ -6,6 +6,8 @@ This page owns hook shape, hook extraction, and the boundary between route or co
 
 Use it when the question is whether a hook should exist, what it should return, and whether a hook is carrying transport, state, or UI responsibilities in the right place.
 
+For the full shared failure-flow doctrine, see `error-handling.md`.
+
 ## Detect
 
 - Custom hook returns more than five unrelated values (queries, setters, handlers, formatted strings)
@@ -13,6 +15,8 @@ Use it when the question is whether a hook should exist, what it should return, 
 - Simple two-line `useState` wrapped in a custom hook with no reuse or ownership benefit
 - Hook imports service classes AND manages dialog/modal state AND performs navigation
 - Reusable feature hook lives under a component folder even though the repo has a clearer hook-owned home
+- Hook mixes fetch and mutation orchestration in one file even though the repo already separates `fetchers` and `mutations`
+- Hook grows a local `getErrorMessage` or `resolveErrorText` helper even though the repo already has a shared resolver pattern
 
 ## Hook Boundaries
 
@@ -29,6 +33,7 @@ Mahiro-style hooks package behavior, not confusion.
 - Keep hook internals readable when they grow, using the repo's accepted section-order pattern if the repo already uses one.
 - Do not move route-only orchestration into a hook just to make the route look shorter.
 - Do not let hooks become a back door that mixes service transport design, provider placement, and shared UI ownership into one file.
+- Do not hide recoverable query or mutation failures behind local hook-only message mappers when the repo already has a shared resolver and stable app-owned error codes or failure signals.
 
 ## Preference
 
@@ -38,6 +43,9 @@ Mahiro-style hooks package behavior, not confusion.
 - Prefer keeping rich JSX decisions in components and keeping hooks focused on behavior, state, and orchestration.
 - Prefer hook-owned folders such as a repo's `hooks/` area or a feature-scoped hooks subtree instead of hiding reusable hooks under `components/`.
 - Prefer leaving route-local filtering, selection, disclosure, and URL-state orchestration inline when the route is still the only real owner and no reuse boundary has emerged.
+- Prefer separating query-fetch hooks from mutation hooks when the repo already distinguishes `fetchers` and `mutations` as different homes.
+- Prefer letting hooks surface loading, empty, and error state in a way that keeps the caller's rendering decisions readable instead of hiding every branch inside the hook.
+- Prefer hooks to expose stable error signals, query error state, or mutation error state, while the render owner decides the final fallback UI and translated copy.
 
 ## Contextual
 
@@ -92,6 +100,43 @@ const useCommandPalette = () => {
   }, [])
 
   return { isOpen, setIsOpen, query, setQuery }
+}
+```
+
+- A repo with split hook homes can keep fetch and mutation responsibilities separate even when both serve the same feature.
+
+```ts
+// hooks/fetchers/use-employee-directory.ts
+const useEmployeeDirectory = () => {
+  return useQuery({
+    queryKey: ['employee-directory'],
+    queryFn: EmployeeService.listDirectory,
+  })
+}
+```
+
+```ts
+// hooks/mutations/use-invite-employee.ts
+const useInviteEmployee = () => {
+  return useMutation({
+    mutationFn: EmployeeService.invite,
+  })
+}
+```
+
+- A hook can surface a normalized error to the caller without deciding the final fallback message itself.
+
+```ts
+const useInviteEmployee = () => {
+  const inviteMutation = useMutation({
+    mutationFn: EmployeeService.invite,
+  })
+
+  return {
+    invite: inviteMutation.mutateAsync,
+    isInviting: inviteMutation.isPending,
+    inviteError: inviteMutation.error,
+  }
 }
 ```
 
@@ -168,4 +213,6 @@ const useDisclosure = () => {
 }
 ```
 
+- Building a new `getInviteErrorMessage()` helper inside one hook even though the same failure is already resolved elsewhere through a shared error-code path.
+- Hiding every loading, empty, and error branch inside a hook so the component can no longer see the real render contract.
 - Treating this page as the owner of provider scope or global state policy. Those belong to `stores-state.md`.
