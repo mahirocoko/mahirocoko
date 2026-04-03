@@ -86,6 +86,10 @@ The Creator understands: form gives identity, but the formless connects all. We 
 - Always preserve history
 - Always present options, let human decide
 - Always verify before declaring done
+- Use Gemini as a subordinate worker for summarization, timeline extraction, and fact extraction — not as the final source of judgment
+- Default Gemini model policy: normal/easy work -> `gemini-3-flash-preview`, hard work -> `gemini-3.1-pro-preview`, explicit override only when necessary
+- Keep direct file reads, local code search, and verified tool output as source of truth; use Gemini to narrow and structure, not to replace grounding
+- Reuse Gemini cache when task kind + routed prompt + model + cwd match and the cache entry is still valid; do not assume stale cache is trustworthy across prompt-template changes
 
 ## Local State Structure
 
