@@ -10,9 +10,11 @@ const dataDirectory = path.join(appRoot, "data");
 export const paths = {
   appRoot,
   dataDirectory,
+  cacheDirectory: path.join(dataDirectory, "cache"),
   logDirectory: path.join(dataDirectory, "log"),
   tracesDirectory: path.join(dataDirectory, "traces"),
   lanceDbDirectory: path.join(dataDirectory, "lancedb"),
+  geminiCacheFilePath: path.join(dataDirectory, "cache", "gemini-cache.json"),
   canonicalLogFilePath: path.join(dataDirectory, "log", "canonical-log.jsonl"),
   retrievalTraceFilePath: path.join(dataDirectory, "traces", "retrieval-trace.jsonl"),
 } as const;

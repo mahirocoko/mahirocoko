@@ -1,3 +1,5 @@
+export type GeminiTaskKind = "general" | "summarize" | "timeline" | "extract-facts";
+
 export interface GeminiWorkerInput {
   readonly taskId: string;
   readonly prompt: string;
@@ -5,6 +7,7 @@ export interface GeminiWorkerInput {
   readonly timeoutMs?: number;
   readonly cwd?: string;
   readonly binaryPath?: string;
+  readonly taskKind?: GeminiTaskKind;
 }
 
 export interface GeminiCommandRunResult {
@@ -32,6 +35,7 @@ export interface GeminiWorkerResult {
     | "completed"
     | "command_failed"
     | "invalid_json"
+    | "invalid_structured_output"
     | "empty_output"
     | "timeout"
     | "spawn_error"
@@ -48,4 +52,7 @@ export interface GeminiWorkerResult {
   readonly startedAt: string;
   readonly finishedAt: string;
   readonly error?: string;
+  readonly taskKind?: GeminiTaskKind;
+  readonly structuredData?: unknown;
+  readonly cached?: boolean;
 }

@@ -2,8 +2,10 @@ node_modules
 dist
 coverage
 data/log/*.jsonl
+data/cache/*.json
 data/traces/*.jsonl
 data/lancedb/*
+!data/cache/.gitkeep
 !data/log/.gitkeep
 !data/traces/.gitkeep
 !data/lancedb/.gitkeep

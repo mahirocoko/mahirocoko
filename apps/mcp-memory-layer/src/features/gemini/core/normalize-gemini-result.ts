@@ -1,12 +1,16 @@
+import type { ZodSchema } from "zod";
+
 import { geminiJsonResponseSchema } from "../schemas.js";
 import type { GeminiCommandRunResult, GeminiWorkerInput, GeminiWorkerResult } from "../types.js";
 
 export function normalizeGeminiResult(
   input: GeminiWorkerInput,
   commandResult: GeminiCommandRunResult,
+  structuredSchema?: ZodSchema,
 ): GeminiWorkerResult {
   const baseResult = {
     taskId: input.taskId,
+    taskKind: input.taskKind,
     requestedModel: input.model,
     stderr: commandResult.stderr.trim() || undefined,
     stdout: commandResult.stdout,
@@ -81,13 +85,67 @@ export function normalizeGeminiResult(
     };
   }
 
+  const structuredResult = parseStructuredData(raw.response, structuredSchema);
+
+  if (structuredResult && !structuredResult.success) {
+    return {
+      ...baseResult,
+      status: "invalid_structured_output",
+      reportedModel,
+      response: raw.response,
+      raw,
+      error: structuredResult.error,
+    };
+  }
+
   return {
     ...baseResult,
     status: "completed",
     reportedModel,
     response: raw.response,
     raw,
+    structuredData: structuredResult?.data,
     error: readStructuredError(raw),
+  };
+}
+
+function parseStructuredData(response: string | undefined, structuredSchema: ZodSchema | undefined) {
+  if (!structuredSchema) {
+    return undefined;
+  }
+
+  if (!response) {
+    return {
+      success: false as const,
+      error: "Gemini did not return a response body for structured output.",
+    };
+  }
+
+  let parsedResponse: unknown;
+
+  try {
+    parsedResponse = JSON.parse(response);
+  } catch (error) {
+    return {
+      success: false as const,
+      error: error instanceof Error ? error.message : "Failed to parse structured response JSON.",
+    };
+  }
+
+  const result = structuredSchema.safeParse(parsedResponse);
+
+  if (!result.success) {
+    return {
+      success: false as const,
+      error: result.error.issues
+        .map((issue) => `${issue.path.join(".") || "structured"}: ${issue.message}`)
+        .join("; "),
+    };
+  }
+
+  return {
+    success: true as const,
+    data: result.data,
   };
 }
 
