@@ -1,0 +1,13 @@
+{
+  "$schema": "https://raw.githubusercontent.com/google-gemini/gemini-cli/main/schemas/settings.schema.json",
+  "mcpServers": {
+    "memory-layer": {
+      "command": "bun",
+      "args": [
+        "./apps/mcp-memory-layer/src/index.ts"
+      ],
+      "cwd": ".",
+      "description": "Project-local MCP memory layer server"
+    }
+  }
+}
