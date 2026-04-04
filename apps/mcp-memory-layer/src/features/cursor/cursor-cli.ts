@@ -2,9 +2,6 @@ import { newId } from "../memory/lib/ids.js";
 
 import type { CursorMode, CursorWorkerInput } from "./types.js";
 
-const defaultCursorModel = "composer-2";
-const planCursorModel = "claude-4.6-opus-high";
-
 interface CursorCliOptions {
   model?: string;
   cwd?: string;
@@ -82,10 +79,16 @@ export function parseCursorCliArgs(argv: readonly string[]): CursorWorkerInput {
     throw new Error("Prompt is required.");
   }
 
+  const model = options.model?.trim();
+
+  if (!model) {
+    throw new Error("--model is required.");
+  }
+
   return {
     taskId: newId("cursor"),
     prompt,
-    model: resolveCursorModel(options),
+    model,
     timeoutMs: options.timeoutMs,
     cwd: options.cwd,
     binaryPath: options.binaryPath,
@@ -93,18 +96,6 @@ export function parseCursorCliArgs(argv: readonly string[]): CursorWorkerInput {
     force: options.force,
     trust: options.trust,
   };
-}
-
-function resolveCursorModel(options: CursorCliOptions): string {
-  if (options.model) {
-    return options.model;
-  }
-
-  if (options.mode === "plan") {
-    return planCursorModel;
-  }
-
-  return defaultCursorModel;
 }
 
 function readMode(value: string): CursorMode {

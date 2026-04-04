@@ -1,8 +1,15 @@
-import type { MemoryRecord, RetrievalRow, SearchMemoryItem } from "../types.js";
+import type { MemoryRecord, RetrievalMode, RetrievalRow, SearchMemoryItem } from "../types.js";
 
 import { nowIso, toTimestamp } from "../lib/time.js";
 
 const indexVersion = "v0";
+
+export interface RetrievalWeights {
+  readonly keyword: number;
+  readonly vector: number;
+  readonly recency: number;
+  readonly importance: number;
+}
 
 export function toRetrievalRow(record: MemoryRecord, embedding: readonly number[], embeddingVersion: string): RetrievalRow {
   return {
@@ -88,11 +95,49 @@ export function scoreRecency(createdAt: string): number {
   return 1 / (1 + ageMs / dayMs);
 }
 
+export function weightsForMode(mode: RetrievalMode): RetrievalWeights {
+  switch (mode) {
+    case "profile":
+      return {
+        keyword: 0.2,
+        vector: 0.15,
+        recency: 0.1,
+        importance: 0.55,
+      };
+    case "query":
+      return {
+        keyword: 0.4,
+        vector: 0.4,
+        recency: 0.1,
+        importance: 0.1,
+      };
+    case "recent":
+      return {
+        keyword: 0.2,
+        vector: 0.15,
+        recency: 0.55,
+        importance: 0.1,
+      };
+    case "full":
+      return {
+        keyword: 0.35,
+        vector: 0.3,
+        recency: 0.2,
+        importance: 0.15,
+      };
+  }
+}
+
 export function scoreCombined(input: {
   readonly keyword: number;
   readonly vector: number;
   readonly recency: number;
   readonly importance: number;
-}): number {
-  return input.keyword * 0.4 + input.vector * 0.35 + input.recency * 0.15 + input.importance * 0.1;
+}, weights: RetrievalWeights): number {
+  return (
+    input.keyword * weights.keyword +
+    input.vector * weights.vector +
+    input.recency * weights.recency +
+    input.importance * weights.importance
+  );
 }

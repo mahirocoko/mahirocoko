@@ -7,7 +7,7 @@ import type { GeminiCommandRunResult, GeminiWorkerInput } from "../src/features/
 const baseInput: GeminiWorkerInput = {
   taskId: "task-123",
   prompt: "Summarize this file.",
-  model: "gemini-2.5-flash",
+  model: "gemini-3-flash-preview",
 };
 
 function createCommandResult(
@@ -92,16 +92,61 @@ describe("runGeminiWorker", () => {
           stdout: JSON.stringify({
             response: "Done.",
             stats: {
-              model: "gemini-2.5-flash",
+              model: "gemini-3-flash-preview",
             },
           }),
         }),
     });
 
     expect(result.status).toBe("completed");
-    expect(result.requestedModel).toBe("gemini-2.5-flash");
-    expect(result.reportedModel).toBe("gemini-2.5-flash");
+    expect(result.requestedModel).toBe("gemini-3-flash-preview");
+    expect(result.reportedModel).toBe("gemini-3-flash-preview");
     expect(result.response).toBe("Done.");
+  });
+
+  it("passes the requested model to the command runner", async () => {
+    let capturedModel: string | undefined;
+
+    await runWorker(
+      { ...baseInput, model: "custom-model-99" },
+      {
+        runCommand: async (input) => {
+          capturedModel = input.model;
+          return createCommandResult({
+            stdout: JSON.stringify({ response: "Done." }),
+          });
+        },
+      },
+    );
+
+    expect(capturedModel).toBe("custom-model-99");
+  });
+
+  it("extracts the reported model from the Gemini stats object", async () => {
+    const result = await runWorker(baseInput, {
+      runCommand: async () =>
+        createCommandResult({
+          stdout: JSON.stringify({
+            response: "Done.",
+            stats: {
+              model: "actual-model-returned-by-api",
+            },
+          }),
+        }),
+    });
+
+    expect(result.requestedModel).toBe("gemini-3-flash-preview");
+    expect(result.reportedModel).toBe("actual-model-returned-by-api");
+  });
+
+  it("returns invalid_input when model is missing from the worker payload", async () => {
+    const result = await runWorker(
+      { taskId: "task-bad", prompt: "Summarize this.", model: "" } as unknown as typeof baseInput,
+      { runCommand: async () => createCommandResult() },
+    );
+
+    expect(result.status).toBe("invalid_input");
+    expect(result.error).toContain("model");
   });
 
   it("routes summarize tasks through structured output parsing", async () => {
@@ -120,7 +165,7 @@ describe("runGeminiWorker", () => {
                 keyPoints: ["One", "Two"],
               }),
               stats: {
-                model: "gemini-2.5-flash",
+                model: "gemini-3-flash-preview",
               },
             }),
           });
@@ -130,6 +175,58 @@ describe("runGeminiWorker", () => {
 
     expect(result.status).toBe("completed");
     expect(result.taskKind).toBe("summarize");
+    expect(result.structuredData).toEqual({
+      summary: "Short summary",
+      keyPoints: ["One", "Two"],
+    });
+  });
+
+  it("parses structured output when response body is fenced with json markdown", async () => {
+    const result = await runWorker(
+      {
+        ...baseInput,
+        taskKind: "summarize",
+      },
+      {
+        runCommand: async () =>
+          createCommandResult({
+            stdout: JSON.stringify({
+              response: "```json\n{\"summary\":\"Short summary\",\"keyPoints\":[\"One\",\"Two\"]}\n```",
+              stats: {
+                model: "gemini-3-flash-preview",
+              },
+            }),
+          }),
+      },
+    );
+
+    expect(result.status).toBe("completed");
+    expect(result.structuredData).toEqual({
+      summary: "Short summary",
+      keyPoints: ["One", "Two"],
+    });
+  });
+
+  it("parses structured output when response body is fenced with bare markdown", async () => {
+    const result = await runWorker(
+      {
+        ...baseInput,
+        taskKind: "summarize",
+      },
+      {
+        runCommand: async () =>
+          createCommandResult({
+            stdout: JSON.stringify({
+              response: "```\n{\"summary\":\"Short summary\",\"keyPoints\":[\"One\",\"Two\"]}\n```",
+              stats: {
+                model: "gemini-3-flash-preview",
+              },
+            }),
+          }),
+      },
+    );
+
+    expect(result.status).toBe("completed");
     expect(result.structuredData).toEqual({
       summary: "Short summary",
       keyPoints: ["One", "Two"],
@@ -180,6 +277,21 @@ describe("runGeminiWorker", () => {
       runCommand: async () =>
         createCommandResult({
           stdout: "not-json",
+        }),
+    });
+
+    expect(result.status).toBe("invalid_json");
+    expect(result.error).toBeTruthy();
+  });
+
+  it("keeps the outer Gemini envelope strict when stdout is fenced markdown", async () => {
+    const result = await runWorker(baseInput, {
+      runCommand: async () =>
+        createCommandResult({
+          stdout: `\
+\`\`\`json
+${JSON.stringify({ response: "Done." })}
+\`\`\``,
         }),
     });
 
@@ -251,7 +363,7 @@ describe("runGeminiWorker", () => {
           stdout: JSON.stringify({
             response: "Done once.",
             stats: {
-              model: "gemini-2.5-flash",
+              model: "gemini-3-flash-preview",
             },
           }),
         });

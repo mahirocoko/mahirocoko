@@ -2,15 +2,11 @@ import { newId } from "../memory/lib/ids.js";
 
 import type { GeminiWorkerInput } from "./types.js";
 
-const generalGeminiModel = "gemini-3-flash-preview";
-const hardGeminiModel = "gemini-3.1-pro-preview";
-
 interface GeminiCliOptions {
   model?: string;
   cwd?: string;
   timeoutMs?: number;
   binaryPath?: string;
-  complexity?: "general" | "hard";
   taskKind?: GeminiWorkerInput["taskKind"];
 }
 
@@ -60,9 +56,6 @@ export function parseGeminiCliArgs(argv: readonly string[]): GeminiWorkerInput {
         options.binaryPath = readFlagValue(token, nextValue);
         index += 1;
         break;
-      case "--hard":
-        options.complexity = "hard";
-        break;
       case "--task":
         options.taskKind = readTaskKind(readFlagValue(token, nextValue));
         index += 1;
@@ -78,10 +71,16 @@ export function parseGeminiCliArgs(argv: readonly string[]): GeminiWorkerInput {
     throw new Error("Prompt is required.");
   }
 
+  const model = options.model?.trim();
+
+  if (!model) {
+    throw new Error("--model is required.");
+  }
+
   return {
     taskId: newId("gemini"),
     prompt,
-    model: resolveGeminiModel(options),
+    model,
     timeoutMs: options.timeoutMs,
     cwd: options.cwd,
     binaryPath: options.binaryPath,
@@ -99,18 +98,6 @@ function readTaskKind(value: string): GeminiWorkerInput["taskKind"] {
     default:
       throw new Error(`Unknown task kind: ${value}`);
   }
-}
-
-function resolveGeminiModel(options: GeminiCliOptions): string {
-  if (options.model) {
-    return options.model;
-  }
-
-  if (options.complexity === "hard") {
-    return hardGeminiModel;
-  }
-
-  return generalGeminiModel;
 }
 
 function readFlagValue(flag: string, value: string | undefined): string {

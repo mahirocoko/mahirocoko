@@ -3,25 +3,25 @@ import { describe, expect, it } from "vitest";
 import { parseCursorCliArgs } from "../src/features/cursor/cursor-cli.js";
 
 describe("parseCursorCliArgs", () => {
-  it("maps positional prompt into worker input", () => {
-    const input = parseCursorCliArgs(["Review", "this", "diff"]);
-
-    expect(input.prompt).toBe("Review this diff");
-    expect(input.model).toBe("composer-2");
-    expect(input.taskId.startsWith("cursor_")).toBe(true);
+  it("fails when model is omitted", () => {
+    expect(() => parseCursorCliArgs(["Review", "this", "diff"]))
+      .toThrowError("--model is required.");
   });
 
-  it("uses Opus by default for plan mode", () => {
-    const input = parseCursorCliArgs(["--mode", "plan", "Plan", "this", "refactor"]);
+  it("fails when plan mode is present without an explicit model", () => {
+    expect(() => parseCursorCliArgs(["--mode", "plan", "Plan", "this", "refactor"]))
+      .toThrowError("--model is required.");
+  });
 
-    expect(input.mode).toBe("plan");
-    expect(input.model).toBe("claude-4.6-opus-high");
+  it("fails when model is only whitespace", () => {
+    expect(() => parseCursorCliArgs(["--model", "   ", "Review", "this", "diff"]))
+      .toThrowError("--model is required.");
   });
 
   it("maps explicit flags into worker input", () => {
     const input = parseCursorCliArgs([
       "--model",
-      "gpt-5",
+      "claude-4.6-sonnet-medium",
       "--cwd",
       "/tmp/project",
       "--timeout-ms",
@@ -37,7 +37,7 @@ describe("parseCursorCliArgs", () => {
       "architecture",
     ]);
 
-    expect(input.model).toBe("gpt-5");
+    expect(input.model).toBe("claude-4.6-sonnet-medium");
     expect(input.cwd).toBe("/tmp/project");
     expect(input.timeoutMs).toBe(30000);
     expect(input.binaryPath).toBe("/usr/local/bin/agent");
@@ -46,7 +46,7 @@ describe("parseCursorCliArgs", () => {
     expect(input.trust).toBe(true);
   });
 
-  it("keeps explicit model override above plan-mode defaults", () => {
+  it("keeps explicit model values even in plan mode", () => {
     const input = parseCursorCliArgs([
       "--mode",
       "plan",
@@ -61,7 +61,7 @@ describe("parseCursorCliArgs", () => {
   });
 
   it("allows explicit prompt tail after double dash", () => {
-    const input = parseCursorCliArgs(["--", "--not-a-flag", "prompt"]);
+    const input = parseCursorCliArgs(["--model", "composer-2", "--", "--not-a-flag", "prompt"]);
 
     expect(input.prompt).toBe("--not-a-flag prompt");
   });

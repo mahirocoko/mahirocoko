@@ -3,7 +3,7 @@ import { z } from "zod";
 export const cursorWorkerInputSchema = z.object({
   taskId: z.string().trim().min(1),
   prompt: z.string().trim().min(1),
-  model: z.string().trim().min(1).optional(),
+  model: z.string().trim().min(1),
   timeoutMs: z.number().int().positive().max(300_000).optional(),
   cwd: z.string().trim().min(1).optional(),
   binaryPath: z.string().trim().min(1).optional(),

@@ -32,6 +32,7 @@ export async function buildContextForTask(input: {
 
   return buildContextFromItems({
     task: payload.task,
+    mode: payload.mode,
     items: result.items,
     maxItems: payload.maxItems ?? defaultContextMaxItems,
     maxChars: payload.maxChars ?? defaultContextMaxChars,
