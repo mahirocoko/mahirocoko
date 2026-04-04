@@ -12,12 +12,65 @@ Local-first MCP memory layer prototype with:
 ```bash
 bun install
 bun run dev
+bun run cursor -- "Review this diff"
 bun run gemini -- "Summarize this repo"
 echo '{"taskId":"task-1","prompt":"Summarize this repo","model":"gemini-2.5-flash"}' | bun run gemini-worker
 bun run typecheck
 bun run test
 bun run reindex
 ```
+
+## Cursor command
+
+`cursor` is the assistant-facing Cursor headless command. It wraps `agent -p --output-format json` and returns a normalized JSON envelope similar to the Gemini path.
+
+Default model policy:
+
+- default -> `composer-2`
+- `--mode plan` -> `claude-4.6-opus-high`
+- explicit `--model ...` overrides the default
+
+```bash
+bun run cursor -- "Review this diff"
+bun run cursor -- --mode plan --trust "Plan a refactor for this package"
+bun run cursor -- --model claude-4.6-opus-high --force --cwd /path/to/project "Apply the requested refactor"
+```
+
+## Cursor worker
+
+`cursor-worker` is the host-friendly stdin wrapper around Cursor headless CLI.
+
+- reads one JSON payload from stdin
+- runs `agent -p --output-format json`
+- writes one normalized JSON result to stdout
+
+Input shape:
+
+```json
+{
+  "taskId": "task-1",
+  "prompt": "Review this diff",
+  "model": "gpt-5",
+  "mode": "plan",
+  "force": false,
+  "trust": true,
+  "timeoutMs": 30000,
+  "cwd": "/path/to/project"
+}
+```
+
+Result shape includes:
+
+- `status`
+- `taskId`
+- `requestedModel`
+- `reportedModel`
+- `response`
+- `error`
+- `exitCode`
+- `startedAt`
+- `finishedAt`
+- `durationMs`
 
 ## Gemini command
 
