@@ -124,7 +124,7 @@ function parseStructuredData(response: string | undefined, structuredSchema: Zod
   let parsedResponse: unknown;
 
   try {
-    parsedResponse = JSON.parse(response);
+    parsedResponse = JSON.parse(stripJsonFences(response));
   } catch (error) {
     return {
       success: false as const,
@@ -147,6 +147,28 @@ function parseStructuredData(response: string | undefined, structuredSchema: Zod
     success: true as const,
     data: result.data,
   };
+}
+
+function stripJsonFences(input: string): string {
+  const trimmed = input.trim();
+
+  if (!trimmed.startsWith("```") || !trimmed.endsWith("```")) {
+    return trimmed;
+  }
+
+  const firstNewlineIndex = trimmed.indexOf("\n");
+
+  if (firstNewlineIndex < 0) {
+    return trimmed;
+  }
+
+  const openingFence = trimmed.slice(0, firstNewlineIndex).trim().toLowerCase();
+
+  if (openingFence !== "```" && openingFence !== "```json") {
+    return trimmed;
+  }
+
+  return trimmed.slice(firstNewlineIndex + 1, -3).trim();
 }
 
 function readReportedModel(raw: { readonly [key: string]: unknown }): string | undefined {

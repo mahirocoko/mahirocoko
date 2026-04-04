@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
-import { mkdir, mkdtemp } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 
@@ -13,6 +13,7 @@ import { rememberMemory } from "../src/features/memory/core/remember.js";
 import { searchMemories } from "../src/features/memory/core/search-memories.js";
 import { buildContextForTask } from "../src/features/memory/core/build-context-for-task.js";
 import { reindexMemoryRecords } from "../src/features/memory/index/reindex.js";
+import { toRetrievalRow } from "../src/features/memory/retrieval/rank.js";
 
 async function createFixture() {
   const root = await mkdtemp(path.join(os.tmpdir(), "mcp-memory-layer-"));
@@ -26,13 +27,15 @@ async function createFixture() {
   const embeddingProvider = new DeterministicEmbeddingProvider(64);
   const connection = await connectToLanceDb(path.join(root, "lancedb"));
   const table = new MemoryRecordsTable(connection);
-  const traceStore = new RetrievalTraceStore(path.join(root, "traces", "retrieval-trace.jsonl"));
+  const traceFilePath = path.join(root, "traces", "retrieval-trace.jsonl");
+  const traceStore = new RetrievalTraceStore(traceFilePath);
 
   return {
     logStore,
     embeddingProvider,
     table,
     traceStore,
+    traceFilePath,
   };
 }
 
@@ -152,6 +155,64 @@ describe("memory service core", () => {
     expect(result.context.length).toBeLessThanOrEqual(500);
   });
 
+  it("builds mode-aware context blocks for profile and recent", async () => {
+    const fixture = await createFixture();
+
+    await rememberMemory({
+      payload: {
+        content: "Raw content for recent context output.",
+        summary: "Short profile summary.",
+        kind: "fact",
+        scope: "project",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+        source: {
+          type: "manual",
+        },
+      },
+      logStore: fixture.logStore,
+      table: fixture.table,
+      embeddingProvider: fixture.embeddingProvider,
+    });
+
+    const profileResult = await buildContextForTask({
+      payload: {
+        task: "Summarize stable project context",
+        mode: "profile",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+        maxItems: 5,
+        maxChars: 500,
+      },
+      table: fixture.table,
+      embeddingProvider: fixture.embeddingProvider,
+      traceStore: fixture.traceStore,
+    });
+
+    const recentResult = await buildContextForTask({
+      payload: {
+        task: "Summarize recent project activity",
+        mode: "recent",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+        maxItems: 5,
+        maxChars: 500,
+      },
+      table: fixture.table,
+      embeddingProvider: fixture.embeddingProvider,
+      traceStore: fixture.traceStore,
+    });
+
+    expect(profileResult.context).toContain("Key user/project context");
+    expect(profileResult.context).toContain("Short profile summary.");
+    expect(recentResult.context).toContain("Recent activity");
+    expect(recentResult.context).toContain("Raw content for recent context output.");
+    expect(recentResult.context).toContain("·");
+  });
+
   it("rebuilds the LanceDB index from the canonical log", async () => {
     const fixture = await createFixture();
 
@@ -193,5 +254,141 @@ describe("memory service core", () => {
     });
 
     expect(result.items.some((item) => item.id === remembered.id)).toBe(true);
+  });
+
+  it("retrieval modes change ranking between recent and profile", async () => {
+    const fixture = await createFixture();
+    const embeddingVersion = fixture.embeddingProvider.version;
+
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-04-05T00:00:00.000Z"));
+
+    try {
+      await fixture.table.upsertRows([
+        toRetrievalRow(
+          {
+            id: "mem-important",
+            kind: "fact",
+            scope: "project",
+            userId: "mahiro",
+            projectId: "mcp-memory-layer",
+            containerId: "workspace:mcp-memory-layer",
+            source: {
+              type: "manual",
+            },
+            content: "Important profile memory about bun runtime",
+            tags: [],
+            importance: 1,
+            createdAt: "2026-04-01T00:00:00.000Z",
+            updatedAt: "2026-04-01T00:00:00.000Z",
+          },
+          await fixture.embeddingProvider.embedText("Important profile memory about bun runtime"),
+          embeddingVersion,
+        ),
+        toRetrievalRow(
+          {
+            id: "mem-recent",
+            kind: "conversation",
+            scope: "project",
+            userId: "mahiro",
+            projectId: "mcp-memory-layer",
+            containerId: "workspace:mcp-memory-layer",
+            source: {
+              type: "manual",
+            },
+            content: "Recent runtime memory about bun runtime",
+            tags: [],
+            importance: 0.3,
+            createdAt: "2026-04-04T23:59:59.000Z",
+            updatedAt: "2026-04-04T23:59:59.000Z",
+          },
+          await fixture.embeddingProvider.embedText("Recent runtime memory about bun runtime"),
+          embeddingVersion,
+        ),
+      ]);
+
+      const recentResult = await searchMemories({
+        payload: {
+          query: "runtime memory",
+          mode: "recent",
+          scope: "project",
+          userId: "mahiro",
+          projectId: "mcp-memory-layer",
+          containerId: "workspace:mcp-memory-layer",
+        },
+        table: fixture.table,
+        embeddingProvider: fixture.embeddingProvider,
+        traceStore: fixture.traceStore,
+      });
+
+      const profileResult = await searchMemories({
+        payload: {
+          query: "runtime memory",
+          mode: "profile",
+          scope: "project",
+          userId: "mahiro",
+          projectId: "mcp-memory-layer",
+          containerId: "workspace:mcp-memory-layer",
+        },
+        table: fixture.table,
+        embeddingProvider: fixture.embeddingProvider,
+        traceStore: fixture.traceStore,
+      });
+
+      expect(recentResult.items[0]?.id).toBe("mem-recent");
+      expect(profileResult.items[0]?.id).toBe("mem-important");
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("returns degraded results when the embedding provider fails during search", async () => {
+    const fixture = await createFixture();
+
+    await rememberMemory({
+      payload: {
+        content: "Graceful fallback should still return keyword matches.",
+        kind: "fact",
+        scope: "project",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+        source: {
+          type: "manual",
+        },
+      },
+      logStore: fixture.logStore,
+      table: fixture.table,
+      embeddingProvider: fixture.embeddingProvider,
+    });
+
+    const failingEmbeddingProvider = {
+      version: fixture.embeddingProvider.version,
+      dimensions: fixture.embeddingProvider.dimensions,
+      embedText: async () => {
+        throw new Error("embedding unavailable");
+      },
+    };
+
+    const result = await searchMemories({
+      payload: {
+        query: "keyword matches",
+        mode: "full",
+        scope: "project",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+      },
+      table: fixture.table,
+      embeddingProvider: failingEmbeddingProvider,
+      traceStore: fixture.traceStore,
+    });
+
+    expect(result.degraded).toBe(true);
+    expect(result.items[0]?.content).toContain("keyword matches");
+
+    const traceLines = (await readFile(fixture.traceFilePath, "utf8")).trim().split("\n");
+    const lastTrace = JSON.parse(traceLines.at(-1)!) as { degraded: boolean };
+    expect(lastTrace.degraded).toBe(true);
   });
 });

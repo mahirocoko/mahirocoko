@@ -9,9 +9,7 @@ export async function runCursorCommand(input: CursorWorkerInput): Promise<Cursor
     const command = input.binaryPath ?? "agent";
     const args = ["-p", "--output-format", "json"];
 
-    if (input.model) {
-      args.push("--model", input.model);
-    }
+    args.push("--model", input.model);
 
     if (input.mode) {
       args.push("--mode", input.mode);

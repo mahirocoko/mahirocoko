@@ -3,7 +3,7 @@ export type CursorMode = "ask" | "plan";
 export interface CursorWorkerInput {
   readonly taskId: string;
   readonly prompt: string;
-  readonly model?: string;
+  readonly model: string;
   readonly timeoutMs?: number;
   readonly cwd?: string;
   readonly binaryPath?: string;

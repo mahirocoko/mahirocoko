@@ -6,6 +6,7 @@ import type { CursorCommandRunResult, CursorWorkerInput } from "../src/features/
 const baseInput: CursorWorkerInput = {
   taskId: "task-123",
   prompt: "Review this file.",
+  model: "composer-2",
 };
 
 function createCommandResult(overrides: Partial<CursorCommandRunResult> = {}): CursorCommandRunResult {
@@ -38,7 +39,17 @@ describe("runCursorWorker", () => {
 
     expect(result.status).toBe("completed");
     expect(result.response).toBe("Done.");
+    expect(result.requestedModel).toBe("composer-2");
     expect(result.reportedModel).toBe("gpt-5");
+  });
+
+  it("returns invalid_input when model is missing from the worker payload", async () => {
+    const result = await runCursorWorker(
+      { taskId: "task-bad", prompt: "Review this.", model: "" } as unknown as typeof baseInput,
+      { runCommand: async () => createCommandResult() },
+    );
+
+    expect(result.status).toBe("invalid_input");
   });
 
   it("returns command_failed when Cursor exits non-zero", async () => {

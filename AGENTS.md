@@ -10,8 +10,9 @@
 - Always present options, let human decide
 - Always verify before declaring done
 - Use Gemini as a subordinate worker for summarization, timeline extraction, and fact extraction — not as the final source of judgment
-- Default Gemini model policy: normal/easy work -> `gemini-3-flash-preview`, hard work -> `gemini-3.1-pro-preview`, explicit override only when necessary
-- Keep direct file reads, local code search, and verified tool output as source of truth; use Gemini to narrow and structure, not to replace grounding
+- Explicit model rule: every Gemini and Cursor invocation — including parallel workers, headless pipelines, and programmatic calls — must specify an explicit model name. Never rely on a built-in default. This applies to CLI flags (`--model`), worker JSON payloads (`"model": "..."`), and orchestrator prompts that spawn workers. If the model field is missing, the call is invalid.
+- Gemini model ladder: `gemini-3-flash-preview` for normal/easy work, `gemini-3.1-pro-preview` for hard work. Always pass the chosen model explicitly.
+- Keep direct file reads, local code search, and verified tool output as source of truth, but do not use that rule as an excuse to skip delegation. Use workers first for extraction and synthesis, then verify surgically.
 - Reuse Gemini cache when task kind + routed prompt + model + cwd match and the cache entry is still valid; do not assume stale cache is trustworthy across prompt-template changes
 
 ## Agent and Model Routing
@@ -29,39 +30,45 @@
 ### Local worker policy
 
 - Primary posture: I remain the orchestrator. Gemini and Cursor are subordinate workers, not final decision-makers.
+- Delegate-first default: if a task shape appears in the routing table, delegate to the mapped worker first unless the task is too small to justify a worker round-trip or requires orchestrator-only authority. When in doubt, delegate.
 - Gemini worker: use for bounded subordinate tasks such as summarization, timeline extraction, fact extraction, and MCP-assisted support tasks.
 - Gemini worker: also use for UI/design thinking, feedback synthesis, and requirement shaping when the task is about clarifying or evaluating frontend direction rather than editing code.
 - Cursor worker: use for headless coding, code review, implementation/refactor assistance, and tasks that benefit from Cursor's agent/tool loop.
 - Cursor worker: use for actual frontend code changes such as component edits, CSS implementation, layout fixes, and UI refactors in the codebase.
-- Default Cursor model policy: `composer-2` by default; use `claude-4.6-sonnet-medium` for harder review/refactor work; `--mode plan` uses `claude-4.6-opus-high`; use explicit model override only when the task clearly needs a different reasoning/cost profile.
-- Keep direct file reads, local code search, tests, build output, and verified tool results as source of truth even when a worker produces a good summary.
+- Cursor model ladder: `composer-2` for standard work, `claude-4.6-sonnet-medium` for harder review/refactor and most direct hard work, `claude-4.6-opus-high` for complex planning. Always pass the chosen model explicitly; never omit `--model` or the `"model"` field.
+- `--mode plan` is not the default posture. Use it only when the task is complex enough that an explicit planning pass is necessary.
+- Grounding reads: before delegating, read only enough source to write a good worker prompt. This is orientation, not full extraction.
+- Verification reads: after a worker responds, spot-check only the specific claims, lines, or files needed to verify the output. Do not re-derive the entire result locally.
+- Keep direct file reads, local code search, tests, build output, and verified tool results as source of truth even when a worker produces a good summary, but bias verification toward executable checks and targeted spot-checks rather than broad duplicate reading.
+- Context budget guard: if inline work would require reading more than roughly 200 lines to summarize, extract facts, build a timeline, or map a module, delegate to Gemini or Cursor instead of consuming the orchestrator context on bulk extraction.
 - Final judgment stays here: do not delegate final architectural judgment, completion claims, or repo-state truth to a worker.
 - Worker output is input to orchestration, not the final truth. Verify, synthesize, and decide at the orchestrator layer.
+- Do not read whole files, mentally summarize them, and present that summary as local analysis when the routing table assigns that work to a worker.
 
 ### Routing procedure
 
 1. Classify the task shape first.
 2. Choose the worker from the routing table.
-3. Use the default model for that worker/task unless there is a concrete reason to override.
-4. Verify the worker output against local tools, files, tests, or build output.
+3. Pick the model from the worker's model ladder. Pass it explicitly in the invocation — never omit the model field.
+4. Verify the worker output against local tools, files, tests, or build output using the minimum depth needed for that task shape. Prefer executable verification and targeted spot-checks over broad duplicate reading.
 5. Escalate only if a trigger is met; record the reason.
 
 ### Practical routing table
 
-| Task shape | Primary worker | Default model | Escalate when | Notes |
-|---|---|---|---|---|
-| Summarize docs/files | Gemini | `gemini-3-flash-preview` | output is weak or context is unusually subtle | Best for bounded text reduction |
-| Timeline extraction | Gemini | `gemini-3-flash-preview` | chronology is ambiguous or source is messy | Keep output structured |
-| Fact extraction | Gemini | `gemini-3-flash-preview` | facts are high-stakes or need extra scrutiny | Always verify important claims |
-| Broad research support | Gemini | `gemini-3-flash-preview` | synthesis needs deeper judgment | Gemini narrows; I decide |
-| Hard research / difficult synthesis | Gemini | `gemini-3.1-pro-preview` | the task is multi-source, nuanced, or high-stakes | Use sparingly; still verify |
-| UI/design thinking | Gemini | `gemini-3-flash-preview` | feedback is subtle or tradeoffs are unclear | Good for clarifying direction before coding |
-| Code review | Cursor | `composer-2` | review is architecture-heavy or highly coupled | Good default coding worker |
-| Frontend code changes | Cursor | `composer-2` | styling or component work crosses many files | Use Cursor when the task is actual UI code implementation |
-| Hard code review / risky refactor | Cursor | `claude-4.6-sonnet-medium` | coupling is very high or the change is production-critical | Good middle tier before Opus |
-| Refactor / implementation | Cursor | `composer-2` | change is deep, risky, or crosses many modules | Prefer Cursor for applied coding |
-| Complex planning in codebase | Cursor | `claude-4.6-opus-high` with `--mode plan` | plan quality is insufficient | Use the planning mode plus stronger model when the plan matters |
-| Critical architecture judgment | Me first, optionally Cursor or Gemini as support | n/a | always | Final decision stays here |
+| Task shape | Primary worker | Default model | Escalate when | Verification depth | Notes |
+|---|---|---|---|---|---|
+| Summarize docs/files | Gemini | `gemini-3-flash-preview` | output is weak or context is unusually subtle | Spot-check 2-3 important claims against source | Best for bounded text reduction |
+| Timeline extraction | Gemini | `gemini-3-flash-preview` | chronology is ambiguous or source is messy | Verify first event, last event, and one midpoint | Keep output structured |
+| Fact extraction | Gemini | `gemini-3-flash-preview` | facts are high-stakes or need extra scrutiny | Verify high-stakes facts; accept low-stakes ones unless something conflicts | Always verify important claims |
+| Broad research support | Gemini | `gemini-3-flash-preview` | synthesis needs deeper judgment | Spot-check the claims that drive the decision | Gemini narrows; I decide |
+| Hard research / difficult synthesis | Gemini | `gemini-3.1-pro-preview` | the task is multi-source, nuanced, or high-stakes | Verify the key tradeoff claims and cited evidence | Use sparingly; still verify |
+| UI/design thinking | Gemini | `gemini-3-flash-preview` | feedback is subtle or tradeoffs are unclear | Verify only the repo/design facts that materially shape the recommendation | Good for clarifying direction before coding |
+| Code review | Cursor | `composer-2` | review is architecture-heavy or highly coupled | Run typecheck/tests and inspect flagged lines | Good default coding worker |
+| Frontend code changes | Cursor | `composer-2` | styling or component work crosses many files | Run relevant checks and review touched files only | Use Cursor when the task is actual UI code implementation |
+| Hard code review / risky refactor | Cursor | `claude-4.6-sonnet-medium` | coupling is very high or the change is production-critical | Full targeted diff review plus typecheck/tests | Good middle tier before Opus |
+| Refactor / implementation | Cursor | `composer-2` | change is deep, risky, or crosses many modules | Full relevant test/build verification and targeted file review | Prefer Cursor for applied coding |
+| Complex planning in codebase | Cursor | `claude-4.6-opus-high` with `--mode plan` | planning depth is not actually needed | Verify plan against repo constraints and 2-3 anchor files, not whole-cluster rereads | Use `--mode plan` only when a real planning pass is necessary |
+| Critical architecture judgment | Me first, optionally Cursor or Gemini as support | n/a | always | Verify the core constraints and tradeoffs yourself | Final decision stays here |
 
 ### Worker escalation heuristics
 

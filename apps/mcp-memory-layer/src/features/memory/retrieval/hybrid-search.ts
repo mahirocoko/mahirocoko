@@ -1,6 +1,6 @@
 import { defaultKeywordCandidateLimit, defaultSearchLimit, defaultVectorCandidateLimit } from "../constants.js";
 import { dedupeSearchItems } from "./dedupe.js";
-import { scoreCombined, scoreKeywordMatch, scoreRecency, scoreVectorMatch, toSearchMemoryItem } from "./rank.js";
+import { scoreCombined, scoreKeywordMatch, scoreRecency, scoreVectorMatch, toSearchMemoryItem, weightsForMode } from "./rank.js";
 import type { EmbeddingProvider } from "../index/embedding-provider.js";
 import type { MemoryRecordsTable } from "../index/memory-records-table.js";
 import type { RetrievalTraceEntry, ScopeFilter, SearchMemoriesInput, SearchMemoriesResult } from "../types.js";
@@ -14,10 +14,21 @@ export async function runHybridSearch(input: {
   readonly embeddingProvider: EmbeddingProvider;
 }): Promise<{ readonly result: SearchMemoriesResult; readonly trace: RetrievalTraceEntry }> {
   const limit = input.search.limit ?? defaultSearchLimit;
-  const queryVector = await input.embeddingProvider.embedText(input.search.query);
+  const weights = weightsForMode(input.search.mode);
+  let queryVector: readonly number[] | undefined;
+
+  try {
+    queryVector = await input.embeddingProvider.embedText(input.search.query);
+  } catch {
+    queryVector = undefined;
+  }
+
+  const degraded = queryVector === undefined;
   const [keywordRows, vectorRows] = await Promise.all([
     input.table.queryScopedRows(input.filter, Math.max(limit * 4, defaultKeywordCandidateLimit)),
-    input.table.vectorSearch(input.filter, queryVector, Math.max(limit * 3, defaultVectorCandidateLimit)),
+    queryVector
+      ? input.table.vectorSearch(input.filter, queryVector, Math.max(limit * 3, defaultVectorCandidateLimit))
+      : Promise.resolve([]),
   ]);
 
   const rowsById = new Map<string, { row: (typeof keywordRows)[number]; reasons: Set<string>; score: number }>();
@@ -31,10 +42,10 @@ export async function runHybridSearch(input: {
 
     const combinedScore = scoreCombined({
       keyword: keywordScore,
-      vector: 0,
+      vector: queryVector ? scoreVectorMatch(queryVector, row.embedding) : 0,
       recency: scoreRecency(row.createdAt),
       importance: row.importance,
-    });
+    }, weights);
 
     rowsById.set(row.id, {
       row,
@@ -44,7 +55,7 @@ export async function runHybridSearch(input: {
   }
 
   for (const row of vectorRows) {
-    const vectorScore = scoreVectorMatch(queryVector, row.embedding);
+    const vectorScore = queryVector ? scoreVectorMatch(queryVector, row.embedding) : 0;
 
     if (vectorScore <= 0) {
       continue;
@@ -55,7 +66,7 @@ export async function runHybridSearch(input: {
       vector: vectorScore,
       recency: scoreRecency(row.createdAt),
       importance: row.importance,
-    });
+    }, weights);
     const existing = rowsById.get(row.id);
 
     if (existing) {
@@ -88,14 +99,14 @@ export async function runHybridSearch(input: {
     contextSize: 0,
     embeddingVersion: input.embeddingProvider.version,
     indexVersion: "v0",
-    degraded: false,
+    degraded,
     createdAt: nowIso(),
   };
 
   return {
     result: {
       items,
-      degraded: false,
+      degraded,
     },
     trace,
   };
