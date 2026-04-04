@@ -18,7 +18,7 @@ This file contains a reusable guardrail block for a global `CLAUDE.md` or simila
    - observed facts,
    - reasonable inferences,
    - speculation.
-   Never present speculation as fact.
+     Never present speculation as fact.
 
 4. **Retract immediately when evidence changes.**
    If a prior statement becomes unsupported, incorrect, or doubtful, correct it right away instead of defending it.
