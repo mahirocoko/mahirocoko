@@ -17,4 +17,5 @@ export const paths = {
   geminiCacheFilePath: path.join(dataDirectory, "cache", "gemini-cache.json"),
   canonicalLogFilePath: path.join(dataDirectory, "log", "canonical-log.jsonl"),
   retrievalTraceFilePath: path.join(dataDirectory, "traces", "retrieval-trace.jsonl"),
+  orchestrationTraceFilePath: path.join(dataDirectory, "traces", "orchestration-trace.jsonl"),
 } as const;

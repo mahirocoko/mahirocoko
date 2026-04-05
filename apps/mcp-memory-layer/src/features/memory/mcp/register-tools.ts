@@ -1,7 +1,14 @@
 import type { ZodRawShape } from "zod";
 
+import { getAppEnv } from "../../../config/env.js";
+import { listOrchestrationTraces } from "../../orchestration/observability/list-orchestration-traces.js";
+import { runOrchestrationWorkflow } from "../../orchestration/run-orchestration-workflow.js";
+import { listOrchestrationTracesInputSchema } from "../../orchestration/schemas.js";
+import { normalizeWorkflowSpec, orchestrateToolInputSchema } from "../../orchestration/workflow-spec.js";
+import { OrchestrationTraceStore } from "../../orchestration/observability/orchestration-trace.js";
 import { rememberInputSchema, searchMemoriesInputSchema, buildContextForTaskInputSchema, upsertDocumentInputSchema, listMemoriesInputSchema } from "../schemas.js";
 import type { MemoryService } from "../memory-service.js";
+import { newId } from "../lib/ids.js";
 
 export interface RegisteredTool {
   readonly name: string;
@@ -11,6 +18,9 @@ export interface RegisteredTool {
 }
 
 export function getRegisteredTools(memoryService: MemoryService): readonly RegisteredTool[] {
+  const env = getAppEnv();
+  const orchestrationTraceStore = new OrchestrationTraceStore(env.dataPaths.orchestrationTraceFilePath);
+
   return [
     {
       name: "remember",
@@ -41,6 +51,29 @@ export function getRegisteredTools(memoryService: MemoryService): readonly Regis
       description: "List stored memories for inspection.",
       inputSchema: listMemoriesInputSchema.shape,
       execute: (input) => memoryService.list(input as never),
+    },
+    {
+      name: "orchestrate_workflow",
+      description: "Run a static parallel or sequential worker workflow.",
+      inputSchema: orchestrateToolInputSchema.shape,
+      execute: async (input) => {
+        const parsed = orchestrateToolInputSchema.parse(input);
+        return runOrchestrationWorkflow(normalizeWorkflowSpec(parsed.spec, parsed.cwd), {
+          traceStore: orchestrationTraceStore,
+          traceSource: "mcp",
+          traceRequestId: newId("workflow"),
+        });
+      },
+    },
+    {
+      name: "list_orchestration_traces",
+      description: "List orchestration workflow trace entries for inspection.",
+      inputSchema: listOrchestrationTracesInputSchema.shape,
+      execute: (input) =>
+        listOrchestrationTraces({
+          payload: input as never,
+          filePath: env.dataPaths.orchestrationTraceFilePath,
+        }),
     },
   ];
 }

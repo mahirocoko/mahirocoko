@@ -80,6 +80,7 @@ Run workers in parallel only when their inputs are fully independent — neither
 - Gemini summarizes one module while Cursor reviews a different file
 - Gemini extracts facts from docs while Cursor plans an unrelated refactor
 - Two Gemini workers analyze separate subsystems before you synthesize
+- Five Cursor workers review five unrelated modules in parallel, then you compare the results
 
 **Dependent (must sequence):**
 
@@ -95,12 +96,35 @@ wait
 # Synthesize both outputs here before proceeding
 ```
 
+Programmatic equivalent:
+
+- `src/features/orchestration/run-parallel-workers.ts` provides the same fan-out and collect pattern for independent jobs without relying on ad-hoc shell `&` and `wait`.
+- `bun run orchestrate -- --file <workflow.json>` exposes that pattern as a package CLI for static JSON-defined workflows.
+- There is no special two-worker limit in the orchestration layer. Fan out as many independent Gemini/Cursor jobs as the machine and upstream tools can safely support.
+- Use parallel workflow field `maxConcurrency` when you want bounded fan-out instead of firing every independent job at once.
+- Orchestration results now include run summary metadata such as total/completed/failed/skipped job counts plus started/finished timestamps and total duration.
+- Use workflow field `timeoutMs` when you want a deadline for the entire orchestration run; active jobs are bounded by the remaining time and unstarted jobs become skipped work.
+- CLI and MCP orchestration runs append JSONL trace entries under `data/traces/orchestration-trace.jsonl` for later inspection.
+
 Example sequential pattern (when Gemini output feeds Cursor):
 
 ```bash
 SUMMARY=$(bun run gemini -- --model gemini-3-flash-preview --cwd /path/to/repo "Summarize the retrieval module")
 bun run cursor -- --model claude-4.6-opus-high --mode plan --trust "Given this summary: $SUMMARY — plan the next improvement"
 ```
+
+Programmatic equivalent:
+
+- `src/features/orchestration/run-sequential-workers.ts` runs dependent steps in order and lets each later step derive its next worker job from earlier results.
+- `bun run orchestrate -- --file <workflow.json>` supports static sequential job lists when you want a CLI wrapper around that execution model.
+- Sequential JSON workflows can interpolate earlier results with placeholders like `{{last.result.response}}` or `{{results.0.result.response}}`.
+- Interpolation helpers include `{{default(path, "fallback")}}` and `{{json(path)}}`.
+
+MCP equivalent:
+
+- The `orchestrate_workflow` MCP tool accepts the same static workflow spec and runs it through the same orchestration runtime.
+- The `list_orchestration_traces` MCP tool reads persisted orchestration trace entries for later inspection.
+- The `list-orchestration-traces` CLI command reads the same persisted trace file with optional filters like `--source`, `--mode`, `--status`, `--request-id`, `--task-id`, and `--limit`, plus `--format text` for a terminal-friendly table view or `--format detail` for expanded per-trace blocks.
 
 ## Verification rule
 
