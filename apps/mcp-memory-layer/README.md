@@ -166,9 +166,11 @@ Flags:
 
 - `--file <path>` -> workflow JSON file path, or `-` to read from stdin
 - `--cwd <path>` -> optional default cwd applied to jobs that do not set their own `input.cwd`
+- `--dry-run` -> validate the workflow spec and print the normalized execution plan without running workers
 
 Result envelope includes:
 
+- `requestId` when orchestration tracing is enabled
 - `mode`
 - `status`
 - `results`
@@ -181,6 +183,14 @@ Result envelope includes:
 - `summary.finishedAt`
 - `summary.durationMs`
 
+Dry-run result includes:
+
+- `status: "dry_run"`
+- `mode`
+- `spec` with generated task IDs and normalized defaults
+- `summary.totalJobs`
+- `summary.maxConcurrency` / `summary.timeoutMs` when present
+
 Trace artifact:
 
 - orchestration runs append JSONL entries to `data/traces/orchestration-trace.jsonl`
@@ -190,11 +200,45 @@ Parallel workflow fields:
 
 - `maxConcurrency` -> optional positive integer limit for how many parallel jobs run at once
 - `timeoutMs` -> optional workflow-level deadline in milliseconds; bounds started jobs and stops launching new ones after expiry
+- per-job `retries` / `retryDelayMs` -> optional retry policy for transient worker failures with exponential backoff
 
 Parallel example:
 
 ```bash
 echo '{"mode":"parallel","jobs":[{"kind":"gemini","input":{"prompt":"Summarize this repo","model":"gemini-3-flash-preview"}},{"kind":"cursor","input":{"prompt":"Review this diff","model":"composer-2"}}]}' | bun run orchestrate -- --file -
+```
+
+Example result shape:
+
+```json
+{
+  "requestId": "workflow_123",
+  "mode": "parallel",
+  "status": "completed",
+  "results": [
+    {
+      "kind": "gemini",
+      "input": {
+        "taskId": "gemini_123",
+        "prompt": "Summarize this repo.",
+        "model": "gemini-3-flash-preview"
+      },
+      "result": {
+        "status": "completed"
+      }
+    }
+  ],
+  "summary": {
+    "totalJobs": 2,
+    "finishedJobs": 2,
+    "completedJobs": 2,
+    "failedJobs": 0,
+    "skippedJobs": 0,
+    "startedAt": "2026-04-05T00:00:00.000Z",
+    "finishedAt": "2026-04-05T00:00:01.000Z",
+    "durationMs": 1000
+  }
+}
 ```
 
 Larger fan-out example:
@@ -229,6 +273,30 @@ Sequential interpolation example:
 echo '{"mode":"sequential","steps":[{"kind":"gemini","input":{"prompt":"Summarize the retrieval module","model":"gemini-3-flash-preview"}},{"kind":"cursor","input":{"prompt":"Given this summary: {{last.result.response}}","model":"claude-4.6-opus-high","mode":"plan"}}]}' | bun run orchestrate -- --file -
 ```
 
+Sequential failure control:
+
+- per-step `continueOnFailure` defaults to continuing with later steps
+- set `continueOnFailure: false` when a failed step should stop the workflow
+- code-level sequential step functions can return `null` to skip a step entirely
+
+Stop-on-failure example:
+
+```bash
+echo '{"mode":"sequential","steps":[{"kind":"cursor","continueOnFailure":false,"input":{"prompt":"Review this diff","model":"composer-2"}},{"kind":"gemini","input":{"prompt":"This only runs if the first step completed","model":"gemini-3-flash-preview"}}]}' | bun run orchestrate -- --file -
+```
+
+Retry example:
+
+```bash
+echo '{"mode":"parallel","jobs":[{"kind":"gemini","retries":2,"retryDelayMs":500,"input":{"prompt":"Summarize this repo","model":"gemini-3-flash-preview"}}]}' | bun run orchestrate -- --file -
+```
+
+Dry-run example:
+
+```bash
+echo '{"mode":"sequential","steps":[{"kind":"gemini","input":{"prompt":"Summarize the retrieval module","model":"gemini-3-flash-preview"}},{"kind":"cursor","input":{"prompt":"Given this summary: {{last.result.response}}","model":"claude-4.6-opus-high","mode":"plan"}}]}' | bun run orchestrate -- --file - --dry-run
+```
+
 Interpolation helpers:
 
 - `{{default(path, "fallback")}}` -> use a fallback value when the path is missing, null, or empty
@@ -253,4 +321,18 @@ bun run list-orchestration-traces
 bun run list-orchestration-traces -- --limit 50 --source cli
 bun run list-orchestration-traces -- --format text --limit 20
 bun run list-orchestration-traces -- --format detail --request-id workflow_123
+```
+
+Common inspection flow:
+
+1. Run `bun run orchestrate -- --file <workflow.json>`
+2. Copy the returned `requestId`
+3. Run `bun run list-orchestration-traces -- --format detail --request-id <that-request-id>`
+
+Concrete example:
+
+```bash
+RESULT=$(echo '{"mode":"parallel","jobs":[{"kind":"gemini","input":{"prompt":"Summarize this repo","model":"gemini-3-flash-preview"}}]}' | bun run orchestrate -- --file -)
+REQUEST_ID=$(printf '%s' "$RESULT" | jq -r '.requestId')
+bun run list-orchestration-traces -- --format detail --request-id "$REQUEST_ID"
 ```
