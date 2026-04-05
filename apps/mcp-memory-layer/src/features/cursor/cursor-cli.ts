@@ -1,4 +1,4 @@
-import { newId } from "../memory/lib/ids.js";
+import { newId } from "../../lib/ids.js";
 
 import type { CursorMode, CursorWorkerInput } from "./types.js";
 

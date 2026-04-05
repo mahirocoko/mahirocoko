@@ -4,7 +4,7 @@ import { scoreCombined, scoreKeywordMatch, scoreRecency, scoreVectorMatch, toSea
 import type { EmbeddingProvider } from "../index/embedding-provider.js";
 import type { MemoryRecordsTable } from "../index/memory-records-table.js";
 import type { RetrievalTraceEntry, ScopeFilter, SearchMemoriesInput, SearchMemoriesResult } from "../types.js";
-import { newId } from "../lib/ids.js";
+import { newId } from "../../../lib/ids.js";
 import { nowIso } from "../lib/time.js";
 
 export async function runHybridSearch(input: {
