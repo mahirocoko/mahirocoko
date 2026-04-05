@@ -1,11 +1,18 @@
 import { readFile } from "node:fs/promises";
 import { stdin } from "node:process";
 
+import { validateWorkerJobTemplates } from "./resolve-workflow-templates.js";
 import { normalizeWorkflowSpec, type OrchestrateWorkflowSpec, workflowSpecSchema } from "./workflow-spec.js";
 
 interface OrchestrateCliOptions {
   file?: string;
   cwd?: string;
+  dryRun?: boolean;
+}
+
+export interface ParsedOrchestrateCliArgs {
+  readonly spec: OrchestrateWorkflowSpec;
+  readonly dryRun: boolean;
 }
 
 export interface ParseOrchestrateCliDependencies {
@@ -16,7 +23,7 @@ export interface ParseOrchestrateCliDependencies {
 export async function parseOrchestrateCliArgs(
   argv: readonly string[],
   dependencies: ParseOrchestrateCliDependencies = {},
-): Promise<OrchestrateWorkflowSpec> {
+): Promise<ParsedOrchestrateCliArgs> {
   const options: OrchestrateCliOptions = {};
 
   for (let index = 0; index < argv.length; index += 1) {
@@ -41,6 +48,9 @@ export async function parseOrchestrateCliArgs(
         options.cwd = readFlagValue(token, nextValue);
         index += 1;
         break;
+      case "--dry-run":
+        options.dryRun = true;
+        break;
       default:
         throw new Error(`Unknown flag: ${token}`);
     }
@@ -56,7 +66,22 @@ export async function parseOrchestrateCliArgs(
   const readStdinText = dependencies.readStdinText ?? readStdin;
   const rawText = file === "-" ? await readStdinText() : await readFileText(file);
   const rawJson = JSON.parse(rawText) as unknown;
-  return normalizeWorkflowSpec(workflowSpecSchema.parse(rawJson), options.cwd);
+  const spec = normalizeWorkflowSpec(workflowSpecSchema.parse(rawJson), options.cwd);
+
+  if (spec.mode === "sequential") {
+    for (const step of spec.steps) {
+      if (typeof step === "function") {
+        continue;
+      }
+
+      validateWorkerJobTemplates(step);
+    }
+  }
+
+  return {
+    spec,
+    dryRun: options.dryRun ?? false,
+  };
 }
 
 async function readWorkflowFile(filePath: string): Promise<string> {
