@@ -105,6 +105,10 @@ Programmatic equivalent:
 - Orchestration results now include run summary metadata such as total/completed/failed/skipped job counts plus started/finished timestamps and total duration.
 - Use workflow field `timeoutMs` when you want a deadline for the entire orchestration run; active jobs are bounded by the remaining time and unstarted jobs become skipped work.
 - CLI and MCP orchestration runs append JSONL trace entries under `data/traces/orchestration-trace.jsonl` for later inspection.
+- CLI and MCP orchestration runs return a `requestId` when tracing is enabled, so you can jump straight from a workflow result to its trace entry.
+- Use per-job fields `retries` and `retryDelayMs` when a worker call may fail transiently and should be retried with exponential backoff.
+- Code-level runners also accept `onJobComplete` for incremental progress. This is library-only for now; parallel callbacks arrive in completion order, and sequential `totalJobs` still counts steps that may later be skipped.
+- `bun run orchestrate -- --file <workflow.json> --dry-run` validates the static spec, checks template syntax, and prints the normalized plan without executing workers.
 
 Example sequential pattern (when Gemini output feeds Cursor):
 
@@ -119,12 +123,20 @@ Programmatic equivalent:
 - `bun run orchestrate -- --file <workflow.json>` supports static sequential job lists when you want a CLI wrapper around that execution model.
 - Sequential JSON workflows can interpolate earlier results with placeholders like `{{last.result.response}}` or `{{results.0.result.response}}`.
 - Interpolation helpers include `{{default(path, "fallback")}}` and `{{json(path)}}`.
+- Static sequential jobs can set `continueOnFailure: false` when a failed step should halt the workflow.
+- Code-level sequential step builders can return `null` to skip a step entirely based on earlier results.
 
 MCP equivalent:
 
 - The `orchestrate_workflow` MCP tool accepts the same static workflow spec and runs it through the same orchestration runtime.
 - The `list_orchestration_traces` MCP tool reads persisted orchestration trace entries for later inspection.
 - The `list-orchestration-traces` CLI command reads the same persisted trace file with optional filters like `--source`, `--mode`, `--status`, `--request-id`, `--task-id`, and `--limit`, plus `--format text` for a terminal-friendly table view or `--format detail` for expanded per-trace blocks.
+
+Typical trace inspection loop:
+
+1. Run `bun run orchestrate -- --file <workflow.json>`
+2. Copy `requestId` from the JSON result
+3. Run `bun run list-orchestration-traces -- --format detail --request-id <that-request-id>`
 
 ## Verification rule
 
