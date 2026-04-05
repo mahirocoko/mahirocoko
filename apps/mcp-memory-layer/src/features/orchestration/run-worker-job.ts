@@ -2,7 +2,34 @@ import { runCursorWorker } from "../cursor/cursor-worker-service.js";
 import { runGeminiWorker } from "../gemini/gemini-worker-service.js";
 import type { WorkerJob, WorkerJobResult } from "./types.js";
 
-export async function runWorkerJob(job: WorkerJob): Promise<WorkerJobResult> {
+const defaultRetryDelayMs = 250;
+const maxRetryDelayMs = 5_000;
+
+export interface RunWorkerJobOptions {
+  readonly sleep?: (delayMs: number) => Promise<void>;
+}
+
+export async function runWorkerJob(
+  job: WorkerJob,
+  options: RunWorkerJobOptions = {},
+): Promise<WorkerJobResult> {
+  const sleep = options.sleep ?? wait;
+  const maxRetries = job.retries ?? 0;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
+    const result = await runWorkerJobOnce(job);
+
+    if (attempt >= maxRetries || !isRetryableResult(result)) {
+      return result;
+    }
+
+    await sleep(calculateRetryDelayMs(job.retryDelayMs, attempt));
+  }
+
+  return runWorkerJobOnce(job);
+}
+
+async function runWorkerJobOnce(job: WorkerJob): Promise<WorkerJobResult> {
   if (job.kind === "gemini") {
     try {
       return {
@@ -36,10 +63,30 @@ export async function runWorkerJob(job: WorkerJob): Promise<WorkerJobResult> {
   }
 }
 
+function isRetryableResult(result: WorkerJobResult): boolean {
+  if (!("result" in result)) {
+    return true;
+  }
+
+  return result.result.status !== "completed" && result.result.status !== "invalid_input";
+}
+
+function calculateRetryDelayMs(
+  baseDelayMs: number | undefined,
+  attempt: number,
+): number {
+  const initialDelayMs = baseDelayMs ?? defaultRetryDelayMs;
+  return Math.min(initialDelayMs * (2 ** attempt), maxRetryDelayMs);
+}
+
 function formatUnexpectedError(error: unknown): string {
   if (error instanceof Error) {
     return error.message;
   }
 
   return "Unknown worker execution error.";
+}
+
+async function wait(delayMs: number): Promise<void> {
+  await new Promise((resolve) => setTimeout(resolve, delayMs));
 }

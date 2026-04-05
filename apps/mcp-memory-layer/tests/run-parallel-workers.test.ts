@@ -211,6 +211,55 @@ describe("runParallelWorkers", () => {
     expect(maxConcurrentRuns).toBe(2);
   });
 
+  it("emits job completion events as jobs finish", async () => {
+    const events: Array<{ mode: string; jobIndex: number; finishedJobs: number; totalJobs: number; status?: string }> = [];
+
+    await runParallelWorkers(
+      [
+        {
+          kind: "gemini",
+          input: {
+            taskId: "gemini-1",
+            prompt: "Summarize this module.",
+            model: "gemini-3-flash-preview",
+          },
+          dependencies: {
+            cacheStore: createNoopCacheStore(),
+            runCommand: async () => createGeminiCommandResult(),
+          },
+        },
+        {
+          kind: "cursor",
+          input: {
+            taskId: "cursor-1",
+            prompt: "Review this module.",
+            model: "composer-2",
+          },
+          dependencies: {
+            runCommand: async () => createCursorCommandResult({ exitCode: 1, stderr: "bad diff" }),
+          },
+        },
+      ],
+      {
+        onJobComplete: async (event) => {
+          events.push({
+            mode: event.mode,
+            jobIndex: event.jobIndex,
+            finishedJobs: event.finishedJobs,
+            totalJobs: event.totalJobs,
+            status: "result" in event.result ? event.result.result.status : event.result.status,
+          });
+        },
+      },
+    );
+
+    expect(events).toHaveLength(2);
+    expect(events.every((event) => event.mode === "parallel")).toBe(true);
+    expect(events.map((event) => event.totalJobs)).toEqual([2, 2]);
+    expect(events.map((event) => event.finishedJobs)).toEqual([1, 2]);
+    expect(events.map((event) => event.status).sort()).toEqual(["command_failed", "completed"]);
+  });
+
   it("stops launching new jobs when the workflow timeout expires", async () => {
     const parallelRun = await runParallelWorkers(
       Array.from({ length: 4 }, (_unused, index) => ({

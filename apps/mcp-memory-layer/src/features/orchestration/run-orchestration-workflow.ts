@@ -2,7 +2,7 @@ import { runParallelWorkers } from "./run-parallel-workers.js";
 import { buildOrchestrationTraceEntry, type OrchestrationTraceStore } from "./observability/orchestration-trace.js";
 import { interpolateWorkerJob } from "./resolve-workflow-templates.js";
 import { runSequentialWorkers } from "./run-sequential-workers.js";
-import type { WorkerJobResult } from "./types.js";
+import type { JobCompleteEvent, WorkerJobResult } from "./types.js";
 import type { OrchestrateWorkflowSpec } from "./workflow-spec.js";
 
 export interface OrchestrationRunSummary {
@@ -20,16 +20,19 @@ export interface RunOrchestrationWorkflowOptions {
   readonly traceStore?: Pick<OrchestrationTraceStore, "append">;
   readonly traceSource?: "cli" | "mcp";
   readonly traceRequestId?: string;
+  readonly onJobComplete?: (event: JobCompleteEvent) => Promise<void> | void;
 }
 
 export type OrchestrationRunResult =
   | {
+      readonly requestId?: string;
       readonly mode: "parallel";
       readonly status: "completed" | "timed_out";
       readonly results: readonly WorkerJobResult[];
       readonly summary: OrchestrationRunSummary;
     }
   | {
+      readonly requestId?: string;
       readonly mode: "sequential";
       readonly status: "completed" | "step_failed" | "timed_out";
       readonly results: readonly WorkerJobResult[];
@@ -49,9 +52,11 @@ export async function runOrchestrationWorkflow(
     const parallelRun = await runParallelWorkers(spec.jobs, {
       maxConcurrency: spec.maxConcurrency,
       timeoutMs: spec.timeoutMs,
+      onJobComplete: options.onJobComplete,
     });
 
     const result: OrchestrationRunResult = {
+      requestId: options.traceRequestId,
       mode: spec.mode,
       status: parallelRun.timedOut ? "timed_out" : "completed",
       results: parallelRun.results,
@@ -63,11 +68,29 @@ export async function runOrchestrationWorkflow(
   }
 
   const sequentialRun = await runSequentialWorkers(
-    spec.steps.map((step) => (context) => interpolateWorkerJob(step, context)),
-    { timeoutMs: spec.timeoutMs },
+    spec.steps.map((step) => {
+      if (typeof step !== "function") {
+        return (context) => interpolateWorkerJob(step, context);
+      }
+
+      return (context) => {
+        const resolved = step(context);
+
+        if (resolved === null) {
+          return null;
+        }
+
+        return interpolateWorkerJob(resolved, context);
+      };
+    }),
+    {
+      timeoutMs: spec.timeoutMs,
+      onJobComplete: options.onJobComplete,
+    },
   );
 
   const result: OrchestrationRunResult = {
+    requestId: options.traceRequestId,
     mode: spec.mode,
     ...sequentialRun,
     summary: buildRunSummary(spec.steps.length, sequentialRun.results, startedAtDate, startedAt),

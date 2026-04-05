@@ -1,10 +1,11 @@
-import type { ParallelWorkersResult, WorkerJob, WorkerJobResult } from "./types.js";
+import type { JobCompleteEvent, ParallelWorkersResult, WorkerJob, WorkerJobResult } from "./types.js";
 import { runWorkerJob } from "./run-worker-job.js";
 import { prepareJobForWorkflowTimeout } from "./workflow-timeout.js";
 
 export interface RunParallelWorkersOptions {
   readonly maxConcurrency?: number;
   readonly timeoutMs?: number;
+  readonly onJobComplete?: (event: JobCompleteEvent) => Promise<void> | void;
 }
 
 export async function runParallelWorkers(
@@ -24,6 +25,7 @@ export async function runParallelWorkers(
   const results = new Array<WorkerJobResult | undefined>(jobs.length);
   let nextIndex = 0;
   let timedOut = false;
+  let finishedJobs = 0;
 
   const workers = Array.from({ length: maxConcurrency }, async () => {
     while (nextIndex < jobs.length) {
@@ -38,6 +40,16 @@ export async function runParallelWorkers(
 
       const result = await runWorkerJob(preparedJob.job);
       results[currentIndex] = result;
+      finishedJobs += 1;
+
+      await options.onJobComplete?.({
+        mode: "parallel",
+        jobIndex: currentIndex,
+        finishedJobs,
+        totalJobs: jobs.length,
+        job: preparedJob.job,
+        result,
+      });
 
       if (preparedJob.workflowTimeoutBounded && "result" in result && result.result.status === "timeout") {
         timedOut = true;

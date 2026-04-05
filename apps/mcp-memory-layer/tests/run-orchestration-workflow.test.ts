@@ -85,6 +85,7 @@ describe("runOrchestrationWorkflow", () => {
 
     expect(result.mode).toBe("parallel");
     expect(result.status).toBe("completed");
+    expect(result.requestId).toBe("workflow-trace-1");
     expect(result.results).toHaveLength(1);
     expect(result.summary).toMatchObject({
       totalJobs: 1,
@@ -136,6 +137,7 @@ describe("runOrchestrationWorkflow", () => {
     });
 
     expect(result.status).toBe("completed");
+    expect(result.requestId).toBeUndefined();
     expect(result.results).toHaveLength(4);
     expect(result.summary).toMatchObject({
       totalJobs: 4,
@@ -145,6 +147,49 @@ describe("runOrchestrationWorkflow", () => {
       skippedJobs: 0,
     });
     expect(maxConcurrentRuns).toBe(2);
+  });
+
+  it("forwards onJobComplete through the workflow runner", async () => {
+    const events: Array<{ mode: string; jobIndex: number; finishedJobs: number; totalJobs: number }> = [];
+
+    await runOrchestrationWorkflow(
+      {
+        mode: "parallel",
+        jobs: [
+          {
+            kind: "gemini",
+            input: {
+              taskId: "gemini-1",
+              prompt: "Summarize this repo.",
+              model: "gemini-3-flash-preview",
+            },
+            dependencies: {
+              cacheStore: createNoopCacheStore(),
+              runCommand: async () => createGeminiCommandResult(),
+            },
+          },
+        ],
+      },
+      {
+        onJobComplete: async (event) => {
+          events.push({
+            mode: event.mode,
+            jobIndex: event.jobIndex,
+            finishedJobs: event.finishedJobs,
+            totalJobs: event.totalJobs,
+          });
+        },
+      },
+    );
+
+    expect(events).toEqual([
+      {
+        mode: "parallel",
+        jobIndex: 0,
+        finishedJobs: 1,
+        totalJobs: 1,
+      },
+    ]);
   });
 
   it("marks the workflow as timed_out when the parallel deadline expires", async () => {
@@ -290,6 +335,106 @@ describe("runOrchestrationWorkflow", () => {
       skippedJobs: 0,
     });
     expect(hasOrchestrationFailures(result)).toBe(false);
+  });
+
+  it("counts skipped steps when a sequential step is conditionally skipped", async () => {
+    const result = await runOrchestrationWorkflow({
+      mode: "sequential",
+      steps: [
+        {
+          kind: "gemini",
+          input: {
+            taskId: "gemini-1",
+            prompt: "Summarize this repo.",
+            model: "gemini-3-flash-preview",
+          },
+          dependencies: {
+            cacheStore: createNoopCacheStore(),
+            runCommand: async () => createGeminiCommandResult(),
+          },
+        },
+        ({ lastResult }) => {
+          if (lastResult && "result" in lastResult && lastResult.result.response === "Gemini summary") {
+            return null;
+          }
+
+          return {
+            kind: "cursor" as const,
+            input: {
+              taskId: "cursor-skip-check",
+              prompt: "This should never run.",
+              model: "composer-2",
+            },
+          };
+        },
+        {
+          kind: "cursor",
+          input: {
+            taskId: "cursor-1",
+            prompt: "Review this diff.",
+            model: "composer-2",
+          },
+          dependencies: {
+            runCommand: async () => createCursorCommandResult(),
+          },
+        },
+      ],
+    });
+
+    expect(result).toMatchObject({
+      mode: "sequential",
+      status: "completed",
+      summary: {
+        totalJobs: 3,
+        finishedJobs: 2,
+        completedJobs: 2,
+        failedJobs: 0,
+        skippedJobs: 1,
+      },
+    });
+  });
+
+  it("stops sequential workflows on failed jobs when continueOnFailure is false", async () => {
+    const result = await runOrchestrationWorkflow({
+      mode: "sequential",
+      steps: [
+        {
+          kind: "cursor",
+          continueOnFailure: false,
+          input: {
+            taskId: "cursor-1",
+            prompt: "Review this diff.",
+            model: "composer-2",
+          },
+          dependencies: {
+            runCommand: async () => createCursorCommandResult({ exitCode: 1, stderr: "bad diff" }),
+          },
+        },
+        {
+          kind: "gemini",
+          input: {
+            taskId: "gemini-1",
+            prompt: "This should never run.",
+            model: "gemini-3-flash-preview",
+          },
+        },
+      ],
+    });
+
+    expect(result).toMatchObject({
+      mode: "sequential",
+      status: "step_failed",
+      failedStepIndex: 0,
+      summary: {
+        totalJobs: 2,
+        finishedJobs: 1,
+        completedJobs: 0,
+        failedJobs: 1,
+        skippedJobs: 1,
+      },
+    });
+    expect(result.error).toBe("Workflow stopped after step 1 returned status 'command_failed'.");
+    expect(hasOrchestrationFailures(result)).toBe(true);
   });
 
   it("fails the sequential workflow when a template cannot be resolved", async () => {

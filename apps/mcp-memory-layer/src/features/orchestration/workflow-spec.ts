@@ -2,8 +2,8 @@ import { z } from "zod";
 
 import { cursorWorkerInputSchema } from "../cursor/schemas.js";
 import { geminiWorkerInputSchema } from "../gemini/schemas.js";
-import { newId } from "../memory/lib/ids.js";
-import type { WorkerJob } from "./types.js";
+import { newId } from "../../lib/ids.js";
+import type { SequentialWorkerStep, WorkerJob } from "./types.js";
 
 export const geminiWorkflowInputSchema = geminiWorkerInputSchema.omit({ taskId: true }).extend({
   taskId: z.string().trim().min(1).optional(),
@@ -17,10 +17,16 @@ export const workflowJobSchema = z.discriminatedUnion("kind", [
   z.object({
     kind: z.literal("gemini"),
     input: geminiWorkflowInputSchema,
+    retries: z.number().int().min(0).max(5).optional(),
+    retryDelayMs: z.number().int().positive().max(30_000).optional(),
+    continueOnFailure: z.boolean().optional(),
   }),
   z.object({
     kind: z.literal("cursor"),
     input: cursorWorkflowInputSchema,
+    retries: z.number().int().min(0).max(5).optional(),
+    retryDelayMs: z.number().int().positive().max(30_000).optional(),
+    continueOnFailure: z.boolean().optional(),
   }),
 ]);
 
@@ -47,7 +53,7 @@ export type WorkflowSpecInput = z.infer<typeof workflowSpecSchema>;
 
 export type OrchestrateWorkflowSpec =
   | { readonly mode: "parallel"; readonly maxConcurrency?: number; readonly timeoutMs?: number; readonly jobs: readonly WorkerJob[] }
-  | { readonly mode: "sequential"; readonly timeoutMs?: number; readonly steps: readonly WorkerJob[] };
+  | { readonly mode: "sequential"; readonly timeoutMs?: number; readonly steps: readonly SequentialWorkerStep[] };
 
 export function normalizeWorkflowSpec(
   spec: WorkflowSpecInput,
@@ -81,6 +87,9 @@ function normalizeJob(
         taskId: job.input.taskId ?? newId("gemini"),
         cwd: job.input.cwd ?? defaultCwd,
       },
+      retries: job.retries,
+      retryDelayMs: job.retryDelayMs,
+      continueOnFailure: job.continueOnFailure,
     };
   }
 
@@ -91,5 +100,8 @@ function normalizeJob(
       taskId: job.input.taskId ?? newId("cursor"),
       cwd: job.input.cwd ?? defaultCwd,
     },
+    retries: job.retries,
+    retryDelayMs: job.retryDelayMs,
+    continueOnFailure: job.continueOnFailure,
   };
 }

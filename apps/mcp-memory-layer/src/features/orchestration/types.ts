@@ -7,12 +7,18 @@ export interface GeminiWorkerJob {
   readonly kind: "gemini";
   readonly input: GeminiWorkerInput;
   readonly dependencies?: RunGeminiWorkerDependencies;
+  readonly retries?: number;
+  readonly retryDelayMs?: number;
+  readonly continueOnFailure?: boolean;
 }
 
 export interface CursorWorkerJob {
   readonly kind: "cursor";
   readonly input: CursorWorkerInput;
   readonly dependencies?: RunCursorWorkerDependencies;
+  readonly retries?: number;
+  readonly retryDelayMs?: number;
+  readonly continueOnFailure?: boolean;
 }
 
 export type WorkerJob = GeminiWorkerJob | CursorWorkerJob;
@@ -49,13 +55,26 @@ export type WorkerJobResult =
   | GeminiWorkerJobFailure
   | CursorWorkerJobFailure;
 
+export interface JobCompleteEvent {
+  readonly mode: "parallel" | "sequential";
+  readonly jobIndex: number;
+  readonly finishedJobs: number;
+  readonly totalJobs: number;
+  readonly job: WorkerJob;
+  readonly result: WorkerJobResult;
+}
+
+// Library-only runtime hook for callers that want incremental progress.
+// Parallel events arrive in completion order, not job index order.
+// Sequential totalJobs counts declared steps, including ones that may be skipped via `null`.
+
 export interface SequentialWorkerContext {
   readonly results: readonly WorkerJobResult[];
   readonly lastResult?: WorkerJobResult;
   readonly stepIndex: number;
 }
 
-export type SequentialWorkerStep = WorkerJob | ((context: SequentialWorkerContext) => WorkerJob);
+export type SequentialWorkerStep = WorkerJob | ((context: SequentialWorkerContext) => WorkerJob | null);
 
 export interface OrchestrationTraceEntry {
   readonly requestId: string;
