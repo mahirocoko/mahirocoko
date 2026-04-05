@@ -3,7 +3,7 @@ import type { CanonicalLogStore } from "../log/canonical-log.js";
 import type { EmbeddingProvider } from "../index/embedding-provider.js";
 import type { MemoryRecordsTable } from "../index/memory-records-table.js";
 import type { MemoryRecord, RememberInput } from "../types.js";
-import { newId } from "../lib/ids.js";
+import { newId } from "../../../lib/ids.js";
 import { assertValidScope } from "../lib/scope.js";
 import { nowIso } from "../lib/time.js";
 import { toRetrievalRow } from "../retrieval/rank.js";
