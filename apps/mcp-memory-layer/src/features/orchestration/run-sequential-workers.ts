@@ -1,9 +1,10 @@
 import { runWorkerJob } from "./run-worker-job.js";
-import type { SequentialWorkerContext, SequentialWorkerStep, SequentialWorkersResult, WorkerJob, WorkerJobResult } from "./types.js";
+import type { JobCompleteEvent, SequentialWorkerContext, SequentialWorkerStep, SequentialWorkersResult, WorkerJob, WorkerJobResult } from "./types.js";
 import { prepareJobForWorkflowTimeout } from "./workflow-timeout.js";
 
 export interface RunSequentialWorkersOptions {
   readonly timeoutMs?: number;
+  readonly onJobComplete?: (event: JobCompleteEvent) => Promise<void> | void;
 }
 
 export async function runSequentialWorkers(
@@ -19,6 +20,10 @@ export async function runSequentialWorkers(
       lastResult: results.at(-1),
       stepIndex,
     });
+
+    if (job === null) {
+      continue;
+    }
 
     if ("status" in job) {
       return {
@@ -42,6 +47,24 @@ export async function runSequentialWorkers(
     const result = await runWorkerJob(preparedJob.job);
     results.push(result);
 
+    await options.onJobComplete?.({
+      mode: "sequential",
+      jobIndex: stepIndex,
+      finishedJobs: results.length,
+      totalJobs: steps.length,
+      job: preparedJob.job,
+      result,
+    });
+
+    if (shouldStopAfterFailure(result, job)) {
+      return {
+        status: "step_failed",
+        results,
+        failedStepIndex: stepIndex,
+        error: formatWorkerFailure(stepIndex, result),
+      };
+    }
+
     if (preparedJob.workflowTimeoutBounded && "result" in result && result.result.status === "timeout") {
       return {
         status: "timed_out",
@@ -60,7 +83,7 @@ export async function runSequentialWorkers(
 function resolveStep(
   step: SequentialWorkerStep,
   context: SequentialWorkerContext,
-): WorkerJob | { readonly status: "step_failed"; readonly error: string } {
+): WorkerJob | null | { readonly status: "step_failed"; readonly error: string } {
   if (typeof step !== "function") {
     return step;
   }
@@ -81,4 +104,24 @@ function formatUnexpectedError(error: unknown): string {
   }
 
   return "Unknown sequential step error.";
+}
+
+function shouldStopAfterFailure(result: WorkerJobResult, job: WorkerJob): boolean {
+  if (job.continueOnFailure !== false) {
+    return false;
+  }
+
+  if (!("result" in result)) {
+    return true;
+  }
+
+  return result.result.status !== "completed";
+}
+
+function formatWorkerFailure(stepIndex: number, result: WorkerJobResult): string {
+  if (!("result" in result)) {
+    return `Workflow stopped after step ${stepIndex + 1} failed: ${result.error}`;
+  }
+
+  return `Workflow stopped after step ${stepIndex + 1} returned status '${result.result.status}'.`;
 }

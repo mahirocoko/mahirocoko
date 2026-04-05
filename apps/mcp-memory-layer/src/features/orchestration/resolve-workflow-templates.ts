@@ -9,6 +9,10 @@ export function interpolateWorkerJob(job: WorkerJob, context: SequentialWorkerCo
   };
 }
 
+export function validateWorkerJobTemplates(job: WorkerJob): void {
+  validateTemplateableValue(job.input);
+}
+
 function interpolateValue(value: unknown, context: SequentialWorkerContext): unknown {
   if (typeof value === "string") {
     return interpolateString(value, context);
@@ -25,6 +29,50 @@ function interpolateValue(value: unknown, context: SequentialWorkerContext): unk
   }
 
   return value;
+}
+
+function validateTemplateableValue(value: unknown): void {
+  if (typeof value === "string") {
+    validateTemplateString(value);
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    for (const item of value) {
+      validateTemplateableValue(item);
+    }
+
+    return;
+  }
+
+  if (value && typeof value === "object") {
+    for (const item of Object.values(value)) {
+      validateTemplateableValue(item);
+    }
+  }
+}
+
+function validateTemplateString(template: string): void {
+  for (const match of template.matchAll(templatePattern)) {
+    const expression = match[1]?.trim();
+
+    if (!expression) {
+      throw new Error("Empty template expression is not allowed.");
+    }
+
+    validateTemplateExpression(expression);
+  }
+}
+
+function validateTemplateExpression(expression: string): void {
+  const helperCall = parseHelperCall(expression);
+
+  if (helperCall) {
+    validateHelperCall(helperCall.name, helperCall.argumentsSource, expression);
+    return;
+  }
+
+  validatePathExpression(expression);
 }
 
 function interpolateString(template: string, context: SequentialWorkerContext): string {
@@ -161,6 +209,34 @@ function resolveHelperCall(
   }
 }
 
+function validateHelperCall(
+  name: string,
+  argumentsSource: string,
+  originalExpression: string,
+): void {
+  const args = splitHelperArguments(argumentsSource);
+
+  switch (name) {
+    case "json":
+      if (args.length !== 1) {
+        throw new Error(`Template helper 'json' expects exactly one argument in '${originalExpression}'.`);
+      }
+
+      validateHelperArgument(args[0] as string);
+      return;
+    case "default":
+      if (args.length !== 2) {
+        throw new Error(`Template helper 'default' expects exactly two arguments in '${originalExpression}'.`);
+      }
+
+      validateHelperArgument(args[0] as string);
+      validateHelperArgument(args[1] as string);
+      return;
+    default:
+      throw new Error(`Unknown template helper '${name}'.`);
+  }
+}
+
 function resolveJsonHelper(
   args: readonly string[],
   context: SequentialWorkerContext,
@@ -204,6 +280,17 @@ function resolveHelperArgument(argumentSource: string, context: SequentialWorker
   }
 
   return resolveExpression(trimmed, context);
+}
+
+function validateHelperArgument(argumentSource: string): void {
+  const trimmed = argumentSource.trim();
+  const literal = parseLiteralArgument(trimmed);
+
+  if (literal.parsed) {
+    return;
+  }
+
+  validateTemplateExpression(trimmed);
 }
 
 function splitHelperArguments(argumentsSource: string): readonly string[] {
@@ -294,6 +381,20 @@ function parseLiteralArgument(argument: string): { readonly parsed: boolean; rea
   }
 
   return { parsed: false };
+}
+
+function validatePathExpression(expression: string): void {
+  const path = expression.split(".").filter(Boolean);
+
+  if (path.length === 0) {
+    throw new Error("Template path expression must not be empty.");
+  }
+
+  for (const segment of path) {
+    if (!/^[a-zA-Z0-9_-]+$/.test(segment)) {
+      throw new Error(`Template path segment '${segment}' is invalid.`);
+    }
+  }
 }
 
 function formatResolvedValue(value: unknown, expression: string): string {

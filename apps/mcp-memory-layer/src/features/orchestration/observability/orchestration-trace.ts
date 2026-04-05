@@ -20,8 +20,6 @@ export function buildOrchestrationTraceEntry(
   spec: OrchestrateWorkflowSpec,
   result: OrchestrationRunResult,
 ): OrchestrationTraceEntry {
-  const jobs = spec.mode === "parallel" ? spec.jobs : spec.steps;
-
   return {
     requestId,
     source,
@@ -29,8 +27,8 @@ export function buildOrchestrationTraceEntry(
     status: result.status,
     maxConcurrency: spec.mode === "parallel" ? spec.maxConcurrency : undefined,
     timeoutMs: spec.timeoutMs,
-    jobKinds: jobs.map((job) => job.kind),
-    taskIds: jobs.map((job) => job.input.taskId),
+    jobKinds: result.results.map((job) => job.kind),
+    taskIds: result.results.map((job) => job.input.taskId),
     totalJobs: result.summary.totalJobs,
     finishedJobs: result.summary.finishedJobs,
     completedJobs: result.summary.completedJobs,
