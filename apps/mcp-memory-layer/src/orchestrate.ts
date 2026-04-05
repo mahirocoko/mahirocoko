@@ -3,10 +3,11 @@ import { stdout } from "node:process";
 import { ZodError } from "zod";
 
 import { getAppEnv } from "./config/env.js";
+import { dryRunWorkflow, type WorkflowDryRunResult } from "./features/orchestration/dry-run-workflow.js";
 import { parseOrchestrateCliArgs } from "./features/orchestration/orchestrate-cli.js";
 import { OrchestrationTraceStore } from "./features/orchestration/observability/orchestration-trace.js";
 import { hasOrchestrationFailures, runOrchestrationWorkflow, type OrchestrationRunResult } from "./features/orchestration/run-orchestration-workflow.js";
-import { newId } from "./features/memory/lib/ids.js";
+import { newId } from "./lib/ids.js";
 
 interface InvalidInputResult {
   readonly status: "invalid_input";
@@ -21,9 +22,15 @@ async function main(): Promise<void> {
   const startedAt = startedAtDate.toISOString();
 
   try {
-    const spec = await parseOrchestrateCliArgs(process.argv.slice(2));
+    const parsed = await parseOrchestrateCliArgs(process.argv.slice(2));
+
+    if (parsed.dryRun) {
+      writeJson(dryRunWorkflow(parsed.spec));
+      return;
+    }
+
     const env = getAppEnv();
-    const result = await runOrchestrationWorkflow(spec, {
+    const result = await runOrchestrationWorkflow(parsed.spec, {
       traceStore: new OrchestrationTraceStore(env.dataPaths.orchestrationTraceFilePath),
       traceSource: "cli",
       traceRequestId: newId("workflow"),
@@ -48,7 +55,7 @@ async function main(): Promise<void> {
   }
 }
 
-function writeJson(value: OrchestrationRunResult | InvalidInputResult): void {
+function writeJson(value: OrchestrationRunResult | WorkflowDryRunResult | InvalidInputResult): void {
   stdout.write(`${JSON.stringify(value)}\n`);
 }
 

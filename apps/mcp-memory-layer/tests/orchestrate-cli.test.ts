@@ -30,6 +30,8 @@ describe("parseOrchestrateCliArgs", () => {
                 prompt: "Summarize this repo.",
                 model: "gemini-3-flash-preview",
               },
+              retries: 2,
+              retryDelayMs: 500,
             },
             {
               kind: "cursor",
@@ -44,20 +46,23 @@ describe("parseOrchestrateCliArgs", () => {
       },
     );
 
-    expect(spec.mode).toBe("parallel");
-    expect(spec.maxConcurrency).toBe(2);
-    expect(spec.timeoutMs).toBe(120000);
-    expect(spec.jobs).toHaveLength(2);
-    expect(spec.jobs[0]).toMatchObject({
+    expect(spec.dryRun).toBe(false);
+    expect(spec.spec.mode).toBe("parallel");
+    expect(spec.spec.maxConcurrency).toBe(2);
+    expect(spec.spec.timeoutMs).toBe(120000);
+    expect(spec.spec.jobs).toHaveLength(2);
+    expect(spec.spec.jobs[0]).toMatchObject({
       kind: "gemini",
       input: {
         prompt: "Summarize this repo.",
         model: "gemini-3-flash-preview",
         cwd: "/tmp/project",
       },
+      retries: 2,
+      retryDelayMs: 500,
     });
-    expect(spec.jobs[0]?.input.taskId).toMatch(/^gemini_/);
-    expect(spec.jobs[1]).toEqual({
+    expect(spec.spec.jobs[0]?.input.taskId).toMatch(/^gemini_/);
+    expect(spec.spec.jobs[1]).toEqual({
       kind: "cursor",
       input: {
         taskId: "cursor-custom",
@@ -90,20 +95,46 @@ describe("parseOrchestrateCliArgs", () => {
     );
 
     expect(spec).toEqual({
-      mode: "sequential",
-      timeoutMs: 30000,
-      steps: [
-        {
-          kind: "gemini",
-          input: {
-            taskId: expect.stringMatching(/^gemini_/),
-            prompt: "Summarize this repo.",
-            model: "gemini-3-flash-preview",
-            cwd: "/tmp/custom",
+      dryRun: false,
+      spec: {
+        mode: "sequential",
+        timeoutMs: 30000,
+        steps: [
+          {
+            kind: "gemini",
+            input: {
+              taskId: expect.stringMatching(/^gemini_/),
+              prompt: "Summarize this repo.",
+              model: "gemini-3-flash-preview",
+              cwd: "/tmp/custom",
+            },
           },
-        },
-      ],
+        ],
+      },
     });
+  });
+
+  it("parses dry-run mode", async () => {
+    const parsed = await parseOrchestrateCliArgs(
+      ["--file", "workflow.json", "--dry-run"],
+      {
+        readFileText: async () => JSON.stringify({
+          mode: "parallel",
+          jobs: [
+            {
+              kind: "gemini",
+              input: {
+                prompt: "Summarize this repo.",
+                model: "gemini-3-flash-preview",
+              },
+            },
+          ],
+        }),
+      },
+    );
+
+    expect(parsed.dryRun).toBe(true);
+    expect(parsed.spec.mode).toBe("parallel");
   });
 
   it("fails when the workflow json shape is invalid", async () => {
@@ -115,6 +146,28 @@ describe("parseOrchestrateCliArgs", () => {
         },
       ),
     ).rejects.toThrowError();
+  });
+
+  it("fails fast for invalid sequential template syntax", async () => {
+    await expect(
+      parseOrchestrateCliArgs(
+        ["--file", "workflow.json"],
+        {
+          readFileText: async () => JSON.stringify({
+            mode: "sequential",
+            steps: [
+              {
+                kind: "cursor",
+                input: {
+                  prompt: "Broken helper: {{mystery(last.result.response)}}",
+                  model: "composer-2",
+                },
+              },
+            ],
+          }),
+        },
+      ),
+    ).rejects.toThrowError("Unknown template helper 'mystery'.");
   });
 
   it("fails when maxConcurrency is not a positive integer", async () => {
