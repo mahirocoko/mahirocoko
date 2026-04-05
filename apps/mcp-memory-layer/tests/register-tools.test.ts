@@ -12,18 +12,17 @@ vi.mock("../src/features/orchestration/observability/list-orchestration-traces.j
   listOrchestrationTraces: vi.fn(async () => []),
 }));
 
-import type { MemoryService } from "../src/features/memory/memory-service.js";
-import { getRegisteredTools } from "../src/features/memory/mcp/register-tools.js";
+import { getRegisteredOrchestrationTools } from "../src/features/orchestration/mcp/register-tools.js";
 import { listOrchestrationTraces } from "../src/features/orchestration/observability/list-orchestration-traces.js";
 import { runOrchestrationWorkflow } from "../src/features/orchestration/run-orchestration-workflow.js";
 
-describe("getRegisteredTools", () => {
+describe("getRegisteredOrchestrationTools", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   it("registers the orchestration workflow MCP tool", () => {
-    const tools = getRegisteredTools({} as MemoryService);
+    const tools = getRegisteredOrchestrationTools();
     const tool = tools.find((item) => item.name === "orchestrate_workflow");
 
     expect(tool).toBeDefined();
@@ -32,7 +31,7 @@ describe("getRegisteredTools", () => {
   });
 
   it("executes the orchestration tool with normalized workflow input", async () => {
-    const tools = getRegisteredTools({} as MemoryService);
+    const tools = getRegisteredOrchestrationTools();
     const tool = tools.find((item) => item.name === "orchestrate_workflow");
     const runOrchestrationWorkflowMock = vi.mocked(runOrchestrationWorkflow);
 
@@ -84,7 +83,7 @@ describe("getRegisteredTools", () => {
   });
 
   it("rejects invalid orchestration tool input before runtime execution", async () => {
-    const tools = getRegisteredTools({} as MemoryService);
+    const tools = getRegisteredOrchestrationTools();
     const tool = tools.find((item) => item.name === "orchestrate_workflow");
     const runOrchestrationWorkflowMock = vi.mocked(runOrchestrationWorkflow);
 
@@ -101,7 +100,7 @@ describe("getRegisteredTools", () => {
   });
 
   it("executes the orchestration trace listing tool", async () => {
-    const tools = getRegisteredTools({} as MemoryService);
+    const tools = getRegisteredOrchestrationTools();
     const tool = tools.find((item) => item.name === "list_orchestration_traces");
     const listOrchestrationTracesMock = vi.mocked(listOrchestrationTraces);
 
