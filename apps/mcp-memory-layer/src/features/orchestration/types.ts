@@ -76,15 +76,31 @@ export interface SequentialWorkerContext {
 
 export type SequentialWorkerStep = WorkerJob | ((context: SequentialWorkerContext) => WorkerJob | null);
 
+export type OrchestrationJobStatus = GeminiWorkerResult["status"] | CursorWorkerResult["status"] | "runner_failed";
+
+/** Per-finished-job model telemetry persisted on orchestration traces (new entries only). */
+export interface OrchestrationJobModelTelemetry {
+  readonly kind: WorkerJob["kind"];
+  readonly taskId: string;
+  /** Normalized per-job execution status for later telemetry analysis. */
+  readonly status: OrchestrationJobStatus;
+  /** Model requested for the job (worker input or normalized result). */
+  readonly requestedModel: string;
+  /** Model reported by the worker runtime when available. */
+  readonly reportedModel?: string;
+}
+
 export interface OrchestrationTraceEntry {
   readonly requestId: string;
   readonly source: "cli" | "mcp";
   readonly mode: "parallel" | "sequential";
-  readonly status: "completed" | "step_failed" | "timed_out";
+  readonly status: "completed" | "step_failed" | "timed_out" | "runner_failed";
   readonly maxConcurrency?: number;
   readonly timeoutMs?: number;
   readonly jobKinds: readonly WorkerJob["kind"][];
   readonly taskIds: readonly string[];
+  /** Present on traces written after this field was added; omitted on older JSONL lines. */
+  readonly jobModels?: readonly OrchestrationJobModelTelemetry[];
   readonly totalJobs: number;
   readonly finishedJobs: number;
   readonly completedJobs: number;
@@ -104,6 +120,8 @@ export interface ListOrchestrationTracesInput {
   readonly status?: OrchestrationTraceEntry["status"];
   readonly requestId?: string;
   readonly taskId?: string;
+  readonly fromDate?: string;
+  readonly toDate?: string;
   readonly limit?: number;
 }
 

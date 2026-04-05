@@ -47,6 +47,7 @@ export const workflowSpecSchema = z.discriminatedUnion("mode", [
 export const orchestrateToolInputSchema = z.object({
   spec: workflowSpecSchema,
   cwd: z.string().trim().min(1).optional(),
+  waitForCompletion: z.boolean().optional(),
 });
 
 export type WorkflowSpecInput = z.infer<typeof workflowSpecSchema>;

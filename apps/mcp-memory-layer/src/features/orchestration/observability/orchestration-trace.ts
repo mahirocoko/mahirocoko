@@ -3,7 +3,7 @@ import path from "node:path";
 
 import type { OrchestrationRunResult } from "../run-orchestration-workflow.js";
 import type { OrchestrateWorkflowSpec } from "../workflow-spec.js";
-import type { OrchestrationTraceEntry } from "../types.js";
+import type { OrchestrationJobModelTelemetry, OrchestrationTraceEntry, WorkerJob, WorkerJobResult } from "../types.js";
 
 export class OrchestrationTraceStore {
   public constructor(private readonly filePath: string) {}
@@ -12,6 +12,40 @@ export class OrchestrationTraceStore {
     await mkdir(path.dirname(this.filePath), { recursive: true });
     await appendFile(this.filePath, `${JSON.stringify(entry)}\n`, "utf8");
   }
+}
+
+interface RunnerFailedTraceOptions {
+  readonly requestId: string;
+  readonly source: OrchestrationTraceEntry["source"];
+  readonly spec: OrchestrateWorkflowSpec;
+  readonly error: string;
+  readonly startedAt: string;
+  readonly finishedAt?: string;
+}
+
+function buildJobModelsFromWorkerResults(
+  results: readonly WorkerJobResult[],
+): readonly OrchestrationJobModelTelemetry[] {
+  return results.map((item) => {
+    if ("result" in item) {
+      const requestedModel = item.result.requestedModel ?? item.input.model;
+      const reportedModel = item.result.reportedModel;
+      return {
+        kind: item.kind,
+        taskId: item.input.taskId,
+        status: item.result.status,
+        requestedModel,
+        ...(reportedModel !== undefined ? { reportedModel } : {}),
+      };
+    }
+
+    return {
+      kind: item.kind,
+      taskId: item.input.taskId,
+      status: item.status,
+      requestedModel: item.input.model,
+    };
+  });
 }
 
 export function buildOrchestrationTraceEntry(
@@ -29,6 +63,7 @@ export function buildOrchestrationTraceEntry(
     timeoutMs: spec.timeoutMs,
     jobKinds: result.results.map((job) => job.kind),
     taskIds: result.results.map((job) => job.input.taskId),
+    jobModels: buildJobModelsFromWorkerResults(result.results),
     totalJobs: result.summary.totalJobs,
     finishedJobs: result.summary.finishedJobs,
     completedJobs: result.summary.completedJobs,
@@ -41,4 +76,47 @@ export function buildOrchestrationTraceEntry(
     durationMs: result.summary.durationMs,
     createdAt: new Date().toISOString(),
   };
+}
+
+export function buildRunnerFailedOrchestrationTraceEntry(
+  options: RunnerFailedTraceOptions,
+): OrchestrationTraceEntry {
+  const jobs = getConcreteJobs(options.spec);
+  const finishedAt = options.finishedAt ?? new Date().toISOString();
+  const durationMs = Math.max(Date.parse(finishedAt) - Date.parse(options.startedAt), 0);
+
+  return {
+    requestId: options.requestId,
+    source: options.source,
+    mode: options.spec.mode,
+    status: "runner_failed",
+    maxConcurrency: options.spec.mode === "parallel" ? options.spec.maxConcurrency : undefined,
+    timeoutMs: options.spec.timeoutMs,
+    jobKinds: jobs.map((job) => job.kind),
+    taskIds: jobs.map((job) => job.input.taskId),
+    jobModels: jobs.map((job) => ({
+      kind: job.kind,
+      taskId: job.input.taskId,
+      status: "runner_failed",
+      requestedModel: job.input.model,
+    })),
+    totalJobs: jobs.length,
+    finishedJobs: 0,
+    completedJobs: 0,
+    failedJobs: jobs.length,
+    skippedJobs: 0,
+    error: options.error,
+    startedAt: options.startedAt,
+    finishedAt,
+    durationMs,
+    createdAt: finishedAt,
+  };
+}
+
+function getConcreteJobs(spec: OrchestrateWorkflowSpec): readonly WorkerJob[] {
+  if (spec.mode === "parallel") {
+    return spec.jobs;
+  }
+
+  return spec.steps.flatMap((step) => (typeof step === "function" ? [] : [step]));
 }

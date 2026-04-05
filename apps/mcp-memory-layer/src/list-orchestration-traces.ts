@@ -8,6 +8,10 @@ import {
   formatOrchestrationTracesAsText,
 } from "./features/orchestration/format-orchestration-traces.js";
 import { listOrchestrationTraces } from "./features/orchestration/observability/list-orchestration-traces.js";
+import {
+  summarizeOrchestrationTraceUsage,
+  type OrchestrationTraceUsageSummary,
+} from "./features/orchestration/observability/summarize-orchestration-trace-usage.js";
 import { parseListOrchestrationTracesCliArgs } from "./features/orchestration/list-orchestration-traces-cli.js";
 import type { OrchestrationTraceEntry } from "./features/orchestration/types.js";
 
@@ -26,12 +30,17 @@ async function main(): Promise<void> {
   try {
     const { format, payload } = parseListOrchestrationTracesCliArgs(process.argv.slice(2));
     const env = getAppEnv();
-    const result = await listOrchestrationTraces({
+    const traces = await listOrchestrationTraces({
       payload,
       filePath: env.dataPaths.orchestrationTraceFilePath,
     });
 
-    writeOutput(format, result);
+    if (format === "usage") {
+      writeJson(summarizeOrchestrationTraceUsage(traces));
+      return;
+    }
+
+    writeOutput(format, traces);
   } catch (error) {
     const failedAtDate = new Date();
 
@@ -47,7 +56,9 @@ async function main(): Promise<void> {
   }
 }
 
-function writeJson(value: readonly OrchestrationTraceEntry[] | InvalidInputResult): void {
+function writeJson(
+  value: readonly OrchestrationTraceEntry[] | InvalidInputResult | OrchestrationTraceUsageSummary,
+): void {
   stdout.write(`${JSON.stringify(value)}\n`);
 }
 

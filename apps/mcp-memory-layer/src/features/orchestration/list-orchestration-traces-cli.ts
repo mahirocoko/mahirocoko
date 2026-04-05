@@ -1,7 +1,7 @@
 import { listOrchestrationTracesInputSchema } from "./schemas.js";
 import type { ListOrchestrationTracesInput } from "./types.js";
 
-export type ListOrchestrationTracesCliFormat = "json" | "text" | "detail";
+export type ListOrchestrationTracesCliFormat = "json" | "text" | "detail" | "usage";
 
 export interface ListOrchestrationTracesCliArgs {
   readonly format: ListOrchestrationTracesCliFormat;
@@ -48,6 +48,14 @@ export function parseListOrchestrationTracesCliArgs(
         parsed.taskId = readStringFlagValue(token, nextValue);
         index += 1;
         break;
+      case "--from-date":
+        parsed.fromDate = readStringFlagValue(token, nextValue);
+        index += 1;
+        break;
+      case "--to-date":
+        parsed.toDate = readStringFlagValue(token, nextValue);
+        index += 1;
+        break;
       case "--limit":
         parsed.limit = readNumberFlagValue(token, nextValue);
         index += 1;
@@ -91,8 +99,8 @@ function readFormatFlagValue(
 ): ListOrchestrationTracesCliFormat {
   const parsed = readStringFlagValue(flag, value);
 
-  if (parsed !== "json" && parsed !== "text" && parsed !== "detail") {
-    throw new Error(`${flag} must be one of: json, text, detail.`);
+  if (parsed !== "json" && parsed !== "text" && parsed !== "detail" && parsed !== "usage") {
+    throw new Error(`${flag} must be one of: json, text, detail, usage.`);
   }
 
   return parsed;

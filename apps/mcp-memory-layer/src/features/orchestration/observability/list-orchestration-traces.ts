@@ -56,9 +56,28 @@ function matchesTraceFilter(
     return false;
   }
 
+  const startedAtMs = Date.parse(entry.startedAt);
+
+  if (filter.fromDate && startedAtMs < normalizeDateFilterValue(filter.fromDate, "from")) {
+    return false;
+  }
+
+  if (filter.toDate && startedAtMs > normalizeDateFilterValue(filter.toDate, "to")) {
+    return false;
+  }
+
   return true;
 }
 
 function isFileNotFoundError(error: unknown): error is NodeJS.ErrnoException {
   return error instanceof Error && "code" in error && error.code === "ENOENT";
+}
+
+function normalizeDateFilterValue(value: string, bound: "from" | "to"): number {
+  if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    const suffix = bound === "from" ? "T00:00:00.000Z" : "T23:59:59.999Z";
+    return Date.parse(`${value}${suffix}`);
+  }
+
+  return Date.parse(value);
 }

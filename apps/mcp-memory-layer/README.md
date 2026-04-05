@@ -198,7 +198,7 @@ Dry-run result includes:
 Trace artifact:
 
 - orchestration runs append JSONL entries to `data/traces/orchestration-trace.jsonl`
-- trace entries include workflow mode, status, job kinds, task IDs, summary counts, and source (`cli` or `mcp`)
+- trace entries include workflow mode, status, job kinds, task IDs, summary counts, source (`cli` or `mcp`), and per-finished-job `jobModels` with `requestedModel` / optional `reportedModel` for Gemini and Cursor jobs (older lines may omit `jobModels`)
 
 Parallel workflow fields:
 
@@ -315,8 +315,38 @@ echo '{"mode":"sequential","steps":[{"kind":"gemini","input":{"prompt":"Summariz
 MCP tool:
 
 - `orchestrate_workflow` runs the same static workflow spec through the MCP server
-- input shape: `{ "spec": <parallel-or-sequential workflow>, "cwd": "/optional/default/cwd" }`
-- `list_orchestration_traces` lists persisted orchestration trace entries with optional filters like `source`, `mode`, `status`, `requestId`, `taskId`, and `limit`
+- input shape: `{ "spec": <parallel-or-sequential workflow>, "cwd": "/optional/default/cwd", "waitForCompletion": true }`
+- set `waitForCompletion: false` for long-running workflows so the tool returns immediately with `{ requestId, status: "running" }` instead of waiting for the full worker response
+- `get_orchestration_result` reads the stored workflow state/result by `requestId`
+- `list_orchestration_traces` lists persisted orchestration trace entries with optional filters like `source`, `mode`, `status`, `requestId`, `taskId`, and `limit` (each entry may include `jobModels` with per-job `requestedModel` / optional `reportedModel` when written by a current package version)
+
+Async MCP example:
+
+```json
+{
+  "spec": {
+    "mode": "parallel",
+    "jobs": [
+      {
+        "kind": "cursor",
+        "input": {
+          "prompt": "Review this diff",
+          "model": "claude-4.6-opus-high"
+        }
+      }
+    ]
+  },
+  "waitForCompletion": false
+}
+```
+
+Then fetch the result later with:
+
+```json
+{
+  "requestId": "workflow_123"
+}
+```
 
 Trace inspection CLI:
 
@@ -325,7 +355,23 @@ bun run list-orchestration-traces
 bun run list-orchestration-traces -- --limit 50 --source cli
 bun run list-orchestration-traces -- --format text --limit 20
 bun run list-orchestration-traces -- --format detail --request-id workflow_123
+bun run list-orchestration-traces -- --format usage --limit 100
 ```
+
+`--format usage` prints one JSON object aggregating `traceCount`, `jobCount`, and count maps `byWorkerKind`, `byRequestedModel`, and `byReportedModel` over the filtered traces (legacy traces without `jobModels` still contribute worker-kind counts).
+
+Current usage summary also includes:
+
+- `bySource` and `byWorkflowStatus` for workflow-level operational mix
+- `byJobStatus` for per-job failure mode distribution
+- `byDay` for daily trace/job rollups
+- `workflowOutcome` and `jobOutcome` success-rate summaries
+- `byRequestedModelOutcome` for per-model job counts and success rates when per-job telemetry is present
+
+Common inspection flow now also supports time filtering:
+
+- `--from-date <iso-or-date>` -> include traces whose `startedAt` is on/after this point
+- `--to-date <iso-or-date>` -> include traces whose `startedAt` is on/before this point
 
 Common inspection flow:
 

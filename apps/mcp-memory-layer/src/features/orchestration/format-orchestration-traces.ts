@@ -54,6 +54,18 @@ export function formatOrchestrationTracesAsDetail(
         lines.push(`Error: ${trace.error}`);
       }
 
+      if (trace.jobModels && trace.jobModels.length > 0) {
+        lines.push(
+          `Job models: ${trace.jobModels
+            .map(
+              (job) =>
+                `${job.taskId} (${job.kind}) status=${typeof job.status === "string" ? job.status : "-"} requested=${job.requestedModel}` +
+                (job.reportedModel !== undefined ? ` reported=${job.reportedModel}` : ""),
+            )
+            .join("; ")}`,
+        );
+      }
+
       return lines.join("\n");
     })
     .join("\n\n");
