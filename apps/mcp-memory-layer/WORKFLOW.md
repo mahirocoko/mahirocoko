@@ -133,7 +133,7 @@ MCP equivalent:
 
 - The `orchestrate_workflow` MCP tool accepts the same static workflow spec and runs it through the same orchestration runtime.
 - The `list_orchestration_traces` MCP tool reads persisted orchestration trace entries for later inspection.
-- The `list-orchestration-traces` CLI command reads the same persisted trace file with optional filters like `--source`, `--mode`, `--status`, `--request-id`, `--task-id`, and `--limit`, plus `--format text` for a terminal-friendly table view or `--format detail` for expanded per-trace blocks.
+- The `list-orchestration-traces` CLI command reads the same persisted trace file with optional filters like `--source`, `--mode`, `--status`, `--request-id`, `--task-id`, and `--limit`, plus `--format text` for a terminal-friendly table view, `--format detail` for expanded per-trace blocks (including per-job model lines when `jobModels` is present), or `--format usage` for aggregated worker/model counts over the filtered result set.
 
 Typical trace inspection loop:
 

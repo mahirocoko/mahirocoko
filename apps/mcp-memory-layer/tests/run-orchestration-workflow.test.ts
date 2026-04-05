@@ -104,6 +104,14 @@ describe("runOrchestrationWorkflow", () => {
         totalJobs: 1,
         completedJobs: 1,
         taskIds: ["gemini-1"],
+        jobModels: [
+          {
+            kind: "gemini",
+            taskId: "gemini-1",
+            requestedModel: "gemini-3-flash-preview",
+            reportedModel: "gemini-3-flash-preview",
+          },
+        ],
       }),
     ]);
     expect(hasOrchestrationFailures(result)).toBe(false);

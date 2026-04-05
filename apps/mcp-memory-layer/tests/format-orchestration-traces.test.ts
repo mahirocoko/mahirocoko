@@ -59,4 +59,46 @@ describe("formatOrchestrationTracesAsText", () => {
       ]),
     ).toContain("Failed Step Index: 1");
   });
+
+  it("includes per-job model telemetry in detail view when present", () => {
+    const detail = formatOrchestrationTracesAsDetail([
+      {
+        requestId: "workflow-1",
+        source: "cli",
+        mode: "parallel",
+        status: "completed",
+        jobKinds: ["gemini", "cursor"],
+        taskIds: ["g1", "c1"],
+        jobModels: [
+          {
+            kind: "gemini",
+            taskId: "g1",
+            status: "completed",
+            requestedModel: "gemini-3-flash-preview",
+            reportedModel: "gemini-3-flash-preview",
+          },
+          {
+            kind: "cursor",
+            taskId: "c1",
+            status: "command_failed",
+            requestedModel: "composer-2",
+            reportedModel: "composer-2",
+          },
+        ],
+        totalJobs: 2,
+        finishedJobs: 2,
+        completedJobs: 2,
+        failedJobs: 0,
+        skippedJobs: 0,
+        startedAt: "2026-04-05T00:00:00.000Z",
+        finishedAt: "2026-04-05T00:00:02.000Z",
+        durationMs: 2000,
+        createdAt: "2026-04-05T00:00:02.000Z",
+      },
+    ]);
+    
+    expect(detail).toContain("Job models:");
+    expect(detail).toContain("g1 (gemini) status=completed requested=gemini-3-flash-preview reported=gemini-3-flash-preview");
+    expect(detail).toContain("c1 (cursor) status=command_failed requested=composer-2 reported=composer-2");
+  });
 });

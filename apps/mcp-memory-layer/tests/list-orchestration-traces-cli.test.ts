@@ -18,6 +18,10 @@ describe("parseListOrchestrationTracesCliArgs", () => {
         "workflow-1",
         "--task-id",
         "cursor-1",
+        "--from-date",
+        "2026-04-05T00:00:00.000Z",
+        "--to-date",
+        "2026-04-06T00:00:00.000Z",
         "--limit",
         "25",
       ]),
@@ -29,6 +33,8 @@ describe("parseListOrchestrationTracesCliArgs", () => {
         status: "completed",
         requestId: "workflow-1",
         taskId: "cursor-1",
+        fromDate: "2026-04-05T00:00:00.000Z",
+        toDate: "2026-04-06T00:00:00.000Z",
         limit: 25,
       },
     });
@@ -61,13 +67,26 @@ describe("parseListOrchestrationTracesCliArgs", () => {
 
   it("fails when format is unsupported", () => {
     expect(() => parseListOrchestrationTracesCliArgs(["--format", "table"])).toThrowError(
-      "--format must be one of: json, text, detail.",
+      "--format must be one of: json, text, detail, usage.",
+    );
+  });
+
+  it("fails when date filters are invalid", () => {
+    expect(() => parseListOrchestrationTracesCliArgs(["--from-date", "not-a-date"])).toThrowError(
+      "Invalid fromDate.",
     );
   });
 
   it("accepts detail format", () => {
     expect(parseListOrchestrationTracesCliArgs(["--format", "detail"])).toEqual({
       format: "detail",
+      payload: {},
+    });
+  });
+
+  it("accepts usage format", () => {
+    expect(parseListOrchestrationTracesCliArgs(["--format", "usage"])).toEqual({
+      format: "usage",
       payload: {},
     });
   });
