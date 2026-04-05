@@ -14,6 +14,7 @@ bun install
 bun run dev
 bun run cursor -- --model composer-2 "Review this diff"
 bun run gemini -- --model gemini-3-flash-preview "Summarize this repo"
+echo '{"mode":"parallel","jobs":[{"kind":"gemini","input":{"prompt":"Summarize this repo","model":"gemini-3-flash-preview"}},{"kind":"cursor","input":{"prompt":"Review this diff","model":"composer-2"}}]}' | bun run orchestrate -- --file -
 echo '{"taskId":"task-1","prompt":"Summarize this repo","model":"gemini-3-flash-preview"}' | bun run gemini-worker
 bun run typecheck
 bun run test
@@ -148,10 +149,108 @@ Result shape includes:
 Run workers in parallel only when their inputs are fully independent — neither worker's output is needed to form the other's prompt.
 
 - **Safe:** Gemini summarizes one module while Cursor plans an unrelated refactor.
+- **Safe:** Five Cursor jobs review five unrelated files/modules in parallel.
 - **Unsafe:** Gemini extracts facts → you use those facts to write the Cursor prompt.
 
 ```bash
 bun run gemini -- --model gemini-3-flash-preview --cwd /path/to/repo "Summarize the architecture" &
 bun run cursor -- --model claude-4.6-sonnet-medium --mode plan --trust "Plan the next improvement" &
 wait
+```
+
+## Orchestrate command
+
+`orchestrate` is the package-level workflow runner for static JSON-defined parallel or sequential job specs.
+
+Flags:
+
+- `--file <path>` -> workflow JSON file path, or `-` to read from stdin
+- `--cwd <path>` -> optional default cwd applied to jobs that do not set their own `input.cwd`
+
+Result envelope includes:
+
+- `mode`
+- `status`
+- `results`
+- `summary.totalJobs`
+- `summary.finishedJobs`
+- `summary.completedJobs`
+- `summary.failedJobs`
+- `summary.skippedJobs`
+- `summary.startedAt`
+- `summary.finishedAt`
+- `summary.durationMs`
+
+Trace artifact:
+
+- orchestration runs append JSONL entries to `data/traces/orchestration-trace.jsonl`
+- trace entries include workflow mode, status, job kinds, task IDs, summary counts, and source (`cli` or `mcp`)
+
+Parallel workflow fields:
+
+- `maxConcurrency` -> optional positive integer limit for how many parallel jobs run at once
+- `timeoutMs` -> optional workflow-level deadline in milliseconds; bounds started jobs and stops launching new ones after expiry
+
+Parallel example:
+
+```bash
+echo '{"mode":"parallel","jobs":[{"kind":"gemini","input":{"prompt":"Summarize this repo","model":"gemini-3-flash-preview"}},{"kind":"cursor","input":{"prompt":"Review this diff","model":"composer-2"}}]}' | bun run orchestrate -- --file -
+```
+
+Larger fan-out example:
+
+```bash
+echo '{"mode":"parallel","jobs":[{"kind":"cursor","input":{"prompt":"Review module A","model":"composer-2"}},{"kind":"cursor","input":{"prompt":"Review module B","model":"composer-2"}},{"kind":"cursor","input":{"prompt":"Review module C","model":"composer-2"}},{"kind":"cursor","input":{"prompt":"Review module D","model":"composer-2"}},{"kind":"cursor","input":{"prompt":"Review module E","model":"composer-2"}}]}' | bun run orchestrate -- --file -
+```
+
+Concurrency-limited example:
+
+```bash
+echo '{"mode":"parallel","maxConcurrency":2,"jobs":[{"kind":"cursor","input":{"prompt":"Review module A","model":"composer-2"}},{"kind":"cursor","input":{"prompt":"Review module B","model":"composer-2"}},{"kind":"cursor","input":{"prompt":"Review module C","model":"composer-2"}},{"kind":"cursor","input":{"prompt":"Review module D","model":"composer-2"}}]}' | bun run orchestrate -- --file -
+```
+
+The orchestration layer is not limited to one Gemini plus one Cursor. It can fan out many independent jobs of the same or different worker kinds, subject to local machine capacity and upstream tool/runtime limits.
+
+Timeout behavior:
+
+- workflow `timeoutMs` is enforced across the whole orchestration run
+- started jobs receive an effective timeout bounded by the remaining workflow time
+- once the workflow deadline expires, remaining jobs are not started and count as `summary.skippedJobs`
+
+Sequential example:
+
+```bash
+echo '{"mode":"sequential","steps":[{"kind":"gemini","input":{"prompt":"Summarize the retrieval module","model":"gemini-3-flash-preview"}},{"kind":"cursor","input":{"prompt":"Plan the next improvement from that summary","model":"claude-4.6-opus-high","mode":"plan"}}]}' | bun run orchestrate -- --file -
+```
+
+Sequential interpolation example:
+
+```bash
+echo '{"mode":"sequential","steps":[{"kind":"gemini","input":{"prompt":"Summarize the retrieval module","model":"gemini-3-flash-preview"}},{"kind":"cursor","input":{"prompt":"Given this summary: {{last.result.response}}","model":"claude-4.6-opus-high","mode":"plan"}}]}' | bun run orchestrate -- --file -
+```
+
+Interpolation helpers:
+
+- `{{default(path, "fallback")}}` -> use a fallback value when the path is missing, null, or empty
+- `{{json(path)}}` -> JSON-stringify the resolved value
+
+Helper example:
+
+```bash
+echo '{"mode":"sequential","steps":[{"kind":"gemini","input":{"prompt":"Summarize the retrieval module","model":"gemini-3-flash-preview"}},{"kind":"cursor","input":{"prompt":"Summary: {{default(last.result.response, "missing")}} Raw: {{json(default(last.result.raw, last.result.response))}}","model":"claude-4.6-opus-high","mode":"plan"}}]}' | bun run orchestrate -- --file -
+```
+
+MCP tool:
+
+- `orchestrate_workflow` runs the same static workflow spec through the MCP server
+- input shape: `{ "spec": <parallel-or-sequential workflow>, "cwd": "/optional/default/cwd" }`
+- `list_orchestration_traces` lists persisted orchestration trace entries with optional filters like `source`, `mode`, `status`, `requestId`, `taskId`, and `limit`
+
+Trace inspection CLI:
+
+```bash
+bun run list-orchestration-traces
+bun run list-orchestration-traces -- --limit 50 --source cli
+bun run list-orchestration-traces -- --format text --limit 20
+bun run list-orchestration-traces -- --format detail --request-id workflow_123
 ```

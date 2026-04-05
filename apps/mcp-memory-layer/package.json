@@ -11,6 +11,8 @@
     "cursor-worker": "tsx src/cursor-worker.ts",
     "gemini": "tsx src/gemini.ts",
     "gemini-worker": "tsx src/gemini-worker.ts",
+    "list-orchestration-traces": "tsx src/list-orchestration-traces.ts",
+    "orchestrate": "tsx src/orchestrate.ts",
     "reindex": "tsx src/index.ts --reindex",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
