@@ -12,7 +12,7 @@ Local-first MCP memory layer prototype with:
 ```bash
 bun install
 bun run dev
-bun run cursor -- --model composer-2 "Review this diff"
+agent -p --model composer-2 --output-format json "Review this diff"
 bun run gemini -- --model gemini-3-flash-preview "Summarize this repo"
 echo '{"mode":"parallel","jobs":[{"kind":"gemini","input":{"prompt":"Summarize this repo","model":"gemini-3-flash-preview"}},{"kind":"cursor","input":{"prompt":"Review this diff","model":"composer-2"}}]}' | bun run orchestrate -- --file -
 echo '{"taskId":"task-1","prompt":"Summarize this repo","model":"gemini-3-flash-preview"}' | bun run gemini-worker
@@ -21,9 +21,11 @@ bun run test
 bun run reindex
 ```
 
-## Cursor command
+## Cursor wrapper
 
-`cursor` is the assistant-facing Cursor headless command. It wraps `agent -p --output-format json` and returns a normalized JSON envelope similar to the Gemini path.
+The native headless Cursor-family entrypoint in this repo is `agent -p --output-format json ...`.
+
+`bun run cursor` is a repo-local wrapper around that `agent` command. Use it when you want this package's normalized JSON envelope and defaults, but do not confuse it with the native headless command itself.
 
 Model selection:
 
@@ -34,15 +36,17 @@ Model selection:
 - `--mode plan` is optional and should be used only when the task is complex enough that you need an explicit planning pass
 
 ```bash
+agent -p --model composer-2 --output-format json "Review this diff"
+agent -p --model claude-4.6-sonnet-medium --output-format json "Refactor this package safely"
+agent -p --model claude-4.6-opus-high --output-format json "Plan a deep cross-module refactor"
+
+# Repo-local wrapper around the same headless path
 bun run cursor -- --model composer-2 "Review this diff"
-bun run cursor -- --model claude-4.6-sonnet-medium --trust "Refactor this package safely"
-bun run cursor -- --model claude-4.6-opus-high --mode plan --trust "Plan a deep cross-module refactor"
-bun run cursor -- --model claude-4.6-sonnet-medium --force --cwd /path/to/project "Apply the requested refactor"
 ```
 
 ## Cursor worker
 
-`cursor-worker` is the host-friendly stdin wrapper around Cursor headless CLI.
+`cursor-worker` is the host-friendly stdin wrapper around the same `agent -p --output-format json` headless path.
 
 - reads one JSON payload from stdin
 - runs `agent -p --output-format json`
@@ -154,7 +158,7 @@ Run workers in parallel only when their inputs are fully independent — neither
 
 ```bash
 bun run gemini -- --model gemini-3-flash-preview --cwd /path/to/repo "Summarize the architecture" &
-bun run cursor -- --model claude-4.6-sonnet-medium --mode plan --trust "Plan the next improvement" &
+agent -p --model claude-4.6-sonnet-medium --output-format json "Plan the next improvement" &
 wait
 ```
 

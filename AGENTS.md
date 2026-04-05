@@ -10,10 +10,58 @@
 - Always present options, let human decide
 - Always verify before declaring done
 - Use Gemini as a subordinate worker for summarization, timeline extraction, and fact extraction — not as the final source of judgment
-- Explicit model rule: every Gemini and Cursor invocation — including parallel workers, headless pipelines, and programmatic calls — must specify an explicit model name. Never rely on a built-in default. This applies to CLI flags (`--model`), worker JSON payloads (`"model": "..."`), and orchestrator prompts that spawn workers. If the model field is missing, the call is invalid.
+- Explicit model rule: every Gemini and Cursor-family headless invocation — including `agent` runs, parallel workers, and programmatic calls — must specify an explicit model name. Never rely on a built-in default. This applies to CLI flags (`--model`), worker JSON payloads (`"model": "..."`), and orchestrator prompts that spawn workers. If the model field is missing, the call is invalid.
 - Gemini model ladder: `gemini-3-flash-preview` for normal/easy work, `gemini-3.1-pro-preview` for hard work. Always pass the chosen model explicitly.
 - Keep direct file reads, local code search, and verified tool output as source of truth, but do not use that rule as an excuse to skip delegation. Use workers first for extraction and synthesis, then verify surgically.
 - Reuse Gemini cache when task kind + routed prompt + model + cwd match and the cache entry is still valid; do not assume stale cache is trustworthy across prompt-template changes
+
+## Orchestrator Operating Protocol
+
+These are hard operating rules, not guidelines. Follow them mechanically before every implementation task.
+
+### Pre-action checklist
+
+Before touching any file for implementation, run this checklist in order:
+
+1. **Classify.** Name the task shape from the routing table. If it matches a delegatable shape, delegate first.
+2. **Size-check.** If the task would require reading more than ~100 lines or editing more than ~3 files, delegate immediately.
+3. **Grounding-read budget.** Read up to 50 lines total for orientation before delegating. If you need more context to write the worker prompt, that is a sign the task is complex and should stay delegated.
+4. **Spawn, don't absorb.** When the task is delegatable, the next substantial action should be a worker invocation, not more local reading or editing.
+
+### Parallel-first rule
+
+If a task decomposes into 2+ independent subtasks, launch workers in parallel in a single batch. Do not serialize independent work.
+
+### Verification budget
+
+After a worker returns:
+
+- Run executable checks first: typecheck, test, build, lint.
+- Spot-check at most 3 specific claims or locations.
+- Total post-worker verification reads must not exceed ~80 lines.
+- If more verification is needed, that is an escalation trigger — send the output to another worker for review instead of absorbing it locally.
+
+### Direct Edit Allowlist
+
+Direct inline edits are allowed only for these task shapes:
+
+- **Trivial edits:** single-line fixes, typo corrections, config value changes (<=5 lines, <=1 file)
+- **Doc and rule updates:** AGENTS.md, WORKFLOW.md, README.md, or other repo-governance docs where the orchestrator is the authority
+- **Worker prompt and config edits:** worker invocation scripts, workflow JSON, or orchestration configuration
+- **Synthesis artifacts:** final summaries, decision records, or plan documents after workers already did the extraction or analysis
+- **Emergency hotfixes:** a broken build or test that blocks all workers, where the fix is obvious and <=10 lines
+
+Everything else should be delegated first.
+
+### Inline-work tripwires
+
+If any of these are true, stop and delegate:
+
+- You have read more than 100 lines of source in the current task without spawning a worker.
+- You are about to make your 3rd file edit without having delegated.
+- You are writing implementation code rather than docs, config, or orchestration glue.
+- You are mentally summarizing a file instead of asking a worker to summarize it.
+- You are planning a multi-step refactor in your head instead of sending it to a planning worker.
 
 ## Agent and Model Routing
 
@@ -27,20 +75,43 @@
 - Route through categories first (`quick`, `deep`, `writing`, `visual-engineering`, `unspecified-*`) before thinking about a specific model name.
 - If multiple models fit, pick the smallest one that preserves reliability and only escalate after a concrete reason appears.
 
+### Expected orchestrator loop shape
+
+A well-behaved orchestrator turn looks like this:
+
+1. User gives task.
+2. Orchestrator reads <=50 lines for orientation, or zero if the task is already clear.
+3. Orchestrator classifies task shape, picks worker, writes prompt, spawns worker(s).
+4. Worker(s) return.
+5. Orchestrator runs executable verification: typecheck, test, build, or lint as appropriate.
+6. Orchestrator spot-checks <=3 locations, <=80 lines total.
+7. Orchestrator synthesizes and responds.
+
+A bad orchestrator turn looks like this:
+
+1. User gives task.
+2. Orchestrator reads 5 files "to understand context."
+3. Orchestrator reads more files "to be thorough."
+4. Orchestrator edits multiple implementation files directly.
+5. Orchestrator runs tests.
+6. No worker was ever used.
+
+If a turn is drifting toward the bad shape, stop and restructure.
+
 ### Local worker policy
 
 - Primary posture: I remain the orchestrator. Gemini and Cursor are subordinate workers, not final decision-makers.
 - Delegate-first default: if a task shape appears in the routing table, delegate to the mapped worker first unless the task is too small to justify a worker round-trip or requires orchestrator-only authority. When in doubt, delegate.
 - Gemini worker: use for bounded subordinate tasks such as summarization, timeline extraction, fact extraction, and MCP-assisted support tasks.
 - Gemini worker: also use for UI/design thinking, feedback synthesis, and requirement shaping when the task is about clarifying or evaluating frontend direction rather than editing code.
-- Cursor worker: use for headless coding, code review, implementation/refactor assistance, and tasks that benefit from Cursor's agent/tool loop.
-- Cursor worker: use for actual frontend code changes such as component edits, CSS implementation, layout fixes, and UI refactors in the codebase.
-- Cursor model ladder: `composer-2` for standard work, `claude-4.6-sonnet-medium` for harder review/refactor and most direct hard work, `claude-4.6-opus-high` for complex planning. Always pass the chosen model explicitly; never omit `--model` or the `"model"` field.
+- Cursor-family worker: use the headless `agent` CLI for coding, code review, implementation/refactor assistance, and tasks that benefit from Cursor's agent/tool loop.
+- Cursor-family worker: use it for actual frontend code changes such as component edits, CSS implementation, layout fixes, and UI refactors in the codebase.
+- Cursor-family model ladder via `agent`: `composer-2` for standard work, `claude-4.6-sonnet-medium` for harder review/refactor and most direct hard work, `claude-4.6-opus-high` for complex planning. Always pass the chosen model explicitly; never omit `--model` or the `"model"` field.
 - `--mode plan` is not the default posture. Use it only when the task is complex enough that an explicit planning pass is necessary.
 - Grounding reads: before delegating, read only enough source to write a good worker prompt. This is orientation, not full extraction.
 - Verification reads: after a worker responds, spot-check only the specific claims, lines, or files needed to verify the output. Do not re-derive the entire result locally.
-- Keep direct file reads, local code search, tests, build output, and verified tool results as source of truth even when a worker produces a good summary, but bias verification toward executable checks and targeted spot-checks rather than broad duplicate reading.
-- Context budget guard: if inline work would require reading more than roughly 200 lines to summarize, extract facts, build a timeline, or map a module, delegate to Gemini or Cursor instead of consuming the orchestrator context on bulk extraction.
+- Keep direct file reads, local code search, tests, build output, and verified tool results as source of truth. Verification must use executable checks first, then targeted spot-checks of at most 3 locations. Do not re-read broadly after delegation.
+- Context budget guard: if inline work would require reading more than 100 lines or editing more than 3 files, delegate immediately. The previous 200-line threshold was too permissive.
 - Final judgment stays here: do not delegate final architectural judgment, completion claims, or repo-state truth to a worker.
 - Worker output is input to orchestration, not the final truth. Verify, synthesize, and decide at the orchestrator layer.
 - Do not read whole files, mentally summarize them, and present that summary as local analysis when the routing table assigns that work to a worker.
