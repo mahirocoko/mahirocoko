@@ -5,14 +5,14 @@ This document defines the worker-first orchestration loop for `apps/mcp-memory-l
 ## Core posture
 
 - The orchestrator routes, compares, verifies, and decides.
-- Gemini and Cursor do the heavy lifting first.
+- Gemini and the Cursor-family `agent` worker do the heavy lifting first.
 - Local reads stay shallow before delegation and surgical after worker output.
-- Every Gemini and Cursor invocation must declare a model explicitly. No implicit defaults.
+- Every Gemini and Cursor-family `agent` invocation must declare a model explicitly. No implicit defaults.
 
 ## Default loop
 
 1. Orient with minimal grounding.
-2. Delegate the right shape of work to Gemini or Cursor.
+2. Delegate the right shape of work to Gemini or the Cursor-family `agent` worker.
 3. Run workers headlessly whenever possible.
 4. Use parallel execution only when worker jobs are independent.
 5. Verify with tests, build output, and small targeted reads.
@@ -40,9 +40,9 @@ bun run gemini -- --model gemini-3.1-pro-preview --cwd /path/to/repo "Review thi
 echo '{"taskId":"task-1","prompt":"Summarize this repo","model":"gemini-3-flash-preview","taskKind":"summarize","cwd":"/path/to/repo"}' | bun run gemini-worker
 ```
 
-## When to use Cursor
+## When to use Cursor-family `agent`
 
-Use Cursor for applied coding work:
+Use the Cursor-family `agent` headless path for applied coding work:
 
 - implementation and refactoring
 - code review
@@ -60,16 +60,19 @@ Recommended model ladder:
 Examples:
 
 ```bash
-bun run cursor -- --model composer-2 "Review this diff"
-bun run cursor -- --model claude-4.6-sonnet-medium --cwd /path/to/repo "Refactor this module safely"
-bun run cursor -- --model claude-4.6-opus-high --mode plan --trust "Plan a refactor for this package"
-bun run cursor -- --model claude-4.6-opus-high --mode plan --trust "Plan a deep cross-module refactor"
+agent -p --model composer-2 --output-format json "Review this diff"
+agent -p --model claude-4.6-sonnet-medium --output-format json "Refactor this module safely"
+agent -p --model claude-4.6-opus-high --output-format json "Plan a refactor for this package"
+agent -p --model claude-4.6-opus-high --output-format json "Plan a deep cross-module refactor"
 echo '{"taskId":"task-1","prompt":"Review this diff","model":"composer-2","cwd":"/path/to/repo"}' | bun run cursor-worker
+
+# Repo-local wrapper around the same headless path
+bun run cursor -- --model composer-2 "Review this diff"
 ```
 
 ## Headless and parallel usage
 
-Headless is the default posture for local workers. Prefer CLI or worker-wrapper execution over interactive usage.
+Headless is the default posture for local workers. Prefer `agent -p --output-format json ...` or repo-local worker wrappers over interactive usage.
 
 ## Parallel execution playbook
 
@@ -91,7 +94,7 @@ Example parallel pattern:
 
 ```bash
 bun run gemini -- --model gemini-3-flash-preview --cwd /path/to/repo "Summarize the memory retrieval architecture" &
-bun run cursor -- --model claude-4.6-opus-high --mode plan --cwd /path/to/repo --trust "Plan the next safe retrieval improvement" &
+agent -p --model claude-4.6-opus-high --output-format json "Plan the next safe retrieval improvement" &
 wait
 # Synthesize both outputs here before proceeding
 ```
@@ -114,7 +117,7 @@ Example sequential pattern (when Gemini output feeds Cursor):
 
 ```bash
 SUMMARY=$(bun run gemini -- --model gemini-3-flash-preview --cwd /path/to/repo "Summarize the retrieval module")
-bun run cursor -- --model claude-4.6-opus-high --mode plan --trust "Given this summary: $SUMMARY — plan the next improvement"
+agent -p --model claude-4.6-opus-high --output-format json "Given this summary: $SUMMARY — plan the next improvement"
 ```
 
 Programmatic equivalent:
