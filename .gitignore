@@ -57,6 +57,7 @@ config.local.js
 # Test coverage
 coverage/
 .nyc_output/
+test-results/
 
 # Temporary files
 .tmp/
