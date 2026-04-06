@@ -3,11 +3,9 @@ import { newId } from "../../../lib/ids.js";
 import type { RegisteredTool } from "../../../lib/mcp/registered-tool.js";
 import { z } from "zod";
 import { listOrchestrationTraces } from "../observability/list-orchestration-traces.js";
+import { OrchestrationLifecycle } from "../observability/orchestration-lifecycle.js";
 import { OrchestrationResultStore } from "../observability/orchestration-result-store.js";
-import {
-  buildRunnerFailedOrchestrationTraceEntry,
-  OrchestrationTraceStore,
-} from "../observability/orchestration-trace.js";
+import { OrchestrationTraceStore } from "../observability/orchestration-trace.js";
 import { runOrchestrationWorkflow } from "../run-orchestration-workflow.js";
 import { listOrchestrationTracesInputSchema } from "../schemas.js";
 import { normalizeWorkflowSpec, orchestrateToolInputSchema } from "../workflow-spec.js";
@@ -20,6 +18,7 @@ export function getRegisteredOrchestrationTools(): readonly RegisteredTool[] {
   const env = getAppEnv();
   const orchestrationTraceStore = new OrchestrationTraceStore(env.dataPaths.orchestrationTraceFilePath);
   const orchestrationResultStore = new OrchestrationResultStore(env.dataPaths.orchestrationResultDirectory);
+  const orchestrationLifecycle = new OrchestrationLifecycle(orchestrationTraceStore, orchestrationResultStore);
 
   return [
     {
@@ -31,22 +30,24 @@ export function getRegisteredOrchestrationTools(): readonly RegisteredTool[] {
         const requestId = newId("workflow");
         const spec = normalizeWorkflowSpec(parsed.spec, parsed.cwd);
         const startedAt = new Date().toISOString();
+        const shouldRunAsync = parsed.waitForCompletion === false
+          || (parsed.waitForCompletion === undefined && shouldAutoRunAsync(spec));
         const options = {
           traceStore: orchestrationTraceStore,
           traceSource: "mcp",
           traceRequestId: requestId,
         } as const;
 
-        await orchestrationResultStore.writeRunning({
+        await orchestrationLifecycle.markRunning({
           requestId,
           source: "mcp",
           spec,
         });
 
-        if (parsed.waitForCompletion === false) {
+        if (shouldRunAsync) {
           void runOrchestrationWorkflow(spec, options)
             .then(async (result) => {
-              await orchestrationResultStore.writeCompleted({
+              await orchestrationLifecycle.markCompleted({
                 requestId,
                 source: "mcp",
                 spec,
@@ -56,34 +57,26 @@ export function getRegisteredOrchestrationTools(): readonly RegisteredTool[] {
             .catch(async (error: unknown) => {
               const errorMessage = error instanceof Error ? error.message : String(error);
 
-              await orchestrationTraceStore.append(
-                buildRunnerFailedOrchestrationTraceEntry({
-                  requestId,
-                  source: "mcp",
-                  spec,
-                  error: errorMessage,
-                  startedAt,
-                }),
-              );
-
-              await orchestrationResultStore.writeRunnerFailed({
+              await orchestrationLifecycle.markRunnerFailed({
                 requestId,
                 source: "mcp",
                 spec,
                 error: errorMessage,
+                startedAt,
               });
             });
 
           return {
             requestId,
             status: "running",
+            ...(parsed.waitForCompletion === undefined ? { autoAsync: true } : {}),
           };
         }
 
         try {
           const result = await runOrchestrationWorkflow(spec, options);
 
-          await orchestrationResultStore.writeCompleted({
+          await orchestrationLifecycle.markCompleted({
             requestId,
             source: "mcp",
             spec,
@@ -94,21 +87,12 @@ export function getRegisteredOrchestrationTools(): readonly RegisteredTool[] {
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : String(error);
 
-          await orchestrationTraceStore.append(
-            buildRunnerFailedOrchestrationTraceEntry({
-              requestId,
-              source: "mcp",
-              spec,
-              error: errorMessage,
-              startedAt,
-            }),
-          );
-
-          await orchestrationResultStore.writeRunnerFailed({
+          await orchestrationLifecycle.markRunnerFailed({
             requestId,
             source: "mcp",
             spec,
             error: errorMessage,
+            startedAt,
           });
 
           throw error;
@@ -135,4 +119,20 @@ export function getRegisteredOrchestrationTools(): readonly RegisteredTool[] {
         }),
     },
   ];
+}
+
+function shouldAutoRunAsync(spec: ReturnType<typeof normalizeWorkflowSpec>): boolean {
+  if (spec.mode === "sequential") {
+    return true;
+  }
+
+  if ((spec.timeoutMs ?? 0) > 30_000) {
+    return true;
+  }
+
+  if (spec.jobs.length > 1) {
+    return true;
+  }
+
+  return spec.jobs.some((job) => job.kind === "cursor");
 }

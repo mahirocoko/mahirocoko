@@ -224,6 +224,91 @@ describe("getRegisteredOrchestrationTools", () => {
     expect(orchestrationResultStoreMock.writeCompleted).toHaveBeenCalledTimes(1);
   });
 
+  it("auto-switches risky workflows to async when waitForCompletion is omitted", async () => {
+    let resolveRun: ((value: Awaited<ReturnType<typeof runOrchestrationWorkflow>>) => void) | undefined;
+
+    vi.mocked(runOrchestrationWorkflow).mockImplementationOnce(
+      () =>
+        new Promise((resolve) => {
+          resolveRun = resolve;
+        }),
+    );
+
+    const tools = getRegisteredOrchestrationTools();
+    const tool = tools.find((item) => item.name === "orchestrate_workflow");
+
+    const result = await tool?.execute({
+      spec: {
+        mode: "parallel",
+        jobs: [
+          {
+            kind: "cursor",
+            input: {
+              prompt: "Review this repo.",
+              model: "composer-2",
+            },
+          },
+        ],
+      },
+    });
+
+    expect(result).toMatchObject({
+      requestId: expect.stringMatching(/^workflow_/),
+      status: "running",
+      autoAsync: true,
+    });
+    expect(orchestrationResultStoreMock.writeRunning).toHaveBeenCalledTimes(1);
+    expect(orchestrationResultStoreMock.writeCompleted).not.toHaveBeenCalled();
+
+    resolveRun?.({
+      requestId: "workflow_auto_async",
+      mode: "parallel",
+      status: "completed",
+      results: [],
+      summary: {
+        totalJobs: 0,
+        finishedJobs: 0,
+        completedJobs: 0,
+        failedJobs: 0,
+        skippedJobs: 0,
+        startedAt: "2026-04-05T00:00:00.000Z",
+        finishedAt: "2026-04-05T00:00:00.000Z",
+        durationMs: 0,
+      },
+    });
+
+    await Promise.resolve();
+
+    expect(orchestrationResultStoreMock.writeCompleted).toHaveBeenCalledTimes(1);
+  });
+
+  it("still allows explicit synchronous execution for risky workflows", async () => {
+    const tools = getRegisteredOrchestrationTools();
+    const tool = tools.find((item) => item.name === "orchestrate_workflow");
+
+    const result = await tool?.execute({
+      spec: {
+        mode: "parallel",
+        jobs: [
+          {
+            kind: "cursor",
+            input: {
+              prompt: "Review this repo.",
+              model: "composer-2",
+            },
+          },
+        ],
+      },
+      waitForCompletion: true,
+    });
+
+    expect(vi.mocked(runOrchestrationWorkflow)).toHaveBeenCalledTimes(1);
+    expect(result).toMatchObject({
+      requestId: "workflow_mocked",
+      status: "completed",
+    });
+  });
+
   it("rejects invalid orchestration tool input before runtime execution", async () => {
     const tools = getRegisteredOrchestrationTools();
     const tool = tools.find((item) => item.name === "orchestrate_workflow");
@@ -261,6 +346,7 @@ describe("getRegisteredOrchestrationTools", () => {
             },
           ],
         },
+        waitForCompletion: true,
       }),
     ).rejects.toThrowError("boom");
 
