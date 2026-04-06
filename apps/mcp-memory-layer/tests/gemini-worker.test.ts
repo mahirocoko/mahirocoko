@@ -139,6 +139,51 @@ describe("runGeminiWorker", () => {
     expect(result.reportedModel).toBe("actual-model-returned-by-api");
   });
 
+  it("falls back to the single stats.models key for reported model", async () => {
+    const result = await runWorker(baseInput, {
+      runCommand: async () =>
+        createCommandResult({
+          stdout: JSON.stringify({
+            response: "Done.",
+            stats: {
+              models: {
+                "gemini-3-flash-preview": {
+                  tokens: {
+                    total: 10,
+                  },
+                },
+              },
+            },
+          }),
+        }),
+    });
+
+    expect(result.reportedModel).toBe("gemini-3-flash-preview");
+  });
+
+  it("extracts cached token counts from Gemini stats models", async () => {
+    const result = await runWorker(baseInput, {
+      runCommand: async () =>
+        createCommandResult({
+          stdout: JSON.stringify({
+            response: "Done.",
+            stats: {
+              models: {
+                "gemini-3-flash-preview": {
+                  tokens: {
+                    cached: 321,
+                  },
+                },
+              },
+            },
+          }),
+        }),
+    });
+
+    expect(result.status).toBe("completed");
+    expect(result.cachedTokens).toBe(321);
+  });
+
   it("returns invalid_input when model is missing from the worker payload", async () => {
     const result = await runWorker(
       { taskId: "task-bad", prompt: "Summarize this.", model: "" } as unknown as typeof baseInput,

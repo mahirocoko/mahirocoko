@@ -55,4 +55,5 @@ export interface GeminiWorkerResult {
   readonly taskKind?: GeminiTaskKind;
   readonly structuredData?: unknown;
   readonly cached?: boolean;
+  readonly cachedTokens?: number;
 }

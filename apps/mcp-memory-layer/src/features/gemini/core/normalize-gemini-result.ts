@@ -73,12 +73,14 @@ export function normalizeGeminiResult(
 
   const raw = rawResult.data;
   const reportedModel = readReportedModel(raw);
+  const cachedTokens = readCachedTokens(raw);
 
   if (commandResult.exitCode !== 0) {
     return {
       ...baseResult,
       status: "command_failed",
       reportedModel,
+      cachedTokens,
       response: raw.response,
       raw,
       error: readCommandFailureError(raw),
@@ -92,6 +94,7 @@ export function normalizeGeminiResult(
       ...baseResult,
       status: "invalid_structured_output",
       reportedModel,
+      cachedTokens,
       response: raw.response,
       raw,
       error: structuredResult.error,
@@ -102,6 +105,7 @@ export function normalizeGeminiResult(
     ...baseResult,
     status: "completed",
     reportedModel,
+    cachedTokens,
     response: raw.response,
     raw,
     structuredData: structuredResult?.data,
@@ -183,7 +187,20 @@ function readReportedModel(raw: { readonly [key: string]: unknown }): string | u
   }
 
   const statsRecord = stats as Record<string, unknown>;
-  return typeof statsRecord.model === "string" ? statsRecord.model : undefined;
+  const statsModel = typeof statsRecord.model === "string" ? statsRecord.model : undefined;
+
+  if (statsModel) {
+    return statsModel;
+  }
+
+  const models = statsRecord.models;
+
+  if (!models || typeof models !== "object") {
+    return undefined;
+  }
+
+  const modelNames = Object.keys(models as Record<string, unknown>);
+  return modelNames.length === 1 ? modelNames[0] : undefined;
 }
 
 function readStructuredError(raw: { readonly [key: string]: unknown }): string | undefined {
@@ -200,4 +217,42 @@ function readStructuredError(raw: { readonly [key: string]: unknown }): string |
 
 function readCommandFailureError(raw: { readonly [key: string]: unknown }): string {
   return readStructuredError(raw) ?? "Gemini command exited with a non-zero code.";
+}
+
+function readCachedTokens(raw: { readonly [key: string]: unknown }): number | undefined {
+  const stats = raw.stats;
+
+  if (!stats || typeof stats !== "object") {
+    return undefined;
+  }
+
+  const statsRecord = stats as Record<string, unknown>;
+  const models = statsRecord.models;
+
+  if (models && typeof models === "object") {
+    const cachedTokenValues = Object.values(models)
+      .map((model) => readModelCachedTokens(model))
+      .filter((value): value is number => typeof value === "number");
+
+    if (cachedTokenValues.length > 0) {
+      return cachedTokenValues.reduce((sum, value) => sum + value, 0);
+    }
+  }
+
+  return readModelCachedTokens(statsRecord);
+}
+
+function readModelCachedTokens(modelStats: unknown): number | undefined {
+  if (!modelStats || typeof modelStats !== "object") {
+    return undefined;
+  }
+
+  const tokens = (modelStats as Record<string, unknown>).tokens;
+
+  if (!tokens || typeof tokens !== "object") {
+    return undefined;
+  }
+
+  const cached = (tokens as Record<string, unknown>).cached;
+  return typeof cached === "number" ? cached : undefined;
 }
