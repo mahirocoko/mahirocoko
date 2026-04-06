@@ -37,6 +37,7 @@ describe("buildOrchestrationTraceEntry jobModels", () => {
         {
           kind: "cursor",
           input: { taskId: "t1", prompt: "x", model: "composer-2" },
+          retryCount: 1,
           status: "runner_failed",
           error: "spawn failed",
         },
@@ -45,7 +46,7 @@ describe("buildOrchestrationTraceEntry jobModels", () => {
     };
 
     expect(buildOrchestrationTraceEntry("r1", "cli", spec, result).jobModels).toEqual([
-      { kind: "cursor", taskId: "t1", status: "runner_failed", requestedModel: "composer-2" },
+      { kind: "cursor", taskId: "t1", status: "runner_failed", retryCount: 1, errorClass: "infra_failure", requestedModel: "composer-2" },
     ]);
   });
 
@@ -68,6 +69,7 @@ describe("buildOrchestrationTraceEntry jobModels", () => {
         {
           kind: "gemini",
           input: { taskId: "g1", prompt: "p", model: "gemini-3-flash-preview" },
+          retryCount: 2,
           result: {
             status: "completed",
             requestedModel: "gemini-3-flash-preview",
@@ -75,6 +77,8 @@ describe("buildOrchestrationTraceEntry jobModels", () => {
             durationMs: 1,
             startedAt: "2026-04-05T00:00:00.000Z",
             finishedAt: "2026-04-05T00:00:01.000Z",
+            cached: true,
+            cachedTokens: 120,
           },
         },
       ],
@@ -86,6 +90,11 @@ describe("buildOrchestrationTraceEntry jobModels", () => {
         kind: "gemini",
         taskId: "g1",
         status: "completed",
+        retryCount: 2,
+        durationMs: 1,
+        cached: true,
+        cachedTokens: 120,
+        errorClass: "none",
         requestedModel: "gemini-3-flash-preview",
         reportedModel: "gemini-3.1-pro-preview",
       },
@@ -130,6 +139,8 @@ describe("buildOrchestrationTraceEntry jobModels", () => {
         kind: "cursor",
         taskId: "c1",
         status: "runner_failed",
+        retryCount: 0,
+        errorClass: "infra_failure",
         requestedModel: "composer-2",
       },
     ]);

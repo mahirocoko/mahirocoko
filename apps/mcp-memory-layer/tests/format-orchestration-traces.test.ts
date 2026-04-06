@@ -74,6 +74,11 @@ describe("formatOrchestrationTracesAsText", () => {
             kind: "gemini",
             taskId: "g1",
             status: "completed",
+            retryCount: 0,
+            durationMs: 800,
+            cached: true,
+            cachedTokens: 300,
+            errorClass: "none",
             requestedModel: "gemini-3-flash-preview",
             reportedModel: "gemini-3-flash-preview",
           },
@@ -81,6 +86,9 @@ describe("formatOrchestrationTracesAsText", () => {
             kind: "cursor",
             taskId: "c1",
             status: "command_failed",
+            retryCount: 2,
+            durationMs: 1400,
+            errorClass: "rate_limited",
             requestedModel: "composer-2",
             reportedModel: "composer-2",
           },
@@ -98,7 +106,7 @@ describe("formatOrchestrationTracesAsText", () => {
     ]);
     
     expect(detail).toContain("Job models:");
-    expect(detail).toContain("g1 (gemini) status=completed requested=gemini-3-flash-preview reported=gemini-3-flash-preview");
-    expect(detail).toContain("c1 (cursor) status=command_failed requested=composer-2 reported=composer-2");
+    expect(detail).toContain("g1 (gemini) status=completed requested=gemini-3-flash-preview retries=0 duration=800ms cached=true cachedTokens=300 errorClass=none reported=gemini-3-flash-preview");
+    expect(detail).toContain("c1 (cursor) status=command_failed requested=composer-2 retries=2 duration=1400ms errorClass=rate_limited reported=composer-2");
   });
 });
