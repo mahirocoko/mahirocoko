@@ -17,7 +17,7 @@ export async function runWorkerJob(
   const maxRetries = job.retries ?? 0;
 
   for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
-    const result = await runWorkerJobOnce(job);
+    const result = await runWorkerJobOnce(job, attempt);
 
     if (attempt >= maxRetries || !isRetryableResult(result)) {
       return result;
@@ -26,21 +26,23 @@ export async function runWorkerJob(
     await sleep(calculateRetryDelayMs(job.retryDelayMs, attempt));
   }
 
-  return runWorkerJobOnce(job);
+  return runWorkerJobOnce(job, maxRetries);
 }
 
-async function runWorkerJobOnce(job: WorkerJob): Promise<WorkerJobResult> {
+async function runWorkerJobOnce(job: WorkerJob, retryCount: number): Promise<WorkerJobResult> {
   if (job.kind === "gemini") {
     try {
       return {
         kind: job.kind,
         input: job.input,
+        retryCount,
         result: await runGeminiWorker(job.input, job.dependencies),
       };
     } catch (error) {
       return {
         kind: job.kind,
         input: job.input,
+        retryCount,
         status: "runner_failed",
         error: formatUnexpectedError(error),
       };
@@ -51,12 +53,14 @@ async function runWorkerJobOnce(job: WorkerJob): Promise<WorkerJobResult> {
     return {
       kind: job.kind,
       input: job.input,
+      retryCount,
       result: await runCursorWorker(job.input, job.dependencies),
     };
   } catch (error) {
     return {
       kind: job.kind,
       input: job.input,
+      retryCount,
       status: "runner_failed",
       error: formatUnexpectedError(error),
     };

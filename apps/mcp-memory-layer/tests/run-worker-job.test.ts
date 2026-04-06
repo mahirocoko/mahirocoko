@@ -88,6 +88,7 @@ describe("runWorkerJob", () => {
     expect(sleep).toHaveBeenNthCalledWith(1, 10);
     expect(sleep).toHaveBeenNthCalledWith(2, 20);
     expect(result && "result" in result ? result.result.status : undefined).toBe("completed");
+    expect(result ? result.retryCount : undefined).toBe(2);
   });
 
   it("does not retry invalid input failures", async () => {
@@ -107,6 +108,7 @@ describe("runWorkerJob", () => {
     );
 
     expect(result && "result" in result ? result.result.status : undefined).toBe("invalid_input");
+    expect(result ? result.retryCount : undefined).toBe(0);
     expect(sleep).not.toHaveBeenCalled();
   });
 
@@ -140,6 +142,7 @@ describe("runWorkerJob", () => {
         prompt: "Review this repo.",
         model: "composer-2",
       },
+      retryCount: 1,
       status: "runner_failed",
       error: "spawn crash",
     });
@@ -165,6 +168,7 @@ describe("runWorkerJob", () => {
     );
 
     expect(result && "result" in result ? result.result.status : undefined).toBe("completed");
+    expect(result ? result.retryCount : undefined).toBe(0);
     expect(sleep).not.toHaveBeenCalled();
   });
 });
