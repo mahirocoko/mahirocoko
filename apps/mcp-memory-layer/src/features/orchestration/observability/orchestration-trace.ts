@@ -1,6 +1,7 @@
 import { appendFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 
+import { classifyWorkerJobError } from "../job-error-class.js";
 import type { OrchestrationRunResult } from "../run-orchestration-workflow.js";
 import type { OrchestrateWorkflowSpec } from "../workflow-spec.js";
 import type { OrchestrationJobModelTelemetry, OrchestrationTraceEntry, WorkerJob, WorkerJobResult } from "../types.js";
@@ -30,10 +31,19 @@ function buildJobModelsFromWorkerResults(
     if ("result" in item) {
       const requestedModel = item.result.requestedModel ?? item.input.model;
       const reportedModel = item.result.reportedModel;
+      const cached = "cached" in item.result && typeof item.result.cached === "boolean" ? item.result.cached : undefined;
+      const cachedTokens = "cachedTokens" in item.result && typeof item.result.cachedTokens === "number"
+        ? item.result.cachedTokens
+        : undefined;
       return {
         kind: item.kind,
         taskId: item.input.taskId,
         status: item.result.status,
+        retryCount: item.retryCount,
+        durationMs: item.result.durationMs,
+        ...(cached !== undefined ? { cached } : {}),
+        ...(cachedTokens !== undefined ? { cachedTokens } : {}),
+        errorClass: classifyWorkerJobError(item),
         requestedModel,
         ...(reportedModel !== undefined ? { reportedModel } : {}),
       };
@@ -43,6 +53,8 @@ function buildJobModelsFromWorkerResults(
       kind: item.kind,
       taskId: item.input.taskId,
       status: item.status,
+      retryCount: item.retryCount,
+      errorClass: classifyWorkerJobError(item),
       requestedModel: item.input.model,
     };
   });
@@ -98,6 +110,8 @@ export function buildRunnerFailedOrchestrationTraceEntry(
       kind: job.kind,
       taskId: job.input.taskId,
       status: "runner_failed",
+      retryCount: 0,
+      errorClass: "infra_failure",
       requestedModel: job.input.model,
     })),
     totalJobs: jobs.length,

@@ -2,6 +2,7 @@ import type { RunCursorWorkerDependencies } from "../cursor/cursor-worker-servic
 import type { CursorWorkerInput, CursorWorkerResult } from "../cursor/types.js";
 import type { RunGeminiWorkerDependencies } from "../gemini/gemini-worker-service.js";
 import type { GeminiWorkerInput, GeminiWorkerResult } from "../gemini/types.js";
+import type { JobErrorClass } from "./job-error-class.js";
 
 export interface GeminiWorkerJob {
   readonly kind: "gemini";
@@ -26,18 +27,21 @@ export type WorkerJob = GeminiWorkerJob | CursorWorkerJob;
 export interface GeminiWorkerJobResult {
   readonly kind: "gemini";
   readonly input: GeminiWorkerInput;
+  readonly retryCount: number;
   readonly result: GeminiWorkerResult;
 }
 
 export interface CursorWorkerJobResult {
   readonly kind: "cursor";
   readonly input: CursorWorkerInput;
+  readonly retryCount: number;
   readonly result: CursorWorkerResult;
 }
 
 export interface GeminiWorkerJobFailure {
   readonly kind: "gemini";
   readonly input: GeminiWorkerInput;
+  readonly retryCount: number;
   readonly status: "runner_failed";
   readonly error: string;
 }
@@ -45,6 +49,7 @@ export interface GeminiWorkerJobFailure {
 export interface CursorWorkerJobFailure {
   readonly kind: "cursor";
   readonly input: CursorWorkerInput;
+  readonly retryCount: number;
   readonly status: "runner_failed";
   readonly error: string;
 }
@@ -84,6 +89,16 @@ export interface OrchestrationJobModelTelemetry {
   readonly taskId: string;
   /** Normalized per-job execution status for later telemetry analysis. */
   readonly status: OrchestrationJobStatus;
+  /** Number of retries before the terminal result. */
+  readonly retryCount?: number;
+  /** Worker-observed execution duration in milliseconds when available. */
+  readonly durationMs?: number;
+  /** Cache hit signal when the worker reports it. */
+  readonly cached?: boolean;
+  /** Provider/local cache token count when the worker reports it. */
+  readonly cachedTokens?: number;
+  /** Normalized error class derived from job status and diagnostics. */
+  readonly errorClass?: JobErrorClass;
   /** Model requested for the job (worker input or normalized result). */
   readonly requestedModel: string;
   /** Model reported by the worker runtime when available. */

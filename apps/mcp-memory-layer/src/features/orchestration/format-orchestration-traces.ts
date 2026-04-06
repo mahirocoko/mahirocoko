@@ -60,6 +60,11 @@ export function formatOrchestrationTracesAsDetail(
             .map(
               (job) =>
                 `${job.taskId} (${job.kind}) status=${typeof job.status === "string" ? job.status : "-"} requested=${job.requestedModel}` +
+                (typeof job.retryCount === "number" ? ` retries=${job.retryCount}` : "") +
+                (typeof job.durationMs === "number" ? ` duration=${job.durationMs}ms` : "") +
+                (typeof job.cached === "boolean" ? ` cached=${job.cached}` : "") +
+                (typeof job.cachedTokens === "number" ? ` cachedTokens=${job.cachedTokens}` : "") +
+                (typeof job.errorClass === "string" ? ` errorClass=${job.errorClass}` : "") +
                 (job.reportedModel !== undefined ? ` reported=${job.reportedModel}` : ""),
             )
             .join("; ")}`,
