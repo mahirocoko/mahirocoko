@@ -17,6 +17,11 @@ describe("summarizeOrchestrationTraceUsage", () => {
             kind: "gemini",
             taskId: "t1",
             status: "completed",
+            retryCount: 0,
+            durationMs: 1000,
+            cached: true,
+            cachedTokens: 400,
+            errorClass: "none",
             requestedModel: "gemini-3-flash-preview",
             reportedModel: "gemini-3-flash-preview",
           },
@@ -24,6 +29,9 @@ describe("summarizeOrchestrationTraceUsage", () => {
             kind: "cursor",
             taskId: "t2",
             status: "command_failed",
+            retryCount: 2,
+            durationMs: 2000,
+            errorClass: "rate_limited",
             requestedModel: "composer-2",
             reportedModel: "composer-2",
           },
@@ -49,6 +57,8 @@ describe("summarizeOrchestrationTraceUsage", () => {
       bySource: { cli: 1 },
       byWorkflowStatus: { completed: 1 },
       byJobStatus: { completed: 1, command_failed: 1 },
+      byErrorClass: { none: 1, rate_limited: 1 },
+      bySourceErrorClass: { cli: { none: 1, rate_limited: 1 } },
       byDay: {
         "2026-04-05": {
           traceCount: 1,
@@ -59,9 +69,16 @@ describe("summarizeOrchestrationTraceUsage", () => {
       },
       workflowOutcome: { completed: 1, failed: 0, successRate: 1 },
       jobOutcome: { completed: 2, failed: 0, successRate: 1 },
+      retryOutcome: { totalRetries: 2, retriedJobs: 1, avgRetriesPerJob: 1 },
+      durationOutcome: { totalDurationMs: 3000, avgDurationMs: 1500, p50DurationMs: 1000, p95DurationMs: 2000 },
+      cacheOutcome: { cachedJobs: 1, uncachedJobs: 0, cacheHitRate: 1, totalCachedTokens: 400 },
       byRequestedModelOutcome: {
-        "gemini-3-flash-preview": { jobCount: 1, completed: 1, failed: 0, successRate: 1 },
-        "composer-2": { jobCount: 1, completed: 0, failed: 1, successRate: 0 },
+        "gemini-3-flash-preview": { jobCount: 1, completed: 1, failed: 0, successRate: 1, totalRetries: 0, avgRetriesPerJob: 0, totalDurationMs: 1000, avgDurationMs: 1000, p50DurationMs: 1000, p95DurationMs: 1000, cachedJobs: 1, uncachedJobs: 0, cacheHitRate: 1, totalCachedTokens: 400, byErrorClass: { none: 1 } },
+        "composer-2": { jobCount: 1, completed: 0, failed: 1, successRate: 0, totalRetries: 2, avgRetriesPerJob: 2, totalDurationMs: 2000, avgDurationMs: 2000, p50DurationMs: 2000, p95DurationMs: 2000, cachedJobs: 0, uncachedJobs: 0, cacheHitRate: 0, totalCachedTokens: 0, byErrorClass: { rate_limited: 1 } },
+      },
+      byReportedModelOutcome: {
+        "gemini-3-flash-preview": { jobCount: 1, completed: 1, failed: 0, successRate: 1, totalRetries: 0, avgRetriesPerJob: 0, totalDurationMs: 1000, avgDurationMs: 1000, p50DurationMs: 1000, p95DurationMs: 1000, cachedJobs: 1, uncachedJobs: 0, cacheHitRate: 1, totalCachedTokens: 400, byErrorClass: { none: 1 } },
+        "composer-2": { jobCount: 1, completed: 0, failed: 1, successRate: 0, totalRetries: 2, avgRetriesPerJob: 2, totalDurationMs: 2000, avgDurationMs: 2000, p50DurationMs: 2000, p95DurationMs: 2000, cachedJobs: 0, uncachedJobs: 0, cacheHitRate: 0, totalCachedTokens: 0, byErrorClass: { rate_limited: 1 } },
       },
     });
   });
@@ -95,6 +112,8 @@ describe("summarizeOrchestrationTraceUsage", () => {
     expect(summary.bySource).toEqual({ mcp: 1 });
     expect(summary.byWorkflowStatus).toEqual({ completed: 1 });
     expect(summary.byJobStatus).toEqual({});
+    expect(summary.byErrorClass).toEqual({});
+    expect(summary.bySourceErrorClass).toEqual({});
     expect(summary.byDay).toEqual({
       "2026-04-05": {
         traceCount: 1,
@@ -105,7 +124,11 @@ describe("summarizeOrchestrationTraceUsage", () => {
     });
     expect(summary.workflowOutcome).toEqual({ completed: 1, failed: 0, successRate: 1 });
     expect(summary.jobOutcome).toEqual({ completed: 3, failed: 0, successRate: 1 });
+    expect(summary.retryOutcome).toEqual({ totalRetries: 0, retriedJobs: 0, avgRetriesPerJob: 0 });
+    expect(summary.durationOutcome).toEqual({ totalDurationMs: 0, avgDurationMs: 0, p50DurationMs: 0, p95DurationMs: 0 });
+    expect(summary.cacheOutcome).toEqual({ cachedJobs: 0, uncachedJobs: 0, cacheHitRate: 0, totalCachedTokens: 0 });
     expect(summary.byRequestedModelOutcome).toEqual({});
+    expect(summary.byReportedModelOutcome).toEqual({});
   });
 
   it("counts runner failures without reportedModel", () => {
@@ -117,7 +140,7 @@ describe("summarizeOrchestrationTraceUsage", () => {
         status: "completed",
         jobKinds: ["gemini"],
         taskIds: ["t1"],
-        jobModels: [{ kind: "gemini", taskId: "t1", status: "runner_failed", requestedModel: "gemini-3-flash-preview" }],
+        jobModels: [{ kind: "gemini", taskId: "t1", status: "runner_failed", retryCount: 1, durationMs: 500, cached: false, cachedTokens: 0, errorClass: "infra_failure", requestedModel: "gemini-3-flash-preview" }],
         totalJobs: 1,
         finishedJobs: 1,
         completedJobs: 0,
@@ -133,9 +156,15 @@ describe("summarizeOrchestrationTraceUsage", () => {
     expect(summary.byRequestedModel).toEqual({ "gemini-3-flash-preview": 1 });
     expect(summary.byReportedModel).toEqual({});
     expect(summary.byJobStatus).toEqual({ runner_failed: 1 });
+    expect(summary.byErrorClass).toEqual({ infra_failure: 1 });
+    expect(summary.bySourceErrorClass).toEqual({ cli: { infra_failure: 1 } });
+    expect(summary.retryOutcome).toEqual({ totalRetries: 1, retriedJobs: 1, avgRetriesPerJob: 1 });
+    expect(summary.durationOutcome).toEqual({ totalDurationMs: 500, avgDurationMs: 500, p50DurationMs: 500, p95DurationMs: 500 });
+    expect(summary.cacheOutcome).toEqual({ cachedJobs: 0, uncachedJobs: 1, cacheHitRate: 0, totalCachedTokens: 0 });
     expect(summary.byRequestedModelOutcome).toEqual({
-      "gemini-3-flash-preview": { jobCount: 1, completed: 0, failed: 1, successRate: 0 },
+      "gemini-3-flash-preview": { jobCount: 1, completed: 0, failed: 1, successRate: 0, totalRetries: 1, avgRetriesPerJob: 1, totalDurationMs: 500, avgDurationMs: 500, p50DurationMs: 500, p95DurationMs: 500, cachedJobs: 0, uncachedJobs: 1, cacheHitRate: 0, totalCachedTokens: 0, byErrorClass: { infra_failure: 1 } },
     });
+    expect(summary.byReportedModelOutcome).toEqual({});
   });
 
   it("ignores legacy jobModels without status for status-based aggregations", () => {
@@ -162,6 +191,12 @@ describe("summarizeOrchestrationTraceUsage", () => {
 
     expect(summary.byRequestedModel).toEqual({ "composer-2": 1 });
     expect(summary.byJobStatus).toEqual({});
+    expect(summary.byErrorClass).toEqual({});
+    expect(summary.bySourceErrorClass).toEqual({});
+    expect(summary.retryOutcome).toEqual({ totalRetries: 0, retriedJobs: 0, avgRetriesPerJob: 0 });
+    expect(summary.durationOutcome).toEqual({ totalDurationMs: 0, avgDurationMs: 0, p50DurationMs: 0, p95DurationMs: 0 });
+    expect(summary.cacheOutcome).toEqual({ cachedJobs: 0, uncachedJobs: 0, cacheHitRate: 0, totalCachedTokens: 0 });
     expect(summary.byRequestedModelOutcome).toEqual({});
+    expect(summary.byReportedModelOutcome).toEqual({});
   });
 });
