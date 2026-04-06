@@ -132,14 +132,31 @@ Programmatic equivalent:
 MCP equivalent:
 
 - The `orchestrate_workflow` MCP tool accepts the same static workflow spec and runs it through the same orchestration runtime.
+- Prefer `waitForCompletion: false` for workflows that may take noticeable time.
+- If `waitForCompletion` is omitted, risky workflows are auto-started in background and return `{ requestId, status: "running", autoAsync: true }` instead of blocking the MCP client.
+- Explicit `waitForCompletion: true` still forces synchronous behavior, so long-running calls can still hit client-side timeout boundaries if the caller insists on waiting.
+- The `get_orchestration_result` MCP tool is the polling path for background orchestration runs.
 - The `list_orchestration_traces` MCP tool reads persisted orchestration trace entries for later inspection.
 - The `list-orchestration-traces` CLI command reads the same persisted trace file with optional filters like `--source`, `--mode`, `--status`, `--request-id`, `--task-id`, and `--limit`, plus `--format text` for a terminal-friendly table view, `--format detail` for expanded per-trace blocks (including per-job model lines when `jobModels` is present), or `--format usage` for aggregated worker/model counts over the filtered result set.
+
+Recommended MCP loop for long-running work:
+
+1. Call `orchestrate_workflow` with `waitForCompletion: false` when the workflow is clearly non-trivial.
+2. If the tool returns `autoAsync: true`, treat that as a deliberate async fallback rather than an error.
+3. Poll `get_orchestration_result` by `requestId` until the stored result is no longer `running`.
+4. Use `list_orchestration_traces` or `bun run list-orchestration-traces -- --format detail --request-id <id>` for execution forensics.
 
 Typical trace inspection loop:
 
 1. Run `bun run orchestrate -- --file <workflow.json>`
 2. Copy `requestId` from the JSON result
 3. Run `bun run list-orchestration-traces -- --format detail --request-id <that-request-id>`
+
+Telemetry highlights worth checking during verification:
+
+- `byJobStatus`, `byErrorClass`, and `bySourceErrorClass` for failure distribution
+- `retryOutcome`, `durationOutcome`, and `cacheOutcome` for reliability and efficiency
+- `modelMismatchOutcome` plus `byRequestedModelOutcome` / `byReportedModelOutcome` for requested-vs-reported model behavior
 
 ## Verification rule
 

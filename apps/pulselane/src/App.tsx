@@ -64,6 +64,7 @@ function App() {
   const selectedCard = board?.cards.find((card) => card.id === selectedCardId) ?? null
   const selectedColumn = board?.columns.find((column) => column.id === selectedCard?.columnId) ?? null
   const draggedCard = board?.cards.find((card) => card.id === dragState?.cardId) ?? null
+  const draggedColumn = board?.columns.find((column) => column.id === dragState?.columnId) ?? null
   const totalCards = board?.cards.length ?? 0
   const totalColumns = board?.columns.length ?? 0
   const isBoardActive = Boolean(board)
@@ -92,7 +93,8 @@ function App() {
       }
 
       setShowConfig(false)
-      closeCard()
+      setSelectedCardId(null)
+      setCardDraft(null)
     }
 
     window.addEventListener('keydown', handleKeyDown)
@@ -341,10 +343,10 @@ function App() {
               </div>
 
               <DragOverlay>
-                {draggedCard && selectedColumn ? (
+                {draggedCard && draggedColumn ? (
                   <div
                     className="pulse-card pulse-card-overlay"
-                    style={{ '--column-accent': selectedColumn.accent } as CSSProperties}
+                    style={{ '--column-accent': draggedColumn.accent } as CSSProperties}
                   >
                     <CardFace card={draggedCard} />
                   </div>
