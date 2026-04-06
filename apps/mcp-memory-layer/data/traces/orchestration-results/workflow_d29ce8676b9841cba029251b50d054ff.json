@@ -1,0 +1,53 @@
+{
+  "requestId": "workflow_d29ce8676b9841cba029251b50d054ff",
+  "source": "mcp",
+  "metadata": {
+    "mode": "sequential",
+    "timeoutMs": 600000,
+    "taskIds": [
+      "gemini_0f5724dcd28344489a5193cb4e01e7ee",
+      "cursor_5d0c9c26388c4ff3b3244053aa2cfc7a"
+    ]
+  },
+  "status": "step_failed",
+  "result": {
+    "requestId": "workflow_d29ce8676b9841cba029251b50d054ff",
+    "mode": "sequential",
+    "status": "step_failed",
+    "results": [
+      {
+        "kind": "gemini",
+        "input": {
+          "prompt": "You are leading the UX/UI redesign for apps/pulselane, a FE-only Vite React TypeScript sandbox for maru-realtime. Read the current implementation from that directory and produce a concrete redesign spec that is implementation-ready. Priorities: remove the permanent sidebar as a dominant layout element, make the board the primary stage, redesign cards for clearer visual identity by column and priority, reduce the heavy crypto/web3 feel, make the header compact once the board is active, and make the add-card composer less visually heavy. Keep architecture and functionality intact, avoid adding dependencies unless necessary. Output must be concise but concrete enough that a coding agent can implement it directly: include target layout structure, component-level changes, CSS direction, and a step-by-step edit plan.",
+          "model": "gemini-3.1-pro-preview",
+          "cwd": "/Users/mahiro/Git/me/mahirocoko/apps/pulselane",
+          "taskKind": "general",
+          "taskId": "gemini_0f5724dcd28344489a5193cb4e01e7ee",
+          "timeoutMs": 600000
+        },
+        "retryCount": 0,
+        "result": {
+          "status": "invalid_input",
+          "durationMs": 1,
+          "startedAt": "2026-04-06T09:12:09.448Z",
+          "finishedAt": "2026-04-06T09:12:09.449Z",
+          "error": "timeoutMs: Too big: expected number to be <=300000"
+        }
+      }
+    ],
+    "failedStepIndex": 0,
+    "error": "Workflow stopped after step 1 returned status 'invalid_input'.",
+    "summary": {
+      "totalJobs": 2,
+      "finishedJobs": 1,
+      "completedJobs": 0,
+      "failedJobs": 1,
+      "skippedJobs": 1,
+      "startedAt": "2026-04-06T09:12:09.447Z",
+      "finishedAt": "2026-04-06T09:12:09.449Z",
+      "durationMs": 2
+    }
+  },
+  "createdAt": "2026-04-06T09:12:09.447Z",
+  "updatedAt": "2026-04-06T09:12:09.450Z"
+}

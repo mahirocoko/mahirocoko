@@ -1,0 +1,175 @@
+{
+  "requestId": "workflow_be23d713cc4f42e5bfbe98805eec9210",
+  "source": "mcp",
+  "metadata": {
+    "mode": "parallel",
+    "taskIds": [
+      "latency-reported-model-opus",
+      "latency-reported-model-gemini"
+    ]
+  },
+  "status": "completed",
+  "result": {
+    "requestId": "workflow_be23d713cc4f42e5bfbe98805eec9210",
+    "mode": "parallel",
+    "status": "completed",
+    "results": [
+      {
+        "kind": "cursor",
+        "input": {
+          "prompt": "Inspect the current orchestration usage summary code in this repo and recommend the smallest safe schema additions for: 1) latency percentile summaries (p50/p95) and 2) reported-model outcome aggregation alongside requested-model outcome. Keep it implementation-oriented and concise. Focus on summarize-orchestration-trace-usage.ts, orchestration trace telemetry shape, and current README/tests.",
+          "model": "claude-4.6-opus-high",
+          "mode": "plan",
+          "trust": true,
+          "taskId": "latency-reported-model-opus",
+          "cwd": "/Users/mahiro/Git/me/mahirocoko/apps/mcp-memory-layer"
+        },
+        "retryCount": 0,
+        "result": {
+          "taskId": "latency-reported-model-opus",
+          "mode": "plan",
+          "requestedModel": "claude-4.6-opus-high",
+          "stdout": "{\"type\":\"result\",\"subtype\":\"success\",\"is_error\":false,\"duration_ms\":56612,\"duration_api_ms\":56612,\"result\":\"I'll inspect the relevant files to understand the current schema and make targeted recommendations. Let me read them in parallel.Now let me also check for the `format-orchestration-traces` file since it renders the usage summary.Good, I now have a complete picture of the current schema, summarizer, telemetry shape, tests, and README. Here's the recommendation.\\n\\n---\\n\\n## Recommendation: Smallest Safe Schema Additions\\n\\n### 1) Latency Percentile Summaries (p50/p95)\\n\\n**Current state:** `OrchestrationDurationSummary` has only `totalDurationMs` and `avgDurationMs`. The summarizer already collects per-job `durationMs` but discards individual values after accumulating the sum — it only tracks `totalDurationMs` and `durationSamples`.\\n\\n**What to change:**\\n\\n**a) Extend `OrchestrationDurationSummary`** — add two optional fields:\\n\\n```typescript\\nexport interface OrchestrationDurationSummary {\\n  readonly totalDurationMs: number;\\n  readonly avgDurationMs: number;\\n  readonly p50DurationMs: number;\\n  readonly p95DurationMs: number;\\n}\\n```\\n\\n**b) Collect duration samples in the loop.** Add a `durationSamples: number[]` array alongside the existing accumulators (line ~103). Push `durationMs` values into it where they're already being summed (line ~141-143).\\n\\n**c) Add a percentile helper:**\\n\\n```typescript\\nfunction calculatePercentile(sorted: readonly number[], p: number): number {\\n  if (sorted.length === 0) return 0;\\n  const idx = Math.ceil((p / 100) * sorted.length) - 1;\\n  return sorted[Math.max(0, idx)];\\n}\\n```\\n\\n**d) In `buildDurationSummary`**, accept the samples array, sort it once, compute both percentiles. The sort cost is negligible — orchestration traces are small datasets.\\n\\n**e) Also add p50/p95 to `OrchestrationModelOutcomeSummary`** — collect a per-model duration array inside the `byRequestedModelOutcome` mutable accumulator, then compute percentiles when building the final output (lines 241-254).\\n\\n**f) Tests:** Add one test case with 5+ jobs that have varied `durationMs` values and assert the p50/p95 values. Extend the existing test expectations to include the new fields (they'll be `0` for 0-sample or 1-sample cases).\\n\\n**Impact:** No telemetry schema change (`OrchestrationJobModelTelemetry` and `OrchestrationTraceEntry` are untouched). This is purely a summarizer-output addition. Existing persisted JSONL traces already carry per-job `durationMs` — no data migration needed.\\n\\n---\\n\\n### 2) Reported-Model Outcome Aggregation\\n\\n**Current state:** The summary has `byReportedModel` (flat count map) and `byRequestedModelOutcome` (rich per-model breakdown). But there's no `byReportedModelOutcome` — so you can see *how many* jobs a reported model served, but not its success rate, retry rate, latency, or error class distribution.\\n\\n**What to change:**\\n\\n**a) Add `byReportedModelOutcome` to `OrchestrationTraceUsageSummary`:**\\n\\n```typescript\\nexport interface OrchestrationTraceUsageSummary {\\n  // ... existing fields ...\\n  readonly byRequestedModelOutcome: Readonly<Record<string, OrchestrationModelOutcomeSummary>>;\\n  readonly byReportedModelOutcome: Readonly<Record<string, OrchestrationModelOutcomeSummary>>;\\n}\\n```\\n\\nReuse `OrchestrationModelOutcomeSummary` exactly as-is — the interface already has the right fields. (Once p50/p95 are added to it, reported-model outcomes get them for free.)\\n\\n**b) In the summarizer loop**, add a parallel `byReportedModelOutcome` mutable accumulator (same shape as `byRequestedModelOutcome`). Populate it in the existing `if (job.reportedModel !== undefined)` block at line ~211, duplicating the same accumulation logic used for `byRequestedModelOutcome`. The key difference: it's keyed by `job.reportedModel` instead of `job.requestedModel`, and it only accumulates when `reportedModel` is present.\\n\\n**c) Build the final output** the same way as `byRequestedModelOutcome` (lines 241-254), computing derived rates from the accumulators.\\n\\n**d) Tests:** Extend the main test case — it already has both `requestedModel` and `reportedModel` on its jobs. Assert that `byReportedModelOutcome` mirrors the expected outcome breakdown keyed by reported model. Add a case where `reportedModel` differs from `requestedModel` (model upgrade/substitution) to show they produce distinct keys.\\n\\n**e) README:** Add one bullet to the `--format usage` section (line ~373):\\n\\n```\\n- `byReportedModelOutcome` for per-reported-model outcome breakdown (same shape as `byRequestedModelOutcome`) — only populated for jobs where the worker runtime reports its actual model\\n```\\n\\n**Impact:** Again, no telemetry schema change. `reportedModel` is already persisted on `OrchestrationJobModelTelemetry` when available. This is a summarizer-output addition only.\\n\\n---\\n\\n### Summary of touched files\\n\\n| File | Change |\\n|---|---|\\n| `summarize-orchestration-trace-usage.ts` | Add `durationSamples` array + percentile helper; add `byReportedModelOutcome` accumulator; extend interfaces with p50/p95 fields and the new outcome map |\\n| `summarize-orchestration-trace-usage.test.ts` | Extend existing assertions for p50/p95 fields; add new test for percentiles with varied durations; add assertions for `byReportedModelOutcome` |\\n| `README.md` | One bullet for `byReportedModelOutcome` in the usage summary section |\\n\\n**Nothing else changes.** No telemetry wire format change, no trace entry change, no format-traces rendering change (unless you choose to surface percentiles in `--format detail`, which is optional and separate).\",\"session_id\":\"bc7d08ad-ab4f-4622-b6a2-97896962c4e0\",\"request_id\":\"500a98cb-738e-4b67-a060-efaf7860d02b\",\"usage\":{\"inputTokens\":5,\"outputTokens\":2294,\"cacheReadTokens\":71652,\"cacheWriteTokens\":30439}}\n",
+          "exitCode": 0,
+          "signal": null,
+          "durationMs": 62670,
+          "startedAt": "2026-04-06T08:13:06.660Z",
+          "finishedAt": "2026-04-06T08:14:09.330Z",
+          "status": "completed",
+          "response": "I'll inspect the relevant files to understand the current schema and make targeted recommendations. Let me read them in parallel.Now let me also check for the `format-orchestration-traces` file since it renders the usage summary.Good, I now have a complete picture of the current schema, summarizer, telemetry shape, tests, and README. Here's the recommendation.\n\n---\n\n## Recommendation: Smallest Safe Schema Additions\n\n### 1) Latency Percentile Summaries (p50/p95)\n\n**Current state:** `OrchestrationDurationSummary` has only `totalDurationMs` and `avgDurationMs`. The summarizer already collects per-job `durationMs` but discards individual values after accumulating the sum — it only tracks `totalDurationMs` and `durationSamples`.\n\n**What to change:**\n\n**a) Extend `OrchestrationDurationSummary`** — add two optional fields:\n\n```typescript\nexport interface OrchestrationDurationSummary {\n  readonly totalDurationMs: number;\n  readonly avgDurationMs: number;\n  readonly p50DurationMs: number;\n  readonly p95DurationMs: number;\n}\n```\n\n**b) Collect duration samples in the loop.** Add a `durationSamples: number[]` array alongside the existing accumulators (line ~103). Push `durationMs` values into it where they're already being summed (line ~141-143).\n\n**c) Add a percentile helper:**\n\n```typescript\nfunction calculatePercentile(sorted: readonly number[], p: number): number {\n  if (sorted.length === 0) return 0;\n  const idx = Math.ceil((p / 100) * sorted.length) - 1;\n  return sorted[Math.max(0, idx)];\n}\n```\n\n**d) In `buildDurationSummary`**, accept the samples array, sort it once, compute both percentiles. The sort cost is negligible — orchestration traces are small datasets.\n\n**e) Also add p50/p95 to `OrchestrationModelOutcomeSummary`** — collect a per-model duration array inside the `byRequestedModelOutcome` mutable accumulator, then compute percentiles when building the final output (lines 241-254).\n\n**f) Tests:** Add one test case with 5+ jobs that have varied `durationMs` values and assert the p50/p95 values. Extend the existing test expectations to include the new fields (they'll be `0` for 0-sample or 1-sample cases).\n\n**Impact:** No telemetry schema change (`OrchestrationJobModelTelemetry` and `OrchestrationTraceEntry` are untouched). This is purely a summarizer-output addition. Existing persisted JSONL traces already carry per-job `durationMs` — no data migration needed.\n\n---\n\n### 2) Reported-Model Outcome Aggregation\n\n**Current state:** The summary has `byReportedModel` (flat count map) and `byRequestedModelOutcome` (rich per-model breakdown). But there's no `byReportedModelOutcome` — so you can see *how many* jobs a reported model served, but not its success rate, retry rate, latency, or error class distribution.\n\n**What to change:**\n\n**a) Add `byReportedModelOutcome` to `OrchestrationTraceUsageSummary`:**\n\n```typescript\nexport interface OrchestrationTraceUsageSummary {\n  // ... existing fields ...\n  readonly byRequestedModelOutcome: Readonly<Record<string, OrchestrationModelOutcomeSummary>>;\n  readonly byReportedModelOutcome: Readonly<Record<string, OrchestrationModelOutcomeSummary>>;\n}\n```\n\nReuse `OrchestrationModelOutcomeSummary` exactly as-is — the interface already has the right fields. (Once p50/p95 are added to it, reported-model outcomes get them for free.)\n\n**b) In the summarizer loop**, add a parallel `byReportedModelOutcome` mutable accumulator (same shape as `byRequestedModelOutcome`). Populate it in the existing `if (job.reportedModel !== undefined)` block at line ~211, duplicating the same accumulation logic used for `byRequestedModelOutcome`. The key difference: it's keyed by `job.reportedModel` instead of `job.requestedModel`, and it only accumulates when `reportedModel` is present.\n\n**c) Build the final output** the same way as `byRequestedModelOutcome` (lines 241-254), computing derived rates from the accumulators.\n\n**d) Tests:** Extend the main test case — it already has both `requestedModel` and `reportedModel` on its jobs. Assert that `byReportedModelOutcome` mirrors the expected outcome breakdown keyed by reported model. Add a case where `reportedModel` differs from `requestedModel` (model upgrade/substitution) to show they produce distinct keys.\n\n**e) README:** Add one bullet to the `--format usage` section (line ~373):\n\n```\n- `byReportedModelOutcome` for per-reported-model outcome breakdown (same shape as `byRequestedModelOutcome`) — only populated for jobs where the worker runtime reports its actual model\n```\n\n**Impact:** Again, no telemetry schema change. `reportedModel` is already persisted on `OrchestrationJobModelTelemetry` when available. This is a summarizer-output addition only.\n\n---\n\n### Summary of touched files\n\n| File | Change |\n|---|---|\n| `summarize-orchestration-trace-usage.ts` | Add `durationSamples` array + percentile helper; add `byReportedModelOutcome` accumulator; extend interfaces with p50/p95 fields and the new outcome map |\n| `summarize-orchestration-trace-usage.test.ts` | Extend existing assertions for p50/p95 fields; add new test for percentiles with varied durations; add assertions for `byReportedModelOutcome` |\n| `README.md` | One bullet for `byReportedModelOutcome` in the usage summary section |\n\n**Nothing else changes.** No telemetry wire format change, no trace entry change, no format-traces rendering change (unless you choose to surface percentiles in `--format detail`, which is optional and separate).",
+          "raw": {
+            "type": "result",
+            "subtype": "success",
+            "is_error": false,
+            "result": "I'll inspect the relevant files to understand the current schema and make targeted recommendations. Let me read them in parallel.Now let me also check for the `format-orchestration-traces` file since it renders the usage summary.Good, I now have a complete picture of the current schema, summarizer, telemetry shape, tests, and README. Here's the recommendation.\n\n---\n\n## Recommendation: Smallest Safe Schema Additions\n\n### 1) Latency Percentile Summaries (p50/p95)\n\n**Current state:** `OrchestrationDurationSummary` has only `totalDurationMs` and `avgDurationMs`. The summarizer already collects per-job `durationMs` but discards individual values after accumulating the sum — it only tracks `totalDurationMs` and `durationSamples`.\n\n**What to change:**\n\n**a) Extend `OrchestrationDurationSummary`** — add two optional fields:\n\n```typescript\nexport interface OrchestrationDurationSummary {\n  readonly totalDurationMs: number;\n  readonly avgDurationMs: number;\n  readonly p50DurationMs: number;\n  readonly p95DurationMs: number;\n}\n```\n\n**b) Collect duration samples in the loop.** Add a `durationSamples: number[]` array alongside the existing accumulators (line ~103). Push `durationMs` values into it where they're already being summed (line ~141-143).\n\n**c) Add a percentile helper:**\n\n```typescript\nfunction calculatePercentile(sorted: readonly number[], p: number): number {\n  if (sorted.length === 0) return 0;\n  const idx = Math.ceil((p / 100) * sorted.length) - 1;\n  return sorted[Math.max(0, idx)];\n}\n```\n\n**d) In `buildDurationSummary`**, accept the samples array, sort it once, compute both percentiles. The sort cost is negligible — orchestration traces are small datasets.\n\n**e) Also add p50/p95 to `OrchestrationModelOutcomeSummary`** — collect a per-model duration array inside the `byRequestedModelOutcome` mutable accumulator, then compute percentiles when building the final output (lines 241-254).\n\n**f) Tests:** Add one test case with 5+ jobs that have varied `durationMs` values and assert the p50/p95 values. Extend the existing test expectations to include the new fields (they'll be `0` for 0-sample or 1-sample cases).\n\n**Impact:** No telemetry schema change (`OrchestrationJobModelTelemetry` and `OrchestrationTraceEntry` are untouched). This is purely a summarizer-output addition. Existing persisted JSONL traces already carry per-job `durationMs` — no data migration needed.\n\n---\n\n### 2) Reported-Model Outcome Aggregation\n\n**Current state:** The summary has `byReportedModel` (flat count map) and `byRequestedModelOutcome` (rich per-model breakdown). But there's no `byReportedModelOutcome` — so you can see *how many* jobs a reported model served, but not its success rate, retry rate, latency, or error class distribution.\n\n**What to change:**\n\n**a) Add `byReportedModelOutcome` to `OrchestrationTraceUsageSummary`:**\n\n```typescript\nexport interface OrchestrationTraceUsageSummary {\n  // ... existing fields ...\n  readonly byRequestedModelOutcome: Readonly<Record<string, OrchestrationModelOutcomeSummary>>;\n  readonly byReportedModelOutcome: Readonly<Record<string, OrchestrationModelOutcomeSummary>>;\n}\n```\n\nReuse `OrchestrationModelOutcomeSummary` exactly as-is — the interface already has the right fields. (Once p50/p95 are added to it, reported-model outcomes get them for free.)\n\n**b) In the summarizer loop**, add a parallel `byReportedModelOutcome` mutable accumulator (same shape as `byRequestedModelOutcome`). Populate it in the existing `if (job.reportedModel !== undefined)` block at line ~211, duplicating the same accumulation logic used for `byRequestedModelOutcome`. The key difference: it's keyed by `job.reportedModel` instead of `job.requestedModel`, and it only accumulates when `reportedModel` is present.\n\n**c) Build the final output** the same way as `byRequestedModelOutcome` (lines 241-254), computing derived rates from the accumulators.\n\n**d) Tests:** Extend the main test case — it already has both `requestedModel` and `reportedModel` on its jobs. Assert that `byReportedModelOutcome` mirrors the expected outcome breakdown keyed by reported model. Add a case where `reportedModel` differs from `requestedModel` (model upgrade/substitution) to show they produce distinct keys.\n\n**e) README:** Add one bullet to the `--format usage` section (line ~373):\n\n```\n- `byReportedModelOutcome` for per-reported-model outcome breakdown (same shape as `byRequestedModelOutcome`) — only populated for jobs where the worker runtime reports its actual model\n```\n\n**Impact:** Again, no telemetry schema change. `reportedModel` is already persisted on `OrchestrationJobModelTelemetry` when available. This is a summarizer-output addition only.\n\n---\n\n### Summary of touched files\n\n| File | Change |\n|---|---|\n| `summarize-orchestration-trace-usage.ts` | Add `durationSamples` array + percentile helper; add `byReportedModelOutcome` accumulator; extend interfaces with p50/p95 fields and the new outcome map |\n| `summarize-orchestration-trace-usage.test.ts` | Extend existing assertions for p50/p95 fields; add new test for percentiles with varied durations; add assertions for `byReportedModelOutcome` |\n| `README.md` | One bullet for `byReportedModelOutcome` in the usage summary section |\n\n**Nothing else changes.** No telemetry wire format change, no trace entry change, no format-traces rendering change (unless you choose to surface percentiles in `--format detail`, which is optional and separate).",
+            "session_id": "bc7d08ad-ab4f-4622-b6a2-97896962c4e0",
+            "request_id": "500a98cb-738e-4b67-a060-efaf7860d02b",
+            "duration_ms": 56612,
+            "duration_api_ms": 56612,
+            "usage": {
+              "inputTokens": 5,
+              "outputTokens": 2294,
+              "cacheReadTokens": 71652,
+              "cacheWriteTokens": 30439
+            }
+          }
+        }
+      },
+      {
+        "kind": "gemini",
+        "input": {
+          "prompt": "Inspect the current orchestration usage summary and suggest the smallest useful additions for latency percentiles and reported-model reliability summaries. Keep the answer concise and implementation-oriented.",
+          "model": "gemini-3-flash-preview",
+          "taskKind": "summarize",
+          "taskId": "latency-reported-model-gemini",
+          "cwd": "/Users/mahiro/Git/me/mahirocoko/apps/mcp-memory-layer"
+        },
+        "retryCount": 0,
+        "result": {
+          "taskId": "latency-reported-model-gemini",
+          "taskKind": "summarize",
+          "requestedModel": "gemini-3-flash-preview",
+          "stderr": "Loaded cached credentials.\nRegistering notification handlers for server 'pencil'. Capabilities: { logging: {}, tools: {} }\nServer 'pencil' has tools but did not declare 'listChanged' capability. Listening anyway for robustness...\nScheduling MCP context refresh...\nExecuting MCP context refresh...\nMCP context refresh complete.",
+          "stdout": "{\n  \"session_id\": \"77cc509e-bc9a-4ae3-afb3-5119d7903f0f\",\n  \"response\": \"```json\\n{\\n  \\\"summary\\\": \\\"Enhance orchestration observability by adding latency percentiles and a dedicated outcome tracking map for reported models to differentiate between requested and actual execution reliability.\\\",\\n  \\\"keyPoints\\\": [\\n    \\\"Introduce `p50Ms`, `p90Ms`, and `p99Ms` to `OrchestrationDurationSummary` and `OrchestrationModelOutcomeSummary` by collecting `durationMs` samples in arrays and calculating percentiles during aggregation.\\\",\\n    \\\"Implement `byReportedModelOutcome` using the same structure as `byRequestedModelOutcome` to track success rates and latency based on the model that actually performed the work.\\\",\\n    \\\"Update the `summarizeOrchestrationTraceUsage` loop to accumulate duration samples and status outcomes keyed by `job.reportedModel` when available.\\\"\\n  ]\\n}\\n```\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-3-flash-preview\": {\n        \"api\": {\n          \"totalRequests\": 2,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 9616\n        },\n        \"tokens\": {\n          \"input\": 16258,\n          \"prompt\": 23394,\n          \"candidates\": 248,\n          \"total\": 24348,\n          \"cached\": 7136,\n          \"thoughts\": 706,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 2,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 9616,\n            \"tokens\": {\n              \"input\": 16258,\n              \"prompt\": 23394,\n              \"candidates\": 248,\n              \"total\": 24348,\n              \"cached\": 7136,\n              \"thoughts\": 706,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 1,\n      \"totalSuccess\": 1,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 6,\n      \"totalDecisions\": {\n        \"accept\": 1,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"read_file\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 6,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 0,\n      \"totalLinesRemoved\": 0\n    }\n  }\n}",
+          "exitCode": 0,
+          "signal": null,
+          "durationMs": 16673,
+          "startedAt": "2026-04-06T08:13:06.663Z",
+          "finishedAt": "2026-04-06T08:13:23.336Z",
+          "status": "completed",
+          "response": "```json\n{\n  \"summary\": \"Enhance orchestration observability by adding latency percentiles and a dedicated outcome tracking map for reported models to differentiate between requested and actual execution reliability.\",\n  \"keyPoints\": [\n    \"Introduce `p50Ms`, `p90Ms`, and `p99Ms` to `OrchestrationDurationSummary` and `OrchestrationModelOutcomeSummary` by collecting `durationMs` samples in arrays and calculating percentiles during aggregation.\",\n    \"Implement `byReportedModelOutcome` using the same structure as `byRequestedModelOutcome` to track success rates and latency based on the model that actually performed the work.\",\n    \"Update the `summarizeOrchestrationTraceUsage` loop to accumulate duration samples and status outcomes keyed by `job.reportedModel` when available.\"\n  ]\n}\n```",
+          "raw": {
+            "response": "```json\n{\n  \"summary\": \"Enhance orchestration observability by adding latency percentiles and a dedicated outcome tracking map for reported models to differentiate between requested and actual execution reliability.\",\n  \"keyPoints\": [\n    \"Introduce `p50Ms`, `p90Ms`, and `p99Ms` to `OrchestrationDurationSummary` and `OrchestrationModelOutcomeSummary` by collecting `durationMs` samples in arrays and calculating percentiles during aggregation.\",\n    \"Implement `byReportedModelOutcome` using the same structure as `byRequestedModelOutcome` to track success rates and latency based on the model that actually performed the work.\",\n    \"Update the `summarizeOrchestrationTraceUsage` loop to accumulate duration samples and status outcomes keyed by `job.reportedModel` when available.\"\n  ]\n}\n```",
+            "stats": {
+              "models": {
+                "gemini-3-flash-preview": {
+                  "api": {
+                    "totalRequests": 2,
+                    "totalErrors": 0,
+                    "totalLatencyMs": 9616
+                  },
+                  "tokens": {
+                    "input": 16258,
+                    "prompt": 23394,
+                    "candidates": 248,
+                    "total": 24348,
+                    "cached": 7136,
+                    "thoughts": 706,
+                    "tool": 0
+                  },
+                  "roles": {
+                    "main": {
+                      "totalRequests": 2,
+                      "totalErrors": 0,
+                      "totalLatencyMs": 9616,
+                      "tokens": {
+                        "input": 16258,
+                        "prompt": 23394,
+                        "candidates": 248,
+                        "total": 24348,
+                        "cached": 7136,
+                        "thoughts": 706,
+                        "tool": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "tools": {
+                "totalCalls": 1,
+                "totalSuccess": 1,
+                "totalFail": 0,
+                "totalDurationMs": 6,
+                "totalDecisions": {
+                  "accept": 1,
+                  "reject": 0,
+                  "modify": 0,
+                  "auto_accept": 0
+                },
+                "byName": {
+                  "read_file": {
+                    "count": 1,
+                    "success": 1,
+                    "fail": 0,
+                    "durationMs": 6,
+                    "decisions": {
+                      "accept": 1,
+                      "reject": 0,
+                      "modify": 0,
+                      "auto_accept": 0
+                    }
+                  }
+                }
+              },
+              "files": {
+                "totalLinesAdded": 0,
+                "totalLinesRemoved": 0
+              }
+            },
+            "session_id": "77cc509e-bc9a-4ae3-afb3-5119d7903f0f"
+          },
+          "structuredData": {
+            "summary": "Enhance orchestration observability by adding latency percentiles and a dedicated outcome tracking map for reported models to differentiate between requested and actual execution reliability.",
+            "keyPoints": [
+              "Introduce `p50Ms`, `p90Ms`, and `p99Ms` to `OrchestrationDurationSummary` and `OrchestrationModelOutcomeSummary` by collecting `durationMs` samples in arrays and calculating percentiles during aggregation.",
+              "Implement `byReportedModelOutcome` using the same structure as `byRequestedModelOutcome` to track success rates and latency based on the model that actually performed the work.",
+              "Update the `summarizeOrchestrationTraceUsage` loop to accumulate duration samples and status outcomes keyed by `job.reportedModel` when available."
+            ]
+          }
+        }
+      }
+    ],
+    "summary": {
+      "totalJobs": 2,
+      "finishedJobs": 2,
+      "completedJobs": 2,
+      "failedJobs": 0,
+      "skippedJobs": 0,
+      "startedAt": "2026-04-06T08:13:06.660Z",
+      "finishedAt": "2026-04-06T08:14:09.330Z",
+      "durationMs": 62670
+    }
+  },
+  "createdAt": "2026-04-06T08:13:06.660Z",
+  "updatedAt": "2026-04-06T08:14:09.331Z"
+}

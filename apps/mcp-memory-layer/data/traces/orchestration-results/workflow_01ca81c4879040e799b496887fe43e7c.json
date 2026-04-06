@@ -1,0 +1,146 @@
+{
+  "requestId": "workflow_01ca81c4879040e799b496887fe43e7c",
+  "source": "mcp",
+  "metadata": {
+    "mode": "parallel",
+    "taskIds": [
+      "latency-cache-mcp-smoke"
+    ]
+  },
+  "status": "completed",
+  "result": {
+    "requestId": "workflow_01ca81c4879040e799b496887fe43e7c",
+    "mode": "parallel",
+    "status": "completed",
+    "results": [
+      {
+        "kind": "gemini",
+        "input": {
+          "prompt": "Summarize orchestration latency and cache telemetry in one sentence.",
+          "model": "gemini-3-flash-preview",
+          "taskKind": "summarize",
+          "taskId": "latency-cache-mcp-smoke",
+          "cwd": "/Users/mahiro/Git/me/mahirocoko/apps/mcp-memory-layer"
+        },
+        "retryCount": 0,
+        "result": {
+          "taskId": "latency-cache-mcp-smoke",
+          "taskKind": "summarize",
+          "requestedModel": "gemini-3-flash-preview",
+          "stderr": "Loaded cached credentials.\nRegistering notification handlers for server 'pencil'. Capabilities: { logging: {}, tools: {} }\nServer 'pencil' has tools but did not declare 'listChanged' capability. Listening anyway for robustness...\nScheduling MCP context refresh...\nExecuting MCP context refresh...\nMCP context refresh complete.",
+          "stdout": "{\n  \"session_id\": \"d0ecba2b-93ba-4074-bb06-740e802d64e3\",\n  \"response\": \"```json\\n{\\n  \\\"summary\\\": \\\"Orchestration workflows exhibit latencies between 75 and 115 seconds, driven by heavy context processing with cache read volumes consistently exceeding 150,000 tokens.\\\",\\n  \\\"keyPoints\\\": [\\n    \\\"Total execution duration ranges from 75.9s to 114.8s for multi-task parallel workflows.\\\",\\n    \\\"Cache telemetry shows high efficiency with cache-read-to-input token ratios frequently exceeding 10,000:1.\\\",\\n    \\\"Individual model API latencies (e.g., Claude 4.6 Opus) account for over 90% of the total orchestration time.\\\",\\n    \\\"Usage summaries reveal substantial context reuse, with over 156k tokens read from cache in typical code analysis runs.\\\"\\n  ]\\n}\\n```\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-3-flash-preview\": {\n        \"api\": {\n          \"totalRequests\": 4,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 18219\n        },\n        \"tokens\": {\n          \"input\": 23499,\n          \"prompt\": 51486,\n          \"candidates\": 367,\n          \"total\": 52895,\n          \"cached\": 27987,\n          \"thoughts\": 1042,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 4,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 18219,\n            \"tokens\": {\n              \"input\": 23499,\n              \"prompt\": 51486,\n              \"candidates\": 367,\n              \"total\": 52895,\n              \"cached\": 27987,\n              \"thoughts\": 1042,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 3,\n      \"totalSuccess\": 3,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 33,\n      \"totalDecisions\": {\n        \"accept\": 3,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"list_directory\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 16,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"read_file\": {\n          \"count\": 2,\n          \"success\": 2,\n          \"fail\": 0,\n          \"durationMs\": 17,\n          \"decisions\": {\n            \"accept\": 2,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 0,\n      \"totalLinesRemoved\": 0\n    }\n  }\n}",
+          "exitCode": 0,
+          "signal": null,
+          "durationMs": 23766,
+          "startedAt": "2026-04-06T07:49:20.851Z",
+          "finishedAt": "2026-04-06T07:49:44.617Z",
+          "status": "completed",
+          "response": "```json\n{\n  \"summary\": \"Orchestration workflows exhibit latencies between 75 and 115 seconds, driven by heavy context processing with cache read volumes consistently exceeding 150,000 tokens.\",\n  \"keyPoints\": [\n    \"Total execution duration ranges from 75.9s to 114.8s for multi-task parallel workflows.\",\n    \"Cache telemetry shows high efficiency with cache-read-to-input token ratios frequently exceeding 10,000:1.\",\n    \"Individual model API latencies (e.g., Claude 4.6 Opus) account for over 90% of the total orchestration time.\",\n    \"Usage summaries reveal substantial context reuse, with over 156k tokens read from cache in typical code analysis runs.\"\n  ]\n}\n```",
+          "raw": {
+            "response": "```json\n{\n  \"summary\": \"Orchestration workflows exhibit latencies between 75 and 115 seconds, driven by heavy context processing with cache read volumes consistently exceeding 150,000 tokens.\",\n  \"keyPoints\": [\n    \"Total execution duration ranges from 75.9s to 114.8s for multi-task parallel workflows.\",\n    \"Cache telemetry shows high efficiency with cache-read-to-input token ratios frequently exceeding 10,000:1.\",\n    \"Individual model API latencies (e.g., Claude 4.6 Opus) account for over 90% of the total orchestration time.\",\n    \"Usage summaries reveal substantial context reuse, with over 156k tokens read from cache in typical code analysis runs.\"\n  ]\n}\n```",
+            "stats": {
+              "models": {
+                "gemini-3-flash-preview": {
+                  "api": {
+                    "totalRequests": 4,
+                    "totalErrors": 0,
+                    "totalLatencyMs": 18219
+                  },
+                  "tokens": {
+                    "input": 23499,
+                    "prompt": 51486,
+                    "candidates": 367,
+                    "total": 52895,
+                    "cached": 27987,
+                    "thoughts": 1042,
+                    "tool": 0
+                  },
+                  "roles": {
+                    "main": {
+                      "totalRequests": 4,
+                      "totalErrors": 0,
+                      "totalLatencyMs": 18219,
+                      "tokens": {
+                        "input": 23499,
+                        "prompt": 51486,
+                        "candidates": 367,
+                        "total": 52895,
+                        "cached": 27987,
+                        "thoughts": 1042,
+                        "tool": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "tools": {
+                "totalCalls": 3,
+                "totalSuccess": 3,
+                "totalFail": 0,
+                "totalDurationMs": 33,
+                "totalDecisions": {
+                  "accept": 3,
+                  "reject": 0,
+                  "modify": 0,
+                  "auto_accept": 0
+                },
+                "byName": {
+                  "list_directory": {
+                    "count": 1,
+                    "success": 1,
+                    "fail": 0,
+                    "durationMs": 16,
+                    "decisions": {
+                      "accept": 1,
+                      "reject": 0,
+                      "modify": 0,
+                      "auto_accept": 0
+                    }
+                  },
+                  "read_file": {
+                    "count": 2,
+                    "success": 2,
+                    "fail": 0,
+                    "durationMs": 17,
+                    "decisions": {
+                      "accept": 2,
+                      "reject": 0,
+                      "modify": 0,
+                      "auto_accept": 0
+                    }
+                  }
+                }
+              },
+              "files": {
+                "totalLinesAdded": 0,
+                "totalLinesRemoved": 0
+              }
+            },
+            "session_id": "d0ecba2b-93ba-4074-bb06-740e802d64e3"
+          },
+          "structuredData": {
+            "summary": "Orchestration workflows exhibit latencies between 75 and 115 seconds, driven by heavy context processing with cache read volumes consistently exceeding 150,000 tokens.",
+            "keyPoints": [
+              "Total execution duration ranges from 75.9s to 114.8s for multi-task parallel workflows.",
+              "Cache telemetry shows high efficiency with cache-read-to-input token ratios frequently exceeding 10,000:1.",
+              "Individual model API latencies (e.g., Claude 4.6 Opus) account for over 90% of the total orchestration time.",
+              "Usage summaries reveal substantial context reuse, with over 156k tokens read from cache in typical code analysis runs."
+            ]
+          }
+        }
+      }
+    ],
+    "summary": {
+      "totalJobs": 1,
+      "finishedJobs": 1,
+      "completedJobs": 1,
+      "failedJobs": 0,
+      "skippedJobs": 0,
+      "startedAt": "2026-04-06T07:49:20.850Z",
+      "finishedAt": "2026-04-06T07:49:44.619Z",
+      "durationMs": 23769
+    }
+  },
+  "createdAt": "2026-04-06T07:49:20.849Z",
+  "updatedAt": "2026-04-06T07:49:44.620Z"
+}

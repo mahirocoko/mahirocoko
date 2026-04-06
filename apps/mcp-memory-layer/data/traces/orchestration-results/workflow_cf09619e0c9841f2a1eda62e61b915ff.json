@@ -1,0 +1,133 @@
+{
+  "requestId": "workflow_cf09619e0c9841f2a1eda62e61b915ff",
+  "source": "mcp",
+  "metadata": {
+    "mode": "parallel",
+    "taskIds": [
+      "telemetry-smoke-gemini"
+    ]
+  },
+  "status": "completed",
+  "result": {
+    "requestId": "workflow_cf09619e0c9841f2a1eda62e61b915ff",
+    "mode": "parallel",
+    "status": "completed",
+    "results": [
+      {
+        "kind": "gemini",
+        "input": {
+          "prompt": "Summarize the purpose of the orchestration trace system in one sentence.",
+          "model": "gemini-3-flash-preview",
+          "taskKind": "summarize",
+          "taskId": "telemetry-smoke-gemini",
+          "cwd": "/Users/mahiro/Git/me/mahirocoko/apps/mcp-memory-layer"
+        },
+        "result": {
+          "taskId": "telemetry-smoke-gemini",
+          "taskKind": "summarize",
+          "requestedModel": "gemini-3-flash-preview",
+          "stderr": "Loaded cached credentials.\nRegistering notification handlers for server 'pencil'. Capabilities: { logging: {}, tools: {} }\nServer 'pencil' has tools but did not declare 'listChanged' capability. Listening anyway for robustness...\nScheduling MCP context refresh...\nExecuting MCP context refresh...\nMCP context refresh complete.",
+          "stdout": "{\n  \"session_id\": \"be848eae-fb16-4df3-9b94-8dfe5b8d0773\",\n  \"response\": \"```json\\n{\\n  \\\"summary\\\": \\\"The orchestration trace system provides a persistent, append-only JSONL log and retrieval layer for monitoring, auditing, and analyzing the execution of parallel and sequential worker jobs.\\\",\\n  \\\"keyPoints\\\": [\\n    \\\"Captures comprehensive workflow metadata including execution mode, status, duration, and worker-job telemetry.\\\",\\n    \\\"Provides observability through dedicated CLI tools and MCP resources for inspecting specific request IDs or job statuses.\\\",\\n    \\\"Aggregates usage metrics such as success rates, model distribution, and daily throughput for performance analysis.\\\",\\n    \\\"Decouples execution from monitoring by storing results in a local-first trace store for later retrieval and reporting.\\\"\\n  ]\\n}\\n```\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-3-flash-preview\": {\n        \"api\": {\n          \"totalRequests\": 2,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 7506\n        },\n        \"tokens\": {\n          \"input\": 17639,\n          \"prompt\": 24886,\n          \"candidates\": 223,\n          \"total\": 25435,\n          \"cached\": 7247,\n          \"thoughts\": 326,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 2,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 7506,\n            \"tokens\": {\n              \"input\": 17639,\n              \"prompt\": 24886,\n              \"candidates\": 223,\n              \"total\": 25435,\n              \"cached\": 7247,\n              \"thoughts\": 326,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 2,\n      \"totalSuccess\": 2,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 33,\n      \"totalDecisions\": {\n        \"accept\": 2,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"read_file\": {\n          \"count\": 2,\n          \"success\": 2,\n          \"fail\": 0,\n          \"durationMs\": 33,\n          \"decisions\": {\n            \"accept\": 2,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 0,\n      \"totalLinesRemoved\": 0\n    }\n  }\n}",
+          "exitCode": 0,
+          "signal": null,
+          "durationMs": 13237,
+          "startedAt": "2026-04-06T07:30:21.863Z",
+          "finishedAt": "2026-04-06T07:30:35.100Z",
+          "status": "completed",
+          "response": "```json\n{\n  \"summary\": \"The orchestration trace system provides a persistent, append-only JSONL log and retrieval layer for monitoring, auditing, and analyzing the execution of parallel and sequential worker jobs.\",\n  \"keyPoints\": [\n    \"Captures comprehensive workflow metadata including execution mode, status, duration, and worker-job telemetry.\",\n    \"Provides observability through dedicated CLI tools and MCP resources for inspecting specific request IDs or job statuses.\",\n    \"Aggregates usage metrics such as success rates, model distribution, and daily throughput for performance analysis.\",\n    \"Decouples execution from monitoring by storing results in a local-first trace store for later retrieval and reporting.\"\n  ]\n}\n```",
+          "raw": {
+            "response": "```json\n{\n  \"summary\": \"The orchestration trace system provides a persistent, append-only JSONL log and retrieval layer for monitoring, auditing, and analyzing the execution of parallel and sequential worker jobs.\",\n  \"keyPoints\": [\n    \"Captures comprehensive workflow metadata including execution mode, status, duration, and worker-job telemetry.\",\n    \"Provides observability through dedicated CLI tools and MCP resources for inspecting specific request IDs or job statuses.\",\n    \"Aggregates usage metrics such as success rates, model distribution, and daily throughput for performance analysis.\",\n    \"Decouples execution from monitoring by storing results in a local-first trace store for later retrieval and reporting.\"\n  ]\n}\n```",
+            "stats": {
+              "models": {
+                "gemini-3-flash-preview": {
+                  "api": {
+                    "totalRequests": 2,
+                    "totalErrors": 0,
+                    "totalLatencyMs": 7506
+                  },
+                  "tokens": {
+                    "input": 17639,
+                    "prompt": 24886,
+                    "candidates": 223,
+                    "total": 25435,
+                    "cached": 7247,
+                    "thoughts": 326,
+                    "tool": 0
+                  },
+                  "roles": {
+                    "main": {
+                      "totalRequests": 2,
+                      "totalErrors": 0,
+                      "totalLatencyMs": 7506,
+                      "tokens": {
+                        "input": 17639,
+                        "prompt": 24886,
+                        "candidates": 223,
+                        "total": 25435,
+                        "cached": 7247,
+                        "thoughts": 326,
+                        "tool": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "tools": {
+                "totalCalls": 2,
+                "totalSuccess": 2,
+                "totalFail": 0,
+                "totalDurationMs": 33,
+                "totalDecisions": {
+                  "accept": 2,
+                  "reject": 0,
+                  "modify": 0,
+                  "auto_accept": 0
+                },
+                "byName": {
+                  "read_file": {
+                    "count": 2,
+                    "success": 2,
+                    "fail": 0,
+                    "durationMs": 33,
+                    "decisions": {
+                      "accept": 2,
+                      "reject": 0,
+                      "modify": 0,
+                      "auto_accept": 0
+                    }
+                  }
+                }
+              },
+              "files": {
+                "totalLinesAdded": 0,
+                "totalLinesRemoved": 0
+              }
+            },
+            "session_id": "be848eae-fb16-4df3-9b94-8dfe5b8d0773"
+          },
+          "structuredData": {
+            "summary": "The orchestration trace system provides a persistent, append-only JSONL log and retrieval layer for monitoring, auditing, and analyzing the execution of parallel and sequential worker jobs.",
+            "keyPoints": [
+              "Captures comprehensive workflow metadata including execution mode, status, duration, and worker-job telemetry.",
+              "Provides observability through dedicated CLI tools and MCP resources for inspecting specific request IDs or job statuses.",
+              "Aggregates usage metrics such as success rates, model distribution, and daily throughput for performance analysis.",
+              "Decouples execution from monitoring by storing results in a local-first trace store for later retrieval and reporting."
+            ]
+          }
+        }
+      }
+    ],
+    "summary": {
+      "totalJobs": 1,
+      "finishedJobs": 1,
+      "completedJobs": 1,
+      "failedJobs": 0,
+      "skippedJobs": 0,
+      "startedAt": "2026-04-06T07:30:21.862Z",
+      "finishedAt": "2026-04-06T07:30:35.104Z",
+      "durationMs": 13242
+    }
+  },
+  "createdAt": "2026-04-06T07:30:21.861Z",
+  "updatedAt": "2026-04-06T07:30:35.104Z"
+}

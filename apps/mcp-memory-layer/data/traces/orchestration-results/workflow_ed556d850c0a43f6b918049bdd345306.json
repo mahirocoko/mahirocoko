@@ -1,0 +1,145 @@
+{
+  "requestId": "workflow_ed556d850c0a43f6b918049bdd345306",
+  "source": "mcp",
+  "metadata": {
+    "mode": "parallel",
+    "taskIds": [
+      "retry-telemetry-smoke"
+    ]
+  },
+  "status": "completed",
+  "result": {
+    "requestId": "workflow_ed556d850c0a43f6b918049bdd345306",
+    "mode": "parallel",
+    "status": "completed",
+    "results": [
+      {
+        "kind": "gemini",
+        "input": {
+          "prompt": "Summarize orchestration retry telemetry in one sentence.",
+          "model": "gemini-3-flash-preview",
+          "taskKind": "summarize",
+          "taskId": "retry-telemetry-smoke",
+          "cwd": "/Users/mahiro/Git/me/mahirocoko/apps/mcp-memory-layer"
+        },
+        "result": {
+          "taskId": "retry-telemetry-smoke",
+          "taskKind": "summarize",
+          "requestedModel": "gemini-3-flash-preview",
+          "stderr": "Loaded cached credentials.\nRegistering notification handlers for server 'pencil'. Capabilities: { logging: {}, tools: {} }\nServer 'pencil' has tools but did not declare 'listChanged' capability. Listening anyway for robustness...\nScheduling MCP context refresh...\nExecuting MCP context refresh...\nMCP context refresh complete.",
+          "stdout": "{\n  \"session_id\": \"25cebe63-fd2c-4517-a102-6fba11b0ebe3\",\n  \"response\": \"```json\\n{\\n  \\\"summary\\\": \\\"Orchestration retry telemetry tracks per-job retry attempts and provides aggregated metrics to evaluate workflow reliability and model performance.\\\",\\n  \\\"keyPoints\\\": [\\n    \\\"Per-job retry counts are captured in orchestration traces\\\",\\n    \\\"Aggregated metrics include total retries, retried jobs count, and average retries per job\\\",\\n    \\\"Telemetry measures retry outcomes to distinguish between first-attempt successes and recovered jobs\\\",\\n    \\\"Retry behavior follows exponential backoff logic defined in workflow specifications\\\"\\n  ]\\n}\\n```\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-3-flash-preview\": {\n        \"api\": {\n          \"totalRequests\": 3,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 11067\n        },\n        \"tokens\": {\n          \"input\": 14666,\n          \"prompt\": 31921,\n          \"candidates\": 235,\n          \"total\": 32756,\n          \"cached\": 17255,\n          \"thoughts\": 600,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 3,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 11067,\n            \"tokens\": {\n              \"input\": 14666,\n              \"prompt\": 31921,\n              \"candidates\": 235,\n              \"total\": 32756,\n              \"cached\": 17255,\n              \"thoughts\": 600,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 2,\n      \"totalSuccess\": 2,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 52,\n      \"totalDecisions\": {\n        \"accept\": 2,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"grep_search\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 45,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"read_file\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 7,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 0,\n      \"totalLinesRemoved\": 0\n    }\n  }\n}",
+          "exitCode": 0,
+          "signal": null,
+          "durationMs": 15595,
+          "startedAt": "2026-04-06T07:34:02.693Z",
+          "finishedAt": "2026-04-06T07:34:18.288Z",
+          "status": "completed",
+          "response": "```json\n{\n  \"summary\": \"Orchestration retry telemetry tracks per-job retry attempts and provides aggregated metrics to evaluate workflow reliability and model performance.\",\n  \"keyPoints\": [\n    \"Per-job retry counts are captured in orchestration traces\",\n    \"Aggregated metrics include total retries, retried jobs count, and average retries per job\",\n    \"Telemetry measures retry outcomes to distinguish between first-attempt successes and recovered jobs\",\n    \"Retry behavior follows exponential backoff logic defined in workflow specifications\"\n  ]\n}\n```",
+          "raw": {
+            "response": "```json\n{\n  \"summary\": \"Orchestration retry telemetry tracks per-job retry attempts and provides aggregated metrics to evaluate workflow reliability and model performance.\",\n  \"keyPoints\": [\n    \"Per-job retry counts are captured in orchestration traces\",\n    \"Aggregated metrics include total retries, retried jobs count, and average retries per job\",\n    \"Telemetry measures retry outcomes to distinguish between first-attempt successes and recovered jobs\",\n    \"Retry behavior follows exponential backoff logic defined in workflow specifications\"\n  ]\n}\n```",
+            "stats": {
+              "models": {
+                "gemini-3-flash-preview": {
+                  "api": {
+                    "totalRequests": 3,
+                    "totalErrors": 0,
+                    "totalLatencyMs": 11067
+                  },
+                  "tokens": {
+                    "input": 14666,
+                    "prompt": 31921,
+                    "candidates": 235,
+                    "total": 32756,
+                    "cached": 17255,
+                    "thoughts": 600,
+                    "tool": 0
+                  },
+                  "roles": {
+                    "main": {
+                      "totalRequests": 3,
+                      "totalErrors": 0,
+                      "totalLatencyMs": 11067,
+                      "tokens": {
+                        "input": 14666,
+                        "prompt": 31921,
+                        "candidates": 235,
+                        "total": 32756,
+                        "cached": 17255,
+                        "thoughts": 600,
+                        "tool": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "tools": {
+                "totalCalls": 2,
+                "totalSuccess": 2,
+                "totalFail": 0,
+                "totalDurationMs": 52,
+                "totalDecisions": {
+                  "accept": 2,
+                  "reject": 0,
+                  "modify": 0,
+                  "auto_accept": 0
+                },
+                "byName": {
+                  "grep_search": {
+                    "count": 1,
+                    "success": 1,
+                    "fail": 0,
+                    "durationMs": 45,
+                    "decisions": {
+                      "accept": 1,
+                      "reject": 0,
+                      "modify": 0,
+                      "auto_accept": 0
+                    }
+                  },
+                  "read_file": {
+                    "count": 1,
+                    "success": 1,
+                    "fail": 0,
+                    "durationMs": 7,
+                    "decisions": {
+                      "accept": 1,
+                      "reject": 0,
+                      "modify": 0,
+                      "auto_accept": 0
+                    }
+                  }
+                }
+              },
+              "files": {
+                "totalLinesAdded": 0,
+                "totalLinesRemoved": 0
+              }
+            },
+            "session_id": "25cebe63-fd2c-4517-a102-6fba11b0ebe3"
+          },
+          "structuredData": {
+            "summary": "Orchestration retry telemetry tracks per-job retry attempts and provides aggregated metrics to evaluate workflow reliability and model performance.",
+            "keyPoints": [
+              "Per-job retry counts are captured in orchestration traces",
+              "Aggregated metrics include total retries, retried jobs count, and average retries per job",
+              "Telemetry measures retry outcomes to distinguish between first-attempt successes and recovered jobs",
+              "Retry behavior follows exponential backoff logic defined in workflow specifications"
+            ]
+          }
+        }
+      }
+    ],
+    "summary": {
+      "totalJobs": 1,
+      "finishedJobs": 1,
+      "completedJobs": 1,
+      "failedJobs": 0,
+      "skippedJobs": 0,
+      "startedAt": "2026-04-06T07:34:02.692Z",
+      "finishedAt": "2026-04-06T07:34:18.289Z",
+      "durationMs": 15597
+    }
+  },
+  "createdAt": "2026-04-06T07:34:02.691Z",
+  "updatedAt": "2026-04-06T07:34:18.289Z"
+}
