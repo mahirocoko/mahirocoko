@@ -72,6 +72,7 @@ describe("summarizeOrchestrationTraceUsage", () => {
       retryOutcome: { totalRetries: 2, retriedJobs: 1, avgRetriesPerJob: 1 },
       durationOutcome: { totalDurationMs: 3000, avgDurationMs: 1500, p50DurationMs: 1000, p95DurationMs: 2000 },
       cacheOutcome: { cachedJobs: 1, uncachedJobs: 0, cacheHitRate: 1, totalCachedTokens: 400 },
+      modelMismatchOutcome: { comparableJobs: 2, modelMismatchCount: 0, modelMismatchRate: 0 },
       byRequestedModelOutcome: {
         "gemini-3-flash-preview": { jobCount: 1, completed: 1, failed: 0, successRate: 1, totalRetries: 0, avgRetriesPerJob: 0, totalDurationMs: 1000, avgDurationMs: 1000, p50DurationMs: 1000, p95DurationMs: 1000, cachedJobs: 1, uncachedJobs: 0, cacheHitRate: 1, totalCachedTokens: 400, byErrorClass: { none: 1 } },
         "composer-2": { jobCount: 1, completed: 0, failed: 1, successRate: 0, totalRetries: 2, avgRetriesPerJob: 2, totalDurationMs: 2000, avgDurationMs: 2000, p50DurationMs: 2000, p95DurationMs: 2000, cachedJobs: 0, uncachedJobs: 0, cacheHitRate: 0, totalCachedTokens: 0, byErrorClass: { rate_limited: 1 } },
@@ -127,6 +128,7 @@ describe("summarizeOrchestrationTraceUsage", () => {
     expect(summary.retryOutcome).toEqual({ totalRetries: 0, retriedJobs: 0, avgRetriesPerJob: 0 });
     expect(summary.durationOutcome).toEqual({ totalDurationMs: 0, avgDurationMs: 0, p50DurationMs: 0, p95DurationMs: 0 });
     expect(summary.cacheOutcome).toEqual({ cachedJobs: 0, uncachedJobs: 0, cacheHitRate: 0, totalCachedTokens: 0 });
+    expect(summary.modelMismatchOutcome).toEqual({ comparableJobs: 0, modelMismatchCount: 0, modelMismatchRate: 0 });
     expect(summary.byRequestedModelOutcome).toEqual({});
     expect(summary.byReportedModelOutcome).toEqual({});
   });
@@ -161,6 +163,7 @@ describe("summarizeOrchestrationTraceUsage", () => {
     expect(summary.retryOutcome).toEqual({ totalRetries: 1, retriedJobs: 1, avgRetriesPerJob: 1 });
     expect(summary.durationOutcome).toEqual({ totalDurationMs: 500, avgDurationMs: 500, p50DurationMs: 500, p95DurationMs: 500 });
     expect(summary.cacheOutcome).toEqual({ cachedJobs: 0, uncachedJobs: 1, cacheHitRate: 0, totalCachedTokens: 0 });
+    expect(summary.modelMismatchOutcome).toEqual({ comparableJobs: 0, modelMismatchCount: 0, modelMismatchRate: 0 });
     expect(summary.byRequestedModelOutcome).toEqual({
       "gemini-3-flash-preview": { jobCount: 1, completed: 0, failed: 1, successRate: 0, totalRetries: 1, avgRetriesPerJob: 1, totalDurationMs: 500, avgDurationMs: 500, p50DurationMs: 500, p95DurationMs: 500, cachedJobs: 0, uncachedJobs: 1, cacheHitRate: 0, totalCachedTokens: 0, byErrorClass: { infra_failure: 1 } },
     });
@@ -196,7 +199,41 @@ describe("summarizeOrchestrationTraceUsage", () => {
     expect(summary.retryOutcome).toEqual({ totalRetries: 0, retriedJobs: 0, avgRetriesPerJob: 0 });
     expect(summary.durationOutcome).toEqual({ totalDurationMs: 0, avgDurationMs: 0, p50DurationMs: 0, p95DurationMs: 0 });
     expect(summary.cacheOutcome).toEqual({ cachedJobs: 0, uncachedJobs: 0, cacheHitRate: 0, totalCachedTokens: 0 });
+    expect(summary.modelMismatchOutcome).toEqual({ comparableJobs: 0, modelMismatchCount: 0, modelMismatchRate: 0 });
     expect(summary.byRequestedModelOutcome).toEqual({});
     expect(summary.byReportedModelOutcome).toEqual({});
+  });
+
+  it("counts requested-vs-reported model mismatches when both are present", () => {
+    const summary = summarizeOrchestrationTraceUsage([
+      {
+        requestId: "mismatch",
+        source: "cli",
+        mode: "parallel",
+        status: "completed",
+        jobKinds: ["gemini"],
+        taskIds: ["t1"],
+        jobModels: [
+          {
+            kind: "gemini",
+            taskId: "t1",
+            status: "completed",
+            requestedModel: "gemini-3-flash-preview",
+            reportedModel: "gemini-3.1-pro-preview",
+          },
+        ],
+        totalJobs: 1,
+        finishedJobs: 1,
+        completedJobs: 1,
+        failedJobs: 0,
+        skippedJobs: 0,
+        startedAt: "2026-04-05T00:00:00.000Z",
+        finishedAt: "2026-04-05T00:00:01.000Z",
+        durationMs: 1000,
+        createdAt: "2026-04-05T00:00:01.000Z",
+      },
+    ]);
+
+    expect(summary.modelMismatchOutcome).toEqual({ comparableJobs: 1, modelMismatchCount: 1, modelMismatchRate: 1 });
   });
 });
