@@ -317,6 +317,7 @@ MCP tool:
 - `orchestrate_workflow` runs the same static workflow spec through the MCP server
 - input shape: `{ "spec": <parallel-or-sequential workflow>, "cwd": "/optional/default/cwd", "waitForCompletion": true }`
 - set `waitForCompletion: false` for long-running workflows so the tool returns immediately with `{ requestId, status: "running" }` instead of waiting for the full worker response
+- when `waitForCompletion` is omitted, obviously risky workflows (sequential runs, cursor jobs, multi-job workflows, or large `timeoutMs`) are auto-started in background and return `{ requestId, status: "running", autoAsync: true }`
 - `get_orchestration_result` reads the stored workflow state/result by `requestId`
 - `list_orchestration_traces` lists persisted orchestration trace entries with optional filters like `source`, `mode`, `status`, `requestId`, `taskId`, and `limit` (each entry may include `jobModels` with per-job `requestedModel` / optional `reportedModel` when written by a current package version)
 
@@ -364,9 +365,14 @@ Current usage summary also includes:
 
 - `bySource` and `byWorkflowStatus` for workflow-level operational mix
 - `byJobStatus` for per-job failure mode distribution
+- `byErrorClass` and `bySourceErrorClass` for normalized reliability views such as rate limiting vs infrastructure vs invalid output
+- `retryOutcome` for total retries, retried jobs, and average retries per job
+- `durationOutcome` for aggregate job runtime visibility including percentile summaries
+- `cacheOutcome` for cache-hit counts and cached token totals when workers report them
 - `byDay` for daily trace/job rollups
 - `workflowOutcome` and `jobOutcome` success-rate summaries
-- `byRequestedModelOutcome` for per-model job counts and success rates when per-job telemetry is present
+- `byRequestedModelOutcome` for per-model job counts, success rates, retries, durations, cache telemetry, and normalized error-class counts when per-job telemetry is present
+- `byReportedModelOutcome` for the same reliability view keyed by the model actually reported by the worker runtime
 
 Common inspection flow now also supports time filtering:
 
