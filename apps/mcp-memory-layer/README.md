@@ -369,10 +369,16 @@ Current usage summary also includes:
 - `retryOutcome` for total retries, retried jobs, and average retries per job
 - `durationOutcome` for aggregate job runtime visibility including percentile summaries
 - `cacheOutcome` for cache-hit counts and cached token totals when workers report them
+- `modelMismatchOutcome` for requested-vs-reported model drift visibility when both model values are present
 - `byDay` for daily trace/job rollups
 - `workflowOutcome` and `jobOutcome` success-rate summaries
 - `byRequestedModelOutcome` for per-model job counts, success rates, retries, durations, cache telemetry, and normalized error-class counts when per-job telemetry is present
 - `byReportedModelOutcome` for the same reliability view keyed by the model actually reported by the worker runtime
+
+Local artifact cleanup:
+
+- nested result snapshots under `data/traces/orchestration-results/*.json` are local-only and gitignored
+- `test-results/` and `.pulselane-refactor/` are also treated as disposable local outputs
 
 Common inspection flow now also supports time filtering:
 

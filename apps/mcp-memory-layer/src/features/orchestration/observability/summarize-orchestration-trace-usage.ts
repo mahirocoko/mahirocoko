@@ -41,6 +41,12 @@ export interface OrchestrationCacheSummary {
   readonly totalCachedTokens: number;
 }
 
+export interface OrchestrationModelMismatchSummary {
+  readonly comparableJobs: number;
+  readonly modelMismatchCount: number;
+  readonly modelMismatchRate: number;
+}
+
 export interface OrchestrationModelOutcomeSummary {
   readonly jobCount: number;
   readonly completed: number;
@@ -76,6 +82,7 @@ export interface OrchestrationTraceUsageSummary {
   readonly retryOutcome: OrchestrationRetrySummary;
   readonly durationOutcome: OrchestrationDurationSummary;
   readonly cacheOutcome: OrchestrationCacheSummary;
+  readonly modelMismatchOutcome: OrchestrationModelMismatchSummary;
   readonly byRequestedModelOutcome: Readonly<Record<string, OrchestrationModelOutcomeSummary>>;
   readonly byReportedModelOutcome: Readonly<Record<string, OrchestrationModelOutcomeSummary>>;
 }
@@ -124,6 +131,8 @@ export function summarizeOrchestrationTraceUsage(
   let cachedJobs = 0;
   let uncachedJobs = 0;
   let totalCachedTokens = 0;
+  let comparableJobs = 0;
+  let modelMismatchCount = 0;
 
   for (const trace of traces) {
     bySource[trace.source] = (bySource[trace.source] ?? 0) + 1;
@@ -150,6 +159,7 @@ export function summarizeOrchestrationTraceUsage(
         const durationMs = typeof job.durationMs === "number" ? job.durationMs : undefined;
         const cached = typeof job.cached === "boolean" ? job.cached : undefined;
         const cachedTokens = typeof job.cachedTokens === "number" ? job.cachedTokens : undefined;
+        const reportedModel = typeof job.reportedModel === "string" ? job.reportedModel : undefined;
 
         if (retryCount !== undefined) {
           totalRetries += retryCount;
@@ -174,6 +184,14 @@ export function summarizeOrchestrationTraceUsage(
           cachedJobs += 1;
         } else if (hasCacheSignal) {
           uncachedJobs += 1;
+        }
+
+        if (reportedModel) {
+          comparableJobs += 1;
+
+          if (reportedModel !== job.requestedModel) {
+            modelMismatchCount += 1;
+          }
         }
 
         if (jobStatus) {
@@ -246,6 +264,7 @@ export function summarizeOrchestrationTraceUsage(
     retryOutcome: buildRetrySummary(totalRetries, retriedJobs, jobCount),
     durationOutcome: buildDurationSummary(totalDurationMs, durationValues, durationSamples),
     cacheOutcome: buildCacheSummary(cachedJobs, uncachedJobs, totalCachedTokens),
+    modelMismatchOutcome: buildModelMismatchSummary(comparableJobs, modelMismatchCount),
     byRequestedModelOutcome: finalizeModelOutcomes(byRequestedModelOutcome),
     byReportedModelOutcome: finalizeModelOutcomes(byReportedModelOutcome),
   };
@@ -302,6 +321,17 @@ function buildCacheSummary(cachedJobs: number, uncachedJobs: number, totalCached
     uncachedJobs,
     cacheHitRate: calculateRate(cachedJobs, cachedJobs + uncachedJobs),
     totalCachedTokens,
+  };
+}
+
+function buildModelMismatchSummary(
+  comparableJobs: number,
+  modelMismatchCount: number,
+): OrchestrationModelMismatchSummary {
+  return {
+    comparableJobs,
+    modelMismatchCount,
+    modelMismatchRate: calculateRate(modelMismatchCount, comparableJobs),
   };
 }
 
