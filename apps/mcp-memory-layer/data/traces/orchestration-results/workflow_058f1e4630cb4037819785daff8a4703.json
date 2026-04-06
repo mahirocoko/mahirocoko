@@ -1,0 +1,158 @@
+{
+  "requestId": "workflow_058f1e4630cb4037819785daff8a4703",
+  "source": "mcp",
+  "metadata": {
+    "mode": "parallel",
+    "taskIds": [
+      "retry-mcp-restart-smoke"
+    ]
+  },
+  "status": "completed",
+  "result": {
+    "requestId": "workflow_058f1e4630cb4037819785daff8a4703",
+    "mode": "parallel",
+    "status": "completed",
+    "results": [
+      {
+        "kind": "gemini",
+        "input": {
+          "prompt": "Summarize orchestration retry telemetry after server restart in one sentence.",
+          "model": "gemini-3-flash-preview",
+          "taskKind": "summarize",
+          "taskId": "retry-mcp-restart-smoke",
+          "cwd": "/Users/mahiro/Git/me/mahirocoko/apps/mcp-memory-layer"
+        },
+        "retryCount": 0,
+        "result": {
+          "taskId": "retry-mcp-restart-smoke",
+          "taskKind": "summarize",
+          "requestedModel": "gemini-3-flash-preview",
+          "stderr": "Loaded cached credentials.\nRegistering notification handlers for server 'pencil'. Capabilities: { logging: {}, tools: {} }\nServer 'pencil' has tools but did not declare 'listChanged' capability. Listening anyway for robustness...\nScheduling MCP context refresh...\nExecuting MCP context refresh...\nMCP context refresh complete.",
+          "stdout": "{\n  \"session_id\": \"1a0f8e76-3d8f-4bbd-968c-7b6b07328b64\",\n  \"response\": \"```json\\n{\\n  \\\"summary\\\": \\\"Orchestration retry telemetry provides durable, per-job attempt counts and aggregated reliability metrics that persist across server restarts via a local-first JSON store.\\\",\\n  \\\"keyPoints\\\": [\\n    \\\"Per-job retry counts are captured and stored in append-only JSONL traces.\\\",\\n    \\\"Orchestration result records persist state in individual JSON files for point-lookup polling.\\\",\\n    \\\"Durable storage ensures historical retry data remains accessible after service interruptions.\\\",\\n    \\\"Metrics include total retries, success rates after recovery, and average attempts per task.\\\"\\n  ]\\n}\\n```\",\n  \"stats\": {\n    \"models\": {\n      \"gemini-3-flash-preview\": {\n        \"api\": {\n          \"totalRequests\": 13,\n          \"totalErrors\": 0,\n          \"totalLatencyMs\": 61019\n        },\n        \"tokens\": {\n          \"input\": 45552,\n          \"prompt\": 275142,\n          \"candidates\": 789,\n          \"total\": 279359,\n          \"cached\": 229590,\n          \"thoughts\": 3428,\n          \"tool\": 0\n        },\n        \"roles\": {\n          \"main\": {\n            \"totalRequests\": 13,\n            \"totalErrors\": 0,\n            \"totalLatencyMs\": 61019,\n            \"tokens\": {\n              \"input\": 45552,\n              \"prompt\": 275142,\n              \"candidates\": 789,\n              \"total\": 279359,\n              \"cached\": 229590,\n              \"thoughts\": 3428,\n              \"tool\": 0\n            }\n          }\n        }\n      }\n    },\n    \"tools\": {\n      \"totalCalls\": 12,\n      \"totalSuccess\": 12,\n      \"totalFail\": 0,\n      \"totalDurationMs\": 184,\n      \"totalDecisions\": {\n        \"accept\": 12,\n        \"reject\": 0,\n        \"modify\": 0,\n        \"auto_accept\": 0\n      },\n      \"byName\": {\n        \"list_directory\": {\n          \"count\": 1,\n          \"success\": 1,\n          \"fail\": 0,\n          \"durationMs\": 13,\n          \"decisions\": {\n            \"accept\": 1,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"read_file\": {\n          \"count\": 8,\n          \"success\": 8,\n          \"fail\": 0,\n          \"durationMs\": 64,\n          \"decisions\": {\n            \"accept\": 8,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        },\n        \"grep_search\": {\n          \"count\": 3,\n          \"success\": 3,\n          \"fail\": 0,\n          \"durationMs\": 107,\n          \"decisions\": {\n            \"accept\": 3,\n            \"reject\": 0,\n            \"modify\": 0,\n            \"auto_accept\": 0\n          }\n        }\n      }\n    },\n    \"files\": {\n      \"totalLinesAdded\": 0,\n      \"totalLinesRemoved\": 0\n    }\n  }\n}",
+          "exitCode": 0,
+          "signal": null,
+          "durationMs": 68808,
+          "startedAt": "2026-04-06T07:44:03.281Z",
+          "finishedAt": "2026-04-06T07:45:12.089Z",
+          "status": "completed",
+          "response": "```json\n{\n  \"summary\": \"Orchestration retry telemetry provides durable, per-job attempt counts and aggregated reliability metrics that persist across server restarts via a local-first JSON store.\",\n  \"keyPoints\": [\n    \"Per-job retry counts are captured and stored in append-only JSONL traces.\",\n    \"Orchestration result records persist state in individual JSON files for point-lookup polling.\",\n    \"Durable storage ensures historical retry data remains accessible after service interruptions.\",\n    \"Metrics include total retries, success rates after recovery, and average attempts per task.\"\n  ]\n}\n```",
+          "raw": {
+            "response": "```json\n{\n  \"summary\": \"Orchestration retry telemetry provides durable, per-job attempt counts and aggregated reliability metrics that persist across server restarts via a local-first JSON store.\",\n  \"keyPoints\": [\n    \"Per-job retry counts are captured and stored in append-only JSONL traces.\",\n    \"Orchestration result records persist state in individual JSON files for point-lookup polling.\",\n    \"Durable storage ensures historical retry data remains accessible after service interruptions.\",\n    \"Metrics include total retries, success rates after recovery, and average attempts per task.\"\n  ]\n}\n```",
+            "stats": {
+              "models": {
+                "gemini-3-flash-preview": {
+                  "api": {
+                    "totalRequests": 13,
+                    "totalErrors": 0,
+                    "totalLatencyMs": 61019
+                  },
+                  "tokens": {
+                    "input": 45552,
+                    "prompt": 275142,
+                    "candidates": 789,
+                    "total": 279359,
+                    "cached": 229590,
+                    "thoughts": 3428,
+                    "tool": 0
+                  },
+                  "roles": {
+                    "main": {
+                      "totalRequests": 13,
+                      "totalErrors": 0,
+                      "totalLatencyMs": 61019,
+                      "tokens": {
+                        "input": 45552,
+                        "prompt": 275142,
+                        "candidates": 789,
+                        "total": 279359,
+                        "cached": 229590,
+                        "thoughts": 3428,
+                        "tool": 0
+                      }
+                    }
+                  }
+                }
+              },
+              "tools": {
+                "totalCalls": 12,
+                "totalSuccess": 12,
+                "totalFail": 0,
+                "totalDurationMs": 184,
+                "totalDecisions": {
+                  "accept": 12,
+                  "reject": 0,
+                  "modify": 0,
+                  "auto_accept": 0
+                },
+                "byName": {
+                  "list_directory": {
+                    "count": 1,
+                    "success": 1,
+                    "fail": 0,
+                    "durationMs": 13,
+                    "decisions": {
+                      "accept": 1,
+                      "reject": 0,
+                      "modify": 0,
+                      "auto_accept": 0
+                    }
+                  },
+                  "read_file": {
+                    "count": 8,
+                    "success": 8,
+                    "fail": 0,
+                    "durationMs": 64,
+                    "decisions": {
+                      "accept": 8,
+                      "reject": 0,
+                      "modify": 0,
+                      "auto_accept": 0
+                    }
+                  },
+                  "grep_search": {
+                    "count": 3,
+                    "success": 3,
+                    "fail": 0,
+                    "durationMs": 107,
+                    "decisions": {
+                      "accept": 3,
+                      "reject": 0,
+                      "modify": 0,
+                      "auto_accept": 0
+                    }
+                  }
+                }
+              },
+              "files": {
+                "totalLinesAdded": 0,
+                "totalLinesRemoved": 0
+              }
+            },
+            "session_id": "1a0f8e76-3d8f-4bbd-968c-7b6b07328b64"
+          },
+          "structuredData": {
+            "summary": "Orchestration retry telemetry provides durable, per-job attempt counts and aggregated reliability metrics that persist across server restarts via a local-first JSON store.",
+            "keyPoints": [
+              "Per-job retry counts are captured and stored in append-only JSONL traces.",
+              "Orchestration result records persist state in individual JSON files for point-lookup polling.",
+              "Durable storage ensures historical retry data remains accessible after service interruptions.",
+              "Metrics include total retries, success rates after recovery, and average attempts per task."
+            ]
+          }
+        }
+      }
+    ],
+    "summary": {
+      "totalJobs": 1,
+      "finishedJobs": 1,
+      "completedJobs": 1,
+      "failedJobs": 0,
+      "skippedJobs": 0,
+      "startedAt": "2026-04-06T07:44:03.279Z",
+      "finishedAt": "2026-04-06T07:45:12.092Z",
+      "durationMs": 68813
+    }
+  },
+  "createdAt": "2026-04-06T07:44:03.278Z",
+  "updatedAt": "2026-04-06T07:45:12.093Z"
+}
