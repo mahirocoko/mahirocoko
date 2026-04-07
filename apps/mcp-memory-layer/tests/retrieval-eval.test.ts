@@ -108,6 +108,20 @@ describe("evaluateSearchCase", () => {
     ).toBe(true);
     expect(evaluateSearchCase(["eval-proj-trace-store", "eval-proj-result-store"], spec).pass).toBe(false);
   });
+
+  it("adversarial requestId distractor does not outrank orchestration gating", () => {
+    const spec = retrievalEvalSearchCases.find((c) => c.id === "search-reqid-gating-vs-webhook-dedup")!;
+
+    expect(evaluateSearchCase(["eval-proj-request-id", "eval-proj-webhook-reqid-distractor"], spec).pass).toBe(true);
+    expect(evaluateSearchCase(["eval-proj-webhook-reqid-distractor", "eval-proj-request-id"], spec).pass).toBe(false);
+  });
+
+  it("adversarial result-store archive distractor does not outrank the live handoff contract", () => {
+    const spec = retrievalEvalSearchCases.find((c) => c.id === "search-live-handoff-vs-archival-mirror")!;
+
+    expect(evaluateSearchCase(["eval-proj-result-store", "eval-proj-result-archive-distractor"], spec).pass).toBe(true);
+    expect(evaluateSearchCase(["eval-proj-result-archive-distractor", "eval-proj-result-store"], spec).pass).toBe(false);
+  });
 });
 
 describe("evaluateContextCase", () => {
