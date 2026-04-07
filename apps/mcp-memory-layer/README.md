@@ -27,6 +27,8 @@ The native headless Cursor-family entrypoint in this repo is `agent -p --output-
 
 `bun run cursor` is a repo-local wrapper around that `agent` command. Use it when you want this package's normalized JSON envelope and defaults, but do not confuse it with the native headless command itself.
 
+`README.md` is the canonical command/reference document for this package. For worker-selection posture, delegation rules, and verification discipline, see `WORKFLOW.md`.
+
 Model selection:
 
 - `--model` is required on every invocation
@@ -152,6 +154,8 @@ Result shape includes:
 
 Run workers in parallel only when their inputs are fully independent — neither worker's output is needed to form the other's prompt.
 
+This section documents the command shapes. `WORKFLOW.md` defines the orchestration posture for when to parallelize, when to sequence, and how to verify the result.
+
 - **Safe:** Gemini summarizes one module while Cursor plans an unrelated refactor.
 - **Safe:** Five Cursor jobs review five unrelated files/modules in parallel.
 - **Unsafe:** Gemini extracts facts → you use those facts to write the Cursor prompt.
@@ -165,6 +169,8 @@ wait
 ## Orchestrate command
 
 `orchestrate` is the package-level workflow runner for static JSON-defined parallel or sequential job specs.
+
+This section is the canonical reference for CLI flags, workflow JSON fields, async MCP usage, and trace inspection examples. `WORKFLOW.md` covers the higher-level worker protocol.
 
 Flags:
 

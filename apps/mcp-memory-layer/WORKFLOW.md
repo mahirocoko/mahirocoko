@@ -2,6 +2,8 @@
 
 This document defines the worker-first orchestration loop for `apps/mcp-memory-layer`.
 
+`WORKFLOW.md` is the behavioral protocol. For CLI flags, JSON payload shapes, MCP examples, and trace inspection command reference, use `README.md`.
+
 ## Core posture
 
 - The orchestrator routes, compares, verifies, and decides.
@@ -99,19 +101,11 @@ wait
 # Synthesize both outputs here before proceeding
 ```
 
-Programmatic equivalent:
+Reference note:
 
-- `src/features/orchestration/run-parallel-workers.ts` provides the same fan-out and collect pattern for independent jobs without relying on ad-hoc shell `&` and `wait`.
-- `bun run orchestrate -- --file <workflow.json>` exposes that pattern as a package CLI for static JSON-defined workflows.
-- There is no special two-worker limit in the orchestration layer. Fan out as many independent Gemini/Cursor jobs as the machine and upstream tools can safely support.
-- Use parallel workflow field `maxConcurrency` when you want bounded fan-out instead of firing every independent job at once.
-- Orchestration results now include run summary metadata such as total/completed/failed/skipped job counts plus started/finished timestamps and total duration.
-- Use workflow field `timeoutMs` when you want a deadline for the entire orchestration run; active jobs are bounded by the remaining time and unstarted jobs become skipped work.
-- CLI and MCP orchestration runs append JSONL trace entries under `data/traces/orchestration-trace.jsonl` for later inspection.
-- CLI and MCP orchestration runs return a `requestId` when tracing is enabled, so you can jump straight from a workflow result to its trace entry.
-- Use per-job fields `retries` and `retryDelayMs` when a worker call may fail transiently and should be retried with exponential backoff.
-- Code-level runners also accept `onJobComplete` for incremental progress. This is library-only for now; parallel callbacks arrive in completion order, and sequential `totalJobs` still counts steps that may later be skipped.
-- `bun run orchestrate -- --file <workflow.json> --dry-run` validates the static spec, checks template syntax, and prints the normalized plan without executing workers.
+- Use `src/features/orchestration/run-parallel-workers.ts` for code-level fan-out and `bun run orchestrate -- --file <workflow.json>` for the same pattern through the package CLI.
+- `README.md` is the canonical reference for workflow fields like `maxConcurrency`, `timeoutMs`, `retries`, `retryDelayMs`, `requestId`, dry-run behavior, and trace/result envelope shapes.
+- There is no special two-worker limit in the orchestration layer. Fan out only as far as the machine and upstream tools can safely support.
 
 Example sequential pattern (when Gemini output feeds Cursor):
 
@@ -123,34 +117,24 @@ agent -p --model claude-4.6-opus-high --output-format json "Given this summary: 
 Programmatic equivalent:
 
 - `src/features/orchestration/run-sequential-workers.ts` runs dependent steps in order and lets each later step derive its next worker job from earlier results.
-- `bun run orchestrate -- --file <workflow.json>` supports static sequential job lists when you want a CLI wrapper around that execution model.
-- Sequential JSON workflows can interpolate earlier results with placeholders like `{{last.result.response}}` or `{{results.0.result.response}}`.
-- Interpolation helpers include `{{default(path, "fallback")}}` and `{{json(path)}}`.
-- Static sequential jobs can set `continueOnFailure: false` when a failed step should halt the workflow.
-- Code-level sequential step builders can return `null` to skip a step entirely based on earlier results.
+- `bun run orchestrate -- --file <workflow.json>` is the CLI wrapper for the same dependent-step pattern.
+- `README.md` is the canonical reference for interpolation helpers, `continueOnFailure`, and the static workflow JSON shape.
 
-MCP equivalent:
+Protocol reminders for MCP and trace verification:
 
 - The `orchestrate_workflow` MCP tool accepts the same static workflow spec and runs it through the same orchestration runtime.
 - Prefer `waitForCompletion: false` for workflows that may take noticeable time.
 - If `waitForCompletion` is omitted, risky workflows are auto-started in background and return `{ requestId, status: "running", autoAsync: true }` instead of blocking the MCP client.
 - Explicit `waitForCompletion: true` still forces synchronous behavior, so long-running calls can still hit client-side timeout boundaries if the caller insists on waiting.
 - The `get_orchestration_result` MCP tool is the polling path for background orchestration runs.
-- The `list_orchestration_traces` MCP tool reads persisted orchestration trace entries for later inspection.
-- The `list-orchestration-traces` CLI command reads the same persisted trace file with optional filters like `--source`, `--mode`, `--status`, `--request-id`, `--task-id`, and `--limit`, plus `--format text` for a terminal-friendly table view, `--format detail` for expanded per-trace blocks (including per-job model lines when `jobModels` is present), or `--format usage` for aggregated worker/model counts over the filtered result set.
+- The `list_orchestration_traces` MCP tool and `list-orchestration-traces` CLI read the same persisted trace data; use the `README.md` command reference for exact flags and example invocations.
 
 Recommended MCP loop for long-running work:
 
 1. Call `orchestrate_workflow` with `waitForCompletion: false` when the workflow is clearly non-trivial.
 2. If the tool returns `autoAsync: true`, treat that as a deliberate async fallback rather than an error.
 3. Poll `get_orchestration_result` by `requestId` until the stored result is no longer `running`.
-4. Use `list_orchestration_traces` or `bun run list-orchestration-traces -- --format detail --request-id <id>` for execution forensics.
-
-Typical trace inspection loop:
-
-1. Run `bun run orchestrate -- --file <workflow.json>`
-2. Copy `requestId` from the JSON result
-3. Run `bun run list-orchestration-traces -- --format detail --request-id <that-request-id>`
+4. Use `list_orchestration_traces` or the CLI trace reader for execution forensics.
 
 Telemetry highlights worth checking during verification:
 
