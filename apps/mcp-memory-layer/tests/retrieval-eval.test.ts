@@ -34,6 +34,13 @@ describe("evaluateSearchCase", () => {
     expect(evaluateSearchCase(["other", "eval-proj-request-id"], spec).pass).toBe(false);
   });
 
+  it("session probe case expects session-scoped primary id", () => {
+    const spec = retrievalEvalSearchCases.find((c) => c.id === "search-session-probe-beats-reqid-noise")!;
+
+    expect(evaluateSearchCase(["eval-sess-reqid", "eval-sess-reqid-noise"], spec).pass).toBe(true);
+    expect(evaluateSearchCase(["eval-sess-reqid-noise", "eval-sess-reqid"], spec).pass).toBe(false);
+  });
+
   it("requires expected ids inside top-k when provided", () => {
     const spec = {
       id: "fixture",

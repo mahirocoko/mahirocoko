@@ -26,7 +26,8 @@ export const retrievalEvalScope = {
 const manualSource = { type: "manual" as const };
 
 /**
- * Fixed corpus: requestId / result-store vs trace-store probes plus one session-scoped row.
+ * Fixed corpus: requestId / result-store vs trace-store probes, session rows, and a few
+ * project-level distractors that share vocabulary but describe the wrong contract.
  * Importance nudges break ties when keyword + vector + recency align.
  */
 export const retrievalEvalMemoryRecords: readonly MemoryRecord[] = [
@@ -94,6 +95,38 @@ export const retrievalEvalMemoryRecords: readonly MemoryRecord[] = [
     updatedAt: EVAL_CREATED_AT,
   },
   {
+    id: "eval-proj-orchestration-store-tangle",
+    kind: "fact",
+    scope: "project",
+    userId: retrievalEvalScope.userId,
+    projectId: retrievalEvalScope.projectId,
+    containerId: retrievalEvalScope.containerId,
+    source: manualSource,
+    content:
+      "Orchestration durable workflow trace exports are mirrored into a downstream result-shaped store shard for jsonl rehydration pipelines; unrelated to toolkit structured outputs or the canonical debugging log contract.",
+    summary: "",
+    tags: [],
+    importance: 0.41,
+    createdAt: EVAL_CREATED_AT,
+    updatedAt: EVAL_CREATED_AT,
+  },
+  {
+    id: "eval-proj-session-language-residual",
+    kind: "fact",
+    scope: "project",
+    userId: retrievalEvalScope.userId,
+    projectId: retrievalEvalScope.projectId,
+    containerId: retrievalEvalScope.containerId,
+    source: manualSource,
+    content:
+      "Project checklist: session-level requestId rejections should precede result-store writes during generic hardening work (wording overlaps session notes but is project-wide guidance).",
+    summary: "",
+    tags: [],
+    importance: 0.38,
+    createdAt: EVAL_CREATED_AT,
+    updatedAt: EVAL_CREATED_AT,
+  },
+  {
     id: "eval-sess-reqid",
     kind: "fact",
     scope: "session",
@@ -103,10 +136,27 @@ export const retrievalEvalMemoryRecords: readonly MemoryRecord[] = [
     sessionId: retrievalEvalScope.sessionWithNotes,
     source: manualSource,
     content:
-      "Session probe: requestId must be rejected when missing before touching result-store; session-first retrieval should surface this.",
+      "Session probe: requestId must be rejected when missing before touching result-store; requestId hardening precedes writes; session-first retrieval should surface this.",
     summary: "",
     tags: [],
     importance: 0.75,
+    createdAt: EVAL_CREATED_AT,
+    updatedAt: EVAL_CREATED_AT,
+  },
+  {
+    id: "eval-sess-reqid-noise",
+    kind: "fact",
+    scope: "session",
+    userId: retrievalEvalScope.userId,
+    projectId: retrievalEvalScope.projectId,
+    containerId: retrievalEvalScope.containerId,
+    sessionId: retrievalEvalScope.sessionWithNotes,
+    source: manualSource,
+    content:
+      "Per-request identifier validation at the middleware boundary before result-store writes; generic guardrail without session-scoped probe wording.",
+    summary: "",
+    tags: [],
+    importance: 0.52,
     createdAt: EVAL_CREATED_AT,
     updatedAt: EVAL_CREATED_AT,
   },
@@ -162,6 +212,15 @@ export const retrievalEvalSearchCases: readonly RetrievalEvalSearchCase[] = [
   {
     id: "search-session-request-id",
     query: "session probe requestId rejected result-store",
+    mode: "full",
+    scope: "session",
+    sessionId: retrievalEvalScope.sessionWithNotes,
+    limit: 8,
+    expectedTop1: "eval-sess-reqid",
+  },
+  {
+    id: "search-session-probe-beats-reqid-noise",
+    query: "session probe requestId hardening before result-store writes",
     mode: "full",
     scope: "session",
     sessionId: retrievalEvalScope.sessionWithNotes,
