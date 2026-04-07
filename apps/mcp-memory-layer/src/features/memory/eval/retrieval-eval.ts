@@ -227,6 +227,16 @@ export const retrievalEvalSearchCases: readonly RetrievalEvalSearchCase[] = [
     limit: 8,
     expectedTop1: "eval-sess-reqid",
   },
+  {
+    id: "search-store-roles-paraphrase",
+    query:
+      "durable structured workflow outputs downstream tools distinct trace metadata append only canonical jsonl substitute payloads",
+    mode: "full",
+    scope: "project",
+    limit: 8,
+    expectedTop1: "eval-proj-result-store",
+    expectedInTopK: { k: 6, ids: ["eval-proj-result-store", "eval-proj-trace-store"] },
+  },
 ];
 
 export const retrievalEvalContextCases: readonly RetrievalEvalContextCase[] = [
@@ -260,6 +270,23 @@ export const retrievalEvalContextCases: readonly RetrievalEvalContextCase[] = [
     },
     expectedFirstItemId: "eval-proj-result-store",
     contextMustInclude: ["result-store", "durable"],
+  },
+  {
+    id: "context-why-separate-stores-paraphrase",
+    payload: {
+      task:
+        "Why persist durable structured workflow outputs for downstream tools in one place while append-only canonical jsonl handles lifecycle debugging?",
+      mode: "full",
+      userId: retrievalEvalScope.userId,
+      projectId: retrievalEvalScope.projectId,
+      containerId: retrievalEvalScope.containerId,
+      sessionId: retrievalEvalScope.sessionSparse,
+      maxItems: 6,
+      maxChars: 8000,
+    },
+    expectedFirstItemId: "eval-proj-result-store",
+    contextMustInclude: ["downstream tools", "not a substitute"],
+    mustIncludeItemIds: ["eval-proj-result-store", "eval-proj-trace-store"],
   },
 ];
 

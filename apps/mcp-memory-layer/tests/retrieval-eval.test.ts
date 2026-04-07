@@ -56,6 +56,27 @@ describe("evaluateSearchCase", () => {
     expect(evaluateSearchCase(["a", "c", "b"], spec).pass).toBe(false);
     expect(evaluateSearchCase(["a", "c", "b"], spec).topKMisses).toEqual(["b"]);
   });
+
+  it("paraphrase store-distinction search pins result-store at top1 and requires trace-store in top-k", () => {
+    const spec = retrievalEvalSearchCases.find((c) => c.id === "search-store-roles-paraphrase")!;
+
+    expect(spec.expectedInTopK).toEqual({
+      k: 6,
+      ids: ["eval-proj-result-store", "eval-proj-trace-store"],
+    });
+    expect(
+      evaluateSearchCase(
+        [
+          "eval-proj-result-store",
+          "eval-proj-orchestration-store-tangle",
+          "eval-proj-trace-store",
+          "eval-proj-request-id",
+        ],
+        spec,
+      ).pass,
+    ).toBe(true);
+    expect(evaluateSearchCase(["eval-proj-trace-store", "eval-proj-result-store"], spec).pass).toBe(false);
+  });
 });
 
 describe("evaluateContextCase", () => {
@@ -87,6 +108,31 @@ describe("evaluateContextCase", () => {
         {
           context: "Session probe: requestId x",
           items: ["eval-proj-request-id"],
+        },
+        spec,
+      ).pass,
+    ).toBe(false);
+  });
+
+  it("paraphrase two-store rationale context requires anchors from both durable outputs and trace notes", () => {
+    const spec = retrievalEvalContextCases.find((c) => c.id === "context-why-separate-stores-paraphrase")!;
+
+    expect(spec.mustIncludeItemIds).toEqual(["eval-proj-result-store", "eval-proj-trace-store"]);
+    expect(
+      evaluateContextCase(
+        {
+          context:
+            "Task: …\n\nRelevant memories:\n- [decision] orchestration result-store persists … downstream tools …\n- [fact] orchestration trace-store … not a substitute for durable result payloads.",
+          items: ["eval-proj-result-store", "eval-proj-trace-store"],
+        },
+        spec,
+      ).pass,
+    ).toBe(true);
+    expect(
+      evaluateContextCase(
+        {
+          context: "Task: …\n\nRelevant memories:\n- [decision] orchestration result-store persists … downstream tools …",
+          items: ["eval-proj-result-store"],
         },
         spec,
       ).pass,
