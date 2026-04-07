@@ -105,12 +105,15 @@ describe("runOrchestrationWorkflow", () => {
         completedJobs: 1,
         taskIds: ["gemini-1"],
         jobModels: [
-          {
+          expect.objectContaining({
             kind: "gemini",
             taskId: "gemini-1",
             requestedModel: "gemini-3-flash-preview",
             reportedModel: "gemini-3-flash-preview",
-          },
+            status: "completed",
+            retryCount: 0,
+            errorClass: "none",
+          }),
         ],
       }),
     ]);

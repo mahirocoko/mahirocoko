@@ -303,6 +303,7 @@ describe("runSequentialWorkers", () => {
             prompt: "Summarize retrieval flow.",
             model: "gemini-3-flash-preview",
           },
+          retryCount: 0,
           result: expect.objectContaining({
             status: "completed",
             response: "Gemini summary",

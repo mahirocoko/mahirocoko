@@ -348,6 +348,7 @@ describe("runParallelWorkers", () => {
         model: "composer-2",
       },
       status: "runner_failed",
+      retryCount: 0,
       error: "boom",
     });
     expect(parallelRun.timedOut).toBe(false);
