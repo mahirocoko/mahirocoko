@@ -77,6 +77,37 @@ describe("evaluateSearchCase", () => {
     ).toBe(true);
     expect(evaluateSearchCase(["eval-proj-trace-store", "eval-proj-result-store"], spec).pass).toBe(false);
   });
+
+  it("semantic replay gate search expects request-id policy at top1", () => {
+    const spec = retrievalEvalSearchCases.find((c) => c.id === "search-semantic-replay-gate")!;
+
+    expect(spec.expectedInTopK).toBeUndefined();
+    expect(evaluateSearchCase(["eval-proj-request-id", "eval-proj-generic-hardening"], spec).pass).toBe(true);
+    expect(evaluateSearchCase(["eval-proj-generic-hardening", "eval-proj-request-id"], spec).pass).toBe(false);
+  });
+
+  it("semantic execution handoffs vs lifecycle records pins result-store at top1 and trace-store in top-k", () => {
+    const spec = retrievalEvalSearchCases.find(
+      (c) => c.id === "search-semantic-execution-handoffs-vs-lifecycle-records",
+    )!;
+
+    expect(spec.expectedInTopK).toEqual({
+      k: 6,
+      ids: ["eval-proj-result-store", "eval-proj-trace-store"],
+    });
+    expect(
+      evaluateSearchCase(
+        [
+          "eval-proj-result-store",
+          "eval-proj-orchestration-store-tangle",
+          "eval-proj-trace-store",
+          "eval-proj-request-id",
+        ],
+        spec,
+      ).pass,
+    ).toBe(true);
+    expect(evaluateSearchCase(["eval-proj-trace-store", "eval-proj-result-store"], spec).pass).toBe(false);
+  });
 });
 
 describe("evaluateContextCase", () => {
