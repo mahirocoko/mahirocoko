@@ -254,9 +254,13 @@ export interface RetrievalEvalSearchCase {
   readonly mode: RetrievalMode;
   readonly scope: MemoryScope;
   readonly sessionId?: string;
+  /** When set, overrides the eval harness default projectId (e.g. wrong-project empty results). */
+  readonly projectId?: string;
   readonly limit: number;
   readonly expectedTop1: string;
   readonly expectedInTopK?: { readonly k: number; readonly ids: readonly string[] };
+  /** When true, pass iff search returns no items (zero-hit / scoped-empty). */
+  readonly expectEmpty?: boolean;
 }
 
 export interface RetrievalEvalContextCase {
@@ -274,6 +278,8 @@ export interface RetrievalEvalContextCase {
   readonly contextMustExclude?: readonly string[];
   /** Memory ids that must not appear in the built items list. */
   readonly mustExcludeItemIds?: readonly string[];
+  /** When true, pass iff no memory items are included (empty retrieval). */
+  readonly expectEmptyItems?: boolean;
 }
 
 export const retrievalEvalSearchCases: readonly RetrievalEvalSearchCase[] = [
@@ -372,6 +378,58 @@ export const retrievalEvalSearchCases: readonly RetrievalEvalSearchCase[] = [
     limit: 10,
     expectedTop1: "eval-proj-result-store",
   },
+  {
+    id: "search-wrong-project-scope-empty",
+    query: "requestId reject malformed replay hook hardening",
+    mode: "full",
+    scope: "project",
+    projectId: "mcp-memory-layer-eval-missing-project",
+    limit: 8,
+    expectEmpty: true,
+    expectedTop1: "",
+  },
+  {
+    id: "search-session-scope-no-matching-rows",
+    query: "session probe requestId rejected result-store",
+    mode: "full",
+    scope: "session",
+    sessionId: "eval-session-without-memories",
+    limit: 8,
+    expectEmpty: true,
+    expectedTop1: "",
+  },
+];
+
+/** Run only after clearing the Lance table (empty corpus). */
+export const retrievalEvalEmptyTableSearchCases: readonly RetrievalEvalSearchCase[] = [
+  {
+    id: "search-empty-corpus-project-scope",
+    query: "requestId orchestration durable workflow outputs",
+    mode: "full",
+    scope: "project",
+    limit: 8,
+    expectEmpty: true,
+    expectedTop1: "",
+  },
+];
+
+/** Run only after clearing the Lance table (empty corpus). */
+export const retrievalEvalEmptyTableContextCases: readonly RetrievalEvalContextCase[] = [
+  {
+    id: "context-empty-corpus-no-memory-items",
+    payload: {
+      task: "Summarize requestId hardening for the orchestration result store",
+      mode: "full",
+      userId: retrievalEvalScope.userId,
+      projectId: retrievalEvalScope.projectId,
+      containerId: retrievalEvalScope.containerId,
+      maxItems: 6,
+      maxChars: 8000,
+    },
+    expectedFirstItemId: "",
+    expectEmptyItems: true,
+    contextMustInclude: ["Task:", "Relevant memories:"],
+  },
 ];
 
 export const retrievalEvalContextCases: readonly RetrievalEvalContextCase[] = [
@@ -457,6 +515,22 @@ export const retrievalEvalContextCases: readonly RetrievalEvalContextCase[] = [
     mustExcludeItemIds: ["eval-proj-verbose-sandbox-rehearsal"],
     contextMustExclude: ["Sandbox rehearsal note (non-production)"],
   },
+  {
+    id: "context-wrong-project-scope-no-items",
+    payload: {
+      task: "requestId hardening before result-store writes",
+      mode: "full",
+      userId: retrievalEvalScope.userId,
+      projectId: "mcp-memory-layer-eval-missing-project",
+      containerId: retrievalEvalScope.containerId,
+      sessionId: retrievalEvalScope.sessionWithNotes,
+      maxItems: 6,
+      maxChars: 8000,
+    },
+    expectedFirstItemId: "",
+    expectEmptyItems: true,
+    contextMustInclude: ["Task:", "Relevant memories:"],
+  },
 ];
 
 export interface RetrievalEvalSearchCaseResult {
@@ -467,6 +541,8 @@ export interface RetrievalEvalSearchCaseResult {
   readonly rankOfExpected: number;
   readonly topKMisses: readonly string[];
   readonly returnedIds: readonly string[];
+  /** Present when the case asserted zero-hit behavior. */
+  readonly expectEmpty?: boolean;
 }
 
 export interface RetrievalEvalContextCaseResult {
@@ -512,6 +588,10 @@ export function evaluateSearchCase(
   returnedIds: readonly string[],
   spec: RetrievalEvalSearchCase,
 ): { readonly pass: boolean; readonly topKMisses: readonly string[] } {
+  if (spec.expectEmpty) {
+    return { pass: returnedIds.length === 0, topKMisses: [] };
+  }
+
   const top1 = returnedIds[0] ?? null;
   const top1Ok = top1 === spec.expectedTop1;
   const k = spec.expectedInTopK?.k;
@@ -539,7 +619,9 @@ export function evaluateContextCase(
   readonly truncatedMismatch: boolean;
 } {
   const first = result.items[0] ?? null;
-  const firstOk = first === spec.expectedFirstItemId;
+  const firstOk = spec.expectEmptyItems
+    ? result.items.length === 0
+    : first === spec.expectedFirstItemId;
   const missingSubstrings = spec.contextMustInclude.filter((s) => !result.context.includes(s));
   const requiredIds = spec.mustIncludeItemIds ?? [];
   const missingItemIds = requiredIds.filter((id) => !result.items.includes(id));
@@ -591,11 +673,14 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
     await Promise.all([
       mkdir(path.join(root, "traces"), { recursive: true }),
       mkdir(path.join(root, "lancedb"), { recursive: true }),
+      mkdir(path.join(root, "lancedb-empty"), { recursive: true }),
     ]);
 
     const embeddingProvider = new DeterministicEmbeddingProvider(env.embeddingDimensions);
     const connection = await connectToLanceDb(path.join(root, "lancedb"));
     const table = new MemoryRecordsTable(connection);
+    const emptyConnection = await connectToLanceDb(path.join(root, "lancedb-empty"));
+    const emptyTable = new MemoryRecordsTable(emptyConnection);
     const traceStore = new RetrievalTraceStore(path.join(root, "traces", "retrieval-trace.jsonl"));
 
     const rows = await rowsFromRecords(retrievalEvalMemoryRecords, embeddingProvider);
@@ -609,17 +694,54 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
 
     const searchResults: RetrievalEvalSearchCaseResult[] = [];
 
-    for (const spec of retrievalEvalSearchCases) {
+    const runSearchSpec = async (spec: RetrievalEvalSearchCase): Promise<void> => {
       const searchResult = await searchMemories({
         payload: {
           query: spec.query,
           mode: spec.mode,
           scope: spec.scope,
           ...baseScope,
+          ...(spec.projectId ? { projectId: spec.projectId } : {}),
           ...(spec.sessionId ? { sessionId: spec.sessionId } : {}),
           limit: spec.limit,
         },
         table,
+        embeddingProvider,
+        traceStore,
+      });
+
+      const returnedIds = searchResult.items.map((item) => item.id);
+      const { pass, topKMisses } = evaluateSearchCase(returnedIds, spec);
+      const expectEmpty = spec.expectEmpty ?? false;
+
+      searchResults.push({
+        caseId: spec.id,
+        pass,
+        top1: returnedIds[0] ?? null,
+        expectedTop1: expectEmpty ? "" : spec.expectedTop1,
+        rankOfExpected: expectEmpty ? -1 : rankOfId(returnedIds, spec.expectedTop1),
+        topKMisses,
+        returnedIds,
+        ...(expectEmpty ? { expectEmpty: true as const } : {}),
+      });
+    };
+
+    for (const spec of retrievalEvalSearchCases) {
+      await runSearchSpec(spec);
+    }
+
+    for (const spec of retrievalEvalEmptyTableSearchCases) {
+      const searchResult = await searchMemories({
+        payload: {
+          query: spec.query,
+          mode: spec.mode,
+          scope: spec.scope,
+          ...baseScope,
+          ...(spec.projectId ? { projectId: spec.projectId } : {}),
+          ...(spec.sessionId ? { sessionId: spec.sessionId } : {}),
+          limit: spec.limit,
+        },
+        table: emptyTable,
         embeddingProvider,
         traceStore,
       });
@@ -631,16 +753,17 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
         caseId: spec.id,
         pass,
         top1: returnedIds[0] ?? null,
-        expectedTop1: spec.expectedTop1,
-        rankOfExpected: rankOfId(returnedIds, spec.expectedTop1),
+        expectedTop1: "",
+        rankOfExpected: -1,
         topKMisses,
         returnedIds,
+        expectEmpty: true,
       });
     }
 
     const contextResults: RetrievalEvalContextCaseResult[] = [];
 
-    for (const spec of retrievalEvalContextCases) {
+    const runContextSpec = async (spec: RetrievalEvalContextCase): Promise<void> => {
       const built = await buildContextForTask({
         payload: spec.payload,
         table,
@@ -661,7 +784,44 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
         caseId: spec.id,
         pass,
         firstItemId: built.items[0] ?? null,
-        expectedFirstItemId: spec.expectedFirstItemId,
+        expectedFirstItemId: spec.expectEmptyItems ? "" : spec.expectedFirstItemId,
+        missingSubstrings,
+        missingItemIds,
+        forbiddenSubstringsPresent,
+        forbiddenItemIdsPresent,
+        truncatedMismatch,
+        itemIds: [...built.items],
+      });
+    };
+
+    await table.replaceAll(rows);
+
+    for (const spec of retrievalEvalContextCases) {
+      await runContextSpec(spec);
+    }
+
+    for (const spec of retrievalEvalEmptyTableContextCases) {
+      const built = await buildContextForTask({
+        payload: spec.payload,
+        table: emptyTable,
+        embeddingProvider,
+        traceStore,
+      });
+
+      const {
+        pass,
+        missingSubstrings,
+        missingItemIds,
+        forbiddenSubstringsPresent,
+        forbiddenItemIdsPresent,
+        truncatedMismatch,
+      } = evaluateContextCase(built, spec);
+
+      contextResults.push({
+        caseId: spec.id,
+        pass,
+        firstItemId: built.items[0] ?? null,
+        expectedFirstItemId: "",
         missingSubstrings,
         missingItemIds,
         forbiddenSubstringsPresent,
@@ -674,7 +834,7 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
     const finishedAtDate = new Date();
     const searchPassed = searchResults.filter((r) => r.pass).length;
     const contextPassed = contextResults.filter((r) => r.pass).length;
-    const searchTop1Hits = searchResults.filter((r) => r.top1 === r.expectedTop1).length;
+    const searchTop1Hits = searchResults.filter((r) => (r.expectEmpty ? r.pass : r.top1 === r.expectedTop1)).length;
 
     const summary: RetrievalEvalSummary = {
       searchCasesTotal: searchResults.length,
@@ -714,8 +874,9 @@ export function formatRetrievalEvalAsText(result: RetrievalEvalOkResult): string
   ];
 
   for (const row of result.search) {
+    const expectedLabel = row.expectEmpty ? "∅" : row.expectedTop1;
     lines.push(
-      `  ${row.pass ? "ok" : "FAIL"} ${row.caseId} top1=${row.top1 ?? "∅"} expected=${row.expectedTop1} rank=${row.rankOfExpected}`,
+      `  ${row.pass ? "ok" : "FAIL"} ${row.caseId} top1=${row.top1 ?? "∅"} expected=${expectedLabel} rank=${row.rankOfExpected}`,
     );
 
     if (row.topKMisses.length > 0) {
@@ -726,8 +887,9 @@ export function formatRetrievalEvalAsText(result: RetrievalEvalOkResult): string
   lines.push("", "context cases:");
 
   for (const row of result.context) {
+    const expectedFirst = row.expectedFirstItemId === "" ? "∅" : row.expectedFirstItemId;
     lines.push(
-      `  ${row.pass ? "ok" : "FAIL"} ${row.caseId} first=${row.firstItemId ?? "∅"} expected=${row.expectedFirstItemId}`,
+      `  ${row.pass ? "ok" : "FAIL"} ${row.caseId} first=${row.firstItemId ?? "∅"} expected=${expectedFirst}`,
     );
 
     if (row.missingSubstrings.length > 0) {

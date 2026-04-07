@@ -119,6 +119,14 @@ describe("evaluateSearchCase", () => {
     expect(evaluateSearchCase(["eval-proj-result-store", "eval-proj-verbose-sandbox-rehearsal"], spec).pass).toBe(true);
     expect(evaluateSearchCase(["eval-proj-verbose-sandbox-rehearsal", "eval-proj-result-store"], spec).pass).toBe(false);
   });
+
+  it("expectEmpty passes only when no ids are returned", () => {
+    const spec = retrievalEvalSearchCases.find((c) => c.id === "search-wrong-project-scope-empty")!;
+
+    expect(spec.expectEmpty).toBe(true);
+    expect(evaluateSearchCase([], spec).pass).toBe(true);
+    expect(evaluateSearchCase(["eval-proj-request-id"], spec).pass).toBe(false);
+  });
 });
 
 describe("evaluateContextCase", () => {
@@ -301,5 +309,32 @@ describe("evaluateContextCase", () => {
         forbiddenItemIdsPresent: ["eval-proj-verbose-sandbox-rehearsal"],
       }),
     );
+  });
+
+  it("expectEmptyItems passes when there are no memory ids and required substrings match", () => {
+    const spec = retrievalEvalContextCases.find((c) => c.id === "context-wrong-project-scope-no-items")!;
+
+    expect(spec.expectEmptyItems).toBe(true);
+    expect(
+      evaluateContextCase(
+        {
+          context: "Task: x\n\nRelevant memories:\n",
+          items: [],
+          truncated: false,
+        },
+        spec,
+      ).pass,
+    ).toBe(true);
+
+    expect(
+      evaluateContextCase(
+        {
+          context: "Task: x\n\nRelevant memories:\n",
+          items: ["eval-proj-request-id"],
+          truncated: false,
+        },
+        spec,
+      ).pass,
+    ).toBe(false);
   });
 });
