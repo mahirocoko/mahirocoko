@@ -40,7 +40,7 @@ export const retrievalEvalMemoryRecords: readonly MemoryRecord[] = [
     containerId: retrievalEvalScope.containerId,
     source: manualSource,
     content:
-      "requestId hardening: reject payloads when request_id is missing, malformed, or replayed; hooks validate before result-store writes.",
+      "requestId hardening: reject payloads when request_id is missing, malformed, or replayed; hooks validate before result-store writes. Status polling must target the correct run after write gating.",
     summary: "",
     tags: [],
     importance: 0.92,
@@ -71,7 +71,7 @@ export const retrievalEvalMemoryRecords: readonly MemoryRecord[] = [
     containerId: retrievalEvalScope.containerId,
     source: manualSource,
     content:
-      "orchestration result-store persists durable workflow outputs (structured results) for downstream tools; distinct from trace metadata.",
+      "orchestration result-store persists durable workflow outputs (structured results) for downstream tools; distinct from trace metadata. Integrators consume structured workflow artifacts via this handoff path.",
     summary: "",
     tags: [],
     importance: 0.88,
@@ -87,7 +87,7 @@ export const retrievalEvalMemoryRecords: readonly MemoryRecord[] = [
     containerId: retrievalEvalScope.containerId,
     source: manualSource,
     content:
-      "orchestration trace-store is append-only canonical jsonl for lifecycle/debugging; not a substitute for durable result payloads.",
+      "orchestration trace-store is append-only canonical jsonl for lifecycle/debugging; not a substitute for durable result payloads. Failure review and engineering inspection use this record stream.",
     summary: "",
     tags: [],
     importance: 0.5,
@@ -231,6 +231,25 @@ export const retrievalEvalSearchCases: readonly RetrievalEvalSearchCase[] = [
     id: "search-store-roles-paraphrase",
     query:
       "durable structured workflow outputs downstream tools distinct trace metadata append only canonical jsonl substitute payloads",
+    mode: "full",
+    scope: "project",
+    limit: 8,
+    expectedTop1: "eval-proj-result-store",
+    expectedInTopK: { k: 6, ids: ["eval-proj-result-store", "eval-proj-trace-store"] },
+  },
+  {
+    id: "search-semantic-replay-gate",
+    query:
+      "hook validation must precede durable writes when orchestration traffic looks malformed or replayed so polling cannot attach to the wrong run",
+    mode: "full",
+    scope: "project",
+    limit: 8,
+    expectedTop1: "eval-proj-request-id",
+  },
+  {
+    id: "search-semantic-execution-handoffs-vs-lifecycle-records",
+    query:
+      "structured downstream workflow artifacts for integrators are not the append-only orchestration records kept for lifecycle debugging and failure review",
     mode: "full",
     scope: "project",
     limit: 8,
