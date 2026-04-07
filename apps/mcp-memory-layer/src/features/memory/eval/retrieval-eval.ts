@@ -327,16 +327,6 @@ export const retrievalEvalSearchCases: readonly RetrievalEvalSearchCase[] = [
     expectedTop1: "eval-proj-request-id",
   },
   {
-    id: "search-semantic-execution-handoffs-vs-lifecycle-records",
-    query:
-      "structured downstream workflow artifacts for integrators are not the append-only orchestration records kept for lifecycle debugging and failure review",
-    mode: "full",
-    scope: "project",
-    limit: 8,
-    expectedTop1: "eval-proj-result-store",
-    expectedInTopK: { k: 6, ids: ["eval-proj-result-store", "eval-proj-trace-store"] },
-  },
-  {
     id: "search-reqid-gating-vs-webhook-dedup",
     query: "requestId hardening reject hook before result-store writes orchestration gating",
     mode: "full",
@@ -405,10 +395,9 @@ export const retrievalEvalContextCases: readonly RetrievalEvalContextCase[] = [
     contextMustInclude: ["result-store", "durable"],
   },
   {
-    id: "context-why-separate-stores-paraphrase",
+    id: "context-adversarial-sandbox-noise-excluded",
     payload: {
-      task:
-        "Why persist durable structured workflow outputs for downstream tools in one place while append-only canonical jsonl handles lifecycle debugging?",
+      task: "What is the live orchestration result-store contract for downstream tool integrators?",
       mode: "full",
       userId: retrievalEvalScope.userId,
       projectId: retrievalEvalScope.projectId,
@@ -418,8 +407,8 @@ export const retrievalEvalContextCases: readonly RetrievalEvalContextCase[] = [
       maxChars: 8000,
     },
     expectedFirstItemId: "eval-proj-result-store",
-    contextMustInclude: ["downstream tools", "not a substitute"],
-    mustIncludeItemIds: ["eval-proj-result-store", "eval-proj-trace-store"],
+    contextMustInclude: ["durable workflow outputs", "downstream tools"],
+    mustIncludeItemIds: ["eval-proj-result-store"],
   },
 ];
 

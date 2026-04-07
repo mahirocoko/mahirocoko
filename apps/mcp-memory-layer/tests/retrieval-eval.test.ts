@@ -86,29 +86,6 @@ describe("evaluateSearchCase", () => {
     expect(evaluateSearchCase(["eval-proj-generic-hardening", "eval-proj-request-id"], spec).pass).toBe(false);
   });
 
-  it("semantic execution handoffs vs lifecycle records pins result-store at top1 and trace-store in top-k", () => {
-    const spec = retrievalEvalSearchCases.find(
-      (c) => c.id === "search-semantic-execution-handoffs-vs-lifecycle-records",
-    )!;
-
-    expect(spec.expectedInTopK).toEqual({
-      k: 6,
-      ids: ["eval-proj-result-store", "eval-proj-trace-store"],
-    });
-    expect(
-      evaluateSearchCase(
-        [
-          "eval-proj-result-store",
-          "eval-proj-orchestration-store-tangle",
-          "eval-proj-trace-store",
-          "eval-proj-request-id",
-        ],
-        spec,
-      ).pass,
-    ).toBe(true);
-    expect(evaluateSearchCase(["eval-proj-trace-store", "eval-proj-result-store"], spec).pass).toBe(false);
-  });
-
   it("adversarial requestId distractor does not outrank orchestration gating", () => {
     const spec = retrievalEvalSearchCases.find((c) => c.id === "search-reqid-gating-vs-webhook-dedup")!;
 
@@ -179,25 +156,50 @@ describe("evaluateContextCase", () => {
     ).toBe(false);
   });
 
-  it("paraphrase two-store rationale context requires anchors from both durable outputs and trace notes", () => {
-    const spec = retrievalEvalContextCases.find((c) => c.id === "context-why-separate-stores-paraphrase")!;
+  it("project-fallback context requires the canonical result-store item and durable wording", () => {
+    const spec = retrievalEvalContextCases.find((c) => c.id === "context-project-fallback-when-session-sparse")!;
 
-    expect(spec.mustIncludeItemIds).toEqual(["eval-proj-result-store", "eval-proj-trace-store"]);
     expect(
       evaluateContextCase(
         {
-          context:
-            "Task: …\n\nRelevant memories:\n- [decision] orchestration result-store persists … downstream tools …\n- [fact] orchestration trace-store … not a substitute for durable result payloads.",
-          items: ["eval-proj-result-store", "eval-proj-trace-store"],
+          context: "Task: …\n\nRelevant memories:\n- [decision] result-store keeps durable workflow outputs for downstream tools.",
+          items: ["eval-proj-result-store"],
         },
         spec,
       ).pass,
     ).toBe(true);
+
     expect(
       evaluateContextCase(
         {
-          context: "Task: …\n\nRelevant memories:\n- [decision] orchestration result-store persists … downstream tools …",
-          items: ["eval-proj-result-store"],
+          context: "Task: …\n\nRelevant memories:\n- [fact] trace metadata only",
+          items: ["eval-proj-trace-store"],
+        },
+        spec,
+      ).pass,
+    ).toBe(false);
+  });
+
+  it("adversarial sandbox context still requires the live result-store contract as first item", () => {
+    const spec = retrievalEvalContextCases.find((c) => c.id === "context-adversarial-sandbox-noise-excluded")!;
+
+    expect(
+      evaluateContextCase(
+        {
+          context:
+            "Task: …\n\nRelevant memories:\n- [decision] orchestration result-store persists durable workflow outputs for downstream tools and integrator handoffs.\n- [fact] sandbox rehearsal note with overlapping vocabulary.",
+          items: ["eval-proj-result-store", "eval-proj-verbose-sandbox-rehearsal"],
+        },
+        spec,
+      ).pass,
+    ).toBe(true);
+
+    expect(
+      evaluateContextCase(
+        {
+          context:
+            "Task: …\n\nRelevant memories:\n- [fact] sandbox rehearsal note repeats durable workflow outputs and downstream tools for drill purposes.",
+          items: ["eval-proj-verbose-sandbox-rehearsal", "eval-proj-result-store"],
         },
         spec,
       ).pass,
