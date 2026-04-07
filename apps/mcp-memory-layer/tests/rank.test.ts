@@ -1,6 +1,36 @@
 import { describe, expect, it } from "vitest";
 
-import { scoreCombined, weightsForMode } from "../src/features/memory/retrieval/rank.js";
+import {
+  evaluateKeywordMatch,
+  scoreCombined,
+  scoreKeywordMatch,
+  weightsForMode,
+} from "../src/features/memory/retrieval/rank.js";
+import type { RetrievalRow } from "../src/features/memory/types.js";
+
+function textRow(content: string, summary = "", tags = "[]"): RetrievalRow {
+  return {
+    id: "mem-test",
+    content,
+    summary,
+    embedding: [],
+    kind: "fact",
+    scope: "project",
+    userId: "",
+    projectId: "",
+    containerId: "",
+    sessionId: "",
+    importance: 0.5,
+    createdAt: "2026-01-01T00:00:00.000Z",
+    updatedAt: "2026-01-01T00:00:00.000Z",
+    sourceType: "manual",
+    sourceUri: "",
+    sourceTitle: "",
+    tags,
+    embeddingVersion: "",
+    indexVersion: "v0",
+  };
+}
 
 describe("retrieval rank helpers", () => {
   it("applies weight profiles correctly", () => {
@@ -33,5 +63,33 @@ describe("retrieval rank helpers", () => {
       '{"keyword":0.35,"vector":0.3,"recency":0.2,"importance":0.15}',
       '{"keyword":0.2,"vector":0.15,"recency":0.55,"importance":0.1}',
     ]);
+  });
+
+  it("treats camelCase query tokens as matching snake_case / spaced identifiers in content", () => {
+    const row = textRow("We validate request_id on every inbound hook before persistence.");
+    const identifierScore = scoreKeywordMatch(row, "requestId hardening");
+    const genericScore = scoreKeywordMatch(
+      textRow("General API safeguards without identifier talk."),
+      "requestId hardening",
+    );
+
+    expect(identifierScore).toBeGreaterThanOrEqual(0.5);
+    expect(identifierScore).toBeGreaterThan(genericScore);
+  });
+
+  it("ranks in-order multi-token mentions above same tokens scattered (tie-break)", () => {
+    const query = "store split rationale";
+    const ordered = evaluateKeywordMatch(
+      textRow("We chose a store split; the rationale was failure-domain isolation."),
+      query,
+    );
+    const scattered = evaluateKeywordMatch(
+      textRow("Split the batch first. Store results separately. Rationale lives in the wiki."),
+      query,
+    );
+
+    expect(ordered.scoreForFusion).toBe(1);
+    expect(scattered.scoreForFusion).toBe(1);
+    expect(ordered.tieBreak).toBeGreaterThan(scattered.tieBreak);
   });
 });
