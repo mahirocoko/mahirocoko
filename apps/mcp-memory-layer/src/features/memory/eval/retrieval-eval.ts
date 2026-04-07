@@ -10,7 +10,13 @@ import { connectToLanceDb } from "../index/lancedb-client.js";
 import { MemoryRecordsTable } from "../index/memory-records-table.js";
 import { RetrievalTraceStore } from "../observability/retrieval-trace.js";
 import { toRetrievalRow } from "../retrieval/rank.js";
-import type { BuildContextForTaskInput, MemoryRecord, RetrievalMode, MemoryScope } from "../types.js";
+import type {
+  BuildContextForTaskInput,
+  BuildContextForTaskResult,
+  MemoryRecord,
+  RetrievalMode,
+  MemoryScope,
+} from "../types.js";
 
 /** Shared timestamp so within-run recency contributions match across all seeded rows (ties broken by keyword/vector/importance). */
 const EVAL_CREATED_AT = "2026-04-01T12:00:00.000Z";
@@ -262,6 +268,12 @@ export interface RetrievalEvalContextCase {
   readonly contextMustInclude: readonly string[];
   /** Optional: second id must appear when session + project both contribute. */
   readonly mustIncludeItemIds?: readonly string[];
+  /** When set, built `truncated` must equal this (maxChars / item budget probes). */
+  readonly expectTruncated?: boolean;
+  /** Substrings that must not appear in built context. */
+  readonly contextMustExclude?: readonly string[];
+  /** Memory ids that must not appear in the built items list. */
+  readonly mustExcludeItemIds?: readonly string[];
 }
 
 export const retrievalEvalSearchCases: readonly RetrievalEvalSearchCase[] = [
@@ -410,6 +422,41 @@ export const retrievalEvalContextCases: readonly RetrievalEvalContextCase[] = [
     contextMustInclude: ["durable workflow outputs", "downstream tools"],
     mustIncludeItemIds: ["eval-proj-result-store"],
   },
+  {
+    id: "context-tight-maxchars-only-top-item",
+    payload: {
+      task: "requestId hardening and session probe before result-store writes",
+      mode: "full",
+      userId: retrievalEvalScope.userId,
+      projectId: retrievalEvalScope.projectId,
+      containerId: retrievalEvalScope.containerId,
+      sessionId: retrievalEvalScope.sessionWithNotes,
+      maxItems: 6,
+      maxChars: 320,
+    },
+    expectedFirstItemId: "eval-sess-reqid",
+    contextMustInclude: ["Session probe:", "requestId"],
+    expectTruncated: true,
+    mustExcludeItemIds: ["eval-proj-request-id"],
+  },
+  {
+    id: "context-maxchars-drops-verbose-sandbox-distractor",
+    payload: {
+      task: "What is the live orchestration result-store contract for downstream tool integrators?",
+      mode: "full",
+      userId: retrievalEvalScope.userId,
+      projectId: retrievalEvalScope.projectId,
+      containerId: retrievalEvalScope.containerId,
+      sessionId: retrievalEvalScope.sessionSparse,
+      maxItems: 10,
+      maxChars: 380,
+    },
+    expectedFirstItemId: "eval-proj-result-store",
+    contextMustInclude: ["durable workflow outputs"],
+    expectTruncated: true,
+    mustExcludeItemIds: ["eval-proj-verbose-sandbox-rehearsal"],
+    contextMustExclude: ["Sandbox rehearsal note (non-production)"],
+  },
 ];
 
 export interface RetrievalEvalSearchCaseResult {
@@ -429,6 +476,9 @@ export interface RetrievalEvalContextCaseResult {
   readonly expectedFirstItemId: string;
   readonly missingSubstrings: readonly string[];
   readonly missingItemIds: readonly string[];
+  readonly forbiddenSubstringsPresent: readonly string[];
+  readonly forbiddenItemIdsPresent: readonly string[];
+  readonly truncatedMismatch: boolean;
   readonly itemIds: readonly string[];
 }
 
@@ -478,23 +528,41 @@ export function evaluateSearchCase(
 }
 
 export function evaluateContextCase(
-  result: { readonly context: string; readonly items: readonly string[] },
+  result: Pick<BuildContextForTaskResult, "context" | "items" | "truncated">,
   spec: RetrievalEvalContextCase,
 ): {
   readonly pass: boolean;
   readonly missingSubstrings: readonly string[];
   readonly missingItemIds: readonly string[];
+  readonly forbiddenSubstringsPresent: readonly string[];
+  readonly forbiddenItemIdsPresent: readonly string[];
+  readonly truncatedMismatch: boolean;
 } {
   const first = result.items[0] ?? null;
   const firstOk = first === spec.expectedFirstItemId;
   const missingSubstrings = spec.contextMustInclude.filter((s) => !result.context.includes(s));
   const requiredIds = spec.mustIncludeItemIds ?? [];
   const missingItemIds = requiredIds.filter((id) => !result.items.includes(id));
+  const forbiddenSubs = spec.contextMustExclude ?? [];
+  const forbiddenSubstringsPresent = forbiddenSubs.filter((s) => result.context.includes(s));
+  const forbiddenIds = spec.mustExcludeItemIds ?? [];
+  const forbiddenItemIdsPresent = forbiddenIds.filter((id) => result.items.includes(id));
+  const truncatedMismatch =
+    spec.expectTruncated !== undefined && result.truncated !== spec.expectTruncated;
 
   return {
-    pass: firstOk && missingSubstrings.length === 0 && missingItemIds.length === 0,
+    pass:
+      firstOk &&
+      missingSubstrings.length === 0 &&
+      missingItemIds.length === 0 &&
+      forbiddenSubstringsPresent.length === 0 &&
+      forbiddenItemIdsPresent.length === 0 &&
+      !truncatedMismatch,
     missingSubstrings,
     missingItemIds,
+    forbiddenSubstringsPresent,
+    forbiddenItemIdsPresent,
+    truncatedMismatch,
   };
 }
 
@@ -580,7 +648,14 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
         traceStore,
       });
 
-      const { pass, missingSubstrings, missingItemIds } = evaluateContextCase(built, spec);
+      const {
+        pass,
+        missingSubstrings,
+        missingItemIds,
+        forbiddenSubstringsPresent,
+        forbiddenItemIdsPresent,
+        truncatedMismatch,
+      } = evaluateContextCase(built, spec);
 
       contextResults.push({
         caseId: spec.id,
@@ -589,6 +664,9 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
         expectedFirstItemId: spec.expectedFirstItemId,
         missingSubstrings,
         missingItemIds,
+        forbiddenSubstringsPresent,
+        forbiddenItemIdsPresent,
+        truncatedMismatch,
         itemIds: [...built.items],
       });
     }
@@ -658,6 +736,18 @@ export function formatRetrievalEvalAsText(result: RetrievalEvalOkResult): string
 
     if (row.missingItemIds.length > 0) {
       lines.push(`    missing item ids: ${row.missingItemIds.join(", ")}`);
+    }
+
+    if (row.forbiddenSubstringsPresent.length > 0) {
+      lines.push(`    forbidden substrings present: ${row.forbiddenSubstringsPresent.join(" | ")}`);
+    }
+
+    if (row.forbiddenItemIdsPresent.length > 0) {
+      lines.push(`    forbidden item ids present: ${row.forbiddenItemIdsPresent.join(", ")}`);
+    }
+
+    if (row.truncatedMismatch) {
+      lines.push("    truncated flag did not match expectTruncated");
     }
   }
 

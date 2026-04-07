@@ -130,6 +130,7 @@ describe("evaluateContextCase", () => {
         {
           context: "Session probe: requestId x",
           items: ["eval-sess-reqid", "eval-proj-request-id"],
+          truncated: false,
         },
         spec,
       ).pass,
@@ -140,6 +141,7 @@ describe("evaluateContextCase", () => {
         {
           context: "missing",
           items: ["eval-sess-reqid", "eval-proj-request-id"],
+          truncated: false,
         },
         spec,
       ).pass,
@@ -150,6 +152,7 @@ describe("evaluateContextCase", () => {
         {
           context: "Session probe: requestId x",
           items: ["eval-proj-request-id"],
+          truncated: false,
         },
         spec,
       ).pass,
@@ -164,6 +167,7 @@ describe("evaluateContextCase", () => {
         {
           context: "Task: …\n\nRelevant memories:\n- [decision] result-store keeps durable workflow outputs for downstream tools.",
           items: ["eval-proj-result-store"],
+          truncated: false,
         },
         spec,
       ).pass,
@@ -174,6 +178,7 @@ describe("evaluateContextCase", () => {
         {
           context: "Task: …\n\nRelevant memories:\n- [fact] trace metadata only",
           items: ["eval-proj-trace-store"],
+          truncated: false,
         },
         spec,
       ).pass,
@@ -189,6 +194,7 @@ describe("evaluateContextCase", () => {
           context:
             "Task: …\n\nRelevant memories:\n- [decision] orchestration result-store persists durable workflow outputs for downstream tools and integrator handoffs.\n- [fact] sandbox rehearsal note with overlapping vocabulary.",
           items: ["eval-proj-result-store", "eval-proj-verbose-sandbox-rehearsal"],
+          truncated: false,
         },
         spec,
       ).pass,
@@ -200,9 +206,100 @@ describe("evaluateContextCase", () => {
           context:
             "Task: …\n\nRelevant memories:\n- [fact] sandbox rehearsal note repeats durable workflow outputs and downstream tools for drill purposes.",
           items: ["eval-proj-verbose-sandbox-rehearsal", "eval-proj-result-store"],
+          truncated: false,
         },
         spec,
       ).pass,
     ).toBe(false);
+  });
+
+  it("enforces expectTruncated and excluded ids / substrings", () => {
+    const tight = retrievalEvalContextCases.find((c) => c.id === "context-tight-maxchars-only-top-item")!;
+    const maxCharsCase = retrievalEvalContextCases.find(
+      (c) => c.id === "context-maxchars-drops-verbose-sandbox-distractor",
+    )!;
+
+    expect(
+      evaluateContextCase(
+        {
+          context: "Session probe: requestId ok",
+          items: ["eval-sess-reqid"],
+          truncated: true,
+        },
+        tight,
+      ).pass,
+    ).toBe(true);
+
+    expect(
+      evaluateContextCase(
+        {
+          context: "Session probe: requestId ok",
+          items: ["eval-sess-reqid", "eval-proj-request-id"],
+          truncated: true,
+        },
+        tight,
+      ).pass,
+    ).toBe(false);
+
+    expect(
+      evaluateContextCase(
+        {
+          context: "Session probe: requestId ok",
+          items: ["eval-sess-reqid"],
+          truncated: false,
+        },
+        tight,
+      ),
+    ).toEqual(
+      expect.objectContaining({
+        pass: false,
+        truncatedMismatch: true,
+        forbiddenItemIdsPresent: [],
+        forbiddenSubstringsPresent: [],
+      }),
+    );
+
+    expect(
+      evaluateContextCase(
+        {
+          context: "durable workflow outputs only",
+          items: ["eval-proj-result-store"],
+          truncated: true,
+        },
+        maxCharsCase,
+      ).pass,
+    ).toBe(true);
+
+    expect(
+      evaluateContextCase(
+        {
+          context: "durable workflow outputs\nSandbox rehearsal note (non-production):",
+          items: ["eval-proj-result-store"],
+          truncated: true,
+        },
+        maxCharsCase,
+      ),
+    ).toEqual(
+      expect.objectContaining({
+        pass: false,
+        forbiddenSubstringsPresent: ["Sandbox rehearsal note (non-production)"],
+      }),
+    );
+
+    expect(
+      evaluateContextCase(
+        {
+          context: "durable workflow outputs",
+          items: ["eval-proj-result-store", "eval-proj-verbose-sandbox-rehearsal"],
+          truncated: true,
+        },
+        maxCharsCase,
+      ),
+    ).toEqual(
+      expect.objectContaining({
+        pass: false,
+        forbiddenItemIdsPresent: ["eval-proj-verbose-sandbox-rehearsal"],
+      }),
+    );
   });
 });
