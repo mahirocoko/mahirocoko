@@ -122,6 +122,26 @@ describe("evaluateSearchCase", () => {
     expect(evaluateSearchCase(["eval-proj-result-store", "eval-proj-result-archive-distractor"], spec).pass).toBe(true);
     expect(evaluateSearchCase(["eval-proj-result-archive-distractor", "eval-proj-result-store"], spec).pass).toBe(false);
   });
+
+  it("same-topic embedding cache invalidation outranks cache reuse policy for staleness query", () => {
+    const spec = retrievalEvalSearchCases.find(
+      (c) => c.id === "search-same-topic-embedding-cache-invalidation-beats-reuse",
+    )!;
+
+    expect(evaluateSearchCase(["eval-proj-embedding-cache-invalidation", "eval-proj-embedding-cache-hit"], spec).pass).toBe(
+      true,
+    );
+    expect(evaluateSearchCase(["eval-proj-embedding-cache-hit", "eval-proj-embedding-cache-invalidation"], spec).pass).toBe(
+      false,
+    );
+  });
+
+  it("long noisy sandbox rehearsal doc does not outrank canonical result-store contract", () => {
+    const spec = retrievalEvalSearchCases.find((c) => c.id === "search-long-noisy-sandbox-doc-vs-result-store-contract")!;
+
+    expect(evaluateSearchCase(["eval-proj-result-store", "eval-proj-verbose-sandbox-rehearsal"], spec).pass).toBe(true);
+    expect(evaluateSearchCase(["eval-proj-verbose-sandbox-rehearsal", "eval-proj-result-store"], spec).pass).toBe(false);
+  });
 });
 
 describe("evaluateContextCase", () => {

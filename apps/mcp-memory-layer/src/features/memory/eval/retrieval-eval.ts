@@ -192,6 +192,54 @@ export const retrievalEvalMemoryRecords: readonly MemoryRecord[] = [
     createdAt: EVAL_CREATED_AT,
     updatedAt: EVAL_CREATED_AT,
   },
+  {
+    id: "eval-proj-embedding-cache-invalidation",
+    kind: "decision",
+    scope: "project",
+    userId: retrievalEvalScope.userId,
+    projectId: retrievalEvalScope.projectId,
+    containerId: retrievalEvalScope.containerId,
+    source: manualSource,
+    content:
+      "Embedding cache invalidation: after prompt-template edits, prior cached embedding rows are stale; retrieval fusion must not treat those vectors as trustworthy for the same task kind across template generations.",
+    summary: "",
+    tags: [],
+    importance: 0.87,
+    createdAt: EVAL_CREATED_AT,
+    updatedAt: EVAL_CREATED_AT,
+  },
+  {
+    id: "eval-proj-embedding-cache-hit",
+    kind: "fact",
+    scope: "project",
+    userId: retrievalEvalScope.userId,
+    projectId: retrievalEvalScope.projectId,
+    containerId: retrievalEvalScope.containerId,
+    source: manualSource,
+    content:
+      "Embedding cache hits: reuse cached vectors when task kind, routed prompt hash, explicit model name, and cwd match; avoids duplicate embed RPC for identical retrieval keys.",
+    summary: "",
+    tags: [],
+    importance: 0.84,
+    createdAt: EVAL_CREATED_AT,
+    updatedAt: EVAL_CREATED_AT,
+  },
+  {
+    id: "eval-proj-verbose-sandbox-rehearsal",
+    kind: "fact",
+    scope: "project",
+    userId: retrievalEvalScope.userId,
+    projectId: retrievalEvalScope.projectId,
+    containerId: retrievalEvalScope.containerId,
+    source: manualSource,
+    content:
+      "Sandbox rehearsal note (non-production): teams often walk through durable workflow outputs, structured results, downstream tools, integrators, handoff paths, trace metadata, and lifecycle logging while preparing QA checklists. During rehearsal, engineers repeat phrases about durable workflow outputs and structured results for downstream tools, compare trace metadata side notes with integrator-facing handoff paths, and rehearse how downstream tools might skim structured results even though this paragraph is explicitly about dry-run practice rather than the live orchestration contract. The rehearsal script mentions durable workflow outputs again, downstream tools again, structured results again, trace metadata again, and integrator handoff vocabulary again to simulate noisy meeting minutes. None of this substitutes for reading the canonical orchestration plane design notes: it is intentionally verbose padding so lexical overlap stays high while the described intent remains sandbox-only drill documentation.",
+    summary: "",
+    tags: [],
+    importance: 0.42,
+    createdAt: EVAL_CREATED_AT,
+    updatedAt: EVAL_CREATED_AT,
+  },
 ];
 
 export interface RetrievalEvalSearchCase {
@@ -299,6 +347,24 @@ export const retrievalEvalSearchCases: readonly RetrievalEvalSearchCase[] = [
   {
     id: "search-live-handoff-vs-archival-mirror",
     query: "durable structured workflow outputs result store downstream tools integrators consume",
+    mode: "full",
+    scope: "project",
+    limit: 10,
+    expectedTop1: "eval-proj-result-store",
+  },
+  {
+    id: "search-same-topic-embedding-cache-invalidation-beats-reuse",
+    query:
+      "prompt template edits stale cached embedding rows retrieval fusion must not treat vectors trustworthy same task kind across template generations",
+    mode: "full",
+    scope: "project",
+    limit: 10,
+    expectedTop1: "eval-proj-embedding-cache-invalidation",
+  },
+  {
+    id: "search-long-noisy-sandbox-doc-vs-result-store-contract",
+    query:
+      "orchestration result-store persists durable workflow outputs structured results downstream tools distinct trace metadata integrators consume handoff path",
     mode: "full",
     scope: "project",
     limit: 10,
