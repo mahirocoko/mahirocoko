@@ -120,6 +120,7 @@ describe("getRegisteredOrchestrationTools", () => {
         ],
       },
       cwd: "/tmp/project",
+      waitForCompletion: true,
     });
 
     expect(runOrchestrationWorkflowMock).toHaveBeenCalledTimes(1);
@@ -224,7 +225,7 @@ describe("getRegisteredOrchestrationTools", () => {
     expect(orchestrationResultStoreMock.writeCompleted).toHaveBeenCalledTimes(1);
   });
 
-  it("auto-switches risky workflows to async when waitForCompletion is omitted", async () => {
+  it("defaults omitted waitForCompletion to async execution", async () => {
     let resolveRun: ((value: Awaited<ReturnType<typeof runOrchestrationWorkflow>>) => void) | undefined;
 
     vi.mocked(runOrchestrationWorkflow).mockImplementationOnce(
@@ -242,10 +243,10 @@ describe("getRegisteredOrchestrationTools", () => {
         mode: "parallel",
         jobs: [
           {
-            kind: "cursor",
+            kind: "gemini",
             input: {
-              prompt: "Review this repo.",
-              model: "composer-2",
+              prompt: "Summarize this repo.",
+              model: "gemini-3-flash-preview",
             },
           },
         ],
