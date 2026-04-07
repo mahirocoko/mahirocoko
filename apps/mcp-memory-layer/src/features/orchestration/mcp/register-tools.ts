@@ -1,5 +1,5 @@
 import { getAppEnv } from "../../../config/env.js";
-import { newId } from "../../../lib/ids.js";
+import { newId, WORKFLOW_REQUEST_ID_PATTERN } from "../../../lib/ids.js";
 import type { RegisteredTool } from "../../../lib/mcp/registered-tool.js";
 import { z } from "zod";
 import { listOrchestrationTraces } from "../observability/list-orchestration-traces.js";
@@ -11,7 +11,10 @@ import { listOrchestrationTracesInputSchema } from "../schemas.js";
 import { normalizeWorkflowSpec, orchestrateToolInputSchema } from "../workflow-spec.js";
 
 const getOrchestrationResultInputSchema = z.object({
-  requestId: z.string().trim().min(1),
+  requestId: z
+    .string()
+    .trim()
+    .regex(WORKFLOW_REQUEST_ID_PATTERN, "requestId must be the workflow_* id returned by orchestrate_workflow"),
 });
 
 export function getRegisteredOrchestrationTools(): readonly RegisteredTool[] {
