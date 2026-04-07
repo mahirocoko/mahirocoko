@@ -206,6 +206,12 @@ Trace artifact:
 - orchestration runs append JSONL entries to `data/traces/orchestration-trace.jsonl`
 - trace entries include workflow mode, status, job kinds, task IDs, summary counts, source (`cli` or `mcp`), and per-finished-job `jobModels` with `requestedModel` / optional `reportedModel` for Gemini and Cursor jobs (older lines may omit `jobModels`)
 
+Result store vs trace store:
+
+- `data/traces/orchestration-results/*.json` is the request-scoped result store used by `get_orchestration_result` and keeps the latest polling state for a single `requestId`
+- `data/traces/orchestration-trace.jsonl` is the append-only telemetry log used by `list_orchestration_traces` and usage summaries
+- the stores stay separate on purpose: polling needs mutable latest-state records, while observability needs historical append-only entries for forensic inspection and aggregation
+
 Parallel workflow fields:
 
 - `maxConcurrency` -> optional positive integer limit for how many parallel jobs run at once
