@@ -30,8 +30,7 @@ export function getRegisteredOrchestrationTools(): readonly RegisteredTool[] {
         const requestId = newId("workflow");
         const spec = normalizeWorkflowSpec(parsed.spec, parsed.cwd);
         const startedAt = new Date().toISOString();
-        const shouldRunAsync = parsed.waitForCompletion === false
-          || (parsed.waitForCompletion === undefined && shouldAutoRunAsync(spec));
+        const shouldRunAsync = parsed.waitForCompletion !== true;
         const options = {
           traceStore: orchestrationTraceStore,
           traceSource: "mcp",
@@ -119,20 +118,4 @@ export function getRegisteredOrchestrationTools(): readonly RegisteredTool[] {
         }),
     },
   ];
-}
-
-function shouldAutoRunAsync(spec: ReturnType<typeof normalizeWorkflowSpec>): boolean {
-  if (spec.mode === "sequential") {
-    return true;
-  }
-
-  if ((spec.timeoutMs ?? 0) > 30_000) {
-    return true;
-  }
-
-  if (spec.jobs.length > 1) {
-    return true;
-  }
-
-  return spec.jobs.some((job) => job.kind === "cursor");
 }
