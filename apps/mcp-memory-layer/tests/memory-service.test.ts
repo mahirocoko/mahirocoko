@@ -213,6 +213,101 @@ describe("memory service core", () => {
     expect(recentResult.context).toContain("·");
   });
 
+  it("buildContextForTask with sessionId backfills from project when session scope is sparse", async () => {
+    const fixture = await createFixture();
+    const sessionId = "session-backfill";
+
+    const projectOnly = await rememberMemory({
+      payload: {
+        content: "Project-wide retrieval layer design using LanceDB.",
+        kind: "fact",
+        scope: "project",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+        source: { type: "manual" },
+      },
+      logStore: fixture.logStore,
+      table: fixture.table,
+      embeddingProvider: fixture.embeddingProvider,
+    });
+
+    const result = await buildContextForTask({
+      payload: {
+        task: "How is retrieval implemented?",
+        mode: "full",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+        sessionId,
+        maxItems: 5,
+        maxChars: 2000,
+      },
+      table: fixture.table,
+      embeddingProvider: fixture.embeddingProvider,
+      traceStore: fixture.traceStore,
+    });
+
+    expect(result.items).toContain(projectOnly.id);
+    expect(result.context).toContain("LanceDB");
+  });
+
+  it("buildContextForTask orders session memories before project when both match", async () => {
+    const fixture = await createFixture();
+    const sessionId = "session-order";
+
+    const sessionMem = await rememberMemory({
+      payload: {
+        content: "Session note: prioritize LanceDB index tuning for this chat.",
+        kind: "fact",
+        scope: "session",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+        sessionId,
+        source: { type: "manual" },
+      },
+      logStore: fixture.logStore,
+      table: fixture.table,
+      embeddingProvider: fixture.embeddingProvider,
+    });
+
+    const projectMem = await rememberMemory({
+      payload: {
+        content: "Project note: LanceDB is the canonical retrieval store.",
+        kind: "fact",
+        scope: "project",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+        source: { type: "manual" },
+      },
+      logStore: fixture.logStore,
+      table: fixture.table,
+      embeddingProvider: fixture.embeddingProvider,
+    });
+
+    const result = await buildContextForTask({
+      payload: {
+        task: "LanceDB retrieval tuning and store choice",
+        mode: "full",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+        sessionId,
+        maxItems: 5,
+        maxChars: 4000,
+      },
+      table: fixture.table,
+      embeddingProvider: fixture.embeddingProvider,
+      traceStore: fixture.traceStore,
+    });
+
+    expect(result.items).toContain(sessionMem.id);
+    expect(result.items).toContain(projectMem.id);
+    expect(result.items.indexOf(sessionMem.id)).toBeLessThan(result.items.indexOf(projectMem.id));
+  });
+
   it("rebuilds the LanceDB index from the canonical log", async () => {
     const fixture = await createFixture();
 
