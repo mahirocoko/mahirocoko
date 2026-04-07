@@ -261,6 +261,8 @@ export interface RetrievalEvalSearchCase {
   readonly expectedInTopK?: { readonly k: number; readonly ids: readonly string[] };
   /** When true, pass iff search returns no items (zero-hit / scoped-empty). */
   readonly expectEmpty?: boolean;
+  /** When set, search `degraded` must equal this (embedding-failure probes). */
+  readonly expectDegraded?: boolean;
 }
 
 export interface RetrievalEvalContextCase {
@@ -280,6 +282,8 @@ export interface RetrievalEvalContextCase {
   readonly mustExcludeItemIds?: readonly string[];
   /** When true, pass iff no memory items are included (empty retrieval). */
   readonly expectEmptyItems?: boolean;
+  /** When set, built `degraded` must equal this (embedding-failure probes). */
+  readonly expectDegraded?: boolean;
 }
 
 export const retrievalEvalSearchCases: readonly RetrievalEvalSearchCase[] = [
@@ -413,6 +417,27 @@ export const retrievalEvalEmptyTableSearchCases: readonly RetrievalEvalSearchCas
   },
 ];
 
+export const retrievalEvalDegradedSearchCases: readonly RetrievalEvalSearchCase[] = [
+  {
+    id: "search-degraded-keyword-only-request-id",
+    query: "requestId hardening reject malformed replay",
+    mode: "full",
+    scope: "project",
+    limit: 8,
+    expectedTop1: "eval-proj-request-id",
+    expectDegraded: true,
+  },
+  {
+    id: "search-degraded-keyword-only-result-store",
+    query: "durable workflow outputs downstream tools result-store",
+    mode: "full",
+    scope: "project",
+    limit: 8,
+    expectedTop1: "eval-proj-result-store",
+    expectDegraded: true,
+  },
+];
+
 /** Run only after clearing the Lance table (empty corpus). */
 export const retrievalEvalEmptyTableContextCases: readonly RetrievalEvalContextCase[] = [
   {
@@ -429,6 +454,25 @@ export const retrievalEvalEmptyTableContextCases: readonly RetrievalEvalContextC
     expectedFirstItemId: "",
     expectEmptyItems: true,
     contextMustInclude: ["Task:", "Relevant memories:"],
+  },
+];
+
+export const retrievalEvalDegradedContextCases: readonly RetrievalEvalContextCase[] = [
+  {
+    id: "context-degraded-keyword-only-request-id",
+    payload: {
+      task: "requestId hardening before result-store writes",
+      mode: "full",
+      userId: retrievalEvalScope.userId,
+      projectId: retrievalEvalScope.projectId,
+      containerId: retrievalEvalScope.containerId,
+      sessionId: retrievalEvalScope.sessionWithNotes,
+      maxItems: 6,
+      maxChars: 8000,
+    },
+    expectedFirstItemId: "eval-sess-reqid",
+    contextMustInclude: ["requestId"],
+    expectDegraded: true,
   },
 ];
 
@@ -543,6 +587,8 @@ export interface RetrievalEvalSearchCaseResult {
   readonly returnedIds: readonly string[];
   /** Present when the case asserted zero-hit behavior. */
   readonly expectEmpty?: boolean;
+  readonly expectDegraded?: boolean;
+  readonly degradedMismatch?: boolean;
 }
 
 export interface RetrievalEvalContextCaseResult {
@@ -555,6 +601,7 @@ export interface RetrievalEvalContextCaseResult {
   readonly forbiddenSubstringsPresent: readonly string[];
   readonly forbiddenItemIdsPresent: readonly string[];
   readonly truncatedMismatch: boolean;
+  readonly degradedMismatch: boolean;
   readonly itemIds: readonly string[];
 }
 
@@ -587,9 +634,12 @@ function rankOfId(ids: readonly string[], target: string): number {
 export function evaluateSearchCase(
   returnedIds: readonly string[],
   spec: RetrievalEvalSearchCase,
-): { readonly pass: boolean; readonly topKMisses: readonly string[] } {
+  degraded = false,
+): { readonly pass: boolean; readonly topKMisses: readonly string[]; readonly degradedMismatch: boolean } {
+  const degradedMismatch = spec.expectDegraded !== undefined && degraded !== spec.expectDegraded;
+
   if (spec.expectEmpty) {
-    return { pass: returnedIds.length === 0, topKMisses: [] };
+    return { pass: returnedIds.length === 0 && !degradedMismatch, topKMisses: [], degradedMismatch };
   }
 
   const top1 = returnedIds[0] ?? null;
@@ -598,17 +648,17 @@ export function evaluateSearchCase(
   const required = spec.expectedInTopK?.ids;
 
   if (!k || !required || required.length === 0) {
-    return { pass: top1Ok, topKMisses: [] };
+    return { pass: top1Ok && !degradedMismatch, topKMisses: [], degradedMismatch };
   }
 
   const slice = returnedIds.slice(0, k);
   const topKMisses = required.filter((id) => !slice.includes(id));
 
-  return { pass: top1Ok && topKMisses.length === 0, topKMisses };
+  return { pass: top1Ok && topKMisses.length === 0 && !degradedMismatch, topKMisses, degradedMismatch };
 }
 
 export function evaluateContextCase(
-  result: Pick<BuildContextForTaskResult, "context" | "items" | "truncated">,
+  result: Pick<BuildContextForTaskResult, "context" | "items" | "truncated" | "degraded">,
   spec: RetrievalEvalContextCase,
 ): {
   readonly pass: boolean;
@@ -617,6 +667,7 @@ export function evaluateContextCase(
   readonly forbiddenSubstringsPresent: readonly string[];
   readonly forbiddenItemIdsPresent: readonly string[];
   readonly truncatedMismatch: boolean;
+  readonly degradedMismatch: boolean;
 } {
   const first = result.items[0] ?? null;
   const firstOk = spec.expectEmptyItems
@@ -631,6 +682,8 @@ export function evaluateContextCase(
   const forbiddenItemIdsPresent = forbiddenIds.filter((id) => result.items.includes(id));
   const truncatedMismatch =
     spec.expectTruncated !== undefined && result.truncated !== spec.expectTruncated;
+  const degradedMismatch =
+    spec.expectDegraded !== undefined && result.degraded !== spec.expectDegraded;
 
   return {
     pass:
@@ -639,12 +692,14 @@ export function evaluateContextCase(
       missingItemIds.length === 0 &&
       forbiddenSubstringsPresent.length === 0 &&
       forbiddenItemIdsPresent.length === 0 &&
-      !truncatedMismatch,
+      !truncatedMismatch &&
+      !degradedMismatch,
     missingSubstrings,
     missingItemIds,
     forbiddenSubstringsPresent,
     forbiddenItemIdsPresent,
     truncatedMismatch,
+    degradedMismatch,
   };
 }
 
@@ -661,6 +716,20 @@ async function rowsFromRecords(
       return toRetrievalRow(record, embedding, embeddingProvider.version);
     }),
   );
+}
+
+class ThrowingEmbeddingProvider {
+  public readonly version: string;
+  public readonly dimensions: number;
+
+  public constructor(base: DeterministicEmbeddingProvider) {
+    this.version = base.version;
+    this.dimensions = base.dimensions;
+  }
+
+  public async embedText(): Promise<readonly number[]> {
+    throw new Error("embedding unavailable");
+  }
 }
 
 export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
@@ -711,8 +780,9 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
       });
 
       const returnedIds = searchResult.items.map((item) => item.id);
-      const { pass, topKMisses } = evaluateSearchCase(returnedIds, spec);
+      const { pass, topKMisses, degradedMismatch } = evaluateSearchCase(returnedIds, spec, searchResult.degraded);
       const expectEmpty = spec.expectEmpty ?? false;
+      const expectDegraded = spec.expectDegraded ?? false;
 
       searchResults.push({
         caseId: spec.id,
@@ -723,6 +793,8 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
         topKMisses,
         returnedIds,
         ...(expectEmpty ? { expectEmpty: true as const } : {}),
+        ...(expectDegraded ? { expectDegraded: true as const } : {}),
+        ...(degradedMismatch ? { degradedMismatch } : {}),
       });
     };
 
@@ -747,7 +819,7 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
       });
 
       const returnedIds = searchResult.items.map((item) => item.id);
-      const { pass, topKMisses } = evaluateSearchCase(returnedIds, spec);
+      const { pass, topKMisses, degradedMismatch } = evaluateSearchCase(returnedIds, spec, searchResult.degraded);
 
       searchResults.push({
         caseId: spec.id,
@@ -758,6 +830,41 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
         topKMisses,
         returnedIds,
         expectEmpty: true,
+        ...(degradedMismatch ? { degradedMismatch } : {}),
+      });
+    }
+
+    const degradedEmbeddingProvider = new ThrowingEmbeddingProvider(embeddingProvider);
+
+    for (const spec of retrievalEvalDegradedSearchCases) {
+      const searchResult = await searchMemories({
+        payload: {
+          query: spec.query,
+          mode: spec.mode,
+          scope: spec.scope,
+          ...baseScope,
+          ...(spec.projectId ? { projectId: spec.projectId } : {}),
+          ...(spec.sessionId ? { sessionId: spec.sessionId } : {}),
+          limit: spec.limit,
+        },
+        table,
+        embeddingProvider: degradedEmbeddingProvider,
+        traceStore,
+      });
+
+      const returnedIds = searchResult.items.map((item) => item.id);
+      const { pass, topKMisses, degradedMismatch } = evaluateSearchCase(returnedIds, spec, searchResult.degraded);
+
+      searchResults.push({
+        caseId: spec.id,
+        pass,
+        top1: returnedIds[0] ?? null,
+        expectedTop1: spec.expectedTop1,
+        rankOfExpected: rankOfId(returnedIds, spec.expectedTop1),
+        topKMisses,
+        returnedIds,
+        expectDegraded: true,
+        ...(degradedMismatch ? { degradedMismatch } : {}),
       });
     }
 
@@ -778,6 +885,7 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
         forbiddenSubstringsPresent,
         forbiddenItemIdsPresent,
         truncatedMismatch,
+        degradedMismatch,
       } = evaluateContextCase(built, spec);
 
       contextResults.push({
@@ -790,6 +898,7 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
         forbiddenSubstringsPresent,
         forbiddenItemIdsPresent,
         truncatedMismatch,
+        degradedMismatch,
         itemIds: [...built.items],
       });
     };
@@ -815,6 +924,7 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
         forbiddenSubstringsPresent,
         forbiddenItemIdsPresent,
         truncatedMismatch,
+        degradedMismatch,
       } = evaluateContextCase(built, spec);
 
       contextResults.push({
@@ -827,6 +937,40 @@ export async function runRetrievalEval(): Promise<RetrievalEvalOkResult> {
         forbiddenSubstringsPresent,
         forbiddenItemIdsPresent,
         truncatedMismatch,
+        degradedMismatch,
+        itemIds: [...built.items],
+      });
+    }
+
+    for (const spec of retrievalEvalDegradedContextCases) {
+      const built = await buildContextForTask({
+        payload: spec.payload,
+        table,
+        embeddingProvider: degradedEmbeddingProvider,
+        traceStore,
+      });
+
+      const {
+        pass,
+        missingSubstrings,
+        missingItemIds,
+        forbiddenSubstringsPresent,
+        forbiddenItemIdsPresent,
+        truncatedMismatch,
+        degradedMismatch,
+      } = evaluateContextCase(built, spec);
+
+      contextResults.push({
+        caseId: spec.id,
+        pass,
+        firstItemId: built.items[0] ?? null,
+        expectedFirstItemId: spec.expectedFirstItemId,
+        missingSubstrings,
+        missingItemIds,
+        forbiddenSubstringsPresent,
+        forbiddenItemIdsPresent,
+        truncatedMismatch,
+        degradedMismatch,
         itemIds: [...built.items],
       });
     }
@@ -882,6 +1026,10 @@ export function formatRetrievalEvalAsText(result: RetrievalEvalOkResult): string
     if (row.topKMisses.length > 0) {
       lines.push(`    topK misses: ${row.topKMisses.join(", ")}`);
     }
+
+    if (row.degradedMismatch) {
+      lines.push("    degraded flag did not match expectDegraded");
+    }
   }
 
   lines.push("", "context cases:");
@@ -910,6 +1058,10 @@ export function formatRetrievalEvalAsText(result: RetrievalEvalOkResult): string
 
     if (row.truncatedMismatch) {
       lines.push("    truncated flag did not match expectTruncated");
+    }
+
+    if (row.degradedMismatch) {
+      lines.push("    degraded flag did not match expectDegraded");
     }
   }
 

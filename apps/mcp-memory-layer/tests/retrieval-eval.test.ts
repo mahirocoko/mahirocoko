@@ -4,6 +4,8 @@ import { parseRetrievalEvalCliArgs } from "../src/features/memory/eval/retrieval
 import {
   evaluateContextCase,
   evaluateSearchCase,
+  retrievalEvalDegradedContextCases,
+  retrievalEvalDegradedSearchCases,
   retrievalEvalContextCases,
   retrievalEvalSearchCases,
 } from "../src/features/memory/eval/retrieval-eval.js";
@@ -126,6 +128,19 @@ describe("evaluateSearchCase", () => {
     expect(spec.expectEmpty).toBe(true);
     expect(evaluateSearchCase([], spec).pass).toBe(true);
     expect(evaluateSearchCase(["eval-proj-request-id"], spec).pass).toBe(false);
+  });
+
+  it("expectDegraded fails when the degraded flag does not match", () => {
+    const spec = retrievalEvalDegradedSearchCases.find((c) => c.id === "search-degraded-keyword-only-request-id")!;
+
+    expect(spec.expectDegraded).toBe(true);
+    expect(evaluateSearchCase(["eval-proj-request-id"], spec, true).pass).toBe(true);
+    expect(evaluateSearchCase(["eval-proj-request-id"], spec, false)).toEqual(
+      expect.objectContaining({
+        pass: false,
+        degradedMismatch: true,
+      }),
+    );
   });
 });
 
@@ -336,5 +351,39 @@ describe("evaluateContextCase", () => {
         spec,
       ).pass,
     ).toBe(false);
+  });
+
+  it("expectDegraded on context requires the degraded flag to be true", () => {
+    const spec = retrievalEvalDegradedContextCases[0]!;
+
+    expect(spec.expectDegraded).toBe(true);
+    expect(
+      evaluateContextCase(
+        {
+          context: "Task: x\n\nRelevant memories:\n- [fact] requestId hardening",
+          items: ["eval-sess-reqid"],
+          truncated: false,
+          degraded: true,
+        },
+        spec,
+      ).pass,
+    ).toBe(true);
+
+    expect(
+      evaluateContextCase(
+        {
+          context: "Task: x\n\nRelevant memories:\n- [fact] requestId hardening",
+          items: ["eval-sess-reqid"],
+          truncated: false,
+          degraded: false,
+        },
+        spec,
+      ),
+    ).toEqual(
+      expect.objectContaining({
+        pass: false,
+        degradedMismatch: true,
+      }),
+    );
   });
 });
