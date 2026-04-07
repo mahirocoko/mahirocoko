@@ -14,28 +14,85 @@ export async function buildContextForTask(input: {
   readonly traceStore: RetrievalTraceStore;
 }): Promise<BuildContextForTaskResult> {
   const payload = buildContextForTaskInputSchema.parse(input.payload);
-  const result = await searchMemories({
-    payload: {
-      query: payload.task,
+  const maxItems = payload.maxItems ?? defaultContextMaxItems;
+  const basePayload = {
+    query: payload.task,
+    mode: payload.mode,
+    userId: payload.userId,
+    projectId: payload.projectId,
+    containerId: payload.containerId,
+  };
+
+  if (!payload.sessionId) {
+    const result = await searchMemories({
+      payload: {
+        ...basePayload,
+        scope: "project",
+        limit: maxItems,
+      },
+      table: input.table,
+      embeddingProvider: input.embeddingProvider,
+      traceStore: input.traceStore,
+    });
+
+    return buildContextFromItems({
+      task: payload.task,
       mode: payload.mode,
-      scope: payload.sessionId ? "session" : "project",
-      userId: payload.userId,
-      projectId: payload.projectId,
-      containerId: payload.containerId,
+      items: result.items,
+      maxItems,
+      maxChars: payload.maxChars ?? defaultContextMaxChars,
+      degraded: result.degraded,
+    });
+  }
+
+  const sessionResult = await searchMemories({
+    payload: {
+      ...basePayload,
+      scope: "session",
       sessionId: payload.sessionId,
-      limit: payload.maxItems ?? defaultContextMaxItems,
+      limit: maxItems,
     },
     table: input.table,
     embeddingProvider: input.embeddingProvider,
     traceStore: input.traceStore,
   });
 
+  const seenIds = new Set(sessionResult.items.map((item) => item.id));
+  const merged = [...sessionResult.items];
+  let degraded = sessionResult.degraded;
+
+  if (merged.length < maxItems) {
+    const projectResult = await searchMemories({
+      payload: {
+        ...basePayload,
+        scope: "project",
+        limit: maxItems - merged.length,
+      },
+      table: input.table,
+      embeddingProvider: input.embeddingProvider,
+      traceStore: input.traceStore,
+    });
+
+    degraded = degraded || projectResult.degraded;
+
+    for (const item of projectResult.items) {
+      if (seenIds.has(item.id)) {
+        continue;
+      }
+      seenIds.add(item.id);
+      merged.push(item);
+      if (merged.length >= maxItems) {
+        break;
+      }
+    }
+  }
+
   return buildContextFromItems({
     task: payload.task,
     mode: payload.mode,
-    items: result.items,
-    maxItems: payload.maxItems ?? defaultContextMaxItems,
+    items: merged,
+    maxItems,
     maxChars: payload.maxChars ?? defaultContextMaxChars,
-    degraded: result.degraded,
+    degraded,
   });
 }
