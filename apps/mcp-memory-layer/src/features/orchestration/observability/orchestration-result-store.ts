@@ -1,6 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 
+import { isWorkflowRequestId } from "../../../lib/ids.js";
 import type { OrchestrationRunResult } from "../run-orchestration-workflow.js";
 import type { OrchestrateWorkflowSpec } from "../workflow-spec.js";
 
@@ -99,8 +100,12 @@ export class OrchestrationResultStore {
   }
 
   public async read(requestId: string): Promise<OrchestrationResultRecord | null> {
+    if (!isWorkflowRequestId(requestId)) {
+      return null;
+    }
+
     try {
-      const content = await readFile(this.getFilePath(requestId), "utf8");
+      const content = await readFile(this.resolveConfinedPath(requestId), "utf8");
       return JSON.parse(content) as OrchestrationResultRecord;
     } catch (error) {
       if (isFileNotFoundError(error)) {
@@ -113,11 +118,22 @@ export class OrchestrationResultStore {
 
   private async writeRecord(record: OrchestrationResultRecord): Promise<void> {
     await mkdir(this.directoryPath, { recursive: true });
-    await writeFile(this.getFilePath(record.requestId), JSON.stringify(record, null, 2), "utf8");
+    await writeFile(this.resolveConfinedPath(record.requestId), JSON.stringify(record, null, 2), "utf8");
   }
 
-  private getFilePath(requestId: string): string {
-    return path.join(this.directoryPath, `${requestId}.json`);
+  private resolveConfinedPath(requestId: string): string {
+    if (!isWorkflowRequestId(requestId)) {
+      throw new Error("Invalid orchestration result requestId");
+    }
+
+    const base = path.resolve(this.directoryPath);
+    const filePath = path.resolve(base, `${requestId}.json`);
+    const relative = path.relative(base, filePath);
+    if (relative.startsWith("..") || path.isAbsolute(relative)) {
+      throw new Error("Orchestration result path escapes store directory");
+    }
+
+    return filePath;
   }
 }
 
