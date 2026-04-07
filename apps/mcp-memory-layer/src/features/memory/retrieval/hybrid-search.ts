@@ -1,11 +1,11 @@
 import { defaultKeywordCandidateLimit, defaultSearchLimit, defaultVectorCandidateLimit } from "../constants.js";
 import { dedupeSearchItems } from "./dedupe.js";
-import { scoreCombined, scoreKeywordMatch, scoreRecency, scoreVectorMatch, toSearchMemoryItem, weightsForMode } from "./rank.js";
+import { evaluateKeywordMatch, scoreCombined, scoreRecency, scoreVectorMatch, toSearchMemoryItem, weightsForMode } from "./rank.js";
 import type { EmbeddingProvider } from "../index/embedding-provider.js";
 import type { MemoryRecordsTable } from "../index/memory-records-table.js";
 import type { RetrievalTraceEntry, ScopeFilter, SearchMemoriesInput, SearchMemoriesResult } from "../types.js";
 import { newId } from "../../../lib/ids.js";
-import { nowIso } from "../lib/time.js";
+import { nowIso, toTimestamp } from "../lib/time.js";
 
 export async function runHybridSearch(input: {
   readonly search: SearchMemoriesInput;
@@ -31,18 +31,27 @@ export async function runHybridSearch(input: {
       : Promise.resolve([]),
   ]);
 
-  const rowsById = new Map<string, { row: (typeof keywordRows)[number]; reasons: Set<string>; score: number }>();
+  const rowsById = new Map<string, {
+    row: (typeof keywordRows)[number];
+    reasons: Set<string>;
+    score: number;
+    keywordScore: number;
+    keywordTieBreak: number;
+    vectorScore: number;
+  }>();
 
   for (const row of keywordRows) {
-    const keywordScore = scoreKeywordMatch(row, input.search.query);
+    const { scoreForFusion: keywordScore, tieBreak: keywordTieBreak } = evaluateKeywordMatch(row, input.search.query);
 
     if (keywordScore <= 0) {
       continue;
     }
 
+    const vectorScore = queryVector ? scoreVectorMatch(queryVector, row.embedding) : 0;
+
     const combinedScore = scoreCombined({
       keyword: keywordScore,
-      vector: queryVector ? scoreVectorMatch(queryVector, row.embedding) : 0,
+      vector: vectorScore,
       recency: scoreRecency(row.createdAt),
       importance: row.importance,
     }, weights);
@@ -51,6 +60,9 @@ export async function runHybridSearch(input: {
       row,
       reasons: new Set(["scope_match", "keyword_match"]),
       score: combinedScore,
+      keywordScore,
+      keywordTieBreak,
+      vectorScore,
     });
   }
 
@@ -61,8 +73,10 @@ export async function runHybridSearch(input: {
       continue;
     }
 
+    const { scoreForFusion: keywordScore, tieBreak: keywordTieBreak } = evaluateKeywordMatch(row, input.search.query);
+
     const combinedScore = scoreCombined({
-      keyword: scoreKeywordMatch(row, input.search.query),
+      keyword: keywordScore,
       vector: vectorScore,
       recency: scoreRecency(row.createdAt),
       importance: row.importance,
@@ -72,6 +86,9 @@ export async function runHybridSearch(input: {
     if (existing) {
       existing.reasons.add("semantic_match");
       existing.score = Math.max(existing.score, combinedScore);
+      existing.keywordScore = Math.max(existing.keywordScore, keywordScore);
+      existing.keywordTieBreak = Math.max(existing.keywordTieBreak, keywordTieBreak);
+      existing.vectorScore = Math.max(existing.vectorScore, vectorScore);
       continue;
     }
 
@@ -79,12 +96,33 @@ export async function runHybridSearch(input: {
       row,
       reasons: new Set(["scope_match", "semantic_match"]),
       score: combinedScore,
+      keywordScore,
+      keywordTieBreak,
+      vectorScore,
     });
   }
 
   const items = dedupeSearchItems(
     [...rowsById.values()]
-      .sort((left, right) => right.score - left.score)
+      .sort((left, right) => {
+        if (right.score !== left.score) {
+          return right.score - left.score;
+        }
+
+        if (right.keywordTieBreak !== left.keywordTieBreak) {
+          return right.keywordTieBreak - left.keywordTieBreak;
+        }
+
+        if (right.keywordScore !== left.keywordScore) {
+          return right.keywordScore - left.keywordScore;
+        }
+
+        if (right.vectorScore !== left.vectorScore) {
+          return right.vectorScore - left.vectorScore;
+        }
+
+        return toTimestamp(right.row.updatedAt) - toTimestamp(left.row.updatedAt);
+      })
       .slice(0, limit)
       .map((entry) => toSearchMemoryItem(entry.row, entry.score, [...entry.reasons])),
   );

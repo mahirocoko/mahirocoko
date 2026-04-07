@@ -81,4 +81,54 @@ describe("runHybridSearch", () => {
     expect(trace.rankingReasonsById["mem-1"]).toContain("keyword_match");
     expect(trace.rankingReasonsById["mem-1"]).not.toContain("semantic_match");
   });
+
+  it("prefers the memory that actually discusses requestId when vector similarity is ambiguous", async () => {
+    const onTopic = createRow({
+      id: "mem-request-id",
+      content:
+        "Hook hardening: reject payloads when request_id is missing, malformed, or replayed.",
+      embedding: [0.92, 0.08],
+      createdAt: "2026-04-01T00:00:00.000Z",
+      updatedAt: "2026-04-01T00:00:00.000Z",
+    });
+
+    const generic = createRow({
+      id: "mem-generic-hardening",
+      content: "Security hardening: rate limits, auth checks, and audit logging on the API layer.",
+      embedding: [0.99, 0.01],
+      createdAt: "2026-04-02T00:00:00.000Z",
+      updatedAt: "2026-04-02T00:00:00.000Z",
+    });
+
+    const keywordRows = [generic, onTopic];
+    const vectorRows = [generic, onTopic];
+
+    const table = {
+      queryScopedRows: async () => keywordRows,
+      vectorSearch: async () => vectorRows,
+    };
+
+    const embeddingProvider: EmbeddingProvider = {
+      version: "test-v1",
+      dimensions: 2,
+      embedText: async () => [1, 0],
+    };
+
+    const { result } = await runHybridSearch({
+      search: {
+        query: "requestId hardening",
+        mode: "query",
+        scope: "project",
+        userId: "mahiro",
+        projectId: "mcp-memory-layer",
+        containerId: "workspace:mcp-memory-layer",
+        limit: 5,
+      },
+      filter: baseFilter,
+      table: table as never,
+      embeddingProvider,
+    });
+
+    expect(result.items[0]?.id).toBe("mem-request-id");
+  });
 });

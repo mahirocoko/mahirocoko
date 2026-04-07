@@ -57,21 +57,101 @@ export function toSearchMemoryItem(
   };
 }
 
-export function scoreKeywordMatch(row: RetrievalRow, query: string): number {
-  const haystack = `${row.content}\n${row.summary}\n${row.tags}`.toLowerCase();
-  const tokens = query
-    .toLowerCase()
-    .split(/[^\p{L}\p{N}_]+/u)
-    .map((token) => token.trim())
-    .filter((token) => token.length > 0);
+/** Split camelCase / snake_case runs so "requestId" can match "request_id" / "request id". */
+function decomposeIdentifierWord(word: string): readonly string[] {
+  const withSpaces = word
+    .replace(/_/g, " ")
+    .replace(/([0-9])([a-z])/gi, "$1 $2")
+    .replace(/([a-z])([A-Z])/g, "$1 $2");
 
-  if (tokens.length === 0) {
-    return 0;
+  return withSpaces
+    .toLowerCase()
+    .split(/\s+/)
+    .map((part) => part.trim())
+    .filter((part) => part.length > 0);
+}
+
+function wordMatchesHaystack(haystack: string, word: string): boolean {
+  const lower = word.toLowerCase();
+
+  if (lower.length === 0) {
+    return false;
   }
 
-  const matches = tokens.filter((token) => haystack.includes(token)).length;
+  if (haystack.includes(lower)) {
+    return true;
+  }
 
-  return matches / tokens.length;
+  const parts = decomposeIdentifierWord(word);
+
+  if (parts.length <= 1) {
+    return false;
+  }
+
+  return parts.every((part) => haystack.includes(part));
+}
+
+function queryWordsAppearInOrder(haystackNorm: string, wordsLower: readonly string[]): boolean {
+  let idx = 0;
+
+  for (const w of wordsLower) {
+    const found = haystackNorm.indexOf(w, idx);
+
+    if (found < 0) {
+      return false;
+    }
+
+    idx = found + w.length;
+  }
+
+  return true;
+}
+
+export interface KeywordMatchEvaluation {
+  /** Bounded [0,1] for use inside `scoreCombined`. */
+  readonly scoreForFusion: number;
+  /** Lexical ordering hint when fusion scores tie (not capped). */
+  readonly tieBreak: number;
+}
+
+export function evaluateKeywordMatch(row: RetrievalRow, query: string): KeywordMatchEvaluation {
+  const haystack = `${row.content}\n${row.summary}\n${row.tags}`.toLowerCase();
+  const words = query.match(/[\p{L}\p{N}_]+/gu)?.filter((word) => word.length > 0) ?? [];
+
+  if (words.length === 0) {
+    return { scoreForFusion: 0, tieBreak: 0 };
+  }
+
+  const matches = words.filter((word) => wordMatchesHaystack(haystack, word)).length;
+  const coverage = matches / words.length;
+
+  const haystackNorm = haystack.replace(/_/g, " ").replace(/\s+/g, " ").trim();
+  const queryNorm = query
+    .toLowerCase()
+    .replace(/_/g, " ")
+    .replace(/[^\p{L}\p{N}\s]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  let phraseBonus = 0;
+
+  if (queryNorm.length >= 6 && haystackNorm.includes(queryNorm)) {
+    phraseBonus = 0.12;
+  }
+
+  const wordsLower = words.map((w) => w.toLowerCase());
+  const literalsAllInHaystack = wordsLower.every((w) => haystack.includes(w));
+  const orderBonus =
+    words.length >= 2 && literalsAllInHaystack && queryWordsAppearInOrder(haystackNorm, wordsLower) ? 0.08 : 0;
+
+  const scoreForFusion = Math.min(1, coverage + phraseBonus + orderBonus);
+  const tieBreak = matches * 10_000 + coverage * 1000 + (phraseBonus > 0 ? 100 : 0) + (orderBonus > 0 ? 10 : 0);
+
+  return { scoreForFusion, tieBreak };
+}
+
+export function scoreKeywordMatch(row: RetrievalRow, query: string): number {
+  return evaluateKeywordMatch(row, query).scoreForFusion;
 }
 
 export function scoreVectorMatch(queryVector: readonly number[], rowVector: readonly number[]): number {
