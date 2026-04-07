@@ -200,6 +200,7 @@ describe("getRegisteredOrchestrationTools", () => {
       requestId: expect.stringMatching(/^workflow_/),
       status: "running",
     });
+    expect(result).not.toHaveProperty("autoAsync");
     expect(orchestrationResultStoreMock.writeRunning).toHaveBeenCalledTimes(1);
     expect(orchestrationResultStoreMock.writeCompleted).not.toHaveBeenCalled();
 
@@ -355,6 +356,40 @@ describe("getRegisteredOrchestrationTools", () => {
     expect(orchestrationResultStoreMock.writeRunnerFailed).toHaveBeenCalledTimes(1);
   });
 
+  it("persists runner_failed when omitted waitForCompletion async execution rejects", async () => {
+    vi.mocked(runOrchestrationWorkflow).mockRejectedValueOnce(new Error("async boom"));
+
+    const tools = getRegisteredOrchestrationTools();
+    const tool = tools.find((item) => item.name === "orchestrate_workflow");
+
+    const result = await tool?.execute({
+      spec: {
+        mode: "parallel",
+        jobs: [
+          {
+            kind: "gemini",
+            input: {
+              prompt: "Summarize this repo.",
+              model: "gemini-3-flash-preview",
+            },
+          },
+        ],
+      },
+    });
+
+    expect(result).toMatchObject({
+      requestId: expect.stringMatching(/^workflow_/),
+      status: "running",
+      autoAsync: true,
+    });
+
+    await Promise.resolve();
+    await Promise.resolve();
+
+    expect(orchestrationTraceStoreMock.append).toHaveBeenCalledTimes(1);
+    expect(orchestrationResultStoreMock.writeRunnerFailed).toHaveBeenCalledTimes(1);
+  });
+
   it("executes the orchestration trace listing tool", async () => {
     const tools = getRegisteredOrchestrationTools();
     const tool = tools.find((item) => item.name === "list_orchestration_traces");
@@ -376,8 +411,9 @@ describe("getRegisteredOrchestrationTools", () => {
   });
 
   it("reads a stored orchestration result by request ID", async () => {
+    const requestId = "workflow_0123456789abcdef0123456789abcdef";
     orchestrationResultStoreMock.read.mockResolvedValueOnce({
-      requestId: "workflow_123",
+      requestId,
       source: "mcp",
       metadata: {
         mode: "parallel",
@@ -392,13 +428,22 @@ describe("getRegisteredOrchestrationTools", () => {
     const tool = tools.find((item) => item.name === "get_orchestration_result");
 
     const result = await tool?.execute({
-      requestId: "workflow_123",
+      requestId,
     });
 
-    expect(orchestrationResultStoreMock.read).toHaveBeenCalledWith("workflow_123");
+    expect(orchestrationResultStoreMock.read).toHaveBeenCalledWith(requestId);
     expect(result).toMatchObject({
-      requestId: "workflow_123",
+      requestId,
       status: "running",
     });
+  });
+
+  it("rejects get_orchestration_result when requestId is not a workflow_* id", async () => {
+    const tools = getRegisteredOrchestrationTools();
+    const tool = tools.find((item) => item.name === "get_orchestration_result");
+
+    await expect(tool?.execute({ requestId: "../evil" })).rejects.toThrow();
+    await expect(tool?.execute({ requestId: "workflow_123" })).rejects.toThrow();
+    expect(orchestrationResultStoreMock.read).not.toHaveBeenCalled();
   });
 });
