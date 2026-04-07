@@ -124,7 +124,7 @@ Protocol reminders for MCP and trace verification:
 
 - The `orchestrate_workflow` MCP tool accepts the same static workflow spec and runs it through the same orchestration runtime.
 - Prefer `waitForCompletion: false` for workflows that may take noticeable time.
-- If `waitForCompletion` is omitted, risky workflows are auto-started in background and return `{ requestId, status: "running", autoAsync: true }` instead of blocking the MCP client.
+- If `waitForCompletion` is omitted, workflows are auto-started in background and return `{ requestId, status: "running", autoAsync: true }` instead of blocking the MCP client.
 - Explicit `waitForCompletion: true` still forces synchronous behavior, so long-running calls can still hit client-side timeout boundaries if the caller insists on waiting.
 - The `get_orchestration_result` MCP tool is the polling path for background orchestration runs.
 - The `list_orchestration_traces` MCP tool and `list-orchestration-traces` CLI read the same persisted trace data; use the `README.md` command reference for exact flags and example invocations.

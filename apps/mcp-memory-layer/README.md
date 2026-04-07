@@ -323,7 +323,7 @@ MCP tool:
 - `orchestrate_workflow` runs the same static workflow spec through the MCP server
 - input shape: `{ "spec": <parallel-or-sequential workflow>, "cwd": "/optional/default/cwd", "waitForCompletion": true }`
 - set `waitForCompletion: false` for long-running workflows so the tool returns immediately with `{ requestId, status: "running" }` instead of waiting for the full worker response
-- when `waitForCompletion` is omitted, obviously risky workflows (sequential runs, cursor jobs, multi-job workflows, or large `timeoutMs`) are auto-started in background and return `{ requestId, status: "running", autoAsync: true }`
+- when `waitForCompletion` is omitted, workflows auto-start in background and return `{ requestId, status: "running", autoAsync: true }`; pass `waitForCompletion: true` only when you intentionally want synchronous waiting
 - `get_orchestration_result` reads the stored workflow state/result by `requestId`
 - `list_orchestration_traces` lists persisted orchestration trace entries with optional filters like `source`, `mode`, `status`, `requestId`, `taskId`, and `limit` (each entry may include `jobModels` with per-job `requestedModel` / optional `reportedModel` when written by a current package version)
 
