@@ -2,6 +2,8 @@
 
 PulseLane is a FE-only sandbox for `maru-realtime`: a live kanban board that stores its state in a single realtime document.
 
+The setup flow now uses one canonical `board path` in the maru format `collection/board-id`.
+
 ## Stack
 
 - Vite 8
@@ -33,17 +35,17 @@ Optional env vars:
 ```bash
 VITE_MARU_PROJECT_ID=your-project-id
 VITE_MARU_API_KEY=mk_your_api_key
-VITE_MARU_DOCUMENT_PATH=boards/pulselane-live
+VITE_MARU_DOCUMENT_PATH=boards/launch-radar
 ```
 
-Without env vars, enter the credentials in the in-app connection sheet.
+PulseLane is env-only. Configure credentials through `.env.local` or another Vite env source.
 
 ## Data Model
 
-PulseLane stores one board per document path. Default path:
+PulseLane stores one board per path. Default board path:
 
 ```text
-boards/pulselane-live
+boards/launch-radar
 ```
 
 The document contains:

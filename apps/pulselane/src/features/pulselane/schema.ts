@@ -1,6 +1,8 @@
 import type { BoardCard, BoardColumn, BoardDocument, MaruConfig } from './types'
 
-export const DEFAULT_DOCUMENT_PATH = 'boards/pulselane-live'
+export const DEFAULT_COLLECTION = 'boards'
+export const DEFAULT_DOCUMENT_ID = 'launch-radar'
+export const DEFAULT_DOCUMENT_PATH = `${DEFAULT_COLLECTION}/${DEFAULT_DOCUMENT_ID}`
 
 const DEFAULT_COLUMNS: BoardColumn[] = [
   { id: 'backlog', title: 'Backlog', accent: '#8b5cf6', order: 0 },
@@ -14,25 +16,43 @@ export function createStarterBoard(): BoardDocument {
 
   return {
     schemaVersion: 1,
-    title: 'PulseLane Sandbox',
+    title: 'Launch Radar',
     updatedAt: now,
     lastActorId: 'starter-kit',
     columns: DEFAULT_COLUMNS,
     cards: [
-      createStarterCard('pulse-01', 'backlog', 'Map the live data contract', 'Mina', 'high', 0, now - 600000),
-      createStarterCard('pulse-02', 'backlog', 'Shape onboarding copy', 'Kai', 'medium', 1, now - 480000),
-      createStarterCard('pulse-03', 'in-flight', 'Prototype card drag feel', 'Lina', 'high', 0, now - 300000),
-      createStarterCard('pulse-04', 'review', 'Verify multi-tab sync pulse', 'Arun', 'medium', 0, now - 180000),
-      createStarterCard('pulse-05', 'shipped', 'Seed sandbox starter board', 'You', 'low', 0, now - 90000),
+      createStarterCard('pulse-01', 'backlog', 'Lock the launch-day KPI glossary', 'Mina', 'high', 0, now - 600000),
+      createStarterCard('pulse-02', 'backlog', 'Tighten the customer invite sequence', 'Kai', 'medium', 1, now - 480000),
+      createStarterCard('pulse-03', 'in-flight', 'Dry-run incident handoff in realtime', 'Lina', 'high', 0, now - 300000),
+      createStarterCard('pulse-04', 'review', 'Review board pulse feedback on card edits', 'Arun', 'medium', 0, now - 180000),
+      createStarterCard('pulse-05', 'shipped', 'Publish the sandbox walkthrough', 'You', 'low', 0, now - 90000),
     ],
   }
+}
+
+export function splitDocumentPath(documentPath: string) {
+  const [rawCollection, rawDocumentId] = documentPath.trim().split('/').filter(Boolean)
+
+  return {
+    collection: sanitizePathSegment(rawCollection, DEFAULT_COLLECTION),
+    documentId: sanitizePathSegment(rawDocumentId, DEFAULT_DOCUMENT_ID),
+  }
+}
+
+export function joinDocumentPath(collection: string, documentId: string) {
+  return `${sanitizePathSegment(collection, DEFAULT_COLLECTION)}/${sanitizePathSegment(documentId, DEFAULT_DOCUMENT_ID)}`
+}
+
+export function normalizeDocumentPath(documentPath?: string) {
+  const { collection, documentId } = splitDocumentPath(documentPath ?? DEFAULT_DOCUMENT_PATH)
+  return joinDocumentPath(collection, documentId)
 }
 
 export function getDefaultConfig(): MaruConfig {
   return {
     projectId: import.meta.env.VITE_MARU_PROJECT_ID?.trim() ?? '',
     apiKey: import.meta.env.VITE_MARU_API_KEY?.trim() ?? '',
-    documentPath: import.meta.env.VITE_MARU_DOCUMENT_PATH?.trim() || DEFAULT_DOCUMENT_PATH,
+    documentPath: normalizeDocumentPath(import.meta.env.VITE_MARU_DOCUMENT_PATH?.trim()),
   }
 }
 
@@ -145,6 +165,11 @@ function createStarterCard(
     order,
     updatedAt,
   }
+}
+
+function sanitizePathSegment(value: string | undefined, fallback: string) {
+  const normalized = value?.trim().replace(/^\/+|\/+$/g, '').split('/')[0]
+  return normalized || fallback
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

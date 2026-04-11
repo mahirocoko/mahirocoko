@@ -35,7 +35,7 @@ export function usePulselane(config: MaruConfig | null) {
 
     const path = parseDocumentPath(config.documentPath)
     if (!path) {
-      setError('Document path must look like collection/documentId')
+      setError('Board path must look like collection/board-id')
       setConnectionStatus('error')
       return
     }
