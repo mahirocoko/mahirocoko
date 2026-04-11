@@ -14,7 +14,7 @@ export function parseDocumentPath(documentPath: string) {
 export async function getDocument(config: MaruConfig) {
   const path = parseDocumentPath(config.documentPath)
   if (!path) {
-    throw new Error('Document path must look like collection/documentId')
+    throw new Error('Board path must look like collection/board-id')
   }
 
   const response = await fetch(
@@ -31,7 +31,7 @@ export async function getDocument(config: MaruConfig) {
   }
 
   if (!response.ok) {
-    throw new Error(await getErrorMessage(response, 'Failed to read board document'))
+    throw new Error(await getErrorMessage(response, 'Failed to read board path'))
   }
 
   return {
@@ -43,7 +43,7 @@ export async function getDocument(config: MaruConfig) {
 export async function putDocument(config: MaruConfig, data: unknown) {
   const path = parseDocumentPath(config.documentPath)
   if (!path) {
-    throw new Error('Document path must look like collection/documentId')
+    throw new Error('Board path must look like collection/board-id')
   }
 
   const response = await fetch(
@@ -59,7 +59,7 @@ export async function putDocument(config: MaruConfig, data: unknown) {
   )
 
   if (!response.ok) {
-    throw new Error(await getErrorMessage(response, 'Failed to write board document'))
+    throw new Error(await getErrorMessage(response, 'Failed to write board path'))
   }
 }
 

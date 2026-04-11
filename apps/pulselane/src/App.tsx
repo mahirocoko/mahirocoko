@@ -15,9 +15,9 @@ import { useEffect, useState, type CSSProperties } from 'react'
 import { addCard, deleteCard, getCardsForColumn, moveCard, updateCard } from './features/pulselane/board'
 import { DEFAULT_DOCUMENT_PATH, getDefaultConfig } from './features/pulselane/schema'
 import { usePulselane } from './features/pulselane/use-pulselane'
-import type { BoardCard, BoardColumn, MaruConfig } from './features/pulselane/types'
+import type { BoardCard, BoardColumn } from './features/pulselane/types'
 
-const STORAGE_KEY = 'pulselane:sandbox-config'
+const DEFAULT_CONFIG = getDefaultConfig()
 
 interface DraftCardEditor {
   title: string
@@ -38,9 +38,6 @@ interface DropTarget {
 }
 
 function App() {
-  const [savedConfig, setSavedConfig] = useState<MaruConfig>(() => loadSavedConfig(getDefaultConfig()))
-  const [draftConfig, setDraftConfig] = useState<MaruConfig>(savedConfig)
-  const [showConfig, setShowConfig] = useState(!hasConfig(savedConfig))
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
   const [cardDraft, setCardDraft] = useState<DraftCardEditor | null>(null)
   const [dragState, setDragState] = useState<DragState | null>(null)
@@ -48,7 +45,7 @@ function App() {
   const [composerValue, setComposerValue] = useState<Record<string, string>>({})
   const [composerOpen, setComposerOpen] = useState<Record<string, boolean>>({})
 
-  const activeConfig = hasConfig(savedConfig) ? savedConfig : null
+  const activeConfig = hasRequiredConfig(DEFAULT_CONFIG) ? DEFAULT_CONFIG : null
   const {
     board,
     connectionStatus,
@@ -67,7 +64,7 @@ function App() {
   const draggedColumn = board?.columns.find((column) => column.id === dragState?.columnId) ?? null
   const totalCards = board?.cards.length ?? 0
   const totalColumns = board?.columns.length ?? 0
-  const isBoardActive = Boolean(board)
+  const hasWorkspace = Boolean(activeConfig)
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -83,16 +80,11 @@ function App() {
   }
 
   useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(savedConfig))
-  }, [savedConfig])
-
-  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key !== 'Escape') {
         return
       }
 
-      setShowConfig(false)
       setSelectedCardId(null)
       setCardDraft(null)
     }
@@ -112,22 +104,6 @@ function App() {
       priority: card.priority,
       description: card.description,
     })
-  }
-
-  const handleSaveConfig = () => {
-    const nextConfig = normalizeConfig(draftConfig)
-    setSavedConfig(nextConfig)
-    setDraftConfig(nextConfig)
-    setShowConfig(false)
-  }
-
-  const handleForgetConfig = () => {
-    const cleared = { projectId: '', apiKey: '', documentPath: DEFAULT_DOCUMENT_PATH }
-    window.localStorage.removeItem(STORAGE_KEY)
-    setSavedConfig(cleared)
-    setDraftConfig(cleared)
-    setShowConfig(true)
-    closeCard()
   }
 
   const handleAddCard = (columnId: string) => {
@@ -212,107 +188,64 @@ function App() {
 
   return (
     <div className="app-shell">
-      <div className="aurora aurora-left" />
-      <div className="aurora aurora-right" />
+      <header className="app-header surface">
+        <div className="app-header-left">
+          <div className="brand-mark" aria-hidden="true">PL</div>
+          <span className="app-title">PulseLane</span>
 
-      <header className={`hero-bar${isBoardActive ? ' hero-bar-compact' : ''}`}>
-        <div className="hero-brand">
-          <p className="eyebrow">PulseLane</p>
-          <h1>Live Kanban sandbox for maru-realtime</h1>
-          {!isBoardActive ? (
-            <p className="hero-copy">
-              One board. One realtime document. Zero backend. Pure pulse.
-            </p>
+          {hasWorkspace ? (
+            <>
+              <span className="board-context">{board?.title ?? 'Board'}</span>
+              <span className="header-divider" />
+              <span className="board-path">{DEFAULT_CONFIG.documentPath || DEFAULT_DOCUMENT_PATH}</span>
+            </>
           ) : null}
         </div>
 
-        <div className="hero-actions">
-          <span className={`status-pill status-${connectionStatus}`}>
-            <span className="status-dot" />
-            {formatStatus(connectionStatus)}
-          </span>
-          <button type="button" className="ghost-button" onClick={() => setShowConfig(true)}>
-            Connection settings
-          </button>
+        <div className="app-header-right">
+          {hasWorkspace ? (
+            <>
+              <span className={`status-pill status-${connectionStatus}`}>
+                <span className="status-dot" />
+                {formatStatus(connectionStatus)}
+              </span>
+              <span className="header-stat">{totalCards} cards</span>
+              <span className="header-stat">{totalColumns} columns</span>
+              <span className="header-stat">Synced {formatSyncTime(lastSyncedAt)}</span>
+              <button type="button" className="ghost-button" onClick={resetBoard} disabled={!board}>
+                Reset
+              </button>
+            </>
+          ) : null}
         </div>
       </header>
 
       <main className="workspace-shell">
-        <section className="utility-bar surface">
-          <div className="utility-group utility-group-leading">
-            <div className="badge-row">
-              <span className="eyebrow-badge">Sandbox only</span>
-              <span className="eyebrow-badge subdued-badge">FE-only</span>
-            </div>
-            <MetricChip label="Project" value={maskValue(savedConfig.projectId)} mono />
-            <MetricChip label="Document" value={savedConfig.documentPath || DEFAULT_DOCUMENT_PATH} mono />
-          </div>
-
-          <div className="utility-group utility-group-trailing">
-            <MetricChip label="Cards" value={String(totalCards)} />
-            <MetricChip label="Columns" value={String(totalColumns)} />
-            <MetricChip label="Last sync" value={formatSyncTime(lastSyncedAt)} />
-            <button type="button" className="ghost-button" onClick={resetBoard} disabled={!board}>
-              Reset board
-            </button>
-            <button type="button" className="ghost-button" onClick={handleForgetConfig}>
-              Forget credentials
-            </button>
-          </div>
-        </section>
-
         <section className="board-shell surface">
-          <div className="board-topline">
-            <div>
-              <p className="eyebrow">Realtime board</p>
-              <h2>{board?.title ?? 'Waiting for a board document'}</h2>
-              {!board ? (
-                <p className="board-subcopy">
-                  Use temporary credentials only. Open two tabs to see remote updates land.
-                </p>
-              ) : null}
-            </div>
+          {error ? <div className="board-error">{error}</div> : null}
 
-            <div className="board-actions">
-              <button type="button" className="ghost-button" onClick={seedBoard} disabled={!activeConfig}>
-                Seed board
-              </button>
-            </div>
-          </div>
-
-          {error ? <div className="error-banner">{error}</div> : null}
-
-          {isHydrating ? (
-            <div className="empty-board">
-              <div className="skeleton-board" aria-hidden="true">
-                {['signal', 'stream', 'sync'].map((laneKey) => (
-                  <div key={laneKey} className="skeleton-lane">
-                    <div className="skeleton-line skeleton-line-short" />
-                    <div className="skeleton-card" />
-                    <div className="skeleton-card" />
-                    <div className="skeleton-card skeleton-card-tall" />
-                  </div>
-                ))}
-              </div>
-              <p className="empty-title">Hydrating the board document...</p>
-              <p className="muted-copy">Pulling the latest snapshot from maru-realtime.</p>
+          {!hasWorkspace ? (
+            <div className="board-empty-state developer-state">
+              <p>Environment not configured</p>
             </div>
           ) : null}
 
-          {!isHydrating && !board ? (
-            <div className="empty-board">
-              <p className="empty-title">No PulseLane board found at this document path.</p>
-              <p className="muted-copy">
-                Seed a starter board or switch to a different document path from the
-                connection sheet.
-              </p>
+          {hasWorkspace && isHydrating ? (
+            <div className="board-empty-state">
+              <p>Loading board...</p>
+            </div>
+          ) : null}
+
+          {hasWorkspace && !isHydrating && !board ? (
+            <div className="board-empty-state">
+              <p>No board found</p>
               <button type="button" className="primary-button" onClick={seedBoard} disabled={!activeConfig}>
-                Create starter board
+                Create board
               </button>
             </div>
           ) : null}
 
-          {board ? (
+          {hasWorkspace && board ? (
             <DndContext
               sensors={sensors}
               onDragStart={handleDragStart}
@@ -356,85 +289,6 @@ function App() {
           ) : null}
         </section>
       </main>
-
-      {showConfig ? (
-        <div className="modal-backdrop" role="presentation">
-          <button
-            type="button"
-            className="modal-dismiss"
-            aria-label="Close connection settings"
-            onClick={() => setShowConfig(false)}
-          />
-
-          <section className="modal-card surface" role="dialog" aria-modal="true" aria-label="Connection settings">
-            <div className="modal-head">
-              <div>
-                <p className="eyebrow">Gateway</p>
-                <h2>Dial your sandbox in</h2>
-              </div>
-
-              <button type="button" className="icon-button" onClick={() => setShowConfig(false)}>
-                Close
-              </button>
-            </div>
-
-            <div className="field-stack">
-              <label className="field-block">
-                <span>Project ID</span>
-                <input
-                  value={draftConfig.projectId}
-                  onChange={(event) =>
-                    setDraftConfig((current) => ({ ...current, projectId: event.target.value }))
-                  }
-                  placeholder="11178251-38cc-44d4-9ac0-bc149eb8de0b"
-                />
-              </label>
-
-              <label className="field-block">
-                <span>API key</span>
-                <input
-                  value={draftConfig.apiKey}
-                  onChange={(event) =>
-                    setDraftConfig((current) => ({ ...current, apiKey: event.target.value }))
-                  }
-                  placeholder="mk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-                />
-              </label>
-
-              <label className="field-block">
-                <span>Document path</span>
-                <input
-                  value={draftConfig.documentPath}
-                  onChange={(event) =>
-                    setDraftConfig((current) => ({ ...current, documentPath: event.target.value }))
-                  }
-                  placeholder={DEFAULT_DOCUMENT_PATH}
-                />
-              </label>
-            </div>
-
-            <div className="modal-notes surface">
-              <div className="badge-row">
-                <span className="eyebrow-badge">Sandbox only</span>
-                <span className="eyebrow-badge subdued-badge">Browser secrets</span>
-              </div>
-              <p className="muted-copy">
-                PulseLane connects directly from the browser. Use throwaway projects and keys
-                only.
-              </p>
-            </div>
-
-            <div className="modal-actions">
-              <button type="button" className="ghost-button" onClick={handleForgetConfig}>
-                Clear
-              </button>
-              <button type="button" className="primary-button" onClick={handleSaveConfig}>
-                Go live
-              </button>
-            </div>
-          </section>
-        </div>
-      ) : null}
 
       {selectedCard && cardDraft ? (
         <aside className="detail-drawer surface">
@@ -564,13 +418,13 @@ function LaneColumn({
   return (
     <section className="lane-column">
       <header className="lane-head">
-        <div>
-          <p className="lane-kicker" style={{ color: column.accent }}>
-            {column.title}
-          </p>
-          <h3>{cards.length} cards</h3>
+        <p className="lane-kicker" style={{ color: column.accent }}>
+          {column.title}
+        </p>
+        <div className="lane-head-meta">
+          <span className="lane-count">{cards.length}</span>
+          <span className="lane-dot" style={{ background: column.accent }} />
         </div>
-        <span className="lane-dot" style={{ background: column.accent }} />
       </header>
 
       <div className="lane-stack">
@@ -614,20 +468,20 @@ function LaneColumn({
           <input
             value={composerValue}
             onChange={(event) => onComposerChange(event.target.value)}
-            placeholder={`Add a card to ${column.title}`}
+            placeholder={`Write the next move for ${column.title}`}
           />
           <div className="composer-actions">
             <button type="button" className="ghost-button" onClick={onComposerClose}>
               Cancel
             </button>
             <button type="submit" className="primary-button">
-              Add card
+              Save card
             </button>
           </div>
         </form>
       ) : (
         <button type="button" className="add-card-button" onClick={onComposerOpen}>
-          + Add card
+          + New card
         </button>
       )}
     </section>
@@ -732,49 +586,7 @@ function DropSlot({
   )
 }
 
-function MetricChip({
-  label,
-  value,
-  mono = false,
-}: {
-  label: string
-  value: string
-  mono?: boolean
-}) {
-  return (
-    <div className="metric-chip">
-      <span>{label}</span>
-      <strong className={mono ? 'mono-text' : ''}>{value}</strong>
-    </div>
-  )
-}
-
-function loadSavedConfig(defaultConfig: MaruConfig): MaruConfig {
-  if (typeof window === 'undefined') {
-    return defaultConfig
-  }
-
-  const rawValue = window.localStorage.getItem(STORAGE_KEY)
-  if (!rawValue) {
-    return defaultConfig
-  }
-
-  try {
-    return normalizeConfig(JSON.parse(rawValue) as Partial<MaruConfig>)
-  } catch {
-    return defaultConfig
-  }
-}
-
-function normalizeConfig(config: Partial<MaruConfig>): MaruConfig {
-  return {
-    projectId: config.projectId?.trim() ?? '',
-    apiKey: config.apiKey?.trim() ?? '',
-    documentPath: config.documentPath?.trim() || DEFAULT_DOCUMENT_PATH,
-  }
-}
-
-function hasConfig(config: MaruConfig) {
+function hasRequiredConfig(config: typeof DEFAULT_CONFIG) {
   return Boolean(config.projectId.trim() && config.apiKey.trim())
 }
 
@@ -791,18 +603,6 @@ function formatStatus(status: ReturnType<typeof usePulselane>['connectionStatus'
     default:
       return 'Idle'
   }
-}
-
-function maskValue(value: string) {
-  if (!value) {
-    return 'Not set'
-  }
-
-  if (value.length < 12) {
-    return value
-  }
-
-  return `${value.slice(0, 6)}...${value.slice(-4)}`
 }
 
 function formatSyncTime(timestamp: number | null) {
