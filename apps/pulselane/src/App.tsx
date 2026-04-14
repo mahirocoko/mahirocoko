@@ -1,54 +1,38 @@
 import {
-  DndContext,
-  DragOverlay,
-  MeasuringStrategy,
   PointerSensor,
-  closestCenter,
-  pointerWithin,
-  useDraggable,
-  useDroppable,
   useSensor,
   useSensors,
-  type CollisionDetection,
   type DragEndEvent,
   type DragOverEvent,
   type DragStartEvent,
 } from '@dnd-kit/core'
-import { useEffect, useMemo, useState, type CSSProperties } from 'react'
-import { addCard, deleteCard, getCardsForColumn, moveCard, updateCard } from './features/pulselane/board'
+import { useEffect, useState } from 'react'
+import { addCard, deleteCard, moveCard, updateCard } from './features/pulselane/board'
 import { DEFAULT_DOCUMENT_PATH, getDefaultConfig } from './features/pulselane/schema'
 import { usePulselane } from './features/pulselane/use-pulselane'
-import type { BoardCard, BoardColumn } from './features/pulselane/types'
+import type { BoardCard } from './features/pulselane/types'
+import { BoardView } from './features/pulselane/components/BoardView'
+import { Button } from './components/ui/Button'
+import { Input } from './components/ui/Input'
+import { Textarea } from './components/ui/Textarea'
+import { cn } from './lib/utils'
 
 const DEFAULT_CONFIG = getDefaultConfig()
 
-const customCollisionDetection: CollisionDetection = (args) => {
-  const pointerCollisions = pointerWithin(args)
-  const slotCollision = pointerCollisions.find(
-    (c) => c.data?.droppableContainer?.data?.current?.type === 'slot'
-  )
-
-  if (slotCollision) {
-    return [slotCollision]
-  }
-
-  return closestCenter(args)
-}
-
-interface DraftCardEditor {
+export interface DraftCardEditor {
   title: string
   owner: string
   priority: BoardCard['priority']
   description: string
 }
 
-interface DragState {
+export interface DragState {
   cardId: string
   columnId: string
   index: number
 }
 
-interface DropTarget {
+export interface DropTarget {
   columnId: string
   index: number
 }
@@ -76,18 +60,9 @@ function App() {
 
   const selectedCard = board?.cards.find((card) => card.id === selectedCardId) ?? null
   const selectedColumn = board?.columns.find((column) => column.id === selectedCard?.columnId) ?? null
-  const draggedCard = board?.cards.find((card) => card.id === dragState?.cardId) ?? null
-  const draggedColumn = board?.columns.find((column) => column.id === dragState?.columnId) ?? null
   const totalCards = board?.cards.length ?? 0
   const totalColumns = board?.columns.length ?? 0
   const hasWorkspace = Boolean(activeConfig)
-  const cardsByColumn = useMemo(() => {
-    if (!board) {
-      return new Map<string, BoardCard[]>()
-    }
-
-    return new Map(board.columns.map((column) => [column.id, getCardsForColumn(board, column.id)]))
-  }, [board])
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -104,19 +79,11 @@ function App() {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') {
-        return
-      }
-
-      setSelectedCardId(null)
-      setCardDraft(null)
+      if (event.key !== 'Escape') return
+      closeCard()
     }
-
     window.addEventListener('keydown', handleKeyDown)
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
+    return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
   const openCard = (card: BoardCard) => {
@@ -131,28 +98,15 @@ function App() {
 
   const handleAddCard = (columnId: string) => {
     const title = (composerValue[columnId] ?? '').trim()
-    if (!title || !board) {
-      return
-    }
+    if (!title || !board) return
 
     commit((currentBoard) => addCard(currentBoard, columnId, title))
     setComposerValue((current) => ({ ...current, [columnId]: '' }))
     setComposerOpen((current) => ({ ...current, [columnId]: false }))
   }
 
-  const handleOpenComposer = (columnId: string) => {
-    setComposerOpen((current) => ({ ...current, [columnId]: true }))
-  }
-
-  const handleCloseComposer = (columnId: string) => {
-    setComposerOpen((current) => ({ ...current, [columnId]: false }))
-    setComposerValue((current) => ({ ...current, [columnId]: '' }))
-  }
-
   const handleSaveCardDraft = () => {
-    if (!selectedCard || !cardDraft) {
-      return
-    }
+    if (!selectedCard || !cardDraft) return
 
     commit((currentBoard) =>
       updateCard(currentBoard, selectedCard.id, {
@@ -162,24 +116,18 @@ function App() {
         description: cardDraft.description,
       }),
     )
-
     closeCard()
   }
 
   const handleDeleteCard = () => {
-    if (!selectedCard) {
-      return
-    }
-
+    if (!selectedCard) return
     commit((currentBoard) => deleteCard(currentBoard, selectedCard.id))
     closeCard()
   }
 
   const handleDragStart = (event: DragStartEvent) => {
     const activeData = event.active.data.current
-    if (activeData?.type !== 'card') {
-      return
-    }
+    if (activeData?.type !== 'card') return
 
     setDragState({
       cardId: String(activeData.cardId),
@@ -215,456 +163,165 @@ function App() {
     setDropTarget(null)
   }
 
-  const handleDragCancel = () => {
-    setDragState(null)
-    setDropTarget(null)
-  }
-
   return (
-    <div className="app-shell">
-      <header className="app-header surface">
-        <div className="app-header-left">
-          <div className="brand-mark" aria-hidden="true">PL</div>
-          <span className="app-title">PulseLane</span>
+    <div className="relative flex flex-col h-screen overflow-hidden bg-background">
+      <header className="z-10 flex h-11 items-center justify-between border-b border-white/5 bg-background px-4 text-xs font-semibold">
+        <div className="flex items-center gap-3">
+          <div className="grid h-4 w-4 place-items-center rounded bg-brand text-[10px] font-bold text-white">PL</div>
+          <span className="text-sm font-medium">PulseLane</span>
 
           {hasWorkspace ? (
             <>
-              <span className="board-context">{board?.title ?? 'Board'}</span>
-              <span className="header-divider" />
-              <span className="board-path">{DEFAULT_CONFIG.documentPath || DEFAULT_DOCUMENT_PATH}</span>
+              <span className="text-sm font-medium">{board?.title ?? 'Board'}</span>
+              <span className="h-4 w-px bg-white/5" />
+              <span className="text-muted font-normal">{DEFAULT_CONFIG.documentPath || DEFAULT_DOCUMENT_PATH}</span>
             </>
           ) : null}
         </div>
 
-        <div className="app-header-right">
+        <div className="flex items-center gap-3">
           {hasWorkspace ? (
             <>
-              <span className={`status-pill status-${connectionStatus}`}>
-                <span className="status-dot" />
+              <span className={cn("inline-flex items-center gap-2 rounded-full border border-white/5 px-2 py-1 text-[12px]", {
+                "text-[#27a644]": connectionStatus === 'live',
+                "text-[#fbbf24]": ['connecting', 'reconnecting'].includes(connectionStatus),
+                "text-[#f87171]": connectionStatus === 'error',
+                "text-[#94a3b8]": connectionStatus === 'idle'
+              })}>
+                <span className="h-2 w-2 rounded-full bg-current" />
                 {formatStatus(connectionStatus)}
               </span>
-              <span className="header-stat">{totalCards} cards</span>
-              <span className="header-stat">{totalColumns} columns</span>
-              <span className="header-stat">Synced {formatSyncTime(lastSyncedAt)}</span>
-              <button type="button" className="ghost-button" onClick={resetBoard} disabled={!board}>
-                Reset
-              </button>
+              <span className="text-muted">{totalCards} cards</span>
+              <span className="text-muted">{totalColumns} columns</span>
+              <span className="text-muted">Synced {formatSyncTime(lastSyncedAt)}</span>
+              <Button variant="ghost" onClick={resetBoard} disabled={!board}>Reset</Button>
             </>
           ) : null}
         </div>
       </header>
 
-      <main className="workspace-shell">
-        <section className="board-shell surface">
-          {error ? <div className="board-error">{error}</div> : null}
+      <main className="relative flex-1 overflow-hidden p-4 md:p-6">
+        <section className="h-full flex flex-col">
+          {error ? <div className="mb-4 rounded-md border border-red-400/20 bg-red-900/10 p-3 text-sm text-red-200">{error}</div> : null}
 
           {!hasWorkspace ? (
-            <div className="board-empty-state developer-state">
+            <div className="flex flex-1 flex-col items-center justify-center text-muted text-sm">
               <p>Environment not configured</p>
             </div>
           ) : null}
 
           {hasWorkspace && isHydrating ? (
-            <div className="board-empty-state">
+            <div className="flex flex-1 flex-col items-center justify-center text-muted text-sm">
               <p>Loading board...</p>
             </div>
           ) : null}
 
           {hasWorkspace && !isHydrating && !board ? (
-            <div className="board-empty-state">
+            <div className="flex flex-1 flex-col items-center justify-center text-muted text-sm gap-3">
               <p>No board found</p>
-              <button type="button" className="primary-button" onClick={seedBoard} disabled={!activeConfig}>
-                Create board
-              </button>
+              <Button variant="primary" onClick={seedBoard} disabled={!activeConfig}>Create board</Button>
             </div>
           ) : null}
 
           {hasWorkspace && board ? (
-            <DndContext
+            <BoardView
+              board={board}
               sensors={sensors}
-              collisionDetection={customCollisionDetection}
-              measuring={{
-                droppable: {
-                  strategy: MeasuringStrategy.Always,
-                },
-              }}
+              pulsingCardIds={pulsingCardIds}
+              selectedCardId={selectedCardId}
+              dropTarget={dropTarget}
+              dragState={dragState}
+              composerValue={composerValue}
+              composerOpen={composerOpen}
               onDragStart={handleDragStart}
               onDragOver={handleDragOver}
               onDragEnd={handleDragEnd}
-              onDragCancel={handleDragCancel}
-            >
-              <div className="lanes-scroll">
-                {board.columns.map((column) => (
-                  <LaneColumn
-                    key={column.id}
-                    column={column}
-                    cards={cardsByColumn.get(column.id) ?? []}
-                    composerValue={composerValue[column.id] ?? ''}
-                    isComposerOpen={composerOpen[column.id] ?? false}
-                    pulsingCardIds={pulsingCardIds}
-                    selectedCardId={selectedCardId}
-                    dropTarget={dropTarget}
-                    onComposerChange={(value) =>
-                      setComposerValue((current) => ({ ...current, [column.id]: value }))
-                    }
-                    onComposerOpen={() => handleOpenComposer(column.id)}
-                    onComposerClose={() => handleCloseComposer(column.id)}
-                    onComposerSubmit={() => handleAddCard(column.id)}
-                    onSelectCard={openCard}
-                  />
-                ))}
-              </div>
-
-              <DragOverlay>
-                {draggedCard && draggedColumn ? (
-                  <div
-                    className="pulse-card pulse-card-overlay"
-                    style={{ '--column-accent': draggedColumn.accent } as CSSProperties}
-                  >
-                    <CardFace card={draggedCard} />
-                  </div>
-                ) : null}
-              </DragOverlay>
-            </DndContext>
+              onDragCancel={() => { setDragState(null); setDropTarget(null); }}
+              onComposerChange={(id, val) => setComposerValue(c => ({ ...c, [id]: val }))}
+              onComposerOpen={(id) => setComposerOpen(c => ({ ...c, [id]: true }))}
+              onComposerClose={(id) => { setComposerOpen(c => ({ ...c, [id]: false })); setComposerValue(c => ({ ...c, [id]: '' })) }}
+              onComposerSubmit={handleAddCard}
+              onSelectCard={openCard}
+            />
           ) : null}
         </section>
       </main>
 
       {selectedCard && cardDraft ? (
-        <aside className="detail-drawer surface">
-          <div className="detail-head">
+        <aside className="fixed top-4 right-4 z-20 w-full max-w-sm h-[calc(100vh-2rem)] overflow-y-auto rounded-xl border border-white/8 bg-[#191a1b] p-5 shadow-2xl animate-[drawer-enter_0.2s_ease-out]">
+          <div className="flex items-start justify-between mb-6">
             <div>
-              <p className="eyebrow">Card detail</p>
-              <h2>{selectedCard.title}</h2>
+              <p className="text-[10px] uppercase tracking-wider text-muted font-bold mb-1">Card detail</p>
+              <h2 className="text-lg font-bold text-white">{selectedCard.title}</h2>
               {selectedColumn ? (
-                <span className="column-badge" style={{ '--column-accent': selectedColumn.accent } as CSSProperties}>
+                <span className="inline-flex items-center mt-2 rounded-full border border-[color-mix(in_srgb,var(--column-accent)_40%,transparent)] bg-[color-mix(in_srgb,var(--column-accent)_14%,transparent)] px-2.5 py-0.5 text-xs font-medium" style={{ '--column-accent': selectedColumn.accent } as React.CSSProperties}>
                   {selectedColumn.title}
                 </span>
               ) : null}
             </div>
-
-            <button type="button" className="icon-button" onClick={closeCard}>
-              Close
-            </button>
+            <Button variant="ghost" onClick={closeCard}>Close</Button>
           </div>
 
-          <div className="field-stack">
-            <label className="field-block">
-              <span>Title</span>
-              <input
+          <div className="grid gap-4">
+            <div className="grid gap-1.5">
+              <label className="text-xs font-medium text-muted">Title</label>
+              <Input
                 value={cardDraft.title}
-                onChange={(event) =>
-                  setCardDraft((current) =>
-                    current ? { ...current, title: event.target.value } : current,
-                  )
-                }
+                onChange={(e) => setCardDraft(c => c ? { ...c, title: e.target.value } : c)}
               />
-            </label>
+            </div>
 
-            <label className="field-block">
-              <span>Owner</span>
-              <input
+            <div className="grid gap-1.5">
+              <label className="text-xs font-medium text-muted">Owner</label>
+              <Input
                 value={cardDraft.owner}
-                onChange={(event) =>
-                  setCardDraft((current) =>
-                    current ? { ...current, owner: event.target.value } : current,
-                  )
-                }
+                onChange={(e) => setCardDraft(c => c ? { ...c, owner: e.target.value } : c)}
                 placeholder="Lina"
               />
-            </label>
+            </div>
 
-            <label className="field-block">
-              <span>Priority</span>
+            <div className="grid gap-1.5">
+              <label className="text-xs font-medium text-muted">Priority</label>
               <select
+                className="flex h-8 w-full rounded-md border border-white/8 bg-white/2 px-3 text-sm focus:border-brand focus:outline-none"
                 value={cardDraft.priority}
-                onChange={(event) =>
-                  setCardDraft((current) =>
-                    current
-                      ? { ...current, priority: event.target.value as BoardCard['priority'] }
-                      : current,
-                  )
-                }
+                onChange={(e) => setCardDraft(c => c ? { ...c, priority: e.target.value as BoardCard['priority'] } : c)}
               >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
                 <option value="high">High</option>
               </select>
-            </label>
+            </div>
 
-            <label className="field-block">
-              <span>Notes</span>
-              <textarea
+            <div className="grid gap-1.5">
+              <label className="text-xs font-medium text-muted">Notes</label>
+              <Textarea
                 rows={5}
                 value={cardDraft.description}
-                onChange={(event) =>
-                  setCardDraft((current) =>
-                    current ? { ...current, description: event.target.value } : current,
-                  )
-                }
+                onChange={(e) => setCardDraft(c => c ? { ...c, description: e.target.value } : c)}
                 placeholder="Add context, links, or handoff notes."
               />
-            </label>
+            </div>
           </div>
 
-          <div className="detail-meta">
+          <div className="my-6 flex items-center justify-between text-sm text-muted">
             <span>Updated {formatRelativeTime(selectedCard.updatedAt)}</span>
-            <span className={`priority-chip priority-${selectedCard.priority}`}>
+            <span className={cn("inline-flex items-center rounded-full border border-white/8 px-2 py-0.5 text-xs font-medium", {
+              "text-white": selectedCard.priority === 'high',
+              "text-[#d0d6e0]": selectedCard.priority === 'medium',
+              "text-[#62666d]": selectedCard.priority === 'low'
+            })}>
               {selectedCard.priority}
             </span>
           </div>
 
-          <div className="modal-actions">
-            <button type="button" className="danger-button" onClick={handleDeleteCard}>
-              Delete card
-            </button>
-            <button type="button" className="primary-button" onClick={handleSaveCardDraft}>
-              Save changes
-            </button>
+          <div className="flex gap-2">
+            <Button variant="danger" className="flex-1" onClick={handleDeleteCard}>Delete card</Button>
+            <Button variant="primary" className="flex-1" onClick={handleSaveCardDraft}>Save changes</Button>
           </div>
         </aside>
       ) : null}
     </div>
-  )
-}
-
-function LaneColumn({
-  column,
-  cards,
-  composerValue,
-  isComposerOpen,
-  pulsingCardIds,
-  selectedCardId,
-  dropTarget,
-  onComposerChange,
-  onComposerOpen,
-  onComposerClose,
-  onComposerSubmit,
-  onSelectCard,
-}: {
-  column: BoardColumn
-  cards: BoardCard[]
-  composerValue: string
-  isComposerOpen: boolean
-  pulsingCardIds: string[]
-  selectedCardId: string | null
-  dropTarget: DropTarget | null
-  onComposerChange: (value: string) => void
-  onComposerOpen: () => void
-  onComposerClose: () => void
-  onComposerSubmit: () => void
-  onSelectCard: (card: BoardCard) => void
-}) {
-  return (
-    <section className="lane-column">
-      <header className="lane-head">
-        <p className="lane-kicker" style={{ color: column.accent }}>
-          {column.title}
-        </p>
-        <div className="lane-head-meta">
-          <span className="lane-count">{cards.length}</span>
-          <span className="lane-dot" style={{ background: column.accent }} />
-        </div>
-      </header>
-
-      <div className="lane-stack">
-        {cards.map((card, index) => (
-          <div key={card.id} className="lane-item">
-            <DropSlot
-              columnId={column.id}
-              index={index}
-              accent={column.accent}
-              isActive={dropTarget?.columnId === column.id && dropTarget.index === index}
-            />
-
-            <DraggableCard
-              card={card}
-              index={index}
-              columnAccent={column.accent}
-              isPulsing={pulsingCardIds.includes(card.id)}
-              isSelected={selectedCardId === card.id}
-              onSelectCard={onSelectCard}
-            />
-          </div>
-        ))}
-
-        {cards.length > 0 ? (
-          <DropSlot
-            columnId={column.id}
-            index={cards.length}
-            accent={column.accent}
-            isActive={dropTarget?.columnId === column.id && dropTarget.index === cards.length}
-            isTerminal
-          />
-        ) : null}
-
-        <LaneBlankDropZone
-          columnId={column.id}
-          index={cards.length}
-          accent={column.accent}
-          isActive={cards.length === 0 && dropTarget?.columnId === column.id && dropTarget.index === cards.length}
-          isDisabled={cards.length > 0}
-        />
-      </div>
-
-      {isComposerOpen ? (
-        <form
-          className="composer-card"
-          onSubmit={(event) => {
-            event.preventDefault()
-            onComposerSubmit()
-          }}
-        >
-          <input
-            value={composerValue}
-            onChange={(event) => onComposerChange(event.target.value)}
-            placeholder={`Write the next move for ${column.title}`}
-          />
-          <div className="composer-actions">
-            <button type="button" className="ghost-button" onClick={onComposerClose}>
-              Cancel
-            </button>
-            <button type="submit" className="primary-button">
-              Save card
-            </button>
-          </div>
-        </form>
-      ) : (
-        <button type="button" className="add-card-button" onClick={onComposerOpen}>
-          + New card
-        </button>
-      )}
-    </section>
-  )
-}
-
-function DraggableCard({
-  card,
-  index,
-  columnAccent,
-  isPulsing,
-  isSelected,
-  onSelectCard,
-}: {
-  card: BoardCard
-  index: number
-  columnAccent: string
-  isPulsing: boolean
-  isSelected: boolean
-  onSelectCard: (card: BoardCard) => void
-}) {
-  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
-    id: card.id,
-    data: {
-      type: 'card',
-      cardId: card.id,
-      columnId: card.columnId,
-      index,
-    },
-  })
-
-  const style = {
-    '--column-accent': columnAccent,
-    opacity: isDragging ? 0.3 : 1,
-  } as CSSProperties
-
-  return (
-    <button
-      ref={setNodeRef}
-      type="button"
-      className={`pulse-card${isSelected ? ' pulse-card-active' : ''}${isPulsing ? ' pulse-card-remote' : ''}${isDragging ? ' pulse-card-dragging' : ''}`}
-      style={style}
-      onClick={() => onSelectCard(card)}
-      {...attributes}
-      {...listeners}
-    >
-      <CardFace card={card} />
-    </button>
-  )
-}
-
-function CardFace({ card }: { card: BoardCard }) {
-  return (
-    <>
-      <div className="card-topline">
-        <span className="tiny-mono card-id">{card.id.slice(0, 8)}</span>
-        <span className={`priority-dot priority-${card.priority}`} aria-hidden="true" />
-      </div>
-      <div className="card-title-row">
-        <h4>{card.title}</h4>
-        <span className={`priority-chip priority-${card.priority}`}>{card.priority}</span>
-      </div>
-      {card.description ? <p>{card.description}</p> : null}
-      <div className="card-footer">
-        <span>{card.owner || 'Unassigned'}</span>
-        <span className="tiny-mono">{formatRelativeTime(card.updatedAt)}</span>
-      </div>
-    </>
-  )
-}
-
-function DropSlot({
-  columnId,
-  index,
-  accent,
-  isActive,
-  isTerminal = false,
-}: {
-  columnId: string
-  index: number
-  accent: string
-  isActive: boolean
-  isTerminal?: boolean
-}) {
-  const { setNodeRef } = useDroppable({
-    id: `slot:${columnId}:${index}`,
-    data: {
-      type: 'slot',
-      columnId,
-      index,
-    },
-  })
-
-  return (
-    <div
-      ref={setNodeRef}
-      className={`drop-slot${isActive ? ' drop-slot-active' : ''}${isTerminal ? ' drop-slot-terminal' : ''}`}
-      style={{ '--column-accent': accent } as CSSProperties}
-      aria-hidden="true"
-    />
-  )
-}
-
-function LaneBlankDropZone({
-  columnId,
-  index,
-  accent,
-  isActive,
-  isDisabled,
-}: {
-  columnId: string
-  index: number
-  accent: string
-  isActive: boolean
-  isDisabled: boolean
-}) {
-  const { setNodeRef } = useDroppable({
-    id: `lane:${columnId}`,
-    data: {
-      type: 'lane-body',
-      columnId,
-      index,
-    },
-    disabled: isDisabled,
-  })
-
-  return (
-    <div
-      ref={setNodeRef}
-      className={`lane-blank-drop${isActive ? ' lane-blank-drop-active' : ''}`}
-      style={{ '--column-accent': accent } as CSSProperties}
-      aria-hidden="true"
-    />
   )
 }
 
@@ -674,71 +331,36 @@ function hasRequiredConfig(config: typeof DEFAULT_CONFIG) {
 
 function formatStatus(status: ReturnType<typeof usePulselane>['connectionStatus']) {
   switch (status) {
-    case 'live':
-      return 'Pulse active'
-    case 'connecting':
-      return 'Connecting'
-    case 'reconnecting':
-      return 'Reconnecting'
-    case 'error':
-      return 'Link degraded'
-    default:
-      return 'Idle'
+    case 'live': return 'Pulse active'
+    case 'connecting': return 'Connecting'
+    case 'reconnecting': return 'Reconnecting'
+    case 'error': return 'Link degraded'
+    default: return 'Idle'
   }
 }
 
 function formatSyncTime(timestamp: number | null) {
-  if (!timestamp) {
-    return 'No sync yet'
-  }
-
-  return new Date(timestamp).toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  })
+  if (!timestamp) return 'No sync yet'
+  return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 }
 
 function formatRelativeTime(timestamp: number) {
   const deltaSeconds = Math.max(1, Math.round((Date.now() - timestamp) / 1000))
-
-  if (deltaSeconds < 60) {
-    return `${deltaSeconds}s ago`
-  }
-
-  if (deltaSeconds < 3600) {
-    return `${Math.round(deltaSeconds / 60)}m ago`
-  }
-
+  if (deltaSeconds < 60) return `${deltaSeconds}s ago`
+  if (deltaSeconds < 3600) return `${Math.round(deltaSeconds / 60)}m ago`
   return `${Math.round(deltaSeconds / 3600)}h ago`
 }
 
 function resolveDropTarget(activeData: unknown, overData: unknown): DropTarget | null {
-  if (
-    !isRecord(activeData) ||
-    !isRecord(overData) ||
-    (overData.type !== 'slot' && overData.type !== 'lane-body')
-  ) {
-    return null
-  }
-
+  if (!isRecord(activeData) || !isRecord(overData) || (overData.type !== 'slot' && overData.type !== 'lane-body')) return null
   const columnId = String(overData.columnId)
   const rawIndex = Number(overData.index)
-
-  if (Number.isNaN(rawIndex)) {
-    return null
-  }
-
-  return {
-    columnId,
-    index: Math.max(rawIndex, 0),
-  }
+  if (Number.isNaN(rawIndex)) return null
+  return { columnId, index: Math.max(rawIndex, 0) }
 }
 
 function areDropTargetsEqual(left: DropTarget | null, right: DropTarget | null) {
-  if (!left || !right) {
-    return left === right
-  }
-
+  if (!left || !right) return left === right
   return left.columnId === right.columnId && left.index === right.index
 }
 
