@@ -573,27 +573,38 @@ textarea {
 
 .lane-item {
   display: grid;
-  gap: 8px;
+  gap: 0;
 }
 
 .drop-slot {
-  height: 0;
-  border-radius: 16px;
-  border: 1px dashed transparent;
+  height: 8px;
+  border-radius: 4px;
   background: transparent;
   opacity: 0;
-  transition: height 160ms ease, opacity 160ms ease, border-color 160ms ease, background 160ms ease;
+  transition: opacity 160ms ease, background 160ms ease;
 }
 
 .drop-slot-active {
-  height: 4.2rem;
   opacity: 1;
-  border-color: color-mix(in srgb, var(--column-accent, #38bdf8) 68%, transparent);
-  background: color-mix(in srgb, var(--column-accent, #38bdf8) 10%, transparent);
+  background: var(--column-accent, #38bdf8);
 }
 
 .drop-slot-terminal {
   margin-top: auto;
+}
+
+.lane-blank-drop {
+  flex: 1 0 3.5rem;
+  min-height: 3.5rem;
+  border-radius: 16px;
+  border: 1px dashed transparent;
+  background: transparent;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.lane-blank-drop-active {
+  border-color: color-mix(in srgb, var(--column-accent, #38bdf8) 68%, transparent);
+  background: color-mix(in srgb, var(--column-accent, #38bdf8) 10%, transparent);
 }
 
 .pulse-card {
@@ -606,6 +617,7 @@ textarea {
   color: inherit;
   box-shadow: none;
   transition: border-color 150ms ease, background 150ms ease;
+  touch-action: none;
 }
 
 .pulse-card:hover {

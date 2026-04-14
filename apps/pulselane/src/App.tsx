@@ -1,23 +1,39 @@
 import {
   DndContext,
   DragOverlay,
+  MeasuringStrategy,
   PointerSensor,
+  closestCenter,
+  pointerWithin,
   useDraggable,
   useDroppable,
   useSensor,
   useSensors,
+  type CollisionDetection,
   type DragEndEvent,
   type DragOverEvent,
   type DragStartEvent,
 } from '@dnd-kit/core'
-import { CSS } from '@dnd-kit/utilities'
-import { useEffect, useState, type CSSProperties } from 'react'
+import { useEffect, useMemo, useState, type CSSProperties } from 'react'
 import { addCard, deleteCard, getCardsForColumn, moveCard, updateCard } from './features/pulselane/board'
 import { DEFAULT_DOCUMENT_PATH, getDefaultConfig } from './features/pulselane/schema'
 import { usePulselane } from './features/pulselane/use-pulselane'
 import type { BoardCard, BoardColumn } from './features/pulselane/types'
 
 const DEFAULT_CONFIG = getDefaultConfig()
+
+const customCollisionDetection: CollisionDetection = (args) => {
+  const pointerCollisions = pointerWithin(args)
+  const slotCollision = pointerCollisions.find(
+    (c) => c.data?.droppableContainer?.data?.current?.type === 'slot'
+  )
+
+  if (slotCollision) {
+    return [slotCollision]
+  }
+
+  return closestCenter(args)
+}
 
 interface DraftCardEditor {
   title: string
@@ -65,6 +81,13 @@ function App() {
   const totalCards = board?.cards.length ?? 0
   const totalColumns = board?.columns.length ?? 0
   const hasWorkspace = Boolean(activeConfig)
+  const cardsByColumn = useMemo(() => {
+    if (!board) {
+      return new Map<string, BoardCard[]>()
+    }
+
+    return new Map(board.columns.map((column) => [column.id, getCardsForColumn(board, column.id)]))
+  }, [board])
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -167,14 +190,25 @@ function App() {
 
   const handleDragOver = (event: DragOverEvent) => {
     const nextTarget = resolveDropTarget(event.active.data.current, event.over?.data.current)
-    setDropTarget(nextTarget)
+    setDropTarget((current) => (areDropTargetsEqual(current, nextTarget) ? current : nextTarget))
   }
 
   const handleDragEnd = (event: DragEndEvent) => {
     const nextTarget = resolveDropTarget(event.active.data.current, event.over?.data.current)
 
     if (board && nextTarget) {
-      commit((currentBoard) => moveCard(currentBoard, String(event.active.id), nextTarget.columnId, nextTarget.index))
+      let finalIndex = nextTarget.index
+      const activeData = event.active.data.current
+      
+      if (
+        isRecord(activeData) &&
+        String(activeData.columnId) === nextTarget.columnId &&
+        Number(activeData.index) < nextTarget.index
+      ) {
+        finalIndex = nextTarget.index - 1
+      }
+
+      commit((currentBoard) => moveCard(currentBoard, String(event.active.id), nextTarget.columnId, finalIndex))
     }
 
     setDragState(null)
@@ -248,6 +282,12 @@ function App() {
           {hasWorkspace && board ? (
             <DndContext
               sensors={sensors}
+              collisionDetection={customCollisionDetection}
+              measuring={{
+                droppable: {
+                  strategy: MeasuringStrategy.Always,
+                },
+              }}
               onDragStart={handleDragStart}
               onDragOver={handleDragOver}
               onDragEnd={handleDragEnd}
@@ -258,7 +298,7 @@ function App() {
                   <LaneColumn
                     key={column.id}
                     column={column}
-                    cards={getCardsForColumn(board, column.id)}
+                    cards={cardsByColumn.get(column.id) ?? []}
                     composerValue={composerValue[column.id] ?? ''}
                     isComposerOpen={composerOpen[column.id] ?? false}
                     pulsingCardIds={pulsingCardIds}
@@ -448,12 +488,22 @@ function LaneColumn({
           </div>
         ))}
 
-        <DropSlot
+        {cards.length > 0 ? (
+          <DropSlot
+            columnId={column.id}
+            index={cards.length}
+            accent={column.accent}
+            isActive={dropTarget?.columnId === column.id && dropTarget.index === cards.length}
+            isTerminal
+          />
+        ) : null}
+
+        <LaneBlankDropZone
           columnId={column.id}
           index={cards.length}
           accent={column.accent}
-          isActive={dropTarget?.columnId === column.id && dropTarget.index === cards.length}
-          isTerminal
+          isActive={cards.length === 0 && dropTarget?.columnId === column.id && dropTarget.index === cards.length}
+          isDisabled={cards.length > 0}
         />
       </div>
 
@@ -503,7 +553,7 @@ function DraggableCard({
   isSelected: boolean
   onSelectCard: (card: BoardCard) => void
 }) {
-  const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
     id: card.id,
     data: {
       type: 'card',
@@ -515,7 +565,6 @@ function DraggableCard({
 
   const style = {
     '--column-accent': columnAccent,
-    transform: CSS.Transform.toString(transform),
     opacity: isDragging ? 0.3 : 1,
   } as CSSProperties
 
@@ -567,7 +616,7 @@ function DropSlot({
   isActive: boolean
   isTerminal?: boolean
 }) {
-  const { setNodeRef, isOver } = useDroppable({
+  const { setNodeRef } = useDroppable({
     id: `slot:${columnId}:${index}`,
     data: {
       type: 'slot',
@@ -579,7 +628,40 @@ function DropSlot({
   return (
     <div
       ref={setNodeRef}
-      className={`drop-slot${isActive || isOver ? ' drop-slot-active' : ''}${isTerminal ? ' drop-slot-terminal' : ''}`}
+      className={`drop-slot${isActive ? ' drop-slot-active' : ''}${isTerminal ? ' drop-slot-terminal' : ''}`}
+      style={{ '--column-accent': accent } as CSSProperties}
+      aria-hidden="true"
+    />
+  )
+}
+
+function LaneBlankDropZone({
+  columnId,
+  index,
+  accent,
+  isActive,
+  isDisabled,
+}: {
+  columnId: string
+  index: number
+  accent: string
+  isActive: boolean
+  isDisabled: boolean
+}) {
+  const { setNodeRef } = useDroppable({
+    id: `lane:${columnId}`,
+    data: {
+      type: 'lane-body',
+      columnId,
+      index,
+    },
+    disabled: isDisabled,
+  })
+
+  return (
+    <div
+      ref={setNodeRef}
+      className={`lane-blank-drop${isActive ? ' lane-blank-drop-active' : ''}`}
       style={{ '--column-accent': accent } as CSSProperties}
       aria-hidden="true"
     />
@@ -631,26 +713,33 @@ function formatRelativeTime(timestamp: number) {
 }
 
 function resolveDropTarget(activeData: unknown, overData: unknown): DropTarget | null {
-  if (!isRecord(activeData) || !isRecord(overData) || overData.type !== 'slot') {
+  if (
+    !isRecord(activeData) ||
+    !isRecord(overData) ||
+    (overData.type !== 'slot' && overData.type !== 'lane-body')
+  ) {
     return null
   }
 
   const columnId = String(overData.columnId)
   const rawIndex = Number(overData.index)
-  const sourceColumnId = String(activeData.columnId)
-  const sourceIndex = Number(activeData.index)
 
-  if (Number.isNaN(rawIndex) || Number.isNaN(sourceIndex)) {
+  if (Number.isNaN(rawIndex)) {
     return null
   }
 
-  const adjustedIndex =
-    sourceColumnId === columnId && sourceIndex < rawIndex ? rawIndex - 1 : rawIndex
-
   return {
     columnId,
-    index: Math.max(adjustedIndex, 0),
+    index: Math.max(rawIndex, 0),
   }
+}
+
+function areDropTargetsEqual(left: DropTarget | null, right: DropTarget | null) {
+  if (!left || !right) {
+    return left === right
+  }
+
+  return left.columnId === right.columnId && left.index === right.index
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
