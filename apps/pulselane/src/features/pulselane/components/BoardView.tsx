@@ -80,7 +80,7 @@ export function BoardView({
       onDragEnd={onDragEnd}
       onDragCancel={onDragCancel}
     >
-      <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-thin">
+      <div className="flex gap-4 overflow-x-auto pb-2">
         {board.columns.map((column) => (
           <LaneColumn
             key={column.id}
@@ -103,10 +103,7 @@ export function BoardView({
 
       <DragOverlay>
         {draggedCard && draggedColumn ? (
-          <div
-            className="border border-white/5 rounded-lg p-3 bg-white/5 shadow-2xl pulse-card-overlay"
-            style={{ '--column-accent': draggedColumn.accent } as React.CSSProperties}
-          >
+          <div className="border border-white/5 rounded-lg p-3 bg-white/5 shadow-2xl">
             <CardFace card={draggedCard} now={now} />
           </div>
         ) : null}
