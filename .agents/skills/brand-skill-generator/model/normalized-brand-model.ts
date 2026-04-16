@@ -150,6 +150,13 @@ export interface IBrandSkillSourcePlanItem {
   exclusionReason: string | null
 }
 
+export interface IBrandSkillCachedDesignMdInfo {
+  absolutePath: string
+  displayPath: string
+  lookupMode: "exact-slug" | "catalog-fallback"
+  matchedSlug: string
+}
+
 export interface IBrandSkillPreflightResult {
   status: BrandSkillPreflightStatus
   knownInputs: string[]
@@ -159,6 +166,7 @@ export interface IBrandSkillPreflightResult {
   issues: IBrandSkillValidationIssue[]
   nextQuestion: IBrandSkillPreflightQuestion | null
   sourcePlan: IBrandSkillSourcePlanItem[]
+  cachedDesignMd: IBrandSkillCachedDesignMdInfo | null
 }
 
 export interface IBrandSkillPlannedFile {

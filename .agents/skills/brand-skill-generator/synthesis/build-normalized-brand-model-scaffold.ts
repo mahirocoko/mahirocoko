@@ -243,10 +243,34 @@ const collectSourceSignals = (
         ]
       }
 
+      if (sourceType === "brand-docs" && category === "visual-system") {
+        return [
+          sourceRecord.metadata.design_md_visual_theme,
+          ...readJsonArray(sourceRecord.metadata.design_md_color_roles),
+          ...readJsonArray(sourceRecord.metadata.design_md_typography_scale),
+          ...readJsonArray(sourceRecord.metadata.design_md_typography_principles),
+          ...readJsonArray(sourceRecord.metadata.design_md_layout_principles),
+        ].filter((value): value is string => Boolean(value))
+      }
+
+      if (sourceType === "brand-docs" && category === "design-system") {
+        return [
+          ...readJsonArray(sourceRecord.metadata.design_md_component_patterns),
+          ...readJsonArray(sourceRecord.metadata.design_md_layout_principles),
+          ...readJsonArray(sourceRecord.metadata.design_md_responsive),
+          ...readJsonArray(sourceRecord.metadata.design_md_dos).map((value) => `Do: ${value}`),
+          ...readJsonArray(sourceRecord.metadata.design_md_donts).map((value) => `Don't: ${value}`),
+        ]
+      }
+
       if (sourceType === "brand-docs" && category === "constraints") {
-        return sourceRecord.textSamples
-          .map((sample) => sample.content)
-          .filter((content) => /\b(must|should|avoid|prefer|never)\b/i.test(content))
+        return [
+          ...readJsonArray(sourceRecord.metadata.design_md_dos).map((value) => `Do: ${value}`),
+          ...readJsonArray(sourceRecord.metadata.design_md_donts).map((value) => `Don't: ${value}`),
+          ...sourceRecord.textSamples
+            .map((sample) => sample.content)
+            .filter((content) => /\b(must|should|avoid|prefer|never)\b/i.test(content)),
+        ]
       }
 
       if (sourceType === "screenshot-dir" && category === "brand-identity") {
@@ -291,6 +315,16 @@ const collectSourceMetadataValues = (
   sourceInventory.sourceRecords
     .filter((sourceRecord) => sourceRecord.sourceType === sourceType)
     .flatMap((sourceRecord) => readJsonArray(sourceRecord.metadata[key]))
+
+const collectSourceMetadataScalars = (
+  sourceInventory: IBrandSourceInventory,
+  sourceType: BrandSourceType,
+  key: string,
+) =>
+  sourceInventory.sourceRecords
+    .filter((sourceRecord) => sourceRecord.sourceType === sourceType)
+    .map((sourceRecord) => sourceRecord.metadata[key])
+    .filter((value): value is string => Boolean(value))
 
 const collectSourceSamples = (sourceInventory: IBrandSourceInventory, sourceType: BrandSourceType) =>
   sourceInventory.sourceRecords
@@ -821,12 +855,69 @@ const buildDesignSystemRules = (
   )
   const codeIds = collectSourceIds(sourceInventory, "code-reference")
   const screenshotIds = collectSourceIds(sourceInventory, "screenshot-dir")
+  const docsIds = collectSourceIds(sourceInventory, "brand-docs")
   const exportNames = collectSourceMetadataValues(sourceInventory, "code-reference", "export_names")
     .filter(isLikelySystemExport)
     .slice(0, 8)
   const styleTokens = collectSourceMetadataValues(sourceInventory, "code-reference", "style_tokens").slice(0, 8)
   const screenshotColors = collectSourceMetadataValues(sourceInventory, "screenshot-dir", "svg_colors").slice(0, 6)
+  const designMdComponentPatterns = collectSourceMetadataValues(
+    sourceInventory,
+    "brand-docs",
+    "design_md_component_patterns",
+  ).slice(0, 6)
+  const designMdLayoutPrinciples = collectSourceMetadataValues(
+    sourceInventory,
+    "brand-docs",
+    "design_md_layout_principles",
+  ).slice(0, 6)
+  const designMdResponsive = collectSourceMetadataValues(
+    sourceInventory,
+    "brand-docs",
+    "design_md_responsive",
+  ).slice(0, 4)
+  const designMdDos = collectSourceMetadataValues(sourceInventory, "brand-docs", "design_md_dos")
+    .slice(0, 4)
+    .map((value) => `Do: ${value}`)
+  const designMdDonts = collectSourceMetadataValues(sourceInventory, "brand-docs", "design_md_donts")
+    .slice(0, 4)
+    .map((value) => `Don't: ${value}`)
   const rules: IBrandRuleRecord[] = []
+
+  if (designMdComponentPatterns.length > 0) {
+    rules.push(
+      createRuleRecord(
+        "design-system-component-patterns",
+        "Component patterns",
+        `Keep reusable UI patterns aligned with documented DESIGN.md guidance such as ${quoteList(designMdComponentPatterns)}.`,
+        docsIds,
+        "high",
+        "Derived from explicit component and UI pattern guidance in DESIGN.md brand docs.",
+      ),
+    )
+  }
+
+  if (designMdLayoutPrinciples.length > 0 || designMdResponsive.length > 0) {
+    const layoutParts = [
+      designMdLayoutPrinciples.length > 0
+        ? `layout principles such as ${quoteList(designMdLayoutPrinciples)}`
+        : null,
+      designMdResponsive.length > 0
+        ? `responsive guidance like ${quoteList(designMdResponsive)}`
+        : null,
+    ].filter((value): value is string => Boolean(value))
+
+    rules.push(
+      createRuleRecord(
+        "design-system-layout-rhythm",
+        "Layout rhythm",
+        `Compose reusable surfaces around ${layoutParts.join(" and ")}.`,
+        docsIds,
+        "high",
+        "Derived from explicit layout and responsive guidance in DESIGN.md brand docs.",
+      ),
+    )
+  }
 
   if (exportNames.length >= 2) {
     rules.push(
@@ -859,20 +950,57 @@ const buildDesignSystemRules = (
     )
   }
 
-  if (codeIds.length > 0) {
+  if (
+    codeIds.length > 0 ||
+    designMdDos.length > 0 ||
+    designMdDonts.length > 0 ||
+    designMdComponentPatterns.length > 0 ||
+    designMdLayoutPrinciples.length > 0
+  ) {
+    const docBoundaryExamples = [...designMdDos, ...designMdDonts].slice(0, 4)
+    const implementationParts = [
+      codeIds.length > 0
+        ? "Keep brand primitives centralized behind explicit exports so downstream surfaces compose the system instead of redefining it ad hoc."
+        : null,
+      docBoundaryExamples.length > 0
+        ? `Honor documented system guidance such as ${quoteList(docBoundaryExamples)}.`
+        : designMdComponentPatterns.length > 0 || designMdLayoutPrinciples.length > 0
+          ? "Honor documented system guidance so downstream surfaces compose the same system instead of redefining it ad hoc."
+          : null,
+    ].filter((value): value is string => Boolean(value))
+
+    const implementationSummary = implementationParts.join(" ")
+
     rules.push(
       createRuleRecord(
         "design-system-implementation-boundary",
         "Implementation boundary",
-        "Keep brand primitives centralized behind explicit exports so downstream surfaces compose the system instead of redefining it ad hoc.",
-        codeIds,
-        "medium",
-        "Inferred from the presence of reusable exports and shared reference files in the code source.",
+        implementationSummary,
+        codeIds.length > 0 ? [...codeIds, ...docsIds] : docsIds,
+        codeIds.length > 0 && docsIds.length === 0 ? "medium" : "high",
+        codeIds.length > 0 && docsIds.length > 0
+          ? "Combined from reusable code exports and explicit system do/don't guidance in DESIGN.md brand docs."
+          : codeIds.length > 0
+            ? "Inferred from the presence of reusable exports and shared reference files in the code source."
+            : "Derived from explicit system do/don't guidance in DESIGN.md brand docs.",
       ),
     )
   }
 
-  return rules.length > 0 ? rules.slice(0, 3) : fallbackRules
+  if (rules.length === 0) {
+    return fallbackRules
+  }
+
+  const requiredRuleIds = new Set([
+    "design-system-component-patterns",
+    "design-system-layout-rhythm",
+    "design-system-token-posture",
+    "design-system-implementation-boundary",
+  ])
+  const prioritizedRules = rules.filter((rule) => requiredRuleIds.has(rule.id))
+  const remainingRules = rules.filter((rule) => !requiredRuleIds.has(rule.id))
+
+  return [...prioritizedRules, ...remainingRules]
 }
 
 const buildVisualSystemRules = (
@@ -888,13 +1016,72 @@ const buildVisualSystemRules = (
   )
   const screenshotIds = collectSourceIds(sourceInventory, "screenshot-dir")
   const codeIds = collectSourceIds(sourceInventory, "code-reference")
+  const docsIds = collectSourceIds(sourceInventory, "brand-docs")
   const screenshotColors = collectSourceMetadataValues(sourceInventory, "screenshot-dir", "svg_colors")
     .filter((value) => /^#[0-9a-fA-F]{6}$/.test(value))
     .slice(0, 10)
   const darkColors = screenshotColors.filter(isDarkHexColor).slice(0, 3)
   const brightColors = screenshotColors.filter(isBrightHexColor).slice(0, 4)
   const styleTokens = collectSourceMetadataValues(sourceInventory, "code-reference", "style_tokens").slice(0, 8)
+  const designMdColorRoles = collectSourceMetadataValues(
+    sourceInventory,
+    "brand-docs",
+    "design_md_color_roles",
+  ).slice(0, 6)
+  const designMdVisualThemes = collectSourceMetadataScalars(
+    sourceInventory,
+    "brand-docs",
+    "design_md_visual_theme",
+  ).slice(0, 2)
+  const designMdTypographyScale = collectSourceMetadataValues(
+    sourceInventory,
+    "brand-docs",
+    "design_md_typography_scale",
+  ).slice(0, 4)
+  const designMdTypographyPrinciples = collectSourceMetadataValues(
+    sourceInventory,
+    "brand-docs",
+    "design_md_typography_principles",
+  ).slice(0, 4)
   const rules: IBrandRuleRecord[] = []
+
+  if (designMdVisualThemes.length > 0 || designMdColorRoles.length > 0) {
+    const visualParts = [
+      designMdVisualThemes.length > 0 ? `documented visual themes like ${quoteList(designMdVisualThemes)}` : null,
+      designMdColorRoles.length > 0 ? `color roles such as ${quoteList(designMdColorRoles)}` : null,
+    ].filter((value): value is string => Boolean(value))
+
+    rules.push(
+      createRuleRecord(
+        "visual-system-design-md-foundation",
+        "Documented visual foundation",
+        `Anchor the visual system in ${visualParts.join(" and ")}.`,
+        docsIds,
+        "high",
+        "Derived from explicit visual-system guidance captured from DESIGN.md brand docs.",
+      ),
+    )
+  }
+
+  if (designMdTypographyScale.length > 0 || designMdTypographyPrinciples.length > 0) {
+    const typographyParts = [
+      designMdTypographyScale.length > 0 ? `type scales like ${quoteList(designMdTypographyScale)}` : null,
+      designMdTypographyPrinciples.length > 0
+        ? `documented principles such as ${quoteList(designMdTypographyPrinciples)}`
+        : null,
+    ].filter((value): value is string => Boolean(value))
+
+    rules.push(
+      createRuleRecord(
+        "visual-system-typography-foundation",
+        "Typography foundation",
+        `Keep typography aligned with ${typographyParts.join(" and ")}.`,
+        docsIds,
+        "high",
+        "Derived from explicit typography guidance in DESIGN.md brand docs.",
+      ),
+    )
+  }
 
   if (darkColors.length > 0 || brightColors.length > 0) {
     const paletteParts = [
@@ -1026,6 +1213,8 @@ const buildProductUiProfileRules = ({
   const guardrails = findRuleById(interactionBehavior, "interaction-operational-guardrails")
   const ctaPosture = findRuleById(voice, "voice-cta-posture")
   const avoidGenericCta = findRuleById(voice, "voice-avoid-generic-cta")
+  const componentPatterns = findRuleById(designSystem, "design-system-component-patterns")
+  const layoutRhythm = findRuleById(designSystem, "design-system-layout-rhythm")
   const tokenPosture = findRuleById(designSystem, "design-system-token-posture")
   const implementationBoundary = findRuleById(designSystem, "design-system-implementation-boundary")
   const rules: IBrandRuleRecord[] = []
@@ -1056,13 +1245,17 @@ const buildProductUiProfileRules = ({
     )
   }
 
-  if (tokenPosture || implementationBoundary) {
+  if (componentPatterns || layoutRhythm || tokenPosture || implementationBoundary) {
     rules.push(
       createRuleRecord(
         "product-ui-system-reuse",
         "System reuse",
-        `Build product screens from the shared system first, then customize only where the product truly needs it.${tokenPosture ? ` ${tokenPosture.summary}` : ""}${implementationBoundary ? ` ${implementationBoundary.summary}` : ""}`,
-        combineRuleSourceIds([tokenPosture, implementationBoundary].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        `Build product screens from the shared system first, then customize only where the product truly needs it.${componentPatterns ? ` ${componentPatterns.summary}` : ""}${layoutRhythm ? ` ${layoutRhythm.summary}` : ""}${tokenPosture ? ` ${tokenPosture.summary}` : ""}${implementationBoundary ? ` ${implementationBoundary.summary}` : ""}`,
+        combineRuleSourceIds(
+          [componentPatterns, layoutRhythm, tokenPosture, implementationBoundary].filter(
+            (rule): rule is IBrandRuleRecord => Boolean(rule),
+          ),
+        ),
         "medium",
         "Composed from design-system rules so product UI scales through reuse instead of one-off screen styling.",
       ),
@@ -1090,6 +1283,8 @@ const buildDashboardProfileRules = ({
   const guardrails = findRuleById(interactionBehavior, "interaction-operational-guardrails")
   const paletteBalance = findRuleById(visualSystem, "visual-system-palette-balance")
   const contrastPosture = findRuleById(visualSystem, "visual-system-contrast-posture")
+  const componentPatterns = findRuleById(designSystem, "design-system-component-patterns")
+  const layoutRhythm = findRuleById(designSystem, "design-system-layout-rhythm")
   const tokenPosture = findRuleById(designSystem, "design-system-token-posture")
   const implementationBoundary = findRuleById(designSystem, "design-system-implementation-boundary")
   const rules: IBrandRuleRecord[] = []
@@ -1120,13 +1315,17 @@ const buildDashboardProfileRules = ({
     )
   }
 
-  if (tokenPosture || implementationBoundary) {
+  if (componentPatterns || layoutRhythm || tokenPosture || implementationBoundary) {
     rules.push(
       createRuleRecord(
         "dashboard-system-consistency",
         "System consistency",
-        `Keep dashboard surfaces tightly coupled to the shared design system so dense views remain consistent across states and modules.${tokenPosture ? ` ${tokenPosture.summary}` : ""}${implementationBoundary ? ` ${implementationBoundary.summary}` : ""}`,
-        combineRuleSourceIds([tokenPosture, implementationBoundary].filter((rule): rule is IBrandRuleRecord => Boolean(rule))),
+        `Keep dashboard surfaces tightly coupled to the shared design system so dense views remain consistent across states and modules.${componentPatterns ? ` ${componentPatterns.summary}` : ""}${layoutRhythm ? ` ${layoutRhythm.summary}` : ""}${tokenPosture ? ` ${tokenPosture.summary}` : ""}${implementationBoundary ? ` ${implementationBoundary.summary}` : ""}`,
+        combineRuleSourceIds(
+          [componentPatterns, layoutRhythm, tokenPosture, implementationBoundary].filter(
+            (rule): rule is IBrandRuleRecord => Boolean(rule),
+          ),
+        ),
         "medium",
         "Composed from design-system rules to prevent dense information surfaces from drifting into bespoke UI patterns.",
       ),

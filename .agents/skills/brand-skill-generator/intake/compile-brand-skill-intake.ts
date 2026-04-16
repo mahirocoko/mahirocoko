@@ -158,12 +158,18 @@ export const compileBrandSkillIntake = ({
     roles: command.figmaRoles,
     sourceType: "figma-url",
   })
+  const autoAttachedDesignMdPath = preflight.cachedDesignMd?.absolutePath ?? null
 
-  if (command.writeBriefDoc && command.brief.trim() && docsPaths.length === 0) {
+  if (command.writeBriefDoc && command.brief.trim() && docsPaths.length === 0 && !autoAttachedDesignMdPath) {
     generatedBriefPath = buildGeneratedBriefPath(command)
     ensureDirectory(generatedBriefPath)
     fs.writeFileSync(generatedBriefPath, renderGeneratedBrief(command))
     docsPaths.push(generatedBriefPath)
+    docsRoles.push("brand-truth")
+  }
+
+  if (autoAttachedDesignMdPath) {
+    docsPaths.push(autoAttachedDesignMdPath)
     docsRoles.push("brand-truth")
   }
 

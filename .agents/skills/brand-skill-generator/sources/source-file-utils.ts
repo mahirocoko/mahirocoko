@@ -136,6 +136,36 @@ export const walkDirectoryFiles = (
   return files
 }
 
+export const findFirstFileByBasename = (rootDir: string, targetBasename: string): string | null => {
+  const walk = (currentDir: string): string | null => {
+    const entries = fs.readdirSync(currentDir, { withFileTypes: true })
+
+    for (const entry of entries) {
+      const fullPath = path.join(currentDir, entry.name)
+
+      if (entry.isFile() && entry.name === targetBasename) {
+        return fullPath
+      }
+    }
+
+    for (const entry of entries) {
+      if (!entry.isDirectory() || ignoredDirectoryNames.has(entry.name)) {
+        continue
+      }
+
+      const nestedMatch = walk(path.join(currentDir, entry.name))
+
+      if (nestedMatch) {
+        return nestedMatch
+      }
+    }
+
+    return null
+  }
+
+  return walk(rootDir)
+}
+
 export const readTextSample = (
   filePath: string,
   rootDir: string,

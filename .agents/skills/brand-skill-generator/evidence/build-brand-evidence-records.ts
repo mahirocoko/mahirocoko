@@ -167,6 +167,16 @@ const buildWebsiteEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: numbe
 const buildBrandDocsEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: number) => {
   const headings = readJsonArray(sourceRecord.metadata.headings).slice(0, 6)
   const keywords = buildKeywordSummary(sourceRecord)
+  const designMdVisualTheme = sourceRecord.metadata.design_md_visual_theme
+  const designMdKeyCharacteristics = readJsonArray(sourceRecord.metadata.design_md_key_characteristics).slice(0, 6)
+  const designMdColorRoles = readJsonArray(sourceRecord.metadata.design_md_color_roles).slice(0, 8)
+  const designMdTypographyScale = readJsonArray(sourceRecord.metadata.design_md_typography_scale).slice(0, 5)
+  const designMdTypographyPrinciples = readJsonArray(sourceRecord.metadata.design_md_typography_principles).slice(0, 6)
+  const designMdComponentPatterns = readJsonArray(sourceRecord.metadata.design_md_component_patterns).slice(0, 8)
+  const designMdLayoutPrinciples = readJsonArray(sourceRecord.metadata.design_md_layout_principles).slice(0, 8)
+  const designMdDos = readJsonArray(sourceRecord.metadata.design_md_dos).slice(0, 6)
+  const designMdDonts = readJsonArray(sourceRecord.metadata.design_md_donts).slice(0, 6)
+  const designMdResponsive = readJsonArray(sourceRecord.metadata.design_md_responsive).slice(0, 6)
   const directiveSamples = sourceRecord.textSamples
     .map((sample) => sample.content)
     .filter((content) => /\b(must|should|avoid|prefer|never)\b/i.test(content))
@@ -192,6 +202,114 @@ const buildBrandDocsEvidence = (sourceRecord: IBrandSourceRecord, baseIndex: num
         "voice",
         "explicit",
         `Brand documents repeatedly emphasize: ${keywords.join(", ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (designMdVisualTheme) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-design-md-visual-theme`,
+        "visual-system",
+        "explicit",
+        `DESIGN.md visual theme guidance: ${designMdVisualTheme}`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (designMdKeyCharacteristics.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-design-md-characteristics`,
+        "brand-identity",
+        "explicit",
+        `DESIGN.md key characteristics include: ${designMdKeyCharacteristics.join(" | ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (designMdColorRoles.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-design-md-colors`,
+        "visual-system",
+        "explicit",
+        `DESIGN.md color roles define: ${designMdColorRoles.join(" | ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (designMdTypographyScale.length > 0 || designMdTypographyPrinciples.length > 0) {
+    const typographyParts = [
+      designMdTypographyScale.length > 0 ? `typography scale ${designMdTypographyScale.join(" | ")}` : null,
+      designMdTypographyPrinciples.length > 0
+        ? `typography principles ${designMdTypographyPrinciples.join(" | ")}`
+        : null,
+    ].filter(Boolean)
+
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-design-md-typography`,
+        "visual-system",
+        "explicit",
+        `DESIGN.md typography guidance captures ${typographyParts.join(" and ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (designMdComponentPatterns.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-design-md-components`,
+        "design-system",
+        "explicit",
+        `DESIGN.md component patterns include: ${designMdComponentPatterns.join(" | ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (designMdLayoutPrinciples.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-design-md-layout`,
+        "visual-system",
+        "explicit",
+        `DESIGN.md layout principles include: ${designMdLayoutPrinciples.join(" | ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (designMdResponsive.length > 0) {
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-design-md-responsive`,
+        "interaction-behavior",
+        "explicit",
+        `DESIGN.md responsive behavior includes: ${designMdResponsive.join(" | ")}.`,
+        sourceRecord,
+      ),
+    )
+  }
+
+  if (designMdDos.length > 0 || designMdDonts.length > 0) {
+    const constraintParts = [
+      designMdDos.length > 0 ? `Do: ${designMdDos.join(" | ")}` : null,
+      designMdDonts.length > 0 ? `Don't: ${designMdDonts.join(" | ")}` : null,
+    ].filter(Boolean)
+
+    evidenceRecords.push(
+      createEvidenceRecord(
+        `evidence-${baseIndex}-design-md-constraints`,
+        "constraints",
+        "explicit",
+        `DESIGN.md usage constraints include ${constraintParts.join(" ; ")}.`,
         sourceRecord,
       ),
     )
