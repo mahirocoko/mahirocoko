@@ -82,6 +82,7 @@ $RECYCLE.BIN/
 
 # Local agent state (selectively ignored)
 .agent-state/active/
+.agent-state/design-md/
 .agent-state/memory/logs/
 
 # Legacy local-state remnants
