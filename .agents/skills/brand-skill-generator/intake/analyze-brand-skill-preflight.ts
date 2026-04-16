@@ -5,6 +5,7 @@ import type {
   IBrandSkillValidationIssue,
 } from "../model/normalized-brand-model"
 import { buildBrandSkillSourcePlan } from "./build-brand-skill-source-plan"
+import { findCachedDesignMdSource } from "./find-cached-design-md-source"
 
 const buildIssue = (
   level: "error" | "warning",
@@ -88,7 +89,11 @@ const buildNextQuestion = (
 export const analyzeBrandSkillPreflight = (
   command: IBrandSkillCommand,
 ): IBrandSkillPreflightResult => {
-  const sourcePlan = buildBrandSkillSourcePlan(command)
+  const cachedDesignMdSource = findCachedDesignMdSource(command)
+  const sourcePlan = [
+    ...buildBrandSkillSourcePlan(command),
+    ...(cachedDesignMdSource ? [cachedDesignMdSource.sourcePlanItem] : []),
+  ]
   const issues: IBrandSkillValidationIssue[] = []
   const knownInputs: string[] = []
   const missingCoverage: string[] = []
@@ -106,6 +111,15 @@ export const analyzeBrandSkillPreflight = (
 
   if (command.brief.trim()) {
     knownInputs.push("Brief text provided")
+  }
+
+  if (cachedDesignMdSource) {
+    knownInputs.push(`Cached design-md auto-attached: ${cachedDesignMdSource.displayPath}`)
+    knownInputs.push(
+      cachedDesignMdSource.lookupMode === "exact-slug"
+        ? `design-md lookup: exact slug hit (${cachedDesignMdSource.matchedSlug})`
+        : `design-md lookup: catalog fallback hit (${cachedDesignMdSource.matchedSlug})`,
+    )
   }
 
   if (sourcePlan.length === 0) {
@@ -130,7 +144,8 @@ export const analyzeBrandSkillPreflight = (
     ambiguities.push(`Website role is unresolved for ${sourceItem.location}`)
   }
 
-  const explicitDocsCount = sourcePlan.filter((sourceItem) => sourceItem.sourceType === "brand-docs").length
+  const explicitDocsCount = command.docsPaths.length
+  const autoAttachedDocsCount = cachedDesignMdSource ? 1 : 0
   const visualReferenceCount = sourcePlan.filter(
     (sourceItem) =>
       sourceItem.sourceType === "screenshot-dir" || sourceItem.sourceType === "figma-url",
@@ -143,6 +158,8 @@ export const analyzeBrandSkillPreflight = (
 
   if (explicitDocsCount > 0) {
     knownInputs.push(`Explicit brand docs: ${explicitDocsCount}`)
+  } else if (autoAttachedDocsCount > 0) {
+    knownInputs.push(`Auto-attached design-md docs: ${autoAttachedDocsCount}`)
   } else if (command.brief.trim() && !command.writeBriefDoc) {
     issues.push(
       buildIssue(
@@ -205,5 +222,13 @@ export const analyzeBrandSkillPreflight = (
     issues: [...issues, ...warnings.map((warning) => buildIssue("warning", "preflight-warning", warning))],
     nextQuestion,
     sourcePlan,
+    cachedDesignMd: cachedDesignMdSource
+      ? {
+          absolutePath: cachedDesignMdSource.absolutePath,
+          displayPath: cachedDesignMdSource.displayPath,
+          lookupMode: cachedDesignMdSource.lookupMode,
+          matchedSlug: cachedDesignMdSource.matchedSlug,
+        }
+      : null,
   }
 }

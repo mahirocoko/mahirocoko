@@ -55,6 +55,7 @@ const buildMissingSourceSuggestions = ({
 
   if (!hasDocs) {
     suggestions.push("Add explicit brand docs or positioning notes.")
+    suggestions.push("If a public DESIGN.md exists for this brand, sync it locally and rerun.")
   }
 
   if (!hasWebsite) {
