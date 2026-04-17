@@ -177,7 +177,7 @@ const App = () => {
 
       <main className="relative flex-1 overflow-hidden p-3 md:p-4">
         <section className="flex h-full flex-col">
-          {error ? <div className="mb-4 rounded-md border border-red-400/20 bg-red-900/10 p-3 text-sm text-red-200">{error}</div> : null}
+          {error ? <div className="mb-4 rounded-md border border-destructive/20 bg-destructive/10 p-3 text-sm text-destructive-foreground">{error}</div> : null}
 
           {!hasWorkspace ? (
             <div className="flex flex-1 flex-col items-center justify-center text-sm text-muted">

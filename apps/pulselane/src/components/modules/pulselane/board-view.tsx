@@ -103,7 +103,7 @@ export const BoardView = ({
 
       <DragOverlay>
         {draggedCard && draggedColumn ? (
-          <div className="rounded-lg border border-white/8 bg-popover/90 p-3 backdrop-blur-sm">
+          <div className="rounded-lg border border-border bg-popover/90 p-3 backdrop-blur-sm">
             <CardFace card={draggedCard} now={now} />
           </div>
         ) : null}
