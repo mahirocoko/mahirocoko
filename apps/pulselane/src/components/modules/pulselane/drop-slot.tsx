@@ -1,19 +1,22 @@
 import { useDroppable } from '@dnd-kit/core'
-import { cn } from '../../../lib/utils'
+import type { CSSProperties } from 'react'
+import { cn } from '../../../utils/cn'
 
-export function DropSlot({
-  columnId,
-  index,
-  accent,
-  isActive,
-  isTerminal = false,
-}: {
+interface IDropSlotProps {
   columnId: string
   index: number
   accent: string
   isActive: boolean
   isTerminal?: boolean
-}) {
+}
+
+export const DropSlot = ({
+  columnId,
+  index,
+  accent,
+  isActive,
+  isTerminal = false,
+}: IDropSlotProps) => {
   const { setNodeRef } = useDroppable({
     id: `slot:${columnId}:${index}`,
     data: {
@@ -31,7 +34,7 @@ export function DropSlot({
         isActive && "opacity-100",
         isTerminal && "mt-auto"
       )}
-      style={{ background: isActive ? accent : 'transparent' } as React.CSSProperties}
+      style={{ background: isActive ? accent : 'transparent' } as CSSProperties}
       aria-hidden="true"
     />
   )

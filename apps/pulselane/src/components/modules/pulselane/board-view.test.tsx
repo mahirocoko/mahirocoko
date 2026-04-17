@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react'
 import { describe, expect, it, vi } from 'vitest'
-import { BoardView } from './BoardView'
-import type { BoardCard, BoardDocument } from '../types'
+import type { BoardCard, BoardDocument } from '../../../features/pulselane/types'
+import { BoardView } from './board-view'
 
 describe('BoardView', () => {
   const card: BoardCard = {

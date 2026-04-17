@@ -1,17 +1,10 @@
 import { useDraggable } from '@dnd-kit/core'
-import type { BoardCard } from '../types'
-import { CardFace } from './CardFace'
-import { cn } from '../../../lib/utils'
+import type { CSSProperties } from 'react'
+import type { BoardCard } from '../../../features/pulselane/types'
+import { cn } from '../../../utils/cn'
+import { CardFace } from './card-face'
 
-export function DraggableCard({
-  card,
-  index,
-  columnAccent,
-  isPulsing,
-  isSelected,
-  onSelectCard,
-  now,
-}: {
+interface IDraggableCardProps {
   card: BoardCard
   index: number
   columnAccent: string
@@ -19,7 +12,17 @@ export function DraggableCard({
   isSelected: boolean
   onSelectCard: (card: BoardCard) => void
   now: number
-}) {
+}
+
+export const DraggableCard = ({
+  card,
+  index,
+  columnAccent,
+  isPulsing,
+  isSelected,
+  onSelectCard,
+  now,
+}: IDraggableCardProps) => {
   const { attributes, listeners, setNodeRef } = useDraggable({
     id: card.id,
     data: {
@@ -35,11 +38,11 @@ export function DraggableCard({
       ref={setNodeRef}
       type="button"
       className={cn(
-        "w-full rounded-lg border border-white/5 bg-white/2 p-2.5 text-left transition-colors touch-none hover:border-white/8 hover:bg-white/4",
+        'w-full rounded-lg border border-border bg-accent p-2.5 text-left transition-colors touch-none hover:border-input hover:bg-accent/80',
         isSelected && "border-brand ring-1 ring-brand",
         isPulsing && "animate-[card-remote-pulse_1.8s_ease]"
       )}
-      style={{ '--column-accent': columnAccent } as React.CSSProperties}
+      style={{ '--column-accent': columnAccent } as CSSProperties}
       onClick={() => onSelectCard(card)}
       {...attributes}
       {...listeners}

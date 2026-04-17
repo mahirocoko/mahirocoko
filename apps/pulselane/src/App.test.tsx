@@ -7,7 +7,7 @@ const { usePulselaneMock } = vi.hoisted(() => ({
   usePulselaneMock: vi.fn(),
 }))
 
-vi.mock('./features/pulselane/use-pulselane', () => ({
+vi.mock('./hooks/use-pulselane', () => ({
   usePulselane: usePulselaneMock,
 }))
 
@@ -63,7 +63,7 @@ describe('App card editing flow', () => {
       resetBoard: vi.fn(),
     })
 
-    const { default: App } = await import('./App')
+    const { default: App } = await import('./app')
     render(<App />)
 
     await user.click(screen.getByRole('button', { name: /lock the launch-day kpi glossary/i }))
@@ -79,7 +79,8 @@ describe('App card editing flow', () => {
     await user.type(titleInput, 'Ship the launch-day KPI glossary')
     await user.clear(ownerInput)
     await user.type(ownerInput, 'Lina')
-    await user.selectOptions(prioritySelect, 'medium')
+    await user.click(prioritySelect)
+    await user.click(await screen.findByRole('option', { name: 'Medium' }))
     await user.clear(notesInput)
     await user.type(notesInput, 'Expanded the rollout notes for launch review.')
     await user.click(screen.getByRole('button', { name: 'Save changes' }))
@@ -100,5 +101,95 @@ describe('App card editing flow', () => {
     })
     expect(nextCard?.updatedAt).toBeGreaterThanOrEqual(initialBoard.cards[0].updatedAt)
     expect(screen.queryByText('Card detail')).not.toBeInTheDocument()
+  })
+
+  it('keeps the sheet open when escape closes the priority select', async () => {
+    const user = userEvent.setup()
+
+    usePulselaneMock.mockReturnValue({
+      board: initialBoard,
+      connectionStatus: 'live',
+      error: null,
+      isHydrating: false,
+      lastSyncedAt: initialBoard.updatedAt,
+      pulsingCardIds: [],
+      commit: vi.fn(),
+      seedBoard: vi.fn(),
+      resetBoard: vi.fn(),
+    })
+
+    const { default: App } = await import('./app')
+    render(<App />)
+
+    await user.click(screen.getByRole('button', { name: /lock the launch-day kpi glossary/i }))
+    await user.click(screen.getByRole('combobox', { name: 'Priority' }))
+    expect(await screen.findByRole('option', { name: 'Medium' })).toBeInTheDocument()
+
+    await user.keyboard('{Escape}')
+
+    expect(screen.getByText('Card detail')).toBeInTheDocument()
+    expect(screen.queryByRole('option', { name: 'Medium' })).not.toBeInTheDocument()
+  })
+
+  it('resets unsaved edits when the card detail sheet is reopened', async () => {
+    const user = userEvent.setup()
+
+    usePulselaneMock.mockReturnValue({
+      board: initialBoard,
+      connectionStatus: 'live',
+      error: null,
+      isHydrating: false,
+      lastSyncedAt: initialBoard.updatedAt,
+      pulsingCardIds: [],
+      commit: vi.fn(),
+      seedBoard: vi.fn(),
+      resetBoard: vi.fn(),
+    })
+
+    const { default: App } = await import('./app')
+    render(<App />)
+
+    await user.click(screen.getByRole('button', { name: /lock the launch-day kpi glossary/i }))
+
+    const titleInput = screen.getByLabelText('Title')
+    await user.clear(titleInput)
+    await user.type(titleInput, 'Unsaved title')
+    await user.click(screen.getByRole('button', { name: 'Close' }))
+
+    await user.click(screen.getByRole('button', { name: /lock the launch-day kpi glossary/i }))
+
+    expect(screen.getByDisplayValue('Lock the launch-day KPI glossary')).toBeInTheDocument()
+    expect(screen.queryByDisplayValue('Unsaved title')).not.toBeInTheDocument()
+  })
+
+  it('blocks saving when the title is only whitespace', async () => {
+    const commit = vi.fn()
+    const user = userEvent.setup()
+
+    usePulselaneMock.mockReturnValue({
+      board: initialBoard,
+      connectionStatus: 'live',
+      error: null,
+      isHydrating: false,
+      lastSyncedAt: initialBoard.updatedAt,
+      pulsingCardIds: [],
+      commit,
+      seedBoard: vi.fn(),
+      resetBoard: vi.fn(),
+    })
+
+    const { default: App } = await import('./app')
+    render(<App />)
+
+    await user.click(screen.getByRole('button', { name: /lock the launch-day kpi glossary/i }))
+
+    const titleInput = screen.getByLabelText('Title')
+    await user.clear(titleInput)
+    await user.type(titleInput, '   ')
+    await user.click(screen.getByRole('button', { name: 'Save changes' }))
+
+    expect(commit).not.toHaveBeenCalled()
+    expect(screen.getByText('Title is required')).toBeInTheDocument()
+    expect(screen.getByText('Card detail')).toBeInTheDocument()
   })
 })
