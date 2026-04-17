@@ -2,15 +2,15 @@ import { cn } from '../../../utils/cn'
 import type { BoardCard, CardPriority } from '../../../features/pulselane/types'
 
 const priorityDotClassName: Record<CardPriority, string> = {
-  low: 'text-emerald-400',
-  medium: 'text-amber-300',
-  high: 'text-rose-400',
+  low: 'text-signal-low',
+  medium: 'text-signal-medium',
+  high: 'text-signal-high',
 }
 
 const priorityChipClassName: Record<CardPriority, string> = {
-  low: 'border-emerald-400/20 bg-emerald-400/10 text-emerald-300',
-  medium: 'border-amber-300/20 bg-amber-300/10 text-amber-200',
-  high: 'border-rose-400/20 bg-rose-400/10 text-rose-300',
+  low: 'border-signal-low-border bg-signal-low-soft text-signal-low',
+  medium: 'border-signal-medium-border bg-signal-medium-soft text-signal-medium',
+  high: 'border-signal-high-border bg-signal-high-soft text-signal-high',
 }
 
 const formatRelativeTime = (timestamp: number, now: number) => {
