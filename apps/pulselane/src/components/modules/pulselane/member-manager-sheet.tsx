@@ -4,6 +4,7 @@ import { Check, Settings2, Trash2, UserPlus, Users } from 'lucide-react'
 import { Button } from '../../ui/button'
 import { Field, FieldContent, FieldDescription, FieldGroup, FieldLabel } from '../../ui/field'
 import { Input } from '../../ui/input'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../../ui/sheet'
 import type { BoardDocument } from '../../../features/pulselane/types'
 import { ConfirmActionButton } from './confirm-action-button'
 
@@ -25,23 +26,18 @@ export const MemberManagerSheet = ({
   const [newMemberName, setNewMemberName] = useState('')
 
   return (
-    <>
-      <div className="fixed inset-0 z-20 bg-black/20 backdrop-blur-md" onClick={onClose} />
-      <aside className="fixed right-4 top-4 z-30 h-[calc(100vh-2rem)] w-full max-w-md overflow-y-auto rounded-xl border border-border bg-surface/90 p-5 backdrop-blur-xl">
-        <div className="mb-6 flex items-start justify-between">
-          <div>
-            <p className="mb-1 text-[10px] font-medium uppercase tracking-[0.18em] text-muted">Members</p>
-            <h2 className="flex items-center gap-2 text-lg font-semibold text-foreground">
+    <Sheet open onOpenChange={(open) => (!open ? onClose() : undefined)}>
+      <SheetContent side="right" className="gap-0 bg-surface/95 p-0 backdrop-blur-xl sm:max-w-md">
+        <SheetHeader className="border-b border-border px-5 py-4">
+          <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted">Members</p>
+          <SheetTitle className="flex items-center gap-2 text-lg">
               <Users className="size-4 text-brand" />
               Manage assignees
-            </h2>
-          </div>
-          <Button variant="ghost" size="sm" onClick={onClose}>
-            Close
-          </Button>
-        </div>
+          </SheetTitle>
+          <SheetDescription>Curate reusable assignees for the board and keep assignment fast.</SheetDescription>
+        </SheetHeader>
 
-        <div className="grid gap-6">
+        <div className="grid gap-6 overflow-y-auto p-5">
           <div className="rounded-lg border border-border bg-popover p-3">
             <FieldGroup>
               <Field>
@@ -120,7 +116,7 @@ export const MemberManagerSheet = ({
             })}
           </div>
         </div>
-      </aside>
-    </>
+      </SheetContent>
+    </Sheet>
   )
 }
