@@ -5,6 +5,7 @@ import { z } from 'zod'
 
 import { Button } from '../../ui/button'
 import { Input } from '../../ui/input'
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '../../ui/sheet'
 import { Textarea } from '../../ui/textarea'
 import {
   Select,
@@ -83,29 +84,26 @@ export const CardDetailSheet = ({
   }
 
   return (
-    <>
-      <div className="fixed inset-0 z-20 bg-black/20 backdrop-blur-md" onClick={onClose} />
-      <aside className="fixed right-4 top-4 z-30 h-[calc(100vh-2rem)] w-full max-w-sm overflow-y-auto rounded-xl border border-border bg-surface/90 p-5 animate-[drawer-enter_0.2s_ease-out] backdrop-blur-xl">
-        <div className="mb-6 flex items-start justify-between">
-          <div>
-            <p className="mb-1 text-[10px] font-medium uppercase tracking-[0.18em] text-muted">Card detail</p>
-            <h2 className="text-lg font-semibold text-foreground">{card.title}</h2>
-            {column ? (
+    <Sheet open onOpenChange={(open) => (!open ? onClose() : undefined)}>
+      <SheetContent side="right" className="gap-0 bg-surface/95 p-0 backdrop-blur-xl sm:max-w-lg">
+        <SheetHeader className="border-b border-border px-5 py-4">
+          <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-muted">Card detail</p>
+          <SheetTitle className="text-lg">{card.title}</SheetTitle>
+          {column ? (
+            <SheetDescription className="flex items-center gap-2 pt-1">
               <span
-                className="mt-2 inline-flex items-center rounded-full border border-[color-mix(in_srgb,var(--column-accent)_40%,transparent)] bg-[color-mix(in_srgb,var(--column-accent)_14%,transparent)] px-2.5 py-0.5 text-xs font-medium text-foreground"
+                className="inline-flex items-center rounded-full border border-[color-mix(in_srgb,var(--column-accent)_40%,transparent)] bg-[color-mix(in_srgb,var(--column-accent)_14%,transparent)] px-2.5 py-0.5 text-xs font-medium text-foreground"
                 style={{ '--column-accent': column.accent } as CSSProperties}
               >
                 {column.title}
               </span>
-            ) : null}
-          </div>
-          <Button variant="ghost" size="sm" onClick={onClose}>
-            Close
-          </Button>
-        </div>
+            </SheetDescription>
+          ) : null}
+        </SheetHeader>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-3">
+        <div className="overflow-y-auto p-5">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-3">
             <FieldGroup>
               <FormField
                 control={form.control}
@@ -229,9 +227,10 @@ export const CardDetailSheet = ({
                 Save changes
               </Button>
             </div>
-          </form>
-        </Form>
-      </aside>
-    </>
+            </form>
+          </Form>
+        </div>
+      </SheetContent>
+    </Sheet>
   )
 }
