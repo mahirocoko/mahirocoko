@@ -16,12 +16,13 @@ describe('BoardView', () => {
   }
 
   const board: BoardDocument = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     title: 'Cleanup board',
     updatedAt: 61_000,
     lastActorId: 'actor-1',
     columns: [{ id: 'column-1', title: 'Inbox', accent: '#f43f5e', order: 0 }],
     cards: [card],
+    members: [{ id: 'member-1', name: 'Mahiro' }],
   }
 
   it('renders the scroll lane and drag overlay without legacy class hooks', () => {

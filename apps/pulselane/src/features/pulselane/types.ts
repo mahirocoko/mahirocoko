@@ -13,6 +13,11 @@ export interface BoardColumn {
   order: number
 }
 
+export interface IBoardMember {
+  id: string
+  name: string
+}
+
 export type CardPriority = 'low' | 'medium' | 'high'
 
 export interface BoardCard {
@@ -27,12 +32,13 @@ export interface BoardCard {
 }
 
 export interface BoardDocument {
-  schemaVersion: 1
+  schemaVersion: 1 | 2
   title: string
   updatedAt: number
   lastActorId: string
   columns: BoardColumn[]
   cards: BoardCard[]
+  members: IBoardMember[]
 }
 
 export interface MaruMessage {

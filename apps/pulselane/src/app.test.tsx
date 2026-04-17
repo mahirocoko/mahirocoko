@@ -13,7 +13,7 @@ vi.mock('./hooks/use-pulselane', () => ({
 
 describe('App card editing flow', () => {
   const initialBoard: BoardDocument = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     title: 'Launch Radar',
     updatedAt: 1_000,
     lastActorId: 'actor-1',
@@ -32,6 +32,7 @@ describe('App card editing flow', () => {
         updatedAt: 900,
       },
     ],
+    members: [{ id: 'member-1', name: 'Mina' }],
   }
 
   beforeEach(() => {
@@ -71,9 +72,9 @@ describe('App card editing flow', () => {
     expect(screen.getByText('Card detail')).toBeInTheDocument()
 
     const titleInput = screen.getByDisplayValue('Lock the launch-day KPI glossary')
-    const ownerInput = screen.getByDisplayValue('Mina')
+    const ownerInput = screen.getByRole('combobox', { name: 'Owner' })
     const notesInput = screen.getByDisplayValue('Need a clearer owner handoff before launch.')
-    const prioritySelect = screen.getByRole('combobox')
+    const prioritySelect = screen.getByRole('combobox', { name: 'Priority' })
 
     await user.clear(titleInput)
     await user.type(titleInput, 'Ship the launch-day KPI glossary')
@@ -99,6 +100,7 @@ describe('App card editing flow', () => {
       priority: 'medium',
       description: 'Expanded the rollout notes for launch review.',
     })
+    expect(nextBoard?.members.find((member) => member.name === 'Lina')).toBeDefined()
     expect(nextCard?.updatedAt).toBeGreaterThanOrEqual(initialBoard.cards[0].updatedAt)
     expect(screen.queryByText('Card detail')).not.toBeInTheDocument()
   })

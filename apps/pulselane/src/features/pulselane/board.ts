@@ -1,4 +1,4 @@
-import type { BoardCard, BoardDocument } from './types'
+import type { BoardCard, BoardColumn, BoardDocument, IBoardMember } from './types'
 
 export function getCardsForColumn(board: BoardDocument, columnId: string) {
   return board.cards
@@ -42,6 +42,167 @@ export function updateCard(
           }
         : card,
     ),
+  }
+}
+
+export function ensureMember(board: BoardDocument, rawName: string): BoardDocument {
+  const name = rawName.trim()
+  if (!name) {
+    return board
+  }
+
+  const normalizedName = name.toLocaleLowerCase()
+  if (board.members.some((member) => member.name.toLocaleLowerCase() === normalizedName)) {
+    return board
+  }
+
+  const nextMember: IBoardMember = {
+    id: crypto.randomUUID().slice(0, 8),
+    name,
+  }
+
+  return {
+    ...board,
+    members: [...board.members, nextMember],
+  }
+}
+
+export function addMember(board: BoardDocument, name: string) {
+  return ensureMember(board, name)
+}
+
+export function updateMember(board: BoardDocument, memberId: string, rawName: string): BoardDocument {
+  const name = rawName.trim()
+  if (!name) {
+    return board
+  }
+
+  const member = board.members.find((entry) => entry.id === memberId)
+  if (!member) {
+    return board
+  }
+
+  const duplicate = board.members.find(
+    (entry) => entry.id !== memberId && entry.name.toLocaleLowerCase() === name.toLocaleLowerCase(),
+  )
+  if (duplicate) {
+    return board
+  }
+
+  return {
+    ...board,
+    members: board.members.map((entry) => (entry.id === memberId ? { ...entry, name } : entry)),
+    cards: board.cards.map((card) => (card.owner === member.name ? { ...card, owner: name } : card)),
+  }
+}
+
+export function removeMember(board: BoardDocument, memberId: string): BoardDocument {
+  const member = board.members.find((entry) => entry.id === memberId)
+  if (!member) {
+    return board
+  }
+
+  return {
+    ...board,
+    members: board.members.filter((entry) => entry.id !== memberId),
+    cards: board.cards.map((card) => (card.owner === member.name ? { ...card, owner: '' } : card)),
+  }
+}
+
+export function addColumn(board: BoardDocument, rawTitle: string, rawAccent: string): BoardDocument {
+  const title = rawTitle.trim()
+  if (!title) {
+    return board
+  }
+
+  const nextColumn: BoardColumn = {
+    id: createColumnId(title),
+    title,
+    accent: rawAccent,
+    order: board.columns.length,
+  }
+
+  return {
+    ...board,
+    columns: [...board.columns, nextColumn],
+  }
+}
+
+export function updateColumn(
+  board: BoardDocument,
+  columnId: string,
+  updates: Partial<Pick<BoardColumn, 'title' | 'accent'>>,
+): BoardDocument {
+  return {
+    ...board,
+    columns: board.columns.map((column) =>
+      column.id === columnId
+        ? {
+            ...column,
+            ...updates,
+            title: typeof updates.title === 'string' ? updates.title.trim() || column.title : column.title,
+          }
+        : column,
+    ),
+  }
+}
+
+export function moveColumn(board: BoardDocument, columnId: string, direction: -1 | 1): BoardDocument {
+  const currentIndex = board.columns.findIndex((column) => column.id === columnId)
+  if (currentIndex === -1) {
+    return board
+  }
+
+  const nextIndex = currentIndex + direction
+  if (nextIndex < 0 || nextIndex >= board.columns.length) {
+    return board
+  }
+
+  const nextColumns = [...board.columns]
+  const [column] = nextColumns.splice(currentIndex, 1)
+  nextColumns.splice(nextIndex, 0, column)
+
+  return {
+    ...board,
+    columns: nextColumns.map((entry, index) => ({ ...entry, order: index })),
+  }
+}
+
+export function removeColumn(board: BoardDocument, columnId: string): BoardDocument {
+  if (board.columns.length <= 1) {
+    return board
+  }
+
+  const columnIndex = board.columns.findIndex((column) => column.id === columnId)
+  if (columnIndex === -1) {
+    return board
+  }
+
+  const fallbackColumn = board.columns[columnIndex - 1] ?? board.columns[columnIndex + 1]
+  if (!fallbackColumn) {
+    return board
+  }
+
+  const remainingColumns = board.columns
+    .filter((column) => column.id !== columnId)
+    .map((column, index) => ({ ...column, order: index }))
+
+  const nextCards = remainingColumns.flatMap((column) => {
+    const cards = board.cards
+      .filter((card) => (card.columnId === columnId ? fallbackColumn.id : card.columnId) === column.id)
+      .sort((left, right) => left.order - right.order)
+
+    return cards.map((card, index) => ({
+      ...card,
+      columnId: card.columnId === columnId ? fallbackColumn.id : card.columnId,
+      order: index,
+    }))
+  })
+
+  return {
+    ...board,
+    columns: remainingColumns,
+    cards: nextCards,
   }
 }
 
@@ -119,4 +280,14 @@ function reindexColumnCards(cards: BoardCard[], columnId: string) {
   const reindexed = columnCards.map((card, index) => ({ ...card, order: index }))
 
   return nextCards.map((card) => reindexed.find((entry) => entry.id === card.id) ?? card)
+}
+
+function createColumnId(title: string) {
+  const baseId = title
+    .toLocaleLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+  return `${baseId || 'column'}-${crypto.randomUUID().slice(0, 4)}`
 }

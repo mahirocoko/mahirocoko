@@ -19,6 +19,8 @@ import {
   FieldDescription,
   FieldGroup,
 } from '../../ui/field'
+import { ConfirmActionButton } from './confirm-action-button'
+import { MemberCombobox } from './member-combobox'
 import {
   Form,
   FormControl,
@@ -29,7 +31,7 @@ import {
 } from '../../ui/form'
 import { cn } from '../../../utils/cn'
 
-import type { BoardCard, BoardColumn } from '../../../features/pulselane/types'
+import type { BoardCard, BoardColumn, IBoardMember } from '../../../features/pulselane/types'
 import type { IDraftCardEditor } from './ui-types'
 
 const cardSchema = z.object({
@@ -42,6 +44,7 @@ const cardSchema = z.object({
 interface ICardDetailProps {
   card: BoardCard
   column: BoardColumn | null
+  members: IBoardMember[]
   draft: IDraftCardEditor
   onClose: () => void
   onSave: (draft: IDraftCardEditor) => void
@@ -58,6 +61,7 @@ const formatRelativeTime = (timestamp: number) => {
 export const CardDetailSheet = ({
   card,
   column,
+  members,
   draft,
   onClose,
   onSave,
@@ -131,9 +135,14 @@ export const CardDetailSheet = ({
                       <FormItem>
                         <FormLabel>Owner</FormLabel>
                         <FormControl>
-                          <Input {...field} placeholder="Lina" />
+                          <MemberCombobox
+                            value={field.value}
+                            members={members}
+                            placeholder="Search or type an owner"
+                            onChange={field.onChange}
+                          />
                         </FormControl>
-                        <FieldDescription>Leave blank if the next owner is still unclear.</FieldDescription>
+                        <FieldDescription>Choose a member or type a new owner name to add it on save.</FieldDescription>
                         <FormMessage />
                       </FormItem>
                     </FieldContent>
@@ -207,9 +216,15 @@ export const CardDetailSheet = ({
             </div>
 
             <div className="flex gap-2">
-              <Button variant="destructive" type="button" className="flex-1" onClick={onDelete}>
-                Delete card
-              </Button>
+              <ConfirmActionButton
+                trigger={<>Delete card</>}
+                title="Delete card"
+                description="This removes the card from the board permanently."
+                actionLabel="Delete"
+                onConfirm={onDelete}
+                triggerVariant="destructive"
+                className="flex-1"
+              />
               <Button variant="default" type="submit" className="flex-1">
                 Save changes
               </Button>
