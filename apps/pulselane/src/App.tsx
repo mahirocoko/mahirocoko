@@ -7,41 +7,22 @@ import {
   type DragStartEvent,
 } from '@dnd-kit/core'
 import { useEffect, useState } from 'react'
+import { BoardView } from './components/modules/pulselane/board-view'
+import { CardDetailSheet } from './components/modules/pulselane/card-detail-sheet'
+import type { IDragState, IDropTarget } from './components/modules/pulselane/ui-types'
+import { Button } from './components/ui/button'
 import { addCard, deleteCard, moveCard, updateCard } from './features/pulselane/board'
 import { DEFAULT_DOCUMENT_PATH, getDefaultConfig } from './features/pulselane/schema'
-import { usePulselane } from './features/pulselane/use-pulselane'
 import type { BoardCard } from './features/pulselane/types'
-import { BoardView } from './features/pulselane/components/BoardView'
-import { Button } from './components/ui/Button'
-import { Input } from './components/ui/Input'
-import { Textarea } from './components/ui/Textarea'
-import { cn } from './lib/utils'
+import { usePulselane } from './hooks/use-pulselane'
+import { cn } from './utils/cn'
 
 const DEFAULT_CONFIG = getDefaultConfig()
 
-export interface DraftCardEditor {
-  title: string
-  owner: string
-  priority: BoardCard['priority']
-  description: string
-}
-
-export interface DragState {
-  cardId: string
-  columnId: string
-  index: number
-}
-
-export interface DropTarget {
-  columnId: string
-  index: number
-}
-
-function App() {
+const App = () => {
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
-  const [cardDraft, setCardDraft] = useState<DraftCardEditor | null>(null)
-  const [dragState, setDragState] = useState<DragState | null>(null)
-  const [dropTarget, setDropTarget] = useState<DropTarget | null>(null)
+  const [dragState, setDragState] = useState<IDragState | null>(null)
+  const [dropTarget, setDropTarget] = useState<IDropTarget | null>(null)
   const [composerValue, setComposerValue] = useState<Record<string, string>>({})
   const [composerOpen, setComposerOpen] = useState<Record<string, boolean>>({})
 
@@ -74,26 +55,21 @@ function App() {
 
   const closeCard = () => {
     setSelectedCardId(null)
-    setCardDraft(null)
   }
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.defaultPrevented) return
       if (event.key !== 'Escape') return
       closeCard()
     }
+
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [])
 
   const openCard = (card: BoardCard) => {
     setSelectedCardId(card.id)
-    setCardDraft({
-      title: card.title,
-      owner: card.owner,
-      priority: card.priority,
-      description: card.description,
-    })
   }
 
   const handleAddCard = (columnId: string) => {
@@ -105,15 +81,16 @@ function App() {
     setComposerOpen((current) => ({ ...current, [columnId]: false }))
   }
 
-  const handleSaveCardDraft = () => {
-    if (!selectedCard || !cardDraft) return
+  const handleSaveCardDraft = (draft: ReturnType<typeof toDraftCardEditor>) => {
+    if (!selectedCard) return
+    const nextTitle = draft.title.trim()
 
     commit((currentBoard) =>
       updateCard(currentBoard, selectedCard.id, {
-        title: cardDraft.title.trim() || 'Untitled pulse',
-        owner: cardDraft.owner.trim(),
-        priority: cardDraft.priority,
-        description: cardDraft.description,
+        title: nextTitle,
+        owner: draft.owner.trim(),
+        priority: draft.priority,
+        description: draft.description,
       }),
     )
     closeCard()
@@ -147,7 +124,7 @@ function App() {
     if (board && nextTarget) {
       let finalIndex = nextTarget.index
       const activeData = event.active.data.current
-      
+
       if (
         isRecord(activeData) &&
         String(activeData.columnId) === nextTarget.columnId &&
@@ -164,17 +141,17 @@ function App() {
   }
 
   return (
-    <div className="relative flex flex-col h-screen overflow-hidden bg-background">
-      <header className="z-10 flex h-11 items-center justify-between border-b border-white/5 bg-background px-4 text-xs font-semibold">
+    <div className="relative flex h-screen flex-col overflow-hidden bg-background">
+      <header className="z-10 flex h-11 items-center justify-between border-b border-border bg-background px-4 text-xs font-medium">
         <div className="flex items-center gap-3">
-          <div className="grid h-4 w-4 place-items-center rounded bg-brand text-[10px] font-bold text-white">PL</div>
-          <span className="text-sm font-medium">PulseLane</span>
+          <div className="grid h-4 w-4 place-items-center rounded bg-brand text-[10px] font-bold text-primary-foreground">PL</div>
+          <span className="text-sm text-foreground">PulseLane</span>
 
           {hasWorkspace ? (
             <>
-              <span className="text-sm font-medium">{board?.title ?? 'Board'}</span>
-              <span className="h-4 w-px bg-white/5" />
-              <span className="text-muted font-normal">{DEFAULT_CONFIG.documentPath || DEFAULT_DOCUMENT_PATH}</span>
+              <span className="text-sm text-foreground">{board?.title ?? 'Board'}</span>
+              <span className="h-3.5 w-px bg-border" />
+              <span className="font-mono text-[11px] text-muted">{DEFAULT_CONFIG.documentPath || DEFAULT_DOCUMENT_PATH}</span>
             </>
           ) : null}
         </div>
@@ -182,44 +159,42 @@ function App() {
         <div className="flex items-center gap-3">
           {hasWorkspace ? (
             <>
-              <span className={cn("inline-flex items-center gap-2 rounded-full border border-white/5 px-2 py-1 text-[12px]", {
-                "text-[#27a644]": connectionStatus === 'live',
-                "text-[#fbbf24]": ['connecting', 'reconnecting'].includes(connectionStatus),
-                "text-[#f87171]": connectionStatus === 'error',
-                "text-[#94a3b8]": connectionStatus === 'idle'
+              <span className={cn('inline-flex h-5 items-center gap-1.5 rounded-full border border-border px-2 text-[11px]', {
+                'text-brand': connectionStatus === 'live',
+                'text-warning': ['connecting', 'reconnecting'].includes(connectionStatus),
+                'text-error': connectionStatus === 'error',
+                'text-muted': connectionStatus === 'idle',
               })}>
                 <span className="h-2 w-2 rounded-full bg-current" />
                 {formatStatus(connectionStatus)}
               </span>
-              <span className="text-muted">{totalCards} cards</span>
-              <span className="text-muted">{totalColumns} columns</span>
-              <span className="text-muted">Synced {formatSyncTime(lastSyncedAt)}</span>
-              <Button variant="ghost" onClick={resetBoard} disabled={!board}>Reset</Button>
+              <span className="text-[11px] text-muted">{totalCards} cards · {totalColumns} columns · Synced {formatSyncTime(lastSyncedAt)}</span>
+              <Button variant="ghost" size="sm" onClick={resetBoard} disabled={!board}>Reset</Button>
             </>
           ) : null}
         </div>
       </header>
 
-      <main className="relative flex-1 overflow-hidden p-4 md:p-6">
-        <section className="h-full flex flex-col">
+      <main className="relative flex-1 overflow-hidden p-3 md:p-4">
+        <section className="flex h-full flex-col">
           {error ? <div className="mb-4 rounded-md border border-red-400/20 bg-red-900/10 p-3 text-sm text-red-200">{error}</div> : null}
 
           {!hasWorkspace ? (
-            <div className="flex flex-1 flex-col items-center justify-center text-muted text-sm">
+            <div className="flex flex-1 flex-col items-center justify-center text-sm text-muted">
               <p>Environment not configured</p>
             </div>
           ) : null}
 
           {hasWorkspace && isHydrating ? (
-            <div className="flex flex-1 flex-col items-center justify-center text-muted text-sm">
+            <div className="flex flex-1 flex-col items-center justify-center text-sm text-muted">
               <p>Loading board...</p>
             </div>
           ) : null}
 
           {hasWorkspace && !isHydrating && !board ? (
-            <div className="flex flex-1 flex-col items-center justify-center text-muted text-sm gap-3">
+            <div className="flex flex-1 flex-col items-center justify-center gap-3 text-sm text-muted">
               <p>No board found</p>
-              <Button variant="primary" onClick={seedBoard} disabled={!activeConfig}>Create board</Button>
+              <Button variant="default" onClick={seedBoard} disabled={!activeConfig}>Create board</Button>
             </div>
           ) : null}
 
@@ -236,10 +211,16 @@ function App() {
               onDragStart={handleDragStart}
               onDragOver={handleDragOver}
               onDragEnd={handleDragEnd}
-              onDragCancel={() => { setDragState(null); setDropTarget(null); }}
-              onComposerChange={(id, val) => setComposerValue(c => ({ ...c, [id]: val }))}
-              onComposerOpen={(id) => setComposerOpen(c => ({ ...c, [id]: true }))}
-              onComposerClose={(id) => { setComposerOpen(c => ({ ...c, [id]: false })); setComposerValue(c => ({ ...c, [id]: '' })) }}
+              onDragCancel={() => {
+                setDragState(null)
+                setDropTarget(null)
+              }}
+              onComposerChange={(id, value) => setComposerValue((current) => ({ ...current, [id]: value }))}
+              onComposerOpen={(id) => setComposerOpen((current) => ({ ...current, [id]: true }))}
+              onComposerClose={(id) => {
+                setComposerOpen((current) => ({ ...current, [id]: false }))
+                setComposerValue((current) => ({ ...current, [id]: '' }))
+              }}
               onComposerSubmit={handleAddCard}
               onSelectCard={openCard}
             />
@@ -247,79 +228,15 @@ function App() {
         </section>
       </main>
 
-      {selectedCard && cardDraft ? (
-        <aside className="fixed top-4 right-4 z-20 w-full max-w-sm h-[calc(100vh-2rem)] overflow-y-auto rounded-xl border border-white/8 bg-[#191a1b] p-5 shadow-2xl animate-[drawer-enter_0.2s_ease-out]">
-          <div className="flex items-start justify-between mb-6">
-            <div>
-              <p className="text-[10px] uppercase tracking-wider text-muted font-bold mb-1">Card detail</p>
-              <h2 className="text-lg font-bold text-white">{selectedCard.title}</h2>
-              {selectedColumn ? (
-                <span className="inline-flex items-center mt-2 rounded-full border border-[color-mix(in_srgb,var(--column-accent)_40%,transparent)] bg-[color-mix(in_srgb,var(--column-accent)_14%,transparent)] px-2.5 py-0.5 text-xs font-medium" style={{ '--column-accent': selectedColumn.accent } as React.CSSProperties}>
-                  {selectedColumn.title}
-                </span>
-              ) : null}
-            </div>
-            <Button variant="ghost" onClick={closeCard}>Close</Button>
-          </div>
-
-          <div className="grid gap-4">
-            <div className="grid gap-1.5">
-              <label className="text-xs font-medium text-muted">Title</label>
-              <Input
-                value={cardDraft.title}
-                onChange={(e) => setCardDraft(c => c ? { ...c, title: e.target.value } : c)}
-              />
-            </div>
-
-            <div className="grid gap-1.5">
-              <label className="text-xs font-medium text-muted">Owner</label>
-              <Input
-                value={cardDraft.owner}
-                onChange={(e) => setCardDraft(c => c ? { ...c, owner: e.target.value } : c)}
-                placeholder="Lina"
-              />
-            </div>
-
-            <div className="grid gap-1.5">
-              <label className="text-xs font-medium text-muted">Priority</label>
-              <select
-                className="flex h-8 w-full rounded-md border border-white/8 bg-white/2 px-3 text-sm focus:border-brand focus:outline-none"
-                value={cardDraft.priority}
-                onChange={(e) => setCardDraft(c => c ? { ...c, priority: e.target.value as BoardCard['priority'] } : c)}
-              >
-                <option value="low">Low</option>
-                <option value="medium">Medium</option>
-                <option value="high">High</option>
-              </select>
-            </div>
-
-            <div className="grid gap-1.5">
-              <label className="text-xs font-medium text-muted">Notes</label>
-              <Textarea
-                rows={5}
-                value={cardDraft.description}
-                onChange={(e) => setCardDraft(c => c ? { ...c, description: e.target.value } : c)}
-                placeholder="Add context, links, or handoff notes."
-              />
-            </div>
-          </div>
-
-          <div className="my-6 flex items-center justify-between text-sm text-muted">
-            <span>Updated {formatRelativeTime(selectedCard.updatedAt)}</span>
-            <span className={cn("inline-flex items-center rounded-full border border-white/8 px-2 py-0.5 text-xs font-medium", {
-              "text-white": selectedCard.priority === 'high',
-              "text-[#d0d6e0]": selectedCard.priority === 'medium',
-              "text-[#62666d]": selectedCard.priority === 'low'
-            })}>
-              {selectedCard.priority}
-            </span>
-          </div>
-
-          <div className="flex gap-2">
-            <Button variant="danger" className="flex-1" onClick={handleDeleteCard}>Delete card</Button>
-            <Button variant="primary" className="flex-1" onClick={handleSaveCardDraft}>Save changes</Button>
-          </div>
-        </aside>
+      {selectedCard ? (
+        <CardDetailSheet
+          card={selectedCard}
+          column={selectedColumn}
+          draft={toDraftCardEditor(selectedCard)}
+          onClose={closeCard}
+          onSave={handleSaveCardDraft}
+          onDelete={handleDeleteCard}
+        />
       ) : null}
     </div>
   )
@@ -331,11 +248,16 @@ function hasRequiredConfig(config: typeof DEFAULT_CONFIG) {
 
 function formatStatus(status: ReturnType<typeof usePulselane>['connectionStatus']) {
   switch (status) {
-    case 'live': return 'Pulse active'
-    case 'connecting': return 'Connecting'
-    case 'reconnecting': return 'Reconnecting'
-    case 'error': return 'Link degraded'
-    default: return 'Idle'
+    case 'live':
+      return 'Pulse active'
+    case 'connecting':
+      return 'Connecting'
+    case 'reconnecting':
+      return 'Reconnecting'
+    case 'error':
+      return 'Link degraded'
+    default:
+      return 'Idle'
   }
 }
 
@@ -344,28 +266,34 @@ function formatSyncTime(timestamp: number | null) {
   return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 }
 
-function formatRelativeTime(timestamp: number) {
-  const deltaSeconds = Math.max(1, Math.round((Date.now() - timestamp) / 1000))
-  if (deltaSeconds < 60) return `${deltaSeconds}s ago`
-  if (deltaSeconds < 3600) return `${Math.round(deltaSeconds / 60)}m ago`
-  return `${Math.round(deltaSeconds / 3600)}h ago`
-}
+function resolveDropTarget(activeData: unknown, overData: unknown): IDropTarget | null {
+  if (!isRecord(activeData) || !isRecord(overData) || (overData.type !== 'slot' && overData.type !== 'lane-body')) {
+    return null
+  }
 
-function resolveDropTarget(activeData: unknown, overData: unknown): DropTarget | null {
-  if (!isRecord(activeData) || !isRecord(overData) || (overData.type !== 'slot' && overData.type !== 'lane-body')) return null
   const columnId = String(overData.columnId)
   const rawIndex = Number(overData.index)
   if (Number.isNaN(rawIndex)) return null
+
   return { columnId, index: Math.max(rawIndex, 0) }
 }
 
-function areDropTargetsEqual(left: DropTarget | null, right: DropTarget | null) {
+function areDropTargetsEqual(left: IDropTarget | null, right: IDropTarget | null) {
   if (!left || !right) return left === right
   return left.columnId === right.columnId && left.index === right.index
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null
+}
+
+function toDraftCardEditor(card: BoardCard) {
+  return {
+    title: card.title,
+    owner: card.owner,
+    priority: card.priority,
+    description: card.description,
+  }
 }
 
 export default App

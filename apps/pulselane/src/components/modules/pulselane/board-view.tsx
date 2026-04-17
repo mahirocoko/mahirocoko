@@ -1,18 +1,18 @@
 import { useMemo } from 'react'
-import type { BoardCard, BoardDocument } from '../types'
-import { getCardsForColumn } from '../board'
-import { LaneColumn } from './LaneColumn'
 import { DndContext, DragOverlay, MeasuringStrategy, type DragStartEvent, type DragOverEvent, type DragEndEvent, type CollisionDetection, pointerWithin, closestCenter, type SensorDescriptor, type SensorOptions } from '@dnd-kit/core'
-import { CardFace } from './CardFace'
-import type { DropTarget, DragState } from '../../../App'
+import type { BoardCard, BoardDocument } from '../../../features/pulselane/types'
+import { getCardsForColumn } from '../../../features/pulselane/board'
+import { CardFace } from './card-face'
+import { LaneColumn } from './lane-column'
+import type { IDropTarget, IDragState } from './ui-types'
 
-interface BoardViewProps {
+interface IBoardViewProps {
   board: BoardDocument
   sensors: SensorDescriptor<SensorOptions>[]
   pulsingCardIds: string[]
   selectedCardId: string | null
-  dropTarget: DropTarget | null
-  dragState: DragState | null
+  dropTarget: IDropTarget | null
+  dragState: IDragState | null
   composerValue: Record<string, string>
   composerOpen: Record<string, boolean>
   onDragStart: (event: DragStartEvent) => void
@@ -39,7 +39,7 @@ const customCollisionDetection: CollisionDetection = (args) => {
   return closestCenter(args)
 }
 
-export function BoardView({
+export const BoardView = ({
   board,
   sensors,
   pulsingCardIds,
@@ -57,7 +57,7 @@ export function BoardView({
   onComposerClose,
   onComposerSubmit,
   onSelectCard,
-}: BoardViewProps) {
+}: IBoardViewProps) => {
   const cardsByColumn = useMemo(() => {
     return new Map(board.columns.map((column) => [column.id, getCardsForColumn(board, column.id)]))
   }, [board])
@@ -80,7 +80,7 @@ export function BoardView({
       onDragEnd={onDragEnd}
       onDragCancel={onDragCancel}
     >
-      <div className="flex gap-4 overflow-x-auto pb-2">
+      <div className="flex gap-3 overflow-x-auto pb-2">
         {board.columns.map((column) => (
           <LaneColumn
             key={column.id}
@@ -103,7 +103,7 @@ export function BoardView({
 
       <DragOverlay>
         {draggedCard && draggedColumn ? (
-          <div className="border border-white/5 rounded-lg p-3 bg-white/5 shadow-2xl">
+          <div className="rounded-lg border border-white/8 bg-popover/90 p-3 backdrop-blur-sm">
             <CardFace card={draggedCard} now={now} />
           </div>
         ) : null}

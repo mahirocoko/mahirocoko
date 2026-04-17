@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
-import { CardFace } from './CardFace'
-import type { BoardCard } from '../types'
+import type { BoardCard } from '../../../features/pulselane/types'
+import { CardFace } from './card-face'
 
 describe('CardFace', () => {
   const baseCard: BoardCard = {

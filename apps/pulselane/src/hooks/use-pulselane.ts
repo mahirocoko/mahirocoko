@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { stampBoard } from './board'
-import { createSocket, getDocument, parseDocumentPath, putDocument, sendSocketMessage } from './maru'
-import { createStarterBoard, normalizeBoard } from './schema'
-import type { BoardDocument, ConnectionStatus, MaruConfig, MaruMessage } from './types'
+import { stampBoard } from '../features/pulselane/board'
+import { createSocket, getDocument, parseDocumentPath, putDocument, sendSocketMessage } from '../features/pulselane/maru'
+import { createStarterBoard, normalizeBoard } from '../features/pulselane/schema'
+import type { BoardDocument, ConnectionStatus, MaruConfig, MaruMessage } from '../features/pulselane/types'
 
 const ACTOR_STORAGE_KEY = 'pulselane:actor-id'
 
