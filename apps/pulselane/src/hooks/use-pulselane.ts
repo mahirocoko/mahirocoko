@@ -8,8 +8,9 @@ const ACTOR_STORAGE_KEY = 'pulselane:actor-id'
 
 export function usePulselane(config: MaruConfig | null) {
   const [actorId] = useState(() => getActorId())
-  const path = config ? parseDocumentPath(config.documentPath) : null
-  const configError = config && !path ? 'Board path must look like collection/board-id' : null
+  const documentPath = config?.documentPath ?? null
+  const hasValidPath = documentPath ? Boolean(parseDocumentPath(documentPath)) : false
+  const configError = config && !hasValidPath ? 'Board path must look like collection/board-id' : null
   const [board, setBoard] = useState<BoardDocument | null>(null)
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('idle')
   const [error, setError] = useState<string | null>(null)
@@ -31,6 +32,7 @@ export function usePulselane(config: MaruConfig | null) {
       return
     }
 
+    const path = parseDocumentPath(config.documentPath)
     if (!path) {
       return
     }
@@ -210,7 +212,7 @@ export function usePulselane(config: MaruConfig | null) {
       socket?.close()
       publishRef.current = async () => {}
     }
-  }, [actorId, config, path])
+  }, [actorId, config, documentPath])
 
   const commit = useCallback(
     (updater: (currentBoard: BoardDocument) => BoardDocument) => {
