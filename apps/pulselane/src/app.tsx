@@ -16,6 +16,7 @@ import { ConfirmActionButton } from './components/modules/pulselane/confirm-acti
 import { MemberManagerSheet } from './components/modules/pulselane/member-manager-sheet'
 import type { IDragState, IDropTarget } from './components/modules/pulselane/ui-types'
 import { Button } from './components/ui/button'
+import { SidebarInset, SidebarProvider, SidebarTrigger } from './components/ui/sidebar'
 import {
   addCard,
   addColumn,
@@ -161,11 +162,23 @@ const App = () => {
   }
 
   return (
-    <div className="relative flex h-screen flex-col overflow-hidden bg-background">
+    <SidebarProvider defaultOpen>
+      <div className="relative flex h-screen w-full overflow-hidden bg-background">
+      <BoardSidebar
+        board={board ?? fallbackBoard()}
+        connectionStatus={connectionStatus}
+        lastSyncedAt={lastSyncedAt}
+        documentPath={DEFAULT_CONFIG.documentPath || DEFAULT_DOCUMENT_PATH}
+        onOpenMembers={() => setIsMemberManagerOpen(true)}
+        onOpenColumns={() => setIsColumnManagerOpen(true)}
+        onResetBoard={resetBoard}
+      />
+      <SidebarInset>
       <header className="z-10 border-b border-border bg-background px-4 py-3 text-xs font-medium">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex min-w-0 items-center gap-3">
-          <div className="grid h-4 w-4 place-items-center rounded bg-brand text-[10px] font-bold text-primary-foreground">PL</div>
+            <SidebarTrigger className="md:flex" />
+            <div className="grid h-4 w-4 place-items-center rounded bg-brand text-[10px] font-bold text-primary-foreground">PL</div>
             <div className="min-w-0">
               <div className="flex min-w-0 flex-wrap items-center gap-2">
                 <span className="text-sm text-foreground">PulseLane</span>
@@ -223,7 +236,7 @@ const App = () => {
       </header>
 
       <main className="relative flex-1 overflow-hidden p-3 md:p-4">
-        <section className="grid h-full gap-4 lg:grid-cols-[16rem_minmax(0,1fr)]">
+        <section className="flex h-full flex-col">
           {error ? <div className="mb-4 rounded-md border border-destructive/20 bg-destructive/10 p-3 text-sm text-destructive-foreground">{error}</div> : null}
 
           {!hasWorkspace ? (
@@ -246,17 +259,7 @@ const App = () => {
           ) : null}
 
           {hasWorkspace && board ? (
-            <>
-              <BoardSidebar
-                board={board}
-                connectionStatus={connectionStatus}
-                lastSyncedAt={lastSyncedAt}
-                documentPath={DEFAULT_CONFIG.documentPath || DEFAULT_DOCUMENT_PATH}
-                onOpenMembers={() => setIsMemberManagerOpen(true)}
-                onOpenColumns={() => setIsColumnManagerOpen(true)}
-                onResetBoard={resetBoard}
-              />
-              <BoardView
+            <BoardView
               board={board}
               sensors={sensors}
               pulsingCardIds={pulsingCardIds}
@@ -280,8 +283,7 @@ const App = () => {
               }}
               onComposerSubmit={handleAddCard}
               onSelectCard={openCard}
-              />
-            </>
+            />
           ) : null}
         </section>
       </main>
@@ -318,8 +320,22 @@ const App = () => {
           onRemoveColumn={(columnId) => commit((currentBoard) => removeColumn(currentBoard, columnId))}
         />
       ) : null}
+      </SidebarInset>
     </div>
+    </SidebarProvider>
   )
+}
+
+function fallbackBoard() {
+  return {
+    schemaVersion: 2 as const,
+    title: 'PulseLane',
+    updatedAt: Date.now(),
+    lastActorId: 'fallback',
+    columns: [],
+    cards: [],
+    members: [],
+  }
 }
 
 function hasRequiredConfig(config: typeof DEFAULT_CONFIG) {
