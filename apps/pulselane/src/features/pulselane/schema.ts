@@ -1,4 +1,4 @@
-import type { BoardCard, BoardColumn, BoardDocument, MaruConfig } from './types'
+import type { BoardCard, BoardColumn, BoardDocument, IBoardMember, MaruConfig } from './types'
 
 export const DEFAULT_COLLECTION = 'boards'
 export const DEFAULT_DOCUMENT_ID = 'launch-radar'
@@ -13,13 +13,15 @@ const DEFAULT_COLUMNS: BoardColumn[] = [
 
 export function createStarterBoard(): BoardDocument {
   const now = Date.now()
+  const members = createMembers(['Mina', 'Kai', 'Lina', 'Arun', 'You'])
 
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     title: 'Launch Radar',
     updatedAt: now,
     lastActorId: 'starter-kit',
     columns: DEFAULT_COLUMNS,
+    members,
     cards: [
       createStarterCard('pulse-01', 'backlog', 'Lock the launch-day KPI glossary', 'Mina', 'high', 0, now - 600000),
       createStarterCard('pulse-02', 'backlog', 'Tighten the customer invite sequence', 'Kai', 'medium', 1, now - 480000),
@@ -61,7 +63,7 @@ export function normalizeBoard(value: unknown): BoardDocument | null {
     return null
   }
 
-  if (value.schemaVersion !== 1 || typeof value.title !== 'string') {
+  if ((value.schemaVersion !== 1 && value.schemaVersion !== 2) || typeof value.title !== 'string') {
     return null
   }
 
@@ -136,13 +138,34 @@ export function normalizeBoard(value: unknown): BoardDocument | null {
     })
     .filter((card): card is BoardCard => Boolean(card))
 
+  const members = Array.isArray(value.members)
+    ? value.members
+        .map((member): IBoardMember | null => {
+          if (!isRecord(member) || typeof member.id !== 'string' || typeof member.name !== 'string') {
+            return null
+          }
+
+          const name = member.name.trim()
+          if (!name) {
+            return null
+          }
+
+          return {
+            id: member.id,
+            name,
+          }
+        })
+        .filter((member): member is IBoardMember => Boolean(member))
+    : createMembers(cards.map((card) => card.owner))
+
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     title: value.title,
     updatedAt: typeof value.updatedAt === 'number' ? value.updatedAt : Date.now(),
     lastActorId: typeof value.lastActorId === 'string' ? value.lastActorId : 'unknown-actor',
     columns,
     cards,
+    members,
   }
 }
 
@@ -170,6 +193,27 @@ function createStarterCard(
 function sanitizePathSegment(value: string | undefined, fallback: string) {
   const normalized = value?.trim().replace(/^\/+|\/+$/g, '').split('/')[0]
   return normalized || fallback
+}
+
+function createMembers(names: string[]) {
+  const seen = new Set<string>()
+
+  return names
+    .map((name) => name.trim())
+    .filter(Boolean)
+    .filter((name) => {
+      const normalized = name.toLocaleLowerCase()
+      if (seen.has(normalized)) {
+        return false
+      }
+
+      seen.add(normalized)
+      return true
+    })
+    .map((name, index) => ({
+      id: `member-${index + 1}`,
+      name,
+    }))
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
