@@ -23,6 +23,15 @@
   --color-muted-foreground: #8a8f98;
   --color-warning: #fbbf24;
   --color-error: #f87171;
+  --color-signal-low: #34d399;
+  --color-signal-low-soft: rgba(52, 211, 153, 0.1);
+  --color-signal-low-border: rgba(52, 211, 153, 0.2);
+  --color-signal-medium: #fcd34d;
+  --color-signal-medium-soft: rgba(252, 211, 77, 0.1);
+  --color-signal-medium-border: rgba(252, 211, 77, 0.2);
+  --color-signal-high: #fb7185;
+  --color-signal-high-soft: rgba(251, 113, 133, 0.1);
+  --color-signal-high-border: rgba(251, 113, 133, 0.2);
   
   --font-sans: 'Inter Variable', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'Berkeley Mono', ui-monospace, SF Mono, Menlo, monospace;

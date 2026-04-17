@@ -40,8 +40,8 @@ describe('CardFace', () => {
 
     const highPriorityBadge = screen.getByText('high')
 
-    expect(container.querySelector('.text-rose-400')).toBeTruthy()
-    expect(highPriorityBadge.className).toContain('bg-rose-400/10')
+    expect(container.querySelector('.text-signal-high')).toBeTruthy()
+    expect(highPriorityBadge.className).toContain('bg-signal-high-soft')
     expect(container.innerHTML).not.toContain('priority-high')
   })
 })
