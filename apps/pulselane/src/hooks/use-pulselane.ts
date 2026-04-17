@@ -7,7 +7,9 @@ import type { BoardDocument, ConnectionStatus, MaruConfig, MaruMessage } from '.
 const ACTOR_STORAGE_KEY = 'pulselane:actor-id'
 
 export function usePulselane(config: MaruConfig | null) {
-  const actorId = useMemo(getActorId, [])
+  const actorId = useMemo(() => getActorId(), [])
+  const path = useMemo(() => (config ? parseDocumentPath(config.documentPath) : null), [config])
+  const configError = config && !path ? 'Board path must look like collection/board-id' : null
   const [board, setBoard] = useState<BoardDocument | null>(null)
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('idle')
   const [error, setError] = useState<string | null>(null)
@@ -25,18 +27,11 @@ export function usePulselane(config: MaruConfig | null) {
 
   useEffect(() => {
     if (!config) {
-      setBoard(null)
-      setError(null)
-      setConnectionStatus('idle')
-      setIsHydrating(false)
       publishRef.current = async () => {}
       return
     }
 
-    const path = parseDocumentPath(config.documentPath)
     if (!path) {
-      setError('Board path must look like collection/board-id')
-      setConnectionStatus('error')
       return
     }
 
@@ -215,7 +210,7 @@ export function usePulselane(config: MaruConfig | null) {
       socket?.close()
       publishRef.current = async () => {}
     }
-  }, [actorId, config])
+  }, [actorId, config, path])
 
   const commit = useCallback(
     (updater: (currentBoard: BoardDocument) => BoardDocument) => {
@@ -260,12 +255,12 @@ export function usePulselane(config: MaruConfig | null) {
   }, [seedBoard])
 
   return {
-    board,
-    connectionStatus,
-    error,
-    isHydrating,
-    lastSyncedAt,
-    pulsingCardIds,
+    board: config ? board : null,
+    connectionStatus: config ? (configError ? 'error' : connectionStatus) : 'idle',
+    error: config ? (configError ?? error) : null,
+    isHydrating: config ? isHydrating : false,
+    lastSyncedAt: config ? lastSyncedAt : null,
+    pulsingCardIds: config ? pulsingCardIds : [],
     commit,
     seedBoard,
     resetBoard,
