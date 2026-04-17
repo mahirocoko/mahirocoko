@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { stampBoard } from '../features/pulselane/board'
 import { createSocket, getDocument, parseDocumentPath, putDocument, sendSocketMessage } from '../features/pulselane/maru'
 import { createStarterBoard, normalizeBoard } from '../features/pulselane/schema'
@@ -7,8 +7,8 @@ import type { BoardDocument, ConnectionStatus, MaruConfig, MaruMessage } from '.
 const ACTOR_STORAGE_KEY = 'pulselane:actor-id'
 
 export function usePulselane(config: MaruConfig | null) {
-  const actorId = useMemo(() => getActorId(), [])
-  const path = useMemo(() => (config ? parseDocumentPath(config.documentPath) : null), [config])
+  const [actorId] = useState(() => getActorId())
+  const path = config ? parseDocumentPath(config.documentPath) : null
   const configError = config && !path ? 'Board path must look like collection/board-id' : null
   const [board, setBoard] = useState<BoardDocument | null>(null)
   const [connectionStatus, setConnectionStatus] = useState<ConnectionStatus>('idle')
