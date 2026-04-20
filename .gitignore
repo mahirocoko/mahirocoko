@@ -97,3 +97,4 @@ lab/hrm-figma-prototype/
 /.sisyphus/
 /.playwright/
 .playwright-cli
+.playwright-mcp
