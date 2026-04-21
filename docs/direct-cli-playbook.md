@@ -214,10 +214,12 @@ Mitigation:
 Symptoms:
 
 - text appears in the input box but Gemini has not entered thinking
+- text you sent is still sitting in the inbox / input area
 
 Mitigation:
 
 - inspect the pane
+- if the message still appears unsent in the inbox or input area, try pressing `Enter` once before assuming the session is stuck
 - if needed, send `Enter` again explicitly
 
 ---
