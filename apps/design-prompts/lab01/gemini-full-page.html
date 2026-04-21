@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Vitalis - Engineered Nutrition</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400
+  ;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+      <style>
+          :root {
+              --bg-color: #f5f4ef;
+              --surface-color: #ffffff;
+              --text-primary: #222b26;
+              --text-secondary: #70756e;
+              --accent-color: #1a2e22;
+              --border-color: #e5e3db;
+              --font-serif: 'Cormorant Garamond', serif;
+              --font-sans: 'Inter', sans-serif;
+              --container-width: 1200px;
+          }
+
+           * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+          }
+
+          body {
+              font-family: var(--font-sans);
+              background-color: var(--bg-color);
+              color: var(--text-primary);
+              line-height: 1.6;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+          }
+
+          img {
+              max-width: 100%;
+              display: block;
+          }
+
+          a {
+              text-decoration: none;
+              color: inherit;
+          }
+
+          .container {
+              max-width: var(--container-width);
+              margin: 0 auto;
+              padding: 0 2rem;
+          }
+
+          nav {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 1.5rem 2rem;
+              border-bottom: 1px solid var(--border-color);
+              font-size: 0.85rem;
+              font-weight: 500;
+          }
+
+          .nav-links {
+              display: flex;
+              gap: 2rem;
+              color: var(--text-secondary);
+          }
+
+          .nav-links a:hover {
+              color: var(--text-primary);
+          }
+
+          .brand {
+              font-size: 1.2rem;
+              letter-spacing: 0.1em;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              font-weight: 400;
+          }
+
+          .brand svg {
+              width: 20px;
+              height: 20px;
+          }
+
+          .nav-actions {
+              display: flex;
+              align-items: center;
+              gap: 1.5rem;
+          }
+
+          .btn {
+              background-color: var(--accent-color);
+              color: white;
+              padding: 0.75rem 1.5rem;
+              border-radius: 2rem;
+              font-size: 0.85rem;
+              transition: opacity 0.3s ease;
+              border: none;
+              cursor: pointer;
+              display: inline-flex;
+              align-items: center;
+              gap: 0.5rem;
+          }
+
+          .btn:hover {
+              opacity: 0.9;
+          }
+
+          .btn-outline {
+              background-color: transparent;
+              color: var(--text-primary);
+              border: 1px solid var(--border-color);
+          }
+
+          .hero {
+              text-align: center;
+              padding: 6rem 0 4rem;
+          }
+
+          .trust-row {
+              display: flex;
+              justify-content: center;
+              gap: 2rem;
+              opacity: 0.4;
+              margin-bottom: 3rem;
+              align-items: center;
+          }
+
+          .trust-row img {
+              height: 12px;
+              filter: grayscale(100%);
+          }
+
+          .hero h1 {
+              font-family: var(--font-serif);
+              font-size: 4.5rem;
+              font-weight: 300;
+              line-height: 1.1;
+              margin-bottom: 1.5rem;
+              color: var(--text-primary);
+              max-width: 800px;
+              margin-inline: auto;
+          }
+
+          .hero p {
+              color: var(--text-secondary);
+              font-size: 1.1rem;
+              max-width: 460px;
+              margin: 0 auto 2.5rem;
+              font-weight: 300;
+          }
+
+          .card-strip {
+              padding: 0 0 6rem;
+          }
+
+          .card-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 1.5rem;
+          }
+
+          .card {
+              background: var(--surface-color);
+              border-radius: 1rem;
+              overflow: hidden;
+              box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+              position: relative;
+              aspect-ratio: 4/5;
+              display: flex;
+              flex-direction: column;
+          }
+
+          .card.image-card {
+              background: #d4d0c5;
+          }
+
+          .card.image-card img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+          }
+
+          .card-caption {
+              position: absolute;
+              bottom: 1.5rem;
+              left: 1.5rem;
+              color: white;
+              font-size: 0.75rem;
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+              background: rgba(0,0,0,0.3);
+              padding: 0.4rem 0.8rem;
+              border-radius: 2rem;
+              backdrop-filter: blur(4px);
+          }
+
+          .card-caption::before {
+              content: '';
+              width: 4px;
+              height: 4px;
+              background: white;
+              border-radius: 50%;
+          }
+
+          .nutrition-card {
+              padding: 2rem;
+              display: flex;
+              flex-direction: column;
+          }
+
+          .card-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-start;
+              margin-bottom: 1rem;
+          }
+
+          .card-icon {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              background: #f0eee5;
+              overflow: hidden;
+          }
+
+          .card-icon img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+          }
+
+          .heart-icon {
+              color: #d1cdc2;
+              font-size: 1.2rem;
+          }
+
+          .nutrition-card h3 {
+              font-family: var(--font-serif);
+              font-size: 1.75rem;
+              font-weight: 400;
+              margin-bottom: 0.5rem;
+          }
+
+          .nutrition-card p {
+              color: var(--text-secondary);
+              font-size: 0.85rem;
+              margin-bottom: auto;
+          }
+
+          .stats {
+              margin-top: 2rem;
+          }
+
+          .stat-row {
+              display: flex;
+              justify-content: space-between;
+              padding: 0.75rem 0;
+              border-bottom: 1px solid var(--border-color);
+              font-size: 0.8rem;
+              color: var(--text-secondary);
+          }
+
+          .stat-row:last-child {
+              border-bottom: none;
+              padding-bottom: 0;
+          }
+
+          .stat-val {
+              color: var(--text-primary);
+              font-weight: 500;
+          }
+
+          .editorial-overlay {
+              position: absolute;
+              bottom: 2rem;
+              left: 2rem;
+              right: 2rem;
+              color: white;
+              font-family: var(--font-serif);
+              font-size: 1.25rem;
+              line-height: 1.3;
+          }
+
+          .quote-section {
+              background: white;
+              padding: 8rem 2rem;
+              text-align: center;
+          }
+
+          .quote-section h2 {
+              font-family: var(--font-serif);
+              font-size: 3.5rem;
+              font-weight: 300;
+              line-height: 1.2;
+              max-width: 900px;
+              margin: 0 auto;
+              color: var(--text-primary);
+          }
+
+          .bio-actives {
+              padding: 6rem 0;
+          }
+
+          .section-header {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+              margin-bottom: 3rem;
+          }
+
+          .section-title h2 {
+              font-family: var(--font-serif);
+              font-size: 2.5rem;
+              font-weight: 300;
+              margin-bottom: 0.5rem;
+          }
+
+          .section-title p {
+              color: var(--text-secondary);
+              font-size: 0.9rem;
+          }
+
+          .controls {
+              display: flex;
+              gap: 0.5rem;
+          }
+
+          .control-btn {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              border: 1px solid var(--border-color);
+              background: transparent;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              cursor: pointer;
+              color: var(--text-primary);
+              transition: all 0.3s ease;
+          }
+
+          .control-btn:hover {
+              border-color: var(--text-primary);
+          }
+
+          .bio-grid {
+              display: grid;
+              grid-template-columns: repeat(4, 1fr);
+              gap: 1.5rem;
+          }
+
+          .bio-card {
+              background: white;
+              border-radius: 1rem;
+              padding: 1.5rem;
+              aspect-ratio: 3/4;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+              position: relative;
+              overflow: hidden;
+          }
+
+          .bio-card.dark {
+              background: var(--accent-color);
+              color: white;
+          }
+
+          .bio-card img {
+              max-height: 70%;
+              object-fit: contain;
+              transition: transform 0.5s ease;
+          }
+
+          .bio-card:hover img {
+              transform: scale(1.05);
+          }
+
+          .protocol {
+              padding: 8rem 0;
+              background: white;
+          }
+
+          .steps-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 4rem;
+          }
+
+          .step {
+              border-top: 1px solid var(--border-color);
+              padding-top: 2rem;
+          }
+
+          .step-num {
+              font-size: 0.85rem;
+              color: var(--text-secondary);
+              margin-bottom: 1.5rem;
+              display: block;
+          }
+
+          .step h3 {
+              font-family: var(--font-serif);
+              font-size: 1.75rem;
+              font-weight: 400;
+              margin-bottom: 1rem;
+          }
+
+          .step p {
+              color: var(--text-secondary);
+              font-size: 0.95rem;
+          }
+
+          .science-split {
+              padding: 8rem 0;
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 6rem;
+              align-items: center;
+          }
+
+          .science-content h2 {
+              font-family: var(--font-serif);
+              font-size: 3rem;
+              font-weight: 300;
+              line-height: 1.2;
+              margin-bottom: 2rem;
+          }
+
+          .science-content p {
+              color: var(--text-secondary);
+              margin-bottom: 2rem;
+              font-size: 1.05rem;
+          }
+
+          .bullets {
+              list-style: none;
+          }
+
+          .bullets li {
+              padding: 1rem 0;
+              border-top: 1px solid var(--border-color);
+              display: flex;
+              align-items: center;
+              gap: 1rem;
+              font-size: 0.95rem;
+          }
+
+          .bullets li::before {
+              content: '→';
+              color: var(--text-secondary);
+          }
+
+          .science-image {
+              background: #d4d0c5;
+              border-radius: 1rem;
+              aspect-ratio: 4/5;
+              overflow: hidden;
+          }
+
+          .science-image img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+          }
+
+          .featured {
+              padding: 8rem 0;
+              background: white;
+          }
+
+          .featured-grid {
+              display: grid;
+              grid-template-columns: repeat(2, 1fr);
+              gap: 2rem;
+          }
+
+          .product-card {
+              background: var(--bg-color);
+              border-radius: 1rem;
+              padding: 3rem;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+          }
+
+          .product-label {
+              font-size: 0.75rem;
+              text-transform: uppercase;
+              letter-spacing: 0.05em;
+              color: var(--text-secondary);
+              margin-bottom: 1rem;
+          }
+
+          .product-card h3 {
+              font-family: var(--font-serif);
+              font-size: 2rem;
+              font-weight: 400;
+              margin-bottom: 0.5rem;
+          }
+
+          .product-card p {
+              color: var(--text-secondary);
+              margin-bottom: 2rem;
+              font-size: 0.9rem;
+          }
+
+          .product-image {
+              width: 100%;
+              aspect-ratio: 1;
+              background: #e5e3db;
+              border-radius: 0.5rem;
+              margin-bottom: 2rem;
+              overflow: hidden;
+          }
+
+          .product-image img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+          }
+
+          .testimonial {
+              padding: 8rem 0;
+              text-align: center;
+          }
+
+          .testimonial blockquote {
+              font-family: var(--font-serif);
+              font-size: 2.5rem;
+              font-weight: 300;
+              line-height: 1.3;
+              max-width: 800px;
+              margin: 0 auto 2rem;
+              color: var(--text-primary);
+          }
+
+          .author {
+              font-size: 0.9rem;
+              color: var(--text-secondary);
+              text-transform: uppercase;
+              letter-spacing: 0.05em;
+          }
+
+          .journal {
+              padding: 8rem 0;
+              background: white;
+          }
+
+          .journal-grid {
+              display: grid;
+              grid-template-columns: repeat(3, 1fr);
+              gap: 2rem;
+          }
+
+          .article-card {
+              cursor: pointer;
+          }
+
+          .article-image {
+              aspect-ratio: 3/2;
+              background: var(--bg-color);
+              border-radius: 0.5rem;
+              margin-bottom: 1.5rem;
+              overflow: hidden;
+          }
+
+          .article-image img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transition: transform 0.5s ease;
+          }
+
+          .article-card:hover .article-image img {
+              transform: scale(1.05);
+          }
+
+          .article-meta {
+              font-size: 0.75rem;
+              color: var(--text-secondary);
+              margin-bottom: 0.5rem;
+              text-transform: uppercase;
+              letter-spacing: 0.05em;
+          }
+
+          .article-card h3 {
+              font-family: var(--font-serif);
+              font-size: 1.5rem;
+              font-weight: 400;
+              margin-bottom: 0.5rem;
+          }
+
+          .cta-section {
+              padding: 10rem 0;
+              text-align: center;
+          }
+
+          .cta-section h2 {
+              font-family: var(--font-serif);
+              font-size: 3.5rem;
+              font-weight: 300;
+              margin-bottom: 1rem;
+          }
+
+          .cta-section p {
+              color: var(--text-secondary);
+              margin-bottom: 3rem;
+          }
+
+          .cta-buttons {
+              display: flex;
+              justify-content: center;
+              gap: 1rem;
+          }
+
+          footer {
+              background: white;
+              padding: 6rem 2rem 2rem;
+              border-top: 1px solid var(--border-color);
+          }
+
+          .footer-grid {
+              max-width: var(--container-width);
+              margin: 0 auto;
+              display: grid;
+              grid-template-columns: 2fr 1fr 1fr 1fr;
+              gap: 4rem;
+              margin-bottom: 6rem;
+          }
+
+          .footer-brand .brand {
+              margin-bottom: 1rem;
+          }
+
+          .footer-brand p {
+              color: var(--text-secondary);
+              font-size: 0.85rem;
+              max-width: 250px;
+          }
+
+          .footer-col h4 {
+              font-size: 0.85rem;
+              margin-bottom: 1.5rem;
+              font-weight: 500;
+          }
+
+          .footer-col ul {
+              list-style: none;
+          }
+
+          .footer-col li {
+              margin-bottom: 0.75rem;
+          }
+
+          .footer-col a {
+              color: var(--text-secondary);
+              font-size: 0.85rem;
+              transition: color 0.3s ease;
+          }
+
+          .footer-col a:hover {
+              color: var(--text-primary);
+          }
+
+          .footer-bottom {
+              max-width: var(--container-width);
+              margin: 0 auto;
+              padding-top: 2rem;
+              border-top: 1px solid var(--border-color);
+              display: flex;
+              justify-content: space-between;
+              color: var(--text-secondary);
+              font-size: 0.75rem;
+          }
+
+          @media (max-width: 1024px) {
+              .hero h1 { font-size: 3.5rem; }
+              .card-grid, .bio-grid { grid-template-columns: repeat(2, 1fr); }
+              .steps-grid, .science-split, .featured-grid, .journal-grid { gap:
+  2rem; }
+          }
+
+          @media (max-width: 768px) {
+              .nav-links { display: none; }
+              .hero h1 { font-size: 2.5rem; }
+              .card-grid, .bio-grid, .steps-grid, .science-split,
+  .featured-grid, .journal-grid, .footer-grid {
+                  grid-template-columns: 1fr;
+              }
+              .science-split { flex-direction: column-reverse; display: flex; }
+              .quote-section h2 { font-size: 2rem; }
+              .footer-grid { gap: 2rem; }
+          }
+      </style>
+  </head>
+  <body>
+
+      <nav>
+          <div class="nav-links">
+              <a href="#">Manifesto</a>
+              <a href="#">Science</a>
+              <a href="#">Journal</a>
+          </div>
+          <div class="brand">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.5">
+                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5
+  10-5"/>
+              </svg>
+              VITALIS
+          </div>
+          <div class="nav-actions">
+              <a href="#">Login</a>
+              <a href="#" class="btn">Get Started &rarr;</a>
+          </div>
+      </nav>
+
+      <section class="hero container">
+          <div class="trust-row">
+              <span>NASA</span>
+              <span>Uber</span>
+              <span>VISA</span>
+              <span>about.me</span>
+          </div>
+          <h1>Engineered Nutrition for Systemic Wellness</h1>
+          <p>Whole-food formulations designed to optimize microbiome diversity
+  and metabolic flexibility. No prep. No fillers. Pure biological signal.</p>
+          <a href="#" class="btn">View Menu</a>
+      </section>
+
+      <section class="card-strip container">
+          <div class="card-grid">
+              <div class="card image-card">
+                  <img
+  src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit
+  =crop&q=80&w=800" alt="Plated salmon and greens">
+                  <div class="card-caption">Daily calibration</div>
+              </div>
+
+              <div class="card nutrition-card">
+                  <div class="card-header">
+                      <div class="card-icon">
+                          <img
+  src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&
+  fit=crop&q=80&w=100" alt="Salad bowl thumb">
+                      </div>
+                      <div class="heart-icon">&hearts;</div>
+                  </div>
+                  <h3>Macro-Bowl V2</h3>
+                  <p>Rich in polyphenols for cognitive repair.</p>
+
+                  <div class="stats">
+                      <div class="stat-row">
+                          <span>Protein</span>
+                          <span class="stat-val">32g</span>
+                      </div>
+                      <div class="stat-row">
+                          <span>Fiber</span>
+                          <span class="stat-val">14g</span>
+                      </div>
+                      <div class="stat-row">
+                          <span>Net Carbs</span>
+                          <span class="stat-val">12g</span>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="card image-card">
+                  <img
+  src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&
+  fit=crop&q=80&w=800" alt="Woman among leaves holding a pomegranate">
+                  <div class="editorial-overlay">Complete nutritional density
+  with 24 essential minerals.</div>
+              </div>
+          </div>
+      </section>
+
+      <section class="quote-section">
+          <div class="container">
+              <h2>“A systemic protocol engineered to restore gut diversity and
+  deliver sustained vitality without the glucose crash.”</h2>
+          </div>
+      </section>
+
+      <section class="bio-actives container">
+          <div class="section-header">
+              <div class="section-title">
+                  <h2>Core Bio-actives</h2>
+                  <p>Sourced from regenerative soil.</p>
+              </div>
+              <div class="controls">
+                  <button class="control-btn">&larr;</button>
+                  <button class="control-btn">&rarr;</button>
+              </div>
+          </div>
+          <div class="bio-grid">
+              <div class="bio-card">
+                  <img
+  src="https://images.unsplash.com/photo-1596541539207-6cb53840b2e3?auto=format&
+  fit=crop&q=80&w=600" alt="Lemon and leaves">
+              </div>
+              <div class="bio-card dark">
+                  <img
+  src="https://images.unsplash.com/photo-1615486171122-d7c3ceb3cc5f?auto=format&
+  fit=crop&q=80&w=600" alt="Tonic vessel">
+              </div>
+              <div class="bio-card">
+                  <img
+  src="https://images.unsplash.com/photo-1611078810232-a5676db6f8d3?auto=format&
+  fit=crop&q=80&w=600" alt="Root extract">
+              </div>
+              <div class="bio-card">
+                  <img
+  src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&
+  fit=crop&q=80&w=600" alt="Avocado">
+              </div>
+          </div>
+      </section>
+
+      <section class="protocol">
+          <div class="container">
+              <div class="steps-grid">
+                  <div class="step">
+                      <span class="step-num">01</span>
+                      <h3>Source</h3>
+                      <p>We partner with zero-tillage farms to extract
+  phytonutrients at their absolute peak bioavailability, preserving the delicate
+  biological matrix.</p>
+                  </div>
+                  <div class="step">
+                      <span class="step-num">02</span>
+                      <h3>Formulate</h3>
+                      <p>Clinical precision dictates our ratios. Every
+  ingredient serves a systemic purpose, optimizing metabolic pathways without
+  superfluous additives.</p>
+                  </div>
+                  <div class="step">
+                      <span class="step-num">03</span>
+                      <h3>Restore</h3>
+                      <p>Consistent daily calibration reestablishes microbiome
+  diversity, stabilizing energy output and reducing systemic inflammation over
+  time.</p>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="science-split container">
+          <div class="science-image">
+              <img
+  src="https://images.unsplash.com/photo-1616832880334-b1004d9808da?auto=format&
+  fit=crop&q=80&w=800" alt="Microscope view or botanical extract">
+          </div>
+          <div class="science-content">
+              <h2>The Science of Biological Calibration</h2>
+              <p>Our approach discards fragmented supplementation in favor of
+  whole-system alignment. By mimicking ancestral nutritional density, we trigger
+  the body's innate repair mechanisms.</p>
+              <ul class="bullets">
+                  <li>Polyphenol diversity for cellular resilience</li>
+                  <li>Micronutrient density beyond baseline requirements</li>
+                  <li>Microbiome support via targeted prebiotics</li>
+                  <li>Metabolic steadiness through fiber-bound delivery</li>
+              </ul>
+          </div>
+      </section>
+
+      <section class="featured">
+          <div class="container">
+              <div class="featured-grid">
+                  <div class="product-card">
+                      <div class="product-image">
+                          <img
+  src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit
+  =crop&q=80&w=800" alt="Morning Protocol">
+                      </div>
+                      <span class="product-label">Phase 1</span>
+                      <h3>Morning Protocol</h3>
+                      <p>Awaken metabolic function and stabilize cortisol with
+  adaptogenic compounds and readily available amino acids.</p>
+                      <a href="#" class="btn btn-outline">View protocol</a>
+                  </div>
+                  <div class="product-card">
+                      <div class="product-image">
+                          <img
+  src="https://images.unsplash.com/photo-1585232004423-244e0e6904e3?auto=format&
+  fit=crop&q=80&w=800" alt="Evening Protocol">
+                      </div>
+                      <span class="product-label">Phase 2</span>
+                      <h3>Evening Restoration</h3>
+                      <p>Down-regulate the nervous system and support deep-phase
+  cellular repair with targeted botanical extracts.</p>
+                      <a href="#" class="btn btn-outline">View protocol</a>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="testimonial">
+          <div class="container">
+              <blockquote>"Vitalis has managed to synthesize complex nutritional
+  science into a remarkably elegant and effective daily ritual. The sustained
+  cognitive clarity is undeniable."</blockquote>
+              <div class="author">Dr. Elena Rostova, Nutritional
+  Biochemist</div>
+          </div>
+      </section>
+
+      <section class="journal">
+          <div class="container">
+              <div class="section-header">
+                  <div class="section-title">
+                      <h2>The Journal</h2>
+                      <p>Research, insights, and field notes.</p>
+                  </div>
+                  <a href="#" class="btn btn-outline">View all</a>
+              </div>
+              <div class="journal-grid">
+                  <div class="article-card">
+                      <div class="article-image">
+                          <img
+  src="https://images.unsplash.com/photo-1490818387583-1baba5e638af?auto=format&
+  fit=crop&q=80&w=600" alt="Article 1">
+                      </div>
+                      <div class="article-meta">Nutrition • 5 min read</div>
+                      <h3>The Myth of Isolated Vitamins</h3>
+                  </div>
+                  <div class="article-card">
+                      <div class="article-image">
+                          <img
+  src="https://images.unsplash.com/photo-1444418185997-1145401101e0?auto=format&
+  fit=crop&q=80&w=600" alt="Article 2">
+                      </div>
+                      <div class="article-meta">Science • 8 min read</div>
+                      <h3>Understanding Metabolic Flexibility</h3>
+                  </div>
+                  <div class="article-card">
+                      <div class="article-image">
+                          <img
+  src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&
+  fit=crop&q=80&w=600" alt="Article 3">
+                      </div>
+                      <div class="article-meta">Lifestyle • 4 min read</div>
+                      <h3>Regenerative Soil and Nutrient Density</h3>
+                  </div>
+              </div>
+          </div>
+      </section>
+
+      <section class="cta-section">
+          <div class="container">
+              <h2>Begin the protocol</h2>
+              <p>Experience systemic wellness through engineered nutrition.</p>
+              <div class="cta-buttons">
+                  <a href="#" class="btn">Explore Menu</a>
+                  <a href="#" class="btn btn-outline">Read the Science</a>
+              </div>
+          </div>
+      </section>
+
+      <footer>
+          <div class="footer-grid">
+              <div class="footer-brand">
+                  <div class="brand">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+  stroke-width="1.5">
+                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2
+  12l10 5 10-5"/>
+                      </svg>
+                      VITALIS
+                  </div>
+                  <p>Engineered nutrition for systemic wellness and metabolic
+  optimization.</p>
+              </div>
+              <div class="footer-col">
+                  <h4>Product</h4>
+                  <ul>
+                      <li><a href="#">The Menu</a></li>
+                      <li><a href="#">Sourcing</a></li>
+                      <li><a href="#">Pricing</a></li>
+                  </ul>
+              </div>
+              <div class="footer-col">
+                  <h4>Company</h4>
+                  <ul>
+                      <li><a href="#">About Us</a></li>
+                      <li><a href="#">Journal</a></li>
+                      <li><a href="#">Careers</a></li>
+                  </ul>
+              </div>
+              <div class="footer-col">
+                  <h4>Legal</h4>
+                  <ul>
+                      <li><a href="#">Privacy Policy</a></li>
+                      <li><a href="#">Terms of Service</a></li>
+                      <li><a href="#">Contact</a></li>
+                  </ul>
+              </div>
+          </div>
+          <div class="footer-bottom">
+              <span>&copy; 2026 Vitalis. All rights reserved.</span>
+              <span>Made with precision.</span>
+  </body>
+  </html>

@@ -1,0 +1,123 @@
+Use the local reference image file `demo01.png` in the current working directory as the primary visual reference.
+
+Create a premium landing-page hero and upper-page composition in plain HTML + CSS based on that image.
+
+[BASE BEHAVIOR]
+Only output production-ready HTML and CSS.
+Do not explain your reasoning.
+Do not output markdown fences.
+Keep the code clean, semantic, and easy to edit.
+Use plain HTML + CSS only.
+Make it responsive.
+Preserve strong visual hierarchy and refined spacing.
+Avoid generic startup UI styling.
+
+[PAGE TYPE]
+Build this as the hero and upper landing-page section of a luxury wellness brand website.
+Focus on the first large visible sections of the page, not the entire site architecture.
+
+[VISUAL DIRECTION]
+Use an editorial, minimalist, typography-first, photo-centric style.
+The design should feel like a premium wellness or luxury nutrition brand.
+Prioritize elegance, whitespace, calm confidence, and visual restraint.
+
+[TYPOGRAPHY]
+Use elegant serif display typography for the main headline.
+Use clean understated sans-serif text for navigation, labels, supporting copy, and metadata.
+Create strong contrast between large serif headlines and quiet utility text.
+The headline should feel airy, high-end, and fashion-editorial rather than tech-marketing.
+
+[STYLE]
+Use a warm cream or off-white background, not pure white.
+Use deep forest green or muted botanical green for primary accents and CTA styling.
+Keep the palette soft, premium, and low-noise.
+Avoid bright SaaS blues, loud gradients, neon colors, or harsh contrast.
+Shadows should be soft and subtle.
+Rounded corners should feel premium and restrained.
+
+[LAYOUT]
+Create:
+1. a very minimal top navigation bar
+2. a centered hero area with a small logo row above the headline
+3. a large multi-line serif headline
+4. a concise supporting paragraph
+5. one compact rounded CTA button
+6. a 3-column image/card section underneath
+7. a large editorial quote section below
+8. the beginning of a content or product grid section after that
+
+The layout should feel spacious and balanced.
+Use generous vertical rhythm.
+Let the hero breathe.
+Do not crowd elements.
+Use image-led composition with clean framed cards.
+
+[COMPONENT DETAILS]
+Navigation:
+- minimal links on left
+- centered or balanced brand mark/title
+- small login text and one dark rounded CTA on right
+
+Hero:
+- tiny muted brand or logo row above the main heading
+- very large serif headline, centered
+- short supporting copy in muted gray-green
+- compact CTA below
+
+Card row:
+- left card: large food or lifestyle image
+- center card: clean white product or nutrition card with title and stats
+- right card: portrait or lifestyle image with overlaid editorial text
+- cards should have generous border radius and soft shadows
+- spacing between cards should be elegant and even
+
+Quote section:
+- centered oversized serif quote
+- lots of negative space
+- calm editorial pacing
+
+Next section:
+- a product or ingredient grid beginning to appear below
+- include subtle navigation arrows or controls if helpful
+- maintain premium minimalism
+
+[DESIGN DETAILS]
+Add subtle refinement details only:
+- thin dividers
+- soft borders
+- very quiet shadows
+- precise spacing
+- careful image framing
+Do not add noisy decorations.
+Do not add heavy glassmorphism.
+Do not add exaggerated gradients.
+Do not overdesign.
+
+[IMAGE INTERPRETATION]
+Match the reference image’s mood and composition:
+- luxury wellness
+- systemic nutrition
+- clean clinical-meets-editorial
+- soft beige background
+- deep green CTA
+- elegant serif heading
+- premium food and portrait photography
+- refined editorial layout
+
+[AVOID]
+Avoid:
+- generic SaaS hero blocks
+- app-dashboard styling
+- overly corporate layouts
+- loud badges everywhere
+- dense icon grids
+- thick borders
+- overuse of blur or gradients
+- e-commerce clutter
+- generic Tailwind-looking spacing patterns
+
+[DELIVERABLE]
+Return a single complete HTML document with embedded CSS in a `<style>` tag.
+Use real placeholder text matching the tone of the reference.
+Use accessible semantic structure.
+Use placeholder image URLs where needed.
