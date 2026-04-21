@@ -1,0 +1,488 @@
+.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitalis - Engineered Nutrition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #F4F3ED;
+            --white: #FFFFFF;
+            --text-primary: #1A1D1A;
+            --text-muted: #6B706B;
+            --accent: #1B2E24;
+            --border-color: #E6E4DD;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-lg: 1.5rem;
+            --radius-full: 9999px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2.5rem 4vw;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .nav-links, .nav-actions {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            width: 33%;
+        }
+
+        .nav-actions {
+            justify-content: flex-end;
+        }
+
+        .nav-links a, .nav-actions a:not(.btn) {
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-actions a:not(.btn):hover {
+            color: var(--text-primary);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            font-size: 1.1rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            width: 33%;
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: var(--white) !important;
+            padding: 0.6rem 1.25rem;
+            border-radius: var(--radius-full);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #121F18;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 5rem 4vw 6rem;
+        }
+
+        .hero-brands {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            opacity: 0.35;
+            margin-bottom: 3.5rem;
+            font-size: 0.85rem;
+            filter: grayscale(1);
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            font-weight: 400;
+            line-height: 1.05;
+            margin: 0 0 1.5rem;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 400;
+        }
+
+        /* Cards Row */
+        .cards-section {
+            padding: 0 4vw 8rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            position: relative;
+            height: 600px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.04);
+            background-color: var(--white);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-badge {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            background: rgba(25, 25, 25, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .card-white {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: auto;
+        }
+
+        .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .heart-icon {
+            color: #D6D6D6;
+            transition: color 0.3s ease;
+        }
+        
+        .heart-icon:hover {
+            color: #FF5A5F;
+            cursor: pointer;
+        }
+
+        .card-white h3 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 400;
+            margin: 0 0 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .card-white > p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0 0 3rem;
+        }
+
+        .macros {
+            margin-top: auto;
+        }
+
+        .macro-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .macro-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .macro-row span:last-child {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 4rem 2rem 2rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            z-index: 10;
+        }
+
+        .card-overlay p {
+            color: var(--white);
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            line-height: 1.25;
+            margin: 0;
+        }
+
+        /* Quote Section */
+        .quote-section {
+            background-color: var(--white);
+            padding: 10rem 4vw;
+            text-align: center;
+        }
+
+        .quote-section h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(2.25rem, 4vw, 3.25rem);
+            font-weight: 400;
+            line-height: 1.3;
+            color: var(--text-primary);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Product Grid Section */
+        .product-section {
+            padding: 8rem 4vw;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-serif);
+            font-size: 2.25rem;
+            font-weight: 400;
+            margin: 0 0 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .control-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+
+        .control-btn:hover {
+            border-color: var(--text-primary);
+            background-color: var(--white);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .product-card {
+            background-color: var(--accent);
+            border-radius: var(--radius-lg);
+            height: 450px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .cards-section, .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                height: 500px;
+            }
+            .nav-links, .nav-actions {
+                display: none;
+            }
+            .brand {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-links">
+            <a href="#">Manifesto</a>
+            <a href="#">Science</a>
+            <a href="#">Journal</a>
+        </div>
+        <div class="brand">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 22C12 22 20 18 20 12C20 6 12 2 12 2C12 2 4 6 4 12C4 18 12 22 12 22Z" />
+                <path d="M12 2v20" />
+            </svg>
+            VITALIS
+        </div>
+        <div class="nav-actions">
+            <a href="#">Login</a>
+            <a href="#" class="btn">Get Started &rarr;</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="hero-brands">
+                <span style="font-family: sans-serif; font-weight: 700; font-size: 1.1rem;">X</span>
+                <span style="font-weight: 500;">Uber</span>
+                <span style="font-weight: 600; letter-spacing: -0.5px;">NASA</span>
+                <span style="font-style: italic; font-weight: 700;">VISA</span>
+                <span style="text-transform: lowercase; font-weight: 500;">about.me</span>
+            </div>
+            <h1>Engineered Nutrition for<br>Systemic Wellness</h1>
+            <p>Whole-food formulations designed to optimize microbiome<br>diversity and metabolic flexibility.<br>No prep. No fillers. Pure biological signal.</p>
+            <a href="#" class="btn" style="padding: 1rem 2rem; font-size: 0.95rem;">View Menu</a>
+        </section>
+
+        <section class="cards-section">
+            <!-- Left Card -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&q=80&w=800" alt="Plated salmon and greens" class="card-img">
+                <div class="card-badge">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                    Daily calibration
+                </div>
+            </div>
+
+            <!-- Center Card -->
+            <div class="card card-white">
+                <div class="card-header">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&q=80&w=200" alt="Bowl thumbnail" class="avatar">
+                    <svg class="heart-icon" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                </div>
+                <h3>Macro-Bowl V2</h3>
+                <p>Rich in polyphenols for cognitive repair.</p>
+                <div class="macros">
+                    <div class="macro-row">
+                        <span>Protein</span>
+                        <span>32g</span>
+                    </div>
+                    <div class="macro-row">
+                        <span>Fiber</span>
+                        <span>14g</span>
+                    </div>
+                    <div class="macro-row">
+                        <span>Net Carbs</span>
+                        <span>12g</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Card -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=800" alt="Editorial wellness portrait" class="card-img">
+                <div class="card-overlay">
+                    <p>Complete nutritional density with 24 essential minerals.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="quote-section">
+            <h2>&ldquo;A systemic protocol engineered to restore<br>gut diversity and deliver sustained vitality<br>without the glucose crash.&rdquo;</h2>
+        </section>
+
+        <section class="product-section">
+            <div class="section-header">
+                <div>
+                    <h2>Core Bio-actives</h2>
+                    <p>Sourced from regenerative soil.</p>
+                </div>
+                <div class="controls">
+                    <button class="control-btn" aria-label="Previous">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    </button>
+                    <button class="control-btn" aria-label="Next">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1611078516518-8d0224213d2a?auto=format&fit=crop&q=80&w=800" alt="Avocado formulation">
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&q=80&w=800" alt="Botanical extracts">
+                </div>
+                <div class="product-card" style="background-color: var(--border-color);">
+                    <!-- Placeholder for next product -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
