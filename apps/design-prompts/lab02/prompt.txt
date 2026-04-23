@@ -1,0 +1,106 @@
+Create a premium eco-car landing page in plain HTML + CSS.
+
+[BASE BEHAVIOR]
+Only output production-ready HTML and CSS.
+Do not explain your reasoning.
+Do not output markdown fences.
+Keep the code clean, semantic, and easy to edit.
+Use plain HTML + CSS only.
+Make it responsive.
+Use accessible semantic structure.
+
+[PAGE TYPE]
+Build this as a premium landing page for a next-generation electric vehicle brand.
+Focus on the full first-page experience, not just a hero section.
+
+[BRAND MOOD]
+The brand should feel calm, advanced, aerodynamic, and environmentally credible.
+Blend premium automotive confidence with transparent sustainability storytelling.
+This is not a generic startup page, not a dashboard, and not a loud futuristic concept site.
+
+[VISUAL DIRECTION]
+Use an editorial image-led layout with disciplined spacing and strong hierarchy.
+Combine clean premium typography with subtle technical detail.
+Use large automotive photography, refined framing, soft depth, and crisp structure.
+Let the page feel expensive and modern without becoming cold or aggressive.
+
+[TYPOGRAPHY]
+Use a clean, elegant sans-serif for the main interface and body copy.
+Use either a refined serif or a highly controlled display sans for selected hero moments.
+Create strong contrast between large hero type and quiet spec labels.
+Typography should feel premium automotive, not trendy SaaS.
+
+[COLOR SYSTEM]
+Use a light mineral or warm-gray base with graphite text and one restrained eco accent.
+Accent options can include moss green, muted teal, or soft electric blue.
+Keep contrast clean and premium.
+Avoid neon greens, crypto gradients, and oversaturated marketing colors.
+
+[MESSAGING RULES]
+Make sustainability claims specific and qualified.
+Use proof such as battery range, recycled-material percentages, lower-emission manufacturing notes, or traceable interior materials.
+Do not use vague claims like “planet friendly” without support.
+Pair eco messaging with performance, comfort, safety, and craftsmanship.
+
+[LAYOUT]
+Create these sections in order:
+1. refined top navigation
+2. image-led hero with large statement headline
+3. proof strip with 3 or 4 key metrics
+4. sustainability and material story section
+5. performance and charging split section
+6. interior technology / cabin experience section
+7. feature grid or ownership benefits section
+8. testimonial or trust section
+9. final CTA
+10. minimal footer
+
+[HERO]
+Include:
+- a small label above the headline
+- a large high-confidence headline
+- concise supporting paragraph
+- primary CTA and secondary CTA
+- a premium car image or conceptual EV visual
+- one or two small spec chips such as range, fast charge time, or recycled interior content
+
+[PROOF STRIP]
+Show concrete metrics such as:
+- estimated range
+- 10 to 80 percent charge time
+- recycled or bio-based material usage
+- low-emission production or lifecycle metric
+
+[SECTION DETAILS]
+Use a section that explains materials and manufacturing transparency.
+Use another section that balances performance with efficiency.
+Use another section that shows cabin calm, software, and driver assistance.
+Keep copy concise and credible.
+
+[STYLE DETAILS]
+Add only restrained details:
+- thin dividers
+- quiet grid lines
+- subtle shadows
+- precise image framing
+- small technical labels
+- calm stat cards
+
+[AVOID]
+Avoid:
+- generic SaaS cards
+- greenwashing language
+- heavy glassmorphism
+- noisy Web3 styling
+- cluttered comparisons
+- oversized icon grids
+- harsh black backgrounds everywhere
+- decorative features that distract from the car
+
+[DELIVERABLE]
+Return a single complete HTML document with embedded CSS in a `<style>` tag.
+Use realistic placeholder copy for an eco-car brand.
+Use placeholder image URLs where needed.
+
+[RELATED WORKFLOW]
+For the repo’s composed design stack (shared baseline + `frontend-design compose`) and the same eco-car page intent, use `full-page-handoff.md` with the command in `README.md` in this folder—not this file alone.

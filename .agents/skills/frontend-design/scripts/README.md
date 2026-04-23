@@ -16,7 +16,8 @@ bun .agents/skills/frontend-design/scripts/validate-frontend-design.ts
 
 - Reads only local assets from `docs/design-prompts/`
 - Keeps composition order deterministic and visible in stdout
-- Supports one optional repo-local `--handoff` file
-- Treats `apps/design-prompts/lab01` as sandbox input only
+- Supports one optional repo-local `--handoff` file (`--handoff` resolves from cwd or repo root)
+- Treats `apps/design-prompts/*` as sandbox input only (compose prepends a sandbox banner for those files)
+- Eco-car lab compose recipe: `apps/design-prompts/lab02/README.md`
 - Does not write `.agent-state`, fetch remote content, or mutate prompt assets
 - Validation fixtures live at `.agents/skills/frontend-design/fixtures/frontend-design.json`
