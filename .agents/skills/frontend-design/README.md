@@ -56,8 +56,9 @@ The script composes prompt content in a fixed, documented order:
 
 - `--handoff` is read-only and repo-local only
 - Relative handoff paths may resolve from the current working directory or repo root
-- If the resolved file lives under `apps/design-prompts/lab01`, the output marks it as sandbox input only
-- The lab folder is not treated as validated prompt canon
+- If the resolved file lives under `apps/design-prompts/`, the output marks it as sandbox input only
+- Files in that sandbox area are not treated as validated prompt canon
+- Example lab handoff (documented in-repo): `apps/design-prompts/lab02/full-page-handoff.md` for the eco-car landing prompt package; see `apps/design-prompts/lab02/README.md` for the suggested `compose` flags
 
 ## Validation harness
 
@@ -71,7 +72,7 @@ bun .agents/skills/frontend-design/scripts/validate-frontend-design.ts
 ```
 
 - The harness validates command behavior, required markers, and compose ordering
-- `apps/design-prompts/lab01/*` remains sandbox input only even when referenced by validation fixtures
+- `apps/design-prompts/*` remains sandbox input only even when referenced by validation fixtures
 
 ## Acceptance criteria
 

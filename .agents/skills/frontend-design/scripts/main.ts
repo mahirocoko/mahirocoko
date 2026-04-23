@@ -45,7 +45,7 @@ type SearchMatch = {
 
 const DESIGN_PROMPTS_RELATIVE_PATH = join("docs", "design-prompts", "design-prompts.json")
 const DESIGN_SKILL_PROMPTS_RELATIVE_PATH = join("docs", "design-prompts", "design-skill-prompts.json")
-const LAB01_RELATIVE_PATH = join("apps", "design-prompts", "lab01")
+const DESIGN_PROMPTS_SANDBOX_RELATIVE_PATH = join("apps", "design-prompts")
 const SKILL_REPO_ROOT = resolve(import.meta.dir, "..", "..", "..", "..")
 
 function resolveRepoRoot(): string {
@@ -197,8 +197,8 @@ Composition order:
 
 Notes:
   - Reads only local prompt assets from docs/design-prompts
-  - --handoff must resolve to a repo-local file
-  - apps/design-prompts/lab01 is sandbox input only`)
+  - --handoff must resolve to a repo-local file (relative paths resolve from cwd or repo root)
+  - apps/design-prompts/* is sandbox input only`)
 }
 
 function formatPromptEntry(entry: SkillPromptEntry): string {
@@ -460,7 +460,9 @@ function resolveRepoLocalFilePath(repoRoot: string, inputPath: string): { absolu
   const realPath = realpathSync(matchedPath)
 
   const repoRelativePath = relative(repoRoot, realPath)
-  const sandboxOnly = repoRelativePath === LAB01_RELATIVE_PATH || repoRelativePath.startsWith(`${LAB01_RELATIVE_PATH}/`)
+  const sandboxOnly =
+    repoRelativePath === DESIGN_PROMPTS_SANDBOX_RELATIVE_PATH ||
+    repoRelativePath.startsWith(`${DESIGN_PROMPTS_SANDBOX_RELATIVE_PATH}/`)
 
   return {
     absolutePath: realPath,
