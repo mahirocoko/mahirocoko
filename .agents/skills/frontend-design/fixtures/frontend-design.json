@@ -116,5 +116,119 @@
       "4. handoff: apps/design-prompts/lab01/prompt.txt"
     ],
     "rejectContains": []
+  },
+  {
+    "id": "compose-branding-stack",
+    "args": [
+      "compose",
+      "--general",
+      "branding",
+      "--direction",
+      "explore-typography",
+      "--prompt",
+      "framed-grid-layout",
+      "--prompt",
+      "beautiful-shadows"
+    ],
+    "expectExitCode": 0,
+    "expectContains": [
+      "# frontend-design compose",
+      "## Composition order",
+      "2. general: branding",
+      "3. direction: explore-typography",
+      "4. prompt: framed-grid-layout",
+      "5. prompt: beautiful-shadows",
+      "## general: branding",
+      "## direction: explore-typography",
+      "## prompt: framed-grid-layout (Framed Grid Layout)",
+      "## prompt: beautiful-shadows (Beautiful Shadows)"
+    ],
+    "expectInOrder": [
+      "1. shared baseline: generalSystemPrompt",
+      "2. general: branding",
+      "3. direction: explore-typography",
+      "4. prompt: framed-grid-layout",
+      "5. prompt: beautiful-shadows",
+      "## shared baseline",
+      "## general: branding",
+      "## direction: explore-typography",
+      "## prompt: framed-grid-layout (Framed Grid Layout)",
+      "## prompt: beautiful-shadows (Beautiful Shadows)"
+    ],
+    "rejectContains": []
+  },
+  {
+    "id": "compose-motion-stack",
+    "args": [
+      "compose",
+      "--general",
+      "motion-design",
+      "--direction",
+      "animate",
+      "--prompt",
+      "gsap",
+      "--prompt",
+      "masked-reveal"
+    ],
+    "expectExitCode": 0,
+    "expectContains": [
+      "# frontend-design compose",
+      "## Composition order",
+      "2. general: motion-design",
+      "3. direction: animate",
+      "4. prompt: gsap",
+      "5. prompt: masked-reveal",
+      "## general: motion-design",
+      "## direction: animate",
+      "## prompt: gsap (GSAP Motion)",
+      "## prompt: masked-reveal (Masked Reveal)"
+    ],
+    "expectInOrder": [
+      "1. shared baseline: generalSystemPrompt",
+      "2. general: motion-design",
+      "3. direction: animate",
+      "4. prompt: gsap",
+      "5. prompt: masked-reveal",
+      "## shared baseline",
+      "## general: motion-design",
+      "## direction: animate",
+      "## prompt: gsap (GSAP Motion)",
+      "## prompt: masked-reveal (Masked Reveal)"
+    ],
+    "rejectContains": []
+  },
+  {
+    "id": "compose-full-page-handoff",
+    "args": [
+      "compose",
+      "--general",
+      "landing-page",
+      "--prompt",
+      "image-first-grid-layout",
+      "--handoff",
+      "apps/design-prompts/lab01/full-page-handoff.md"
+    ],
+    "requiredFiles": [
+      "apps/design-prompts/lab01/full-page-handoff.md"
+    ],
+    "expectExitCode": 0,
+    "expectContains": [
+      "# frontend-design compose",
+      "## Composition order",
+      "2. general: landing-page",
+      "3. prompt: image-first-grid-layout",
+      "4. handoff: apps/design-prompts/lab01/full-page-handoff.md",
+      "## prompt: image-first-grid-layout (Image First Grid Layout)",
+      "## handoff: apps/design-prompts/lab01/full-page-handoff.md",
+      "Sandbox note: apps/design-prompts/lab01/full-page-handoff.md is experimental input only and is not validated prompt canon.",
+      "# Full Page Design Handoff"
+    ],
+    "expectInOrder": [
+      "1. shared baseline: generalSystemPrompt",
+      "2. general: landing-page",
+      "3. prompt: image-first-grid-layout",
+      "4. handoff: apps/design-prompts/lab01/full-page-handoff.md"
+    ],
+    "rejectContains": []
   }
 ]
