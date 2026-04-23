@@ -1,0 +1,120 @@
+[
+  {
+    "id": "list-basic",
+    "args": ["list"],
+    "expectExitCode": 0,
+    "expectContains": [
+      "# frontend-design list",
+      "## General prompts (20)",
+      "- hero",
+      "## Direction prompts (8)",
+      "- animate",
+      "## Reusable prompt entries (56)",
+      "- css-border-gradient — Border Gradients [style]"
+    ],
+    "expectInOrder": [
+      "# frontend-design list",
+      "## General prompts (20)",
+      "## Direction prompts (8)",
+      "## Reusable prompt entries (56)"
+    ],
+    "rejectContains": []
+  },
+  {
+    "id": "search-hero",
+    "args": ["search", "hero"],
+    "expectExitCode": 0,
+    "expectContains": [
+      "# frontend-design search",
+      "Query: hero",
+      "## General prompts (",
+      "- hero —",
+      "## Direction prompts (",
+      "## Reusable prompt entries ("
+    ],
+    "expectInOrder": [
+      "# frontend-design search",
+      "Query: hero",
+      "## General prompts (",
+      "## Direction prompts (",
+      "## Reusable prompt entries ("
+    ],
+    "rejectContains": [
+      "No matching prompt assets found."
+    ]
+  },
+  {
+    "id": "compose-ordered-stack",
+    "args": [
+      "compose",
+      "--general",
+      "hero",
+      "--direction",
+      "animate",
+      "--direction",
+      "design-details",
+      "--prompt",
+      "css-border-gradient"
+    ],
+    "expectExitCode": 0,
+    "expectContains": [
+      "# frontend-design compose",
+      "## Composition order",
+      "1. shared baseline: generalSystemPrompt",
+      "2. general: hero",
+      "3. direction: animate",
+      "4. direction: design-details",
+      "5. prompt: css-border-gradient",
+      "## direction: animate",
+      "Animate intro with interactions and scroll events.",
+      "## direction: design-details",
+      "Add details like 01 02 03, lines, grid, vertical container-size lines.",
+      "## prompt: css-border-gradient (Border Gradients)"
+    ],
+    "expectInOrder": [
+      "1. shared baseline: generalSystemPrompt",
+      "2. general: hero",
+      "3. direction: animate",
+      "4. direction: design-details",
+      "5. prompt: css-border-gradient",
+      "## shared baseline",
+      "## general: hero",
+      "## direction: animate",
+      "## direction: design-details",
+      "## prompt: css-border-gradient (Border Gradients)"
+    ],
+    "rejectContains": []
+  },
+  {
+    "id": "compose-lab01-handoff",
+    "args": [
+      "compose",
+      "--general",
+      "landing-page",
+      "--prompt",
+      "css-border-gradient",
+      "--handoff",
+      "apps/design-prompts/lab01/prompt.txt"
+    ],
+    "requiredFiles": [
+      "apps/design-prompts/lab01/prompt.txt"
+    ],
+    "expectExitCode": 0,
+    "expectContains": [
+      "# frontend-design compose",
+      "## Composition order",
+      "2. general: landing-page",
+      "3. prompt: css-border-gradient",
+      "4. handoff: apps/design-prompts/lab01/prompt.txt",
+      "## handoff: apps/design-prompts/lab01/prompt.txt",
+      "Sandbox note: apps/design-prompts/lab01/prompt.txt is experimental input only and is not validated prompt canon."
+    ],
+    "expectInOrder": [
+      "1. shared baseline: generalSystemPrompt",
+      "2. general: landing-page",
+      "3. prompt: css-border-gradient",
+      "4. handoff: apps/design-prompts/lab01/prompt.txt"
+    ],
+    "rejectContains": []
+  }
+]
