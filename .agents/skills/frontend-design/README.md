@@ -9,6 +9,7 @@ This skill provides a lean repo-local way to inspect and compose frontend design
 - Read reusable prompt fragments from `docs/design-prompts/design-skill-prompts.json`
 - Optionally append one repo-local handoff file during composition
 - Keep the skill wrapper thin and the script read-only
+- Keep visual taste doctrine out of this wrapper; pair with `uncodixify` only when implementing or revamping UI output
 
 ## Chosen architecture
 

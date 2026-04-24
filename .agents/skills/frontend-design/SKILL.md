@@ -57,5 +57,7 @@ The compose command prints sections in this order:
 - `--handoff` may read a repo-local file and appends its content last
 - `apps/design-prompts/lab01` is sandbox input only and should not be treated as validated prompt canon
 - Skill-owned validation lives at `.agents/skills/frontend-design/scripts/validate-frontend-design.ts`
+- For actual UI generation or revamps, pair this with `uncodixify` so composed prompt output is filtered through a restrained, non-generic frontend aesthetic.
+- When prompt assets call for remote images or asset URLs, use real reachable URLs only. Never invent image URLs or assume variants exist without checking.
 
 ARGUMENTS: $ARGUMENTS

@@ -1,0 +1,117 @@
+Create a restrained indie game studio landing page in plain HTML + CSS.
+
+[BASE BEHAVIOR]
+Only output production-ready HTML and CSS.
+Do not explain your reasoning.
+Do not output markdown fences.
+Keep the code clean, semantic, and easy to edit.
+Use plain HTML + CSS only.
+Make it responsive.
+Use accessible semantic structure.
+Do not use JavaScript, frameworks, build tools, or external dependencies.
+
+[PAGE TYPE]
+Build this as a full landing page for an independent narrative game studio.
+Focus on the complete first-page experience, not just a hero section.
+
+[BRAND MOOD]
+The studio should feel quiet, production-capable, and specific.
+Blend atmosphere with clear product information about games, craft, updates, and press.
+This is not a generic SaaS page, not a dashboard, not a pricing page, and not a loud cyberpunk game teaser.
+
+[VISUAL DIRECTION]
+Use a dark, image-led layout with disciplined spacing and clear hierarchy.
+Use normal sections, simple borders, restrained buttons, and careful typography.
+Use charcoal surfaces, muted amber or oxide accents, and plain image framing.
+Keep the page immersive without heavy gradients, glassmorphism, neon glow, HUD decoration, corner markers, or repeated utility labels.
+
+[TYPOGRAPHY]
+Use a readable type system with one strong sans-serif family.
+Keep headings clear and body copy comfortable.
+Avoid decorative serif shortcuts, uppercase label spam, and metadata layers that make the page feel templated.
+
+[COLOR SYSTEM]
+Use a dark cinematic base: near-black, charcoal, warm gray, and off-white text.
+Use one restrained accent such as muted amber, rust, clay, or aged brass.
+Keep contrast accessible.
+Avoid electric blue, cyan neon, oversaturated purple gradients, and colorful cyberpunk styling.
+
+[MESSAGING RULES]
+Make the studio specific and believable.
+Reference narrative design, playable prototypes, shipped titles, platforms, accessibility, localization, and press updates where useful.
+Do not overclaim awards or use vague hype like “redefining gaming forever.”
+Do not create fake enterprise sections, KPI dashboards, integrations, pricing tiers, or testimonial spam.
+
+[LAYOUT]
+Create these sections in order:
+1. restrained top navigation
+2. cinematic image-led hero for the studio and current title
+3. featured games section
+4. studio approach section
+5. proof strip with concrete studio facts
+6. current update / press section
+7. final CTA
+8. minimal footer
+
+[HERO]
+Include:
+- a concise context line about the studio
+- a large cinematic headline
+- a short supporting paragraph
+- primary CTA and secondary CTA
+- a dominant cinematic image or illustrated still
+- one or two plain production notes such as current build, platforms, or festival preview
+
+[FEATURED GAMES]
+Show 2 or 3 game projects.
+Each project should include a title, short premise, status, platform or release note, and visual still.
+Avoid generic cards; use editorial rows, split layouts, or image-led panels.
+
+[STUDIO APPROACH]
+Explain how the studio works.
+Possible points: narrative systems, environmental storytelling, intimate art direction, accessibility passes, localization planning, or prototype-led production.
+Keep copy concise and concrete.
+
+[PROOF STRIP]
+Show grounded facts such as:
+- shipped games or prototypes
+- languages supported
+- festival selections or press previews
+- accessibility checklist coverage
+These should read as credibility signals, not KPI cards.
+
+[CURRENT UPDATE / PRESS]
+Include a current production update and one press excerpt or announcement.
+Use editorial layout, not testimonial spam.
+
+[STYLE DETAILS]
+Add only restrained details:
+- thin dividers
+- simple dividers
+- plain image frames
+- short production notes
+- visible focus states and subtle hover cues
+
+[AVOID]
+Avoid:
+- generic SaaS sections
+- pricing, integrations, dashboards, KPI card grids, or logo walls
+- glassmorphism
+- heavy gradients
+- pill overload
+- neon cyberpunk styling
+- fake premium copy
+- loud gamer UI clichés
+- oversized icon grids
+- decorative features that distract from the studio’s games
+
+[DELIVERABLE]
+Return a single complete HTML document with embedded CSS in a `<style>` tag.
+Use realistic placeholder copy for an indie narrative game studio.
+Use real reachable image URLs or self-contained inline/data-URI artwork if images are needed; do not invent broken asset URLs.
+
+[RELATED WORKFLOW]
+For the repo’s composed design stack (shared baseline + `frontend-design compose`) and the same game-studio page intent, use `full-page-handoff.md` with the command in `README.md` in this folder—not this file alone.
+
+[UNCODIXIFY REVAMP NOTES]
+Prefer normal landing-page structure over cinematic decoration. Do not use decorative frame corners, repeated uppercase labels, oversized shadows, fake dashboard-style proof blocks, or legal/footer placeholder links that pretend to be pages.
