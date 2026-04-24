@@ -266,6 +266,34 @@ If a UI choice feels like a default AI UI move, ban it and pick the harder, clea
 - Mobile typography must be reduced for reading flow, not just mechanically clamped.
 - If the fastest way to make the design feel intentional is to enlarge the heading, you are probably avoiding the harder layout problem.
 
+## Hard typography enforcement
+
+- Only one dominant heading zone is allowed per page by default.
+- If there is a hero, the hero may take the largest type size. Everything else must step down clearly.
+- If there is no true hero, do not invent one with oversized typography.
+- Non-hero section headings must stay moderate, visibly smaller, and structurally quieter than the main heading zone.
+- When a layout still works after reducing the heading size, the heading was too big.
+- If the composition feels weak, fix layout, spacing, grouping, and content density before increasing type size.
+- If in doubt, reduce heading size first.
+- Do not let the model use scale as a substitute for hierarchy.
+
+### Prompt reinterpretation rule
+
+- If another prompt asks for expressive, dominant, large, editorial, oversized, or typography-first treatment, reinterpret it conservatively.
+- Keep the intent, reduce the excess.
+- “Expressive” does not mean poster-scale.
+- “Editorial” does not mean every heading becomes a display heading.
+- “Dominant” means clearly primary, not overwhelmingly huge.
+- “Typography-first” means typography leads the composition, not that typography becomes physically enormous.
+
+### Default type behavior
+
+- Hero heading: large but restrained.
+- Section heading: moderate.
+- Card titles, quotes, labels, and metadata: clearly subordinate.
+- Body copy should never look miniaturized just to justify a larger heading.
+- If body text starts feeling too small relative to the heading, reduce the heading before changing anything else.
+
 Hierarchy should come from this order:
 
 1. placement
