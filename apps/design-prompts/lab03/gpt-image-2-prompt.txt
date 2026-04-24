@@ -1,0 +1,95 @@
+Create a high-fidelity landing page design reference for an indie narrative game studio website.
+
+The image should look like a complete landing page mockup, not code, not a wireframe, and not a cropped hero-only poster. Show a polished web-design reference with enough of the page visible to understand the layout system, atmosphere, and section rhythm.
+
+Studio: "Hollow Signal Studio".
+Current game: "Northstar After Dark".
+
+Use case:
+This is a design reference for a landing page implementation. Prioritize layout hierarchy, spacing, typography, section structure, and reusable visual direction over illustration spectacle.
+
+Core direction:
+- restrained dark editorial landing page
+- image-led, atmospheric, and readable
+- serious small studio, production-aware, commercially clear
+- narrative games about memory, weather, sound, and places that feel lived in
+- quiet cinematic mood, not loud cyberpunk and not generic SaaS
+
+Page structure to show:
+1. restrained top navigation with "Hollow Signal Studio", "Games", "Approach", "Updates", "Press", "Play the Demo", and "Press Kit"
+2. main hero with a dominant cinematic still for "Northstar After Dark", concise studio context, a clear headline, short supporting copy, two normal buttons, and one or two plain production notes
+3. featured games area with three projects: "Northstar After Dark", "Moth House", "Low Tide Almanac"
+4. studio approach section about environmental storytelling, playable milestones, accessibility, localization, and sound design
+5. thin proof strip with grounded facts such as shipped narrative titles, subtitle plan, festival demo, accessibility checks
+6. current production update and press note
+7. calm final CTA and minimal footer
+
+Important text:
+- Render the brand and main labels clearly where they appear.
+- Important exact text: "Hollow Signal Studio", "Northstar After Dark", "Moth House", "Low Tide Almanac".
+- If showing a hero headline, use: "Small stories about places that remember".
+- Keep supporting copy short. Do not fill the image with dense paragraphs.
+- No random extra labels, no duplicate headings, no misspelled brand name.
+
+Visual system:
+- near-black / charcoal / dark umber background
+- warm off-white text
+- muted warm gray secondary text
+- restrained amber, aged brass, rust, or clay accent used sparingly
+- thin low-contrast dividers
+- simple bordered media frames
+- modest 8px corner radius at most
+- no dramatic shadows
+- no glow effects
+- no glassmorphism
+- no heavy gradients
+- no neon blue or cyan accents
+- no purple cyberpunk lighting
+- no dashboard cards or KPI grid
+- no pill overload
+- no logo wall
+- no decorative corner-frame ornaments
+
+Typography:
+- one readable modern sans-serif family
+- clear hierarchy with normal heading sizes
+- headings should feel mature and editorial, not huge poster text
+- avoid uppercase metadata spam
+- avoid decorative serif headline shortcuts
+
+Layout notes:
+- use disciplined grid alignment and generous but not excessive spacing
+- hero should be image-led but still feel like a usable studio website
+- featured games should use editorial rows or split image/text panels, not generic equal SaaS cards
+- proof strip should feel like factual studio credibility, not analytics metrics
+- footer should be minimal and practical
+
+Imagery direction:
+- create cinematic game stills as part of the page mockup
+- Northstar After Dark: dark coastal road, rain, radio tower, warm signal light, quiet storm atmosphere
+- Moth House: dim domestic interior, stairs or window, subtle ghost-story mood
+- Low Tide Almanac: dark shoreline, field notes, tide marker, archival feeling
+- images should support the website design, not overpower the interface
+
+Composition:
+- polished website mockup / Figma-style design reference
+- choose a natural landing-page preview composition that best shows the design direction
+- the composition may be wide, tall, or slightly zoomed out as long as the landing page remains readable
+- show enough of the page to understand multiple sections
+- clean product-design finish, realistic spacing, accessible contrast
+- restrained, human-designed, closer to a serious studio site than an AI-generated premium dashboard
+
+Avoid:
+- generic startup hero layout
+- overlarge headlines
+- fake premium copy
+- metric-card grids
+- neon gamer UI
+- cyberpunk HUD interface
+- floating glass panels
+- glossy gradients
+- exaggerated rounded pills
+- random badges
+- testimonial/logo-wall sections
+- decorative AI filler elements
+- browser chrome, device frames, cursors, or watermarks
