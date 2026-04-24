@@ -4,8 +4,10 @@ This lab captures a screenshot-to-HTML design prompt experiment.
 
 Files:
 
-- `demo01.png` - local reference screenshot
+- `1.png`, `2.png`, `3.png` - local reference screenshots
 - `prompt.txt` - prompt sent to Gemini CLI
+- `full-page-handoff.md` - expanded full-page section handoff
+- `index.html` - reference landing page implementation in plain HTML + embedded CSS
 
 Goal:
 
