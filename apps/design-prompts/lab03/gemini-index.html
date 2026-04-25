@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hollow Signal Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="antialiased relative min-h-screen flex flex-col bg-[#10100e] text-[#f5f1ea]">
+
+  <!-- Background Lines (Container Lines) -->
+  <div class="fixed inset-0 pointer-events-none z-[0] max-w-7xl mx-auto w-full">
+    <div class="absolute top-0 bottom-0 w-[1px] bg-[#f5f1ea]/[0.06] left-0 md:left-6"></div>
+    <div class="absolute top-0 bottom-0 w-[1px] bg-[#f5f1ea]/[0.06] right-0 md:right-6"></div>
+    <div class="absolute top-0 bottom-0 w-[1px] bg-[#f5f1ea]/[0.06] left-1/2 hidden md:block"></div>
+  </div>
+
+  <!-- 1. Top Navigation -->
+  <nav class="border-b border-[#f5f1ea]/10 relative z-10 bg-[#10100e]/90">
+    <div class="max-w-7xl mx-auto w-full px-6 flex flex-col md:flex-row items-center justify-between py-5 gap-4">
+      <div class="flex items-center gap-10">
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-7 h-7 flex items-center justify-center border border-[#f5f1ea]/20 text-[#c8874f] text-xs font-semibold transition-colors group-hover:border-[#c8874f]">H</div>
+          <span class="font-medium text-sm tracking-wide">Hollow Signal Studio</span>
+        </a>
+        <div class="hidden md:flex gap-7 text-sm text-[#b7afa4]">
+          <a href="#games" class="hover:text-[#f5f1ea] transition-colors">Games</a>
+          <a href="#approach" class="hover:text-[#f5f1ea] transition-colors">Approach</a>
+          <a href="#updates" class="hover:text-[#f5f1ea] transition-colors">Updates</a>
+          <a href="#press" class="hover:text-[#f5f1ea] transition-colors">Press</a>
+        </div>
+      </div>
+      <div class="flex gap-4 text-sm font-medium">
+        <a href="#demo" class="px-5 py-2 border border-[#f5f1ea]/20 text-[#f5f1ea] hover:bg-[#f5f1ea] hover:text-[#10100e] transition-colors">Play the Demo</a>
+        <a href="#presskit" class="px-5 py-2 text-[#b7afa4] hover:text-[#f5f1ea] transition-colors">Press Kit</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 2. Cinematic Hero -->
+  <!-- Split layout technical / Image first grid layout -->
+  <header class="relative border-b border-[#f5f1ea]/10 overflow-hidden flex-1 flex flex-col justify-center pt-24 pb-20 lg:pt-36 lg:pb-32">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#10100e] via-[#10100e]/85 to-[#10100e]/20 z-10"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-[#10100e] via-transparent to-transparent z-10"></div>
+      <img
+        src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
+        alt="Storm-dark coastal water and road atmosphere for Northstar After Dark"
+        class="w-full h-full object-cover opacity-40"
+      >
+    </div>
+    
+    <div class="max-w-7xl mx-auto w-full px-6 relative z-20 grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div class="flex flex-col items-start justify-center">
+        <div class="text-xs font-mono uppercase tracking-widest text-[#8b8176] mb-6 flex items-center gap-3">
+          <span class="w-4 h-[1px] bg-[#8b8176]"></span>
+          Founded in 2019
+        </div>
+        <h1 class="text-4xl lg:text-[4rem] font-medium tracking-tight leading-[1.05] mb-6 max-w-xl">
+          Small stories with the weight of weather.
+        </h1>
+        <p class="text-[1.05rem] text-[#b7afa4] mb-10 max-w-md leading-relaxed">
+          Independent narrative games built around environmental storytelling, lived-in places, and playable mechanics over exposition.
+        </p>
+        <div class="flex gap-4">
+          <a href="#demo" class="px-6 py-3 bg-[#f5f1ea] text-[#10100e] font-medium hover:bg-white transition-colors">Play the Demo</a>
+          <a href="#games" class="px-6 py-3 border border-[#f5f1ea]/20 text-[#f5f1ea] hover:bg-[#f5f1ea]/5 transition-colors">View Projects</a>
+        </div>
+      </div>
+      
+      <div class="hidden md:flex flex-col justify-end items-end pb-4">
+        <div class="border border-[#f5f1ea]/15 bg-[#10100e]/80 backdrop-blur-sm p-6 w-[22rem] relative">
+          <!-- Corner markers -->
+          <div class="absolute top-[-2px] left-[-2px] w-1 h-1 bg-[#f5f1ea]/40"></div>
+          <div class="absolute top-[-2px] right-[-2px] w-1 h-1 bg-[#f5f1ea]/40"></div>
+          <div class="absolute bottom-[-2px] left-[-2px] w-1 h-1 bg-[#f5f1ea]/40"></div>
+          <div class="absolute bottom-[-2px] right-[-2px] w-1 h-1 bg-[#f5f1ea]/40"></div>
+
+          <div class="flex items-center gap-2 text-[0.65rem] text-[#c8874f] font-mono uppercase tracking-widest mb-4">
+            <span class="w-1.5 h-1.5 bg-[#c8874f] block"></span>
+            Current Build
+          </div>
+          <h3 class="text-[1.05rem] font-medium mb-2 text-[#f5f1ea]">Northstar After Dark</h3>
+          <p class="text-sm text-[#b7afa4] mb-5 leading-relaxed">Demo 0.8 in private festival circulation. PC first, localization passes active.</p>
+          <div class="h-[1px] w-full bg-[#f5f1ea]/10 mb-4"></div>
+          <div class="flex justify-between text-[0.65rem] text-[#8b8176] font-mono uppercase tracking-wider">
+            <span>Status: Private</span>
+            <span>ENG / ESP / FRA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. Featured Games -->
+  <section id="games" class="py-24 lg:py-32 border-b border-[#f5f1ea]/10 relative z-10">
+    <div class="max-w-7xl mx-auto w-full px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+        <div>
+          <div class="text-[0.65rem] font-mono uppercase text-[#8b8176] mb-5 tracking-widest flex items-center gap-3">
+            01 <span class="w-8 h-[1px] bg-[#f5f1ea]/20"></span> Featured Projects
+          </div>
+          <h2 class="text-3xl lg:text-4xl font-medium tracking-tight">A small slate with playable builds</h2>
+        </div>
+        <p class="text-[#b7afa4] max-w-md text-[0.95rem] leading-relaxed">
+          Each project stays narrow enough to test, revise, and ship without losing the atmosphere that started it.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-20">
+        <!-- Game 1 -->
+        <article class="group relative flex flex-col">
+          <div class="relative aspect-[16/10] mb-6 border border-[#f5f1ea]/15 overflow-hidden bg-[#151515]">
+            <!-- Corner markers -->
+            <div class="absolute top-[-1px] left-[-1px] w-1 h-1 bg-[#f5f1ea]/30"></div>
+            <div class="absolute bottom-[-1px] right-[-1px] w-1 h-1 bg-[#f5f1ea]/30"></div>
+            
+            <img
+              src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
+              alt="Quiet night road under a dark sky for Northstar After Dark"
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            >
+          </div>
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <h3 class="text-xl font-medium">Northstar After Dark</h3>
+            <span class="text-[0.65rem] font-mono text-[#c8874f] border border-[#c8874f]/30 px-2 py-1 uppercase tracking-wider">Demo Available</span>
+          </div>
+          <p class="text-[#b7afa4] text-[0.95rem] mb-6 leading-relaxed">
+            A road mystery about a radio operator following storm calls along an empty coastal highway.
+          </p>
+          <div class="flex items-center gap-3 text-[0.65rem] font-mono text-[#8b8176] uppercase tracking-widest mt-auto border-t border-[#f5f1ea]/10 pt-4">
+            <span>PC First</span>
+            <span class="w-1 h-1 rounded-full bg-[#f5f1ea]/20"></span>
+            <span>Festival Build In Review</span>
+          </div>
+        </article>
+
+        <!-- Game 2 -->
+        <article class="group relative flex flex-col">
+          <div class="relative aspect-[16/10] mb-6 border border-[#f5f1ea]/15 overflow-hidden bg-[#111111]">
+            <div class="absolute top-[-1px] left-[-1px] w-1 h-1 bg-[#f5f1ea]/30"></div>
+            <div class="absolute bottom-[-1px] right-[-1px] w-1 h-1 bg-[#f5f1ea]/30"></div>
+            
+            <img
+              src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
+              alt="Dim lived-in interior with quiet domestic ghost-story mood for Moth House"
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            >
+          </div>
+          <div class="flex items-start justify-between gap-4 mb-3">
+            <h3 class="text-xl font-medium">Moth House</h3>
+            <span class="text-[0.65rem] font-mono text-[#8b8176] border border-[#f5f1ea]/15 px-2 py-1 uppercase tracking-wider">In Production</span>
+          </div>
+          <p class="text-[#b7afa4] text-[0.95rem] mb-6 leading-relaxed">
+            A domestic ghost story built around room-scale puzzles, overheard conversations, and old routines.
+          </p>
+          <div class="flex items-center gap-3 text-[0.65rem] font-mono text-[#8b8176] uppercase tracking-widest mt-auto border-t border-[#f5f1ea]/10 pt-4">
+            <span>PC / Console Target</span>
+            <span class="w-1 h-1 rounded-full bg-[#f5f1ea]/20"></span>
+            <span>Accessibility Plan Active</span>
+          </div>
+        </article>
+
+        <!-- Game 3 (Spans full width on desktop split) -->
+        <article class="group relative flex flex-col md:col-span-2 md:grid md:grid-cols-12 md:gap-12 md:items-center pt-12 border-t border-[#f5f1ea]/10">
+          <div class="md:col-span-7 relative aspect-[16/9] mb-6 md:mb-0 border border-[#f5f1ea]/15 overflow-hidden bg-[#121212]">
+            <div class="absolute top-[-1px] left-[-1px] w-1 h-1 bg-[#f5f1ea]/30"></div>
+            <div class="absolute bottom-[-1px] right-[-1px] w-1 h-1 bg-[#f5f1ea]/30"></div>
+            
+            <img
+              src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&amp;fit=crop&amp;w=1400&amp;q=80"
+              alt="Muted shoreline and low tide atmosphere for Low Tide Almanac"
+              class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+            >
+          </div>
+          <div class="md:col-span-5 flex flex-col justify-center">
+            <div class="flex items-start justify-between gap-4 mb-4">
+              <h3 class="text-2xl font-medium">Low Tide Almanac</h3>
+            </div>
+            <p class="text-[#b7afa4] text-[0.95rem] mb-8 leading-relaxed">
+              A short-form walking sim about archival field notes, migration, and a shoreline that changes each time you return.
+            </p>
+            <div class="flex flex-col gap-3 text-[0.65rem] font-mono text-[#8b8176] uppercase tracking-widest border-l border-[#f5f1ea]/15 pl-4">
+              <div class="flex items-center justify-between">
+                <span>Status</span>
+                <span class="text-[#f5f1ea]">Prototype Archive</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Duration</span>
+                <span class="text-[#f5f1ea]">Ten-Minute Build</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span>Purpose</span>
+                <span class="text-[#f5f1ea]">Tooling Tests</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Studio Approach (Editorial Tech & Split Layout) -->
+  <section id="approach" class="py-24 lg:py-32 border-b border-[#f5f1ea]/10 bg-[#141412] relative z-10">
+    <div class="max-w-7xl mx-auto w-full px-6 grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <div class="lg:col-span-5 flex flex-col">
+        <div class="text-[0.65rem] font-mono uppercase text-[#8b8176] mb-5 tracking-widest flex items-center gap-3">
+          02 <span class="w-8 h-[1px] bg-[#f5f1ea]/20"></span> Approach
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-medium tracking-tight mb-6">Scenes are built for play first.</h2>
+        <p class="text-[#b7afa4] leading-relaxed mb-10 text-[0.95rem]">
+          Writing, audio, level blocking, and accessibility checks move together from the first internal build. We treat environmental storytelling as a system, relying on rooms, roads, and weather systems to carry clues before a character explains them.
+        </p>
+        <a href="#press" class="inline-flex items-center gap-2 text-sm font-medium text-[#f5f1ea] hover:text-[#c8874f] transition-colors mt-auto">
+          Read our process notes <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+        </a>
+      </div>
+      
+      <div class="lg:col-span-7 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+        <div class="border-t border-[#f5f1ea]/15 pt-6 relative">
+          <div class="absolute top-0 left-0 w-8 h-[1px] bg-[#c8874f]"></div>
+          <h3 class="text-lg font-medium mb-3">Place Before Exposition</h3>
+          <p class="text-[0.9rem] text-[#b7afa4] leading-relaxed">Rooms, roads, and weather systems carry clues before a character explains them.</p>
+        </div>
+        <div class="border-t border-[#f5f1ea]/15 pt-6 relative">
+          <h3 class="text-lg font-medium mb-3">Playable Milestones</h3>
+          <p class="text-[0.9rem] text-[#b7afa4] leading-relaxed">Each milestone must run as a small build with readable objectives and controller notes.</p>
+        </div>
+        <div class="border-t border-[#f5f1ea]/15 pt-6 relative">
+          <h3 class="text-lg font-medium mb-3">Sound As Structure</h3>
+          <p class="text-[0.9rem] text-[#b7afa4] leading-relaxed">Radio layers, room tone, and silence are treated as systems instead of decoration.</p>
+        </div>
+        <div class="border-t border-[#f5f1ea]/15 pt-6 relative">
+          <h3 class="text-lg font-medium mb-3">Accessibility Early</h3>
+          <p class="text-[0.9rem] text-[#b7afa4] leading-relaxed">Subtitle systems, remappable controls, and contrast checks are integrated during the first playable.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Proof Strip (Number Details & Technical Rails) -->
+  <section class="py-12 border-b border-[#f5f1ea]/10 relative z-10 bg-[#10100e]">
+    <div class="max-w-7xl mx-auto w-full px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x lg:divide-[#f5f1ea]/15">
+        <div class="lg:pr-8 lg:pl-0">
+          <div class="text-[1.75rem] font-medium text-[#f5f1ea] mb-2 font-mono">02</div>
+          <div class="text-[0.65rem] font-mono text-[#8b8176] tracking-widest uppercase">Shipped narrative titles</div>
+        </div>
+        <div class="lg:px-8">
+          <div class="text-[1.75rem] font-medium text-[#f5f1ea] mb-2 font-mono">09</div>
+          <div class="text-[0.65rem] font-mono text-[#8b8176] tracking-widest uppercase">Language subtitle plan</div>
+        </div>
+        <div class="lg:px-8">
+          <div class="text-[1.75rem] font-medium text-[#f5f1ea] mb-2 font-mono">01</div>
+          <div class="text-[0.65rem] font-mono text-[#8b8176] tracking-widest uppercase">Playable demo in circulation</div>
+        </div>
+        <div class="lg:pl-8">
+          <div class="text-[1.75rem] font-medium text-[#c8874f] mb-2 font-mono flex items-center h-[2.625rem]">
+            <iconify-icon icon="solar:check-read-linear" class="text-2xl"></iconify-icon>
+          </div>
+          <div class="text-[0.65rem] font-mono text-[#8b8176] tracking-widest uppercase">Remapping & contrast checks</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Current Update / Press -->
+  <section id="updates" class="py-24 lg:py-32 border-b border-[#f5f1ea]/10 relative z-10 bg-[#10100e]">
+    <div class="max-w-7xl mx-auto w-full px-6">
+      <div class="text-[0.65rem] font-mono uppercase text-[#8b8176] mb-10 tracking-widest flex items-center gap-3">
+        03 <span class="w-8 h-[1px] bg-[#f5f1ea]/20"></span> Updates & Press
+      </div>
+      
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+        <article class="lg:col-span-7 border border-[#f5f1ea]/15 bg-[#141412] p-8 md:p-12 relative flex flex-col justify-between">
+          <!-- Structural corner markers -->
+          <div class="absolute top-[-1px] left-[-1px] w-1.5 h-1.5 bg-[#f5f1ea]/30"></div>
+          <div class="absolute top-[-1px] right-[-1px] w-1.5 h-1.5 bg-[#f5f1ea]/30"></div>
+          <div class="absolute bottom-[-1px] left-[-1px] w-1.5 h-1.5 bg-[#f5f1ea]/30"></div>
+          <div class="absolute bottom-[-1px] right-[-1px] w-1.5 h-1.5 bg-[#f5f1ea]/30"></div>
+          
+          <div>
+            <div class="flex flex-wrap items-center gap-3 mb-8">
+              <span class="text-[0.65rem] font-mono text-[#c8874f] border border-[#c8874f]/30 px-2 py-1 uppercase tracking-widest">Production Note</span>
+              <span class="text-[0.65rem] font-mono text-[#8b8176] uppercase tracking-widest">Northstar After Dark</span>
+              <span class="text-[0.65rem] font-mono text-[#8b8176] uppercase tracking-widest md:ml-auto">March 2026</span>
+            </div>
+            <h3 class="text-2xl lg:text-3xl font-medium mb-6 leading-tight max-w-lg">Chapter two route memory and alternate storm calls</h3>
+            <p class="text-[#b7afa4] text-[0.95rem] leading-relaxed mb-8 max-w-xl">
+              The latest branch adds a second coastal stop, revised subtitle timing for overlapping radio chatter, and a first pass on high-contrast clue states. We are balancing the contrast pass to ensure it remains accessible without flattening the cinematic lighting.
+            </p>
+          </div>
+          <a href="#" class="inline-flex items-center gap-2 text-sm font-medium text-[#f5f1ea] hover:text-[#c8874f] transition-colors mt-4">
+            Read the full build note <iconify-icon icon="solar:arrow-right-linear"></iconify-icon>
+          </a>
+        </article>
+
+        <aside class="lg:col-span-5 border border-[#f5f1ea]/15 p-8 md:p-12 flex flex-col justify-between bg-[#10100e]" id="press">
+          <div>
+            <div class="text-[0.65rem] font-mono text-[#8b8176] uppercase tracking-widest mb-8">Festival Preview</div>
+            <blockquote class="text-xl lg:text-2xl font-medium leading-snug mb-8 text-[#f5f1ea] border-l-2 border-[#c8874f] pl-6 py-1">
+              “Northstar After Dark understands that a road can feel haunted without raising its voice.”
+            </blockquote>
+          </div>
+          <div class="pt-8 border-t border-[#f5f1ea]/10">
+            <cite class="text-[0.85rem] text-[#b7afa4] block not-italic mb-5">— Signal & Screen festival preview</cite>
+            <a href="#" class="inline-flex items-center gap-2 text-sm font-medium text-[#f5f1ea] hover:text-[#c8874f] transition-colors">
+              Download press kit <iconify-icon icon="solar:download-linear"></iconify-icon>
+            </a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Final CTA -->
+  <section class="py-32 border-b border-[#f5f1ea]/10 relative z-10 overflow-hidden bg-[#141412]">
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&amp;fit=crop&amp;w=1600&amp;q=80"
+        alt="Quiet landscape at dusk for the final demo call to action"
+        class="absolute inset-0 w-full h-full object-cover opacity-20"
+      >
+      <div class="absolute inset-0 bg-[#10100e]/65"></div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto w-full px-6 relative z-10 flex flex-col items-center text-center">
+      <h2 class="text-3xl lg:text-5xl font-medium tracking-tight mb-6">
+        Step into the next build when the lights go down.
+      </h2>
+      <p class="text-[#b7afa4] text-[1.05rem] max-w-lg mb-10 leading-relaxed">
+        Play the festival demo build or request access to the press kit for coverage, assets, and publishing conversations.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto justify-center">
+        <a href="#demo" class="px-8 py-3 bg-[#f5f1ea] text-[#10100e] font-medium hover:bg-white transition-colors">Play the Demo</a>
+        <a href="#presskit" class="px-8 py-3 border border-[#f5f1ea]/20 text-[#f5f1ea] hover:bg-[#f5f1ea]/5 transition-colors">Download Press Kit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Footer -->
+  <footer class="pt-20 pb-12 text-sm relative z-10 bg-[#10100e]">
+    <div class="max-w-7xl mx-auto w-full px-6">
+      <div class="grid grid-cols-2 md:grid-cols-12 gap-12 mb-20">
+        <div class="col-span-2 md:col-span-4 lg:col-span-5">
+          <a href="#" class="flex items-center gap-3 mb-6">
+            <div class="w-8 h-8 flex items-center justify-center border border-[#f5f1ea]/20 text-[#c8874f] text-xs font-semibold">H</div>
+            <span class="font-medium tracking-wide">Hollow Signal Studio</span>
+          </a>
+          <p class="text-[#b7afa4] max-w-[18rem] text-[0.9rem] leading-relaxed">
+            Small-team narrative games about memory, weather, and places that feel lived in.
+          </p>
+        </div>
+        
+        <div class="md:col-span-2 lg:col-span-2">
+          <h4 class="text-[#f5f1ea] font-medium mb-5 text-[0.95rem]">Games</h4>
+          <ul class="space-y-4 text-[#b7afa4]">
+            <li><a href="#games" class="hover:text-[#c8874f] transition-colors">Northstar</a></li>
+            <li><a href="#games" class="hover:text-[#c8874f] transition-colors">Moth House</a></li>
+            <li><a href="#games" class="hover:text-[#c8874f] transition-colors">Low Tide</a></li>
+          </ul>
+        </div>
+        
+        <div class="md:col-span-2 lg:col-span-2">
+          <h4 class="text-[#f5f1ea] font-medium mb-5 text-[0.95rem]">Studio</h4>
+          <ul class="space-y-4 text-[#b7afa4]">
+            <li><a href="#approach" class="hover:text-[#c8874f] transition-colors">Approach</a></li>
+            <li><a href="#updates" class="hover:text-[#c8874f] transition-colors">Updates</a></li>
+            <li><a href="mailto:hello@hollowsignal.com" class="hover:text-[#c8874f] transition-colors">Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="md:col-span-2 lg:col-span-1">
+          <h4 class="text-[#f5f1ea] font-medium mb-5 text-[0.95rem]">Press</h4>
+          <ul class="space-y-4 text-[#b7afa4]">
+            <li><a href="#press" class="hover:text-[#c8874f] transition-colors">Preview</a></li>
+            <li><a href="#presskit" class="hover:text-[#c8874f] transition-colors">Press Kit</a></li>
+            <li><a href="mailto:press@hollowsignal.com" class="hover:text-[#c8874f] transition-colors">Email</a></li>
+          </ul>
+        </div>
+        
+        <div class="md:col-span-2 lg:col-span-2">
+          <h4 class="text-[#f5f1ea] font-medium mb-5 text-[0.95rem]">Legal</h4>
+          <ul class="space-y-4 text-[#8b8176]">
+            <li>Privacy Policy</li>
+            <li>Terms of Service</li>
+            <li>Studio Credits</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-[#f5f1ea]/10 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-[0.65rem] text-[#8b8176] font-mono uppercase tracking-widest">
+        <span>© 2026 Hollow Signal Studio</span>
+        <span>Fictional lab reference. No preorder implied.</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
