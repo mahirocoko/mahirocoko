@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Hollow Signal Studio — independent narrative games about memory, weather, and lived-in places."
+    />
+    <title>Hollow Signal Studio</title>
+    <style>
+      :root {
+        --bg: #0c0b0a;
+        --surface: #161412;
+        --panel: #1c1916;
+        --text: #f2ebe2;
+        --muted: #b8aea3;
+        --quiet: #857a70;
+        --line: rgba(242, 235, 226, 0.12);
+        --accent: #b87a3d;
+        --max: 1120px;
+        --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--font);
+        font-size: 1rem;
+        line-height: 1.62;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      svg {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      a {
+        color: inherit;
+        text-underline-offset: 0.2em;
+      }
+
+      a:hover {
+        color: var(--accent);
+      }
+
+      a:focus-visible,
+      .btn:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      .skip-link:focus {
+        position: fixed;
+        left: 1rem;
+        top: 1rem;
+        width: auto;
+        height: auto;
+        padding: 0.65rem 1rem;
+        background: var(--text);
+        color: var(--bg);
+        z-index: 100;
+      }
+
+      .wrap {
+        width: min(100% - 1.75rem, var(--max));
+        margin-inline: auto;
+      }
+
+      .site-header {
+        border-bottom: 1px solid var(--line);
+        background: var(--bg);
+      }
+
+      .nav-inner {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0.95rem 0;
+        align-items: center;
+      }
+
+      @media (min-width: 880px) {
+        .nav-inner {
+          grid-template-columns: auto 1fr auto;
+        }
+      }
+
+      .nav-cluster {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.65rem 1.1rem;
+      }
+
+      @media (min-width: 880px) {
+        .nav-cluster--links {
+          justify-content: center;
+        }
+
+        .nav-actions {
+          justify-self: end;
+        }
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        color: var(--text);
+        text-decoration: none;
+      }
+
+      .brand-mark {
+        width: 1.85rem;
+        height: 1.85rem;
+        border: 1px solid var(--line);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: var(--accent);
+      }
+
+      .brand-name {
+        font-weight: 700;
+        font-size: 0.98rem;
+      }
+
+      .brand-sub {
+        display: block;
+        color: var(--quiet);
+        font-size: 0.82rem;
+        font-weight: 500;
+      }
+
+      .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem 1.1rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+
+      .nav-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 0.65rem;
+        align-items: center;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.45rem;
+        padding: 0.55rem 0.95rem;
+        border: 1px solid var(--line);
+        color: var(--text);
+        background: transparent;
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-decoration: none;
+        transition: border-color 140ms ease, background-color 140ms ease, color 140ms ease;
+      }
+
+      .btn:hover {
+        border-color: rgba(242, 235, 226, 0.28);
+        background: rgba(242, 235, 226, 0.05);
+        color: var(--text);
+      }
+
+      .btn-primary {
+        border-color: var(--text);
+        background: var(--text);
+        color: var(--bg);
+      }
+
+      .btn-primary:hover {
+        border-color: var(--accent);
+        background: var(--accent);
+        color: var(--bg);
+      }
+
+      .hero {
+        padding: 2.75rem 0 3.25rem;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .hero-grid {
+        display: grid;
+        gap: 2rem;
+      }
+
+      @media (min-width: 960px) {
+        .hero-grid {
+          grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+          align-items: stretch;
+          gap: 2.5rem;
+        }
+
+        .hero-copy {
+          order: 2;
+        }
+
+        .hero-visual {
+          order: 1;
+        }
+      }
+
+      .context {
+        margin: 0 0 0.85rem;
+        color: var(--quiet);
+        font-size: 0.92rem;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 18ch;
+        margin-bottom: 1.1rem;
+        font-size: clamp(2rem, 4.2vw, 3.35rem);
+        line-height: 1.05;
+        letter-spacing: -0.038em;
+        font-weight: 700;
+      }
+
+      .lead {
+        max-width: 40rem;
+        margin-bottom: 1.35rem;
+        color: var(--muted);
+        font-size: 1.08rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 0.65rem;
+      }
+
+      .production-notes {
+        margin: 1.35rem 0 0;
+        padding-top: 1rem;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      .production-notes p {
+        margin: 0 0 0.5rem;
+      }
+
+      .production-notes p:last-child {
+        margin-bottom: 0;
+      }
+
+      .media {
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: var(--surface);
+      }
+
+      .hero-media {
+        min-height: 14rem;
+      }
+
+      @media (min-width: 640px) {
+        .hero-media {
+          min-height: 20rem;
+        }
+      }
+
+      .media-caption {
+        padding: 0.65rem 0.9rem;
+        border-top: 1px solid var(--line);
+        color: var(--quiet);
+        font-size: 0.86rem;
+      }
+
+      .section {
+        padding: 3rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .section-lead {
+        max-width: 38rem;
+        margin: 0 0 2rem;
+        color: var(--muted);
+        font-size: 1.02rem;
+      }
+
+      h2 {
+        margin-bottom: 0.65rem;
+        font-size: clamp(1.45rem, 2.2vw, 2.05rem);
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        max-width: 22ch;
+      }
+
+      .games-intro h2 {
+        max-width: 24ch;
+      }
+
+      .game-rows {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .game-row {
+        display: grid;
+        gap: 1.1rem;
+        padding: 1.5rem 0;
+        border-top: 1px solid var(--line);
+      }
+
+      @media (min-width: 840px) {
+        .game-row {
+          grid-template-columns: minmax(12rem, 0.38fr) minmax(0, 1fr);
+          gap: 1.75rem;
+          align-items: start;
+        }
+
+        .game-row:nth-child(even) figure {
+          order: 2;
+        }
+
+        .game-row:nth-child(even) .game-copy {
+          order: 1;
+        }
+      }
+
+      .game-row h3 {
+        margin-bottom: 0.45rem;
+        font-size: clamp(1.2rem, 1.9vw, 1.65rem);
+        letter-spacing: -0.02em;
+      }
+
+      .game-row p {
+        margin-bottom: 0.65rem;
+        color: var(--muted);
+        max-width: 44rem;
+      }
+
+      .game-row p:last-child {
+        margin-bottom: 0;
+      }
+
+      .game-meta {
+        color: var(--quiet);
+        font-size: 0.88rem;
+        line-height: 1.45;
+      }
+
+      .thumb {
+        min-height: 11rem;
+      }
+
+      @media (min-width: 840px) {
+        .thumb {
+          min-height: 13rem;
+        }
+      }
+
+      .approach {
+        background: var(--panel);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .approach-inner {
+        padding: 3rem 0;
+      }
+
+      .approach-note {
+        max-width: 46rem;
+      }
+
+      .approach-note h2 {
+        max-width: none;
+        margin-bottom: 1rem;
+      }
+
+      .approach-note p {
+        color: var(--muted);
+        margin-bottom: 1rem;
+      }
+
+      .approach-note h3 {
+        margin: 1.5rem 0 0.4rem;
+        font-size: 1.05rem;
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .approach-note p + h3 {
+        margin-top: 1.35rem;
+      }
+
+      .facts {
+        padding: 2.5rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .facts ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0;
+      }
+
+      .facts li {
+        padding: 0.75rem 0;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .facts li:first-child {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .update-grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      @media (min-width: 820px) {
+        .update-grid {
+          grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.48fr);
+        }
+      }
+
+      .update-card,
+      .press-card {
+        border: 1px solid var(--line);
+        padding: 1.15rem 1.2rem;
+        background: var(--bg);
+      }
+
+      .update-card h3,
+      .press-card h3 {
+        font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+        margin-bottom: 0.65rem;
+        line-height: 1.22;
+      }
+
+      .update-card p,
+      .press-card p {
+        color: var(--muted);
+        margin-bottom: 0.85rem;
+      }
+
+      .press-card blockquote {
+        margin: 0 0 0.75rem;
+        color: var(--muted);
+        font-size: 0.98rem;
+      }
+
+      .press-card cite {
+        color: var(--quiet);
+        font-style: normal;
+        font-size: 0.88rem;
+      }
+
+      .cta-final {
+        padding: 3rem 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .cta-panel {
+        border: 1px solid var(--line);
+        padding: 1.5rem 1.35rem;
+        display: grid;
+        gap: 1.35rem;
+        align-items: end;
+      }
+
+      @media (min-width: 760px) {
+        .cta-panel {
+          grid-template-columns: 1fr auto;
+          padding: 1.65rem 1.5rem;
+        }
+      }
+
+      .cta-panel h2 {
+        max-width: 22ch;
+        margin-bottom: 0.55rem;
+      }
+
+      .cta-panel .support {
+        margin: 0;
+        color: var(--muted);
+        max-width: 36rem;
+      }
+
+      .cta-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 0.65rem;
+      }
+
+      .site-footer {
+        padding: 2.75rem 0 2rem;
+        color: var(--muted);
+      }
+
+      .footer-top {
+        display: grid;
+        gap: 2rem;
+      }
+
+      @media (min-width: 780px) {
+        .footer-top {
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+        }
+      }
+
+      .footer-brand p {
+        max-width: 30rem;
+        margin: 0.85rem 0 0;
+        font-size: 0.95rem;
+      }
+
+      .footer-nav {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+      }
+
+      @media (min-width: 560px) {
+        .footer-nav {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+      }
+
+      .footer-nav h3 {
+        margin: 0 0 0.55rem;
+        font-size: 0.88rem;
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .footer-nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .footer-nav a {
+        font-size: 0.86rem;
+        color: var(--muted);
+        text-decoration: none;
+      }
+
+      .footer-nav .plain {
+        font-size: 0.86rem;
+        color: var(--quiet);
+      }
+
+      .footer-meta {
+        margin-top: 1.75rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--line);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0.75rem;
+        font-size: 0.82rem;
+        color: var(--quiet);
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" id="top">
+      <nav class="wrap nav-inner" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="Hollow Signal Studio home">
+          <span class="brand-mark" aria-hidden="true">H</span>
+          <span>
+            <span class="brand-name">Hollow Signal Studio</span>
+            <span class="brand-sub">Narrative games, compact teams</span>
+          </span>
+        </a>
+        <div class="nav-cluster nav-cluster--links">
+          <ul class="nav-links">
+            <li><a href="#games">Games</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#updates">Updates</a></li>
+            <li><a href="#press">Press</a></li>
+          </ul>
+        </div>
+        <div class="nav-actions">
+          <a class="btn btn-primary" href="#games">Play the Demo</a>
+          <a class="btn" href="#press-kit">Press Kit</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <p class="context">Independent narrative games · founded in 2019</p>
+            <h1 id="hero-title">Small stories with the weight of weather</h1>
+            <p class="lead">
+              Hollow Signal Studio makes story-led games where memory, tide, and rooms do the talking. Current focus:
+              <strong style="font-weight: 700; color: var(--text)">Northstar After Dark</strong>
+              — a quiet road mystery for PC, built from playable milestones and early accessibility passes.
+            </p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#games">Play the Demo</a>
+              <a class="btn" href="#updates">Read the latest note</a>
+            </div>
+            <div class="production-notes" aria-label="Production notes">
+              <p>Demo 0.8 · PC-first build in festival circulation.</p>
+              <p>Remappable controls, subtitles, and contrast checks run every milestone.</p>
+            </div>
+          </div>
+          <figure class="media hero-media hero-visual">
+            <svg viewBox="0 0 1200 780" role="img" aria-labelledby="hero-svg-title hero-svg-desc">
+              <title id="hero-svg-title">Coastal highway at night — concept still for Northstar After Dark</title>
+              <desc id="hero-svg-desc">
+                Dark sky, low hills, a two-lane road, and a distant amber signal above the horizon.
+              </desc>
+              <rect width="1200" height="780" fill="#0f0e0c" />
+              <rect x="0" y="0" width="1200" height="420" fill="#121110" />
+              <path d="M0 520 C220 455 410 480 600 410 C790 345 980 360 1200 300 V780 H0 Z" fill="#1a1714" />
+              <path d="M0 610 C260 555 420 575 640 520 C840 472 1020 485 1200 445 V780 H0 Z" fill="#080807" />
+              <path d="M0 780 L0 640 L1200 520 L1200 780 Z" fill="#141210" />
+              <path d="M585 120 L615 120 L632 780 L568 780 Z" fill="#050504" opacity="0.85" />
+              <circle cx="600" cy="118" r="14" fill="#b87a3d" opacity="0.92" />
+              <path d="M600 132 L455 780" stroke="#b87a3d" stroke-width="2" opacity="0.18" />
+              <path d="M600 132 L748 780" stroke="#b87a3d" stroke-width="2" opacity="0.22" />
+            </svg>
+            <figcaption class="media-caption">Northstar After Dark — illustrated still, demo 0.8</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="games" aria-labelledby="games-heading">
+        <div class="wrap">
+          <header class="games-intro">
+            <h2 id="games-heading">Featured games</h2>
+            <p class="section-lead">
+              Two active projects and one archived prototype. Each row pairs a still with status and platform notes—no
+              card grid, just the work in order of attention.
+            </p>
+          </header>
+
+          <div class="game-rows">
+            <article class="game-row" id="northstar-after-dark">
+              <figure class="media thumb">
+                <svg viewBox="0 0 800 520" role="img" aria-labelledby="g1-t g1-d">
+                  <title id="g1-t">Northstar After Dark — road and signal</title>
+                  <desc id="g1-d">Night road cutting through dark terrain toward a warm point of light.</desc>
+                  <rect width="800" height="520" fill="#10100e" />
+                  <path d="M0 360 C160 300 300 330 430 275 C560 220 680 235 800 185 V520 H0 Z" fill="#221e1a" />
+                  <path d="M355 520 L420 240 L485 520 Z" fill="#0a0908" />
+                  <path d="M418 248 L640 520" stroke="#b87a3d" stroke-width="2.5" opacity="0.35" />
+                  <circle cx="422" cy="236" r="5" fill="#b87a3d" opacity="0.85" />
+                </svg>
+              </figure>
+              <div class="game-copy">
+                <h3>Northstar After Dark</h3>
+                <p>
+                  A quiet road mystery about a radio operator following storm signals across an empty coastal highway.
+                </p>
+                <p class="game-meta">Demo available · PC first, console after narrative lock · Festival build in review</p>
+              </div>
+            </article>
+
+            <article class="game-row" id="moth-house">
+              <figure class="media thumb">
+                <svg viewBox="0 0 800 520" role="img" aria-labelledby="g2-t g2-d">
+                  <title id="g2-t">Moth House — interior stair and window</title>
+                  <desc id="g2-d">Dim domestic interior with vertical stair geometry and a small warm window.</desc>
+                  <rect width="800" height="520" fill="#0e0e0e" />
+                  <rect x="110" y="70" width="240" height="380" fill="#1c1916" />
+                  <rect x="145" y="110" width="168" height="200" fill="#2a2219" />
+                  <path d="M430 85 H690 V520 H430 Z" fill="#151515" />
+                  <path d="M430 210 H690 M430 318 H690 M430 420 H690" stroke="#857a70" stroke-width="2.5" opacity="0.25" />
+                  <circle cx="505" cy="198" r="3.5" fill="#b87a3d" opacity="0.75" />
+                </svg>
+              </figure>
+              <div class="game-copy">
+                <h3>Moth House</h3>
+                <p>A domestic ghost story built around room-scale puzzles and overheard conversations.</p>
+                <p class="game-meta">In production · PC / console target · Localization scoped for nine subtitle languages</p>
+              </div>
+            </article>
+
+            <article class="game-row" id="low-tide-almanac">
+              <figure class="media thumb">
+                <svg viewBox="0 0 800 520" role="img" aria-labelledby="g3-t g3-d">
+                  <title id="g3-t">Low Tide Almanac — shoreline and notes</title>
+                  <desc id="g3-d">Mudflat silhouette with hand-drawn field-note lines and a vertical tide marker.</desc>
+                  <rect width="800" height="520" fill="#101010" />
+                  <path d="M0 372 C190 330 310 360 440 312 C575 262 690 280 800 242 V520 H0 Z" fill="#231f1c" />
+                  <path d="M0 430 C200 392 330 418 480 368 C615 322 710 338 800 308 V520 H0 Z" fill="#0a0a0a" />
+                  <path d="M120 95 H430 M120 132 H480 M120 168 H360" stroke="#857a70" stroke-width="2.5" opacity="0.32" />
+                  <path d="M620 88 V400" stroke="#b87a3d" stroke-width="3" opacity="0.3" />
+                </svg>
+              </figure>
+              <div class="game-copy">
+                <h3>Low Tide Almanac</h3>
+                <p>A short-form walking sim about archival field notes, migration, and shoreline memory.</p>
+                <p class="game-meta">Prototype archive · ~10 minute build · Used for tooling and pipeline experiments</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="approach" id="approach" aria-labelledby="approach-heading">
+        <div class="wrap approach-inner">
+          <article class="approach-note">
+            <h2 id="approach-heading">Studio approach</h2>
+            <p>
+              We work small and keep builds honest: if a scene is not playable, it does not ship to a milestone. Narrative
+              systems are tied to place and memory—routes change, objects linger, radio calls overlap—before characters
+              spell anything out.
+            </p>
+            <h3>Environmental storytelling first</h3>
+            <p>
+              Lighting, props, and audio cues carry plot weight. Exposition exists, but only after the room has already
+              taught you how to read it.
+            </p>
+            <h3>Prototype-led production</h3>
+            <p>
+              Graybox beats slide decks. Each milestone ends in a runnable slice with objectives, controller notes, and a
+              short test pass for subtitles and remapping.
+            </p>
+            <h3>Accessibility and localization early</h3>
+            <p>
+              Nine-language subtitle plan is budgeted before content lock. Contrast passes and UI scale land in the same
+              weeks as VO integration—not as a late polish bolt-on.
+            </p>
+            <h3>Art direction and sound as one lane</h3>
+            <p>
+              A six-person core team keeps visual and audio direction in the same conversations so mood stays consistent
+              when weather, time of day, or radio static shifts.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="facts" aria-label="Studio proof">
+        <div class="wrap">
+          <ul>
+            <li>2 shipped narrative titles before the current slate.</li>
+            <li>9 language subtitle plan scoped ahead of content lock.</li>
+            <li>1 playable demo (0.8) in festival circulation.</li>
+            <li>Remapping, subtitles, and contrast checks in every milestone.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="updates" aria-labelledby="updates-heading">
+        <div class="wrap">
+          <h2 id="updates-heading">Current update / press</h2>
+          <p class="section-lead">
+            Short notes for players and press: what changed in the build, and how early coverage framed the road mystery.
+          </p>
+          <div class="update-grid">
+            <article class="update-card">
+              <h3>Northstar After Dark — chapter two routing</h3>
+              <p>
+                March 2026: second coastal stop is in; route memory affects which storm calls surface first. Subtitle
+                timing was rebuilt for overlapping radio chatter, and high-contrast clue states received a first art pass.
+              </p>
+              <p><a href="#press-kit">Download press kit</a> or <a href="mailto:press@hollowsignal.example">email press</a>.</p>
+            </article>
+            <aside class="press-card" id="press" aria-label="Press excerpt">
+              <h3>Press excerpt</h3>
+              <blockquote>“Northstar After Dark understands that a road can feel haunted without raising its voice.”</blockquote>
+              <p><cite>Signal &amp; Screen festival preview</cite></p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-final" id="press-kit" aria-labelledby="cta-heading">
+        <div class="wrap cta-panel">
+          <div>
+            <h2 id="cta-heading">Step into the next build when the lights go down</h2>
+            <p class="support">Request a demo key for the festival build or grab stills, a fact sheet, and trailer beats from the press kit.</p>
+          </div>
+          <div class="cta-actions">
+            <a class="btn btn-primary" href="#games">Play the Demo</a>
+            <a class="btn" href="mailto:press@hollowsignal.example">Download Press Kit</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="brand" href="#top" aria-label="Hollow Signal Studio home">
+              <span class="brand-mark" aria-hidden="true">H</span>
+              <span>
+                <span class="brand-name">Hollow Signal Studio</span>
+                <span class="brand-sub">Narrative games, compact teams</span>
+              </span>
+            </a>
+            <p>Narrative games about memory, weather, and places that feel lived in—playable before decorative.</p>
+          </div>
+          <nav class="footer-nav" aria-label="Footer">
+            <div>
+              <h3>Games</h3>
+              <ul>
+                <li><a href="#northstar-after-dark">Northstar After Dark</a></li>
+                <li><a href="#moth-house">Moth House</a></li>
+                <li><a href="#low-tide-almanac">Low Tide Almanac</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Studio</h3>
+              <ul>
+                <li><a href="#approach">Approach</a></li>
+                <li><a href="#updates">Updates</a></li>
+                <li><a href="mailto:hello@hollowsignal.example">Contact</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Press</h3>
+              <ul>
+                <li><a href="#press">Preview</a></li>
+                <li><a href="#press-kit">Press kit</a></li>
+                <li><a href="mailto:press@hollowsignal.example">Press email</a></li>
+              </ul>
+            </div>
+            <div>
+              <h3>Legal</h3>
+              <ul>
+                <li><span class="plain">Privacy policy: available on request.</span></li>
+                <li><span class="plain">Terms: available on request.</span></li>
+                <li><span class="plain">Full credits listed in press kit.</span></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="footer-meta">
+          <span>© 2026 Hollow Signal Studio</span>
+          <span>Fictional lab reference page. No commercial offer or platform availability implied.</span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

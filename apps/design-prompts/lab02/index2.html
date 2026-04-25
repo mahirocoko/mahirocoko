@@ -927,6 +927,90 @@
         font-size: 0.8125rem;
         color: var(--muted-light);
       }
+
+      @media (max-width: 720px) {
+        .wrap {
+          width: min(100% - 2rem, var(--max));
+        }
+
+        .nav-inner {
+          grid-template-columns: 1fr;
+          justify-items: center;
+          gap: 0.85rem;
+        }
+
+        .brand-lockup {
+          order: -1;
+        }
+
+        .nav-left,
+        .nav-right {
+          justify-self: center;
+          justify-content: center;
+          width: 100%;
+          gap: 0.65rem 0.9rem;
+        }
+
+        .nav-right .btn {
+          flex: 1 1 9.5rem;
+          max-width: 11rem;
+          padding-inline: 0.8rem;
+        }
+
+        .hero {
+          padding: 2.75rem 0 3rem;
+        }
+
+        .hero-grid,
+        .materials-layout,
+        .performance-grid,
+        .cabin-body,
+        .trust-inner {
+          min-width: 0;
+        }
+
+        .hero-copy,
+        .hero-copy h1,
+        .hero-copy p.lead,
+        .split-head,
+        .cabin-header,
+        .journal-header {
+          max-width: 100%;
+        }
+
+        .hero-copy h1 {
+          font-size: clamp(2.35rem, 11vw, 3rem);
+          letter-spacing: 0;
+        }
+
+        .hero-copy p.lead,
+        .split-head p,
+        .cabin-header p,
+        .journal-header p,
+        .performance .lede {
+          font-size: 1rem;
+        }
+
+        .hero-ctas .btn {
+          flex: 1 1 100%;
+        }
+
+        .hero-chips {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .chip {
+          max-width: 100%;
+        }
+
+        .proof-grid,
+        .spec-grid,
+        .benefit-grid,
+        .footer-links {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
   </head>
   <body>
@@ -973,10 +1057,10 @@
           </div>
           <figure class="hero-visual">
             <img
-              src="https://images.unsplash.com/photo-1536700503339-1e4b06520771?auto=format&fit=crop&w=1600&q=82"
-              width="1600"
-              height="1000"
-              alt="Low-profile electric vehicle parked on a quiet road in warm neutral light"
+              src="assets/aerion-e1-hero.png"
+              width="1586"
+              height="992"
+              alt="Graphite electric grand tourer in a mineral coastal setting"
               fetchpriority="high"
               decoding="async"
             />
@@ -1025,10 +1109,10 @@
           <div class="materials-layout">
             <figure class="materials-visual">
               <img
-                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
-                width="1200"
-                height="800"
-                alt="Detail of premium vehicle materials and stitching in neutral tones"
+                src="assets/aerion-e1-materials.png"
+                width="1536"
+                height="1024"
+                alt="Close detail of woven recycled textile, brushed aluminum, and bio-composite interior trim"
                 loading="lazy"
                 decoding="async"
               />
@@ -1103,10 +1187,10 @@
           </div>
           <figure class="performance-visual">
             <img
-              src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1200&q=80"
-              width="1200"
-              height="900"
-              alt="Automotive detail in motion blur suggesting performance and precision"
+              src="assets/aerion-e1-charging.png"
+              width="1448"
+              height="1086"
+              alt="Graphite electric grand tourer charging at a quiet mountain-road stop"
               loading="lazy"
               decoding="async"
             />
@@ -1128,10 +1212,10 @@
           <div class="cabin-body">
             <figure class="cabin-hero-img">
               <img
-                src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1400&q=80"
-                width="1400"
-                height="900"
-                alt="Wide view of a modern premium vehicle cabin with panoramic light"
+                src="assets/aerion-e1-cabin.png"
+                width="1562"
+                height="1007"
+                alt="Wide premium electric vehicle cabin with textile surfaces and a quiet road view"
                 loading="lazy"
                 decoding="async"
               />

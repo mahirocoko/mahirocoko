@@ -10,9 +10,8 @@
     <title>Hollow Signal Studio</title>
     <style>
       :root {
-        --bg: #0f0f0f;
-        --surface: #1a1a1a;
-        --surface-soft: #151515;
+        --bg: #10100e;
+        --surface: #181816;
         --text: #f5f1ea;
         --muted: #b7afa4;
         --quiet: #8b8176;
@@ -250,26 +249,17 @@
         font-size: 1.125rem;
       }
 
-      .notes {
-        display: grid;
-        gap: 0.75rem;
+      .production-notes {
         max-width: 36rem;
         margin: 1.5rem 0 0;
-        padding: 0;
-        list-style: none;
-      }
-
-      .notes li {
-        display: grid;
-        grid-template-columns: 7rem 1fr;
-        gap: 1rem;
-        padding-top: 0.75rem;
+        padding-top: 1rem;
         border-top: 1px solid var(--line);
         color: var(--muted);
+        font-size: 0.95rem;
       }
 
-      .notes strong {
-        color: var(--text);
+      .production-notes p {
+        margin: 0;
       }
 
       .media {
@@ -285,10 +275,6 @@
       }
 
       .media-caption {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 0.75rem;
         padding: 0.75rem 1rem;
         border-top: 1px solid var(--line);
         color: var(--quiet);
@@ -365,13 +351,11 @@
         color: var(--muted);
       }
 
-      .game-info {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem 1rem;
+      .game-meta {
         margin-top: 1rem;
         color: var(--quiet);
         font-size: 0.925rem;
+        line-height: 1.45;
       }
 
       .thumb {
@@ -405,33 +389,29 @@
       }
 
       .facts {
-        padding: 2rem 0;
+        padding: 3rem 0;
         border-bottom: 1px solid var(--line);
-        background: var(--surface-soft);
       }
 
       .facts-list {
         display: grid;
-        gap: 0.75rem 1.5rem;
+        gap: 0;
         margin: 0;
         padding: 0;
         list-style: none;
       }
 
-      @media (min-width: 760px) {
-        .facts-list {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-      }
-
       .facts-list li {
-        padding-top: 0.75rem;
+        padding: 0.85rem 0;
         border-top: 1px solid var(--line);
         color: var(--muted);
+        font-size: 0.975rem;
+        line-height: 1.5;
       }
 
-      .facts-list strong {
-        color: var(--text);
+      .facts-list li:first-child {
+        border-top: none;
+        padding-top: 0;
       }
 
       .update-layout {
@@ -450,7 +430,7 @@
       .cta-box {
         border: 1px solid var(--line);
         border-radius: var(--radius);
-        background: var(--surface-soft);
+        background: var(--bg);
         padding: 1.25rem;
       }
 
@@ -576,11 +556,6 @@
           padding: 2.5rem 0;
         }
 
-        .notes li {
-          grid-template-columns: 1fr;
-          gap: 0.25rem;
-        }
-
         .hero-media {
           min-height: 18rem;
         }
@@ -625,10 +600,11 @@
               <a class="btn btn-primary" href="#games">Play the demo</a>
               <a class="btn" href="#updates">Read the latest note</a>
             </div>
-            <ul class="notes" aria-label="Production notes">
-              <li><strong>Current build</strong><span>Northstar After Dark demo 0.8 is in private festival circulation.</span></li>
-              <li><strong>Platform plan</strong><span>PC first, console planning after narrative lock.</span></li>
-            </ul>
+            <div class="production-notes" aria-label="Production notes">
+              <p>
+                Northstar After Dark demo 0.8 is in private festival circulation. PC first, with console planning after narrative lock.
+              </p>
+            </div>
           </div>
 
           <figure class="media hero-media">
@@ -643,12 +619,8 @@
               <path d="M660 300 L505 760" stroke="#c8874f" stroke-width="2" opacity="0.2" />
               <path d="M660 300 L824 760" stroke="#c8874f" stroke-width="2" opacity="0.28" />
               <circle cx="662" cy="278" r="18" fill="#c8874f" opacity="0.9" />
-              <rect x="0" y="0" width="1200" height="760" fill="none" stroke="#f5f1ea" stroke-opacity="0.12" />
             </svg>
-            <figcaption class="media-caption">
-              <span>Northstar After Dark</span>
-              <span>Demo build 0.8</span>
-            </figcaption>
+            <figcaption class="media-caption">Northstar After Dark · Demo build 0.8</figcaption>
           </figure>
         </div>
       </section>
@@ -664,7 +636,7 @@
           </header>
 
           <div class="game-list">
-            <article class="game">
+            <article class="game" id="northstar-after-dark">
               <figure class="media thumb">
                 <svg viewBox="0 0 800 520" role="img" aria-labelledby="game-one-title game-one-desc">
                   <title id="game-one-title">Northstar After Dark still</title>
@@ -678,11 +650,11 @@
               <div>
                 <h3>Northstar After Dark</h3>
                 <p>A road mystery about a radio operator following storm calls along an empty coastal highway.</p>
-                <div class="game-info"><span>Demo available</span><span>PC first</span><span>Festival build in review</span></div>
+                <p class="game-meta">Demo available · PC first · Festival build in review</p>
               </div>
             </article>
 
-            <article class="game">
+            <article class="game" id="moth-house">
               <figure class="media thumb">
                 <svg viewBox="0 0 800 520" role="img" aria-labelledby="game-two-title game-two-desc">
                   <title id="game-two-title">Moth House still</title>
@@ -698,11 +670,11 @@
               <div>
                 <h3>Moth House</h3>
                 <p>A domestic ghost story built around room-scale puzzles, overheard conversations, and old routines.</p>
-                <div class="game-info"><span>In production</span><span>PC / console target</span><span>Accessibility plan active</span></div>
+                <p class="game-meta">In production · PC / console target · Accessibility plan active</p>
               </div>
             </article>
 
-            <article class="game">
+            <article class="game" id="low-tide-almanac">
               <figure class="media thumb">
                 <svg viewBox="0 0 800 520" role="img" aria-labelledby="game-three-title game-three-desc">
                   <title id="game-three-title">Low Tide Almanac still</title>
@@ -717,7 +689,7 @@
               <div>
                 <h3>Low Tide Almanac</h3>
                 <p>A short walking sim about field notes, migration, and a shoreline that changes each time you return.</p>
-                <div class="game-info"><span>Prototype archive</span><span>Ten-minute build</span><span>Used for tooling tests</span></div>
+                <p class="game-meta">Prototype archive · Ten-minute build · Used for tooling tests</p>
               </div>
             </article>
           </div>
@@ -754,10 +726,10 @@
       <section class="facts" aria-label="Studio facts">
         <div class="wrap">
           <ul class="facts-list">
-            <li><strong>Two shipped narrative titles</strong> before the current slate.</li>
-            <li><strong>Nine subtitle languages planned</strong> before content lock.</li>
-            <li><strong>Demo 0.8 in festival circulation</strong> with remapping and contrast checks.</li>
-            <li><strong>Six-person core team</strong> supported by QA and localization partners.</li>
+            <li>Shipped two narrative titles before the current slate.</li>
+            <li>Nine subtitle languages planned before content lock.</li>
+            <li>Demo 0.8 in festival circulation with remapping and contrast checks.</li>
+            <li>Six-person core team supported by QA and localization partners.</li>
           </ul>
         </div>
       </section>
@@ -774,10 +746,9 @@
 
           <div class="update-layout">
             <article class="update">
-              <p class="context">March 2026 production note</p>
               <h3>Chapter two now supports route memory and alternate storm calls</h3>
               <p>
-                The latest branch adds a second coastal stop, revised subtitle timing for overlapping radio chatter, and a first pass on high-contrast clue states.
+                March 2026 — the latest branch adds a second coastal stop, revised subtitle timing for overlapping radio chatter, and a first pass on high-contrast clue states.
               </p>
               <a href="#contact">Read the build note</a>
             </article>
@@ -821,9 +792,9 @@
             <div class="footer-col">
               <h3>Games</h3>
               <ul>
-                <li><a href="#games">Northstar</a></li>
-                <li><a href="#games">Moth House</a></li>
-                <li><a href="#games">Low Tide</a></li>
+                <li><a href="#northstar-after-dark">Northstar</a></li>
+                <li><a href="#moth-house">Moth House</a></li>
+                <li><a href="#low-tide-almanac">Low Tide</a></li>
               </ul>
             </div>
             <div class="footer-col">
