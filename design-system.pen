@@ -1,5 +1,5 @@
 {
-  "version": "2.9",
+  "version": "2.11",
   "children": [
     {
       "type": "frame",
@@ -12481,6 +12481,3648 @@
                       "fontWeight": "500"
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "oteBd",
+      "x": 19780,
+      "y": -324,
+      "name": "Lab01 / Vitalis Wellness Landing",
+      "clip": true,
+      "width": 1440,
+      "height": 5350,
+      "fill": "#F7F1E7",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "HHeQQ",
+          "name": "Nav",
+          "width": "fill_container",
+          "height": 84,
+          "stroke": {
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "#DED6C8"
+          },
+          "padding": [
+            0,
+            72
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Dp4JZ",
+              "name": "Nav links",
+              "gap": 28,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "PZhid",
+                  "name": "navManifesto",
+                  "fill": "#314139",
+                  "content": "Manifesto",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "Q6D5M",
+                  "name": "navScience",
+                  "fill": "#314139",
+                  "content": "Science",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "zQl9r",
+                  "name": "navJournal",
+                  "fill": "#314139",
+                  "content": "Journal",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "byDyF",
+              "name": "Brand",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "VngpL",
+                  "x": 0,
+                  "y": 0,
+                  "name": "brandMark",
+                  "enabled": false,
+                  "width": 18,
+                  "height": 18,
+                  "fill": "#1F3A2D",
+                  "cornerRadius": 9,
+                  "stroke": {
+                    "thickness": 4,
+                    "fill": "#CBD7C1"
+                  }
+                },
+                {
+                  "type": "text",
+                  "id": "uPAmk",
+                  "name": "brandText",
+                  "fill": "#123D2D",
+                  "content": "VITALIS",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 38,
+                  "fontWeight": "500",
+                  "letterSpacing": 10
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "S4Gkk",
+              "name": "Nav actions",
+              "gap": 22,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "gVDuV",
+                  "name": "login",
+                  "fill": "#314139",
+                  "content": "Login",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "BQQuk",
+                  "name": "navCta",
+                  "fill": "#1F3A2D",
+                  "cornerRadius": 22,
+                  "padding": [
+                    11,
+                    18
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "UMLMG",
+                      "name": "navCtaText",
+                      "fill": "#FFFDF8",
+                      "content": "Get Started",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "YU1Sn",
+          "name": "Hero",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 30,
+          "padding": [
+            96,
+            220,
+            62,
+            220
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "wA11Z",
+              "name": "trust",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "line",
+                  "id": "8lniq",
+                  "name": "trustLineL",
+                  "width": 34,
+                  "height": 0,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "fill": "#9AA991"
+                  }
+                },
+                {
+                  "type": "text",
+                  "id": "zg6Mx",
+                  "name": "trustText",
+                  "fill": "#123D2D",
+                  "content": "WHOLE FOOD NUTRITION   •   CLINICAL INTEGRITY   •   BOTANICAL WISDOM",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600",
+                  "letterSpacing": 2.3
+                },
+                {
+                  "type": "line",
+                  "id": "qw1ad",
+                  "name": "trustLineR",
+                  "width": 34,
+                  "height": 0,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 1,
+                    "fill": "#9AA991"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "LnVG8",
+              "name": "headline",
+              "fill": "#123D2D",
+              "textGrowth": "fixed-width",
+              "width": 900,
+              "content": "Nutrition designed\nfor a life well lived.",
+              "lineHeight": 0.96,
+              "textAlign": "center",
+              "fontFamily": "Cormorant Garamond",
+              "fontSize": 86,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "3SygS",
+              "name": "subcopy",
+              "fill": "#3F4D48",
+              "textGrowth": "fixed-width",
+              "width": 620,
+              "content": "Whole food protocols crafted with bio-active ingredients and clinical insight to nourish your body, mind, and longevity.",
+              "lineHeight": 1.55,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 18
+            },
+            {
+              "type": "frame",
+              "id": "lkOwC",
+              "name": "heroCta",
+              "fill": "#1F3A2D",
+              "cornerRadius": 24,
+              "padding": [
+                14,
+                24
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "vhoWc",
+                  "name": "heroCtaText",
+                  "fill": "#FFFDF8",
+                  "content": "Begin your protocol",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "0j51P",
+          "name": "Hero Card Strip",
+          "width": "fill_container",
+          "gap": 24,
+          "padding": [
+            18,
+            72,
+            92,
+            72
+          ],
+          "alignItems": "end",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Z0sz9",
+              "name": "Daily calibration image",
+              "clip": true,
+              "width": "fill_container",
+              "height": 440,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "apps/design-prompts/lab01/assets/hero-food-bowl.png",
+                "mode": "fill"
+              },
+              "cornerRadius": 30,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#7B6A4A24",
+                "offset": {
+                  "x": 0,
+                  "y": 18
+                },
+                "blur": 34
+              },
+              "layout": "vertical",
+              "padding": 22,
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "CkTmv",
+                  "name": "foodCaption",
+                  "fill": "#FFFDF8D9",
+                  "cornerRadius": 18,
+                  "padding": [
+                    9,
+                    13
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "N3rbE",
+                      "name": "foodCaptionText",
+                      "fill": "#263B2F",
+                      "content": "Daily calibration",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "9tWZQ",
+              "name": "Macro-Bowl V2",
+              "width": "fill_container",
+              "height": 440,
+              "fill": "#FFFDF8",
+              "cornerRadius": 30,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#E4DCCC"
+              },
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#7B6A4A1F",
+                "offset": {
+                  "x": 0,
+                  "y": 18
+                },
+                "blur": 34
+              },
+              "layout": "vertical",
+              "gap": 22,
+              "padding": 28,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "swWwH",
+                  "name": "macroTop",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 128,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "apps/design-prompts/lab01/assets/nutrition-shake-card.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 22
+                },
+                {
+                  "type": "text",
+                  "id": "FJlbJ",
+                  "name": "macroTitle",
+                  "fill": "#17251D",
+                  "content": "Daily Nutrition",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 34,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "j61B2",
+                  "name": "macroDesc",
+                  "fill": "#6B786B",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "A clinically informed blend of protein, phytos, prebiotic fiber, and essential micronutrients.",
+                  "lineHeight": 1.45,
+                  "fontFamily": "Inter",
+                  "fontSize": 15
+                },
+                {
+                  "type": "frame",
+                  "id": "667Hp",
+                  "name": "Nutrition stats",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "#E6DDCF"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "wX5F1",
+                      "name": "stat1",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "N5rKM",
+                          "name": "stat1Label",
+                          "fill": "#6F7B70",
+                          "content": "Protein",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "2KAVh",
+                          "name": "stat1Value",
+                          "fill": "#22372B",
+                          "content": "20g",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "5DTXX",
+                      "name": "stat2",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "QBSgG",
+                          "name": "stat2Label",
+                          "fill": "#6F7B70",
+                          "content": "Fiber",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "wCXjU",
+                          "name": "stat2Value",
+                          "fill": "#22372B",
+                          "content": "8g",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ad8X4",
+                      "name": "stat3",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "jNJiM",
+                          "name": "stat3Label",
+                          "fill": "#6F7B70",
+                          "content": "Net carbs",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "pYuaN",
+                          "name": "stat3Value",
+                          "fill": "#22372B",
+                          "content": "24g",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cIhp8",
+              "name": "Botanical portrait",
+              "clip": true,
+              "width": "fill_container",
+              "height": 440,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "apps/design-prompts/lab01/assets/hero-botanical-portrait.png",
+                "mode": "fill"
+              },
+              "cornerRadius": 30,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#7B6A4A24",
+                "offset": {
+                  "x": 0,
+                  "y": 18
+                },
+                "blur": 34
+              },
+              "layout": "vertical",
+              "padding": 24,
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "nraMi",
+                  "name": "portraitPanel",
+                  "width": "fill_container",
+                  "fill": "#173124CC",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 18,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "aTj6O",
+                      "name": "portraitTitle",
+                      "fill": "#FFFDF8",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Rooted in nature.\nBacked by science.\nGuided by you.",
+                      "lineHeight": 1.12,
+                      "fontFamily": "Cormorant Garamond",
+                      "fontSize": 31,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "pJ4Qp",
+                      "name": "portraitMeta",
+                      "fill": "#D9E0D4",
+                      "content": "Our manifesto  →",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "tfqgA",
+          "name": "Editorial Quote",
+          "width": "fill_container",
+          "stroke": {
+            "thickness": {
+              "top": 1,
+              "bottom": 1
+            },
+            "fill": "#E1D8CA"
+          },
+          "layout": "vertical",
+          "gap": 28,
+          "padding": [
+            92,
+            220,
+            104,
+            220
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "3KFuv",
+              "name": "quoteText",
+              "fill": "#17251D",
+              "textGrowth": "fixed-width",
+              "width": 880,
+              "content": "“The body does not need more.\nIt needs what is real.”",
+              "lineHeight": 1.1,
+              "textAlign": "center",
+              "fontFamily": "Cormorant Garamond",
+              "fontSize": 56,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "QKSen",
+              "name": "quoteBy",
+              "fill": "#788474",
+              "content": "—   DR. ELENA MORGAN",
+              "fontFamily": "Inter",
+              "fontSize": 12,
+              "fontWeight": "700",
+              "letterSpacing": 2.4
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "9eP8k",
+          "name": "Core Bio-actives",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 30,
+          "padding": [
+            84,
+            72
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Gjz5O",
+              "name": "Ingredient heading",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "jldU1",
+                  "name": "ingCopy",
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "swAUC",
+                      "name": "ingTitle",
+                      "fill": "#17251D",
+                      "content": "Core Bio-actives",
+                      "fontFamily": "Cormorant Garamond",
+                      "fontSize": 48,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "3iM79",
+                      "name": "ingDesc",
+                      "fill": "#6B786B",
+                      "content": "Sourced from regenerative soil and formulated for daily steadiness.",
+                      "fontFamily": "Inter",
+                      "fontSize": 15
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "oHxPp",
+                  "name": "arrows",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "7YbcK",
+                      "name": "arrowL",
+                      "width": 38,
+                      "height": 38,
+                      "cornerRadius": 19,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#D6CDBF"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "DFhnB",
+                          "name": "arrowLText",
+                          "fill": "#314139",
+                          "content": "←",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eClZc",
+                      "name": "arrowR",
+                      "width": 38,
+                      "height": 38,
+                      "fill": "#1F3A2D",
+                      "cornerRadius": 19,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "SusE8",
+                          "name": "arrowRText",
+                          "fill": "#FFFDF8",
+                          "content": "→",
+                          "fontFamily": "Inter",
+                          "fontSize": 16,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "a4EEe",
+              "name": "Ingredient grid",
+              "width": "fill_container",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "LZ5kV",
+                  "name": "Olive leaf extract",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#E4DCCC"
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mgPjM",
+                      "name": "img1",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 210,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "apps/design-prompts/lab01/assets/ingredient-olive-leaf.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": 18
+                    },
+                    {
+                      "type": "text",
+                      "id": "eeeSl",
+                      "name": "t1",
+                      "fill": "#17251D",
+                      "content": "OLIVE LEAF EXTRACT",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    },
+                    {
+                      "type": "text",
+                      "id": "p4YOR",
+                      "name": "d1",
+                      "fill": "#6B786B",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Polyphenol-rich antioxidant and cellular support.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Inter",
+                      "fontSize": 13
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "sBrNG",
+                  "name": "Fermented tonics",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#E4DCCC"
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ByNxw",
+                      "name": "img2",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 210,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "apps/design-prompts/lab01/assets/ingredient-fermented-tonics.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": 18
+                    },
+                    {
+                      "type": "text",
+                      "id": "0bdoM",
+                      "name": "t2",
+                      "fill": "#17251D",
+                      "content": "FERMENTED TONICS",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    },
+                    {
+                      "type": "text",
+                      "id": "oBrEf",
+                      "name": "d2",
+                      "fill": "#6B786B",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Gut-supportive compounds for daily balance.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Inter",
+                      "fontSize": 13
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "2XLCx",
+                  "name": "Fulvic minerals",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#E4DCCC"
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "NwkY2",
+                      "name": "img3",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 210,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "apps/design-prompts/lab01/assets/ingredient-fulvic-minerals.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": 18
+                    },
+                    {
+                      "type": "text",
+                      "id": "yFClF",
+                      "name": "t3",
+                      "fill": "#17251D",
+                      "content": "FULVIC MINERALS",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    },
+                    {
+                      "type": "text",
+                      "id": "oCwkz",
+                      "name": "d3",
+                      "fill": "#6B786B",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Trace minerals and fulvic acids for bioavailability.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Inter",
+                      "fontSize": 13
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "1i5U3",
+                  "name": "Avocado phytonutrients",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#E4DCCC"
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "jc4r2",
+                      "name": "img4",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 210,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "apps/design-prompts/lab01/assets/ingredient-avocado-phytonutrients.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": 18
+                    },
+                    {
+                      "type": "text",
+                      "id": "ipQzq",
+                      "name": "t4",
+                      "fill": "#17251D",
+                      "content": "AVOCADO PHYTONUTRIENTS",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    },
+                    {
+                      "type": "text",
+                      "id": "RcLXb",
+                      "name": "d4",
+                      "fill": "#6B786B",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Healthy fats and plant sterols for cellular health.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Inter",
+                      "fontSize": 13
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "N1lZ1",
+                  "name": "Beta-glucans",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 20,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#E4DCCC"
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "n08mH",
+                      "name": "betaImg",
+                      "clip": true,
+                      "width": "fill_container",
+                      "height": 210,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1777218979408.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": 14
+                    },
+                    {
+                      "type": "text",
+                      "id": "KZV2M",
+                      "name": "betaTitle",
+                      "fill": "#17251D",
+                      "content": "BETA-GLUCANS",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700",
+                      "letterSpacing": 0.8
+                    },
+                    {
+                      "type": "text",
+                      "id": "zHhwO",
+                      "name": "betaDesc",
+                      "fill": "#6B786B",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Prebiotic fibers to feed a thriving microbiome.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Inter",
+                      "fontSize": 13
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "rQaqe",
+          "name": "Protocol and Science",
+          "width": "fill_container",
+          "fill": "#EFE7DA",
+          "gap": 48,
+          "padding": [
+            74,
+            72
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "cxYVM",
+              "name": "How it works",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 22,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "BCJ6S",
+                  "name": "stepsTitle",
+                  "fill": "#17251D",
+                  "content": "How the protocol works",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 44,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "BduQs",
+                  "name": "step1",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "#D8CEBE"
+                  },
+                  "gap": 18,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "GsR8J",
+                      "name": "n1",
+                      "fill": "#7B866F",
+                      "content": "01",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "5TyXo",
+                      "name": "s1",
+                      "fill": "#37483D",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Source regenerative plants, minerals, and cultured botanicals with restrained processing.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Inter",
+                      "fontSize": 15
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UyCGr",
+                  "name": "step2",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "#D8CEBE"
+                  },
+                  "gap": 18,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KiPS2",
+                      "name": "n2",
+                      "fill": "#7B866F",
+                      "content": "02",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "J05Mu",
+                      "name": "s2",
+                      "fill": "#37483D",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Formulate around steady energy, micronutrient density, and microbiome support.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Inter",
+                      "fontSize": 15
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "4BA7N",
+                  "name": "step3",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1,
+                      "bottom": 1
+                    },
+                    "fill": "#D8CEBE"
+                  },
+                  "gap": 18,
+                  "padding": [
+                    20,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "7d6BX",
+                      "name": "n3",
+                      "fill": "#7B866F",
+                      "content": "03",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nPbMn",
+                      "name": "s3",
+                      "fill": "#37483D",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Restore the daily rhythm with a protocol simple enough to repeat without friction.",
+                      "lineHeight": 1.45,
+                      "fontFamily": "Inter",
+                      "fontSize": 15
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vIzzD",
+              "name": "Science split",
+              "width": "fill_container",
+              "fill": "#23392E",
+              "cornerRadius": 28,
+              "layout": "vertical",
+              "gap": 24,
+              "padding": 34,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Tgfsv",
+                  "name": "scienceTitle",
+                  "fill": "#FFFDF8",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Designed for the space between clinical precision and botanical patience.",
+                  "lineHeight": 1.14,
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 40,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "FKKLj",
+                  "name": "scienceCopy",
+                  "fill": "#D6DFD3",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "The system emphasizes polyphenol diversity, micronutrient density, microbiome support, and metabolic steadiness without turning wellness into noise.",
+                  "lineHeight": 1.55,
+                  "fontFamily": "Inter",
+                  "fontSize": 15
+                },
+                {
+                  "type": "frame",
+                  "id": "UOCOZ",
+                  "name": "principles",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "#FFFFFF24"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": [
+                    18,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Lo15l",
+                      "name": "p1",
+                      "fill": "#FFFDF8",
+                      "content": "Polyphenol diversity",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TUSkn",
+                      "name": "p2",
+                      "fill": "#FFFDF8",
+                      "content": "Micronutrient density",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "6x7j5",
+                      "name": "p3",
+                      "fill": "#FFFDF8",
+                      "content": "Microbiome support",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "4VnQD",
+          "name": "Featured Products",
+          "width": "fill_container",
+          "fill": "#FAF6EF",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            92,
+            96
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "e9E5g",
+              "name": "prodHead",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "VmwSk",
+                  "name": "prodTitle",
+                  "fill": "#17251D",
+                  "content": "Featured Protocols",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 38,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "fRPCz",
+                  "name": "prodLink",
+                  "fill": "#1F3A2D",
+                  "content": "View all protocols  →",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "6moGf",
+              "name": "prodGrid",
+              "width": "fill_container",
+              "gap": 22,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "qi8Mg",
+                  "name": "Daily Nutrition card",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 410,
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 10,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#DED6C8"
+                  },
+                  "layout": "vertical",
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ZMFjt",
+                      "name": "p1Top",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "gap": 28,
+                      "padding": [
+                        38,
+                        34,
+                        34,
+                        34
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "kadpX",
+                          "name": "p1Img",
+                          "clip": true,
+                          "width": 172,
+                          "height": 210,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "apps/design-prompts/lab01/assets/product-daily-nutrition.png",
+                            "mode": "fit"
+                          },
+                          "cornerRadius": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "gJRsP",
+                          "name": "p1Copy",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 16,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "RQSSV",
+                              "name": "p1Title",
+                              "fill": "#173D2D",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Daily Nutrition",
+                              "lineHeight": 1.06,
+                              "fontFamily": "Cormorant Garamond",
+                              "fontSize": 31,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "uzN5E",
+                              "name": "p1Desc",
+                              "fill": "#283734",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Foundational whole food nutrition for everyday vitality.",
+                              "lineHeight": 1.55,
+                              "fontFamily": "Inter",
+                              "fontSize": 16
+                            },
+                            {
+                              "type": "text",
+                              "id": "iIqfn",
+                              "name": "p1Link",
+                              "fill": "#173D2D",
+                              "content": "View protocol  →",
+                              "fontFamily": "Inter",
+                              "fontSize": 15,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "OqXG4",
+                      "name": "p1Band",
+                      "width": "fill_container",
+                      "height": 112,
+                      "fill": "#F3EEE7",
+                      "stroke": {
+                        "thickness": {
+                          "top": 1
+                        },
+                        "fill": "#DED6C8"
+                      },
+                      "padding": [
+                        28,
+                        34
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Nfgky",
+                          "name": "p1BandText",
+                          "fill": "#283734",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Supports energy, immunity, and digestive balance.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 14
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "o0d9E",
+                  "name": "Greens+ card",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 410,
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 10,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#DED6C8"
+                  },
+                  "layout": "vertical",
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Hsxaq",
+                      "name": "p2Top",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "gap": 28,
+                      "padding": [
+                        38,
+                        34,
+                        34,
+                        34
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "1cSvA",
+                          "name": "p2Img",
+                          "clip": true,
+                          "width": 172,
+                          "height": 210,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "apps/design-prompts/lab01/assets/product-greens-plus.png",
+                            "mode": "fit"
+                          },
+                          "cornerRadius": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "JUYiH",
+                          "name": "p2Copy",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 16,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "hl6Gh",
+                              "name": "p2Title",
+                              "fill": "#173D2D",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Greens+",
+                              "lineHeight": 1.06,
+                              "fontFamily": "Cormorant Garamond",
+                              "fontSize": 31,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "LQjzP",
+                              "name": "p2Desc",
+                              "fill": "#283734",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Plant-based greens and superfood blend for daily resilience.",
+                              "lineHeight": 1.55,
+                              "fontFamily": "Inter",
+                              "fontSize": 16
+                            },
+                            {
+                              "type": "text",
+                              "id": "z5zBv",
+                              "name": "p2Link",
+                              "fill": "#173D2D",
+                              "content": "View protocol  →",
+                              "fontFamily": "Inter",
+                              "fontSize": 15,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "yMLVj",
+                      "name": "p2Band",
+                      "width": "fill_container",
+                      "height": 112,
+                      "fill": "#F3EEE7",
+                      "stroke": {
+                        "thickness": {
+                          "top": 1
+                        },
+                        "fill": "#DED6C8"
+                      },
+                      "padding": [
+                        28,
+                        34
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "tzDn8",
+                          "name": "p2BandText",
+                          "fill": "#283734",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Supports detoxification, gut health, and natural energy.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 14
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "iOFIP",
+                  "name": "Restorative Night card",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 410,
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 10,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#DED6C8"
+                  },
+                  "layout": "vertical",
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "0MTAq",
+                      "name": "p3Top",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "gap": 28,
+                      "padding": [
+                        38,
+                        34,
+                        34,
+                        34
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "HxcR2",
+                          "name": "p3Img",
+                          "clip": true,
+                          "width": 172,
+                          "height": 210,
+                          "fill": {
+                            "type": "image",
+                            "enabled": true,
+                            "url": "apps/design-prompts/lab01/assets/product-restorative-night.png",
+                            "mode": "fit"
+                          },
+                          "cornerRadius": 8
+                        },
+                        {
+                          "type": "frame",
+                          "id": "byYJK",
+                          "name": "p3Copy",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 16,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "1oUAt",
+                              "name": "p3Title",
+                              "fill": "#173D2D",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Restorative Night",
+                              "lineHeight": 1.06,
+                              "fontFamily": "Cormorant Garamond",
+                              "fontSize": 30,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "gUCiw",
+                              "name": "p3Desc",
+                              "fill": "#283734",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Calming nutrients to support deep rest and recovery.",
+                              "lineHeight": 1.55,
+                              "fontFamily": "Inter",
+                              "fontSize": 16
+                            },
+                            {
+                              "type": "text",
+                              "id": "cpUmj",
+                              "name": "p3Link",
+                              "fill": "#173D2D",
+                              "content": "View protocol  →",
+                              "fontFamily": "Inter",
+                              "fontSize": 15,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wQ2Uw",
+                      "name": "p3Band",
+                      "width": "fill_container",
+                      "height": 112,
+                      "fill": "#F3EEE7",
+                      "stroke": {
+                        "thickness": {
+                          "top": 1
+                        },
+                        "fill": "#DED6C8"
+                      },
+                      "padding": [
+                        28,
+                        34
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "eO09p",
+                          "name": "p3BandText",
+                          "fill": "#283734",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Supports relaxation, sleep quality, and overnight restoration.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 14
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "PFoa3",
+          "name": "Testimonial Trust",
+          "width": "fill_container",
+          "fill": "#FAF6EF",
+          "gap": 44,
+          "padding": [
+            64,
+            96,
+            84,
+            96
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "wVtjt",
+              "name": "3.png testimonial band",
+              "width": "fill_container",
+              "height": 238,
+              "fill": "#FFFDF8",
+              "cornerRadius": 10,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#DED6C8"
+              },
+              "padding": [
+                0,
+                118
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "FyjKO",
+                  "name": "testQuote",
+                  "fill": "#173D2D",
+                  "textGrowth": "fixed-width",
+                  "width": 820,
+                  "content": "“  Vitalis changed the way I think about food and energy.\n    I feel clear, strong, and more like myself.”",
+                  "lineHeight": 1.22,
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 38,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "Qsh7Y",
+                  "name": "testPerson",
+                  "gap": 18,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "wCoyP",
+                      "name": "testAvatar",
+                      "clip": true,
+                      "width": 72,
+                      "height": 72,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "apps/design-prompts/lab01/assets/testimonial-member-portrait.png",
+                        "mode": "fill"
+                      },
+                      "cornerRadius": 36
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zTpvB",
+                      "name": "testMeta",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "9u3v5",
+                          "name": "testName",
+                          "fill": "#173D2D",
+                          "content": "SARAH L.",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "800",
+                          "letterSpacing": 1.2
+                        },
+                        {
+                          "type": "text",
+                          "id": "rwwbP",
+                          "name": "testRole",
+                          "fill": "#4B5A55",
+                          "content": "Vitalis Member",
+                          "fontFamily": "Inter",
+                          "fontSize": 13
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "SFyzM",
+          "name": "Journal Preview",
+          "width": "fill_container",
+          "fill": "#FAF6EF",
+          "layout": "vertical",
+          "gap": 36,
+          "padding": [
+            72,
+            96,
+            88,
+            96
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "HvLPg",
+              "name": "jHead",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "nnbbw",
+                  "name": "jTitle",
+                  "fill": "#17251D",
+                  "content": "From the Journal",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 38,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "kyobG",
+                  "name": "jLink",
+                  "fill": "#1F3A2D",
+                  "content": "Explore all articles  →",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ZOvye",
+              "name": "jGrid",
+              "width": "fill_container",
+              "gap": 22,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "LFsZS",
+                  "name": "The power of polyphenols",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 500,
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#DED6C8"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "iAdAB",
+                      "name": "j1Img",
+                      "width": "fill_container",
+                      "height": 245,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "apps/design-prompts/lab01/assets/journal-polyphenols.png",
+                        "mode": "fit"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "LQjLU",
+                      "name": "j1Body",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        30,
+                        32
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "rfwWQ",
+                          "name": "j1Cat",
+                          "fill": "#173D2D",
+                          "content": "NUTRITION",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "800",
+                          "letterSpacing": 1.6
+                        },
+                        {
+                          "type": "text",
+                          "id": "zLDrx",
+                          "name": "j1Title",
+                          "fill": "#173D2D",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "The power of polyphenols",
+                          "lineHeight": 1.12,
+                          "fontFamily": "Cormorant Garamond",
+                          "fontSize": 31,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "87S60",
+                          "name": "j1Desc",
+                          "fill": "#283734",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Why plant diversity is key to long-term health and cellular resilience.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 15
+                        },
+                        {
+                          "type": "text",
+                          "id": "mmLFm",
+                          "name": "j1Link",
+                          "fill": "#173D2D",
+                          "content": "Read article  →",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "1GoBa",
+                  "name": "Understanding your microbiome",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 500,
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#DED6C8"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Er8He",
+                      "name": "j2Img",
+                      "width": "fill_container",
+                      "height": 245,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "apps/design-prompts/lab01/assets/journal-microbiome.png",
+                        "mode": "fit"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ZuOQb",
+                      "name": "j2Body",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        30,
+                        32
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "JaCQV",
+                          "name": "j2Cat",
+                          "fill": "#173D2D",
+                          "content": "SCIENCE",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "800",
+                          "letterSpacing": 1.6
+                        },
+                        {
+                          "type": "text",
+                          "id": "Pa9ql",
+                          "name": "j2Title",
+                          "fill": "#173D2D",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Understanding your microbiome",
+                          "lineHeight": 1.12,
+                          "fontFamily": "Cormorant Garamond",
+                          "fontSize": 31,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Mr8so",
+                          "name": "j2Desc",
+                          "fill": "#283734",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "How gut health influences every part of you.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 15
+                        },
+                        {
+                          "type": "text",
+                          "id": "Cep7k",
+                          "name": "j2Link",
+                          "fill": "#173D2D",
+                          "content": "Read article  →",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "y5srr",
+                  "name": "Rituals for restoration",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 500,
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#DED6C8"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "RW5g9",
+                      "name": "j3Img",
+                      "width": "fill_container",
+                      "height": 245,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "apps/design-prompts/lab01/assets/journal-restoration-ritual.png",
+                        "mode": "fit"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NEPPG",
+                      "name": "j3Body",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 14,
+                      "padding": [
+                        30,
+                        32
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "rfeoG",
+                          "name": "j3Cat",
+                          "fill": "#173D2D",
+                          "content": "LIFESTYLE",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "800",
+                          "letterSpacing": 1.6
+                        },
+                        {
+                          "type": "text",
+                          "id": "keUWT",
+                          "name": "j3Title",
+                          "fill": "#173D2D",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Rituals for restoration",
+                          "lineHeight": 1.12,
+                          "fontFamily": "Cormorant Garamond",
+                          "fontSize": 31,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "dqNzn",
+                          "name": "j3Desc",
+                          "fill": "#283734",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Simple daily rituals to support hormone balance and calm.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 15
+                        },
+                        {
+                          "type": "text",
+                          "id": "hWOJS",
+                          "name": "j3Link",
+                          "fill": "#173D2D",
+                          "content": "Read article  →",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u9GCF",
+          "name": "Final CTA",
+          "width": "fill_container",
+          "height": 430,
+          "fill": "#F2EADF",
+          "gap": 40,
+          "children": [
+            {
+              "type": "frame",
+              "id": "gfz8l",
+              "name": "Light CTA copy",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 18,
+              "padding": [
+                0,
+                0,
+                0,
+                160
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "QbTXM",
+                  "name": "ctaTitle",
+                  "fill": "#173D2D",
+                  "content": "Begin the protocol",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 56,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "XlQ4i",
+                  "name": "ctaDesc",
+                  "fill": "#283734",
+                  "content": "Personalized nutrition. Real ingredients. Lasting change.",
+                  "fontFamily": "Inter",
+                  "fontSize": 17
+                },
+                {
+                  "type": "frame",
+                  "id": "AdDtG",
+                  "name": "ctaButtons",
+                  "gap": 28,
+                  "padding": [
+                    8,
+                    0,
+                    0,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "yEzR2",
+                      "name": "ctaB1",
+                      "fill": "#123D2D",
+                      "cornerRadius": 8,
+                      "padding": [
+                        15,
+                        34
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Wchk7",
+                          "name": "ctaB1Text",
+                          "fill": "#FFFDF8",
+                          "content": "Explore Menu",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "OyKjv",
+                      "name": "ctaB2",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#123D2D"
+                      },
+                      "padding": [
+                        14,
+                        34
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "EpAU4",
+                          "name": "ctaB2Text",
+                          "fill": "#123D2D",
+                          "content": "Read the Science",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "4Hytv",
+              "name": "ctaImage",
+              "clip": true,
+              "width": 560,
+              "height": "fill_container",
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "apps/design-prompts/lab01/assets/final-cta-botanical-vase.png",
+                "mode": "fit"
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "KGUom",
+                  "x": 250,
+                  "y": 108,
+                  "name": "vase",
+                  "enabled": false,
+                  "fill": "#FFFFFF66",
+                  "width": 132,
+                  "height": 174,
+                  "stroke": {
+                    "thickness": 2,
+                    "fill": "#D8CDBB"
+                  }
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 20,
+                  "id": "IOXZf",
+                  "x": 290,
+                  "y": 58,
+                  "name": "vaseNeck",
+                  "enabled": false,
+                  "fill": "#FFFFFF44",
+                  "width": 54,
+                  "height": 96,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#D8CDBB"
+                  }
+                },
+                {
+                  "type": "line",
+                  "id": "SVz9s",
+                  "x": 306,
+                  "y": 4,
+                  "name": "stem1",
+                  "enabled": false,
+                  "rotation": -18,
+                  "width": 126,
+                  "height": 214,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 3,
+                    "fill": "#566F45"
+                  }
+                },
+                {
+                  "type": "line",
+                  "id": "QgYjL",
+                  "x": 328,
+                  "y": 58,
+                  "name": "stem2",
+                  "enabled": false,
+                  "rotation": 22,
+                  "width": 112,
+                  "height": 206,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 2,
+                    "fill": "#566F45"
+                  }
+                },
+                {
+                  "type": "line",
+                  "id": "t2yRs",
+                  "x": 268,
+                  "y": 26,
+                  "name": "stem3",
+                  "enabled": false,
+                  "rotation": -42,
+                  "width": 92,
+                  "height": 190,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 2,
+                    "fill": "#566F45"
+                  }
+                },
+                {
+                  "type": "ellipse",
+                  "id": "BPPK4",
+                  "x": 370,
+                  "y": 34,
+                  "name": "leaf1",
+                  "enabled": false,
+                  "rotation": -22,
+                  "fill": "#5C744A",
+                  "width": 54,
+                  "height": 22
+                },
+                {
+                  "type": "ellipse",
+                  "id": "UYtyS",
+                  "x": 396,
+                  "y": 88,
+                  "name": "leaf2",
+                  "enabled": false,
+                  "rotation": 18,
+                  "fill": "#72855D",
+                  "width": 58,
+                  "height": 22
+                },
+                {
+                  "type": "ellipse",
+                  "id": "FQ1QM",
+                  "x": 220,
+                  "y": 76,
+                  "name": "leaf3",
+                  "enabled": false,
+                  "rotation": -44,
+                  "fill": "#5C744A",
+                  "width": 54,
+                  "height": 22
+                },
+                {
+                  "type": "ellipse",
+                  "id": "4khah",
+                  "x": 204,
+                  "y": 136,
+                  "name": "leaf4",
+                  "enabled": false,
+                  "rotation": 32,
+                  "fill": "#72855D",
+                  "width": 52,
+                  "height": 21
+                },
+                {
+                  "type": "ellipse",
+                  "id": "dg3qf",
+                  "x": 352,
+                  "y": 144,
+                  "name": "leaf5",
+                  "enabled": false,
+                  "rotation": -18,
+                  "fill": "#5C744A",
+                  "width": 54,
+                  "height": 22
+                },
+                {
+                  "type": "ellipse",
+                  "id": "uOeHE",
+                  "x": 214,
+                  "y": 284,
+                  "name": "shadow",
+                  "enabled": false,
+                  "fill": "#C9BDAA55",
+                  "width": 260,
+                  "height": 40
+                },
+                {
+                  "type": "ellipse",
+                  "id": "OgT7G",
+                  "x": 422,
+                  "y": 142,
+                  "name": "leaf6",
+                  "enabled": false,
+                  "rotation": 28,
+                  "fill": "#6A7E57",
+                  "width": 48,
+                  "height": 20
+                },
+                {
+                  "type": "ellipse",
+                  "id": "xwycU",
+                  "x": 252,
+                  "y": 28,
+                  "name": "leaf7",
+                  "enabled": false,
+                  "rotation": -26,
+                  "fill": "#5C744A",
+                  "width": 44,
+                  "height": 18
+                },
+                {
+                  "type": "ellipse",
+                  "id": "atb6X",
+                  "x": 330,
+                  "y": 190,
+                  "name": "leaf8",
+                  "enabled": false,
+                  "rotation": -12.000000000000002,
+                  "fill": "#72855D",
+                  "width": 46,
+                  "height": 19
+                },
+                {
+                  "type": "line",
+                  "id": "dwyWj",
+                  "x": 318,
+                  "y": 112,
+                  "name": "stem4",
+                  "enabled": false,
+                  "rotation": 48.00000000000001,
+                  "width": 150,
+                  "height": 180,
+                  "stroke": {
+                    "align": "center",
+                    "thickness": 2,
+                    "fill": "#6A7E57"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "bmj1J",
+          "name": "Footer",
+          "width": "fill_container",
+          "height": 330,
+          "fill": "#FAF6EF",
+          "padding": [
+            56,
+            96,
+            44,
+            96
+          ],
+          "justifyContent": "space_between",
+          "children": [
+            {
+              "type": "frame",
+              "id": "gm3xw",
+              "name": "footBrand",
+              "width": 220,
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "LrA0j",
+                  "name": "footLogo",
+                  "fill": "#173D2D",
+                  "content": "VITALIS",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 34,
+                  "fontWeight": "500",
+                  "letterSpacing": 8
+                },
+                {
+                  "type": "text",
+                  "id": "eJUM1",
+                  "name": "footCopy",
+                  "fill": "#283734",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Whole food nutrition\nfor a life well lived.",
+                  "lineHeight": 1.55,
+                  "fontFamily": "Inter",
+                  "fontSize": 14
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AgD9E",
+              "name": "footProduct",
+              "layout": "vertical",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "v4nEI",
+                  "name": "fpH",
+                  "fill": "#173D2D",
+                  "content": "Product",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "zqXFP",
+                  "name": "fp1",
+                  "fill": "#283734",
+                  "content": "Protocols",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                },
+                {
+                  "type": "text",
+                  "id": "WkfPF",
+                  "name": "fp2",
+                  "fill": "#283734",
+                  "content": "Ingredients",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ic0qp",
+              "name": "footScience",
+              "layout": "vertical",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "s6caE",
+                  "name": "fsH",
+                  "fill": "#173D2D",
+                  "content": "Science",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "gheyk",
+                  "name": "fs1",
+                  "fill": "#283734",
+                  "content": "Our Approach",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                },
+                {
+                  "type": "text",
+                  "id": "X4sus",
+                  "name": "fs2",
+                  "fill": "#283734",
+                  "content": "Research",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SjI4g",
+              "name": "footJournal",
+              "layout": "vertical",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "t5oIl",
+                  "name": "fjH",
+                  "fill": "#173D2D",
+                  "content": "Journal",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "bKlCI",
+                  "name": "fj1",
+                  "fill": "#283734",
+                  "content": "Nutrition",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                },
+                {
+                  "type": "text",
+                  "id": "8HsKW",
+                  "name": "fj2",
+                  "fill": "#283734",
+                  "content": "Lifestyle",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Dsrvz",
+              "name": "footContact",
+              "layout": "vertical",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "4gh74",
+                  "name": "fcH",
+                  "fill": "#173D2D",
+                  "content": "Contact",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "Jt547",
+                  "name": "fc1",
+                  "fill": "#283734",
+                  "content": "hello@vitalis.com",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                },
+                {
+                  "type": "text",
+                  "id": "13e5B",
+                  "name": "fc2",
+                  "fill": "#283734",
+                  "content": "@vitalis_nutrition",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "9ud2W",
+              "name": "legal",
+              "layout": "vertical",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "YCjBi",
+                  "name": "legalH",
+                  "fill": "#173D2D",
+                  "content": "Legal",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "wNXo1",
+                  "name": "legal1",
+                  "fill": "#283734",
+                  "content": "Privacy Policy",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                },
+                {
+                  "type": "text",
+                  "id": "9Ohk8",
+                  "name": "legal2",
+                  "fill": "#283734",
+                  "content": "Terms of Service",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                },
+                {
+                  "type": "text",
+                  "id": "UkENc",
+                  "name": "legal3",
+                  "fill": "#283734",
+                  "content": "Cookie Policy",
+                  "fontFamily": "Inter",
+                  "fontSize": 13
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Yd9b8",
+      "x": 23100,
+      "y": -324,
+      "name": "Lab01 / Alt Composition",
+      "clip": true,
+      "width": 1440,
+      "fill": "#F6F1E8",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "sOK7V",
+          "name": "nav",
+          "width": "fill_container",
+          "height": 88,
+          "stroke": {
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "#DDD3C4"
+          },
+          "padding": [
+            0,
+            64
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "XUf1g",
+              "name": "navLeft",
+              "gap": 26,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "cgPSA",
+                  "name": "navL1",
+                  "fill": "#2E3F37",
+                  "content": "Protocol",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "rIuyv",
+                  "name": "navL2",
+                  "fill": "#2E3F37",
+                  "content": "Ingredients",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "pplKK",
+                  "name": "navL3",
+                  "fill": "#2E3F37",
+                  "content": "Journal",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "oqmZf",
+              "name": "brand",
+              "fill": "#173D2D",
+              "content": "VITALIS",
+              "fontFamily": "Cormorant Garamond",
+              "fontSize": 34,
+              "fontWeight": "500",
+              "letterSpacing": 7
+            },
+            {
+              "type": "frame",
+              "id": "8tdbs",
+              "name": "navRight",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mnbMP",
+                  "name": "login",
+                  "fill": "#2E3F37",
+                  "content": "Login",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "znGrc",
+                  "name": "cta",
+                  "fill": "#173D2D",
+                  "cornerRadius": 20,
+                  "padding": [
+                    10,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "8TY4b",
+                      "name": "ctaTxt",
+                      "fill": "#FFFDF8",
+                      "content": "Begin",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "xOjpA",
+          "name": "hero",
+          "width": "fill_container",
+          "gap": 26,
+          "padding": [
+            62,
+            64,
+            42,
+            64
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "9E5gw",
+              "name": "heroLeft",
+              "width": "fill_container",
+              "height": 500,
+              "layout": "vertical",
+              "padding": [
+                18,
+                0
+              ],
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "lqotz",
+                  "name": "heroKicker",
+                  "fill": "#5E6E65",
+                  "content": "SYSTEMIC BOTANICAL NUTRITION",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "700",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "C1VlG",
+                  "name": "heroTitle",
+                  "fill": "#173D2D",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "A slower, smarter\nway to nourish\nthrough the day.",
+                  "lineHeight": 0.96,
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 74,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "tDtgh",
+                  "name": "heroDesc",
+                  "fill": "#3F4F48",
+                  "textGrowth": "fixed-width",
+                  "width": 520,
+                  "content": "Calibrated whole-food protocols built around microbiome support, mineral density, and recovery rhythm.",
+                  "lineHeight": 1.55,
+                  "fontFamily": "Inter",
+                  "fontSize": 17
+                },
+                {
+                  "type": "frame",
+                  "id": "QEVB3",
+                  "name": "heroActions",
+                  "gap": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "iuip8",
+                      "name": "heroA1",
+                      "fill": "#173D2D",
+                      "cornerRadius": 8,
+                      "padding": [
+                        14,
+                        22
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "fvyn0",
+                          "name": "heroA1t",
+                          "fill": "#FFFDF8",
+                          "content": "Explore menu",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "iwr8e",
+                      "name": "heroA2",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#173D2D"
+                      },
+                      "padding": [
+                        13,
+                        22
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "dBXp9",
+                          "name": "heroA2t",
+                          "fill": "#173D2D",
+                          "content": "Read science",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "n8puM",
+              "name": "heroRight",
+              "clip": true,
+              "width": 500,
+              "height": 500,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "apps/design-prompts/lab01/assets/hero-botanical-portrait.png",
+                "mode": "fill"
+              },
+              "cornerRadius": 16
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "OFXNJ",
+          "name": "spot",
+          "width": "fill_container",
+          "gap": 18,
+          "padding": [
+            8,
+            64,
+            64,
+            64
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "WIuKN",
+              "name": "food",
+              "clip": true,
+              "width": "fill_container",
+              "height": 310,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "apps/design-prompts/lab01/assets/hero-food-bowl.png",
+                "mode": "fill"
+              },
+              "cornerRadius": 14,
+              "layout": "vertical",
+              "padding": 18,
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "a4AZ8",
+                  "name": "foodCap",
+                  "fill": "#FFFDF8",
+                  "content": "Daily calibration",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "BzOdj",
+              "name": "shake",
+              "width": "fill_container",
+              "height": 310,
+              "fill": "#FFFDF8",
+              "cornerRadius": 14,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#DDD3C4"
+              },
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "aPYsb",
+                  "name": "shakeImg",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 156,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "apps/design-prompts/lab01/assets/nutrition-shake-card.png",
+                    "mode": "fit"
+                  },
+                  "cornerRadius": 10
+                },
+                {
+                  "type": "text",
+                  "id": "cJfNZ",
+                  "name": "shakeT",
+                  "fill": "#173D2D",
+                  "content": "Macro-Bowl V2",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 31,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "NhtpJ",
+                  "name": "shakeD",
+                  "fill": "#4B5B53",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Protein-forward botanical blend with prebiotic fiber and mineral support.",
+                  "lineHeight": 1.45,
+                  "fontFamily": "Inter",
+                  "fontSize": 14
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fMhPI",
+              "name": "stats",
+              "width": 220,
+              "height": 310,
+              "fill": "#173D2D",
+              "cornerRadius": 14,
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 20,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "926Wl",
+                  "name": "st1",
+                  "fill": "#FFFDF8",
+                  "content": "20g\nProtein",
+                  "lineHeight": 0.95,
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 44,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "q25bY",
+                  "name": "st2",
+                  "fill": "#D4DDD7",
+                  "content": "8g Fiber\n24g Net carbs",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Hqjfz",
+          "name": "quote",
+          "width": "fill_container",
+          "stroke": {
+            "thickness": {
+              "top": 1,
+              "bottom": 1
+            },
+            "fill": "#DDD3C4"
+          },
+          "layout": "vertical",
+          "padding": [
+            34,
+            64,
+            44,
+            64
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "wiJHW",
+              "name": "qText",
+              "fill": "#173D2D",
+              "textGrowth": "fixed-width",
+              "width": 760,
+              "content": "“The body does not need more. It needs what is real.”",
+              "lineHeight": 1.05,
+              "textAlign": "center",
+              "fontFamily": "Cormorant Garamond",
+              "fontSize": 54,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "8GvQs",
+          "name": "ing",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            54,
+            64
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "x6kgg",
+              "name": "ingHead",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "frQ5Z",
+                  "name": "ingTitle",
+                  "fill": "#173D2D",
+                  "content": "Core Bio-actives",
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 46,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "DTJbF",
+                  "name": "ingSub",
+                  "fill": "#5E6E65",
+                  "content": "targeted ingredients / measurable impact",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "600",
+                  "letterSpacing": 1.2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nf1Wv",
+              "name": "ingGrid",
+              "width": "fill_container",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "69Foc",
+                  "name": "ing1",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 200,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "apps/design-prompts/lab01/assets/ingredient-olive-leaf.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12
+                },
+                {
+                  "type": "frame",
+                  "id": "A724Z",
+                  "name": "ing2",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 200,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "apps/design-prompts/lab01/assets/ingredient-fermented-tonics.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12
+                },
+                {
+                  "type": "frame",
+                  "id": "4Wdoh",
+                  "name": "ing3",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 200,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "apps/design-prompts/lab01/assets/ingredient-fulvic-minerals.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12
+                },
+                {
+                  "type": "frame",
+                  "id": "I3gFr",
+                  "name": "ing4",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 200,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "apps/design-prompts/lab01/assets/ingredient-avocado-phytonutrients.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12
+                },
+                {
+                  "type": "frame",
+                  "id": "qsef6",
+                  "name": "ing5",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": 200,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "apps/design-prompts/lab01/assets/ingredient-beta-glucans.png",
+                    "mode": "fill"
+                  },
+                  "cornerRadius": 12
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "gjn2p",
+          "name": "science",
+          "width": "fill_container",
+          "fill": "#EEE6D9",
+          "gap": 18,
+          "padding": [
+            36,
+            64,
+            58,
+            64
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "2jBjJ",
+              "name": "scMain",
+              "clip": true,
+              "width": "fill_container",
+              "height": 470,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "apps/design-prompts/lab01/assets/journal-microbiome.png",
+                "mode": "fill"
+              },
+              "cornerRadius": 14,
+              "layout": "vertical",
+              "padding": 24,
+              "justifyContent": "end",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fuKq9",
+                  "name": "scTag",
+                  "fill": "#FFFDF8",
+                  "content": "SCIENCE NOTE",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "800",
+                  "letterSpacing": 1.4
+                },
+                {
+                  "type": "text",
+                  "id": "BVzRa",
+                  "name": "scTitle",
+                  "fill": "#FFFDF8",
+                  "textGrowth": "fixed-width",
+                  "width": 440,
+                  "content": "Understanding your microbiome",
+                  "lineHeight": 1,
+                  "fontFamily": "Cormorant Garamond",
+                  "fontSize": 52,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fu9zQ",
+              "name": "scRight",
+              "width": 360,
+              "height": 520,
+              "layout": "vertical",
+              "gap": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "YnsqZ",
+                  "name": "art1",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#D7CEBF"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "r7tLy",
+                      "name": "art1Img",
+                      "width": "fill_container",
+                      "height": 170,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "apps/design-prompts/lab01/assets/journal-polyphenols.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "EZGPr",
+                      "name": "art1Body",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "WoHs2",
+                          "name": "art1T",
+                          "fill": "#173D2D",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "The power of polyphenols",
+                          "lineHeight": 1.06,
+                          "fontFamily": "Cormorant Garamond",
+                          "fontSize": 29,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "CbIoe",
+                          "name": "art1D",
+                          "fill": "#4B5B53",
+                          "content": "Plant diversity and cellular resilience.",
+                          "fontFamily": "Inter",
+                          "fontSize": 14
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "rmiOC",
+                  "name": "art2",
+                  "clip": true,
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#D7CEBF"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "YRwLL",
+                      "name": "art2Img",
+                      "width": "fill_container",
+                      "height": 170,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "apps/design-prompts/lab01/assets/journal-restoration-ritual.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Pss3M",
+                      "name": "art2Body",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 10,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ETfoW",
+                          "name": "art2T",
+                          "fill": "#173D2D",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Rituals for restoration",
+                          "lineHeight": 1.06,
+                          "fontFamily": "Cormorant Garamond",
+                          "fontSize": 29,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "aBEgQ",
+                          "name": "art2D",
+                          "fill": "#4B5B53",
+                          "content": "Simple practices for calmer evenings.",
+                          "fontFamily": "Inter",
+                          "fontSize": 14
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "F5nXo",
+          "name": "prod",
+          "width": "fill_container",
+          "gap": 14,
+          "padding": [
+            0,
+            64,
+            58,
+            64
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "GvHaz",
+              "name": "prod1",
+              "clip": true,
+              "width": "fill_container",
+              "height": 180,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "apps/design-prompts/lab01/assets/product-daily-nutrition.png",
+                "mode": "fit"
+              },
+              "cornerRadius": 12
+            },
+            {
+              "type": "frame",
+              "id": "fsnlx",
+              "name": "prod2",
+              "clip": true,
+              "width": "fill_container",
+              "height": 180,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "apps/design-prompts/lab01/assets/product-greens-plus.png",
+                "mode": "fit"
+              },
+              "cornerRadius": 12
+            },
+            {
+              "type": "frame",
+              "id": "a7i6t",
+              "name": "prod3",
+              "clip": true,
+              "width": "fill_container",
+              "height": 180,
+              "fill": {
+                "type": "image",
+                "enabled": true,
+                "url": "apps/design-prompts/lab01/assets/product-restorative-night.png",
+                "mode": "fit"
+              },
+              "cornerRadius": 12
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "APOqO",
+          "name": "end",
+          "width": "fill_container",
+          "height": 220,
+          "fill": "#173D2D",
+          "padding": [
+            0,
+            64
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "Lfjfp",
+              "name": "endTxt",
+              "fill": "#FFFDF8",
+              "content": "Begin the protocol",
+              "fontFamily": "Cormorant Garamond",
+              "fontSize": 56,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "RZz48",
+              "name": "endBtn",
+              "fill": "#FFFDF8",
+              "cornerRadius": 8,
+              "padding": [
+                14,
+                20
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "JhIep",
+                  "name": "endBtnT",
+                  "fill": "#173D2D",
+                  "content": "Explore menu",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "spKJe",
+          "name": "foot",
+          "width": "fill_container",
+          "height": 96,
+          "fill": "#F6F1E8",
+          "padding": [
+            0,
+            64
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "FehE3",
+              "name": "footL",
+              "fill": "#173D2D",
+              "content": "VITALIS",
+              "fontFamily": "Cormorant Garamond",
+              "fontSize": 24,
+              "fontWeight": "500",
+              "letterSpacing": 4
+            },
+            {
+              "type": "frame",
+              "id": "qZNtn",
+              "name": "footR",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "WiAGI",
+                  "name": "footR1",
+                  "fill": "#43534B",
+                  "content": "Science",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "s65CI",
+                  "name": "footR2",
+                  "fill": "#43534B",
+                  "content": "Journal",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "dmlmB",
+                  "name": "footR3",
+                  "fill": "#43534B",
+                  "content": "Contact",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "600"
                 }
               ]
             }
