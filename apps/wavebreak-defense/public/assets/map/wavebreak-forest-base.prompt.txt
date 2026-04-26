@@ -1,0 +1,10 @@
+Use case: stylized-concept
+Asset type: 2D tower defense game map base, top-down baked background for Phaser.
+Primary request: Create a polished top-down fantasy forest defense map for Wavebreak Defense. Horizontal 16:10 composition, no UI, no labels, no text, no characters, no towers. The final asset is resized to 1024x640 for the Phaser world.
+Scene/backdrop: twilight magical forest clearing with mossy dark-green ground, soft teal crystal glow accents, warm copper-gold firefly light, dense but readable foliage around the edges, playable center kept clear.
+Gameplay layout: A wide tan dirt path enters from the upper-right edge, curves leftward across the upper third, snakes through the center, dips into the lower middle, curves back right, and terminates at a crystal base clearing around 84% width / 59% height. Keep the path broad, readable, and continuous, with soft worn edges.
+Build spaces: Nine subtle circular moss/rune clearings near the path but not on top of it. These should look like natural tower pads, not UI markers.
+Style: high-quality hand-painted game art, readable tower-defense battlefield, painterly but crisp, saturated forest greens balanced with tan path and teal magic, top-down orthographic, consistent scale.
+Avoid: text, logos, UI panels, characters, enemies, towers, isometric perspective, extreme blur, heavy fog, dark unreadable corners, huge foreground objects crossing the path.
+Top-down painterly fantasy tower-defense arena, dark evergreen forest edge, winding dirt lane entering from the upper-right and curling toward a teal crystal base, mossy stone tower pads, copper/stone magic structures, small rocks, flowers, banners, and lanterns.
+Gameplay labels, HUD text, hit targets, enemy movement, tower range rings, and collision/path metadata are implemented in code.

@@ -60,6 +60,7 @@ coverage/
 test-results/
 
 # Temporary files
+tmp/
 .tmp/
 .tmp
 .tmp*

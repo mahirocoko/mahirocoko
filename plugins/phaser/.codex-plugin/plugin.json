@@ -1,0 +1,44 @@
+{
+  "name": "phaser",
+  "version": "0.1.0",
+  "description": "Phaser 4 skills for building browser games with Codex.",
+  "author": {
+    "name": "Phaser Studio",
+    "url": "https://github.com/phaserjs"
+  },
+  "homepage": "https://phaser.io/",
+  "repository": "https://github.com/phaserjs/phaser/tree/master/skills",
+  "license": "MIT",
+  "keywords": [
+    "phaser",
+    "phaser-4",
+    "browser-games",
+    "game-development",
+    "javascript"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Phaser",
+    "shortDescription": "Phaser 4 game-development skills",
+    "longDescription": "Use Phaser skills for game setup, scenes, sprites, animation, input, loading, cameras, tilemaps, physics, audio, particles, filters, responsive scaling, Phaser 3 to 4 migration, and Phaser 4 features.",
+    "developerName": "Phaser Studio",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://phaser.io/",
+    "privacyPolicyURL": "https://phaser.io/community/privacy-policy",
+    "termsOfServiceURL": "https://phaser.io/community/terms-of-use",
+    "defaultPrompt": [
+      "Build a Phaser 4 scene with sprites and input",
+      "Add Arcade Physics collisions to my Phaser game",
+      "Migrate this Phaser 3 code to Phaser 4"
+    ],
+    "brandColor": "#7B42F6",
+    "composerIcon": "./assets/phaser.svg",
+    "logo": "./assets/phaser.svg",
+    "screenshots": []
+  }
+}
