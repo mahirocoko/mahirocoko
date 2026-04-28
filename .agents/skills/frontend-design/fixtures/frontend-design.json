@@ -94,10 +94,10 @@
       "--prompt",
       "css-border-gradient",
       "--handoff",
-      "apps/design-prompts/lab01/prompt.txt"
+      "resources/reference-excerpts/wellness-handoff-excerpt.md"
     ],
     "requiredFiles": [
-      "apps/design-prompts/lab01/prompt.txt"
+      "resources/reference-excerpts/wellness-handoff-excerpt.md"
     ],
     "expectExitCode": 0,
     "expectContains": [
@@ -105,15 +105,15 @@
       "## Composition order",
       "2. general: landing-page",
       "3. prompt: css-border-gradient",
-      "4. handoff: apps/design-prompts/lab01/prompt.txt",
-      "## handoff: apps/design-prompts/lab01/prompt.txt",
-      "Sandbox note: apps/design-prompts/lab01/prompt.txt is experimental input only and is not validated prompt canon."
+      "4. handoff: resources/reference-excerpts/wellness-handoff-excerpt.md",
+      "## handoff: resources/reference-excerpts/wellness-handoff-excerpt.md",
+      "Sandbox note: resources/reference-excerpts/wellness-handoff-excerpt.md is skill-local sample input only and is not validated prompt canon."
     ],
     "expectInOrder": [
       "1. shared baseline: generalSystemPrompt",
       "2. general: landing-page",
       "3. prompt: css-border-gradient",
-      "4. handoff: apps/design-prompts/lab01/prompt.txt"
+      "4. handoff: resources/reference-excerpts/wellness-handoff-excerpt.md"
     ],
     "rejectContains": []
   },
@@ -206,10 +206,10 @@
       "--prompt",
       "image-first-grid-layout",
       "--handoff",
-      "apps/design-prompts/lab01/full-page-handoff.md"
+      "resources/reference-excerpts/wellness-handoff-excerpt.md"
     ],
     "requiredFiles": [
-      "apps/design-prompts/lab01/full-page-handoff.md"
+      "resources/reference-excerpts/wellness-handoff-excerpt.md"
     ],
     "expectExitCode": 0,
     "expectContains": [
@@ -217,18 +217,70 @@
       "## Composition order",
       "2. general: landing-page",
       "3. prompt: image-first-grid-layout",
-      "4. handoff: apps/design-prompts/lab01/full-page-handoff.md",
+      "4. handoff: resources/reference-excerpts/wellness-handoff-excerpt.md",
       "## prompt: image-first-grid-layout (Image First Grid Layout)",
-      "## handoff: apps/design-prompts/lab01/full-page-handoff.md",
-      "Sandbox note: apps/design-prompts/lab01/full-page-handoff.md is experimental input only and is not validated prompt canon.",
-      "# Full Page Design Handoff"
+      "## handoff: resources/reference-excerpts/wellness-handoff-excerpt.md",
+      "Sandbox note: resources/reference-excerpts/wellness-handoff-excerpt.md is skill-local sample input only and is not validated prompt canon.",
+      "# Portable Handoff Excerpt"
     ],
     "expectInOrder": [
       "1. shared baseline: generalSystemPrompt",
       "2. general: landing-page",
       "3. prompt: image-first-grid-layout",
-      "4. handoff: apps/design-prompts/lab01/full-page-handoff.md"
+      "4. handoff: resources/reference-excerpts/wellness-handoff-excerpt.md"
     ],
     "rejectContains": []
+  },
+  {
+    "id": "brief-reference-anatomy",
+    "args": [
+      "brief",
+      "--general",
+      "hero",
+      "--direction",
+      "animate",
+      "--prompt",
+      "image-first-grid-layout",
+      "--reference",
+      "resources/reference-excerpts/velorah-anatomy.md"
+    ],
+    "requiredFiles": [
+      "resources/reference-excerpts/velorah-anatomy.md"
+    ],
+    "expectExitCode": 0,
+    "expectContains": [
+      "# frontend-design brief",
+      "## intent / page job",
+      "General prompt key: hero",
+      "## selected direction modifiers",
+      "- animate: Animate intro with interactions and scroll events.",
+      "## selected reusable prompt fragments",
+      "- image-first-grid-layout (Image First Grid Layout):",
+      "## visual reference anatomy",
+      "## asset needs",
+      "Route asset planning to asset-designer",
+      "Route single image-generation prompt rewrites to web-asset-prompts",
+      "## uncodixify guardrails",
+      "liquid glass, pill nav, cinematic dark SaaS",
+      "## reference: resources/reference-excerpts/velorah-anatomy.md",
+      "Reference posture: use this for anatomy and constraints only; do not treat its aesthetic as canonical."
+    ],
+    "expectInOrder": [
+      "# frontend-design brief",
+      "## intent / page job",
+      "## selected direction modifiers",
+      "## selected reusable prompt fragments",
+      "## visual reference anatomy",
+      "## information architecture",
+      "## design system cues",
+      "## motion / media guidance",
+      "## asset needs",
+      "## uncodixify guardrails",
+      "## implementation constraints",
+      "## reference: resources/reference-excerpts/velorah-anatomy.md"
+    ],
+    "rejectContains": [
+      "Sandbox note: resources/reference-excerpts/velorah-anatomy.md is skill-local sample input only and is not validated prompt canon."
+    ]
   }
 ]

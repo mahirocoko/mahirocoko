@@ -20,6 +20,29 @@ Use it when UI output is drifting toward generic GPT/Codex taste and needs to be
 
 The goal is not to erase product direction. The goal is to prevent the easy AI move: decorative, median, fake-premium UI that looks generated instead of designed.
 
+## Pairing with `frontend-design brief`
+
+When `frontend-design brief` is used, apply `uncodixify` **after** the brief has named the page job, structure, reference anatomy, and asset needs.
+
+Do not use `uncodixify` to erase the brief. Use it to filter reference leakage:
+
+1. Keep the explicit page job and section structure from the brief.
+2. Keep explicit brand/product constraints and required assets.
+3. Review every inherited visual move from references.
+4. Remove or normalize anything that looks like an AI-default shortcut rather than a product decision.
+
+Common reference-leakage risks from bundled non-canonical excerpts or external prompt corpora:
+
+- liquid glass as default material
+- pill navigation and rounded-full CTA systems
+- cinematic dark SaaS as a generic mood
+- giant video heroes that replace content clarity
+- hover scale as routine interaction
+- glow/gradient systems used to fake premium feel
+- implementation specificity copied without product reason
+
+If one of those moves remains, it must be justified by hierarchy, grouping, affordance, accessibility, or brand clarity.
+
 ## Precedence and flexibility
 
 Use this order:
