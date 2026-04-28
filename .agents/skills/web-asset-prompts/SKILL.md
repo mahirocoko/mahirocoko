@@ -13,6 +13,18 @@ This is a guidance-only skill. It does not run a local script. Apply the rules d
 
 Boundary: use this skill for prompt specs and prompt rewrites only. Use `asset-designer` when the task involves asset planning, cutout cleanup, layer separation, delivery manifests, or deciding what assets a page needs.
 
+Phase role: `web-asset-prompts` is the per-asset prompt writer. It answers **how to ask an image model for one web-usable asset**. It should not become the asset-pack planner; use `asset-designer` for deciding the asset set, filenames, layer split, QA composites, or delivery manifest.
+
+Recommended chain:
+
+```txt
+frontend-design brief
+  -> asset-designer asset plan / manifest
+  -> web-asset-prompts per-asset generation prompts
+  -> image generation or cleanup
+  -> asset-designer QA / delivery notes
+```
+
 ## Supported asset modes
 
 - `photo-card` — full-bleed editorial/card image
@@ -207,3 +219,13 @@ Create a large responsive website hero image for a premium botanical nutrition l
 - Pair with `imagegen` when actually generating raster assets.
 - Pair with `frontend-design` when asset prompts come from a landing-page handoff.
 - Pair with `uncodixify` when generated assets are part of a frontend revamp and the visual system needs restraint.
+- Pair with `asset-designer` when more than one asset, layer, crop variant, or delivery format must be planned.
+
+## Boundary with `asset-designer`
+
+Keep the two skills separate:
+
+- `web-asset-prompts`: one asset mode, one generation prompt/spec, ratio/output format, crop safety, no-text/no-logo/no-watermark constraints.
+- `asset-designer`: multi-asset planning, filenames, layer strategy, transparent cutout cleanup, shadow/background separation, previews, and delivery manifest.
+
+If the prompt depends on page/component context, take that context from `frontend-design` or `asset-designer`, then return the final image-generation prompt without expanding into a full asset plan.

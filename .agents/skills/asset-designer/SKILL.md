@@ -13,6 +13,18 @@ Pair with `web-asset-prompts` whenever new image-generation prompts are needed.
 
 Boundary: use this skill for asset planning, cutout cleanup strategy, layer separation, delivery manifests, and deciding what assets a page needs. Use `web-asset-prompts` for the actual prompt specs and prompt rewrites.
 
+Phase role: `asset-designer` is the asset director. It answers **what assets should exist, how they should be produced, how they should be packaged, and how they should be QA'd**. It should not become the primary prompt writer for a single image; delegate that step to `web-asset-prompts`.
+
+Recommended chain:
+
+```txt
+frontend-design brief
+  -> asset-designer asset plan / manifest
+  -> web-asset-prompts per-asset generation prompts
+  -> image generation or cleanup
+  -> asset-designer QA / delivery notes
+```
+
 ## Core principle
 
 Start from the website job, not the picture.
@@ -243,3 +255,12 @@ Otherwise choose the safest production default and proceed.
 - Use `imagegen` when actual raster generation or editing is required.
 - Use `frontend-design` when the asset plan is derived from a landing-page or UI handoff.
 - Use `uncodixify` when assets must support restrained, non-generic frontend visual output.
+
+## Boundary with `web-asset-prompts`
+
+Keep the two skills separate:
+
+- `asset-designer`: multi-asset planning, filenames, roles, layer strategy, crop variants, QA backgrounds, and delivery manifest.
+- `web-asset-prompts`: one asset request at a time, final prompt wording, ratio/output format, crop safety, and image-generation constraints.
+
+If a user asks “what images does this page need?”, start here. If a user asks “write the prompt for this one image/cutout/background”, use `web-asset-prompts`.

@@ -13,9 +13,10 @@ type ValidationCase = {
   rejectContains: string[]
 }
 
-const REPO_ROOT = resolve(import.meta.dir, "..", "..", "..", "..")
-const FIXTURE_PATH = join(REPO_ROOT, ".agents", "skills", "frontend-design", "fixtures", "frontend-design.json")
-const FRONTEND_DESIGN_SCRIPT = join(REPO_ROOT, ".agents", "skills", "frontend-design", "scripts", "main.ts")
+const SKILL_ROOT = resolve(import.meta.dir, "..")
+const WORKSPACE_ROOT = resolve(SKILL_ROOT, "..", "..", "..")
+const FIXTURE_PATH = join(SKILL_ROOT, "fixtures", "frontend-design.json")
+const FRONTEND_DESIGN_SCRIPT = join(SKILL_ROOT, "scripts", "main.ts")
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value)
@@ -25,12 +26,12 @@ function isStringArray(value: unknown): value is string[] {
   return Array.isArray(value) && value.every((entry) => typeof entry === "string")
 }
 
-function ensureRepoLocalPath(pathValue: string, label: string): string {
-  const resolvedPath = isAbsolute(pathValue) ? pathValue : resolve(REPO_ROOT, pathValue)
-  const relativePath = relative(REPO_ROOT, resolvedPath)
+function ensureSkillLocalPath(pathValue: string, label: string): string {
+  const resolvedPath = isAbsolute(pathValue) ? pathValue : resolve(SKILL_ROOT, pathValue)
+  const relativePath = relative(SKILL_ROOT, resolvedPath)
 
   if (relativePath.startsWith("..") || isAbsolute(relativePath)) {
-    throw new Error(`${label} must stay inside the repo: ${pathValue}`)
+    throw new Error(`${label} must stay inside the skill: ${pathValue}`)
   }
 
   return resolvedPath
@@ -105,7 +106,7 @@ function validateCases(value: unknown): ValidationCase[] {
 }
 
 function assertFileExists(pathValue: string, label: string): void {
-  const resolvedPath = ensureRepoLocalPath(pathValue, label)
+  const resolvedPath = ensureSkillLocalPath(pathValue, label)
 
   if (!existsSync(resolvedPath)) {
     throw new Error(`${label} not found: ${pathValue}`)
@@ -156,7 +157,7 @@ function runCase(validationCase: ValidationCase): void {
 
   const command = ["bun", FRONTEND_DESIGN_SCRIPT, ...validationCase.args]
   const result = Bun.spawnSync(command, {
-    cwd: REPO_ROOT,
+    cwd: WORKSPACE_ROOT,
     stdout: "pipe",
     stderr: "pipe",
     env: process.env,
@@ -187,7 +188,8 @@ function main(): void {
 
   console.log("# validate-frontend-design")
   console.log("")
-  console.log(`Repo root: ${REPO_ROOT}`)
+  console.log(`Skill root: ${SKILL_ROOT}`)
+  console.log(`Workspace root: ${WORKSPACE_ROOT}`)
   console.log(`Cases: ${validationCases.length}`)
   console.log("")
 

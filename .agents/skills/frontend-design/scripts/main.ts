@@ -18,7 +18,8 @@ type SkillPromptEntry = {
 }
 
 type AssetPaths = {
-  repoRoot: string
+  skillRoot: string
+  workspaceRoot: string
   designPromptsPath: string
   designSkillPromptsPath: string
 }
@@ -35,6 +36,10 @@ type ComposeOptions = {
   handoffPath: string | null
 }
 
+type BriefOptions = ComposeOptions & {
+  referencePaths: string[]
+}
+
 type SearchMatch = {
   kind: "general" | "direction" | "prompt"
   key: string
@@ -43,20 +48,29 @@ type SearchMatch = {
   score: number
 }
 
-const DESIGN_PROMPTS_RELATIVE_PATH = join("docs", "design-prompts", "design-prompts.json")
-const DESIGN_SKILL_PROMPTS_RELATIVE_PATH = join("docs", "design-prompts", "design-skill-prompts.json")
-const DESIGN_PROMPTS_SANDBOX_RELATIVE_PATH = join("apps", "design-prompts")
-const SKILL_REPO_ROOT = resolve(import.meta.dir, "..", "..", "..", "..")
-
-function resolveRepoRoot(): string {
-  return SKILL_REPO_ROOT
+type RepoLocalFile = {
+  absolutePath: string
+  displayPath: string
+  sandboxOnly: boolean
+  referenceCorpus: boolean
 }
 
-function getAssetPaths(repoRoot: string): AssetPaths {
+const PROMPT_ASSETS_RELATIVE_PATH = join("resources", "prompt-assets")
+const DESIGN_PROMPTS_RELATIVE_PATH = join(PROMPT_ASSETS_RELATIVE_PATH, "design-prompts.json")
+const DESIGN_SKILL_PROMPTS_RELATIVE_PATH = join(PROMPT_ASSETS_RELATIVE_PATH, "design-skill-prompts.json")
+const REFERENCE_EXCERPTS_RELATIVE_PATH = join("resources", "reference-excerpts")
+const SKILL_ROOT = resolve(import.meta.dir, "..")
+
+function resolveWorkspaceRoot(): string {
+  return process.cwd()
+}
+
+function getAssetPaths(skillRoot: string, workspaceRoot: string): AssetPaths {
   return {
-    repoRoot,
-    designPromptsPath: join(repoRoot, DESIGN_PROMPTS_RELATIVE_PATH),
-    designSkillPromptsPath: join(repoRoot, DESIGN_SKILL_PROMPTS_RELATIVE_PATH),
+    skillRoot,
+    workspaceRoot,
+    designPromptsPath: join(skillRoot, DESIGN_PROMPTS_RELATIVE_PATH),
+    designSkillPromptsPath: join(skillRoot, DESIGN_SKILL_PROMPTS_RELATIVE_PATH),
   }
 }
 
@@ -184,9 +198,10 @@ function printHelp(): void {
   console.log(`frontend-design
 
 Usage:
-  bun .agents/skills/frontend-design/scripts/main.ts list
-  bun .agents/skills/frontend-design/scripts/main.ts search <query>
-  bun .agents/skills/frontend-design/scripts/main.ts compose --general <key> [--direction <key> ...] [--prompt <id> ...] [--handoff <path>]
+  bun scripts/main.ts list
+  bun scripts/main.ts search <query>
+  bun scripts/main.ts compose --general <key> [--direction <key> ...] [--prompt <id> ...] [--handoff <path>]
+  bun scripts/main.ts brief --general <key> [--direction <key> ...] [--prompt <id> ...] [--handoff <path>] [--reference <path> ...]
 
 Composition order:
   1. generalSystemPrompt
@@ -196,9 +211,10 @@ Composition order:
   5. optional --handoff file content
 
 Notes:
-  - Reads only local prompt assets from docs/design-prompts
-  - --handoff must resolve to a repo-local file (relative paths resolve from cwd or repo root)
-  - apps/design-prompts/* is sandbox input only`)
+  - Reads bundled prompt assets from resources/prompt-assets
+  - --handoff and --reference resolve from the current workspace or skill root
+  - --reference files are treated as evidence, not prompt canon
+  - resources/reference-excerpts/* is bundled non-canonical evidence`)
 }
 
 function formatPromptEntry(entry: SkillPromptEntry): string {
@@ -213,7 +229,8 @@ function runList(assetPaths: AssetPaths, assets: LoadedAssets): void {
 
   console.log("# frontend-design list")
   console.log("")
-  console.log(`Repo root: ${assetPaths.repoRoot}`)
+  console.log(`Skill root: ${assetPaths.skillRoot}`)
+  console.log(`Workspace root: ${assetPaths.workspaceRoot}`)
   console.log(`Assets: ${DESIGN_PROMPTS_RELATIVE_PATH}, ${DESIGN_SKILL_PROMPTS_RELATIVE_PATH}`)
   console.log("")
   console.log(`Shared baseline: generalSystemPrompt (${assets.promptLibrary.generalSystemPrompt.length} chars)`)
@@ -412,17 +429,60 @@ function parseComposeArgs(args: string[]): ComposeOptions {
   }
 }
 
-function isRepoLocalPath(repoRoot: string, candidatePath: string): boolean {
-  const relativePath = relative(repoRoot, candidatePath)
+function parseBriefArgs(args: string[]): BriefOptions {
+  const composeArgs: string[] = []
+  const referencePaths: string[] = []
+
+  for (let index = 0; index < args.length; index += 1) {
+    const argument = args[index]
+
+    if (argument === "--reference") {
+      referencePaths.push(readRequiredOptionValue(args, index, "--reference"))
+      index += 1
+      continue
+    }
+
+    composeArgs.push(argument)
+  }
+
+  assertNoDuplicates(referencePaths, "reference path")
+
+  return {
+    ...parseComposeArgs(composeArgs),
+    referencePaths,
+  }
+}
+
+function isInsidePath(parentPath: string, candidatePath: string): boolean {
+  const relativePath = relative(parentPath, candidatePath)
   return relativePath === "" || (!relativePath.startsWith("..") && !isAbsolute(relativePath))
 }
 
-function resolveRepoLocalFilePath(repoRoot: string, inputPath: string): { absolutePath: string; repoRelativePath: string; sandboxOnly: boolean } {
+function formatDisplayPath(assetPaths: AssetPaths, absolutePath: string): string {
+  const skillRelativePath = relative(assetPaths.skillRoot, absolutePath)
+  if (skillRelativePath === "" || (!skillRelativePath.startsWith("..") && !isAbsolute(skillRelativePath))) {
+    return skillRelativePath
+  }
+
+  const workspaceRelativePath = relative(assetPaths.workspaceRoot, absolutePath)
+  if (workspaceRelativePath === "" || (!workspaceRelativePath.startsWith("..") && !isAbsolute(workspaceRelativePath))) {
+    return workspaceRelativePath
+  }
+
+  return absolutePath
+}
+
+function isSkillReferenceExcerptPath(skillRoot: string, candidatePath: string): boolean {
+  const referenceExcerptPath = join(skillRoot, REFERENCE_EXCERPTS_RELATIVE_PATH)
+  return isInsidePath(referenceExcerptPath, candidatePath)
+}
+
+function resolveInputFilePath(assetPaths: AssetPaths, inputPath: string): RepoLocalFile {
   const candidatePaths = isAbsolute(inputPath)
     ? [inputPath]
-    : Array.from(new Set([resolve(process.cwd(), inputPath), resolve(repoRoot, inputPath)]))
+    : Array.from(new Set([resolve(assetPaths.workspaceRoot, inputPath), resolve(assetPaths.skillRoot, inputPath)]))
 
-  let foundOutsideRepo = false
+  let foundOutsideAllowedRoots = false
   let foundNonFilePath = false
 
   const matchedPath = candidatePaths.find((candidatePath) => {
@@ -431,8 +491,10 @@ function resolveRepoLocalFilePath(repoRoot: string, inputPath: string): { absolu
     }
 
     const realPath = realpathSync(candidatePath)
-    if (!isRepoLocalPath(repoRoot, realPath)) {
-      foundOutsideRepo = true
+    const insideWorkspace = isInsidePath(assetPaths.workspaceRoot, realPath)
+    const insideSkill = isInsidePath(assetPaths.skillRoot, realPath)
+    if (!insideWorkspace && !insideSkill) {
+      foundOutsideAllowedRoots = true
       return false
     }
 
@@ -446,28 +508,26 @@ function resolveRepoLocalFilePath(repoRoot: string, inputPath: string): { absolu
   })
 
   if (!matchedPath) {
-    if (foundOutsideRepo) {
-      throw new Error(`Handoff path must stay inside the repo: ${inputPath}`)
+    if (foundOutsideAllowedRoots) {
+      throw new Error(`Input path must stay inside the current workspace or skill bundle: ${inputPath}`)
     }
 
     if (foundNonFilePath) {
-      throw new Error(`Handoff path must be a file: ${inputPath}`)
+      throw new Error(`Input path must be a file: ${inputPath}`)
     }
 
-    throw new Error(`Handoff file not found: ${inputPath}`)
+    throw new Error(`Input file not found: ${inputPath}`)
   }
 
   const realPath = realpathSync(matchedPath)
-
-  const repoRelativePath = relative(repoRoot, realPath)
-  const sandboxOnly =
-    repoRelativePath === DESIGN_PROMPTS_SANDBOX_RELATIVE_PATH ||
-    repoRelativePath.startsWith(`${DESIGN_PROMPTS_SANDBOX_RELATIVE_PATH}/`)
+  const displayPath = formatDisplayPath(assetPaths, realPath)
+  const referenceCorpus = isSkillReferenceExcerptPath(assetPaths.skillRoot, realPath)
 
   return {
     absolutePath: realPath,
-    repoRelativePath,
-    sandboxOnly,
+    displayPath,
+    sandboxOnly: referenceCorpus,
+    referenceCorpus,
   }
 }
 
@@ -505,7 +565,7 @@ function runCompose(assetPaths: AssetPaths, assets: LoadedAssets, options: Compo
   })
 
   const handoff = options.handoffPath
-    ? resolveRepoLocalFilePath(assetPaths.repoRoot, options.handoffPath)
+    ? resolveInputFilePath(assetPaths, options.handoffPath)
     : null
 
   const handoffSection = handoff
@@ -513,13 +573,13 @@ function runCompose(assetPaths: AssetPaths, assets: LoadedAssets, options: Compo
         const fileContent = readFileSync(handoff.absolutePath, "utf8").trim()
         const lines = handoff.sandboxOnly
           ? [
-              `Sandbox note: ${handoff.repoRelativePath} is experimental input only and is not validated prompt canon.`,
+              `Sandbox note: ${handoff.displayPath} is skill-local sample input only and is not validated prompt canon.`,
               "",
               fileContent,
             ]
           : [fileContent]
 
-        return formatSection(`handoff: ${handoff.repoRelativePath}`, lines.join("\n"))
+        return formatSection(`handoff: ${handoff.displayPath}`, lines.join("\n"))
       })()
     : null
 
@@ -531,7 +591,7 @@ function runCompose(assetPaths: AssetPaths, assets: LoadedAssets, options: Compo
   ]
 
   if (handoffSection) {
-    orderLines.push(`${orderLines.length + 1}. handoff: ${handoff?.repoRelativePath}`)
+    orderLines.push(`${orderLines.length + 1}. handoff: ${handoff?.displayPath}`)
   }
 
   const sections = [
@@ -547,7 +607,8 @@ function runCompose(assetPaths: AssetPaths, assets: LoadedAssets, options: Compo
 
   console.log("# frontend-design compose")
   console.log("")
-  console.log(`Repo root: ${assetPaths.repoRoot}`)
+  console.log(`Skill root: ${assetPaths.skillRoot}`)
+  console.log(`Workspace root: ${assetPaths.workspaceRoot}`)
   console.log(`Assets: ${DESIGN_PROMPTS_RELATIVE_PATH}, ${DESIGN_SKILL_PROMPTS_RELATIVE_PATH}`)
   console.log("")
   console.log("## Composition order")
@@ -558,10 +619,167 @@ function runCompose(assetPaths: AssetPaths, assets: LoadedAssets, options: Compo
   console.log(sections.join("\n\n"))
 }
 
+function truncateContent(content: string, maxLength: number): string {
+  const normalized = content.trim()
+
+  if (normalized.length <= maxLength) {
+    return normalized
+  }
+
+  return `${normalized.slice(0, maxLength).trimEnd()}\n\n[truncated: ${normalized.length - maxLength} chars omitted]`
+}
+
+function formatSourceList(title: string, entries: string[]): string {
+  const body = entries.length > 0 ? entries.map((entry) => `- ${entry}`).join("\n") : "- none"
+  return formatSection(title, body)
+}
+
+function runBrief(assetPaths: AssetPaths, assets: LoadedAssets, options: BriefOptions): void {
+  const generalPrompt = assets.promptLibrary.generalSystemPrompts[options.generalKey]
+  if (!generalPrompt) {
+    throw new Error(`Unknown general key '${options.generalKey}'. Run 'list' to inspect available keys.`)
+  }
+
+  const directionSummaries = options.directionKeys.map((key) => {
+    const prompt = assets.promptLibrary.directionSystemPrompts[key]
+    if (!prompt) {
+      throw new Error(`Unknown direction key '${key}'. Run 'list' to inspect available keys.`)
+    }
+
+    return `${key}: ${prompt}`
+  })
+
+  const promptEntryMap = resolvePromptEntryMap(assets.skillPromptEntries)
+  const promptSummaries = options.promptIds.map((id) => {
+    const entry = promptEntryMap.get(id)
+    if (!entry) {
+      throw new Error(`Unknown prompt id '${id}'. Run 'list' to inspect available ids.`)
+    }
+
+    return `${id} (${entry.label}): ${entry.description}`
+  })
+
+  const handoff = options.handoffPath
+    ? resolveInputFilePath(assetPaths, options.handoffPath)
+    : null
+
+  const references = options.referencePaths.map((referencePath) =>
+    resolveInputFilePath(assetPaths, referencePath),
+  )
+
+  const sections = [
+    formatSection(
+      "intent / page job",
+      [
+        `General prompt key: ${options.generalKey}`,
+        `Canonical general prompt length: ${generalPrompt.length} chars`,
+        "Use selected canonical prompt assets to define the page job, not to blindly concatenate a final implementation prompt.",
+        "Preserve product intent, information architecture, and explicit user constraints before applying visual style.",
+      ].join("\n"),
+    ),
+    formatSourceList("selected direction modifiers", directionSummaries),
+    formatSourceList("selected reusable prompt fragments", promptSummaries),
+    formatSection(
+      "visual reference anatomy",
+      [
+        "Extract only reusable anatomy from references:",
+        "- page type and section sequence",
+        "- typography roles and hierarchy",
+        "- color/material system cues",
+        "- media/background role and crop behavior",
+        "- motion timing and interaction purpose",
+        "- component responsibilities and responsive constraints",
+        "Do not copy reference aesthetics unless they are explicitly required by product or brand.",
+      ].join("\n"),
+    ),
+    formatSection(
+      "information architecture",
+      [
+        "Define content hierarchy before styling:",
+        "- primary message and audience",
+        "- navigation and action hierarchy",
+        "- section jobs and proof/supporting content",
+        "- above-the-fold requirements versus later-page content",
+      ].join("\n"),
+    ),
+    formatSection(
+      "design system cues",
+      [
+        "Turn the prompt stack into explicit design-system decisions:",
+        "- font roles, weights, and hierarchy constraints",
+        "- color tokens or palette source",
+        "- radius, border, shadow, and surface rules",
+        "- spacing scale and container behavior",
+        "- component states that are functional rather than decorative",
+      ].join("\n"),
+    ),
+    formatSection(
+      "motion / media guidance",
+      [
+        "Use motion and media only when they serve comprehension, sequencing, or brand atmosphere.",
+        "For video/background references, specify role, overlay/readability needs, crop focal point, fallback, and reduced-motion behavior.",
+        "Avoid importing motion-heavy recreation specs as default product UI behavior.",
+      ].join("\n"),
+    ),
+    formatSection(
+      "asset needs",
+      [
+        "Route asset planning to asset-designer when the page needs images, videos, cutouts, crops, shadows, or delivery variants.",
+        "Route single image-generation prompt rewrites to web-asset-prompts.",
+        "Every asset should have a role: hero media, overlay-safe background, card image, transparent cutout, foreground layer, shadow layer, or responsive variant.",
+      ].join("\n"),
+    ),
+    formatSection(
+      "uncodixify guardrails",
+      [
+        "Apply uncodixify after extracting design intent:",
+        "- keep explicit brand/product constraints",
+        "- remove generic AI defaults that do not improve hierarchy, grouping, affordance, accessibility, or brand clarity",
+        "- treat liquid glass, pill nav, cinematic dark SaaS, giant video hero, hover scale, glows, and decorative gradients as risks, not defaults",
+        "- reduce over-large typography before using scale as hierarchy",
+      ].join("\n"),
+    ),
+    formatSection(
+      "implementation constraints",
+      [
+        "Write implementation instructions only after the brief is coherent.",
+        "Keep repo/framework constraints explicit. Do not invent asset URLs, libraries, fonts, or routes.",
+        "Prefer existing project tokens/components when implementing in a real codebase.",
+        "The brief is not complete until reference-derived ideas are separated from canonical prompt assets.",
+      ].join("\n"),
+    ),
+  ]
+
+  if (handoff) {
+    const content = truncateContent(readFileSync(handoff.absolutePath, "utf8"), 3600)
+    const posture = handoff.sandboxOnly
+      ? `Sandbox note: ${handoff.displayPath} is skill-local sample input only and is not validated prompt canon.`
+      : `Handoff source: ${handoff.displayPath}`
+
+    sections.push(formatSection("handoff context", [posture, "", content].join("\n")))
+  }
+
+  for (const reference of references) {
+    const content = truncateContent(readFileSync(reference.absolutePath, "utf8"), 2400)
+    const posture = reference.referenceCorpus
+      ? "Reference posture: use this for anatomy and constraints only; do not treat its aesthetic as canonical."
+      : "Reference posture: workspace-local reference evidence. Extract intent before copying style."
+
+    sections.push(formatSection(`reference: ${reference.displayPath}`, [posture, "", content].join("\n")))
+  }
+
+  console.log("# frontend-design brief")
+  console.log("")
+  console.log(`Skill root: ${assetPaths.skillRoot}`)
+  console.log(`Workspace root: ${assetPaths.workspaceRoot}`)
+  console.log(`Assets: ${DESIGN_PROMPTS_RELATIVE_PATH}, ${DESIGN_SKILL_PROMPTS_RELATIVE_PATH}`)
+  console.log("")
+  console.log(sections.join("\n\n"))
+}
+
 function main(): void {
   const [command, ...rest] = process.argv.slice(2)
-  const repoRoot = resolveRepoRoot()
-  const assetPaths = getAssetPaths(repoRoot)
+  const assetPaths = getAssetPaths(SKILL_ROOT, resolveWorkspaceRoot())
 
   switch (command) {
     case undefined:
@@ -589,6 +807,13 @@ function main(): void {
       const assets = loadAssets(assetPaths)
       const options = parseComposeArgs(rest)
       runCompose(assetPaths, assets, options)
+      return
+    }
+
+    case "brief": {
+      const assets = loadAssets(assetPaths)
+      const options = parseBriefArgs(rest)
+      runBrief(assetPaths, assets, options)
       return
     }
 
