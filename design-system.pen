@@ -11851,648 +11851,9 @@
     },
     {
       "type": "frame",
-      "id": "N8RKJ",
-      "x": 14240,
-      "y": 0,
-      "name": "Study / Pricing Card / Business Plan",
-      "width": 1600,
-      "height": 1600,
-      "fill": "#ECE9E6"
-    },
-    {
-      "type": "frame",
-      "id": "XAcW8",
-      "x": 14640,
-      "y": 350,
-      "name": "businessPlanCard",
-      "width": 820,
-      "height": 930,
-      "fill": "#FFFFFF",
-      "cornerRadius": 58,
-      "stroke": {
-        "align": "inside",
-        "thickness": 8,
-        "fill": "#F8F8F7"
-      },
-      "effect": {
-        "type": "shadow",
-        "shadowType": "outer",
-        "color": "#00000014",
-        "offset": {
-          "x": 0,
-          "y": 18
-        },
-        "blur": 54
-      }
-    },
-    {
-      "type": "frame",
-      "id": "GYZON",
-      "x": 14690,
-      "y": 430,
-      "name": "pricingContent",
-      "width": 720,
-      "layout": "vertical",
-      "gap": 36,
-      "alignItems": "center",
-      "children": [
-        {
-          "type": "frame",
-          "id": "bhfhR",
-          "name": "intro",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 22,
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "frame",
-              "id": "F5G5y",
-              "name": "iconBox",
-              "width": 84,
-              "height": 84,
-              "fill": "#F4FAFDCC",
-              "cornerRadius": 22,
-              "stroke": {
-                "align": "inside",
-                "thickness": 2,
-                "fill": "#F7FBFD"
-              },
-              "layout": "vertical",
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "eW3u7",
-                  "name": "iconMark",
-                  "fill": "#111111",
-                  "content": "◆",
-                  "textAlign": "center",
-                  "fontFamily": "Noto Sans Thai",
-                  "fontSize": 26,
-                  "fontWeight": "700"
-                }
-              ]
-            },
-            {
-              "type": "text",
-              "id": "vrxKx",
-              "name": "planTitle",
-              "fill": "#1A1A1A",
-              "content": "Business plan",
-              "textAlign": "center",
-              "fontFamily": "Noto Sans Thai",
-              "fontSize": 32,
-              "fontWeight": "600"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "QIqrB",
-          "name": "priceWrap",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 6,
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "jD5S5",
-              "name": "priceText",
-              "fill": "#0A0A0A",
-              "content": "$20/mth",
-              "textAlign": "center",
-              "fontFamily": "Noto Sans Thai",
-              "fontSize": 78,
-              "fontWeight": "800"
-            },
-            {
-              "type": "text",
-              "id": "5rSpu",
-              "name": "billedText",
-              "fill": "#2E2E2E",
-              "content": "Billed annually",
-              "textAlign": "center",
-              "fontFamily": "Noto Sans Thai",
-              "fontSize": 26,
-              "fontWeight": "500"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "LQonC",
-          "name": "ctaButton",
-          "width": 716,
-          "height": 92,
-          "fill": "#111111",
-          "cornerRadius": 30,
-          "effect": {
-            "type": "shadow",
-            "shadowType": "outer",
-            "color": "#00000040",
-            "offset": {
-              "x": 0,
-              "y": 14
-            },
-            "blur": 28
-          },
-          "justifyContent": "center",
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "text",
-              "id": "fc3Yo",
-              "name": "ctaLabel",
-              "fill": "#FFFFFF",
-              "content": "Choose Plan →",
-              "textAlign": "center",
-              "fontFamily": "Noto Sans Thai",
-              "fontSize": 24,
-              "fontWeight": "700"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "y6bie",
-          "name": "features",
-          "width": "fill_container",
-          "layout": "vertical",
-          "gap": 24,
-          "children": [
-            {
-              "type": "text",
-              "id": "KnC6i",
-              "name": "featureList",
-              "fill": "#6F6F6F",
-              "content": "✓  Unlimited emails\n\n✓  10 phone numbers per month\n\n✓  12K /mth export limit\n\n✓  CRM integration",
-              "fontFamily": "Noto Sans Thai",
-              "fontSize": 24,
-              "fontWeight": "500"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "rectangle",
-      "id": "P0BUV",
-      "x": 15872,
-      "y": -324,
-      "fill": {
-        "type": "image",
-        "enabled": true,
-        "url": "image 49.jpg",
-        "mode": "fill"
-      },
-      "width": 2048,
-      "height": 2048
-    },
-    {
-      "type": "frame",
-      "id": "TXUjr",
-      "x": 18040,
-      "y": -324,
-      "name": "Card Build - Agent Slot",
-      "width": 760,
-      "height": 980,
-      "fill": "#F5F5F5",
-      "layout": "vertical",
-      "gap": 16,
-      "padding": 24,
-      "children": [
-        {
-          "type": "frame",
-          "id": "WmxIk",
-          "layoutPosition": "absolute",
-          "x": 560,
-          "y": 24,
-          "name": "Feature Row/Compact",
-          "reusable": true,
-          "width": 176,
-          "gap": 10,
-          "alignItems": "center",
-          "children": [
-            {
-              "type": "icon_font",
-              "id": "fYZpT",
-              "name": "featureIcon",
-              "width": 14,
-              "height": 14,
-              "iconFontName": "check",
-              "iconFontFamily": "lucide",
-              "fill": "$color.accent"
-            },
-            {
-              "type": "text",
-              "id": "jdzBw",
-              "name": "featureLabel",
-              "fill": "$color.accent",
-              "content": "Feature item",
-              "fontFamily": "Inter",
-              "fontSize": 14,
-              "fontWeight": "500"
-            }
-          ]
-        },
-        {
-          "type": "frame",
-          "id": "8z3SQ",
-          "name": "Feature List / Pricing",
-          "width": "fill_container",
-          "height": "fit_content(106)",
-          "layout": "vertical",
-          "gap": 10,
-          "padding": [
-            8,
-            0,
-            0,
-            0
-          ],
-          "children": [
-            {
-              "id": "Fq6Jd",
-              "type": "ref",
-              "ref": "WmxIk",
-              "width": "fill_container(712)",
-              "name": "row1",
-              "x": 0,
-              "y": 8,
-              "descendants": {
-                "jdzBw": {
-                  "content": "Unlimited projects"
-                }
-              }
-            },
-            {
-              "id": "kAQdo",
-              "type": "ref",
-              "ref": "WmxIk",
-              "width": "fill_container(712)",
-              "name": "row2",
-              "x": 0,
-              "y": 35,
-              "descendants": {
-                "jdzBw": {
-                  "content": "Advanced analytics"
-                }
-              }
-            },
-            {
-              "id": "T4wmu",
-              "type": "ref",
-              "ref": "WmxIk",
-              "width": "fill_container(712)",
-              "name": "row3",
-              "x": 0,
-              "y": 62,
-              "descendants": {
-                "jdzBw": {
-                  "content": "Priority email support"
-                }
-              }
-            },
-            {
-              "id": "s7bKq",
-              "type": "ref",
-              "ref": "WmxIk",
-              "width": "fill_container(712)",
-              "name": "row4",
-              "x": 0,
-              "y": 89,
-              "descendants": {
-                "jdzBw": {
-                  "content": "Custom domain"
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
-      "id": "gT6sv",
-      "x": 18860,
-      "y": -324,
-      "name": "Pricing Card Component - Done",
-      "width": 760,
-      "height": 980,
-      "fill": "#E9E9EA",
-      "layout": "vertical",
-      "gap": 24,
-      "padding": 48,
-      "justifyContent": "center",
-      "alignItems": "center",
-      "children": [
-        {
-          "type": "frame",
-          "id": "RH2u4",
-          "name": "Component/Pricing Card",
-          "reusable": true,
-          "width": 380,
-          "fill": [
-            {
-              "type": "gradient",
-              "gradientType": "linear",
-              "enabled": true,
-              "rotation": 180,
-              "size": {
-                "height": 1
-              },
-              "colors": [
-                {
-                  "color": "#F5FBFF",
-                  "position": 0
-                },
-                {
-                  "color": "#FFFFFF",
-                  "position": 1
-                }
-              ]
-            },
-            "#FFFFFFCC"
-          ],
-          "cornerRadius": 30,
-          "stroke": {
-            "thickness": 2,
-            "fill": "#FFFFFF"
-          },
-          "effect": {
-            "type": "shadow",
-            "shadowType": "outer",
-            "color": "#0000001A",
-            "offset": {
-              "x": 0,
-              "y": 10
-            },
-            "blur": 24
-          },
-          "layout": "vertical",
-          "gap": 14,
-          "padding": [
-            22,
-            24,
-            24,
-            24
-          ],
-          "children": [
-            {
-              "type": "frame",
-              "id": "jyBPK",
-              "name": "head",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 6,
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "IMS8V",
-                  "name": "iconBox",
-                  "width": 34,
-                  "height": 34,
-                  "fill": "#E8EDF2",
-                  "cornerRadius": 10,
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "KXDVZ",
-                      "name": "iconTxt",
-                      "fill": "#111111",
-                      "content": "◈",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
-                      "fontWeight": "600"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "id": "curBu",
-                  "name": "planTxt",
-                  "fill": "#1E1E1E",
-                  "content": "Business plan",
-                  "fontFamily": "Inter",
-                  "fontSize": 29,
-                  "fontWeight": "500"
-                },
-                {
-                  "type": "text",
-                  "id": "ONLdI",
-                  "name": "priceTxt",
-                  "fill": "#101010",
-                  "content": "$20/mth",
-                  "fontFamily": "Inter",
-                  "fontSize": 52,
-                  "fontWeight": "700"
-                },
-                {
-                  "type": "text",
-                  "id": "9GKnj",
-                  "name": "billTxt",
-                  "fill": "#3D3D3D",
-                  "content": "Billed annually",
-                  "fontFamily": "Inter",
-                  "fontSize": 22,
-                  "fontWeight": "500"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "JHztV",
-              "name": "cta",
-              "width": "fill_container",
-              "fill": "#0A0A0A",
-              "cornerRadius": 16,
-              "effect": [
-                {
-                  "type": "shadow",
-                  "shadowType": "outer",
-                  "color": "#00000066",
-                  "offset": {
-                    "x": 0,
-                    "y": 6
-                  },
-                  "blur": 18
-                },
-                {
-                  "type": "shadow",
-                  "shadowType": "outer",
-                  "color": "#FFFFFF33",
-                  "blur": 3
-                }
-              ],
-              "padding": [
-                12,
-                18
-              ],
-              "justifyContent": "center",
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "5Jaox",
-                  "name": "ctaTxt",
-                  "fill": "#FFFFFF",
-                  "content": "Choose Plan →",
-                  "fontFamily": "Inter",
-                  "fontSize": 20,
-                  "fontWeight": "600"
-                }
-              ]
-            },
-            {
-              "type": "frame",
-              "id": "GsANN",
-              "name": "features",
-              "width": "fill_container",
-              "layout": "vertical",
-              "gap": 10,
-              "padding": [
-                4,
-                2,
-                0,
-                2
-              ],
-              "children": [
-                {
-                  "type": "frame",
-                  "id": "wWjm7",
-                  "name": "row1",
-                  "width": "fill_container",
-                  "gap": 10,
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "tcnvg",
-                      "name": "check1",
-                      "fill": "#4A4A4A",
-                      "content": "✓",
-                      "fontFamily": "Inter",
-                      "fontSize": 16,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "tBC7S",
-                      "name": "label1",
-                      "fill": "#4A4A4A",
-                      "content": "Unlimited emails",
-                      "fontFamily": "Inter",
-                      "fontSize": 18,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "Vpbtd",
-                  "name": "row2",
-                  "width": "fill_container",
-                  "gap": 10,
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "z1Pbx",
-                      "name": "check2",
-                      "fill": "#4A4A4A",
-                      "content": "✓",
-                      "fontFamily": "Inter",
-                      "fontSize": 16,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "uPU1w",
-                      "name": "label2",
-                      "fill": "#4A4A4A",
-                      "content": "10 phone numbers per month",
-                      "fontFamily": "Inter",
-                      "fontSize": 18,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "LFnMC",
-                  "name": "row3",
-                  "width": "fill_container",
-                  "gap": 10,
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "51otf",
-                      "name": "check3",
-                      "fill": "#4A4A4A",
-                      "content": "✓",
-                      "fontFamily": "Inter",
-                      "fontSize": 16,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "uPdHI",
-                      "name": "label3",
-                      "fill": "#4A4A4A",
-                      "content": "12K /mth export limit",
-                      "fontFamily": "Inter",
-                      "fontSize": 18,
-                      "fontWeight": "500"
-                    }
-                  ]
-                },
-                {
-                  "type": "frame",
-                  "id": "3zHQZ",
-                  "name": "row4",
-                  "width": "fill_container",
-                  "gap": 10,
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "X0gQO",
-                      "name": "check4",
-                      "fill": "#4A4A4A",
-                      "content": "✓",
-                      "fontFamily": "Inter",
-                      "fontSize": 16,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "V2fZL",
-                      "name": "label4",
-                      "fill": "#4A4A4A",
-                      "content": "CRM integration",
-                      "fontFamily": "Inter",
-                      "fontSize": 18,
-                      "fontWeight": "500"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "frame",
       "id": "oteBd",
-      "x": 19780,
-      "y": -324,
+      "x": 15098,
+      "y": 0,
       "name": "Lab01 / Vitalis Wellness Landing",
       "clip": true,
       "width": 1440,
@@ -12723,7 +12084,8 @@
               "lineHeight": 1.55,
               "textAlign": "center",
               "fontFamily": "Inter",
-              "fontSize": 18
+              "fontSize": 18,
+              "fontWeight": "normal"
             },
             {
               "type": "frame",
@@ -12880,7 +12242,8 @@
                   "content": "A clinically informed blend of protein, phytos, prebiotic fiber, and essential micronutrients.",
                   "lineHeight": 1.45,
                   "fontFamily": "Inter",
-                  "fontSize": 15
+                  "fontSize": 15,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "frame",
@@ -13154,7 +12517,8 @@
                       "fill": "#6B786B",
                       "content": "Sourced from regenerative soil and formulated for daily steadiness.",
                       "fontFamily": "Inter",
-                      "fontSize": 15
+                      "fontSize": 15,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -13275,7 +12639,8 @@
                       "content": "Polyphenol-rich antioxidant and cellular support.",
                       "lineHeight": 1.45,
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -13330,7 +12695,8 @@
                       "content": "Gut-supportive compounds for daily balance.",
                       "lineHeight": 1.45,
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -13385,7 +12751,8 @@
                       "content": "Trace minerals and fulvic acids for bioavailability.",
                       "lineHeight": 1.45,
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -13440,7 +12807,8 @@
                       "content": "Healthy fats and plant sterols for cellular health.",
                       "lineHeight": 1.45,
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -13469,7 +12837,7 @@
                       "fill": {
                         "type": "image",
                         "enabled": true,
-                        "url": "./images/generated-1777218979408.png",
+                        "url": "images/generated-1777218979408.png",
                         "mode": "fill"
                       },
                       "cornerRadius": 14
@@ -13495,7 +12863,8 @@
                       "content": "Prebiotic fibers to feed a thriving microbiome.",
                       "lineHeight": 1.45,
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -13570,7 +12939,8 @@
                       "content": "Source regenerative plants, minerals, and cultured botanicals with restrained processing.",
                       "lineHeight": 1.45,
                       "fontFamily": "Inter",
-                      "fontSize": 15
+                      "fontSize": 15,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -13611,7 +12981,8 @@
                       "content": "Formulate around steady energy, micronutrient density, and microbiome support.",
                       "lineHeight": 1.45,
                       "fontFamily": "Inter",
-                      "fontSize": 15
+                      "fontSize": 15,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -13653,7 +13024,8 @@
                       "content": "Restore the daily rhythm with a protocol simple enough to repeat without friction.",
                       "lineHeight": 1.45,
                       "fontFamily": "Inter",
-                      "fontSize": 15
+                      "fontSize": 15,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -13693,7 +13065,8 @@
                   "content": "The system emphasizes polyphenol diversity, micronutrient density, microbiome support, and metabolic steadiness without turning wellness into noise.",
                   "lineHeight": 1.55,
                   "fontFamily": "Inter",
-                  "fontSize": 15
+                  "fontSize": 15,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "frame",
@@ -13877,7 +13250,8 @@
                               "content": "Foundational whole food nutrition for everyday vitality.",
                               "lineHeight": 1.55,
                               "fontFamily": "Inter",
-                              "fontSize": 16
+                              "fontSize": 16,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "text",
@@ -13921,7 +13295,8 @@
                           "content": "Supports energy, immunity, and digestive balance.",
                           "lineHeight": 1.5,
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -14003,7 +13378,8 @@
                               "content": "Plant-based greens and superfood blend for daily resilience.",
                               "lineHeight": 1.55,
                               "fontFamily": "Inter",
-                              "fontSize": 16
+                              "fontSize": 16,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "text",
@@ -14047,7 +13423,8 @@
                           "content": "Supports detoxification, gut health, and natural energy.",
                           "lineHeight": 1.5,
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -14129,7 +13506,8 @@
                               "content": "Calming nutrients to support deep rest and recovery.",
                               "lineHeight": 1.55,
                               "fontFamily": "Inter",
-                              "fontSize": 16
+                              "fontSize": 16,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "text",
@@ -14173,7 +13551,8 @@
                           "content": "Supports relaxation, sleep quality, and overnight restoration.",
                           "lineHeight": 1.5,
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -14276,7 +13655,8 @@
                           "fill": "#4B5A55",
                           "content": "Vitalis Member",
                           "fontFamily": "Inter",
-                          "fontSize": 13
+                          "fontSize": 13,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -14413,7 +13793,8 @@
                           "content": "Why plant diversity is key to long-term health and cellular resilience.",
                           "lineHeight": 1.5,
                           "fontFamily": "Inter",
-                          "fontSize": 15
+                          "fontSize": 15,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "text",
@@ -14504,7 +13885,8 @@
                           "content": "How gut health influences every part of you.",
                           "lineHeight": 1.5,
                           "fontFamily": "Inter",
-                          "fontSize": 15
+                          "fontSize": 15,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "text",
@@ -14595,7 +13977,8 @@
                           "content": "Simple daily rituals to support hormone balance and calm.",
                           "lineHeight": 1.5,
                           "fontFamily": "Inter",
-                          "fontSize": 15
+                          "fontSize": 15,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "text",
@@ -14658,7 +14041,8 @@
                   "fill": "#283734",
                   "content": "Personalized nutrition. Real ingredients. Lasting change.",
                   "fontFamily": "Inter",
-                  "fontSize": 17
+                  "fontSize": 17,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "frame",
@@ -14990,7 +14374,8 @@
                   "content": "Whole food nutrition\nfor a life well lived.",
                   "lineHeight": 1.55,
                   "fontFamily": "Inter",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -15018,7 +14403,8 @@
                   "fill": "#283734",
                   "content": "Protocols",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -15027,7 +14413,8 @@
                   "fill": "#283734",
                   "content": "Ingredients",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -15055,7 +14442,8 @@
                   "fill": "#283734",
                   "content": "Our Approach",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -15064,7 +14452,8 @@
                   "fill": "#283734",
                   "content": "Research",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -15092,7 +14481,8 @@
                   "fill": "#283734",
                   "content": "Nutrition",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -15101,7 +14491,8 @@
                   "fill": "#283734",
                   "content": "Lifestyle",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -15129,7 +14520,8 @@
                   "fill": "#283734",
                   "content": "hello@vitalis.com",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -15138,7 +14530,8 @@
                   "fill": "#283734",
                   "content": "@vitalis_nutrition",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -15166,7 +14559,8 @@
                   "fill": "#283734",
                   "content": "Privacy Policy",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -15175,7 +14569,8 @@
                   "fill": "#283734",
                   "content": "Terms of Service",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "text",
@@ -15184,7 +14579,8 @@
                   "fill": "#283734",
                   "content": "Cookie Policy",
                   "fontFamily": "Inter",
-                  "fontSize": 13
+                  "fontSize": 13,
+                  "fontWeight": "normal"
                 }
               ]
             }
@@ -15195,8 +14591,8 @@
     {
       "type": "frame",
       "id": "Yd9b8",
-      "x": 23100,
-      "y": -324,
+      "x": 18418,
+      "y": 0,
       "name": "Lab01 / Alt Composition",
       "clip": true,
       "width": 1440,
@@ -15375,7 +14771,8 @@
                   "content": "Calibrated whole-food protocols built around microbiome support, mineral density, and recovery rhythm.",
                   "lineHeight": 1.55,
                   "fontFamily": "Inter",
-                  "fontSize": 17
+                  "fontSize": 17,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "frame",
@@ -15547,7 +14944,8 @@
                   "content": "Protein-forward botanical blend with prebiotic fiber and mineral support.",
                   "lineHeight": 1.45,
                   "fontFamily": "Inter",
-                  "fontSize": 14
+                  "fontSize": 14,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -15880,7 +15278,8 @@
                           "fill": "#4B5B53",
                           "content": "Plant diversity and cellular resilience.",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -15944,7 +15343,8 @@
                           "fill": "#4B5B53",
                           "content": "Simple practices for calmer evenings.",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -16123,6 +15523,2675 @@
                   "fontFamily": "Inter",
                   "fontSize": 12,
                   "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "B0EfdS",
+      "x": 20400,
+      "y": 0,
+      "name": "Lab04 / Sumut Ngoen Mobile Flow",
+      "width": 1880,
+      "height": 1120,
+      "fill": "#F7F3EA",
+      "cornerRadius": 24,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "#DED8CB"
+      },
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "type": "text",
+          "id": "HzNEt",
+          "name": "title",
+          "fill": "#0E0F0C",
+          "content": "สมุดเงิน / Mobile Flow",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 34,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "XxLiw",
+          "name": "subtitle",
+          "fill": "#5F625F",
+          "content": "อ้างอิง imagegen-mobile-flow.png — หน้าแรก, bottom sheet, รายการทั้งหมด, สรุปและแจ้งเตือน",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 15,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "m8czH",
+          "name": "Mobile Screens Row",
+          "width": "fill_container",
+          "height": "fill_container",
+          "gap": 28,
+          "children": [
+            {
+              "type": "frame",
+              "id": "iXKUt",
+              "name": "1. หน้าแรก (ภาพรวม)",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#FFFDF8",
+              "cornerRadius": 32,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#DAD4C8"
+              },
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 18,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "B7rVeI",
+                  "name": "h1",
+                  "fill": "#0E0F0C",
+                  "content": "1. หน้าแรก (ภาพรวม)",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "r9dsO",
+                  "name": "top1",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A43iE",
+                      "name": "brand1",
+                      "fill": "#0E0F0C",
+                      "content": "สมุดเงิน",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 30,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "qk0MP",
+                      "name": "bell1",
+                      "fill": "#0E0F0C",
+                      "content": "🔔",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 22,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "QAV4B",
+                  "name": "month1",
+                  "fill": "#ECF9DF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#B9E7A0"
+                  },
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    14
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "h59UCE",
+                      "name": "monthText1",
+                      "fill": "#163300",
+                      "content": "เมษายน 2569⌄",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "VJbDB",
+                  "name": "status1",
+                  "fill": "#454745",
+                  "content": "● ข้อมูลตัวอย่าง — ไม่เชื่อมต่อบัญชีธนาคาร",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "c3KNR",
+                  "name": "balance1",
+                  "width": "fill_container",
+                  "fill": "#ECF9DF",
+                  "cornerRadius": 18,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#B9E7A0"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 18,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "oDF3B",
+                      "name": "balLabel1",
+                      "fill": "#0E0F0C",
+                      "content": "เงินคงเหลือ",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "IGxKe",
+                      "name": "balValue1",
+                      "fill": "#054D28",
+                      "content": "฿18,450.00",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 34,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "vCF7z",
+                  "name": "stats1",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "BkmHb",
+                      "name": "income1",
+                      "width": "fill_container",
+                      "fill": "#FFFDF8",
+                      "cornerRadius": 14,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E3DDD1"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "g9QDX",
+                          "name": "inct1",
+                          "fill": "#054D28",
+                          "content": "รายรับ\n฿62,000",
+                          "textAlign": "center",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "qVPbq",
+                      "name": "exp1",
+                      "width": "fill_container",
+                      "fill": "#FFFDF8",
+                      "cornerRadius": 14,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E3DDD1"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "C0OFTM",
+                          "name": "expt1",
+                          "fill": "#D03238",
+                          "content": "รายจ่าย\n฿43,550",
+                          "textAlign": "center",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Wmhek",
+                      "name": "sav1",
+                      "width": "fill_container",
+                      "fill": "#FFFDF8",
+                      "cornerRadius": 14,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E3DDD1"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "B7KU8Q",
+                          "name": "savt1",
+                          "fill": "#163300",
+                          "content": "ออมแล้ว\n62%",
+                          "textAlign": "center",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "y3wy4L",
+                  "name": "cta1",
+                  "width": "fill_container",
+                  "fill": "#5ABF2C",
+                  "cornerRadius": 16,
+                  "gap": 8,
+                  "padding": [
+                    12,
+                    18
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sjyQJ",
+                      "name": "ctat1",
+                      "fill": "#FFFFFF",
+                      "content": "＋ บันทึกรายการ",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cwZJ4",
+                  "name": "recent1",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 18,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "w3Nx4",
+                      "name": "rt1",
+                      "fill": "#0E0F0C",
+                      "content": "รายการล่าสุด",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "obmIi",
+                      "name": "r1",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "N8dqY",
+                          "name": "r1l",
+                          "fill": "#454745",
+                          "content": "🍽️ อาหาร/เครื่องดื่ม\n29 เม.ย. 2569",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Z3ErZa",
+                          "name": "r1v",
+                          "fill": "#D03238",
+                          "content": "−฿120.00",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "MwmCM",
+                      "name": "r2",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "lGLMp",
+                          "name": "r2l",
+                          "fill": "#454745",
+                          "content": "💵 เงินเดือน\n29 เม.ย. 2569",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZS34P",
+                          "name": "r2v",
+                          "fill": "#054D28",
+                          "content": "+฿30,000.00",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "URDQf",
+                  "name": "rem1",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 18,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sZKY4",
+                      "name": "remTitle1",
+                      "fill": "#0E0F0C",
+                      "content": "แจ้งเตือนใกล้ถึงกำหนด",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 15,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "gJ6OE",
+                      "name": "remLine1",
+                      "fill": "#D03238",
+                      "content": "💧 ค่าน้ำ — อีก 3 วัน  ฿420.00",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ww9mc",
+                  "name": "nav1",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "#E3DDD1"
+                  },
+                  "padding": [
+                    12,
+                    8,
+                    0,
+                    8
+                  ],
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "RsrzA",
+                      "name": "navt1",
+                      "fill": "#3E9D2C",
+                      "content": "🏠\nหน้าแรก",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "K6RuZt",
+                      "name": "navt2",
+                      "fill": "#0E0F0C",
+                      "content": "☷\nรายการ",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "C6QEW",
+                      "name": "navt3",
+                      "fill": "#0E0F0C",
+                      "content": "◔\nสรุป",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "akq4Y",
+                      "name": "navt4",
+                      "fill": "#0E0F0C",
+                      "content": "⚙\nตั้งค่า",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "yL5hP",
+              "name": "2. บันทึกรายการ Bottom Sheet",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#F2F0EA",
+              "cornerRadius": 32,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#DAD4C8"
+              },
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 18,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "iDSiK",
+                  "name": "h2",
+                  "fill": "#0E0F0C",
+                  "content": "2. บันทึกรายการ",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "HsR7h",
+                  "name": "dim2",
+                  "opacity": 0.35,
+                  "width": "fill_container",
+                  "height": 170,
+                  "fill": "#0E0F0C",
+                  "cornerRadius": 24
+                },
+                {
+                  "type": "frame",
+                  "id": "g5ayMP",
+                  "name": "sheet2",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": [
+                    26,
+                    26,
+                    24,
+                    24
+                  ],
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "gap": 14,
+                  "padding": 18,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "p74i8q",
+                      "name": "handle2",
+                      "width": 64,
+                      "height": 5,
+                      "fill": "#CFC8BA",
+                      "cornerRadius": 999
+                    },
+                    {
+                      "type": "text",
+                      "id": "YgeT5",
+                      "name": "sheetTitle2",
+                      "fill": "#0E0F0C",
+                      "content": "บันทึกรายการ",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "tBO6D",
+                      "name": "seg2",
+                      "width": "fill_container",
+                      "height": 46,
+                      "fill": "#FFFDF8",
+                      "cornerRadius": 14,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E3DDD1"
+                      },
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "anz32",
+                          "name": "segIn2",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "fill": "#ECF9DF",
+                          "cornerRadius": 14,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Xtv6G",
+                              "name": "segInText2",
+                              "fill": "#054D28",
+                              "content": "รายรับ",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "wzl5Y",
+                          "name": "segOut2",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "hL0tp",
+                              "name": "segOutText2",
+                              "fill": "#D03238",
+                              "content": "รายจ่าย",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 14,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "BCClh",
+                      "name": "amount2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "m9RrJ",
+                          "name": "amountLabel2",
+                          "fill": "#454745",
+                          "content": "จำนวนเงิน",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "S5MDg",
+                          "name": "amountBox2",
+                          "width": "fill_container",
+                          "height": 58,
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 14,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#DAD4C8"
+                          },
+                          "padding": [
+                            0,
+                            16
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "iGr1X",
+                              "name": "amountText2",
+                              "fill": "#0E0F0C",
+                              "content": "฿ 450.00",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 22,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "yXQxD",
+                      "name": "cat2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "i1oe4",
+                          "name": "catLabel2",
+                          "fill": "#454745",
+                          "content": "หมวดหมู่",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "yLxXb",
+                          "name": "catBox2",
+                          "width": "fill_container",
+                          "height": 52,
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 14,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#DAD4C8"
+                          },
+                          "padding": [
+                            0,
+                            16
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "e8eI7",
+                              "name": "catText2",
+                              "fill": "#0E0F0C",
+                              "content": "🍽️ อาหาร/เครื่องดื่ม",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "k7lV6q",
+                      "name": "note2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "se4H9",
+                          "name": "noteLabel2",
+                          "fill": "#454745",
+                          "content": "หมายเหตุ",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "x9Dekm",
+                          "name": "noteBox2",
+                          "width": "fill_container",
+                          "height": 66,
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 14,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#DAD4C8"
+                          },
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "njXC7",
+                              "name": "noteText2",
+                              "fill": "#868685",
+                              "content": "เช่น ซื้อข้าวกลางวัน",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "T6lska",
+                      "name": "date2",
+                      "width": "fill_container",
+                      "height": 52,
+                      "fill": "#FFFDF8",
+                      "cornerRadius": 14,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#DAD4C8"
+                      },
+                      "padding": [
+                        0,
+                        16
+                      ],
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Hf1iA",
+                          "name": "dateText2",
+                          "fill": "#0E0F0C",
+                          "content": "📅 29 เม.ย. 2569",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "O9yb8C",
+                      "name": "save2",
+                      "width": "fill_container",
+                      "height": 56,
+                      "fill": "#5ABF2C",
+                      "cornerRadius": 14,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "vd01D",
+                          "name": "saveText2",
+                          "fill": "#FFFFFF",
+                          "content": "บันทึก",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 18,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "VQGtS",
+              "name": "3. รายการทั้งหมด",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#FFFDF8",
+              "cornerRadius": 32,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#DAD4C8"
+              },
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 18,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "cjOj9",
+                  "name": "h3",
+                  "fill": "#0E0F0C",
+                  "content": "3. รายการทั้งหมด",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "a4eB3",
+                  "name": "top3",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "sFosB",
+                      "name": "title3",
+                      "fill": "#0E0F0C",
+                      "content": "รายการทั้งหมด",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 22,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fwDfP",
+                      "name": "search3",
+                      "fill": "#0E0F0C",
+                      "content": "🔍",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 22,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "V7j6u9",
+                  "name": "tabs3",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Q0yzIq",
+                      "name": "tabA3",
+                      "width": "fill_container",
+                      "height": 42,
+                      "fill": "#ECF9DF",
+                      "cornerRadius": 12,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#B9E7A0"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XF2gi",
+                          "name": "tabAText3",
+                          "fill": "#163300",
+                          "content": "ทั้งหมด",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "R54UfA",
+                      "name": "tabB3",
+                      "width": "fill_container",
+                      "height": 42,
+                      "fill": "#FFFDF8",
+                      "cornerRadius": 12,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E3DDD1"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "HQ2V5",
+                          "name": "tabBText3",
+                          "fill": "#0E0F0C",
+                          "content": "รายรับ",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Kx7pa",
+                      "name": "tabC3",
+                      "width": "fill_container",
+                      "height": 42,
+                      "fill": "#FFFDF8",
+                      "cornerRadius": 12,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E3DDD1"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Fn0O0",
+                          "name": "tabCText3",
+                          "fill": "#0E0F0C",
+                          "content": "รายจ่าย",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "GQy04",
+                  "name": "day3",
+                  "fill": "#0E0F0C",
+                  "content": "29 เม.ย. 2569",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "csElI",
+                  "name": "list3",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 18,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "AdI7m",
+                      "name": "item31",
+                      "width": "fill_container",
+                      "padding": 14,
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "uGqBs",
+                          "name": "item31l",
+                          "fill": "#0E0F0C",
+                          "content": "💵 เงินเดือน\nรายได้ประจำ",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "IvDlE",
+                          "name": "item31v",
+                          "fill": "#054D28",
+                          "content": "+฿30,000.00 ›",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JK3KM",
+                      "name": "item32",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "top": 1
+                        },
+                        "fill": "#E3DDD1"
+                      },
+                      "padding": 14,
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XEhLK",
+                          "name": "item32l",
+                          "fill": "#0E0F0C",
+                          "content": "🍽️ อาหาร/เครื่องดื่ม\nซื้อข้าวกลางวัน",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "BvwVt",
+                          "name": "item32v",
+                          "fill": "#D03238",
+                          "content": "−฿120.00 ›",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "H0cbu",
+                  "name": "day32",
+                  "fill": "#0E0F0C",
+                  "content": "28 เม.ย. 2569",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "ifVkI",
+                  "name": "list32",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 18,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "e8fkJ",
+                      "name": "item33",
+                      "width": "fill_container",
+                      "padding": 14,
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XzBbI",
+                          "name": "item33l",
+                          "fill": "#0E0F0C",
+                          "content": "🚆 เดินทาง\nค่า BTS",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "DcJQP",
+                          "name": "item33v",
+                          "fill": "#D03238",
+                          "content": "−฿60.00 ›",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "tqCxr",
+                      "name": "item34",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "top": 1
+                        },
+                        "fill": "#E3DDD1"
+                      },
+                      "padding": 14,
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "n4iMt",
+                          "name": "item34l",
+                          "fill": "#0E0F0C",
+                          "content": "🎁 บันเทิง\nดูหนัง",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 14,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "t74Zm",
+                          "name": "item34v",
+                          "fill": "#D03238",
+                          "content": "−฿220.00 ›",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "UMjeB",
+                  "name": "nav3",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "#E3DDD1"
+                  },
+                  "padding": [
+                    12,
+                    8,
+                    0,
+                    8
+                  ],
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "TePIE",
+                      "name": "nav31",
+                      "fill": "#0E0F0C",
+                      "content": "🏠\nหน้าแรก",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vayWI",
+                      "name": "nav32",
+                      "fill": "#3E9D2C",
+                      "content": "☷\nรายการ",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Q7Gws6",
+                      "name": "nav33",
+                      "fill": "#0E0F0C",
+                      "content": "◔\nสรุป",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jKJ3F",
+                      "name": "nav34",
+                      "fill": "#0E0F0C",
+                      "content": "⚙\nตั้งค่า",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "NIUG2",
+              "name": "4. สรุปและแจ้งเตือน",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#FFFDF8",
+              "cornerRadius": 32,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#DAD4C8"
+              },
+              "layout": "vertical",
+              "gap": 14,
+              "padding": 18,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "qiiis",
+                  "name": "h4",
+                  "fill": "#0E0F0C",
+                  "content": "4. สรุปและแจ้งเตือน",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 18,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "Smlc6",
+                  "name": "top4",
+                  "fill": "#0E0F0C",
+                  "content": "สรุปเดือนนี้",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 24,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "jTPSa",
+                  "name": "cat4",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 18,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lje3q",
+                      "name": "catTitle4",
+                      "fill": "#0E0F0C",
+                      "content": "ภาพรวมการใช้จ่าย",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YpuXK",
+                      "name": "catLine41",
+                      "fill": "#454745",
+                      "content": "🍽️ อาหาร/เครื่องดื่ม     ฿4,250   32%",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AjMBn",
+                      "name": "bar41",
+                      "width": "fill_container",
+                      "height": 6,
+                      "fill": "#5ABF2C",
+                      "cornerRadius": 999
+                    },
+                    {
+                      "type": "text",
+                      "id": "fkT7d",
+                      "name": "catLine42",
+                      "fill": "#454745",
+                      "content": "🚆 เดินทาง                 ฿3,120    7%",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SBGah",
+                      "name": "bar42",
+                      "width": "fill_container",
+                      "height": 6,
+                      "fill": "#9FE870",
+                      "cornerRadius": 999
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "S1ztK",
+                  "name": "alerts4",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 18,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Kh7oE",
+                      "name": "alertTitle4",
+                      "fill": "#0E0F0C",
+                      "content": "แจ้งเตือนใกล้ถึงกำหนด",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nPNWV",
+                      "name": "alert41",
+                      "fill": "#D03238",
+                      "content": "💧 ค่าน้ำ — อีก 3 วัน",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dGTNN",
+                      "name": "alert42",
+                      "fill": "#D03238",
+                      "content": "💳 ผ่อนบัตรเครดิต — อีก 6 วัน",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "q8Ik4",
+                      "name": "alert43",
+                      "fill": "#3E9D2C",
+                      "content": "🎯 เป้าหมายออม — อีก 11 วัน",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "teeJ2",
+                  "name": "tools4",
+                  "width": "fill_container",
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 18,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "gap": 10,
+                  "padding": 14,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jZSjC",
+                      "name": "toolsTitle4",
+                      "fill": "#0E0F0C",
+                      "content": "เครื่องมือ",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V0FAwc",
+                      "name": "tools41",
+                      "fill": "#454745",
+                      "content": "☁️ สำรองข้อมูล / ส่งออก CSV  ›",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vLE8N",
+                      "name": "tools42",
+                      "fill": "#454745",
+                      "content": "🔒 ความเป็นส่วนตัวของฉัน  ›",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "tFawM",
+                  "name": "nav4",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "#E3DDD1"
+                  },
+                  "padding": [
+                    12,
+                    8,
+                    0,
+                    8
+                  ],
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A3QMU",
+                      "name": "nav41",
+                      "fill": "#0E0F0C",
+                      "content": "🏠\nหน้าแรก",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "A02Lv",
+                      "name": "nav42",
+                      "fill": "#0E0F0C",
+                      "content": "☷\nรายการ",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "lOlSt",
+                      "name": "nav43",
+                      "fill": "#3E9D2C",
+                      "content": "◔\nสรุป",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZQhwo",
+                      "name": "nav44",
+                      "fill": "#0E0F0C",
+                      "content": "⚙\nตั้งค่า",
+                      "textAlign": "center",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 12,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Q8mB7",
+      "x": 20400,
+      "y": 1240,
+      "name": "Lab04 / Sumut Ngoen Desktop Flow",
+      "width": 1880,
+      "height": 1260,
+      "fill": "#F7F3EA",
+      "cornerRadius": 24,
+      "stroke": {
+        "align": "inside",
+        "thickness": 1,
+        "fill": "#DED8CB"
+      },
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 32,
+      "children": [
+        {
+          "type": "text",
+          "id": "CRBnK",
+          "name": "dt",
+          "fill": "#0E0F0C",
+          "content": "สมุดเงิน / Desktop Responsive Flow",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 34,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "Q7iXe",
+          "name": "ds",
+          "fill": "#5F625F",
+          "content": "อ้างอิง imagegen-desktop-flow.png — home, ledger, summary/reminders, quick entry modal",
+          "fontFamily": "Noto Sans Thai",
+          "fontSize": 15,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "k067P",
+          "name": "dtop",
+          "width": "fill_container",
+          "height": 610,
+          "gap": 28,
+          "children": [
+            {
+              "type": "frame",
+              "id": "CfTdo",
+              "name": "1 Desktop Home",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#FFFDF8",
+              "cornerRadius": 20,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#DED8CB"
+              },
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Go5xo",
+                  "name": "side1",
+                  "width": 130,
+                  "height": "fill_container",
+                  "fill": "#FFFDF8",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "right": 1
+                    },
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "gap": 14,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "EEM5L",
+                      "name": "s1title",
+                      "fill": "#0E0F0C",
+                      "content": "สมุดเงิน",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "j4bVRI",
+                      "name": "s1nav",
+                      "fill": "#454745",
+                      "content": "🏠 หน้าหลัก\n☷ รายการทั้งหมด\n◔ สรุปเดือนนี้\n🎯 เป้าหมายการออม\n▥ รายงาน",
+                      "lineHeight": 1.9,
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "n7Si7",
+                  "name": "main1",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#FFFDF8",
+                  "layout": "vertical",
+                  "gap": 14,
+                  "padding": 18,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Y3GOj",
+                      "name": "head1",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "UMgKb",
+                          "name": "monthD1",
+                          "fill": "#0E0F0C",
+                          "content": "‹  เมษายน 2569  ›",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 18,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Hifvr",
+                          "name": "btnD1",
+                          "width": 110,
+                          "height": 38,
+                          "fill": "#9FE870",
+                          "cornerRadius": 10,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "w07B6",
+                              "name": "btnD1t",
+                              "fill": "#163300",
+                              "content": "+ บันทึกรายการ",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 11,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SnlKt",
+                      "name": "balD1",
+                      "width": "fill_container",
+                      "fill": "#FFFDF8",
+                      "cornerRadius": 16,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E3DDD1"
+                      },
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 18,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "f10Vmk",
+                          "name": "balD1l",
+                          "fill": "#454745",
+                          "content": "เงินคงเหลือ",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "IeYoc",
+                          "name": "balD1v",
+                          "fill": "#0E0F0C",
+                          "content": "฿18,450.00",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 28,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "NZiEn",
+                          "name": "miniD1",
+                          "fill": "#454745",
+                          "content": "รายรับ ฿62,000.00     รายจ่าย ฿43,550.00     ออมแล้ว 62%",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "XhUk6",
+                      "name": "rowD1",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "gap": 14,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "zNQ6n",
+                          "name": "recentD1",
+                          "width": "fill_container",
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 16,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#E3DDD1"
+                          },
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "H5Ps4",
+                              "name": "recentD1t",
+                              "fill": "#0E0F0C",
+                              "content": "รายการล่าสุด",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 15,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "text",
+                              "id": "x9yT3P",
+                              "name": "recentD1r",
+                              "fill": "#454745",
+                              "content": "↓ 29 เม.ย. เงินเดือน +฿25,000.00\n↑ 28 เม.ย. ซุปเปอร์มาร์เก็ต −฿1,250.00\n↑ 27 เม.ย. ค่าน้ำประปา −฿420.00\n↓ 26 เม.ย. ฟรีแลนซ์ +฿8,000.00",
+                              "lineHeight": 1.8,
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "N4BwNJ",
+                          "name": "railD1",
+                          "width": 170,
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "LyehB",
+                              "name": "billD1",
+                              "width": "fill_container",
+                              "fill": "#FFFDF8",
+                              "cornerRadius": 16,
+                              "stroke": {
+                                "align": "inside",
+                                "thickness": 1,
+                                "fill": "#E3DDD1"
+                              },
+                              "layout": "vertical",
+                              "gap": 8,
+                              "padding": 12,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "g4yrZj",
+                                  "name": "billD1t",
+                                  "fill": "#454745",
+                                  "content": "เดือนความจำถัดไป\n💧 ค่าน้ำประปา ฿420.00\nอีก 2 วัน",
+                                  "lineHeight": 1.7,
+                                  "fontFamily": "Noto Sans Thai",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "lhQ9z",
+              "name": "2 Desktop Ledger",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#FFFDF8",
+              "cornerRadius": 20,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#DED8CB"
+              },
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "dN2ip",
+                  "name": "side2",
+                  "width": 130,
+                  "height": "fill_container",
+                  "fill": "#FFFDF8",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "right": 1
+                    },
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "gap": 14,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XOUcB",
+                      "name": "s2title",
+                      "fill": "#0E0F0C",
+                      "content": "สมุดเงิน",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KmFBn",
+                      "name": "s2nav",
+                      "fill": "#454745",
+                      "content": "🏠 หน้าหลัก\n☷ รายการทั้งหมด\n◔ สรุปเดือนนี้\n🎯 เป้าหมายการออม\n▥ รายงาน",
+                      "lineHeight": 1.9,
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "eSTES",
+                  "name": "main2",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#FFFDF8",
+                  "layout": "vertical",
+                  "gap": 14,
+                  "padding": 18,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NevTs",
+                      "name": "ledgerTitle2",
+                      "fill": "#0E0F0C",
+                      "content": "รายการทั้งหมด",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WNAEm",
+                      "name": "filters2",
+                      "width": "fill_container",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "W1Cxot",
+                          "name": "f21",
+                          "width": 70,
+                          "height": 34,
+                          "fill": "#ECF9DF",
+                          "cornerRadius": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#B9E7A0"
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "jioGk",
+                              "name": "f21t",
+                              "fill": "#163300",
+                              "content": "ทั้งหมด",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 11,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "JodQd",
+                          "name": "f22",
+                          "width": 70,
+                          "height": 34,
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#E3DDD1"
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "a21XsI",
+                              "name": "f22t",
+                              "fill": "#0E0F0C",
+                              "content": "รายรับ",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "wO8z6",
+                          "name": "search2",
+                          "width": "fill_container",
+                          "height": 34,
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#E3DDD1"
+                          },
+                          "padding": [
+                            0,
+                            12
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "HGwLp",
+                              "name": "search2t",
+                              "fill": "#868685",
+                              "content": "🔍 ค้นหาบันทึก, หมวดหมู่, จำนวนเงิน...",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 10,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "l5ITR",
+                      "name": "table2",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#FFFDF8",
+                      "cornerRadius": 14,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E3DDD1"
+                      },
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "bdL69",
+                          "name": "headrow2",
+                          "width": "fill_container",
+                          "fill": "#F7F3EA",
+                          "padding": 10,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "mJhAw",
+                              "name": "headtxt2",
+                              "fill": "#454745",
+                              "content": "วันที่          ประเภท        หมวดหมู่             บันทึกเพิ่มเติม                จำนวนเงิน",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 10,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "b418BZ",
+                          "name": "rows2",
+                          "fill": "#454745",
+                          "content": "29 เม.ย. 2569   รายรับ       เงินเดือน            เงินเดือนประจำเดือน       +฿25,000.00\n28 เม.ย. 2569   รายจ่าย     อาหาร/เครื่องดื่ม     ซุปเปอร์มาร์เก็ต Lotus     −฿1,250.00\n27 เม.ย. 2569   รายจ่าย     ที่อยู่อาศัย           ค่าน้ำประปา                 −฿420.00\n26 เม.ย. 2569   รายรับ       ฟรีแลนซ์              งานออกแบบเว็บไซต์        +฿8,000.00\n25 เม.ย. 2569   รายจ่าย     เดินทาง               เดินทาง (BTS)              −฿60.00",
+                          "lineHeight": 2.1,
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "JXS8M",
+              "name": "3 Desktop Summary",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#FFFDF8",
+              "cornerRadius": 20,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#DED8CB"
+              },
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "gvXaX",
+                  "name": "side3",
+                  "width": 130,
+                  "height": "fill_container",
+                  "fill": "#FFFDF8",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "right": 1
+                    },
+                    "fill": "#E3DDD1"
+                  },
+                  "layout": "vertical",
+                  "gap": 14,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "eb9JF",
+                      "name": "s3title",
+                      "fill": "#0E0F0C",
+                      "content": "สมุดเงิน",
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 18,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Di4Ay",
+                      "name": "s3nav",
+                      "fill": "#454745",
+                      "content": "🏠 หน้าหลัก\n☷ รายการทั้งหมด\n◔ สรุปเดือนนี้\n🎯 เป้าหมายการออม\n▥ รายงาน",
+                      "lineHeight": 1.9,
+                      "fontFamily": "Noto Sans Thai",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YVM7t",
+                  "name": "main3",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#FFFDF8",
+                  "gap": 14,
+                  "padding": 18,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "jnvlm",
+                      "name": "summary3",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "p8Spj",
+                          "name": "summary3t",
+                          "fill": "#0E0F0C",
+                          "content": "สรุปเดือนนี้",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 18,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "D5ixbi",
+                          "name": "finance3",
+                          "width": "fill_container",
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 16,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#E3DDD1"
+                          },
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "bGW0f",
+                              "name": "finance3txt",
+                              "fill": "#454745",
+                              "content": "ภาพรวมการเงิน\nรายรับทั้งหมด     ฿62,000.00\nรายจ่ายทั้งหมด    ฿43,550.00\nเงินคงเหลือ       ฿18,450.00",
+                              "lineHeight": 1.8,
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Rk6yB",
+                          "name": "cat3",
+                          "width": "fill_container",
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 16,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#E3DDD1"
+                          },
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 14,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "VSmwn",
+                              "name": "cat3txt",
+                              "fill": "#454745",
+                              "content": "สรุปตามหมวดหมู่\n🍽️ อาหาร ฿4,250 32%\n🚆 เดินทาง ฿3,120 7%\n🏠 ที่อยู่อาศัย ฿8,900 28%\n💳 ผ่อนหนี้ ฿5,200 12%",
+                              "lineHeight": 1.8,
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 11,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fTAoi",
+                      "name": "rem3",
+                      "width": 180,
+                      "height": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "SjmHi",
+                          "name": "rem3t",
+                          "fill": "#0E0F0C",
+                          "content": "เตือนความจำ",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 16,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "tmfkP",
+                          "name": "rem3card",
+                          "width": "fill_container",
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 16,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#E3DDD1"
+                          },
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "RQLQ8",
+                              "name": "rem3text",
+                              "fill": "#454745",
+                              "content": "💧 1 พ.ค. ค่าน้ำประปา ฿420\n💳 5 พ.ค. ค่าบัตรเครดิต ฿6,500\n🚗 10 พ.ค. ค่างวดรถยนต์ ฿590",
+                              "lineHeight": 1.8,
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 10,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ll3fw",
+                          "name": "save3card",
+                          "width": "fill_container",
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 16,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#E3DDD1"
+                          },
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": 12,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "kFZjR",
+                              "name": "save3text",
+                              "fill": "#054D28",
+                              "content": "เป้าหมายการออม\n฿12,000 / ฿20,000\n60%",
+                              "lineHeight": 1.8,
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 11,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "JegEG",
+          "name": "4 Quick Entry Modal",
+          "opacity": 0.78,
+          "width": "fill_container",
+          "height": 460,
+          "fill": "#0E0F0C",
+          "cornerRadius": 18,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "BlalW",
+              "name": "modal",
+              "width": 560,
+              "fill": "#FFFDF8",
+              "cornerRadius": 16,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#DAD4C8"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 22,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "V9C1Wn",
+                  "name": "mt",
+                  "fill": "#0E0F0C",
+                  "content": "บันทึกรายการ",
+                  "fontFamily": "Noto Sans Thai",
+                  "fontSize": 20,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "rpV6k",
+                  "name": "segM",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "#FFFDF8",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E3DDD1"
+                  },
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "r8FsEw",
+                      "name": "segM1",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "fill": "#9FE870",
+                      "cornerRadius": 12,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Kw0E2",
+                          "name": "segM1t",
+                          "fill": "#163300",
+                          "content": "รายรับ",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rURkX",
+                      "name": "segM2",
+                      "width": "fill_container",
+                      "height": "fill_container",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "q94uk",
+                          "name": "segM2t",
+                          "fill": "#0E0F0C",
+                          "content": "รายจ่าย",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "sEuz7",
+                  "name": "formRow1",
+                  "width": "fill_container",
+                  "gap": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "HUuxU",
+                      "name": "fieldM1",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "CPwWD",
+                          "name": "fieldM1l",
+                          "fill": "#454745",
+                          "content": "จำนวนเงิน",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "OoYhF",
+                          "name": "fieldM1b",
+                          "width": "fill_container",
+                          "height": 48,
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#3E9D2C"
+                          },
+                          "padding": [
+                            0,
+                            12
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "y9lGgS",
+                              "name": "fieldM1t",
+                              "fill": "#454745",
+                              "content": "฿                         0.00",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "KL051",
+                      "name": "fieldM2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "PKMok",
+                          "name": "fieldM2l",
+                          "fill": "#454745",
+                          "content": "หมวดหมู่",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "StbY1",
+                          "name": "fieldM2b",
+                          "width": "fill_container",
+                          "height": 48,
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#DAD4C8"
+                          },
+                          "padding": [
+                            0,
+                            12
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ZAlpX",
+                              "name": "fieldM2t",
+                              "fill": "#454745",
+                              "content": "เลือกหมวดหมู่⌄",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "U09y6y",
+                  "name": "formRow2",
+                  "width": "fill_container",
+                  "gap": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "utYbC",
+                      "name": "fieldM3",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "b0RHXJ",
+                          "name": "fieldM3l",
+                          "fill": "#454745",
+                          "content": "บันทึกเพิ่มเติม (ไม่บังคับ)",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Z1xXu",
+                          "name": "fieldM3b",
+                          "width": "fill_container",
+                          "height": 48,
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#DAD4C8"
+                          },
+                          "padding": [
+                            0,
+                            12
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "slV44",
+                              "name": "fieldM3t",
+                              "fill": "#868685",
+                              "content": "เช่น เงินเดือน, ค่าข้าวกลางวัน",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rb35I",
+                      "name": "fieldM4",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 6,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "D3lRsY",
+                          "name": "fieldM4l",
+                          "fill": "#454745",
+                          "content": "วันที่",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "xS4VY",
+                          "name": "fieldM4b",
+                          "width": "fill_container",
+                          "height": 48,
+                          "fill": "#FFFDF8",
+                          "cornerRadius": 10,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#DAD4C8"
+                          },
+                          "padding": [
+                            0,
+                            12
+                          ],
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "zs8bG",
+                              "name": "fieldM4t",
+                              "fill": "#0E0F0C",
+                              "content": "29 เม.ย. 2569  📅",
+                              "fontFamily": "Noto Sans Thai",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ejBJy",
+                  "name": "modalActions",
+                  "width": "fill_container",
+                  "gap": 14,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "h1VMh",
+                      "name": "cancelM",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": "#FFFDF8",
+                      "cornerRadius": 10,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#DAD4C8"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Quil8",
+                          "name": "cancelMt",
+                          "fill": "#0E0F0C",
+                          "content": "ยกเลิก",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SHiMd",
+                      "name": "saveM",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": "#9FE870",
+                      "cornerRadius": 10,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "WH9xc",
+                          "name": "saveMt",
+                          "fill": "#163300",
+                          "content": "บันทึก",
+                          "fontFamily": "Noto Sans Thai",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
