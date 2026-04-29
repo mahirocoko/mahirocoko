@@ -51,6 +51,8 @@ Use this order:
 2. canonical `frontend-design` output and handoff contract
 3. `uncodixify` normal-standard enforcement
 
+Explicit design-system tokens for radius, shape, and component geometry override the generic 8–12px normal-UI defaults when they are coherent, repeated intentionally, and brand-backed.
+
 ### What must inherit from `frontend-design`
 
 - page/app structure that is explicitly requested
@@ -147,8 +149,8 @@ This is how you Uncodixify.
 - Headers: normal (simple text, no eyebrows, no uppercase labels, no gradient text, just h1/h2 with proper hierarchy)
 - Sections: normal (standard padding 20-30px, no hero blocks inside dashboards, no decorative copy)
 - Navigation: normal (simple links, subtle hover states, no transform animations, no badges unless functional)
-- Buttons: normal (solid fills or simple borders, 8-10px radius max, no pill shapes, no gradient backgrounds)
-- Cards: normal (simple containers, 8-12px radius max, subtle borders, no shadows over 8px blur, no floating effect)
+- Buttons: normal by default (solid fills or simple borders, use project radius tokens; if no design system exists, prefer 8-10px and avoid accidental pill shapes, no gradient backgrounds)
+- Cards: normal by default (simple containers, use project radius tokens; if no design system exists, prefer 8-12px, subtle borders, no shadows over 8px blur, no fake floating effect)
 - Forms: normal (standard inputs, clear labels above fields, no fancy floating labels, simple focus states)
 - Inputs: normal (solid borders, simple focus ring, no animated underlines, no morphing shapes)
 - Modals: normal (centered overlay, simple backdrop, no slide-in animations, straightforward close button)
@@ -183,8 +185,7 @@ Think Linear. Think Raycast. Think Stripe. Think GitHub. They don't try to grab 
 ## Hard No
 
 - Everything you are used to doing and is a basic "YES" to you.
-- No oversized rounded corners.
-- No pill overload.
+- No oversized rounded corners or pill overload unless the radius/pill treatment is an explicit, coherent design-system or brand requirement.
 - No floating glassmorphism shells as the default visual language.
 - No soft corporate gradients used to fake taste.
 - No generic dark SaaS UI composition.
@@ -221,7 +222,7 @@ Think Linear. Think Raycast. Think Stripe. Think GitHub. They don't try to grab 
 This is not allowed.
 
 - `<small>` headers are NOT allowed
-- Big no to rounded `span`s
+- Big no to decorative rounded `span`s used as AI-style filler; allowed when they are real components/tokens such as badges, chips, or brand-defined pills.
 - Colors going towards blue — **NOPE, bad.** Dark muted colors are best.
 
 - Anything in the structure of this card is a **BIG no**.
@@ -239,8 +240,8 @@ This one is **THE BIGGEST NO**.
 
 ## Specifically Banned (Based on Mistakes)
 
-- Border radii in the 20px to 32px range across everything
-- Repeating the same rounded rectangle on sidebar, cards, buttons, and panels
+- Unintentional 20px to 32px radii applied everywhere without a design-system reason
+- Repeating the same rounded rectangle across unrelated surfaces unless that shape is an explicit brand/system token
 - Sidebar width around 280px with a brand block on top and nav links below
 - Floating detached sidebar with rounded outer shell
 - Canvas chart placed in a glass card with no product-specific reason
