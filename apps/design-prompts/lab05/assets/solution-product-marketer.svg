@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 580" role="img" aria-labelledby="title desc">
+  <title id="title">Product marketer workspace</title>
+  <desc id="desc">An editorial illustration of a marketer working at a laptop in a warm studio crop.</desc>
+  <defs>
+    <linearGradient id="room" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f2e6d7"/>
+      <stop offset=".58" stop-color="#e0cdb8"/>
+      <stop offset="1" stop-color="#cdb9a6"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf8"/>
+      <stop offset="1" stop-color="#ded6cc"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#5b4d42" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect width="960" height="580" rx="10" fill="url(#room)"/>
+  <path d="M0 370c180-58 356-68 526-31 142 30 283 29 434-28v269H0Z" fill="#e9ddcf"/>
+  <g filter="url(#shadow)">
+    <path d="M306 573c22-120 84-193 191-219 103 24 166 97 188 219Z" fill="url(#shirt)"/>
+    <path d="M421 236c-12 53-5 99 28 135 27 29 75 31 102 1 34-37 41-84 26-139-23-31-128-29-156 3Z" fill="#735044"/>
+    <path d="M407 230c10-87 66-128 151-107 63 19 86 61 66 127-16-30-36-45-61-45-54 1-95 9-156 25Z" fill="#2f2623"/>
+    <path d="M429 255c22-7 46-6 72 3M530 257c25-8 48-9 69-1" stroke="#2c2522" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="470" cy="279" r="28" fill="none" stroke="#8bb0c4" stroke-width="5"/>
+    <circle cx="565" cy="279" r="28" fill="none" stroke="#8bb0c4" stroke-width="5"/>
+    <path d="M498 279h39" stroke="#8bb0c4" stroke-width="5"/>
+    <path d="M500 307c13 8 28 8 43 0" stroke="#2c2522" stroke-width="5" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(93 423)" filter="url(#shadow)">
+    <path d="M0 0h360l58 139H59Z" fill="#e7e1dc"/>
+    <path d="M40 20h272l30 75H74Z" fill="#f6f2ee"/>
+  </g>
+  <g transform="translate(680 360)">
+    <rect width="182" height="92" rx="10" fill="#fff" fill-opacity=".84"/>
+    <circle cx="30" cy="29" r="12" fill="#ead9ff"/>
+    <path d="M24 29h12M30 23v12" stroke="#7b3ce6" stroke-width="2"/>
+    <rect x="54" y="23" width="82" height="8" rx="4" fill="#2b2926" fill-opacity=".22"/>
+    <rect x="22" y="55" width="136" height="7" rx="4" fill="#2b2926" fill-opacity=".14"/>
+    <rect x="22" y="69" width="98" height="7" rx="4" fill="#2b2926" fill-opacity=".11"/>
+  </g>
+  <g transform="translate(120 315)">
+    <rect width="196" height="104" rx="10" fill="#fff" fill-opacity=".88"/>
+    <rect x="20" y="18" width="42" height="15" rx="8" fill="#dff7e5"/>
+    <rect x="72" y="18" width="56" height="15" rx="8" fill="#ead9ff"/>
+    <rect x="20" y="48" width="120" height="8" rx="4" fill="#2b2926" fill-opacity=".18"/>
+    <rect x="20" y="65" width="150" height="8" rx="4" fill="#2b2926" fill-opacity=".11"/>
+  </g>
+</svg>

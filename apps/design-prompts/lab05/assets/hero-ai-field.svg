@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 900" role="img" aria-labelledby="title desc">
+  <title id="title">Abstract AI marketing field</title>
+  <desc id="desc">A warm cinematic field with a perspective grid and floating glass product tiles.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff6e8"/>
+      <stop offset=".28" stop-color="#ffe1bd"/>
+      <stop offset=".66" stop-color="#dfaaa0"/>
+      <stop offset="1" stop-color="#c58f8d"/>
+    </linearGradient>
+    <radialGradient id="sun" cx=".45" cy=".5" r=".42">
+      <stop offset="0" stop-color="#fff6bd" stop-opacity=".95"/>
+      <stop offset=".38" stop-color="#ffd9a6" stop-opacity=".55"/>
+      <stop offset="1" stop-color="#ffd9a6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="violet" cx=".5" cy=".82" r=".35">
+      <stop offset="0" stop-color="#8847e8" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#8847e8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffafd"/>
+      <stop offset=".72" stop-color="#e8d7ef"/>
+      <stop offset="1" stop-color="#c7a2df"/>
+    </linearGradient>
+    <filter id="softShadow" x="-30%" y="-30%" width="160%" height="180%">
+      <feDropShadow dx="0" dy="34" stdDeviation="24" flood-color="#5b347a" flood-opacity=".24"/>
+    </filter>
+    <pattern id="grid" width="84" height="84" patternUnits="userSpaceOnUse">
+      <path d="M84 0H0v84" fill="none" stroke="#7d44d8" stroke-opacity=".36" stroke-width="1.4"/>
+    </pattern>
+  </defs>
+  <rect width="2100" height="900" fill="url(#sky)"/>
+  <rect width="2100" height="900" fill="url(#sun)"/>
+  <rect width="2100" height="900" fill="url(#violet)"/>
+  <g transform="translate(0 615)">
+    <path d="M0 235 420 0h1260l420 235Z" fill="url(#grid)" opacity=".95"/>
+    <path d="M0 235 420 0h1260l420 235Z" fill="url(#violet)" opacity=".55"/>
+    <g opacity=".33" fill="#5c4b62">
+      <path d="M0 206h500l-90 28H0z"/>
+      <path d="M1600 206h500v28h-410z"/>
+      <path d="M24 165h410l-72 22H0z"/>
+      <path d="M1666 165h410l24 22h-362z"/>
+      <path d="M88 128h330l-58 18H46z"/>
+      <path d="M1710 128h330l44 18h-314z"/>
+    </g>
+  </g>
+  <g filter="url(#softShadow)" transform="translate(880 610)">
+    <rect x="0" y="0" width="250" height="158" rx="14" fill="#8d51e5"/>
+    <rect x="0" y="-28" width="250" height="158" rx="14" fill="url(#tile)" stroke="#fff" stroke-opacity=".85" stroke-width="2"/>
+    <path d="M126 27c-43 0-78 34-78 76s35 76 78 76c38 0 69-25 76-60h-78V92h112c2 9 3 16 3 25 0 64-45 108-113 108-69 0-125-55-125-122S57-20 126-20c34 0 62 12 84 32l-36 35c-13-12-29-20-48-20Z" transform="scale(.35) translate(235 70)" fill="#3c3330"/>
+  </g>
+  <g filter="url(#softShadow)" transform="translate(1216 452)">
+    <rect x="0" y="0" width="168" height="104" rx="12" fill="#8d51e5"/>
+    <rect x="0" y="-24" width="168" height="104" rx="12" fill="url(#tile)" stroke="#fff" stroke-opacity=".85" stroke-width="2"/>
+    <path d="M52 30h64M52 52h64M70 18v48M98 18v48" stroke="#3c3330" stroke-width="3" fill="none"/>
+  </g>
+  <g filter="url(#softShadow)" transform="translate(650 506)">
+    <rect x="0" y="0" width="150" height="92" rx="12" fill="#8d51e5"/>
+    <rect x="0" y="-22" width="150" height="92" rx="12" fill="url(#tile)" stroke="#fff" stroke-opacity=".85" stroke-width="2"/>
+    <path d="M46 29h58v35H46zM46 29l29 23 29-23" stroke="#3c3330" stroke-width="3" fill="none"/>
+  </g>
+  <g filter="url(#softShadow)" transform="translate(1510 360) rotate(11)">
+    <rect x="0" y="0" width="138" height="90" rx="12" fill="#8d51e5"/>
+    <rect x="0" y="-22" width="138" height="90" rx="12" fill="url(#tile)" stroke="#fff" stroke-opacity=".85" stroke-width="2"/>
+    <path d="M39 25h61v38H39zM51 52l15-16 10 9 13-18" stroke="#3c3330" stroke-width="3" fill="none"/>
+  </g>
+  <g filter="url(#softShadow)" transform="translate(545 372) rotate(-13)">
+    <rect x="0" y="0" width="118" height="84" rx="12" fill="#8d51e5"/>
+    <rect x="0" y="-20" width="118" height="84" rx="12" fill="url(#tile)" stroke="#fff" stroke-opacity=".85" stroke-width="2"/>
+    <path d="M58 16v45M36 39h45M42 23l32 32M75 23 43 55" stroke="#3c3330" stroke-width="3" fill="none"/>
+  </g>
+</svg>
