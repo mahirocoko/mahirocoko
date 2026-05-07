@@ -791,11 +791,13 @@
         justify-content: center;
       }
 
-      .final-cta img {
+      .final-cta .ctaImage {
         width: 100%;
         height: 100%;
         min-height: 330px;
-        object-fit: cover;
+        padding: clamp(0.45rem, 1.4vw, 0.95rem);
+        object-fit: contain;
+        object-position: center bottom;
       }
 
       .footer {
@@ -966,7 +968,7 @@
           text-align: left;
         }
 
-        .final-cta img {
+        .final-cta .ctaImage {
           min-height: 240px;
         }
 
@@ -1498,7 +1500,8 @@
               </div>
             </div>
             <img
-              src="https://images.unsplash.com/photo-1509223197845-458d87318791?auto=format&fit=crop&w=760&q=82"
+              class="ctaImage"
+              src="assets/final-cta-vase-cutout-trimmed.png"
               alt="Glass vase with fresh green stems on a cream surface"
             />
           </div>
