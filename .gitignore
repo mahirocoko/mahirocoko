@@ -99,3 +99,5 @@ lab/hrm-figma-prototype/
 /.playwright/
 .playwright-cli
 .playwright-mcp
+# CocoIndex Code (ccc)
+/.cocoindex_code/
