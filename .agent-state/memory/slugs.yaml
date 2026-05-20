@@ -3,3 +3,6 @@ never-run-claude-init: .agent-state/memory/learnings/2026-04-01_never-run-claude
 life-lesson-ep-9-diw-weerawat: .agent-state/memory/learnings/2026-04-23_life-lesson-ep-9-diw-weerawat.md
 9arm-same-energy-drama: .agent-state/memory/learnings/2026-04-25_9arm-same-energy-drama.md
 andrej-karpathy-5-ai-x10: /Users/mahiro/Git/me/mahirocoko/.agent-state/memory/learnings/2026-05-07_andrej-karpathy-5-ai-x10.md
+claude-code-notebooklm-workflow: .agent-state/memory/learnings/2026-05-18_claude-code-notebooklm-workflow.md
+ai-stock-picking-agent: .agent-state/memory/learnings/2026-05-18_ai-stock-picking-agent.md
+watch-second-pass-extraction: .agent-state/memory/learnings/2026-05-19_watch-second-pass-extraction.md
