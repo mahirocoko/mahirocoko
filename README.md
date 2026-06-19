@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/cat-avatar.svg" alt="Mahiro Cat Avatar" width="180" />
+  <img src="public/cat-avatar.gif" alt="Mahiro samurai cat avatar" width="180" />
   
   # Mahiro Cokawa
   
@@ -12,5 +12,5 @@
 ---
 
 <div align="center">
-  <img src="public/mahiro-profile-card.svg" alt="Mahiro profile card" width="720" />
+  <img src="public/mahiro-profile-card.gif" alt="Mahiro profile card" width="720" />
 </div>
