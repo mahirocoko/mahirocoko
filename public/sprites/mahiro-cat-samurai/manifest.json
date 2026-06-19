@@ -1,0 +1,159 @@
+{
+  "name": "mahiro-cat-samurai",
+  "description": "White cat samurai game sprite pack generated for Mahiro profile/game experiments.",
+  "frame": {
+    "width": 128,
+    "height": 128
+  },
+  "actions": {
+    "idle": {
+      "frames": 6,
+      "fps": 6,
+      "role": "template-driven idle loop",
+      "source": "sources/idle-source.png",
+      "runtime": {
+        "png": "runtime/idle.png",
+        "webp": "runtime/idle.webp"
+      },
+      "preview": "previews/idle.gif",
+      "sheet": {
+        "width": 768,
+        "height": 128,
+        "columns": 6,
+        "rows": 1
+      },
+      "notes": [
+        "Regenerated from public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png as a stricter template-driven 6-frame action."
+      ]
+    },
+    "run": {
+      "frames": 6,
+      "fps": 8,
+      "role": "template-driven bipedal sword run cycle",
+      "source": "sources/run-source.png",
+      "runtime": {
+        "png": "runtime/run.png",
+        "webp": "runtime/run.webp"
+      },
+      "preview": "previews/run.gif",
+      "sheet": {
+        "width": 768,
+        "height": 128,
+        "columns": 6,
+        "rows": 1
+      },
+      "notes": [
+        "Regenerated from public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png as a bipedal two-leg run while holding the sword close to the body.",
+        "This run source intentionally replaces the earlier quadruped/cat-gallop run skeleton."
+      ]
+    },
+    "slash": {
+      "frames": 5,
+      "fps": 10,
+      "role": "template-driven sword slash attack",
+      "source": "sources/slash-source.png",
+      "runtime": {
+        "png": "runtime/slash.png",
+        "webp": "runtime/slash.webp"
+      },
+      "preview": "previews/slash.gif",
+      "sheet": {
+        "width": 640,
+        "height": 128,
+        "columns": 5,
+        "rows": 1
+      },
+      "notes": [
+        "Regenerated from public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png as a stricter template-driven 6-frame action.",
+        "Runtime timing trimmed to 5 frames using generated frame sequence 0,1,2,3,5 to remove a duplicate post-slash pose."
+      ]
+    },
+    "hurt": {
+      "frames": 4,
+      "fps": 7,
+      "role": "template-driven hurt reaction",
+      "source": "sources/hurt-source.png",
+      "runtime": {
+        "png": "runtime/hurt.png",
+        "webp": "runtime/hurt.webp"
+      },
+      "preview": "previews/hurt.gif",
+      "sheet": {
+        "width": 512,
+        "height": 128,
+        "columns": 4,
+        "rows": 1
+      },
+      "notes": [
+        "Regenerated from public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png as a stricter template-driven 4-frame action."
+      ]
+    },
+    "walk": {
+      "frames": 6,
+      "fps": 6,
+      "role": "bipedal exploration walk",
+      "source": "sources/walk-source.png",
+      "runtime": {
+        "png": "runtime/walk.png",
+        "webp": "runtime/walk.webp"
+      },
+      "preview": "previews/walk.gif",
+      "sheet": {
+        "width": 768,
+        "height": 128,
+        "columns": 6,
+        "rows": 1
+      },
+      "notes": [
+        "Regenerated from public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png as a stronger 6-frame bipedal walk with clearer step contrast.",
+        "Still intentionally calm/exploration-speed rather than run-speed; step contrast is modest to preserve the character posture."
+      ]
+    },
+    "dash": {
+      "frames": 4,
+      "fps": 10,
+      "role": "samurai dash burst",
+      "source": "sources/dash-source.png",
+      "runtime": {
+        "png": "runtime/dash.png",
+        "webp": "runtime/dash.webp"
+      },
+      "preview": "previews/dash.gif",
+      "sheet": {
+        "width": 512,
+        "height": 128,
+        "columns": 4,
+        "rows": 1
+      },
+      "notes": [
+        "Generated from public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png as an additional 4-frame action."
+      ]
+    },
+    "guard": {
+      "frames": 4,
+      "fps": 8,
+      "role": "guard block stance",
+      "source": "sources/guard-source.png",
+      "runtime": {
+        "png": "runtime/guard.png",
+        "webp": "runtime/guard.webp"
+      },
+      "preview": "previews/guard.gif",
+      "sheet": {
+        "width": 512,
+        "height": 128,
+        "columns": 4,
+        "rows": 1
+      },
+      "notes": [
+        "Generated from public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png as an additional 4-frame action."
+      ]
+    }
+  },
+  "notes": [
+    "Latest action sheets are regenerated one action at a time with Codex imagegen using public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png as the character/style master.",
+    "Runtime strips are component-cut, chroma-key cleaned, and normalized to transparent 128x128 cells.",
+    "Per-action GIF previews are full-frame exports with Dispose: Background; runtime PNG/WebP strips remain the source of truth for game import.",
+    "Use previews/all-actions-preview.png and per-action GIFs for QA before game import."
+  ]
+}
