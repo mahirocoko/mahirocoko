@@ -1,0 +1,252 @@
+{
+  "lane": "lane-c",
+  "task": "C+D scale-lock Mahiro White Cat Samurai walk refinement",
+  "status": "completed_with_caveat",
+  "count_layout_pass": true,
+  "raw_preserved": true,
+  "raw_png_path": "generated-source-images/imagegen-source-raw.png",
+  "raw_sha256": "3608f0dceee7ebda0fe809b3bf7e2ea542b77ec9514c5742d0e09744004d0649",
+  "raw_dimensions": [
+    2172,
+    724
+  ],
+  "payload": {
+    "extracted_from": "/Users/mahiro/.codex/sessions/2026/06/21/rollout-2026-06-21T23-17-28-019eeaf9-0261-77c0-ade3-951322a53b1c.jsonl",
+    "jsonl_line_1_based": 47,
+    "timestamp": "2026-06-21T16:20:31.353Z",
+    "call_id": "ig_060a4c24692472a7016a380ef17a1081919a79be266cbc5138",
+    "result_base64_length": 1786292
+  },
+  "references": {
+    "identity_stability": "docs/sprites/analysis/walk-four-lane-codex/lane-c/sprite-sheet-6f.png",
+    "leg_kimono_readability": "docs/sprites/analysis/walk-four-lane-codex/lane-d/sprite-sheet-6f.png",
+    "canonical_identity": "public/assets/mahiro-cat-samurai-character-template-master-neutral.png",
+    "canonical_source_style": "public/sprites/mahiro-cat-samurai/sources/walk-source.png"
+  },
+  "normalization": {
+    "method": "magenta chroma-key removal, equal 1x6 cell split, component crop, shared-scale resize, feet alignment",
+    "rows": 1,
+    "cols": 6,
+    "cell_size": 128,
+    "threshold": 40,
+    "edge_threshold": 12,
+    "fit_scale": 0.9,
+    "shared_scale": true,
+    "align": "feet",
+    "component_mode": "all",
+    "trim_border": 2,
+    "edge_clean_depth": 2
+  },
+  "scale_qa": {
+    "note": "Count/layout pass: raw has six complete right-facing sprites in one horizontal row. Shared-scale normalization keeps one common scale and a fixed feet alignment in 128x128 frames. Raw crop height range is 16px (359-375), raw crop width range is 40px (244-284), normalized baseline range is 0px. Frame 4 reads slightly larger/taller; frames 2, 5, and especially 6 read a little smaller/narrower. This is improved versus obvious zoom pulsing, but not a perfect scale-lock pass.",
+    "raw_crop_height_range_px": 16,
+    "raw_crop_width_range_px": 40,
+    "normalized_baseline_range_px": 0,
+    "assessment": "usable review candidate; remaining raw scale drift documented honestly"
+  },
+  "frames": [
+    {
+      "frame": 1,
+      "raw_crop_bbox": [
+        33,
+        155,
+        305,
+        530
+      ],
+      "raw_crop_size": [
+        272,
+        375
+      ],
+      "normalized_visible_bbox": [
+        22,
+        7,
+        105,
+        122
+      ],
+      "normalized_visible_size": [
+        83,
+        115
+      ],
+      "processor_output_size": [
+        83,
+        115
+      ],
+      "baseline_y": 122,
+      "top_y": 7,
+      "component_count": 7,
+      "edge_touch": false
+    },
+    {
+      "frame": 2,
+      "raw_crop_bbox": [
+        15,
+        167,
+        291,
+        526
+      ],
+      "raw_crop_size": [
+        276,
+        359
+      ],
+      "normalized_visible_bbox": [
+        22,
+        12,
+        106,
+        122
+      ],
+      "normalized_visible_size": [
+        84,
+        110
+      ],
+      "processor_output_size": [
+        84,
+        110
+      ],
+      "baseline_y": 122,
+      "top_y": 12,
+      "component_count": 6,
+      "edge_touch": false
+    },
+    {
+      "frame": 3,
+      "raw_crop_bbox": [
+        8,
+        163,
+        280,
+        530
+      ],
+      "raw_crop_size": [
+        272,
+        367
+      ],
+      "normalized_visible_bbox": [
+        22,
+        10,
+        105,
+        122
+      ],
+      "normalized_visible_size": [
+        83,
+        112
+      ],
+      "processor_output_size": [
+        83,
+        112
+      ],
+      "baseline_y": 122,
+      "top_y": 10,
+      "component_count": 2,
+      "edge_touch": false
+    },
+    {
+      "frame": 4,
+      "raw_crop_bbox": [
+        10,
+        155,
+        282,
+        530
+      ],
+      "raw_crop_size": [
+        272,
+        375
+      ],
+      "normalized_visible_bbox": [
+        22,
+        7,
+        105,
+        122
+      ],
+      "normalized_visible_size": [
+        83,
+        115
+      ],
+      "processor_output_size": [
+        83,
+        115
+      ],
+      "baseline_y": 122,
+      "top_y": 7,
+      "component_count": 6,
+      "edge_touch": false
+    },
+    {
+      "frame": 5,
+      "raw_crop_bbox": [
+        5,
+        166,
+        289,
+        530
+      ],
+      "raw_crop_size": [
+        284,
+        364
+      ],
+      "normalized_visible_bbox": [
+        20,
+        11,
+        107,
+        122
+      ],
+      "normalized_visible_size": [
+        87,
+        111
+      ],
+      "processor_output_size": [
+        87,
+        111
+      ],
+      "baseline_y": 122,
+      "top_y": 11,
+      "component_count": 6,
+      "edge_touch": false
+    },
+    {
+      "frame": 6,
+      "raw_crop_bbox": [
+        36,
+        158,
+        280,
+        530
+      ],
+      "raw_crop_size": [
+        244,
+        372
+      ],
+      "normalized_visible_bbox": [
+        27,
+        8,
+        101,
+        122
+      ],
+      "normalized_visible_size": [
+        74,
+        114
+      ],
+      "processor_output_size": [
+        74,
+        114
+      ],
+      "baseline_y": 122,
+      "top_y": 8,
+      "component_count": 5,
+      "edge_touch": false
+    }
+  ],
+  "deliverables": [
+    "generated-source-images/imagegen-source-raw.png",
+    "frames/frame-01.png",
+    "frames/frame-02.png",
+    "frames/frame-03.png",
+    "frames/frame-04.png",
+    "frames/frame-05.png",
+    "frames/frame-06.png",
+    "sprite-sheet-6f.png",
+    "sprite-sheet-6f.webp",
+    "preview.gif",
+    "preview-dark.png",
+    "qa-board.png",
+    "README.md",
+    "process-meta.json",
+    "prompt-used.txt"
+  ]
+}

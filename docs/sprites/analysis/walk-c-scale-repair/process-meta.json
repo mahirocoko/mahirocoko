@@ -1,0 +1,60 @@
+{
+  "task": "Mahiro White Cat Samurai lane-C local scale repair",
+  "source": "source/lane-c-selected-sprite-sheet-6f.png",
+  "method": "split selected C into six 128x128 frames, trim alpha content, resize each content crop to a shared 113px height, place all frames on a fixed 128x128 canvas with bottom baseline at y=122, then reassemble",
+  "intent": "reduce perceived per-frame scale/zoom drift while preserving C identity and walk poses",
+  "original_bboxes": [
+    {
+      "frame": 1,
+      "bbox": "83x115+22+7"
+    },
+    {
+      "frame": 2,
+      "bbox": "84x110+22+12"
+    },
+    {
+      "frame": 3,
+      "bbox": "83x112+22+10"
+    },
+    {
+      "frame": 4,
+      "bbox": "83x115+22+7"
+    },
+    {
+      "frame": 5,
+      "bbox": "87x111+20+11"
+    },
+    {
+      "frame": 6,
+      "bbox": "74x114+27+8"
+    }
+  ],
+  "repaired_bboxes": [
+    {
+      "frame": 1,
+      "bbox": "82x113+23+9"
+    },
+    {
+      "frame": 2,
+      "bbox": "86x113+21+9"
+    },
+    {
+      "frame": 3,
+      "bbox": "84x113+22+9"
+    },
+    {
+      "frame": 4,
+      "bbox": "82x113+23+9"
+    },
+    {
+      "frame": 5,
+      "bbox": "89x113+19+9"
+    },
+    {
+      "frame": 6,
+      "bbox": "73x113+27+9"
+    }
+  ],
+  "qa_note": "Height and baseline are now locked across frames. Width still varies by pose, especially frame 6, but that reads more like silhouette/stride variation than camera zoom. No runtime assets edited.",
+  "defringe": "Applied ImageMagick fuzz 10% transparent #ff00ff pass after height/baseline lock; QA preview did not show loss of sakura/ear details."
+}
