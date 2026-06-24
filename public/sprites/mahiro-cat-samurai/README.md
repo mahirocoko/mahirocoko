@@ -14,7 +14,7 @@ Game-ready prototype sprite pack for Mahiro's white-cat samurai mascot.
 
 | action | frames | fps | role |
 | --- | ---: | ---: | --- |
-| `idle` | 6 | 6 | template-driven idle loop |
+| `idle` | 6 | 6 | rig-based idle loop |
 | `run` | 6 | 8 | template-driven bipedal sword run cycle |
 | `walk` | 6 | 6 | bipedal exploration walk |
 | `dash` | 4 | 10 | samurai dash burst |
@@ -25,6 +25,7 @@ Game-ready prototype sprite pack for Mahiro's white-cat samurai mascot.
 ## Notes
 
 - Generated one action at a time with Codex imagegen. Current action sheets were regenerated from `public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png` as the character/style master.
+- `idle` now uses the local `main-character-animation-rig` output normalized into the existing `128x128` runtime contract.
 - Runtime strips are component-cut, chroma-key cleaned, and normalized to transparent `128x128` cells.
 - `previews/all-actions-preview.png` is the quick QA board.
 - Preview GIFs are exported as full-frame GIFs with `Dispose: Background`; runtime PNG/WebP strips remain the source of truth for game use.
