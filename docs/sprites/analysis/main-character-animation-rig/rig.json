@@ -1,0 +1,279 @@
+{
+  "name": "mahiro-cat-samurai-animation-rig",
+  "version": 1,
+  "source": "source/neutral-base-64x80.png",
+  "canvas": {
+    "width": 64,
+    "height": 80,
+    "baselineY": 76
+  },
+  "coordinateSystem": "top-left pixel coordinates; pivots are in full-canvas coordinates",
+  "recommendedRuntimeFrame": "64x80",
+  "partsBackToFront": [
+    "tail",
+    "katana-back",
+    "torso-kimono",
+    "obi-belt",
+    "left-foot",
+    "right-foot",
+    "front-sleeve",
+    "head",
+    "face-features"
+  ],
+  "parts": {
+    "tail": {
+      "fullCanvas": "layers/full-canvas/tail.png",
+      "cropped": "layers/cropped/tail.png",
+      "pivot": {
+        "x": 51,
+        "y": 56
+      },
+      "bounds": {
+        "x": 46,
+        "y": 43,
+        "w": 18,
+        "h": 30
+      },
+      "animate": "subtle wag/settle; rotate around root near body, keep tip within canvas"
+    },
+    "katana-back": {
+      "fullCanvas": "layers/full-canvas/katana-back.png",
+      "cropped": "layers/cropped/katana-back.png",
+      "pivot": {
+        "x": 11,
+        "y": 54
+      },
+      "bounds": {
+        "x": 0,
+        "y": 31,
+        "w": 20,
+        "h": 43
+      },
+      "animate": "move with torso; avoid independent swinging unless action frame"
+    },
+    "torso-kimono": {
+      "fullCanvas": "layers/full-canvas/torso-kimono.png",
+      "cropped": "layers/cropped/torso-kimono.png",
+      "pivot": {
+        "x": 32,
+        "y": 52
+      },
+      "bounds": {
+        "x": 13,
+        "y": 33,
+        "w": 40,
+        "h": 44
+      },
+      "animate": "main body bob; small y offsets for idle/walk"
+    },
+    "obi-belt": {
+      "fullCanvas": "layers/full-canvas/obi-belt.png",
+      "cropped": "layers/cropped/obi-belt.png",
+      "pivot": {
+        "x": 32,
+        "y": 55
+      },
+      "bounds": {
+        "x": 19,
+        "y": 48,
+        "w": 29,
+        "h": 16
+      },
+      "animate": "locked to torso; separate only if cloth sway is needed"
+    },
+    "left-foot": {
+      "fullCanvas": "layers/full-canvas/left-foot.png",
+      "cropped": "layers/cropped/left-foot.png",
+      "pivot": {
+        "x": 24,
+        "y": 74
+      },
+      "bounds": {
+        "x": 17,
+        "y": 66,
+        "w": 16,
+        "h": 14
+      },
+      "animate": "walk contact/step; keep baseline at y=76 when planted"
+    },
+    "right-foot": {
+      "fullCanvas": "layers/full-canvas/right-foot.png",
+      "cropped": "layers/cropped/right-foot.png",
+      "pivot": {
+        "x": 40,
+        "y": 74
+      },
+      "bounds": {
+        "x": 32,
+        "y": 66,
+        "w": 18,
+        "h": 14
+      },
+      "animate": "walk contact/step; alternate with left-foot"
+    },
+    "front-sleeve": {
+      "fullCanvas": "layers/full-canvas/front-sleeve.png",
+      "cropped": "layers/cropped/front-sleeve.png",
+      "pivot": {
+        "x": 44,
+        "y": 47
+      },
+      "bounds": {
+        "x": 38,
+        "y": 43,
+        "w": 19,
+        "h": 29
+      },
+      "animate": "small sway with robe/body; can lift for action poses"
+    },
+    "head": {
+      "fullCanvas": "layers/full-canvas/head.png",
+      "cropped": "layers/cropped/head.png",
+      "pivot": {
+        "x": 32,
+        "y": 33
+      },
+      "bounds": {
+        "x": 5,
+        "y": 0,
+        "w": 55,
+        "h": 46
+      },
+      "animate": "head bob/tilt around neck; keep ears inside canvas"
+    },
+    "face-features": {
+      "fullCanvas": "layers/full-canvas/face-features.png",
+      "cropped": "layers/cropped/face-features.png",
+      "pivot": {
+        "x": 32,
+        "y": 28
+      },
+      "bounds": {
+        "x": 13,
+        "y": 21,
+        "w": 37,
+        "h": 17
+      },
+      "animate": "blink/expression overlay; normally follows head"
+    }
+  },
+  "animationTemplates": {
+    "idle6": {
+      "frameCount": 6,
+      "fps": 8,
+      "notes": "subtle breathing loop; move torso/head by 0-1px and wag tail lightly",
+      "frames": [
+        {
+          "frame": 0,
+          "torsoY": 0,
+          "headY": 0,
+          "tailRot": 0
+        },
+        {
+          "frame": 1,
+          "torsoY": 0,
+          "headY": -1,
+          "tailRot": 1
+        },
+        {
+          "frame": 2,
+          "torsoY": -1,
+          "headY": -1,
+          "tailRot": 2
+        },
+        {
+          "frame": 3,
+          "torsoY": -1,
+          "headY": 0,
+          "tailRot": 1
+        },
+        {
+          "frame": 4,
+          "torsoY": 0,
+          "headY": 0,
+          "tailRot": 0
+        },
+        {
+          "frame": 5,
+          "torsoY": 0,
+          "headY": 0,
+          "tailRot": -1
+        }
+      ]
+    },
+    "walk8": {
+      "frameCount": 8,
+      "fps": 10,
+      "notes": "start from planted baseline; alternate foot y/x offsets; keep body mass stable",
+      "frames": [
+        {
+          "frame": 0,
+          "bodyY": 0,
+          "leftFoot": "plant",
+          "rightFoot": "back"
+        },
+        {
+          "frame": 1,
+          "bodyY": -1,
+          "leftFoot": "push",
+          "rightFoot": "lift"
+        },
+        {
+          "frame": 2,
+          "bodyY": -1,
+          "leftFoot": "back",
+          "rightFoot": "swing"
+        },
+        {
+          "frame": 3,
+          "bodyY": 0,
+          "leftFoot": "back",
+          "rightFoot": "contact"
+        },
+        {
+          "frame": 4,
+          "bodyY": 0,
+          "leftFoot": "back",
+          "rightFoot": "plant"
+        },
+        {
+          "frame": 5,
+          "bodyY": -1,
+          "leftFoot": "lift",
+          "rightFoot": "push"
+        },
+        {
+          "frame": 6,
+          "bodyY": -1,
+          "leftFoot": "swing",
+          "rightFoot": "back"
+        },
+        {
+          "frame": 7,
+          "bodyY": 0,
+          "leftFoot": "contact",
+          "rightFoot": "back"
+        }
+      ]
+    }
+  },
+  "qa": {
+    "assembledNeutral": "output/assembled-neutral.png",
+    "sourcePreview": "qa/source-neutral-preview-4x.png",
+    "assembledPreview": "qa/assembled-neutral-preview-4x.png",
+    "contactSheet": "qa/rig-contact-sheet.png"
+  },
+  "outputs": {
+    "idlePolished6": {
+      "strip": "output/idle-polished-6f-strip.png",
+      "gif": "output/idle-polished-6f.gif",
+      "framesDir": "frames/idle-6f",
+      "previewStrip4x": "qa/idle-polished-6f-strip-preview-4x.png",
+      "previewGif4x": "qa/idle-polished-6f-preview-4x.gif",
+      "facePolicy": "single short blink frame; variable GIF delay keeps blink fast"
+    }
+  },
+  "optionalLayers": {
+    "faceFeaturesBlink": "layers/full-canvas/face-features-blink.png"
+  }
+}

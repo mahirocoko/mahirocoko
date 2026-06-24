@@ -9,7 +9,7 @@
     "idle": {
       "frames": 6,
       "fps": 6,
-      "role": "template-driven idle loop",
+      "role": "rig-based idle loop",
       "source": "sources/idle-source.png",
       "runtime": {
         "png": "runtime/idle.png",
@@ -23,7 +23,16 @@
         "rows": 1
       },
       "notes": [
-        "Regenerated from public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png as a stricter template-driven 6-frame action."
+        "Replaced runtime idle with docs/sprites/analysis/main-character-animation-rig/output/idle-polished-6f-strip.png, scaled and padded into transparent 128x128 runtime cells.",
+        "Blink uses a dedicated face-features layer and a shorter preview GIF delay so it reads as a quick blink."
+      ],
+      "frameDelaysMs": [
+        140,
+        120,
+        120,
+        50,
+        120,
+        140
       ]
     },
     "run": {
@@ -154,6 +163,7 @@
     "Latest action sheets are regenerated one action at a time with Codex imagegen using public/assets/mahiro-cat-samurai-character-template-master-neutral-512.png as the character/style master.",
     "Runtime strips are component-cut, chroma-key cleaned, and normalized to transparent 128x128 cells.",
     "Per-action GIF previews are full-frame exports with Dispose: Background; runtime PNG/WebP strips remain the source of truth for game import.",
-    "Use previews/all-actions-preview.png and per-action GIFs for QA before game import."
+    "Use previews/all-actions-preview.png and per-action GIFs for QA before game import.",
+    "Idle action now uses the self-contained main-character-animation-rig output, normalized to the existing 128x128 runtime contract."
   ]
 }
