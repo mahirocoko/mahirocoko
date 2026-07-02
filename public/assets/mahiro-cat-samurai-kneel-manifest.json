@@ -1,0 +1,41 @@
+{
+  "name": "mahiro-cat-samurai-kneel",
+  "kind": "sprite-sheet-animation",
+  "frameSize": [176, 176],
+  "layout": { "columns": 8, "rows": 1, "gutter": 0 },
+  "frameCount": 8,
+  "states": ["kneel"],
+  "frames": [
+    { "state": "kneel", "index": 0, "x": 0, "y": 0, "width": 176, "height": 176, "durationMs": 90 },
+    { "state": "kneel", "index": 1, "x": 176, "y": 0, "width": 176, "height": 176, "durationMs": 90 },
+    { "state": "kneel", "index": 2, "x": 352, "y": 0, "width": 176, "height": 176, "durationMs": 90 },
+    { "state": "kneel", "index": 3, "x": 528, "y": 0, "width": 176, "height": 176, "durationMs": 90 },
+    { "state": "kneel", "index": 4, "x": 704, "y": 0, "width": 176, "height": 176, "durationMs": 90 },
+    { "state": "kneel", "index": 5, "x": 880, "y": 0, "width": 176, "height": 176, "durationMs": 90 },
+    { "state": "kneel", "index": 6, "x": 1056, "y": 0, "width": 176, "height": 176, "durationMs": 90 },
+    { "state": "kneel", "index": 7, "x": 1232, "y": 0, "width": 176, "height": 176, "durationMs": 560 }
+  ],
+  "anchors": { "default": [88, 172], "baseline": [88, 175] },
+  "artifacts": {
+    "sheet": "mahiro-cat-samurai-kneel-sprite-sheet.png",
+    "previewGif": "mahiro-cat-samurai-kneel-preview.gif"
+  },
+  "provenance": {
+    "sourceLane": "codex",
+    "usage": "production-draft",
+    "sourceImage": "mahiro-cat-samurai-character-template-master-neutral.png",
+    "sourceWorkflow": ".agent-state/sprite-workflow/jobs/cat-samurai-kneel-chroma-001",
+    "winnerSource": "raw-generated/chroma-raw-2.png",
+    "pipeline": "sprite-workflow/extract-chroma-sheet -> center align -> make-qa-previews -> qa-sprite-sheet"
+  },
+  "qa": {
+    "report": ".agent-state/sprite-workflow/jobs/cat-samurai-kneel-chroma-001/outbox/pipeline-raw2-centered/qa.json",
+    "allowBottomEdge": true,
+    "preserveRightAppendage": true,
+    "centerAligned": true,
+    "centerXRange": [87.5, 88.5],
+    "warnings": 0,
+    "failures": 0
+  },
+  "notes": "Generated through sprite-workflow pipeline from the smoother raw2 Codex imagegen magenta chroma-key source. Frames 3-6 were center-aligned after extraction so the character stays near x=88 through the kneel motion."
+}
