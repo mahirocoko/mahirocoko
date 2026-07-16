@@ -4,6 +4,7 @@ import { configurationPrice } from '../hooks/use-commerce'
 import type { Finish, ModuleId, RailSize, SystemConfiguration } from '../types'
 import { useBuilderIntro } from '../hooks/use-builder-intro'
 import { useSectionIntro } from '../hooks/use-section-intro'
+import { BuilderPreview } from './builder-preview'
 import { ArrowIcon } from './icons'
 import { MotionHeading } from './motion-heading'
 
@@ -39,20 +40,10 @@ export const SystemBuilder = ({ onAdd }: SystemBuilderProps) => {
       <div className="builder-shell">
         <div className={`builder-canvas builder-canvas--${finish}`} ref={canvasRef}>
           <div className="canvas-toolbar">
-            <span>Desk preview</span>
+            <span>3D desk preview</span>
             <span>{railSize} cm · {modules.length} {modules.length === 1 ? 'module' : 'modules'}</span>
           </div>
-          <div className="desk-scene" style={{ '--rail-width': `${58 + (railSize - 90) * 0.24}%` } as React.CSSProperties}>
-            <div className="desk-plane" />
-            <div className="system-rail">
-              <i className="rail-slot" />
-              <span className={`attached attached--dock ${modules.includes('arc-dock') ? 'is-present' : 'is-absent'}`} aria-hidden="true"><b /><small>ARC</small></span>
-              <span className={`attached attached--light ${modules.includes('halo-light') ? 'is-present' : 'is-absent'}`} aria-hidden="true"><b /><small>HALO</small></span>
-              <span className={`attached attached--tray ${modules.includes('pocket-tray') ? 'is-present' : 'is-absent'}`} aria-hidden="true"><b /><small>POCKET</small></span>
-            </div>
-            <span className="canvas-scale">{railSize}0 mm</span>
-          </div>
-          <p className="canvas-note">Concept geometry · attachment positions are illustrative</p>
+          <BuilderPreview railSize={railSize} finish={finish} modules={modules} />
         </div>
 
         <form className="builder-controls" ref={controlsRef} onSubmit={(event) => { event.preventDefault(); onAdd(configuration) }}>

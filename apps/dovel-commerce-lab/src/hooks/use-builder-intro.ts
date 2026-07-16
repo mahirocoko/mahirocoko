@@ -24,11 +24,9 @@ export const useBuilderIntro = () => {
       (context) => {
         const conditions = context.conditions as { mobile: boolean; desktop: boolean; reduce: boolean }
         const toolbar = canvas.querySelector<HTMLElement>('.canvas-toolbar')
-        const desk = canvas.querySelector<HTMLElement>('.desk-plane')
-        const rail = canvas.querySelector<HTMLElement>('.system-rail')
-        const modules = gsap.utils.toArray<HTMLElement>('.attached.is-present', canvas)
+        const preview = canvas.querySelector<HTMLElement>('.builder-preview-stage')
         const note = canvas.querySelector<HTMLElement>('.canvas-note')
-        const canvasTargets = [canvas, toolbar, desk, rail, note, ...modules].filter((target): target is HTMLElement => target !== null)
+        const canvasTargets = [canvas, toolbar, preview, note].filter((target): target is HTMLElement => target !== null)
         const controlTargets = [
           ...gsap.utils.toArray<HTMLElement>('fieldset', controls),
           ...gsap.utils.toArray<HTMLElement>('.builder-total', controls),
@@ -48,9 +46,7 @@ export const useBuilderIntro = () => {
         })
           .from(canvas, { autoAlpha: 0, clipPath: 'inset(0 0 16% 0)', duration: 0.38 })
           .from(toolbar, { autoAlpha: 0, y: -5, duration: 0.24 }, '-=0.18')
-          .from(desk, { autoAlpha: 0, y: conditions.mobile ? 9 : 14, duration: 0.38 }, '-=0.18')
-          .from(rail, { autoAlpha: 0, scaleX: 0, transformOrigin: 'center center', duration: 0.42 }, '-=0.2')
-          .from(modules, { autoAlpha: 0, y: conditions.mobile ? 12 : 18, duration: 0.34, stagger: 0.065 }, '-=0.16')
+          .from(preview, { autoAlpha: 0, y: conditions.mobile ? 9 : 14, scale: 0.985, duration: 0.46 }, '-=0.18')
           .from(note, { autoAlpha: 0, duration: 0.24 }, '-=0.12')
 
         const controlsTimeline = gsap.timeline({

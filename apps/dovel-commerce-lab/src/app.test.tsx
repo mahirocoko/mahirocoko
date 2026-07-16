@@ -24,6 +24,8 @@ describe('DOVEL commerce lab', () => {
     render(<App />)
 
     expect(screen.getByTestId('builder-total')).toHaveTextContent('$427')
+    expect(screen.getByText('System 01 · CSS fallback')).toBeInTheDocument()
+    expect(document.querySelector('.builder-preview-stage canvas')).not.toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Add Halo Light' }))
     expect(screen.getByTestId('builder-total')).toHaveTextContent('$616')
 
