@@ -24,7 +24,7 @@ Everything here is fictional concept content. Product dimensions, prices, polici
 - product collection with finish selection and add-to-bag
 - Starter 01 buying-path bridge with rail, module, desk-fit, compatibility, and concept-total guidance
 - product-detail dialog with specifications, compatibility, finish choice, and cart handoff
-- application-style System Builder with rail sizes, finishes, module toggles, live total, and attached-object preview
+- application-style System Builder with rail sizes, finishes, module toggles, live total, and a real configurable Three.js/GLB product preview
 - native shared-object card ↔ detail transitions plus deterministic hero/rail seating feedback
 - dedicated Hero timeline coordinating masked typography, product-card seating, rail/latches, CTA/spec, and system note
 - GSAP + ScrollTrigger section choreography with masked typography lines, bounded staging, and one-shot viewport triggers
@@ -35,7 +35,7 @@ Everything here is fictional concept content. Product dimensions, prices, polici
 
 ## Interaction evidence
 
-Codrops influenced the mechanism-level principles of **state continuity** and **one coherent motion relationship**: an object should remain identifiable while selection or layout changes around it, and motion should clarify section hierarchy rather than stack spectacle. DOVEL adapts those principles through the native View Transitions API for product card ↔ detail continuity, short authored CSS seating/latch feedback in the hero and configurator, and pinned GSAP + ScrollTrigger choreography for one-shot section introductions. ScrollTrigger does not scrub typography or own scrolling; there is no ScrollSmoother, scroll hijacking, WebGL, or copied Codrops animation sequence. Unsupported View Transition browsers fall back to immediate state changes, while `prefers-reduced-motion` skips shared-object and section choreography paths entirely.
+Codrops influenced the mechanism-level principles of **state continuity** and **one coherent motion relationship**: an object should remain identifiable while selection or layout changes around it, and motion should clarify section hierarchy rather than stack spectacle. DOVEL adapts those principles through the native View Transitions API for product card ↔ detail continuity, a real GLB-backed Three.js Builder preview, short authored seating/latch feedback, and pinned GSAP + ScrollTrigger choreography for one-shot section introductions. ScrollTrigger does not scrub typography or own scrolling; there is no ScrollSmoother, scroll hijacking, or copied Codrops animation sequence. Unsupported WebGL uses the prior CSS concept geometry, unsupported View Transition browsers fall back to immediate state changes, and `prefers-reduced-motion` removes pointer parallax and settles model/configuration changes immediately.
 
 ## Product assets
 
@@ -44,6 +44,7 @@ Runtime product assets:
 - `public/assets/products/arc-dock.webp`
 - `public/assets/products/halo-light.webp`
 - `public/assets/products/pocket-tray.webp`
+- `public/assets/models/dovel-system-01.glb`
 
 The contract and generation prompts live in `docs/asset-manifest.md` and `docs/imagegen-prompts.md`. The three card renders were generated independently with Codex image generation, visually inspected, checked in desktop/mobile crops, and then promoted. The first combined hero candidate was rejected for product-family and mobile-crop drift; two multi-reference V2 attempts were blocked by the image-edits transport. The first viewport therefore composes the three accepted product renders around an authored rail instead of promoting a rejected hero. Every image surface retains an intentional CSS fallback and never shows a broken-image icon.
 
@@ -53,6 +54,8 @@ The contract and generation prompts live in `docs/asset-manifest.md` and `docs/i
 pnpm install
 pnpm dev
 pnpm lint
+pnpm model:build
+pnpm model:check
 pnpm typecheck
 pnpm test
 pnpm build

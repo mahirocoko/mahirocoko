@@ -6,17 +6,21 @@
   "packageManager": "pnpm@10.32.1",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "pnpm model:check && tsc -b && vite build",
     "lint": "eslint .",
+    "model:build": "node scripts/build-dovel-system-model.mjs",
+    "model:check": "node scripts/check-dovel-system-model.mjs",
     "typecheck": "tsc -b",
     "test": "vitest run",
     "test:watch": "vitest",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/fiber": "9.6.1",
     "gsap": "3.15.0",
     "react": "19.2.5",
-    "react-dom": "19.2.5"
+    "react-dom": "19.2.5",
+    "three": "0.182.0"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
@@ -26,6 +30,7 @@
     "@types/node": "25.6.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "@types/three": "0.182.0",
     "@vitejs/plugin-react": "6.0.1",
     "eslint": "10.2.0",
     "eslint-plugin-react-hooks": "7.1.0",

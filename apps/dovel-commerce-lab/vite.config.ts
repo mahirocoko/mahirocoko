@@ -3,6 +3,10 @@ import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    // The below-fold Three.js preview is lazy-loaded as one auditable capability chunk.
+    chunkSizeWarningLimit: 950,
+  },
   server: {
     host: 'localhost',
     port: 4176,

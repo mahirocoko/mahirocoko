@@ -18,6 +18,7 @@ Status: production-candidate generation contract for a fictional commerce lab. N
 | `arc-dock.webp` | product-card render for angled charging dock module | 4:5 | WebP | imagegen isolated studio product render | silhouette, no clipping, consistent family/materials, card crop | runtime-promoted after desktop/mobile crop QA |
 | `halo-light.webp` | product-card render for slim rail-mounted task light | 4:5 | WebP | imagegen isolated studio product render | full lamp visible, no Apple-like form, card crop, no glow bloom | runtime-promoted with centered-crop constraint |
 | `pocket-tray.webp` | product-card render for shallow ash/aluminum tray | 4:5 | WebP | imagegen isolated studio product render | readable tray depth, material separation, card crop | runtime-promoted after desktop/mobile crop QA |
+| `dovel-system-01.glb` | live System Builder model containing the rail and all three configurable modules | 120cm baseline | GLB 2.0 | original procedural Three.js mesh informed by the three promoted single-view product renders | semantic nodes/materials, finite desk-safe bounds, deterministic hash, file-size ceiling, no textures/external fetches, V1/V2 silhouette comparison, desktop/mobile runtime readability | V2 runtime candidate; model contract/check passes; foreground acceptance pending |
 
 ## QA surfaces
 
@@ -31,4 +32,5 @@ Status: production-candidate generation contract for a fictional commerce lab. N
 - Intended generator lane: Codex image generation, `gpt-5.6-sol`, high reasoning.
 - Scratch source directory: `.asset-work/codex-source/` (ignored).
 - Runtime candidate directory after main-agent inspection: `public/assets/products/`.
+- Runtime 3D model and reproducible source contract: `public/assets/models/dovel-system-01.glb`, `scripts/build-dovel-system-model.mjs`, and `docs/model-contract.md`.
 - This is an original fictional brand system. Do not use third-party product photography or copy recognizable product trade dress.
