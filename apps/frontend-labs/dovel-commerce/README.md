@@ -2,6 +2,8 @@
 
 A standalone fictional commerce concept that tests a complete premium storefront and a web-native modular desk configurator.
 
+Collection path: `apps/frontend-labs/dovel-commerce/`
+
 > **Working name only:** DOVEL has not received legal, trademark, domain, or store-name clearance. This is not a live store and no checkout or payment exists.
 
 ## Brand read
