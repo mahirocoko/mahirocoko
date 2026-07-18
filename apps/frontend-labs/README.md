@@ -11,6 +11,7 @@ Each lab owns its runtime, package manager files, assets, tests, and product-spe
 | [`dovel-commerce`](./dovel-commerce/) | Premium modular-desk commerce proof with a configurable Three.js/GLB Builder | Accepted working lab |
 | [`chiang-mai-journal`](./chiang-mai-journal/) | Thai-first contemporary Chiang Mai culture journal, working brand `รอยเมือง` | Completed Home + Chapter 01 first slice |
 | [`nudge-gallery`](./nudge-gallery/) | Original interaction-study gallery with accessible previews and reduced-motion fallback | Initial working slice |
+| [`resonant-atlas`](./resonant-atlas/) | Original browser instrument coordinating DOM, Three.js, GSAP, Lenis, and opt-in Web Audio | Review candidate |
 
 ## Current lab — Chiang Mai culture journal
 
