@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-24T09:43:25",
+  "generatedAt": "2026-07-24T15:48:47",
   "source": "rrr-derived",
-  "totalSessions": 191,
-  "todaySessions": 1,
+  "totalSessions": 192,
+  "todaySessions": 2,
   "activeDays": 83,
-  "avgSessionsPerActiveDay": 2.3,
+  "avgSessionsPerActiveDay": 2.31,
   "sizes": {
-    "today": "small",
+    "today": "medium",
     "thresholds": {
       "smallMax": 1,
       "mediumMax": 3,
