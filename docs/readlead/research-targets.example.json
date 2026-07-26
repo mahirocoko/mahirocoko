@@ -1,0 +1,24 @@
+{
+  "sites": [
+    {
+      "key": "novelfull",
+      "novels": [
+        {"name": "replace-with-approved-novel-1", "firstChapterUrl": "https://novelfull.com/martial-peak/chapter-1-the-servant-who-sweeps.html"},
+        {"name": "replace-with-approved-novel-2", "firstChapterUrl": "https://novelfull.com/chapter-2-breaking-through-the-wall-and-not-looking-back.html"},
+        {"name": "replace-with-approved-novel-3", "firstChapterUrl": "https://novelfull.com/chapter-3-147-losses.html"},
+        {"name": "replace-with-approved-novel-4", "firstChapterUrl": "https://novelfull.com/chapter-4-the-black-book.html"},
+        {"name": "replace-with-approved-novel-5", "firstChapterUrl": "https://novelfull.com/chapter-5-the-proud-golden-statue.html"}
+      ]
+    },
+    {
+      "key": "wuxiaworld",
+      "novels": [
+        {"name": "replace-with-approved-novel-1", "firstChapterUrl": "https://www.wuxiaworld.com/novel/nine-star-hegemon/nshba-chapter-0-1"},
+        {"name": "replace-with-approved-novel-2", "firstChapterUrl": "https://www.wuxiaworld.com/novel/nine-star-hegemon/nshba-chapter-0-2"},
+        {"name": "replace-with-approved-novel-3", "firstChapterUrl": "https://www.wuxiaworld.com/novel/nine-star-hegemon/nshba-chapter-0-3"},
+        {"name": "replace-with-approved-novel-4", "firstChapterUrl": "https://www.wuxiaworld.com/novel/nine-star-hegemon/nshba-chapter-0-4"},
+        {"name": "replace-with-approved-novel-5", "firstChapterUrl": "https://www.wuxiaworld.com/novel/nine-star-hegemon/nshba-chapter-0-5"}
+      ]
+    }
+  ]
+}

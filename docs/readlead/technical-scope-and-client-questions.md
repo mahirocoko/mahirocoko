@@ -103,46 +103,29 @@ API (Hono on Node)
 
 ---
 
-## Model และ API key: 3 ทางเลือก
+## Model และ API key: Platform-managed only
 
-### A. Managed credits — **แนะนำสำหรับ MVP**
+ReadLead ถือ provider API key ฝั่ง server ผู้ใช้ซื้อเครดิตและไม่ต้องตั้งค่า API key ของตัวเอง ระบบจะเริ่มด้วย provider เดียวและเลือก model tier ภายในแพลตฟอร์ม
 
-ReadLead ถือ provider API key ฝั่ง server ผู้ใช้ซื้อเครดิตและไม่ต้องตั้งค่าอะไรเพิ่ม
+**แนวทางที่เสนอ**
 
-**ข้อดี**
-- UX สั้นที่สุด
-- คุม model, prompt และคุณภาพ output ได้
-- ทำ Standard/Quality pricing ได้ชัด
-- มี usage ledger, rate limit และ anti-abuse ในที่เดียว
+- ช่วง research ใช้ Gemini 2.5 Flash-Lite free tier เพื่อ benchmark เท่านั้น
+- production ใช้ Gemini API paid tier ผ่าน key ของ ReadLead
+- `Standard` ใช้ Gemini 2.5 Flash-Lite เป็น baseline ที่ต้นทุนต่ำ
+- `Quality` ใช้ Gemini 2.5 Flash เมื่อ benchmark ระบุว่าตอนนั้นต้องการภาษา/บริบทที่ดีกว่า
+- หน้า Reader แสดง Standard/Quality ไม่แสดงชื่อ model หรือ provider ให้ผู้ใช้เลือกเอง
 
-**ต้นทุน/ความเสี่ยง**
+**ข้อดีของการตัด BYOK ออก**
+
+- UX สั้น คุมคุณภาพ prompt/model ได้ และ support path เดียว
+- ไม่ต้องสร้าง key vault, provider validation หรือ quota/error flow หลายชุด
+- usage ledger และ credit reserve อยู่ภายใต้ระบบเดียว
+
+**สิ่งที่ต้องรับผิดชอบ**
+
 - เราต้องสำรองค่า model ก่อนเก็บเงินจากลูกค้า
 - ต้องมี credit reserve, refund และ monitoring ที่ดี
-- รับผิดชอบความเสถียรของ provider และ margin
-
-### B. BYOK — ผู้ใช้ใส่ API key เอง
-
-ผู้ใช้เชื่อม provider key ของตัวเอง แต่ key ยังต้องผ่าน backend และเก็บแบบเข้ารหัสหรือใช้แบบ session-only
-
-**ข้อดี**
-- ลดค่า token ที่แพลตฟอร์มต้องสำรอง
-- เหมาะกับ power user ที่มี provider/budget ของตัวเอง
-
-**ต้นทุน/ความเสี่ยง**
-- onboarding ยุ่งขึ้นมาก
-- model และคุณภาพไม่สม่ำเสมอ
-- ต้องดูแล key vault, validation, quota/error จากหลาย provider
-- ถึงไม่คิดค่า model ก็ยังมีค่า extraction, queue, database และ support
-- ห้าม expose key ใน browser
-
-### C. Hybrid — มีทั้งเครดิต ReadLead และ BYOK
-
-**ข้อดี**: ยืดหยุ่นที่สุด  
-**ข้อเสีย**: ต้องมี provider adapter, pricing, credit ledger, error copy และ support flow สองชุดตั้งแต่วันแรก
-
-### ข้อเสนอ
-
-เริ่ม **Managed credits** ก่อน ให้ผู้ใช้เลือก “Standard” หรือ “Quality” แทนชื่อโมเดลจริง แล้วค่อยเพิ่ม BYOK หลังจาก benchmark คุณภาพและ usage ledger เสถียรแล้ว
+- provider key อยู่ฝั่ง server เท่านั้น และต้องมี rate limit/abuse guard
 
 โมเดลไม่ควรล็อกด้วยชื่อใน proposal ตอนนี้ ให้คัดจาก benchmark กับตัวอย่างนิยายจริง 20–30 ตอน โดยดู:
 
@@ -233,7 +216,6 @@ QuickFixRevision
 
 - URL adapters เพิ่มตามเว็บที่ลูกค้าใช้จริง
 - export, shared library, admin/support tools
-- พิจารณา BYOK หลังมีข้อมูล usage/quality จริง
 
 ---
 
@@ -271,4 +253,4 @@ QuickFixRevision
 
 ReadLead ทำได้จริง ถ้าตกลงให้ชัดว่า v1 รองรับ source แบบไหนและใช้ model/billing แบบใด จุดที่ไม่ควรรับปากเกินจริงคือ “ดึงได้ทุกเว็บ” และ “แปลเนียนทุกแนวโดยไม่ต้องมี benchmark”
 
-ทางที่ปลอดภัยและขายงานได้คือ: **Managed credits + URL preview + รองรับเว็บไซต์ที่ตกลง + contextual glossary + Quick Fix ระดับ segment** แล้วเก็บข้อมูลจริงก่อนขยายไป BYOK หรือหลาย provider
+ทางที่ปลอดภัยและขายงานได้คือ: **Platform-managed Gemini API + URL preview + รองรับเว็บไซต์ที่ตกลง + contextual glossary + Quick Fix ระดับ segment** แล้วขยายเฉพาะเว็บไซต์และ model tier ที่ benchmark ผ่าน
