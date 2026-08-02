@@ -1,0 +1,32 @@
+{
+  "slug": "reef",
+  "name": "Reef",
+  "category": "Productivity & SaaS",
+  "categorySlug": "productivity-saas",
+  "tags": [],
+  "thumbnail": "https://cdn.getdesign.md/catalog/reef/thumb.webp",
+  "favicon": "https://cdn.getdesign.md/catalog/reef/favicon.png",
+  "website": "https://reef.io/",
+  "tagline": "A blockchain platform built for DeFi, NFTs, and gaming. Fits crypto exchanges, DeFi dashboards, NFT marketplaces, and Web3 dev tools.",
+  "pages": null,
+  "hasDesignMd": false,
+  "designMdSlug": null,
+  "highDemand": false,
+  "orders": 0,
+  "priority": 0,
+  "addedAt": "2026-04-27",
+  "detailUrl": "https://getdesign.md/design-md/reef",
+  "description": "A blockchain platform built for DeFi, NFTs, and gaming. Fits crypto exchanges, DeFi dashboards, NFT marketplaces, and Web3 dev tools. Request a DESIGN.md file and drop it into your AI agent.",
+  "ogImage": "https://getdesign.md/api/og/default?v=2",
+  "heroImage": "https://cdn.getdesign.md/catalog/reef/home.webp",
+  "structuredData": {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "name": "Reef-style design system",
+    "description": "A blockchain platform built for DeFi, NFTs, and gaming. Fits crypto exchanges, DeFi dashboards, NFT marketplaces, and Web3 dev tools. Request a DESIGN.md file and drop it into your AI agent.",
+    "url": "https://getdesign.md/design-md/reef",
+    "image": "https://cdn.getdesign.md/catalog/reef/thumb.webp",
+    "about": "Reef"
+  },
+  "crawledAt": "2026-08-02T16:07:04.152Z"
+}
