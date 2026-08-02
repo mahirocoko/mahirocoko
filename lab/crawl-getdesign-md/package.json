@@ -1,0 +1,15 @@
+{
+  "name": "crawl-getdesign-md",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Crawl script for getdesign.md/design-md catalog",
+  "scripts": {
+    "crawl": "node crawl.mjs",
+    "crawl:details": "node crawl.mjs --details",
+    "crawl:sample": "node crawl.mjs --details --limit 5"
+  },
+  "dependencies": {
+    "jsdom": "30.0.1"
+  }
+}
