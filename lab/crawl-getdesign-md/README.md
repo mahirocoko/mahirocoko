@@ -22,13 +22,16 @@ npm install
 node crawl.mjs
 
 # ดึง catalog + detail pages ทุกตัว
-node crawl.mjs --details
+node crawl.mjs --details --resume
 
-# ดึง detail แค่ 10 ตัวแรก
-node crawl.mjs --details --limit 10
+# ดึง detail ที่ยังค้างอีกไม่เกิน 10 ตัว
+node crawl.mjs --details --resume --limit 10
 
 # ปรับ delay ระหว่าง request (default 1000ms)
-node crawl.mjs --details --delay 2000
+node crawl.mjs --details --resume --delay 2000
+
+# ไม่ reuse checkpoint เดิมและ crawl detail ใหม่ทั้งหมด
+node crawl.mjs --details
 
 # ดู help
 node crawl.mjs --help
@@ -38,21 +41,31 @@ node crawl.mjs --help
 
 ```bash
 npm run crawl            # catalog only
-npm run crawl:details    # catalog + all details
-npm run crawl:sample     # catalog + first 5 details
+npm run crawl:details    # resume detail crawl จนครบ
+npm run crawl:details:fresh # crawl detail ใหม่ทั้งหมด
+npm run crawl:sample     # pending details อีกไม่เกิน 5 ตัว
+npm run build            # refresh catalog + details + viewer + verify
+npm run verify           # ตรวจ corpus และ local artifacts โดยไม่ crawl ใหม่
 ```
+
+`--resume` จะอ่าน `output/catalog.json` และ detail JSON ที่ผ่าน validation แล้ว จากนั้น retry เฉพาะรายการที่ยังขาด เคย error หรือมี catalog-entry fingerprint ไม่ตรงกับ snapshot ปัจจุบัน ระหว่างรันจะ checkpoint หลังจบทุก entry ถ้า process หยุดกลางทางให้รันคำสั่งเดิมซ้ำได้เลย
 
 ## Output
 
 ```
 output/
 ├── catalog.json            # full catalog array (340 entries)
+├── catalog-manifest.json   # bundle URL/hash + extraction counts
 ├── catalog-enriched.json   # catalog + detail-page metadata (--details)
-└── details/                # one JSON per entry (--details)
-    ├── amplemarket.json
-    ├── evervault.json
-    └── ...
+├── detail-crawl-state.json # per-slug checkpoint + success/error/pending totals
+├── completeness-report.json # ผลจาก npm run verify
+├── index.html              # local catalog viewer
+├── details/                # one JSON per entry (--details)
+├── pages/                  # local detail pages 340 หน้า
+└── images/                 # thumbnails + page screenshots
 ```
+
+`output/` เป็น local generated state และถูก `.gitignore` ไว้ ถ้าจะย้ายเครื่องหรือใช้เป็น release artifact ต้อง archive แยกเอง
 
 ### Entry Schema (`catalog.json`)
 
@@ -111,4 +124,23 @@ output/
 
 - ใช้ `User-Agent` ที่ระบุตัวตนชัดเจน
 - มี rate limiting (default 1s delay) เพื่อไม่ให้กระทบ server
-- Bundle URL อาจเปลี่ยนเมื่อเว็บ deploy ใหม่ — script จะ detect อัตโนมัติจาก `<link rel="modulepreload">`
+- Bundle URL อาจเปลี่ยนเมื่อเว็บ deploy ใหม่ script จะหา `main-*.js` จาก catalog HTML แล้วบันทึก URL และ SHA-256 ไว้ใน manifest
+- Catalog และ detail checkpoints เขียนผ่าน temporary file แล้ว atomic rename เพื่อลดโอกาสได้ JSON ครึ่งไฟล์
+- Downloader reuse เฉพาะไฟล์ที่มี JPEG/WebP signature ถูกต้อง ถ้า process หยุดกลางทาง ไฟล์ชั่วคราวจะไม่ถูกนับว่าเสร็จ
+
+## Completeness
+
+current snapshot มี contract ดังนี้:
+
+- `catalog.json`: 340 entries / 340 unique slugs
+- `catalog-enriched.json`: 340 entries เรียงตาม catalog และไม่มี `error`
+- `details/*.json`: 340 ไฟล์ตรงกับ slug set พอดี
+- `pages/*.html`: 340 หน้าและทุกหน้ากลับ `../index.html` ได้
+- local images: 340 thumbnails + 944 screenshots จาก `pages` + 123 `heroImage` fallbacks = 1,407 ไฟล์
+- image ทุกไฟล์ผ่าน JPEG/WebP signature check
+
+123 entries ไม่มี `pages` ใน bundle แต่ detail page มี `heroImage` อยู่ builder จะใช้ภาพนั้นเป็น Home screenshot แทน จึงไม่แสดงช่องว่างทั้งที่ source มีภาพให้ใช้งาน
+
+ถ้ามี screenshots มากกว่า 1 หน้า detail viewer จะแสดงเป็น tabs และเปิดทีละภาพ รองรับ click, `ArrowLeft`, `ArrowRight`, `Home` และ `End` ตาม semantic tab contract ส่วนรายการที่มีภาพเดียวจะไม่สร้าง tab เพิ่ม
+
+รัน `npm run verify` ก่อนเรียก output ว่าครบ ตัว verifier จะออก non-zero เมื่อมี detail/page/image ขาด มีไฟล์ stale, checkpoint ยัง pending หรือ manifest ไม่ตรงกับ catalog

@@ -9,7 +9,14 @@
  *   node build-viewer.mjs --concurrency 5 # parallel downloads (default 3)
  */
 
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import {
+  readFile,
+  writeFile,
+  mkdir,
+  open,
+  rename,
+  unlink,
+} from "node:fs/promises";
 import { existsSync, createWriteStream } from "node:fs";
 import { pipeline } from "node:stream/promises";
 import path from "node:path";
@@ -45,16 +52,45 @@ const CATALOG_PATH = path.join(OUTPUT_DIR, "catalog.json");
 
 // ─── Download helpers ────────────────────────────────────────────────────────
 
+async function isValidImage(filePath) {
+  if (!existsSync(filePath)) return false;
+  let handle;
+  try {
+    handle = await open(filePath, "r");
+    const header = Buffer.alloc(12);
+    const { bytesRead } = await handle.read(header, 0, header.length, 0);
+    if (bytesRead < 12) return false;
+    const jpeg = header.subarray(0, 3).equals(Buffer.from([0xff, 0xd8, 0xff]));
+    const webp =
+      header.subarray(0, 4).toString("ascii") === "RIFF" &&
+      header.subarray(8, 12).toString("ascii") === "WEBP";
+    return jpeg || webp;
+  } catch {
+    return false;
+  } finally {
+    await handle?.close().catch(() => {});
+  }
+}
+
 async function downloadFile(url, dest) {
-  const res = await fetch(url, {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (compatible; getdesign-md-crawler/1.0; +https://github.com/mahirocoko)",
-    },
-  });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  const fileStream = createWriteStream(dest);
-  await pipeline(res.body, fileStream);
+  const temp = `${dest}.${process.pid}.${Date.now()}.tmp`;
+  try {
+    const res = await fetch(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (compatible; getdesign-md-crawler/1.0; +https://github.com/mahirocoko)",
+      },
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    await pipeline(res.body, createWriteStream(temp));
+    if (!(await isValidImage(temp))) {
+      throw new Error("Downloaded file is not a supported JPEG/WebP image");
+    }
+    await rename(temp, dest);
+  } catch (error) {
+    await unlink(temp).catch(() => {});
+    throw error;
+  }
 }
 
 async function downloadWithLimit(tasks, limit) {
@@ -90,7 +126,8 @@ async function downloadThumbnails(catalog) {
     const localFile = path.join(IMAGES_DIR, `${entry.slug}${ext}`);
     entry._localThumb = `images/${entry.slug}${ext}`;
 
-    if (existsSync(localFile)) continue; // skip already downloaded
+    if (await isValidImage(localFile)) continue;
+    await unlink(localFile).catch(() => {});
     toDownload.push({ entry, url: entry.thumbnail, dest: localFile });
   }
 
@@ -118,6 +155,7 @@ async function downloadThumbnails(catalog) {
     `✅ Downloaded ${toDownload.length - failed}/${toDownload.length}` +
       (failed ? ` (${failed} failed)` : "")
   );
+  if (failed) throw new Error(`${failed} thumbnail downloads failed`);
 }
 
 // ─── Generate HTML viewer ────────────────────────────────────────────────────
@@ -172,6 +210,7 @@ function generateHtml(catalog) {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>getdesign.md Catalog — Local Viewer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>◈</text></svg>" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -187,11 +226,6 @@ function generateHtml(catalog) {
       --radius: 8px;
       --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       --mono: 'GeistMono', 'SF Mono', 'Fira Code', monospace;
-    }
-
-    @font-face {
-      font-family: 'Inter';
-      src: url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
     }
 
     body {
@@ -544,7 +578,10 @@ async function main() {
   // Generate HTML
   console.log("🔨 Generating index.html …");
   const html = generateHtml(catalog);
-  await writeFile(path.join(OUTPUT_DIR, "index.html"), html);
+  const outputPath = path.join(OUTPUT_DIR, "index.html");
+  const tempPath = `${outputPath}.${process.pid}.${Date.now()}.tmp`;
+  await writeFile(tempPath, html);
+  await rename(tempPath, outputPath);
   console.log(`💾 Saved → output/index.html`);
 
   console.log(`\n✨ Done! Open output/index.html in a browser to browse.`);
