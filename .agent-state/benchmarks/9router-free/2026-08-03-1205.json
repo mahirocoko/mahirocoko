@@ -1,0 +1,661 @@
+{
+  "prompt": "You are being evaluated for practical coding-agent work. Return exactly one JSON object with exactly these keys: code, logic, thai. No Markdown fences, no commentary, no extra keys.\n\n1) code: Write plain JavaScript (not TypeScript) defining function selectLatest(events). Requirements:\n- Return an array of {key,state,at} sorted by key ascending.\n- Ignore entries missing a non-empty agentId, a non-empty conversationId, or a finite numeric at.\n- If conversationId is \"default\", key is `${agentId}:default:${cwd || \"\"}`.\n- Otherwise key is `${agentId}:${conversationId}`.\n- Keep the newest at for each key; if at ties, the later input entry wins.\n- Do not use imports or external dependencies.\nThe JSON string value must contain only executable JavaScript defining selectLatest.\n\n2) logic: Two workers can run jobs in parallel. A takes 4 minutes. B takes 3 minutes after A. C takes 5 minutes after A. D takes 2 minutes after both B and C. Return only the earliest total completion time as a decimal string.\n\n3) thai: In natural Thai, explain the difference between a free-only AI gateway running locally and a local model. Use 180-500 Thai characters. It must explicitly say that prompts still leave the machine for an upstream provider, and that this isolated lane does not reuse existing paid-provider credentials.",
+  "results": [
+    {
+      "provider": "OpenCode",
+      "requested_model": "oc/mimo-v2.5-free",
+      "actual_model": "mimo-v2.5-free",
+      "status": 200,
+      "latency_seconds": 16.433,
+      "usage": {
+        "prompt_tokens": 2536,
+        "completion_tokens": 1200,
+        "total_tokens": 3736,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 192,
+          "cache_write_tokens": 0
+        },
+        "completion_tokens_details": {
+          "audio_tokens": 0,
+          "reasoning_tokens": 1199
+        }
+      },
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 1,
+      "error": null,
+      "retry_5000": {
+        "status": 200,
+        "latency_seconds": 56.231,
+        "actual_model": "mimo-v2.5-free",
+        "usage": {
+          "prompt_tokens": 2536,
+          "completion_tokens": 4176,
+          "total_tokens": 6712,
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 512,
+            "cache_write_tokens": 0
+          },
+          "completion_tokens_details": {
+            "audio_tokens": 0,
+            "reasoning_tokens": 3768
+          }
+        },
+        "content": "{\n  \"code\": \"function selectLatest(events){const map=new Map();for(const event of events){if(!event.agentId||event.agentId===''||!event.conversationId||event.conversationId===''||typeof event.at!=='number'||!isFinite(event.at)){continue;}let key;if(event.conversationId==='default'){key=`${event.agentId}:default:${event.cwd||''}`;}else{key=`${event.agentId}:${event.conversationId}`;}if(!map.has(key)||event.at>=map.get(key).at){map.set(key,{state:event.state,at:event.at});}}const result=[];for(const[key,value]of map){result.push({key,state:value.state,at:value.at});}result.sort((a,b)=>a.key.localeCompare(b.key));return result;}\",\n  \"logic\": \"11\",\n  \"thai\": \"ระหว่างเกตเวย์ AI ที่ใช้ฟรีเท่านั้นกับโมเดลท้องถิ่น มีความแตกต่างสำคัญ เกตเวย์รันบนเครื่องแต่คำสั่งจะถูกส่งไปยังผู้ให้บริการภายนอก เพื่อประมวลผลต่อ ในขณะที่โมเดลท้องถิ่นทำงานบนเครื่องของคุณเองทั้งหมด ไม่มีการส่งข้อมูลออกนอกเครื่อง เกตเวย์ที่เป็นช่องทางอิสระนี้ไม่ได้ใช้ข้อมูลรับรองจากผู้ให้บริการที่เสียค่าใช้จ่าย จึงทำให้การใช้งานเป็นไปอย่างฟรีแต่ก็มีข้อจำกัดด้านความเป็นส่วนตัว\"\n}",
+        "finish_reason": "stop",
+        "message_keys": [
+          "role",
+          "content",
+          "refusal",
+          "reasoning",
+          "reasoning_details"
+        ],
+        "error": null
+      }
+    },
+    {
+      "provider": "OpenCode",
+      "requested_model": "oc/deepseek-v4-flash-free",
+      "actual_model": "deepseek-v4-flash-free",
+      "status": 200,
+      "latency_seconds": 13.926,
+      "usage": {
+        "prompt_tokens": 2381,
+        "completion_tokens": 1200,
+        "total_tokens": 3581,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1200
+        }
+      },
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 1,
+      "error": null,
+      "retry_5000": {
+        "status": 200,
+        "latency_seconds": 47.501,
+        "actual_model": "deepseek-v4-flash-free",
+        "usage": {
+          "prompt_tokens": 2381,
+          "completion_tokens": 5000,
+          "total_tokens": 7381,
+          "prompt_tokens_details": {
+            "cached_tokens": 256
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 5000
+          }
+        },
+        "content": "",
+        "finish_reason": "length",
+        "message_keys": [
+          "role",
+          "content",
+          "reasoning_content"
+        ],
+        "error": null
+      }
+    },
+    {
+      "provider": "OpenCode",
+      "requested_model": "oc/laguna-s-2.1-free",
+      "actual_model": "laguna-s-2.1-free",
+      "status": 200,
+      "latency_seconds": 17.789,
+      "usage": {
+        "prompt_tokens": 2342,
+        "completion_tokens": 782,
+        "total_tokens": 3124,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 32,
+          "cache_write_tokens": 0
+        },
+        "completion_tokens_details": {
+          "audio_tokens": 0,
+          "reasoning_tokens": 0
+        }
+      },
+      "content": "{\"code\":\"function selectLatest(events) {\\n  const valid = [];\\n  for (const e of events) {\\n    if (!e || typeof e.agentId !== 'string' || e.agentId === '') continue;\\n    if (!e || typeof e.conversationId !== 'string' || e.conversationId === '') continue;\\n    if (typeof e.at !== 'number' || !Number.isFinite(e.at)) continue;\\n    valid.push(e);\\n  }\\n  const best = {};\\n  for (let i = 0; i < valid.length; i++) {\\n    const e = valid[i];\\n    const key = e.conversationId === 'default'\\n      ? `${e.agentId}:default:${(e.cwd || '')}`\\n      : `${e.agentId}:${e.conversationId}`;\\n    if (!Object.prototype.hasOwnProperty.call(best, key)) {\\n      best[key] = { key, state: e.state, at: e.at, idx: i };\\n    } else {\\n      const cur = best[key];\\n      if (e.at > cur.at || (e.at === cur.at && i > cur.idx)) {\\n        best[key] = { key, state: e.state, at: e.at, idx: i };\\n      }\\n    }\\n  }\\n  return Object.keys(best)\\n    .map(k => ({ key: best[k].key, state: best[k].state, at: best[k].at }))\\n    .sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));\\n}\\n\",\"logic\":\"11.0\",\"thai\":\"เส้นทางเสริมประเภทหนึ่งคือการรัน AI เกตเวย์แบบฟรีๆ บนเครื่อง ซึ่งทำหน้าที่เป็นตัวนำเข้าอย่างเดียว ไม่มีโมเดลอยู่ในเครื่อง ดังนั้นพร้อมคำถามหรือข้อความจะหลุดหายไปนอกเครื่องแล้วส่งต่อไปยังผู้ให้บริการขึ้นสตรีม นอนี้กับโมเดลที่โฮสต์อยู่ในเครื่องแล้วก็แตกต่างกัน เพราะโมเดลในเครื่องไม่ต้องส่งอะไรออกไปนอกเครื่องเลย นอกจากนี้ เส้นทางแบบฟรีๆ นี้ยังไม่นำข้อมูลรับรองจากผู้ให้บริการที่มีการชำระเงินมาใช้และเป็นช่องทางแยกจากระบบหลัก\"}",
+      "parsed": {
+        "code": "function selectLatest(events) {\n  const valid = [];\n  for (const e of events) {\n    if (!e || typeof e.agentId !== 'string' || e.agentId === '') continue;\n    if (!e || typeof e.conversationId !== 'string' || e.conversationId === '') continue;\n    if (typeof e.at !== 'number' || !Number.isFinite(e.at)) continue;\n    valid.push(e);\n  }\n  const best = {};\n  for (let i = 0; i < valid.length; i++) {\n    const e = valid[i];\n    const key = e.conversationId === 'default'\n      ? `${e.agentId}:default:${(e.cwd || '')}`\n      : `${e.agentId}:${e.conversationId}`;\n    if (!Object.prototype.hasOwnProperty.call(best, key)) {\n      best[key] = { key, state: e.state, at: e.at, idx: i };\n    } else {\n      const cur = best[key];\n      if (e.at > cur.at || (e.at === cur.at && i > cur.idx)) {\n        best[key] = { key, state: e.state, at: e.at, idx: i };\n      }\n    }\n  }\n  return Object.keys(best)\n    .map(k => ({ key: best[k].key, state: best[k].state, at: best[k].at }))\n    .sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0));\n}\n",
+        "logic": "11.0",
+        "thai": "เส้นทางเสริมประเภทหนึ่งคือการรัน AI เกตเวย์แบบฟรีๆ บนเครื่อง ซึ่งทำหน้าที่เป็นตัวนำเข้าอย่างเดียว ไม่มีโมเดลอยู่ในเครื่อง ดังนั้นพร้อมคำถามหรือข้อความจะหลุดหายไปนอกเครื่องแล้วส่งต่อไปยังผู้ให้บริการขึ้นสตรีม นอนี้กับโมเดลที่โฮสต์อยู่ในเครื่องแล้วก็แตกต่างกัน เพราะโมเดลในเครื่องไม่ต้องส่งอะไรออกไปนอกเครื่องเลย นอกจากนี้ เส้นทางแบบฟรีๆ นี้ยังไม่นำข้อมูลรับรองจากผู้ให้บริการที่มีการชำระเงินมาใช้และเป็นช่องทางแยกจากระบบหลัก"
+      },
+      "exact_keys": true,
+      "code_tests": {
+        "passed": 4,
+        "total": 4,
+        "details": []
+      },
+      "logic_ok": false,
+      "thai_score": 1,
+      "thai_details": [
+        "facts outbound=False isolated=False"
+      ],
+      "score": 7,
+      "error": null
+    },
+    {
+      "provider": "OpenCode",
+      "requested_model": "oc/nemotron-3-ultra-free",
+      "actual_model": "nemotron-3-ultra-free",
+      "status": 200,
+      "latency_seconds": 54.15,
+      "usage": {
+        "prompt_tokens": 2320,
+        "completion_tokens": 1200,
+        "total_tokens": 3520,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "completion_tokens_details": {
+          "audio_tokens": 0,
+          "reasoning_tokens": 1154
+        }
+      },
+      "content": "We need to output a single JSON object with keys: code, logic, thai. No markdown fences, no commentary, no extra keys.\n\n1) code: plain JavaScript defining function selectLatest(events). Must return array of {key,state,at} sorted by key ascending. Requirements:\n\n- Ignore entries missing a non-empty agentId, a non-empty conversationId, or a finite numeric at.\n- If conversationId is \"default\", key is `${agentId}:default:${cwd || \"\"}`.\n- Otherwise key is `${agentId}:${conversationId}`.\n- Keep the newest at for each key; if at ties, the later input entry wins.\n- Do not use imports or external dependencies.\n- The JSON string value must contain only executable JavaScript defining selectLatest.\n\nSo code value is a string containing JavaScript code. Must be plain JS, not TS. Should define function selectLatest(events). Probably something like:\n\nfunction selectLatest(events) {\n  const map = new Map();\n  for (let i = 0; i < events.length; i++) {\n    const e = events[i];\n    if (!e) continue;\n    const agentId = e.agentId;\n    const conversationId = e.conversationId;\n    const at = e.at;\n    const state = e.state;\n    const cwd = e.cwd;\n    if (typeof agentId !== 'string' || agentId === '') continue;\n    if (typeof conversationId !== 'string' || conversationId === '') continue;\n    if (typeof at !== 'number' || !isFinite(at)) continue;\n    let key;\n    if (conversationId === 'default') {\n      key = agentId + ':default:' + (cwd || '');\n    } else {\n      key = agentId + ':' + conversationId;\n    }\n    const existing = map.get(key);\n    if (!existing || at > existing.at || (at === existing.at && i > existing.index)) {\n      map.set(key, {key, state, at, index: i});\n    }\n  }\n  const result = Array.from(map.values()).map(({key, state, at}) => ({key, state, at}));\n  result.sort((a,b) => a.key.localeCompare(b.key));\n  return result;\n}\n\nBut note: The output array should be of objects with key, state, at. The map stores index for tie-breaking. The later input entry wins if at ties. Since we iterate in order, later index is larger. So condition: if at > existing.at OR (at === existing.at && i > existing.index). Good.\n\nWe must ensure code string is valid JSON string (escaped). In JSON, we need to escape newlines, quotes, etc. But the instruction: \"The JSON string value must contain only executable JavaScript defining selectLatest.\" So the value for \"code\" is a JSON string containing the JS code. We'll need to embed it as a string with proper escaping. But we are outputting a JSON object with keys code, logic, thai. The code value is a string. So we must produce something like:\n\n{\n  \"code\": \"function selectLatest(events) { ... }\",\n  \"logic\": \"12.0\",\n  \"thai\": \"....\"\n}\n\nBut we must not include markdown fences. Just raw JSON.\n\nWe need to compute logic: Two workers can run jobs in parallel. A takes 4 minutes. B takes 3 minutes after A. C takes 5 minutes after A. D takes 2 minutes after both B and C. Return only the earliest total completion time as a decimal string.\n\nInterpretation: We have two workers (parallel). Jobs: A (4 min). B depends on A (3 min after A). C depends on A (5 min after A). D depends on both B and C (2 min after both B and C). We want earliest total completion time (makespan) with two workers.\n\nWe can schedule: At time 0, start A on worker1 (4 min). Worker2 idle. At time 4, A finishes. Then B and C can start. We have two workers, so we can start B on worker1 (3 min) and C on worker2 (5 min) simultaneously at time 4. B finishes at 7, C finishes at 9. D depends on both B and C, so can start after both finish, i.e., at time 9. Then D takes 2 min, finishes at 11. So total completion time = 11 minutes.\n\nBut could we do better by starting A on one worker, and maybe something else? No other jobs before A. So 11 is minimal.\n\nBut check if we could start B and C on same worker sequentially? That would be worse. So 11.\n\nBut wait: \"Two workers can run jobs in parallel.\" Means we have two workers. So the schedule above yields 11. Could we start A on worker1, and at time 0 also start something else? No dependencies. So 11.\n\nBut is there any possibility to overlap A with something? No.\n\nThus earliest total completion time = 11. As decimal string: \"11.0\" or \"11\"? It says decimal string. Could be \"11.0\". But \"11\" is also a decimal string. Usually they'd want \"11.0\". But we can output \"11\". However, to be safe, output \"11.0\". The instruction: \"Return only the earliest total completion time as a decimal string.\" So we can output \"11.0\". We'll output \"11.0\".\n\nNow thai: In natural Thai,",
+      "parsed": {
+        "code": "function selectLatest(events) { ... }",
+        "logic": "12.0",
+        "thai": "...."
+      },
+      "exact_keys": true,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "compile:Unexpected token '...'"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "length=4",
+        "facts outbound=False isolated=False"
+      ],
+      "score": 2,
+      "error": null
+    },
+    {
+      "provider": "OpenCode",
+      "requested_model": "oc/north-mini-code-free",
+      "actual_model": "north-mini-code-free",
+      "status": 200,
+      "latency_seconds": 118.936,
+      "usage": {
+        "prompt_tokens": 2289,
+        "completion_tokens": 1202,
+        "total_tokens": 3491,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "completion_tokens_details": {
+          "audio_tokens": 0,
+          "reasoning_tokens": 2101
+        }
+      },
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 1,
+      "error": null,
+      "retry_5000": {
+        "status": null,
+        "latency_seconds": 240.003,
+        "actual_model": null,
+        "usage": {},
+        "content": "",
+        "finish_reason": null,
+        "message_keys": [],
+        "error": "timeout: timed out"
+      }
+    },
+    {
+      "provider": "OpenCode",
+      "requested_model": "oc/ling-3.0-flash-free",
+      "actual_model": "ling-3.0-flash-free",
+      "status": 200,
+      "latency_seconds": 4.432,
+      "usage": {
+        "prompt_tokens": 2327,
+        "completion_tokens": 1200,
+        "total_tokens": 3527,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cached_tokens": 0,
+          "cache_write_tokens": 0
+        },
+        "completion_tokens_details": {
+          "audio_tokens": 0,
+          "reasoning_tokens": 1324
+        }
+      },
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 1,
+      "error": null,
+      "retry_5000": {
+        "status": 200,
+        "latency_seconds": 16.754,
+        "actual_model": "ling-3.0-flash-free",
+        "usage": {
+          "prompt_tokens": 2327,
+          "completion_tokens": 5000,
+          "total_tokens": 7327,
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cached_tokens": 0,
+            "cache_write_tokens": 0
+          },
+          "completion_tokens_details": {
+            "audio_tokens": 0,
+            "reasoning_tokens": 5891
+          }
+        },
+        "content": "",
+        "finish_reason": "length",
+        "message_keys": [
+          "role",
+          "content",
+          "refusal",
+          "reasoning",
+          "reasoning_details"
+        ],
+        "error": null
+      }
+    },
+    {
+      "provider": "OpenCode",
+      "requested_model": "oc/big-pickle",
+      "actual_model": "big-pickle",
+      "status": 200,
+      "latency_seconds": 12.808,
+      "usage": {
+        "prompt_tokens": 2381,
+        "completion_tokens": 1200,
+        "total_tokens": 3581,
+        "prompt_tokens_details": {
+          "cached_tokens": 256
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1200
+        }
+      },
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 1,
+      "error": null,
+      "retry_5000": {
+        "status": 200,
+        "latency_seconds": 44.644,
+        "actual_model": "big-pickle",
+        "usage": {
+          "prompt_tokens": 2381,
+          "completion_tokens": 5000,
+          "total_tokens": 7381,
+          "prompt_tokens_details": {
+            "cached_tokens": 256
+          },
+          "completion_tokens_details": {
+            "reasoning_tokens": 5000
+          }
+        },
+        "content": "",
+        "finish_reason": "length",
+        "message_keys": [
+          "role",
+          "content",
+          "reasoning_content"
+        ],
+        "error": null
+      }
+    },
+    {
+      "provider": "Ollama Cloud",
+      "requested_model": "ollama/kimi-k2.7-code",
+      "actual_model": null,
+      "status": 403,
+      "latency_seconds": 3.631,
+      "usage": {},
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 0,
+      "error": "{\"error\":{\"message\":\"[ollama/kimi-k2.7-code] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: c30c9b09-8cc7-457b-9cab-b38e32a4a330)\\\"}\\n (reset after 2m)\"}}"
+    },
+    {
+      "provider": "Ollama Cloud",
+      "requested_model": "ollama/deepseek-v4-pro",
+      "actual_model": null,
+      "status": 403,
+      "latency_seconds": 3.405,
+      "usage": {},
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 0,
+      "error": "{\"error\":{\"message\":\"[ollama/deepseek-v4-pro] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: 75402783-3162-46c4-bf6a-d9ef9bcb7f9b)\\\"}\\n (reset after 1m 57s)\"}}"
+    },
+    {
+      "provider": "Ollama Cloud",
+      "requested_model": "ollama/glm-5.2",
+      "actual_model": null,
+      "status": 403,
+      "latency_seconds": 3.399,
+      "usage": {},
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 0,
+      "error": "{\"error\":{\"message\":\"[ollama/glm-5.2] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: 04107a2f-75e2-4cde-a54b-2ce6ee046a0f)\\\"}\\n (reset after 1m 54s)\"}}"
+    },
+    {
+      "provider": "Ollama Cloud",
+      "requested_model": "ollama/kimi-k3",
+      "actual_model": null,
+      "status": 403,
+      "latency_seconds": 3.424,
+      "usage": {},
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 0,
+      "error": "{\"error\":{\"message\":\"[ollama/kimi-k3] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: 749f2380-9e69-45ea-a5e2-2eaebf5d8230)\\\"}\\n (reset after 1m 50s)\"}}"
+    },
+    {
+      "provider": "NVIDIA NIM",
+      "requested_model": "nvidia/deepseek-ai/deepseek-v4-pro",
+      "actual_model": "deepseek-ai/deepseek-v4-pro",
+      "status": 200,
+      "latency_seconds": 23.639,
+      "usage": {
+        "prompt_tokens": 2302,
+        "completion_tokens": 550,
+        "total_tokens": 2852
+      },
+      "content": "{\n  \"code\": \"function selectLatest(events) {\\n  const map = new Map();\\n  for (const e of events) {\\n    if (!e || typeof e.agentId !== 'string' || e.agentId.trim() === '') continue;\\n    if (!e || typeof e.conversationId !== 'string' || e.conversationId.trim() === '') continue;\\n    if (typeof e.at !== 'number' || !isFinite(e.at)) continue;\\n    let key;\\n    if (e.conversationId === 'default') {\\n      const cwd = typeof e.cwd === 'string' ? e.cwd : '';\\n      key = `${e.agentId}:default:${cwd}`;\\n    } else {\\n      key = `${e.agentId}:${e.conversationId}`;\\n    }\\n    const existing = map.get(key);\\n    if (!existing || e.at > existing.at || (e.at === existing.at && map.get('_order_' + key) < e._order)) {\\n      map.set(key, { key, state: e.state, at: e.at });\\n      map.set('_order_' + key, e._order);\\n    }\\n  }\\n  const result = [];\\n  for (const [k, v] of map) {\\n    if (k.startsWith('_order_')) continue;\\n    result.push(v);\\n  }\\n  result.sort((a, b) => a.key.localeCompare(b.key));\\n  return result;\\n}\",\n  \"logic\": \"9\",\n  \"thai\": \"เกตเวย์ AI แบบฟรีที่รันเฉพาะในเครื่อง กับโมเดลท้องถิ่น แตกต่างกันที่เส้นทางของพรอมต์ เกตเวย์ฟรีที่รันในเครื่องยังคงส่งพรอมต์ของคุณออกไปยังผู้ให้บริการภายนอกผ่านอินเทอร์เน็ต ข้อมูลจึงออกจากเครื่องคุณไปยังเซิร์ฟเวอร์กลางเสมอ ตรงข้ามกับโมเดลท้องถิ่นที่ประมวลผลทุกอย่างภายในเครื่องโดยไม่ส่งข้อมูลออกไปไหนเลย นอกจากนี้เกตเวย์ฟรีแบบแยกเลนนี้จะไม่นำข้อมูลรับรองบัญชีแบบเสียเงินที่มีอยู่เดิมมาใช้ซ้ำ ผู้ใช้ต้องเข้าใจว่าถึงแม้จะรันเกตเวย์ในเครื่อง แต่ความเป็นส่วนตัวยังไม่เท่ากับการรันโมเดลในเครื่องเอง\"\n}",
+      "parsed": {
+        "code": "function selectLatest(events) {\n  const map = new Map();\n  for (const e of events) {\n    if (!e || typeof e.agentId !== 'string' || e.agentId.trim() === '') continue;\n    if (!e || typeof e.conversationId !== 'string' || e.conversationId.trim() === '') continue;\n    if (typeof e.at !== 'number' || !isFinite(e.at)) continue;\n    let key;\n    if (e.conversationId === 'default') {\n      const cwd = typeof e.cwd === 'string' ? e.cwd : '';\n      key = `${e.agentId}:default:${cwd}`;\n    } else {\n      key = `${e.agentId}:${e.conversationId}`;\n    }\n    const existing = map.get(key);\n    if (!existing || e.at > existing.at || (e.at === existing.at && map.get('_order_' + key) < e._order)) {\n      map.set(key, { key, state: e.state, at: e.at });\n      map.set('_order_' + key, e._order);\n    }\n  }\n  const result = [];\n  for (const [k, v] of map) {\n    if (k.startsWith('_order_')) continue;\n    result.push(v);\n  }\n  result.sort((a, b) => a.key.localeCompare(b.key));\n  return result;\n}",
+        "logic": "9",
+        "thai": "เกตเวย์ AI แบบฟรีที่รันเฉพาะในเครื่อง กับโมเดลท้องถิ่น แตกต่างกันที่เส้นทางของพรอมต์ เกตเวย์ฟรีที่รันในเครื่องยังคงส่งพรอมต์ของคุณออกไปยังผู้ให้บริการภายนอกผ่านอินเทอร์เน็ต ข้อมูลจึงออกจากเครื่องคุณไปยังเซิร์ฟเวอร์กลางเสมอ ตรงข้ามกับโมเดลท้องถิ่นที่ประมวลผลทุกอย่างภายในเครื่องโดยไม่ส่งข้อมูลออกไปไหนเลย นอกจากนี้เกตเวย์ฟรีแบบแยกเลนนี้จะไม่นำข้อมูลรับรองบัญชีแบบเสียเงินที่มีอยู่เดิมมาใช้ซ้ำ ผู้ใช้ต้องเข้าใจว่าถึงแม้จะรันเกตเวย์ในเครื่อง แต่ความเป็นส่วนตัวยังไม่เท่ากับการรันโมเดลในเครื่องเอง"
+      },
+      "exact_keys": true,
+      "code_tests": {
+        "passed": 3,
+        "total": 4,
+        "details": [
+          "newest-and-tie:[{\"key\":\"a:c1\",\"state\":\"new\",\"at\":2}]"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 1,
+      "thai_details": [
+        "facts outbound=True isolated=False"
+      ],
+      "score": 6,
+      "error": null
+    },
+    {
+      "provider": "NVIDIA NIM",
+      "requested_model": "nvidia/z-ai/glm-5.2",
+      "actual_model": null,
+      "status": null,
+      "latency_seconds": 180.008,
+      "usage": {},
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 0,
+      "error": "timeout: timed out"
+    },
+    {
+      "provider": "NVIDIA NIM",
+      "requested_model": "nvidia/minimaxai/minimax-m3",
+      "actual_model": null,
+      "status": null,
+      "latency_seconds": 180.003,
+      "usage": {},
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 0,
+      "error": "timeout: timed out"
+    },
+    {
+      "provider": "NVIDIA NIM",
+      "requested_model": "nvidia/moonshotai/kimi-k2.6",
+      "actual_model": null,
+      "status": 404,
+      "latency_seconds": 0.454,
+      "usage": {},
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 0,
+      "error": "{\"error\":{\"message\":\"[nvidia/moonshotai/kimi-k2.6] [404]: {\\\"status\\\":404,\\\"title\\\":\\\"Not Found\\\",\\\"detail\\\":\\\"Function '23d4f03a-b8a6-4adb-a183-7daa083a09cc': Not found for account 'VXXMkH2CYvwi50f8Vu_FFPhZx5b62BawU1YPgRVo6uw'\\\"} (reset after 2m)\"}}"
+    },
+    {
+      "provider": "OpenRouter",
+      "requested_model": "openrouter/google/gemma-4-31b-it:free",
+      "actual_model": null,
+      "status": 429,
+      "latency_seconds": 0.714,
+      "usage": {},
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 0,
+      "error": "{\"error\":{\"message\":\"[openrouter/google/gemma-4-31b-it:free] [429]: {\\\"error\\\":{\\\"message\\\":\\\"Provider returned error\\\",\\\"code\\\":429,\\\"metadata\\\":{\\\"raw\\\":\\\"google/gemma-4-31b-it:free is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\\\",\\\"provider_name\\\":\\\"Google AI Studio\\\",\\\"is_byok\\\":false,\\\"provider_error_code\\\":\\\"429\\\",\\\"limit_source\\\":\\\"upstream_provider_shared_pool\\\",\\\"remedy_hint\\\":\\\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\\\"}},\\\"user_id\\\":\\\"user_2vNsvU1Qp419hxmLFPfZsWKdqUa\\\"} (reset after 2s)\"}}"
+    },
+    {
+      "provider": "OpenRouter",
+      "requested_model": "openrouter/openrouter/free",
+      "actual_model": "inclusionai/ling-3.0-flash:free",
+      "status": 200,
+      "latency_seconds": 5.843,
+      "usage": {
+        "prompt_tokens": 2327,
+        "completion_tokens": 1200,
+        "total_tokens": 3527,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1052,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      },
+      "content": "",
+      "parsed": null,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no JSON object"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_details": [
+        "no JSON object"
+      ],
+      "score": 1,
+      "error": null
+    }
+  ]
+}

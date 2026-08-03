@@ -1,0 +1,223 @@
+{
+  "prompt": "You are being evaluated for practical coding-agent work. Return exactly one JSON object with exactly these keys: code, logic, thai. No Markdown fences, no commentary, no extra keys.\n\n1) code: Write plain JavaScript (not TypeScript) defining function selectLatest(events). Requirements:\n- Return an array of {key,state,at} sorted by key ascending.\n- Ignore entries missing a non-empty agentId, a non-empty conversationId, or a finite numeric at.\n- If conversationId is \"default\", key is `${agentId}:default:${cwd || \"\"}`.\n- Otherwise key is `${agentId}:${conversationId}`.\n- Keep the newest at for each key; if at ties, the later input entry wins.\n- Do not use imports or external dependencies.\nThe JSON string value must contain only executable JavaScript defining selectLatest.\n\n2) logic: Two workers can run jobs in parallel. A takes 4 minutes. B takes 3 minutes after A. C takes 5 minutes after A. D takes 2 minutes after both B and C. Return only the earliest total completion time as a decimal string.\n\n3) thai: In natural Thai, explain the difference between a free-only AI gateway running locally and a local model. Use 180-500 Thai characters. It must explicitly say that prompts still leave the machine for an upstream provider, and that this isolated lane does not reuse existing paid-provider credentials.",
+  "results": [
+    {
+      "model": "ollama/minimax-m3",
+      "actual_model": "minimax-m3",
+      "status": 200,
+      "latency_seconds": 21.531,
+      "usage": {
+        "prompt_tokens": 2468,
+        "completion_tokens": 3043,
+        "total_tokens": 5511
+      },
+      "content": "{\"code\":\"function selectLatest(events){const map=new Map();for(let i=0;i<events.length;i++){const e=events[i];if(!e||typeof e.at!=='number'||!Number.isFinite(e.at))continue;if(typeof e.agentId!=='string'||e.agentId.length===0)continue;if(typeof e.conversationId!=='string'||e.conversationId.length===0)continue;const key=e.conversationId==='default'?`${e.agentId}:default:${e.cwd||''}`:`${e.agentId}:${e.conversationId}`;const existing=map.get(key);if(!existing||e.at>=existing.at){map.set(key,{key:key,state:e.state,at:e.at});}}return Array.from(map.values()).sort((a,b)=>a.key<b.key?-1:a.key>b.key?1:0);}\",\"logic\":\"11\",\"thai\":\"เกตเวย์ AI ฟรีเฉพาะที่รันบนเครื่องทำหน้าที่เป็นตัวกลางส่งต่อคำขอไปยังผู้ให้บริการภายนอกฟรีเท่านั้น ข้อความและบริบททั้งหมดยังคงออกจากเครื่องของคุณไปยังเซิร์ฟเวอร์ต้นทาง ไม่ได้ประมวลผลภายในเครื่องแต่อย่างใด เลนแยกนี้ไม่ใช้คีย์หรือโควตาของผู้ให้บริการแบบเสียเงินที่มีอยู่ ใช้บัญชีฟรีแยกต่างหาก จึงแยกการเรียกเก็บและการเข้าถึงออกจากกันชัดเจน ส่วนโมเดลท้องถิ่นทำงานบนเครื่องของคุณเอง ข้อมูลไม่ออกไปไหนเลย\"}",
+      "finish_reason": "stop",
+      "error": null
+    },
+    {
+      "model": "ollama/gemma4:31b",
+      "actual_model": "gemma4:31b",
+      "status": 200,
+      "latency_seconds": 6.347,
+      "usage": {
+        "prompt_tokens": 2319,
+        "completion_tokens": 317,
+        "total_tokens": 2636
+      },
+      "content": "{\n  \"code\": \"function selectLatest(events) {\\n  const latest = new Map();\\n  for (const e of events) {\\n    const { agentId, conversationId, at, cwd } = e;\\n    if (!agentId || !conversationId || typeof at !== 'number' || !isFinite(at)) continue;\\n    const key = conversationId === 'default' ? `${agentId}:default:${cwd || ''}` : `${agentId}:${conversationId}`;\\n    const current = latest.get(key);\\n    if (!current || at >= current.at) {\\n      latest.set(key, { key, state: e.state, at });\\n    }\\n  }\\n  return Array.from(latest.values()).sort((a, b) => a.key.localeCompare(b.key));\\n}\",\n  \"logic\": \"11.0\",\n  \"thai\": \"AI Gateway แบบฟรีที่รันในเครื่องทำหน้าที่เป็นทางผ่านเพื่อส่งคำสั่งไปยังผู้ให้บริการภายนอก ซึ่งหมายความว่า prompt ของคุณยังคงต้องส่งออกจากเครื่องไปยัง upstream provider และช่องทางแยกนี้จะไม่นำข้อมูลรับรองหรือ credential ของผู้ให้บริการแบบชำระเงินที่มีอยู่มาใช้ ในขณะที่ Local Model คือการรันตัวโมเดลทั้งหมดภายในเครื่องของคุณเอง ข้อมูลจึงไม่หลุดออกไปภายนอกและทำงานได้โดยไม่ต้องพึ่งพา API ภายนอกเลย\"\n}",
+      "finish_reason": "stop",
+      "error": null
+    },
+    {
+      "model": "ollama/nemotron-3-ultra",
+      "actual_model": null,
+      "status": null,
+      "latency_seconds": 180.003,
+      "usage": {},
+      "content": "",
+      "finish_reason": null,
+      "error": "timeout: timed out"
+    },
+    {
+      "model": "ollama/gpt-oss:20b",
+      "actual_model": "gpt-oss:20b",
+      "status": 200,
+      "latency_seconds": 44.473,
+      "usage": {
+        "prompt_tokens": 2355,
+        "completion_tokens": 5000,
+        "total_tokens": 7355
+      },
+      "content": "",
+      "finish_reason": "length",
+      "error": null
+    },
+    {
+      "model": "ollama/gpt-oss:120b",
+      "actual_model": "gpt-oss:120b",
+      "status": 200,
+      "latency_seconds": 47.089,
+      "usage": {
+        "prompt_tokens": 2355,
+        "completion_tokens": 1835,
+        "total_tokens": 4190
+      },
+      "content": "{\n  \"code\": \"function selectLatest(events) {\\n  const map = Object.create(null);\\n  for (let i = 0; i < events.length; i++) {\\n    const e = events[i];\\n    if (!e || typeof e.agentId !== 'string' || e.agentId === '' ||\\n        typeof e.conversationId !== 'string' || e.conversationId === '' ||\\n        !Number.isFinite(e.at)) {\\n      continue;\\n    }\\n    const key = e.conversationId === 'default'\\n      ? `${e.agentId}:default:${e.cwd || ''}`\\n      : `${e.agentId}:${e.conversationId}`;\\n    const stored = map[key];\\n    if (!stored || e.at > stored.at || e.at === stored.at) {\\n      map[key] = { key, state: e.state, at: e.at };\\n    }\\n  }\\n  const result = Object.values(map);\\n  result.sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0);\\n  return result;\\n}\",\n  \"logic\": \"11\",\n  \"thai\": \"ฟรี‑ออนลายอีไอเกตเวย์ที่รันบนเครื่องของคุณแม้จะเป็นซอฟต์แวร์เปิดให้ใช้ฟรี แต่เมื่อคุณพิมพ์คำสั่งหรือข้อความ (prompt) ระบบจะส่งข้อมูลนั้นออกไปยังผู้ให้บริการด้านบน (upstream provider) เพื่อให้โมเดลทำงานและส่งผลลัพธ์กลับมา ดังนั้นแม้จะอยู่ในโหมดแยก (isolated lane) ก็ยังคงพึ่งพาเซิร์ฟเวอร์ภายนอกและไม่ใช้ข้อมูลประจำตัวของผู้ให้บริการที่คุณอาจมีอยู่แล้ว ส่วนโมเดลที่ติดตั้งและทำงานแบบ local model จะทำงานทั้งหมดบนเครื่องของคุณเอง ไม่ต้องส่ง prompt ไปไหนเลย จึงไม่มีการใช้หรือเปิดเผยข้อมูลผู้ให้บริการใด ๆ ทั้งสิ้น\"\n}",
+      "finish_reason": "stop",
+      "error": null
+    },
+    {
+      "model": "ollama/nemotron-3-super",
+      "actual_model": "nemotron-3-super",
+      "status": 200,
+      "latency_seconds": 15.37,
+      "usage": {
+        "prompt_tokens": 2321,
+        "completion_tokens": 2050,
+        "total_tokens": 4371
+      },
+      "content": "{\n  \"code\": \"function selectLatest(events){const map=new Map();events.forEach((e,i)=>{if(!e.agentId||typeof e.agentId!=='string'||e.agentId.trim()===''||!e.conversationId||typeof e.conversationId!=='string'||e.conversationId.trim()===''||typeof e.at!=='number'||!isFinite(e.at))return;let key;if(e.conversationId==='default'){key=`${e.agentId}:default:${e.cwd||''}`}else{key=`${e.agentId}:${e.conversationId}`};const prev=map.get(key);if(!prev||e.at>prev.at||(e.at===prev.at&&i>prev.i)){map.set(key,{state:e.state,at:e.at,i:i});}});const result=Array.from(map,([key,{state,at}])=>({key,state,at}));result.sort((a,b)=>a.key.localeCompare(b.key));return result;}\",\n  \"logic\": \"11\",\n  \"thai\": \"เกตเวย์ AI ที่ให้บริการฟรีเฉพาะในเครื่องทำงานโดยไม่ต้องเชื่อมต่อกับผู้ให้บริการภายนอกเพื่อเรียกใช้โมเดล แต่คำสั่งหรือ prompt ที่ผู้ใช้ป้อนยังคงถูกส่งออกไปยังเซิร์ฟเวอร์ของผู้ให้บริการภายนอกเพื่อประมวลผล ดังนั้นข้อมูลที่ส่งออกยังคงออกนอกเครื่องอยู่ดี เลนที่แยกนี้ถูกออกแบบมาให้ทำงานอย่างอิสระ โดยไม่ใช้ข้อมูลรับรอง (credentials) ของบริการที่มีค่าใช้จ่ายที่ผู้ใช้อาจมีอยู่แล้ว ดังนั้นแม้จะรันอยู่บนเครื่องเดียวกัน การประมวลผลจริงยังต้องพึ่งพาเซิร์ฟเวอร์ภายนอก และไม่มีการนำคีย์หรือโทเคนของบริการที่ต้องชำระเงินมาใช้ซ้ำ\"\n}",
+      "finish_reason": "stop",
+      "error": null
+    }
+  ],
+  "evaluation": [
+    {
+      "model": "ollama/minimax-m3",
+      "status": 200,
+      "latency_seconds": 21.531,
+      "score": 9,
+      "exact_keys": true,
+      "code_tests": {
+        "passed": 4,
+        "total": 4,
+        "details": []
+      },
+      "logic_ok": true,
+      "thai_score": 1,
+      "thai_facts": {
+        "outbound": true,
+        "isolated": false
+      },
+      "thai": "เกตเวย์ AI ฟรีเฉพาะที่รันบนเครื่องทำหน้าที่เป็นตัวกลางส่งต่อคำขอไปยังผู้ให้บริการภายนอกฟรีเท่านั้น ข้อความและบริบททั้งหมดยังคงออกจากเครื่องของคุณไปยังเซิร์ฟเวอร์ต้นทาง ไม่ได้ประมวลผลภายในเครื่องแต่อย่างใด เลนแยกนี้ไม่ใช้คีย์หรือโควตาของผู้ให้บริการแบบเสียเงินที่มีอยู่ ใช้บัญชีฟรีแยกต่างหาก จึงแยกการเรียกเก็บและการเข้าถึงออกจากกันชัดเจน ส่วนโมเดลท้องถิ่นทำงานบนเครื่องของคุณเอง ข้อมูลไม่ออกไปไหนเลย",
+      "code": "function selectLatest(events){const map=new Map();for(let i=0;i<events.length;i++){const e=events[i];if(!e||typeof e.at!=='number'||!Number.isFinite(e.at))continue;if(typeof e.agentId!=='string'||e.agentId.length===0)continue;if(typeof e.conversationId!=='string'||e.conversationId.length===0)continue;const key=e.conversationId==='default'?`${e.agentId}:default:${e.cwd||''}`:`${e.agentId}:${e.conversationId}`;const existing=map.get(key);if(!existing||e.at>=existing.at){map.set(key,{key:key,state:e.state,at:e.at});}}return Array.from(map.values()).sort((a,b)=>a.key<b.key?-1:a.key>b.key?1:0);}",
+      "raw_logic": "11",
+      "content_len": 1030
+    },
+    {
+      "model": "ollama/gemma4:31b",
+      "status": 200,
+      "latency_seconds": 6.347,
+      "score": 9,
+      "exact_keys": true,
+      "code_tests": {
+        "passed": 4,
+        "total": 4,
+        "details": []
+      },
+      "logic_ok": true,
+      "thai_score": 1,
+      "thai_facts": {
+        "outbound": true,
+        "isolated": false
+      },
+      "thai": "AI Gateway แบบฟรีที่รันในเครื่องทำหน้าที่เป็นทางผ่านเพื่อส่งคำสั่งไปยังผู้ให้บริการภายนอก ซึ่งหมายความว่า prompt ของคุณยังคงต้องส่งออกจากเครื่องไปยัง upstream provider และช่องทางแยกนี้จะไม่นำข้อมูลรับรองหรือ credential ของผู้ให้บริการแบบชำระเงินที่มีอยู่มาใช้ ในขณะที่ Local Model คือการรันตัวโมเดลทั้งหมดภายในเครื่องของคุณเอง ข้อมูลจึงไม่หลุดออกไปภายนอกและทำงานได้โดยไม่ต้องพึ่งพา API ภายนอกเลย",
+      "code": "function selectLatest(events) {\n  const latest = new Map();\n  for (const e of events) {\n    const { agentId, conversationId, at, cwd } = e;\n    if (!agentId || !conversationId || typeof at !== 'number' || !isFinite(at)) continue;\n    const key = conversationId === 'default' ? `${agentId}:default:${cwd || ''}` : `${agentId}:${conversationId}`;\n    const current = latest.get(key);\n    if (!current || at >= current.at) {\n      latest.set(key, { key, state: e.state, at });\n    }\n  }\n  return Array.from(latest.values()).sort((a, b) => a.key.localeCompare(b.key));\n}",
+      "raw_logic": "11.0",
+      "content_len": 1022
+    },
+    {
+      "model": "ollama/nemotron-3-ultra",
+      "status": null,
+      "latency_seconds": 180.003,
+      "score": 0,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no json"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_facts": {
+        "outbound": false,
+        "isolated": false
+      },
+      "thai": "",
+      "code": null,
+      "raw_logic": null,
+      "content_len": 0
+    },
+    {
+      "model": "ollama/gpt-oss:20b",
+      "status": 200,
+      "latency_seconds": 44.473,
+      "score": 1,
+      "exact_keys": false,
+      "code_tests": {
+        "passed": 0,
+        "total": 4,
+        "details": [
+          "no json"
+        ]
+      },
+      "logic_ok": false,
+      "thai_score": 0,
+      "thai_facts": {
+        "outbound": false,
+        "isolated": false
+      },
+      "thai": "",
+      "code": null,
+      "raw_logic": null,
+      "content_len": 0
+    },
+    {
+      "model": "ollama/gpt-oss:120b",
+      "status": 200,
+      "latency_seconds": 47.089,
+      "score": 8,
+      "exact_keys": true,
+      "code_tests": {
+        "passed": 4,
+        "total": 4,
+        "details": []
+      },
+      "logic_ok": true,
+      "thai_score": 0,
+      "thai_facts": {
+        "outbound": true,
+        "isolated": false
+      },
+      "thai": "ฟรี‑ออนลายอีไอเกตเวย์ที่รันบนเครื่องของคุณแม้จะเป็นซอฟต์แวร์เปิดให้ใช้ฟรี แต่เมื่อคุณพิมพ์คำสั่งหรือข้อความ (prompt) ระบบจะส่งข้อมูลนั้นออกไปยังผู้ให้บริการด้านบน (upstream provider) เพื่อให้โมเดลทำงานและส่งผลลัพธ์กลับมา ดังนั้นแม้จะอยู่ในโหมดแยก (isolated lane) ก็ยังคงพึ่งพาเซิร์ฟเวอร์ภายนอกและไม่ใช้ข้อมูลประจำตัวของผู้ให้บริการที่คุณอาจมีอยู่แล้ว ส่วนโมเดลที่ติดตั้งและทำงานแบบ local model จะทำงานทั้งหมดบนเครื่องของคุณเอง ไม่ต้องส่ง prompt ไปไหนเลย จึงไม่มีการใช้หรือเปิดเผยข้อมูลผู้ให้บริการใด ๆ ทั้งสิ้น",
+      "code": "function selectLatest(events) {\n  const map = Object.create(null);\n  for (let i = 0; i < events.length; i++) {\n    const e = events[i];\n    if (!e || typeof e.agentId !== 'string' || e.agentId === '' ||\n        typeof e.conversationId !== 'string' || e.conversationId === '' ||\n        !Number.isFinite(e.at)) {\n      continue;\n    }\n    const key = e.conversationId === 'default'\n      ? `${e.agentId}:default:${e.cwd || ''}`\n      : `${e.agentId}:${e.conversationId}`;\n    const stored = map[key];\n    if (!stored || e.at > stored.at || e.at === stored.at) {\n      map[key] = { key, state: e.state, at: e.at };\n    }\n  }\n  const result = Object.values(map);\n  result.sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0);\n  return result;\n}",
+      "raw_logic": "11",
+      "content_len": 1324
+    },
+    {
+      "model": "ollama/nemotron-3-super",
+      "status": 200,
+      "latency_seconds": 15.37,
+      "score": 8,
+      "exact_keys": true,
+      "code_tests": {
+        "passed": 4,
+        "total": 4,
+        "details": []
+      },
+      "logic_ok": true,
+      "thai_score": 0,
+      "thai_facts": {
+        "outbound": true,
+        "isolated": false
+      },
+      "thai": "เกตเวย์ AI ที่ให้บริการฟรีเฉพาะในเครื่องทำงานโดยไม่ต้องเชื่อมต่อกับผู้ให้บริการภายนอกเพื่อเรียกใช้โมเดล แต่คำสั่งหรือ prompt ที่ผู้ใช้ป้อนยังคงถูกส่งออกไปยังเซิร์ฟเวอร์ของผู้ให้บริการภายนอกเพื่อประมวลผล ดังนั้นข้อมูลที่ส่งออกยังคงออกนอกเครื่องอยู่ดี เลนที่แยกนี้ถูกออกแบบมาให้ทำงานอย่างอิสระ โดยไม่ใช้ข้อมูลรับรอง (credentials) ของบริการที่มีค่าใช้จ่ายที่ผู้ใช้อาจมีอยู่แล้ว ดังนั้นแม้จะรันอยู่บนเครื่องเดียวกัน การประมวลผลจริงยังต้องพึ่งพาเซิร์ฟเวอร์ภายนอก และไม่มีการนำคีย์หรือโทเคนของบริการที่ต้องชำระเงินมาใช้ซ้ำ",
+      "code": "function selectLatest(events){const map=new Map();events.forEach((e,i)=>{if(!e.agentId||typeof e.agentId!=='string'||e.agentId.trim()===''||!e.conversationId||typeof e.conversationId!=='string'||e.conversationId.trim()===''||typeof e.at!=='number'||!isFinite(e.at))return;let key;if(e.conversationId==='default'){key=`${e.agentId}:default:${e.cwd||''}`}else{key=`${e.agentId}:${e.conversationId}`};const prev=map.get(key);if(!prev||e.at>prev.at||(e.at===prev.at&&i>prev.i)){map.set(key,{state:e.state,at:e.at,i:i});}});const result=Array.from(map,([key,{state,at}])=>({key,state,at}));result.sort((a,b)=>a.key.localeCompare(b.key));return result;}",
+      "raw_logic": "11",
+      "content_len": 1210
+    }
+  ]
+}

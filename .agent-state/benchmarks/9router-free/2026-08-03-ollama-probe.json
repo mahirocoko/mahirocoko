@@ -1,0 +1,192 @@
+[
+  {
+    "model": "deepseek-v4-pro",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.579,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/deepseek-v4-pro] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: e96fdff0-5444-4b0e-923d-37db30708abf)\\\"}\\n (reset after 2m)\"}}"
+  },
+  {
+    "model": "qwen3.5:397b",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.479,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/qwen3.5:397b] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: c1825919-8084-4412-9d7e-d5155d813fe8)\\\"}\\n (reset after 1m 57s)\"}}"
+  },
+  {
+    "model": "nemotron-3-super",
+    "status": 200,
+    "category": "ok",
+    "latency_seconds": 1.067,
+    "content": "",
+    "usage": {
+      "prompt_tokens": 2021,
+      "completion_tokens": 32,
+      "total_tokens": 2053
+    },
+    "error": null
+  },
+  {
+    "model": "kimi-k2.7-code",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.398,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/kimi-k2.7-code] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: 22d65676-60cd-4b56-8eff-894802a72bce)\\\"}\\n (reset after 1m 53s)\"}}"
+  },
+  {
+    "model": "nemotron-3-nano:30b",
+    "status": 200,
+    "category": "ok",
+    "latency_seconds": 1.645,
+    "content": "",
+    "usage": {
+      "prompt_tokens": 2021,
+      "completion_tokens": 32,
+      "total_tokens": 2053
+    },
+    "error": null
+  },
+  {
+    "model": "gpt-oss:20b",
+    "status": 200,
+    "category": "ok",
+    "latency_seconds": 1.063,
+    "content": "OK",
+    "usage": {
+      "prompt_tokens": 2071,
+      "completion_tokens": 26,
+      "total_tokens": 2097
+    },
+    "error": null
+  },
+  {
+    "model": "deepseek-v4-flash:0731",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.414,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/deepseek-v4-flash:0731] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: 6d35211d-d91b-417e-9b02-2da515716e77)\\\"}\\n (reset after 1m 46s)\"}}"
+  },
+  {
+    "model": "mistral-large-3:675b",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.38,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/mistral-large-3:675b] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: e2b9b370-f358-40f5-bb4c-89f5cc180a72)\\\"}\\n (reset after 1m 43s)\"}}"
+  },
+  {
+    "model": "kimi-k2.6",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.409,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/kimi-k2.6] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: 895c4a73-9fde-46be-aa5d-c9c9ab5142e3)\\\"}\\n (reset after 1m 40s)\"}}"
+  },
+  {
+    "model": "minimax-m2.7",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.399,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/minimax-m2.7] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: ef811410-e0ae-4877-8641-1e937aab979f)\\\"}\\n (reset after 1m 36s)\"}}"
+  },
+  {
+    "model": "glm-5.1",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.483,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/glm-5.1] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: 8500ae8d-d6bb-4ae5-a851-f4eb1d7b21f6)\\\"}\\n (reset after 1m 33s)\"}}"
+  },
+  {
+    "model": "deepseek-v4-flash",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.474,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/deepseek-v4-flash] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: b1817743-cb0b-40e7-85cf-cc5be60792c8)\\\"}\\n (reset after 1m 29s)\"}}"
+  },
+  {
+    "model": "kimi-k3",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.402,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/kimi-k3] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: f369ceae-e844-4ec8-a2ab-4c9549229938)\\\"}\\n (reset after 1m 26s)\"}}"
+  },
+  {
+    "model": "minimax-m3",
+    "status": 200,
+    "category": "ok",
+    "latency_seconds": 1.19,
+    "content": "OK",
+    "usage": {
+      "prompt_tokens": 2180,
+      "completion_tokens": 23,
+      "total_tokens": 2203
+    },
+    "error": null
+  },
+  {
+    "model": "gemma4:31b",
+    "status": 200,
+    "category": "ok",
+    "latency_seconds": 0.9,
+    "content": "OK",
+    "usage": {
+      "prompt_tokens": 2017,
+      "completion_tokens": 2,
+      "total_tokens": 2019
+    },
+    "error": null
+  },
+  {
+    "model": "nemotron-3-ultra",
+    "status": 200,
+    "category": "ok",
+    "latency_seconds": 3.583,
+    "content": "OK",
+    "usage": {
+      "prompt_tokens": 2021,
+      "completion_tokens": 14,
+      "total_tokens": 2035
+    },
+    "error": null
+  },
+  {
+    "model": "glm-5.2",
+    "status": 403,
+    "category": "subscription",
+    "latency_seconds": 3.427,
+    "content": "",
+    "usage": {},
+    "error": "{\"error\":{\"message\":\"[ollama/glm-5.2] [403]: {\\\"error\\\":\\\"this model requires a subscription, upgrade for access: https://ollama.com/upgrade (ref: d7ba91b7-99ec-446e-b43b-ee503fea115a)\\\"}\\n (reset after 1m 17s)\"}}"
+  },
+  {
+    "model": "gpt-oss:120b",
+    "status": 200,
+    "category": "ok",
+    "latency_seconds": 1.381,
+    "content": "",
+    "usage": {
+      "prompt_tokens": 2071,
+      "completion_tokens": 32,
+      "total_tokens": 2103
+    },
+    "error": null
+  }
+]
