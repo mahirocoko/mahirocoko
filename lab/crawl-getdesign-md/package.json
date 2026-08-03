@@ -7,7 +7,12 @@
   "scripts": {
     "crawl": "node crawl.mjs",
     "crawl:details": "node crawl.mjs --details",
-    "crawl:sample": "node crawl.mjs --details --limit 5"
+    "crawl:sample": "node crawl.mjs --details --limit 5",
+    "viewer": "node build-viewer.mjs",
+    "viewer:skip-dl": "node build-viewer.mjs --skip-download",
+    "details": "node build-details.mjs",
+    "details:skip-dl": "node build-details.mjs --skip-download",
+    "build": "node crawl.mjs && node build-viewer.mjs && node build-details.mjs"
   },
   "dependencies": {
     "jsdom": "30.0.1"
