@@ -6,13 +6,15 @@
   "description": "Crawl script for getdesign.md/design-md catalog",
   "scripts": {
     "crawl": "node crawl.mjs",
-    "crawl:details": "node crawl.mjs --details",
-    "crawl:sample": "node crawl.mjs --details --limit 5",
+    "crawl:details": "node crawl.mjs --details --resume",
+    "crawl:details:fresh": "node crawl.mjs --details",
+    "crawl:sample": "node crawl.mjs --details --resume --limit 5",
     "viewer": "node build-viewer.mjs",
     "viewer:skip-dl": "node build-viewer.mjs --skip-download",
     "details": "node build-details.mjs",
     "details:skip-dl": "node build-details.mjs --skip-download",
-    "build": "node crawl.mjs && node build-viewer.mjs && node build-details.mjs"
+    "verify": "node verify-output.mjs",
+    "build": "node crawl.mjs && node crawl.mjs --details --resume && node build-viewer.mjs && node build-details.mjs && node verify-output.mjs"
   },
   "dependencies": {
     "jsdom": "30.0.1"
