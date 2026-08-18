@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>ผมใช้ AI ทำงานยังไง</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#stage">ข้ามไปยังสไลด์</a>
+
+  <div class="deck">
+    <div class="stage" id="stage">
+      <img class="grain" src="assets/grain.svg" alt="" width="160" height="160">
+      <img class="filament" src="assets/filament.svg" alt="" width="48" height="1080">
+
+      <header class="chrome-top">
+        <p class="progress" aria-live="polite" aria-atomic="true">
+          <span id="progress-current">1</span>
+          <span class="progress-sep" aria-hidden="true">/</span>
+          <span id="progress-total">12</span>
+        </p>
+        <p class="session-mark">Mahiro · setup ที่ใช้จริง</p>
+      </header>
+
+      <main class="viewport">
+        <article class="slide s1 is-active" id="slide-1" data-slide="1" aria-labelledby="s1-title" tabindex="-1">
+          <p class="eyebrow">ผมใช้ AI ทำงานยังไง</p>
+          <h1 id="s1-title">จาก AI Chat สู่ Letta Code</h1>
+          <ol class="journey" role="list">
+            <li>AI Chat</li>
+            <li>Claude Code</li>
+            <li>OpenCode</li>
+            <li>Letta Code</li>
+          </ol>
+          <p class="lede">เส้นทางที่ลองใช้ ปรับแต่ง และสร้างเครื่องมือเสริมรอบ AI จนกลายเป็น setup ปัจจุบัน</p>
+          <template class="notes">Session นี้แชร์ setup และวิธีทำงานจริงของผม ไม่ใช่การจัดอันดับ model หรือบอกว่าทุกคนต้องเซ็ตเหมือนกัน</template>
+        </article>
+
+        <article class="slide s2" id="slide-2" data-slide="2" hidden aria-labelledby="s2-title" tabindex="-1">
+          <h1 id="s2-title">เครื่องมือที่ผมใช้ตามลำดับ</h1>
+          <div class="s2-grid">
+            <ol class="roadmap" role="list">
+              <li><strong>AI Chat</strong><span>ช่วยคิด อธิบาย logic และร่าง code</span></li>
+              <li><strong>Claude Code</strong><span>เริ่มให้ coding agent ลงมือแก้ code ใน repo</span></li>
+              <li><strong>MCP memory</strong><span>ทดลองทำ memory layer ให้จำข้อมูลข้าม session</span></li>
+              <li><strong>OpenCode</strong><span>เลือก model และ provider ได้อิสระ จัด workflow หลาย agent</span></li>
+              <li><strong>Letta Code</strong><span>main agent ที่คุยและทำงานร่วมกันระยะยาว</span></li>
+              <li><strong>Herdr + Agent Halo</strong><span>คุมและมองเห็นสถานะของหลาย agent พร้อมกัน</span></li>
+            </ol>
+            <dl class="glossary">
+              <div>
+                <dt>Model</dt>
+                <dd>สมองที่คิดและประมวลผล</dd>
+              </div>
+              <div>
+                <dt>Tool</dt>
+                <dd>สิ่งที่ทำให้ model ลงมือได้ (อ่าน/แก้ไฟล์ รัน command ฯลฯ)</dd>
+              </div>
+              <div>
+                <dt>Agent</dt>
+                <dd>Model + Tools + Goal ทำงานต่อเนื่องหลายขั้นตอนได้เอง</dd>
+              </div>
+            </dl>
+          </div>
+          <template class="notes">ใช้สไลด์นี้เป็น roadmap ของ session และปูพื้นความต่างระหว่าง model, tool กับ agent สั้น ๆ เพราะคำพวกนี้จะถูกพูดถึงตลอด</template>
+        </article>
+
+        <article class="slide s3" id="slide-3" data-slide="3" hidden aria-labelledby="s3-title" tabindex="-1">
+          <h1 id="s3-title" class="visually-hidden">จากก๊อปคำตอบเอง สู่ให้ agent ลงมือใน repo</h1>
+          <div class="split">
+            <section class="pane pane-chat">
+              <h2>AI Chat</h2>
+              <ol class="broken-path" role="list">
+                <li>เจอ error</li>
+                <li>ก๊อปไปถาม</li>
+                <li>ก๊อปคำตอบกลับมา</li>
+                <li>รันเองใน terminal</li>
+              </ol>
+            </section>
+            <section class="pane pane-agent">
+              <h2>Claude Code</h2>
+              <ol class="loop-path" role="list">
+                <li>อ่าน codebase</li>
+                <li>แก้ไฟล์</li>
+                <li>รัน command และ test</li>
+                <li>อ่านผลแล้วทำต่อได้</li>
+              </ol>
+            </section>
+          </div>
+          <template class="notes">Claude Code เป็น coding agent ตัวแรกที่ผมใช้จริงจัง ความต่างที่ชัดมากคือไม่ต้องคอยก๊อป code ข้ามไปมาระหว่าง chat, editor และ terminal เองทุกขั้นตอน</template>
+        </article>
+
+        <article class="slide s4" id="slide-4" data-slide="4" hidden aria-labelledby="s4-title" tabindex="-1">
+          <p class="eyebrow">ก่อน Letta</p>
+          <h1 id="s4-title">ผมลองสร้าง memory layer เอง</h1>
+          <figure class="mcp-stack">
+            <div class="node node-tool">Claude Code</div>
+            <p class="mcp-link"><span class="mcp-arrows" aria-hidden="true">↕</span> MCP</p>
+            <div class="node node-memory">Memory layer ข้าม session</div>
+          </figure>
+          <ul class="motives" role="list">
+            <li>อยากให้ agent ค้นและดึง context จากงานก่อนหน้ากลับมาใช้ได้</li>
+            <li>ไม่อยากเริ่มใหม่จากศูนย์ทุกครั้งที่เปิด session</li>
+            <li>ลองแยก memory ออกจาก coding tool เพื่อไม่ให้ข้อมูลผูกติดกับเครื่องมือเดียว</li>
+          </ul>
+          <template class="notes">ช่วงนี้ผมพยายามสร้าง memory layer ครอบ Claude Code ผ่าน MCP (Model Context Protocol) เป้าหมายคือเปลี่ยน coding tool ได้โดย context เดิมไม่หายตามไปด้วย</template>
+        </article>
+
+        <article class="slide s5" id="slide-5" data-slide="5" hidden aria-labelledby="s5-title" tabindex="-1">
+          <h1 id="s5-title">ทำไมผมย้ายไป OpenCode</h1>
+          <ol class="manifesto" role="list">
+            <li><span class="idx">01</span> ใช้ ChatGPT subscription ที่มีอยู่เดิมได้</li>
+            <li><span class="idx">02</span> เลือก model และ provider ได้อิสระขึ้น</li>
+            <li><span class="idx">03</span> มี Oh My OpenCode ช่วยจัด workflow และแบ่งบทบาท agent</li>
+            <li><span class="idx">04</span> ย้าย skills และ custom commands เดิมตามไปใช้ต่อได้</li>
+          </ol>
+          <template class="notes">OpenCode ทำหน้าที่เป็น runtime หลัก ส่วน Oh My OpenCode ช่วยจัด workflow และแบ่งบทบาท agent ช่วงนี้ทำให้ผมเริ่มเลือก model ตามงาน แทนการใช้ตัวเดียวทำทุกอย่าง</template>
+        </article>
+
+        <article class="slide s6" id="slide-6" data-slide="6" hidden aria-labelledby="s6-title" tabindex="-1">
+          <h1 id="s6-title">Letta Code เป็นตัวหลัก แต่ workflow ไม่ได้ผูกกับตัวเดียว</h1>
+          <div class="strata">
+            <section class="stratum stratum-letta">
+              <h2>Letta Code — main agent ที่รู้จักผม</h2>
+              <ul role="list">
+                <li>รู้จัก workflow, preference และวิธีทำงานของผม</li>
+                <li>มี persistent memory จำ context ข้าม session</li>
+              </ul>
+            </section>
+            <section class="stratum stratum-skills">
+              <h2>Skills — workflow ที่พกไปใช้กับ agent อื่นได้</h2>
+              <ul role="list">
+                <li>ใช้ procedure เดิมกับ Agy, OpenCode, Claude Code และ CLI อื่น</li>
+                <li>เปลี่ยน model หรือ tool ได้ โดยไม่ต้องเริ่มวิธีทำงานใหม่ทั้งหมด</li>
+              </ul>
+            </section>
+            <section class="stratum stratum-mods">
+              <h2>Mods — ขยาย runtime ของ Letta Code โดยเฉพาะ</h2>
+              <ul role="list">
+                <li>tools, commands, state และ events เฉพาะ Letta Code</li>
+                <li>ไม่ได้พกไปใช้กับ Agy โดยตรง</li>
+              </ul>
+            </section>
+          </div>
+          <template class="notes">สิ่งที่ผมชอบใน Letta Code คือความต่อเนื่องของ main agent แต่ผมไม่ได้ย้ายทุก workflow เข้าไปผูกกับ Letta Code เพราะ skills เป็น procedure ที่ติดตั้งและใช้กับ agent อื่นได้ ส่วน mods ใช้ขยาย runtime ของ Letta Code โดยเฉพาะ</template>
+        </article>
+
+        <article class="slide s7" id="slide-7" data-slide="7" hidden aria-labelledby="s7-title" tabindex="-1">
+          <h1 id="s7-title">ผมแบ่งงานให้ agent ยังไง</h1>
+          <table class="roles">
+            <caption class="visually-hidden">บทบาทของ agent และวิธีเลือก model</caption>
+            <thead>
+              <tr>
+                <th scope="col">บทบาท</th>
+                <th scope="col">หน้าที่</th>
+                <th scope="col">เลือก model แบบไหน</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Main / Coordinator</th>
+                <td>คุย วางแผน ถือ context ภาพรวม</td>
+                <td>คิดรอบคอบ รองรับ context ยาว</td>
+              </tr>
+              <tr>
+                <th scope="row">Scout</th>
+                <td>อ่าน codebase กว้าง ๆ สรุปจุดสำคัญ</td>
+                <td>อ่านเร็ว สรุปชัด จับ pattern ได้</td>
+              </tr>
+              <tr>
+                <th scope="row">Writer</th>
+                <td>ลงมือแก้ code ใน scope ที่ชัดเจน</td>
+                <td>แม่นยำ ทำตาม instruction เคร่งครัด</td>
+              </tr>
+              <tr>
+                <th scope="row">Reviewer / Verifier</th>
+                <td>ตรวจ code, command และผล test</td>
+                <td>ช่างสงสัย หาจุดขัดแย้งและ edge cases เก่ง</td>
+              </tr>
+              <tr>
+                <th scope="row">Visual Direction</th>
+                <td>สำรวจและทดลองทิศทางด้านภาพ</td>
+                <td>รสนิยมและ creative taste เข้ากับงาน</td>
+              </tr>
+            </tbody>
+          </table>
+          <template class="notes">ผมเลือก model ตามบทบาทของงานมากกว่าหาตัวที่เก่งที่สุดทุกเรื่อง และเพราะ model เปลี่ยนรุ่นเร็วมาก จึงไม่ใส่ชื่อรุ่นเฉพาะเจาะจงไว้บนสไลด์</template>
+        </article>
+
+        <article class="slide s8" id="slide-8" data-slide="8" hidden aria-labelledby="s8-title" tabindex="-1">
+          <h1 id="s8-title">หนึ่งงานจริง ผมเริ่มและจบยังไง</h1>
+          <ol class="river" role="list">
+            <li>ดูของจริงใน repo (code, config, logs)</li>
+            <li>กำหนดเป้าหมายและ scope ให้ชัด</li>
+            <li>เลือก skill หรือ workflow ที่เกี่ยวข้อง</li>
+            <li>เลือก agent และ model ที่เหมาะกับบทบาท</li>
+            <li>ลงมือแก้ทีละส่วน พร้อม verify ผลจริง</li>
+            <li>review ผลลัพธ์สุดท้ายและตัดสินใจเอง</li>
+            <li>บันทึก context หรือปรับ skill ไว้ใช้ครั้งถัดไป</li>
+          </ol>
+          <template class="notes">นี่คือ workflow ทั่วไปในการทำงานจริง ไม่ใช่ checklist แข็งตัว งานเล็ก main agent อาจทำจบเอง แต่งานใหญ่ค่อยกระจายให้ scout, writer หรือ reviewer ช่วยกัน โดยเราเป็นคนคุมและตัดสินใจขั้นสุดท้ายเสมอ</template>
+        </article>
+
+        <article class="slide s9" id="slide-9" data-slide="9" hidden aria-labelledby="s9-title" tabindex="-1">
+          <h1 id="s9-title">เปิดหลาย agent พร้อมกัน ผมดูและคุมยังไง</h1>
+          <div class="control-room">
+            <section class="herdr">
+              <h2>Herdr — control room สำหรับ agents</h2>
+              <div class="panes" aria-hidden="true">
+                <div class="pane-win">
+                  <span>lane</span>
+                  <p>workspace</p>
+                </div>
+                <div class="pane-win">
+                  <span>tab</span>
+                  <p>prompt / output</p>
+                </div>
+                <div class="pane-win">
+                  <span>terminal</span>
+                  <p>stop / focus</p>
+                </div>
+              </div>
+              <ul role="list">
+                <li>จัด workspace, tab และ terminal pane</li>
+                <li>ส่ง prompt อ่าน output และหยุดงาน</li>
+                <li>สลับกลับไปยัง pane ที่ต้องการได้ทันที</li>
+              </ul>
+            </section>
+            <section class="halo">
+              <h2>Agent Halo — สถานะบน Notch</h2>
+              <img class="notch" src="assets/notch.svg" alt="">
+              <ul class="status" role="list">
+                <li><span class="dot working"></span> working</li>
+                <li><span class="dot waiting"></span> waiting</li>
+                <li><span class="dot done"></span> done</li>
+                <li><span class="dot error"></span> error</li>
+              </ul>
+              <ul role="list">
+                <li>แสดงสถานะ working, waiting, done, error</li>
+                <li>เหลือบดูได้โดยไม่ต้องเฝ้า terminal</li>
+                <li>คลิกกลับไปยัง session นั้นได้ทันที</li>
+              </ul>
+            </section>
+          </div>
+          <template class="notes">Herdr เป็นที่สั่งและคุมงานจริง ส่วน Agent Halo แสดงสถานะของทุก session บน Notch ทั้งคู่ช่วยให้ผมตามงานหลาย session ได้โดยไม่ต้องเฝ้า terminal ตลอดเวลา</template>
+        </article>
+
+        <article class="slide s10" id="slide-10" data-slide="10" hidden aria-labelledby="s10-title" tabindex="-1">
+          <h1 id="s10-title">Ecosystem ที่ผมใช้จริง</h1>
+          <div class="eco">
+            <div class="eco-core">
+              <p class="eco-label">แกน</p>
+              <h2>Letta Code + Memory</h2>
+              <p>main agent, context และ preference ระยะยาว</p>
+              <p class="eco-mod">Mods · tools, commands, state และ events เฉพาะ Letta Code</p>
+            </div>
+            <ul class="eco-orbit" role="list">
+              <li>
+                <h2>Skills</h2>
+                <p>procedure ที่ใช้ซ้ำและพกข้าม agent</p>
+              </li>
+              <li>
+                <h2>Repo docs / AGENTS.md</h2>
+                <p>กติกาและ context ของแต่ละโปรเจกต์</p>
+              </li>
+              <li>
+                <h2>Herdr</h2>
+                <p>execution lanes และ panes ที่กำลังรันงาน</p>
+              </li>
+              <li>
+                <h2>Agent Halo</h2>
+                <p>ภาพรวมสถานะที่อยากเหลือบดูเร็ว ๆ</p>
+              </li>
+            </ul>
+          </div>
+          <template class="notes">เส้นแบ่งสำคัญคือ skills พก workflow ไปใช้ข้าม agent ได้ ส่วน mods เป็น Letta-specific runtime extension ไม่ได้พกไปใช้กับ Agy โดยตรง ณ วันที่ 17 สิงหาคม 2026 Agy ติดตั้ง Mahiro Skills แบบ managed อยู่ 24 skills</template>
+        </article>
+
+        <article class="slide s11" id="slide-11" data-slide="11" hidden aria-labelledby="s11-title" tabindex="-1">
+          <h1 id="s11-title">Mahiro Skills ที่ผมพกไปใช้ข้าม agent</h1>
+          <div class="skills-layout">
+            <section>
+              <h2>Mahiro core behavior</h2>
+              <table class="skill-table">
+                <caption class="visually-hidden">Mahiro core skill family</caption>
+                <thead>
+                  <tr>
+                    <th scope="col">Skill</th>
+                    <th scope="col">ใช้ทำอะไร</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"><code>mahiro-style</code></th>
+                    <td>code, review และ implementation ในแบบของผม</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><code>mahiro-guidance-refine</code></th>
+                    <td>เปลี่ยน feedback ให้เป็น docs และ rules ที่ใช้ต่อได้</td>
+                  </tr>
+                  <tr>
+                    <th scope="row"><code>mahiro-docs-rules-init</code></th>
+                    <td>ตั้งต้น AGENTS.md และ project docs</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+            <section class="skill-side">
+              <h2>Workflow ที่หยิบใช้ประจำ</h2>
+              <ul class="chips" role="list">
+                <li><code>recap</code></li>
+                <li><code>rrr</code></li>
+                <li><code>direct-cli</code></li>
+                <li><code>fable</code></li>
+              </ul>
+              <p class="alias-note">Agy ติดตั้งทั้งหมดเป็น <code>/mh-*</code> ส่วน agent อื่นใช้ adapter ของตัวเอง</p>
+            </section>
+          </div>
+          <template class="notes">Skill family ที่คุณหมายถึงคือ mahiro-* ไม่ใช่ prefix /mh-*: mahiro-guidance-refine ถูกใช้ 59 ครั้ง, mahiro-style 21 และ mahiro-docs-rules-init 10 ส่วน /mh-* เป็นเพียงชื่อ alias ที่ Agy สร้างตอนติดตั้ง ปัจจุบัน Agy มี Mahiro Skills แบบ managed 24 skills</template>
+        </article>
+
+        <article class="slide s12" id="slide-12" data-slide="12" hidden aria-labelledby="s12-title" tabindex="-1">
+          <p class="eyebrow">Q&amp;A</p>
+          <h1 id="s12-title">ตอนนี้ทุกคนใช้ AI ช่วยทำงานกันแบบไหน?</h1>
+          <template class="notes">ชวนคุยแลกเปลี่ยน: ตอนนี้ในทีมใช้ AI Chat, coding agent หรือเครื่องมือตัวไหนกันอยู่บ้าง มี pain point หรือ workflow ตรงไหนที่อยากลองปรับ</template>
+        </article>
+      </main>
+
+      <nav class="chrome-nav" aria-label="สไลด์">
+        <button type="button" id="prev" aria-label="สไลด์ก่อนหน้า">
+          <span aria-hidden="true">←</span> ก่อนหน้า
+        </button>
+        <button type="button" id="next" aria-label="สไลด์ถัดไป">
+          ถัดไป <span aria-hidden="true">→</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <dialog id="notes-dialog" aria-labelledby="notes-heading">
+    <div class="notes-panel">
+      <p class="notes-kicker" id="notes-kicker">สไลด์ 1</p>
+      <h2 id="notes-heading">บันทึกผู้บรรยาย</h2>
+      <p id="notes-body"></p>
+      <form method="dialog">
+        <button type="submit" value="close">ปิด</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
