@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>ใช้ AI ทำงานยังไง</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="workflow.css">
+</head>
+<body>
+  <a class="skip-link" href="#stage">ข้ามไปยังสไลด์</a>
+
+  <div class="deck">
+    <div class="stage" id="stage">
+      <img class="grain" src="assets/grain.svg" alt="" width="160" height="160">
+      <img class="filament" src="assets/filament.svg" alt="" width="48" height="1080">
+
+      <header class="chrome-top">
+        <p class="progress" aria-live="polite" aria-atomic="true">
+          <span id="progress-current">1</span>
+          <span class="progress-sep" aria-hidden="true">/</span>
+          <span id="progress-total">9</span>
+        </p>
+        <p class="session-mark">Mahiro · code workflow ที่ใช้จริง</p>
+      </header>
+
+      <main class="viewport">
+        <article class="slide s1 is-active" id="slide-1" data-slide="1" aria-labelledby="s1-title" tabindex="-1">
+          <div class="s1-copy">
+            <p class="eyebrow">ใช้ AI ทำงานยังไง</p>
+            <h1 id="s1-title">Workflow ที่ใช้จริงกับงาน code</h1>
+            <div class="title-paths" aria-label="จุดเริ่มงานสองแบบ">
+              <span>โปรเจกต์ใหม่</span>
+              <span>โปรเจกต์เดิม</span>
+            </div>
+            <p class="lede">เริ่มต่างกัน แต่สุดท้ายกลับมาเข้าลูปเดียวกัน</p>
+          </div>
+          <figure class="s1-art">
+            <img
+              src="assets/filament-memory.png"
+              alt=""
+              width="900"
+              height="1200"
+              fetchpriority="high"
+            >
+          </figure>
+          <template class="notes">Session นี้ไม่ได้พาทัวร์เครื่องมือ แต่จะเล่า workflow ที่ผมใช้จริงเวลาเริ่มโปรเจกต์ใหม่ เข้าไปทำงานในโปรเจกต์เดิม ติดแล้วไปเรียนจาก source อื่น และทำให้บทเรียนจากรอบนี้กลับมาใช้ได้ในรอบถัดไป</template>
+        </article>
+
+        <article class="slide s2" id="slide-2" data-slide="2" hidden aria-labelledby="s2-title" tabindex="-1">
+          <p class="eyebrow">Two entry modes</p>
+          <h1 id="s2-title">เริ่มต่างกัน แล้วเข้าลูปเดียวกัน</h1>
+          <div class="entry-modes">
+            <section class="entry-mode entry-mode-new">
+              <span class="entry-index">01</span>
+              <h2>โปรเจกต์ใหม่</h2>
+              <p>สร้าง context และกติกา</p>
+              <code>style → docs → safe index</code>
+            </section>
+            <section class="entry-mode entry-mode-existing">
+              <span class="entry-index">02</span>
+              <h2>โปรเจกต์เดิม</h2>
+              <p>โหลด context และกติกา</p>
+              <code>recap → repo docs → current reality</code>
+            </section>
+            <div class="entry-converge" aria-hidden="true">
+              <span></span>
+              <strong>↓</strong>
+              <span></span>
+            </div>
+            <ol class="shared-loop" role="list">
+              <li>เข้าใจ</li>
+              <li>ลงมือ</li>
+              <li>verify</li>
+              <li>เรียนรู้</li>
+              <li>เก็บบทเรียน</li>
+            </ol>
+          </div>
+          <template class="notes">จริง ๆ งานใหม่กับงานเดิมไม่ได้ใช้ workflow คนละชุด ต่างกันแค่ตอนเข้าโปรเจกต์ งานใหม่ยังไม่มีกติกา จึงต้องสร้าง context, docs และ index ขึ้นมา ส่วนงานเดิมมีกติกาและ behavior อยู่แล้ว ต้องโหลดของจริงก่อน พอเข้าใจแล้วทั้งสองแบบก็กลับมาใช้ execution loop เดียวกัน</template>
+        </article>
+
+        <article class="slide s3" id="slide-3" data-slide="3" hidden aria-labelledby="s3-title" tabindex="-1">
+          <p class="eyebrow">New project</p>
+          <h1 id="s3-title">สร้าง context ให้โปรเจกต์ใหม่</h1>
+          <ol class="skill-sequence" role="list">
+            <li>
+              <span class="skill-index">01</span>
+              <div>
+                <strong>เลือก stack และวาง structure</strong>
+                <p>เริ่มจากของที่โปรเจกต์ต้องใช้จริง</p>
+              </div>
+            </li>
+            <li>
+              <span class="skill-index">02</span>
+              <div>
+                <code>mahiro-style</code>
+                <p>ใช้เป็น doctrine ตอน repo ยังไม่มีกติกา</p>
+              </div>
+            </li>
+            <li>
+              <span class="skill-index">03</span>
+              <div>
+                <code>mahiro-docs-rules-init</code>
+                <p>สร้าง AGENTS.md และ project docs</p>
+              </div>
+            </li>
+            <li>
+              <span class="skill-index">04</span>
+              <div>
+                <code>cocoindex-rules-init → ccc</code>
+                <p>ตั้ง safe exclusions ก่อน index และ search</p>
+              </div>
+            </li>
+          </ol>
+          <p class="sequence-close">พอมี docs แล้ว กติกาใน repo คือ source of truth</p>
+          <template class="notes">mahiro-style ไม่ใช่ตัวสร้าง project โดยตรง แต่ใช้คุม naming, structure, TypeScript และ frontend conventions ตอน repo ยังเงียบ พอ stack เริ่มนิ่ง ผมใช้ mahiro-docs-rules-init สร้าง AGENTS.md และ docs จากนั้น sync exclusions และรัน filename-only preflight กับ strict scan ให้ผ่านก่อน แล้วค่อยใช้ ccc index หรือ search เมื่อ local docs เกิดขึ้นแล้ว กติกาใน repo ต้องมาก่อน global style</template>
+        </article>
+
+        <article class="slide s4" id="slide-4" data-slide="4" hidden aria-labelledby="s4-title" tabindex="-1">
+          <p class="eyebrow">Existing project</p>
+          <h1 id="s4-title">โหลดของจริงก่อนลงมือ</h1>
+          <ol class="reentry-sequence" role="list">
+            <li>
+              <code>recap</code>
+              <span>รู้งานค้าง จุดตัดสินใจ และสิ่งที่ควรทำต่อ</span>
+            </li>
+            <li>
+              <strong>AGENTS.md · docs · git status</strong>
+              <span>อ่านกติกาและงานที่มีอยู่ก่อน</span>
+            </li>
+            <li>
+              <strong>current behavior</strong>
+              <span>ดู source · browser · logs · failing command</span>
+            </li>
+            <li>
+              <code>ccc / exact search</code>
+              <span>หา owner และ pattern ที่ใช้อยู่จริง</span>
+            </li>
+          </ol>
+          <aside class="local-rule">
+            <span>กติกาเดียว</span>
+            <strong><code>mahiro-style</code> เติมช่องว่าง ไม่ทับ local pattern</strong>
+          </aside>
+          <template class="notes">ถ้าเป็นโปรเจกต์เดิม ผมไม่เริ่มจากสร้างกติกาใหม่ แต่ใช้ recap เพื่อดูว่างานค้างตรงไหน จากนั้นอ่าน AGENTS.md, docs, git status และ behavior ปัจจุบันก่อน ใช้ ccc หรือ exact search หา owner กับ pattern ที่ repo ใช้อยู่ mahiro-style เป็น fallback เฉพาะจุดที่ repo เงียบ ไม่ใช่เหตุผลให้ rewrite ของเดิมตาม preference กลาง</template>
+        </article>
+
+        <article class="slide s5" id="slide-5" data-slide="5" hidden aria-labelledby="s5-title" tabindex="-1">
+          <p class="eyebrow">Execution loop</p>
+          <h1 id="s5-title">พอเข้าใจงานแล้ว ใช้ลูปเดียวกัน</h1>
+          <div class="execution-layout">
+            <ol class="execution-loop" role="list">
+              <li><span>01</span><strong>กำหนดจุดที่นับว่าจบ</strong></li>
+              <li><span>02</span><strong>main ทำเอง หรือแบ่งงาน</strong></li>
+              <li><span>03</span><strong>implement แล้วรวมผลกลับมา</strong></li>
+              <li><span>04</span><strong>verify จาก evidence จริง</strong></li>
+              <li><span>05</span><strong>Mahiro review — ผ่านหรือแก้ต่อ</strong></li>
+            </ol>
+            <aside class="execution-routing">
+              <p class="routing-thesis">เลือก agent และ model<br>เท่าที่งานต้องใช้</p>
+              <p class="routing-formula">ความถนัด × effort × risk × cost</p>
+              <ul class="routing-examples" role="list">
+                <li><span>Scout</span><code>GPT-5.6 Luna</code></li>
+                <li><span>Writer</span><code>Gemini Flash</code></li>
+                <li><span>Review</span><code>GPT-5.6 Terra / Sol</code></li>
+                <li><span>Visual</span><code>Gemini / Kimi K3</code></li>
+              </ul>
+            </aside>
+          </div>
+          <p class="verification-line"><code>diff · test · browser · native evidence</code> <span>agent verified ≠ human accepted</span></p>
+          <template class="notes">งานเล็กและมี concrete anchor ชัด main agent ทำเองได้ ถ้างานอ่านกว้าง งาน parallel หรือต้องใช้ specialist ค่อยส่งผ่าน direct-cli หรือ subagent แล้วเลือก model ตามความถนัด effort ความเสี่ยง และ cost ผลทุก lane ต้องกลับมาที่ main agent เพื่อรวม diff และ verify จาก command, test, browser หรือ native evidence ก่อนให้ผมตัดสินใจ การที่ agent ตรวจผ่านไม่ได้แปลว่าผมยอมรับผลด้าน product หรือ visual แล้ว</template>
+        </article>
+
+        <article class="slide s6" id="slide-6" data-slide="6" hidden aria-labelledby="s6-title" tabindex="-1">
+          <p class="eyebrow">Choose the execution path</p>
+          <h1 id="s6-title">เพิ่ม orchestration เท่าที่งานต้องใช้</h1>
+          <div class="execution-path-layout">
+            <ol class="execution-path" role="list">
+              <li class="execution-path-level execution-path-main">
+                <span class="path-index">01</span>
+                <div>
+                  <strong>Letta Code — Main ทำเอง</strong>
+                  <p>scope ชัด · มี concrete anchor · ไม่ต้องแยก exploration</p>
+                </div>
+              </li>
+              <li class="path-bridge" aria-hidden="true">
+                <span>เมื่อ role หรือ context ต้องแยก</span>
+              </li>
+              <li class="execution-path-level execution-path-subagent">
+                <span class="path-index">02</span>
+                <div>
+                  <strong>Letta subagent</strong>
+                  <p>Scout · Writer · Reviewer · Verifier</p>
+                  <small>แยก context โดยยังอยู่ใน workflow เดิม</small>
+                </div>
+              </li>
+              <li class="path-bridge" aria-hidden="true">
+                <span>เมื่อ capability เฉพาะ executor จำเป็น</span>
+              </li>
+              <li class="execution-path-level execution-path-direct">
+                <span class="path-index">03</span>
+                <div>
+                  <strong>Direct executor lane</strong>
+                  <p>Agy · Cursor · Codex · Pi</p>
+                  <small>Herdr คุม pane · Agent Halo ดูสถานะ</small>
+                </div>
+              </li>
+            </ol>
+            <aside class="cross-layer-tools">
+              <p class="cross-layer-kicker">ใช้ได้ทุกชั้น</p>
+              <ul role="list">
+                <li><code>ccc / exact search</code><span>หาของจริงใน codebase</span></li>
+                <li><code>Playwright / HiroHiro</code><span>เก็บ browser evidence</span></li>
+                <li><code>Mahiro Skills</code><span>procedure ที่พกข้าม agent</span></li>
+              </ul>
+            </aside>
+          </div>
+          <p class="execution-path-thesis">เริ่มจากทางที่เบาที่สุด แล้วเพิ่ม orchestration เมื่อมีเหตุผล</p>
+          <template class="notes">ผมไม่ได้ส่งทุกงานออกไป direct CLI งานที่ scope ชัด main agent ทำเองได้ ถ้าต้องแยก role หรือ context ค่อยส่ง Letta subagent เช่น Scout, Writer, Reviewer หรือ Verifier โดยเลือก model ให้เหมาะกับงาน ส่วน Agy, Cursor, Codex และ Pi เป็น direct executor lane ที่ใช้เมื่อจำเป็นต้องพึ่ง capability, model หรือ environment เฉพาะ Herdr กับ Agent Halo จึงเข้ามาเฉพาะตอนมี pane หรืองานหลาย lane ส่วน ccc, browser evidence และ Mahiro Skills ใช้ได้ทุกชั้น</template>
+        </article>
+
+        <article class="slide s7 learning-slide" id="slide-7" data-slide="7" hidden aria-labelledby="s7-title" tabindex="-1">
+          <p class="eyebrow">Learn from source</p>
+          <h1 id="s7-title">ติดตรงไหน ไปเรียนจากของจริง</h1>
+          <div class="learning-path">
+            <section class="learning-trigger">
+              <span>Trigger</span>
+              <strong>เจอปัญหาที่ติดอยู่<br>หรือเจอ repo ที่น่าจะช่วยได้</strong>
+            </section>
+            <ol class="learning-steps" role="list">
+              <li>
+                <code>project</code>
+                <span>หา · clone · track source</span>
+              </li>
+              <li>
+                <code>learn</code>
+                <span>อ่าน architecture · patterns · commands · gotchas</span>
+              </li>
+              <li>
+                <strong>Keep · Adapt · Reject</strong>
+                <span>ตัดสินจากหลักฐาน ไม่ copy ทั้ง repo</span>
+              </li>
+            </ol>
+            <p class="learning-return">กลับมาใช้กับ project ของเรา <span aria-hidden="true">↵</span></p>
+          </div>
+          <template class="notes">learn ไม่ได้ใช้เฉพาะโปรเจกต์ใหม่ ถ้าทำงานของเดิมแล้วติด หรือเจอ open-source repo ที่แก้ปัญหาใกล้กัน ก็ใช้ project หา clone และ track source จากนั้นใช้ learn อ่าน architecture, patterns, commands และ gotchas เป้าหมายไม่ใช่ copy code ทั้ง repo แต่เอาหลักฐานกลับมาตัดสินว่าส่วนไหนควรเก็บ ปรับ หรือไม่ใช้</template>
+        </article>
+
+        <article class="slide s8 closing-slide" id="slide-8" data-slide="8" hidden aria-labelledby="s8-title" tabindex="-1">
+          <p class="eyebrow">Close the loop</p>
+          <h1 id="s8-title">จบงานแล้ว เก็บอะไรไว้ใช้ต่อ</h1>
+          <ol class="closing-tools" role="list">
+            <li>
+              <code>rrr</code>
+              <span>ย้อนดูว่าอะไรเวิร์ก พลาด และควรจำต่อ</span>
+            </li>
+            <li>
+              <code>mahiro-guidance-refine</code>
+              <span>เปลี่ยน feedback เป็นข้อเสนอแก้ AGENTS.md, docs และ rules</span>
+            </li>
+            <li>
+              <code>auditing-context-contracts</code>
+              <span>เช็ก code, comments, docs และ memory หลังเปลี่ยน contract ใหญ่</span>
+            </li>
+            <li>
+              <code>git-commit</code>
+              <span>อ่าน status, diff และ commit style — ทำเมื่อสั่งเท่านั้น</span>
+            </li>
+            <li>
+              <code>forward</code>
+              <span>ส่ง handoff ถ้างานยังไม่จบแต่ต้องเปลี่ยน session</span>
+            </li>
+          </ol>
+          <p class="closing-thesis">งานจบหนึ่งรอบ → workflow รอบถัดไปดีขึ้น</p>
+          <template class="notes">rrr ใช้มองย้อนงานและเก็บ lesson note ไว้ใช้ต่อ ถ้า feedback ควรกลายเป็นกติกาของ repo ใช้ mahiro-guidance-refine ทำข้อเสนอแก้ก่อน หลัง migration ใหญ่ใช้ auditing-context-contracts ตรวจว่าข้อความทุก owner ยังตรงกับ code git-commit ทำเฉพาะเมื่อผมสั่งและต้องตาม pattern ของ repo ถ้ายังไม่จบแต่ต้องเปลี่ยน session ใช้ forward ส่ง handoff</template>
+        </article>
+
+        <article class="slide s9 question-slide" id="slide-9" data-slide="9" hidden aria-labelledby="s9-title" tabindex="-1">
+          <h1 id="s9-title">Q&amp;A</h1>
+          <template class="notes">ชวนคุยจากปัญหาจริงของแต่ละคน ตอนเริ่ม project ใหม่มีวิธีตั้ง conventions และ docs ยังไง เวลาเข้า repo เดิม AI หาของจริงเจอแค่ไหน และพองานจบแล้วมีอะไรช่วยเก็บบทเรียนให้รอบถัดไปดีขึ้นหรือยัง</template>
+        </article>
+
+      </main>
+
+      <nav class="chrome-nav" aria-label="สไลด์">
+        <button type="button" id="prev" aria-label="สไลด์ก่อนหน้า">
+          <span aria-hidden="true">←</span> ก่อนหน้า
+        </button>
+        <button type="button" id="next" aria-label="สไลด์ถัดไป">
+          ถัดไป <span aria-hidden="true">→</span>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <dialog id="notes-dialog" aria-labelledby="notes-heading">
+    <div class="notes-panel">
+      <p class="notes-kicker" id="notes-kicker">สไลด์ 1</p>
+      <h2 id="notes-heading">บันทึกผู้บรรยาย</h2>
+      <p id="notes-body"></p>
+      <form method="dialog">
+        <button type="submit" value="close">ปิด</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>

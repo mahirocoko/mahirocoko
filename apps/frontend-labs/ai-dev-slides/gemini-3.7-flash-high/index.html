@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ผมใช้ AI ทำงานยังไง — Mahiro AI Dev Sharing</title>
+  <link rel="icon" href="data:,">
+  <meta name="description" content="จาก AI Chat สู่ Letta Code: เส้นทางที่ลองใช้ ปรับแต่ง และสร้างเครื่องมือเสริมรอบ AI จนกลายเป็น setup ปัจจุบัน โดย Mahiro">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="deck-container" id="deckContainer">
+    <!-- Top Global App Bar -->
+    <header class="app-header" aria-label="Deck Header">
+      <div class="header-left">
+        <div class="deck-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-label">KNOWLEDGE SHARING</span>
+        </div>
+        <span class="header-sep">/</span>
+        <span class="header-topic" id="headerTopic">ผมใช้ AI ทำงานยังไง</span>
+      </div>
+
+      <div class="header-center">
+        <div class="slide-indicator" aria-live="polite">
+          <span class="current-slide-num" id="currentSlideNum">01</span>
+          <span class="total-slides-num">/ 12</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button type="button" class="tool-btn" id="btnNotes" title="Speaker Notes (Key: N)" aria-label="Toggle Speaker Notes" aria-expanded="false" aria-controls="notesDrawer">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+          <span>Notes <kbd>N</kbd></span>
+        </button>
+
+        <button type="button" class="tool-btn" id="btnOverview" title="Slide Overview Grid (Key: O)" aria-label="Toggle Slide Overview Grid" aria-expanded="false" aria-controls="overviewModal">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>Grid <kbd>O</kbd></span>
+        </button>
+
+        <button type="button" class="tool-btn" id="btnFullscreen" title="Fullscreen (Key: F)" aria-label="Toggle Fullscreen">
+          <svg class="icon icon-fs" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Presentation Stage (16:9 fixed canvas with auto scale) -->
+    <main class="stage-viewport" id="stageViewport" aria-roledescription="carousel" aria-label="Slide Presentation">
+      <div class="stage-frame" id="stageFrame">
+
+        <!-- ==================== SLIDE 1 ==================== -->
+        <section class="slide-pane active" id="slide-1" data-slide-index="1" aria-roledescription="slide" aria-label="Slide 1 of 12: ผมใช้ AI ทำงานยังไง">
+          <div class="slide-content s1-layout">
+            <div class="s1-meta-row">
+              <span class="meta-pill meta-primary">Knowledge sharing ภายในทีม Developer</span>
+              <span class="meta-pill">เวลาเป้าหมาย: 30–35 นาที + Q&A</span>
+              <span class="meta-pill">17 สิงหาคม 2026</span>
+            </div>
+
+            <div class="s1-hero">
+              <div class="s1-tagline-badge">Personal Workflow &amp; Tooling Journey</div>
+              <h1 class="s1-title">ผมใช้ AI ทำงานยังไง</h1>
+              <p class="s1-subtitle">จาก AI Chat สู่ Letta Code</p>
+            </div>
+
+            <!-- Flow Track Ribbon -->
+            <div class="s1-track-container" aria-label="วิวัฒนาการเครื่องมือ">
+              <div class="track-step">
+                <span class="step-idx">01</span>
+                <span class="step-name">AI Chat</span>
+              </div>
+              <div class="track-arrow">→</div>
+              <div class="track-step">
+                <span class="step-idx">02</span>
+                <span class="step-name">Claude Code</span>
+              </div>
+              <div class="track-arrow">→</div>
+              <div class="track-step">
+                <span class="step-idx">03</span>
+                <span class="step-name">OpenCode</span>
+              </div>
+              <div class="track-arrow">→</div>
+              <div class="track-step current">
+                <span class="step-idx">04</span>
+                <span class="step-name">Letta Code</span>
+                <span class="pulse-marker" title="Current Setup"></span>
+              </div>
+            </div>
+
+            <div class="s1-foot-card">
+              <div class="foot-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+              </div>
+              <p class="s1-description">
+                เส้นทางที่ลองใช้ ปรับแต่ง และสร้างเครื่องมือเสริมรอบ AI จนกลายเป็น setup ปัจจุบัน
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 2 ==================== -->
+        <section class="slide-pane" id="slide-2" data-slide-index="2" aria-roledescription="slide" aria-label="Slide 2 of 12: เครื่องมือที่ผมใช้ตามลำดับ">
+          <div class="slide-content s2-layout">
+            <div class="slide-header-block">
+              <span class="section-kicker">02 / OVERVIEW &amp; TAXONOMY</span>
+              <h2 class="slide-title">เครื่องมือที่ผมใช้ตามลำดับ</h2>
+            </div>
+
+            <div class="s2-grid">
+              <!-- Left: 6 Evolutionary Milestones -->
+              <div class="s2-timeline-col">
+                <ol class="milestone-list">
+                  <li class="milestone-item">
+                    <div class="m-badge">1</div>
+                    <div class="m-body">
+                      <strong class="m-title">AI Chat</strong>
+                      <span class="m-desc">ช่วยคิด อธิบาย logic และร่าง code</span>
+                    </div>
+                  </li>
+                  <li class="milestone-item">
+                    <div class="m-badge">2</div>
+                    <div class="m-body">
+                      <strong class="m-title">Claude Code</strong>
+                      <span class="m-desc">เริ่มให้ coding agent ลงมือแก้ code ใน repo</span>
+                    </div>
+                  </li>
+                  <li class="milestone-item">
+                    <div class="m-badge">3</div>
+                    <div class="m-body">
+                      <strong class="m-title">MCP memory</strong>
+                      <span class="m-desc">ทดลองทำ memory layer ให้จำข้อมูลข้าม session</span>
+                    </div>
+                  </li>
+                  <li class="milestone-item">
+                    <div class="m-badge">4</div>
+                    <div class="m-body">
+                      <strong class="m-title">OpenCode</strong>
+                      <span class="m-desc">เลือก model และ provider ได้อิสระ จัด workflow หลาย agent</span>
+                    </div>
+                  </li>
+                  <li class="milestone-item highlight-letta">
+                    <div class="m-badge">5</div>
+                    <div class="m-body">
+                      <strong class="m-title">Letta Code</strong>
+                      <span class="m-desc">main agent ที่คุยและทำงานร่วมกันระยะยาว</span>
+                    </div>
+                  </li>
+                  <li class="milestone-item">
+                    <div class="m-badge">6</div>
+                    <div class="m-body">
+                      <strong class="m-title">Herdr + Agent Halo</strong>
+                      <span class="m-desc">คุมและมองเห็นสถานะของหลาย agent พร้อมกัน</span>
+                    </div>
+                  </li>
+                </ol>
+              </div>
+
+              <!-- Right: Core Definitions Equation Box -->
+              <div class="s2-concept-col">
+                <div class="concept-card">
+                  <div class="concept-card-head">
+                    <span class="concept-tag">CORE TAXONOMY</span>
+                    <h3 class="concept-heading">ความเข้าใจพื้นฐานใน Session นี้</h3>
+                  </div>
+
+                  <div class="concept-definitions">
+                    <div class="def-box def-model">
+                      <div class="def-header">
+                        <span class="def-badge">Model</span>
+                        <span class="def-role">สมอง</span>
+                      </div>
+                      <p class="def-text">สมองที่คิดและประมวลผล</p>
+                    </div>
+
+                    <div class="def-box def-tool">
+                      <div class="def-header">
+                        <span class="def-badge">Tool</span>
+                        <span class="def-role">เครื่องมือ</span>
+                      </div>
+                      <p class="def-text">สิ่งที่ทำให้ model ลงมือได้ (อ่าน/แก้ไฟล์ รัน command ฯลฯ)</p>
+                    </div>
+
+                    <div class="def-box def-agent">
+                      <div class="def-header">
+                        <span class="def-badge">Agent</span>
+                        <span class="def-role">ระบบทำงานอัตโนมัติ</span>
+                      </div>
+                      <div class="agent-formula">Model + Tools + Goal</div>
+                      <p class="def-text">ทำงานต่อเนื่องหลายขั้นตอนได้เอง</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 3 ==================== -->
+        <section class="slide-pane" id="slide-3" data-slide-index="3" aria-roledescription="slide" aria-label="Slide 3 of 12: จากก๊อปคำตอบเอง สู่ให้ agent ลงมือใน repo">
+          <div class="slide-content s3-layout">
+            <div class="slide-header-block">
+              <span class="section-kicker">03 / PARADIGM SHIFT</span>
+              <h2 class="slide-title">จากก๊อปคำตอบเอง สู่ให้ agent ลงมือใน repo</h2>
+            </div>
+
+            <div class="s3-compare-grid">
+              <!-- Left: AI Chat Manual Loop -->
+              <div class="compare-card chat-mode">
+                <div class="compare-head">
+                  <div class="compare-badge mode-chat">AI Chat</div>
+                  <h3 class="compare-title">Manual Copy-Paste Loop</h3>
+                  <span class="compare-subtitle">มนุษย์เป็นสะพานเชื่อมระหว่าง Chat, Editor และ Terminal</span>
+                </div>
+
+                <div class="flow-pipeline-vertical">
+                  <div class="pipe-node node-warn">
+                    <span class="node-num">1</span>
+                    <span class="node-txt">เจอ error</span>
+                  </div>
+                  <div class="pipe-arrow">↓ ก๊อปปี้ไปวางในแชต</div>
+                  <div class="pipe-node node-warn">
+                    <span class="node-num">2</span>
+                    <span class="node-txt">ก๊อปไปถาม</span>
+                  </div>
+                  <div class="pipe-arrow">↓ รอคำตอบแล้วคัดลอก</div>
+                  <div class="pipe-node node-warn">
+                    <span class="node-num">3</span>
+                    <span class="node-txt">ก๊อปคำตอบกลับมา</span>
+                  </div>
+                  <div class="pipe-arrow">↓ สลับไป terminal/IDE</div>
+                  <div class="pipe-node node-warn">
+                    <span class="node-num">4</span>
+                    <span class="node-txt">รันเองใน terminal</span>
+                  </div>
+                </div>
+
+                <div class="compare-footer-tag">
+                  <span class="tag-warn-bullet">⚠</span> Context หลุดบ่อย ต้องสลับหน้าต่างตลอดเวลา
+                </div>
+              </div>
+
+              <!-- Right: Claude Code Autonomous Loop -->
+              <div class="compare-card agent-mode">
+                <div class="compare-head">
+                  <div class="compare-badge mode-agent">Claude Code</div>
+                  <h3 class="compare-title">Autonomous Repo Execution</h3>
+                  <span class="compare-subtitle">Coding Agent ตัวแรกที่ลงมือและจัดการลูปการทำงานใน Repo จริง</span>
+                </div>
+
+                <div class="flow-pipeline-vertical">
+                  <div class="pipe-node node-success">
+                    <span class="node-num">1</span>
+                    <span class="node-txt">อ่าน codebase</span>
+                  </div>
+                  <div class="pipe-arrow flow-auto">↓ เข้าใจบริบทและ dependencies</div>
+                  <div class="pipe-node node-success">
+                    <span class="node-num">2</span>
+                    <span class="node-txt">แก้ไฟล์</span>
+                  </div>
+                  <div class="pipe-arrow flow-auto">↓ แก้ไขตาม requirement</div>
+                  <div class="pipe-node node-success">
+                    <span class="node-num">3</span>
+                    <span class="node-txt">รัน command และ test</span>
+                  </div>
+                  <div class="pipe-arrow flow-auto">↓ ประเมินผลลัพธ์อัตโนมัติ</div>
+                  <div class="pipe-node node-success">
+                    <span class="node-num">4</span>
+                    <span class="node-txt">อ่านผลแล้วทำต่อได้</span>
+                  </div>
+                </div>
+
+                <div class="compare-footer-tag tag-success">
+                  <span class="tag-success-bullet">✓</span> วนรอบแก้ปัญหาและ verify ผลได้โดยตรง
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 4 ==================== -->
+        <section class="slide-pane" id="slide-4" data-slide-index="4" aria-roledescription="slide" aria-label="Slide 4 of 12: ก่อน Letta ผมลองสร้าง memory layer เอง">
+          <div class="slide-content s4-layout">
+            <div class="slide-header-block">
+              <span class="section-kicker">04 / THE MEMORY PROBLEM</span>
+              <h2 class="slide-title">ก่อน Letta ผมลองสร้าง memory layer เอง</h2>
+            </div>
+
+            <div class="s4-grid">
+              <!-- Left: Architectural Bridge Diagram -->
+              <div class="s4-diagram-card">
+                <div class="diagram-canvas">
+                  <div class="arch-box box-agent">
+                    <div class="arch-tag">CODING AGENT</div>
+                    <div class="arch-title">Claude Code</div>
+                  </div>
+
+                  <div class="arch-bridge">
+                    <div class="bridge-line"></div>
+                    <div class="bridge-pill">
+                      <span class="bridge-icon">↕</span>
+                      <span class="bridge-text">MCP (Model Context Protocol)</span>
+                    </div>
+                    <div class="bridge-line"></div>
+                  </div>
+
+                  <div class="arch-box box-memory">
+                    <div class="arch-tag">EXTERNAL PERSISTENCE</div>
+                    <div class="arch-title">Memory layer ข้าม session</div>
+                  </div>
+                </div>
+
+                <div class="diagram-caption">
+                  แยก Memory ออกจาก Coding Tool เพื่อให้ Context คงอยู่เมื่อเปลี่ยนเครื่องมือ
+                </div>
+              </div>
+
+              <!-- Right: Three Core Drivers -->
+              <div class="s4-points-col">
+                <ul class="clean-bullet-list">
+                  <li class="bullet-card">
+                    <div class="bullet-icon-box">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </div>
+                    <div class="bullet-text">
+                      <strong>อยากให้ agent ค้นและดึง context จากงานก่อนหน้ากลับมาใช้ได้</strong>
+                      <p>เรียกความจำ ประวัติการตัดสินใจ และ context ของโปรเจกต์เดิมมาต่อยอด</p>
+                    </div>
+                  </li>
+
+                  <li class="bullet-card">
+                    <div class="bullet-icon-box">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+                    </div>
+                    <div class="bullet-text">
+                      <strong>ไม่อยากเริ่มใหม่จากศูนย์ทุกครั้งที่เปิด session</strong>
+                      <p>ลดเวลาที่ต้องคอยป้อน prompt อธิบายสไตล์หรือข้อตกลงซ้ำ ๆ</p>
+                    </div>
+                  </li>
+
+                  <li class="bullet-card">
+                    <div class="bullet-icon-box">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                    </div>
+                    <div class="bullet-text">
+                      <strong>ลองแยก memory ออกจาก coding tool เพื่อไม่ให้ข้อมูลผูกติดกับเครื่องมือเดียว</strong>
+                      <p>อิสระในการสลับ runtime หรือ model โดยความรู้สะสมไม่สูญหาย</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 5 ==================== -->
+        <section class="slide-pane" id="slide-5" data-slide-index="5" aria-roledescription="slide" aria-label="Slide 5 of 12: ทำไมผมย้ายไป OpenCode">
+          <div class="slide-content s5-layout">
+            <div class="slide-header-block">
+              <span class="section-kicker">05 / HARNESS MIGRATION</span>
+              <h2 class="slide-title">ทำไมผมย้ายไป OpenCode</h2>
+            </div>
+
+            <div class="s5-cards-grid">
+              <div class="s5-card">
+                <div class="s5-card-num">01</div>
+                <div class="s5-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                </div>
+                <h3 class="s5-card-title">ใช้ ChatGPT subscription ที่มีอยู่เดิมได้</h3>
+                <p class="s5-card-desc">ใช้ resource ที่มีอยู่เดิมได้คุ้มค่า ไม่ต้องผูกขาดกับ API เดียว</p>
+              </div>
+
+              <div class="s5-card">
+                <div class="s5-card-num">02</div>
+                <div class="s5-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </div>
+                <h3 class="s5-card-title">เลือก model และ provider ได้อิสระขึ้น</h3>
+                <p class="s5-card-desc">สลับโมเดลตามความเหมาะสมของแต่ละเนื้องาน ไม่ยึดติดกับค่ายใดค่ายหนึ่ง</p>
+              </div>
+
+              <div class="s5-card">
+                <div class="s5-card-num">03</div>
+                <div class="s5-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <h3 class="s5-card-title">มี Oh My OpenCode ช่วยจัด workflow และแบ่งบทบาท agent</h3>
+                <p class="s5-card-desc">จัดโครงสร้าง multi-agent แบ่งหน้าที่การทำงานชัดเจน</p>
+              </div>
+
+              <div class="s5-card">
+                <div class="s5-card-num">04</div>
+                <div class="s5-card-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                </div>
+                <h3 class="s5-card-title">ย้าย skills และ custom commands เดิมตามไปใช้ต่อได้</h3>
+                <p class="s5-card-desc">Procedure ที่เคยสร้างไว้ไม่สูญเปล่า นำไปต่อยอดกับ runtime ใหม่ได้ทันที</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 6 ==================== -->
+        <section class="slide-pane" id="slide-6" data-slide-index="6" aria-roledescription="slide" aria-label="Slide 6 of 12: Letta Code เป็นตัวหลัก แต่ workflow ไม่ได้ผูกกับตัวเดียว">
+          <div class="slide-content s6-layout">
+            <div class="slide-header-block">
+              <span class="section-kicker">06 / DUAL-CORE ARCHITECTURE</span>
+              <h2 class="slide-title">Letta Code เป็นตัวหลัก แต่ workflow ไม่ได้ผูกกับตัวเดียว</h2>
+            </div>
+
+            <div class="s6-pillars-grid">
+              <!-- Pillar 1: Letta Code -->
+              <div class="pillar-card letta-pillar">
+                <div class="pillar-header">
+                  <div class="pillar-badge">MAIN AGENT</div>
+                  <h3 class="pillar-title">Letta Code — main agent ที่รู้จักผม</h3>
+                  <p class="pillar-subtitle">ตัวตนหลักที่คุย ประสานงาน และเก็บ context ต่อเนื่อง</p>
+                </div>
+                <ul class="pillar-list">
+                  <li class="pillar-item">
+                    <span class="item-check">✦</span>
+                    <div class="item-content">
+                      <strong>รู้จัก workflow, preference และวิธีทำงานของผม</strong>
+                      <p>เข้าใจสไตล์และมาตรฐานส่วนตัวโดยไม่ต้องอธิบายใหม่</p>
+                    </div>
+                  </li>
+                  <li class="pillar-item">
+                    <span class="item-check">✦</span>
+                    <div class="item-content">
+                      <strong>มี persistent memory จำ context ข้าม session</strong>
+                      <p>หน่วยความจำถาวรช่วยต่อยอดงานและเก็บบทเรียนระยะยาว</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Pillar 2: Portable Skills -->
+              <div class="pillar-card skills-pillar">
+                <div class="pillar-header">
+                  <div class="pillar-badge">PORTABLE PROCEDURES</div>
+                  <h3 class="pillar-title">Skills — workflow ที่พกไปใช้กับ agent อื่นได้</h3>
+                  <p class="pillar-subtitle">ขั้นตอนการทำงานมาตรฐานที่นำไปรันกับ Agent ตัวใดก็ได้</p>
+                </div>
+                <ul class="pillar-list">
+                  <li class="pillar-item">
+                    <span class="item-check">✦</span>
+                    <div class="item-content">
+                      <strong>ใช้ procedure เดิมกับ Agy, OpenCode, Claude Code และ CLI อื่น</strong>
+                      <p>แชร์ชุดทักษะร่วมกันข้ามสารพัด Harness และ Agent</p>
+                    </div>
+                  </li>
+                  <li class="pillar-item">
+                    <span class="item-check">✦</span>
+                    <div class="item-content">
+                      <strong>เปลี่ยน model หรือ tool ได้ โดยไม่ต้องเริ่มวิธีทำงานใหม่ทั้งหมด</strong>
+                      <p>Workflow ยืนยาวกว่าตัว Model และ Tooling เสมอ</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Distinction Bar: Skills vs Mods -->
+            <div class="s6-distinction-bar">
+              <div class="dist-icon">ℹ</div>
+              <div class="dist-text">
+                <strong>เส้นแบ่งทางสถาปัตยกรรม:</strong> <em>Skills</em> เป็น Portable Procedure ที่พกไปใช้ข้าม Agent ได้ ส่วน <em>Mods</em> ใช้ขยาย Runtime ของ Letta Code โดยเฉพาะ
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 7 ==================== -->
+        <section class="slide-pane" id="slide-7" data-slide-index="7" aria-roledescription="slide" aria-label="Slide 7 of 12: ผมแบ่งงานให้ agent ยังไง">
+          <div class="slide-content s7-layout">
+            <div class="slide-header-block">
+              <span class="section-kicker">07 / MULTI-AGENT DIVISION OF LABOR</span>
+              <h2 class="slide-title">ผมแบ่งงานให้ agent ยังไง</h2>
+            </div>
+
+            <div class="s7-table-container">
+              <table class="role-matrix-table" aria-label="ตารางแบ่งบทบาท Agent และการเลือก Model">
+                <thead>
+                  <tr>
+                    <th scope="col" class="th-role">บทบาท</th>
+                    <th scope="col" class="th-duty">หน้าที่</th>
+                    <th scope="col" class="th-model">เลือก model แบบไหน</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="row-coord">
+                    <td class="td-role">
+                      <div class="role-cell">
+                        <span class="role-pill pill-amber">Main / Coordinator</span>
+                      </div>
+                    </td>
+                    <td class="td-duty">คุย วางแผน ถือ context ภาพรวม</td>
+                    <td class="td-model">
+                      <span class="model-trait">คิดรอบคอบ รองรับ context ยาว</span>
+                    </td>
+                  </tr>
+
+                  <tr class="row-scout">
+                    <td class="td-role">
+                      <div class="role-cell">
+                        <span class="role-pill pill-cyan">Scout</span>
+                      </div>
+                    </td>
+                    <td class="td-duty">อ่าน codebase กว้าง ๆ สรุปจุดสำคัญ</td>
+                    <td class="td-model">
+                      <span class="model-trait">อ่านเร็ว สรุปชัด จับ pattern ได้</span>
+                    </td>
+                  </tr>
+
+                  <tr class="row-writer">
+                    <td class="td-role">
+                      <div class="role-cell">
+                        <span class="role-pill pill-blue">Writer</span>
+                      </div>
+                    </td>
+                    <td class="td-duty">ลงมือแก้ code ใน scope ที่ชัดเจน</td>
+                    <td class="td-model">
+                      <span class="model-trait">แม่นยำ ทำตาม instruction เคร่งครัด</span>
+                    </td>
+                  </tr>
+
+                  <tr class="row-reviewer">
+                    <td class="td-role">
+                      <div class="role-cell">
+                        <span class="role-pill pill-green">Reviewer / Verifier</span>
+                      </div>
+                    </td>
+                    <td class="td-duty">ตรวจ code, command และผล test</td>
+                    <td class="td-model">
+                      <span class="model-trait">ช่างสงสัย หาจุดขัดแย้งและ edge cases เก่ง</span>
+                    </td>
+                  </tr>
+
+                  <tr class="row-visual">
+                    <td class="td-role">
+                      <div class="role-cell">
+                        <span class="role-pill pill-purple">Visual Direction</span>
+                      </div>
+                    </td>
+                    <td class="td-duty">สำรวจและทดลองทิศทางด้านภาพ</td>
+                    <td class="td-model">
+                      <span class="model-trait">รสนิยมและ creative taste เข้ากับงาน</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="s7-footer-note">
+              เลือก Model ตาม <em>บทบาทของงาน</em> แทนการหา Model ตัวเดียวที่เก่งที่สุดทุกเรื่อง
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 8 ==================== -->
+        <section class="slide-pane" id="slide-8" data-slide-index="8" aria-roledescription="slide" aria-label="Slide 8 of 12: หนึ่งงานจริง ผมเริ่มและจบยังไง">
+          <div class="slide-content s8-layout">
+            <div class="slide-header-block">
+              <span class="section-kicker">08 / EXECUTION LIFECYCLE</span>
+              <h2 class="slide-title">หนึ่งงานจริง ผมเริ่มและจบยังไง</h2>
+            </div>
+
+            <div class="s8-flow-wrapper">
+              <div class="s8-steps-grid">
+                <!-- Step 1 -->
+                <div class="s8-step-card step-start">
+                  <div class="step-card-header">
+                    <span class="step-badge">STEP 1</span>
+                    <span class="step-phase">Ground Reality</span>
+                  </div>
+                  <h3 class="step-action-title">ดูของจริงใน repo</h3>
+                  <p class="step-action-desc">(code, config, logs)</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="s8-step-card">
+                  <div class="step-card-header">
+                    <span class="step-badge">STEP 2</span>
+                    <span class="step-phase">Scope</span>
+                  </div>
+                  <h3 class="step-action-title">กำหนดเป้าหมายและ scope ให้ชัด</h3>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="s8-step-card">
+                  <div class="step-card-header">
+                    <span class="step-badge">STEP 3</span>
+                    <span class="step-phase">Procedure</span>
+                  </div>
+                  <h3 class="step-action-title">เลือก skill หรือ workflow ที่เกี่ยวข้อง</h3>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="s8-step-card">
+                  <div class="step-card-header">
+                    <span class="step-badge">STEP 4</span>
+                    <span class="step-phase">Roster</span>
+                  </div>
+                  <h3 class="step-action-title">เลือก agent และ model ที่เหมาะกับบทบาท</h3>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="s8-step-card">
+                  <div class="step-card-header">
+                    <span class="step-badge">STEP 5</span>
+                    <span class="step-phase">Iterate</span>
+                  </div>
+                  <h3 class="step-action-title">ลงมือแก้ทีละส่วน พร้อม verify ผลจริง</h3>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="s8-step-card step-decision">
+                  <div class="step-card-header">
+                    <span class="step-badge badge-human">STEP 6</span>
+                    <span class="step-phase">Human Gate</span>
+                  </div>
+                  <h3 class="step-action-title">review ผลลัพธ์สุดท้ายและตัดสินใจเอง</h3>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="s8-step-card step-persist">
+                  <div class="step-card-header">
+                    <span class="step-badge">STEP 7</span>
+                    <span class="step-phase">Memory</span>
+                  </div>
+                  <h3 class="step-action-title">บันทึก context หรือปรับ skill ไว้ใช้ครั้งถัดไป</h3>
+                </div>
+              </div>
+
+              <!-- Loop-back Feedback Banner -->
+              <div class="s8-loop-banner">
+                <div class="loop-icon">↻</div>
+                <div class="loop-text">
+                  <strong>Continuous Learning Loop:</strong> สิ่งที่เรียนรู้ใน Step 7 จะกลายเป็น Context และ Skill ที่พร้อมใช้สำหรับงานถัดไปทันที
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 9 ==================== -->
+        <section class="slide-pane" id="slide-9" data-slide-index="9" aria-roledescription="slide" aria-label="Slide 9 of 12: เปิดหลาย agent พร้อมกัน ผมดูและคุมยังไง">
+          <div class="slide-content s9-layout">
+            <div class="slide-header-block">
+              <span class="section-kicker">09 / MULTI-AGENT OBSERVABILITY</span>
+              <h2 class="slide-title">เปิดหลาย agent พร้อมกัน ผมดูและคุมยังไง</h2>
+            </div>
+
+            <div class="s9-dual-grid">
+              <!-- Card 1: Herdr -->
+              <div class="s9-tool-card herdr-card">
+                <div class="tool-card-head">
+                  <div class="tool-badge badge-herdr">EXECUTION CONTROL ROOM</div>
+                  <h3 class="tool-title">Herdr — control room สำหรับ agents</h3>
+                </div>
+
+                <ul class="tool-feature-list">
+                  <li class="feature-item">
+                    <div class="feat-dot"></div>
+                    <div class="feat-text">
+                      <strong>จัด workspace, tab และ terminal pane</strong>
+                      <p>แบ่งแยกสภาพแวดล้อมและ lane ของแต่ละงานอย่างเป็นสัดส่วน</p>
+                    </div>
+                  </li>
+                  <li class="feature-item">
+                    <div class="feat-dot"></div>
+                    <div class="feat-text">
+                      <strong>ส่ง prompt อ่าน output และหยุดงาน</strong>
+                      <p>สั่งงานและแทรกแซง execution ได้ทันทีเมื่อจำเป็น</p>
+                    </div>
+                  </li>
+                  <li class="feature-item">
+                    <div class="feat-dot"></div>
+                    <div class="feat-text">
+                      <strong>สลับกลับไปยัง pane ที่ต้องการได้ทันที</strong>
+                      <p>กระโดดเข้า context ของ agent ตัวที่ต้องการโดยไม่หลงทาง</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Card 2: Agent Halo -->
+              <div class="s9-tool-card halo-card">
+                <div class="tool-card-head">
+                  <div class="tool-badge badge-halo">AMBIENT NOTCH MONITOR</div>
+                  <h3 class="tool-title">Agent Halo — สถานะบน Notch</h3>
+                </div>
+
+                <!-- Status Chips Simulation -->
+                <div class="notch-status-bar" aria-label="สถานะของ Agent Halo บน Notch">
+                  <div class="status-chip chip-working">
+                    <span class="status-indicator"></span>
+                    <span class="chip-label">working</span>
+                  </div>
+                  <div class="status-chip chip-waiting">
+                    <span class="status-indicator"></span>
+                    <span class="chip-label">waiting</span>
+                  </div>
+                  <div class="status-chip chip-done">
+                    <span class="status-indicator"></span>
+                    <span class="chip-label">done</span>
+                  </div>
+                  <div class="status-chip chip-error">
+                    <span class="status-indicator"></span>
+                    <span class="chip-label">error</span>
+                  </div>
+                </div>
+
+                <ul class="tool-feature-list">
+                  <li class="feature-item">
+                    <div class="feat-dot dot-halo"></div>
+                    <div class="feat-text">
+                      <strong>แสดงสถานะ working, waiting, done, error</strong>
+                      <p>เห็นภาพรวมการทำงานของทุก agent ในระดับสายตา</p>
+                    </div>
+                  </li>
+                  <li class="feature-item">
+                    <div class="feat-dot dot-halo"></div>
+                    <div class="feat-text">
+                      <strong>เหลือบดูได้โดยไม่ต้องเฝ้า terminal</strong>
+                      <p>ลด Cognitive Load ทำงานอื่นคู่ขนานได้อย่างมั่นใจ</p>
+                    </div>
+                  </li>
+                  <li class="feature-item">
+                    <div class="feat-dot dot-halo"></div>
+                    <div class="feat-text">
+                      <strong>คลิกกลับไปยัง session นั้นได้ทันที</strong>
+                      <p>คลิกจาก Notch เพื่อเปิด Terminal Pane ที่กำลังรอ input ได้ตรงจุด</p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 10 ==================== -->
+        <section class="slide-pane" id="slide-10" data-slide-index="10" aria-roledescription="slide" aria-label="Slide 10 of 12: Ecosystem ที่ผมใช้จริง">
+          <div class="slide-content s10-layout">
+            <div class="slide-header-block">
+              <span class="section-kicker">10 / COMPLETE ECOSYSTEM</span>
+              <h2 class="slide-title">Ecosystem ที่ผมใช้จริง</h2>
+            </div>
+
+            <div class="s10-table-container">
+              <table class="ecosystem-table" aria-label="ตารางแสดงส่วนประกอบใน Ecosystem และหน้าที่ใน workflow">
+                <thead>
+                  <tr>
+                    <th scope="col" class="th-component">ส่วนประกอบ</th>
+                    <th scope="col" class="th-wf-duty">หน้าที่ใน workflow</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="td-component">
+                      <div class="comp-box comp-core">
+                        <span class="comp-icon">🧠</span>
+                        <strong class="comp-name">Letta Code + Memory</strong>
+                      </div>
+                    </td>
+                    <td class="td-wf-duty">main agent, context และ preference ระยะยาว</td>
+                  </tr>
+
+                  <tr>
+                    <td class="td-component">
+                      <div class="comp-box comp-portable">
+                        <span class="comp-icon">⚡</span>
+                        <strong class="comp-name">Skills</strong>
+                      </div>
+                    </td>
+                    <td class="td-wf-duty">procedure ที่ใช้ซ้ำและพกข้าม agent</td>
+                  </tr>
+
+                  <tr>
+                    <td class="td-component">
+                      <div class="comp-box comp-runtime">
+                        <span class="comp-icon">🧩</span>
+                        <strong class="comp-name">Mods</strong>
+                      </div>
+                    </td>
+                    <td class="td-wf-duty">tools, commands, state และ events เฉพาะ Letta Code</td>
+                  </tr>
+
+                  <tr>
+                    <td class="td-component">
+                      <div class="comp-box comp-docs">
+                        <span class="comp-icon">📄</span>
+                        <strong class="comp-name">Repo docs / AGENTS.md</strong>
+                      </div>
+                    </td>
+                    <td class="td-wf-duty">กติกาและ context ของแต่ละโปรเจกต์</td>
+                  </tr>
+
+                  <tr>
+                    <td class="td-component">
+                      <div class="comp-box comp-ctrl">
+                        <span class="comp-icon">🎛️</span>
+                        <strong class="comp-name">Herdr</strong>
+                      </div>
+                    </td>
+                    <td class="td-wf-duty">execution lanes และ panes ที่กำลังรันงาน</td>
+                  </tr>
+
+                  <tr>
+                    <td class="td-component">
+                      <div class="comp-box comp-obs">
+                        <span class="comp-icon">🟢</span>
+                        <strong class="comp-name">Agent Halo</strong>
+                      </div>
+                    </td>
+                    <td class="td-wf-duty">ภาพรวมสถานะที่อยากเหลือบดูเร็ว ๆ</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="s10-footer-summary">
+              สถาปัตยกรรมที่แยก <strong>Long-term Memory</strong>, <strong>Portable Skills</strong>, <strong>Project Rules</strong> และ <strong>Execution Controls</strong> ออกจากกันอย่างเป็นระบบ
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 11 ==================== -->
+        <section class="slide-pane" id="slide-11" data-slide-index="11" aria-roledescription="slide" aria-label="Slide 11 of 12: Mahiro Skills ที่ผมพกไปใช้ข้าม agent">
+          <div class="slide-content s11-layout">
+            <div class="slide-header-block">
+              <span class="section-kicker">11 / MAHIRO CORE SKILLS</span>
+              <h2 class="slide-title">Mahiro Skills ที่ผมพกไปใช้ข้าม agent</h2>
+            </div>
+
+            <div class="s11-content-grid">
+              <!-- Top: Mahiro Core Behavior Table -->
+              <div class="s11-behavior-block">
+                <div class="block-subheading">
+                  <span class="badge-core-family">CORE FAMILY</span>
+                  <span class="family-title">Mahiro core behavior (`mahiro-*`)</span>
+                </div>
+
+                <table class="core-skills-table" aria-label="ตาราง Mahiro core behavior skills">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="th-sk-name">Skill</th>
+                      <th scope="col" class="th-sk-use">ใช้ทำอะไร</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="td-sk-name"><code class="code-skill">mahiro-style</code></td>
+                      <td class="td-sk-use">code, review และ implementation ในแบบของผม</td>
+                    </tr>
+                    <tr>
+                      <td class="td-sk-name"><code class="code-skill">mahiro-guidance-refine</code></td>
+                      <td class="td-sk-use">เปลี่ยน feedback ให้เป็น docs และ rules ที่ใช้ต่อได้</td>
+                    </tr>
+                    <tr>
+                      <td class="td-sk-name"><code class="code-skill">mahiro-docs-rules-init</code></td>
+                      <td class="td-sk-use">ตั้งต้น AGENTS.md และ project docs</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Bottom: Daily Workflows + Adapter Note -->
+              <div class="s11-bottom-row">
+                <div class="s11-daily-card">
+                  <div class="daily-head">Workflow ที่หยิบใช้ประจำ</div>
+                  <div class="skill-chips-row">
+                    <span class="skill-chip"><code>recap</code></span>
+                    <span class="chip-sep">·</span>
+                    <span class="skill-chip"><code>rrr</code></span>
+                    <span class="chip-sep">·</span>
+                    <span class="skill-chip"><code>direct-cli</code></span>
+                    <span class="chip-sep">·</span>
+                    <span class="skill-chip"><code>fable</code></span>
+                  </div>
+                </div>
+
+                <div class="s11-adapter-card">
+                  <div class="adapter-head">Harness Compatibility</div>
+                  <p class="adapter-text">
+                    Agy ติดตั้งทั้งหมดเป็น <code>/mh-*</code> ส่วน agent อื่นใช้ adapter ของตัวเอง
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================== SLIDE 12 ==================== -->
+        <section class="slide-pane" id="slide-12" data-slide-index="12" aria-roledescription="slide" aria-label="Slide 12 of 12: Q&A">
+          <div class="slide-content s12-layout">
+            <div class="s12-hero-card">
+              <div class="s12-tag">
+                <span class="qa-pulse"></span>
+                <span>OPEN DISCUSSION</span>
+              </div>
+
+              <h2 class="s12-main-title">Q&amp;A</h2>
+
+              <div class="s12-question-box">
+                <p class="s12-prompt-question">ตอนนี้ทุกคนใช้ AI ช่วยทำงานกันแบบไหน?</p>
+              </div>
+
+              <div class="s12-topics-grid">
+                <div class="s12-topic-card">
+                  <div class="topic-icon">💬</div>
+                  <h3 class="topic-title">AI Chat vs Coding Agents</h3>
+                  <p class="topic-desc">เครื่องมือที่กำลังใช้จริงในทีมปัจจุบัน</p>
+                </div>
+
+                <div class="s12-topic-card">
+                  <div class="topic-icon">⚠️</div>
+                  <h3 class="topic-title">Pain points &amp; Context</h3>
+                  <p class="topic-desc">ปัญหา context loss หรือ friction ที่อยากปรับ</p>
+                </div>
+
+                <div class="s12-topic-card">
+                  <div class="topic-icon">🚀</div>
+                  <h3 class="topic-title">Workflows &amp; Skills</h3>
+                  <p class="topic-desc">แนวทางการออกแบบ procedure เฉพาะของทีม</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- Bottom Global Navigation & Timeline Bar -->
+    <footer class="app-footer" aria-label="Deck Controls and Progress">
+      <div class="footer-left">
+        <button type="button" class="nav-btn" id="btnPrev" title="Previous Slide (Key: ← / PageUp)" aria-label="Previous Slide">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          <span>Prev</span>
+        </button>
+        <button type="button" class="nav-btn" id="btnNext" title="Next Slide (Key: → / Space / PageDown)" aria-label="Next Slide">
+          <span>Next</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="footer-center">
+        <!-- Interactive Progress Bar and Segment Dots -->
+        <div class="progress-container" id="progressContainer" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="12" aria-label="Slide Progress">
+          <div class="progress-bar-fill" id="progressBarFill" style="width: 8.33%;"></div>
+          <div class="progress-ticks" id="progressTicks">
+            <!-- 12 segment tick buttons generated via JS or markup -->
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <div class="key-hints">
+          <span class="hint-item"><kbd>←</kbd><kbd>→</kbd> Navigate</span>
+          <span class="hint-item"><kbd>Space</kbd> Next</span>
+          <span class="hint-item"><kbd>N</kbd> Notes</span>
+          <span class="hint-item"><kbd>O</kbd> Grid</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Speaker Notes Slide-out Drawer -->
+    <aside class="notes-drawer" id="notesDrawer" aria-label="Speaker Notes" aria-hidden="true">
+      <div class="drawer-header">
+        <div class="drawer-title-box">
+          <span class="drawer-badge">SPEAKER NOTES</span>
+          <h2 class="drawer-slide-title" id="notesSlideTitle">Slide 1 — ผมใช้ AI ทำงานยังไง</h2>
+        </div>
+        <button type="button" class="drawer-close-btn" id="btnCloseNotes" aria-label="Close Speaker Notes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div class="drawer-body" id="notesContent">
+        <!-- Injected dynamically based on active slide -->
+      </div>
+      <div class="drawer-footer">
+        <span class="drawer-hint">กด <kbd>N</kbd> หรือ <kbd>Esc</kbd> เพื่อปิด</span>
+      </div>
+    </aside>
+
+    <!-- Slide Overview Grid Modal -->
+    <div class="overview-modal" id="overviewModal" aria-label="Slide Overview Picker" aria-hidden="true" role="dialog">
+      <div class="modal-backdrop" id="modalBackdrop"></div>
+      <div class="modal-window">
+        <div class="modal-header">
+          <div class="modal-title-wrap">
+            <h2 class="modal-title">Slide Overview</h2>
+            <span class="modal-subtitle">12 Slides · Select a slide to jump</span>
+          </div>
+          <button type="button" class="modal-close-btn" id="btnCloseOverview" aria-label="Close Overview Grid">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="modal-grid" id="overviewGrid">
+          <!-- 12 Slide cards injected via JS -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

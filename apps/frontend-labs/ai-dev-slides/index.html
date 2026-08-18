@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Dev Talk — Slide Candidates</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family: -apple-system, BlinkMacSystemFont, "Sukhumvit Set", "Noto Sans Thai", sans-serif;
+        background: #0b0c0e;
+        color: #f4f1ea;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        padding: clamp(28px, 6vw, 88px);
+        background:
+          radial-gradient(circle at 15% 5%, rgba(96, 165, 250, 0.13), transparent 34%),
+          radial-gradient(circle at 90% 95%, rgba(224, 138, 74, 0.12), transparent 34%),
+          #0b0c0e;
+      }
+
+      main {
+        width: min(1180px, 100%);
+        margin: 0 auto;
+      }
+
+      .eyebrow {
+        margin: 0 0 16px;
+        color: #99a2b1;
+        font: 600 12px/1.4 ui-monospace, "SFMono-Regular", monospace;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 780px;
+        margin: 0;
+        font-size: clamp(42px, 7vw, 84px);
+        line-height: 0.98;
+        letter-spacing: -0.045em;
+      }
+
+      .intro {
+        max-width: 720px;
+        margin: 26px 0 50px;
+        color: #b7bdc8;
+        font-size: clamp(17px, 2vw, 21px);
+        line-height: 1.65;
+      }
+
+      .candidates {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      article {
+        display: flex;
+        min-height: 340px;
+        flex-direction: column;
+        padding: 26px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.045);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+      }
+
+      article:nth-child(1) {
+        --accent: #63d5e6;
+      }
+
+      article:nth-child(2) {
+        --accent: #d9a45c;
+      }
+
+      article:nth-child(3) {
+        --accent: #e08a4a;
+      }
+
+      article:nth-child(4) {
+        --accent: #f0a45d;
+      }
+
+      .number {
+        color: var(--accent);
+        font: 600 13px/1 ui-monospace, "SFMono-Regular", monospace;
+      }
+
+      h2 {
+        margin: 22px 0 10px;
+        font-size: 27px;
+        line-height: 1.12;
+      }
+
+      .model {
+        margin: 0 0 22px;
+        color: #8f98a7;
+        font: 500 12px/1.5 ui-monospace, "SFMono-Regular", monospace;
+      }
+
+      article p {
+        margin: 0;
+        color: #c1c6cf;
+        line-height: 1.65;
+      }
+
+      a {
+        width: fit-content;
+        margin-top: auto;
+        padding: 11px 16px;
+        border: 1px solid color-mix(in srgb, var(--accent), transparent 45%);
+        border-radius: 999px;
+        color: #f7f7f4;
+        text-decoration: none;
+        background: color-mix(in srgb, var(--accent), transparent 88%);
+      }
+
+      a:hover {
+        background: color-mix(in srgb, var(--accent), transparent 78%);
+      }
+
+      a:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 4px;
+      }
+
+      footer {
+        margin-top: 32px;
+        color: #747d8c;
+        font-size: 13px;
+      }
+
+      @media (max-width: 850px) {
+        .candidates {
+          grid-template-columns: 1fr;
+        }
+
+        article {
+          min-height: 280px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">Independent model-taste comparison</p>
+      <h1>ผมใช้ AI ทำงานยังไง</h1>
+      <p class="intro">
+        HTML web deck สามชุดจาก outline เดียวกัน แต่ละโมเดลออกแบบและ implement แยกกันโดยไม่เห็นงานของอีกตัว
+        เปิดดูทั้งสามชุดก่อนเลือก visual direction ที่จะนำไป production ต่อ
+      </p>
+
+      <section class="candidates" aria-label="Slide deck candidates">
+        <article>
+          <span class="number">01</span>
+          <h2>Gemini</h2>
+          <p class="model">gemini-3.7-flash-high</p>
+          <p>Precision Studio Graphite — graphite, cyan, amber และ interaction surface ที่มี overview, notes และ fullscreen</p>
+          <a href="./gemini-3.7-flash-high/index.html#1">เปิด Gemini deck</a>
+        </article>
+
+        <article>
+          <span class="number">02</span>
+          <h2>Claude Opus</h2>
+          <p class="model">claude-opus-4-6-thinking</p>
+          <p>Strata — dark ink, amber/clay และ sage แยกเนื้อหาเป็นชั้นตาม journey และหน้าที่ของแต่ละสไลด์</p>
+          <a href="./claude-opus-4.6-thinking/index.html#1">เปิด Opus deck</a>
+        </article>
+
+        <article>
+          <span class="number">03</span>
+          <h2>Cursor Grok</h2>
+          <p class="model">cursor-grok-4.6-high</p>
+          <p>Context Filament — warm ink studio, bone paper และ copper thread เชื่อมเรื่องตั้งแต่จุดเริ่มจนถึง ecosystem</p>
+          <a href="./cursor-grok-4.6-high/index.html#1">เปิด Grok deck</a>
+        </article>
+
+        <article>
+          <span class="number">04 · GROOMED</span>
+          <h2>Grok × Opus × Gemini</h2>
+          <p class="model">visual · content · asset</p>
+          <p>Context Filament ที่ groom จาก feedback: Grok ดู visual, Opus ดูเนื้อหา และ Gemini สร้างภาพสนับสนุน Slide 1</p>
+          <a href="./groomed-grok-opus/index.html#1">เปิด Groomed deck</a>
+        </article>
+      </section>
+
+      <footer>Arrow keys / Space สำหรับเปลี่ยนสไลด์ · N สำหรับ speaker notes</footer>
+    </main>
+  </body>
+</html>
