@@ -1,0 +1,52 @@
+Continue from the current worktree only. Do not restart from scratch.
+
+Use the hosted image_generation tool to generate real raster images. This is an imagegen-required job. Do not substitute SVG, procedural drawing, Python/Pillow/Canvas art, stock images, or web downloads.
+
+Scope:
+- Read lab/coloring-pages/mixed-animals-cut-sheet-20-a4/manifest.md
+- Write generated PNGs only to the provider generated-images area
+- Do not edit repository files, application code, manifests, or prompts
+- Do not commit
+
+Task:
+Generate 20 separate isolated animal coloring images, exactly one hosted image_generation call per animal. Every call must repeat the shared style contract so all animals form one consistent printable set.
+
+Shared style for every call:
+- one single cute baby animal, full body, centered, facing generally forward in a simple friendly pose
+- no prop, no scenery, no ground line, no plant, no water, no environmental element, no decorative accent
+- friendly rounded proportions and a simple cheerful expression
+- anatomically clear and instantly recognizable silhouette
+- clean children's coloring-book line art for ages 4–7
+- bold smooth pure-black outlines of consistent weight on a pure-white background
+- large open enclosed areas that are easy to color with crayons
+- minimal internal detail; simplify fur, feathers, scales, spots, stripes, and markings into a few broad coloring regions
+- generous white padding around the complete silhouette
+- keep every ear, horn, wing, flipper, paw, hoof, foot, fin, and tail fully visible
+- no cropped anatomy, no duplicate animal, no extra creature
+- no color, no gray fill, no shading, no gradient, no hatching, no halftone, no drop shadow, no solid black body mass, no dense texture
+- no text, letters, numbers, labels, logos, signatures, or watermarks
+- square or simple portrait source composition is acceptable; the main agent will trim and place it in an A4 grid
+
+Generate these animals in this exact numbered order:
+1. kitten
+2. floppy-eared puppy
+3. bunny
+4. baby panda
+5. baby fox
+6. bear cub
+7. lion cub with a simple rounded mane
+8. baby elephant
+9. baby giraffe with a few large simple spots
+10. monkey with a simple curled tail
+11. calf with a few large simple patches
+12. piglet
+13. lamb with a few broad wool curves, not dense curls
+14. duckling with both feet visible
+15. baby penguin with body areas left unfilled
+16. baby turtle with a simple broad shell pattern
+17. baby dolphin with complete fins and tail, floating on white with no water
+18. koala
+19. fawn with only a few large simple spots
+20. raccoon with mask and tail markings left as open coloring regions, not solid black
+
+After all calls finish, return a numbered 1–20 mapping of animal name to exact generated PNG path. State explicitly whether every source came from hosted image_generation. If any call fails, stop claiming completeness and identify the missing number. Do not copy, trim, normalize, or compose the files; the main agent owns final assembly and QA.

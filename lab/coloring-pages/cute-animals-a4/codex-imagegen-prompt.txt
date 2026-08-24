@@ -1,0 +1,35 @@
+Continue from the current worktree only. Do not restart from scratch.
+
+Use the hosted image_generation tool to generate real raster images. This is an imagegen-required job; do not substitute SVG, procedural drawing, Python/Pillow/Canvas art, stock images, or web downloads.
+
+Scope:
+- Read lab/coloring-pages/cute-animals-a4/manifest.md
+- Write generated PNG files only to the provider's generated-images area and report their exact paths
+- Do not edit application code, do not commit, and do not overwrite unrelated files
+
+Task:
+Generate six separate portrait coloring pages, one image-generation call per page, with a consistent visual style and character treatment.
+
+Shared style for every page:
+- printable children's coloring-book line art for ages 4–7
+- portrait composition with the same aspect ratio as A4 paper (210:297)
+- one central cute baby animal, large enough to fill most of the page
+- friendly rounded proportions, simple expressive face, anatomically clear silhouette
+- bold smooth pure-black outlines of consistent weight on a pure-white background
+- large open enclosed areas that are easy to color with crayons
+- sparse scene accents only, with generous white space
+- keep every important line and all anatomy safely inside the page, leaving approximately 12 mm clear margin on all four sides
+- no page frame or decorative border
+- black line art only: no color, no gray, no shading, no gradients, no hatching, no halftone, no solid black masses, no dense fur, no tiny textures
+- no text, letters, numbers, labels, logos, signatures, or watermarks
+- exactly one animal, no duplicate characters, no cropped ears, feet, wings, trunk, or tail
+
+Page scenes:
+1. A cheerful kitten sitting and gently touching one large ball of yarn; use only a few broad curved yarn strands.
+2. A floppy-eared puppy sitting beside one simple toy ball; add three large grass tufts, no collar tag.
+3. A smiling bunny holding two large carrots; use broad carrot leaves and only two simple ground flowers.
+4. A happy baby elephant raising its trunk toward one large butterfly; use one simple puddle shape and three large water drops.
+5. A friendly bear cub sitting beside one simple unlabeled honey jar; use two broad honey drips and two large leaves, with no bees.
+6. A round baby penguin holding one small fish while standing on one simple ice patch; use three broad wave curves in the background.
+
+After generation, report a numbered mapping from page 1–6 to the exact generated PNG path and state whether all six calls used image_generation successfully. Do not claim A4 pixel accuracy; the main agent will normalize the accepted raw rasters to 2480 × 3508 px at 300 DPI.
