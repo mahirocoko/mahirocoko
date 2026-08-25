@@ -13,7 +13,7 @@ Selecting a subagent model requires preserving five things together:
 4. provider/auth route;
 5. context and turn cost.
 
-A plausible model ID can still select the wrong provider. In the current Letta Code catalog, `gpt-5.6-luna-medium` and `gpt-5.6-terra-medium` resolve to `openai/*` and require an OpenAI API key. The ChatGPT OAuth-compatible explicit presets are `gpt-5.6-luna-plus-pro-medium` and `gpt-5.6-terra-plus-pro-medium`. Sol High likewise uses `gpt-5.6-sol-plus-pro-high` for explicit subagent routing.
+A plausible model ID can still select the wrong provider. The original 2026-07-18 catalog required `*-plus-pro-*` IDs for ChatGPT OAuth, but that contract is historical. In Letta Code 0.30.31 the current explicit presets are `gpt-5.6-luna-medium`, `gpt-5.6-terra-medium`, and `gpt-5.6-sol-high`; live readback resolves them to `openai-codex/*` with `provider_type: chatgpt_oauth` and the named effort. Bare family slugs resolve through the same provider but default to `reasoning_effort: none`.
 
 ## Current routing contract
 
@@ -46,4 +46,3 @@ The new global `verifier` is the reusable independent QA lane. It is read-only, 
 - Plus/Pro Luna/Terra Medium launches succeeded.
 - Mahiro Code's fresh agent listing showed Sol with high reasoning and 372k local catalog context.
 - The Verifier smoke ran one `git status --short --branch` command, returned `VERIFIED`, and preserved a clean worktree.
-

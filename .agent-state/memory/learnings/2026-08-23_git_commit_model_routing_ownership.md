@@ -10,7 +10,7 @@
 
 ใน local backend ค่า `model:` ที่ Main ส่งแบบ explicit มี priority เหนือ frontmatter และการเรียกที่ไม่ส่ง model อาจ inherit parent ก่อนอ่าน recommended model ของ custom agent เพราะฉะนั้นแก้เพียง `~/.letta/agents/git-commit.md` ยังไม่พอ ถ้า durable workflow memory ยังสั่ง Spark อยู่ Main ก็อาจ override Luna Low กลับไปได้
 
-Contract ปัจจุบันคือ `git-commit` ใช้ `gpt-5.6-luna-plus-pro-low` โดยตรง ไม่ใช่ Spark-first fallback การเปลี่ยนนี้แตะเฉพาะ model routing ส่วน safety contract เดิมยังเหมือนเดิม: commit ได้เมื่อ Mahiro สั่งชัดเจนเท่านั้น, ห้าม push/amend เอง, stage เฉพาะไฟล์ที่เกี่ยวข้อง, ตรวจ secrets และอ่าน Git state ก่อนกับหลัง commit
+Contract ปัจจุบันใน Letta Code 0.30.31 คือ `git-commit` ใช้ `gpt-5.6-luna-low` โดยตรง ไม่ใช่ Spark-first fallback หรือ preset เก่าแบบ `*-plus-pro-*` การเปลี่ยนนี้แตะเฉพาะ model routing ส่วน safety contract เดิมยังเหมือนเดิม: commit ได้เมื่อ Mahiro สั่งชัดเจนเท่านั้น, ห้าม push/amend เอง, stage เฉพาะไฟล์ที่เกี่ยวข้อง, ตรวจ secrets และอ่าน Git state ก่อนกับหลัง commit
 
 หลังแก้ definition ให้ตรวจสองระดับแยกกัน
 
