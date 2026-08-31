@@ -82,7 +82,6 @@ Desktop.ini
 $RECYCLE.BIN/
 
 # Local agent state (selectively ignored)
-.agent-state/sprite-workflow/
 .agent-state/active/
 .agent-state/design-md/
 .agent-state/memory/logs/
@@ -95,6 +94,9 @@ $RECYCLE.BIN/
 
 # Design exploration artifacts
 lab/hrm-figma-prototype/
+
+# Local prototype apps
+/apps/h3-sprite-controller/
 
 /.sisyphus/
 /.playwright/
