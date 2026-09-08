@@ -97,6 +97,7 @@ lab/hrm-figma-prototype/
 
 # Local prototype apps
 /apps/h3-sprite-controller/
+/apps/frontend-labs/passcraft/
 
 /.sisyphus/
 /.playwright/
