@@ -1,0 +1,83 @@
+TAP version 13
+# Subtest: rejects duplicate IDs permanently without changing persisted state
+ok 1 - rejects duplicate IDs permanently without changing persisted state
+  ---
+  duration_ms: 4.848375
+  type: 'test'
+  ...
+# Subtest: validates IDs and owners without mutating persisted state
+ok 2 - validates IDs and owners without mutating persisted state
+  ---
+  duration_ms: 0.884625
+  type: 'test'
+  ...
+# Subtest: claims queued items in insertion order
+ok 3 - claims queued items in insertion order
+  ---
+  duration_ms: 1.719833
+  type: 'test'
+  ...
+# Subtest: reclaims an expired lease and increments attempt
+ok 4 - reclaims an expired lease and increments attempt
+  ---
+  duration_ms: 1.348042
+  type: 'test'
+  ...
+# Subtest: expired acknowledgement fails and persists reconciliation
+ok 5 - expired acknowledgement fails and persists reconciliation
+  ---
+  duration_ms: 1.279458
+  type: 'test'
+  ...
+# Subtest: fail requeues a valid claim and permits a later claim
+ok 6 - fail requeues a valid claim and permits a later claim
+  ---
+  duration_ms: 1.514916
+  type: 'test'
+  ...
+# Subtest: serializes simultaneous claims
+ok 7 - serializes simultaneous claims
+  ---
+  duration_ms: 1.283834
+  type: 'test'
+  ...
+# Subtest: snapshot is detached from internal state
+ok 8 - snapshot is detached from internal state
+  ---
+  duration_ms: 0.737541
+  type: 'test'
+  ...
+# Subtest: rejects malformed persisted state without overwriting it
+ok 9 - rejects malformed persisted state without overwriting it
+  ---
+  duration_ms: 0.488459
+  type: 'test'
+  ...
+# Subtest: rejects malformed item records
+ok 10 - rejects malformed item records
+  ---
+  duration_ms: 0.449292
+  type: 'test'
+  ...
+# Subtest: leaves no owned temporary files after successful persistence
+ok 11 - leaves no owned temporary files after successful persistence
+  ---
+  duration_ms: 0.873208
+  type: 'test'
+  ...
+# Subtest: uses rename-based persistence and cleans its temp after failure
+ok 12 - uses rename-based persistence and cleans its temp after failure
+  ---
+  duration_ms: 1.36025
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 63.799
+

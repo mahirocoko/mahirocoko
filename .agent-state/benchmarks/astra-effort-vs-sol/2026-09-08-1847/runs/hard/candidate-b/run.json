@@ -1,0 +1,12 @@
+{
+  "task": "hard",
+  "candidate": "candidate-b",
+  "startedAt": "2026-09-08T13:39:02Z",
+  "endedAt": "2026-09-08T13:41:54Z",
+  "elapsedMs": 172570,
+  "exitCode": 0,
+  "usage": {
+    "context_used_tokens_approx": 33600
+  },
+  "execution": "herdr-interactive-codex"
+}

@@ -1,0 +1,248 @@
+{
+  "easy": {
+    "candidate-a": {
+      "score": 100,
+      "public": {
+        "exitCode": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 0,
+        "tests": 7,
+        "pass": 7,
+        "fail": 0
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    },
+    "candidate-b": {
+      "score": 100,
+      "public": {
+        "exitCode": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 0,
+        "tests": 7,
+        "pass": 7,
+        "fail": 0
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    },
+    "candidate-c": {
+      "score": 100,
+      "public": {
+        "exitCode": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 0,
+        "tests": 7,
+        "pass": 7,
+        "fail": 0
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    },
+    "candidate-d": {
+      "score": 100,
+      "public": {
+        "exitCode": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 0,
+        "tests": 7,
+        "pass": 7,
+        "fail": 0
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    }
+  },
+  "medium": {
+    "candidate-a": {
+      "score": 100,
+      "public": {
+        "exitCode": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 0,
+        "tests": 12,
+        "pass": 12,
+        "fail": 0
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    },
+    "candidate-b": {
+      "score": 100,
+      "public": {
+        "exitCode": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 0,
+        "tests": 12,
+        "pass": 12,
+        "fail": 0
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    },
+    "candidate-c": {
+      "score": 53.33,
+      "public": {
+        "exitCode": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 1,
+        "tests": 12,
+        "pass": 4,
+        "fail": 8
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    },
+    "candidate-d": {
+      "score": 100,
+      "public": {
+        "exitCode": 0,
+        "tests": 2,
+        "pass": 2,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 0,
+        "tests": 12,
+        "pass": 12,
+        "fail": 0
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    }
+  },
+  "hard": {
+    "candidate-a": {
+      "score": 93.64,
+      "public": {
+        "exitCode": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 1,
+        "tests": 11,
+        "pass": 10,
+        "fail": 1
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    },
+    "candidate-b": {
+      "score": 93.64,
+      "public": {
+        "exitCode": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 1,
+        "tests": 11,
+        "pass": 10,
+        "fail": 1
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    },
+    "candidate-c": {
+      "score": 16.36,
+      "public": {
+        "exitCode": 1,
+        "tests": 3,
+        "pass": 0,
+        "fail": 3
+      },
+      "hidden": {
+        "exitCode": 1,
+        "tests": 11,
+        "pass": 1,
+        "fail": 10
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    },
+    "candidate-d": {
+      "score": 93.64,
+      "public": {
+        "exitCode": 0,
+        "tests": 3,
+        "pass": 3,
+        "fail": 0
+      },
+      "hidden": {
+        "exitCode": 1,
+        "tests": 11,
+        "pass": 10,
+        "fail": 1
+      },
+      "integrity": {
+        "passed": true,
+        "protectedUnchanged": true,
+        "extraFiles": []
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+TAP version 13
+# Subtest: rejects duplicate IDs permanently without changing persisted state
+ok 1 - rejects duplicate IDs permanently without changing persisted state
+  ---
+  duration_ms: 5.103708
+  type: 'test'
+  ...
+# Subtest: validates IDs and owners without mutating persisted state
+ok 2 - validates IDs and owners without mutating persisted state
+  ---
+  duration_ms: 1.086875
+  type: 'test'
+  ...
+# Subtest: claims queued items in insertion order
+ok 3 - claims queued items in insertion order
+  ---
+  duration_ms: 1.931583
+  type: 'test'
+  ...
+# Subtest: reclaims an expired lease and increments attempt
+ok 4 - reclaims an expired lease and increments attempt
+  ---
+  duration_ms: 1.381708
+  type: 'test'
+  ...
+# Subtest: expired acknowledgement fails and persists reconciliation
+ok 5 - expired acknowledgement fails and persists reconciliation
+  ---
+  duration_ms: 1.331167
+  type: 'test'
+  ...
+# Subtest: fail requeues a valid claim and permits a later claim
+ok 6 - fail requeues a valid claim and permits a later claim
+  ---
+  duration_ms: 1.593167
+  type: 'test'
+  ...
+# Subtest: serializes simultaneous claims
+ok 7 - serializes simultaneous claims
+  ---
+  duration_ms: 1.303042
+  type: 'test'
+  ...
+# Subtest: snapshot is detached from internal state
+ok 8 - snapshot is detached from internal state
+  ---
+  duration_ms: 0.624708
+  type: 'test'
+  ...
+# Subtest: rejects malformed persisted state without overwriting it
+ok 9 - rejects malformed persisted state without overwriting it
+  ---
+  duration_ms: 0.49875
+  type: 'test'
+  ...
+# Subtest: rejects malformed item records
+ok 10 - rejects malformed item records
+  ---
+  duration_ms: 0.38275
+  type: 'test'
+  ...
+# Subtest: leaves no owned temporary files after successful persistence
+ok 11 - leaves no owned temporary files after successful persistence
+  ---
+  duration_ms: 0.77175
+  type: 'test'
+  ...
+# Subtest: uses rename-based persistence and cleans its temp after failure
+ok 12 - uses rename-based persistence and cleans its temp after failure
+  ---
+  duration_ms: 1.236083
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 62.26225
+

@@ -1,0 +1,12 @@
+{
+  "task": "easy",
+  "candidate": "candidate-a",
+  "startedAt": null,
+  "endedAt": null,
+  "elapsedMs": 82408,
+  "exitCode": 0,
+  "usage": {
+    "context_used_tokens_approx": 31200
+  },
+  "execution": "herdr-interactive-codex"
+}

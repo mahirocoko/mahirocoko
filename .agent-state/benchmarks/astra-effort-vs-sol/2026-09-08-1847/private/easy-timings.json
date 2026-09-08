@@ -1,0 +1,30 @@
+{
+  "candidate-a": {
+    "startedAt": null,
+    "endedAt": null,
+    "elapsedMs": 82408,
+    "status": "completed",
+    "usage": { "context_used_tokens_approx": 31200 }
+  },
+  "candidate-b": {
+    "startedAt": null,
+    "endedAt": null,
+    "elapsedMs": 98517,
+    "status": "completed",
+    "usage": { "context_used_tokens_approx": 31700 }
+  },
+  "candidate-c": {
+    "startedAt": null,
+    "endedAt": null,
+    "elapsedMs": 216234,
+    "status": "completed",
+    "usage": { "context_used_tokens_approx": 35100 }
+  },
+  "candidate-d": {
+    "startedAt": null,
+    "endedAt": null,
+    "elapsedMs": 65833,
+    "status": "completed",
+    "usage": { "context_used_tokens_approx": 29400 }
+  }
+}

@@ -1,0 +1,331 @@
+TAP version 13
+# Subtest: rejects duplicate IDs permanently without changing persisted state
+not ok 1 - rejects duplicate IDs permanently without changing persisted state
+  ---
+  duration_ms: 4.222791
+  type: 'test'
+  location: '/Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:19:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection (DuplicateIdError).'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  stack: |-
+    async TestContext.<anonymous> (file:///Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:25:3)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+  ...
+# Subtest: validates IDs and owners without mutating persisted state
+not ok 2 - validates IDs and owners without mutating persisted state
+  ---
+  duration_ms: 0.74125
+  type: 'test'
+  location: '/Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:29:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:31:3)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: claims queued items in insertion order
+ok 3 - claims queued items in insertion order
+  ---
+  duration_ms: 0.978541
+  type: 'test'
+  ...
+# Subtest: reclaims an expired lease and increments attempt
+not ok 4 - reclaims an expired lease and increments attempt
+  ---
+  duration_ms: 1.112083
+  type: 'test'
+  location: '/Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:44:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+    + null
+    - {
+    -   attempt: 2,
+    -   id: 'job',
+    -   leaseUntil: 120,
+    -   payload: 'value'
+    - }
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    id: 'job'
+    payload: 'value'
+    attempt: 2
+    leaseUntil: 120
+  actual: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:50:10)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: expired acknowledgement fails and persists reconciliation
+not ok 5 - expired acknowledgement fails and persists reconciliation
+  ---
+  duration_ms: 0.959
+  type: 'test'
+  location: '/Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:58:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    true !== false
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:64:10)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: fail requeues a valid claim and permits a later claim
+ok 6 - fail requeues a valid claim and permits a later claim
+  ---
+  duration_ms: 0.821
+  type: 'test'
+  ...
+# Subtest: serializes simultaneous claims
+ok 7 - serializes simultaneous claims
+  ---
+  duration_ms: 0.480958
+  type: 'test'
+  ...
+# Subtest: snapshot is detached from internal state
+not ok 8 - snapshot is detached from internal state
+  ---
+  duration_ms: 0.353875
+  type: 'test'
+  location: '/Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:84:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    
+    99 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 99
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:89:10)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: rejects malformed persisted state without overwriting it
+not ok 9 - rejects malformed persisted state without overwriting it
+  ---
+  duration_ms: 0.53175
+  type: 'test'
+  location: '/Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:92:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:97:3)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: rejects malformed item records
+not ok 10 - rejects malformed item records
+  ---
+  duration_ms: 0.560417
+  type: 'test'
+  location: '/Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:101:1'
+  failureType: 'testCodeFailure'
+  error: 'Missing expected rejection.'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  operator: 'rejects'
+  stack: |-
+    async TestContext.<anonymous> (file:///Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:105:3)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: leaves no owned temporary files after successful persistence
+ok 11 - leaves no owned temporary files after successful persistence
+  ---
+  duration_ms: 0.738416
+  type: 'test'
+  ...
+# Subtest: uses rename-based persistence and cleans its temp after failure
+not ok 12 - uses rename-based persistence and cleans its temp after failure
+  ---
+  duration_ms: 0.498291
+  type: 'test'
+  location: '/Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:114:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The input did not match the regular expression /\brename\b/. Input:
+    
+    "import { mkdir, readFile, writeFile } from 'node:fs/promises'\n" +
+      "import { dirname } from 'node:path'\n" +
+      '\n' +
+      'class DuplicateIdError extends Error {}\n' +
+      '\n' +
+      'class PersistentLeaseQueue {\n' +
+      '  constructor(filePath, state, options) {\n' +
+      '    this.filePath = filePath\n' +
+      '    this.state = state\n' +
+      '    this.clock = options.clock\n' +
+      '    this.leaseMs = options.leaseMs\n' +
+      '  }\n' +
+      '\n' +
+      '  static async open(filePath, { clock = Date.now, leaseMs = 30000 } = {}) {\n' +
+      '    let state = { version: 1, items: [], seenIds: [] }\n' +
+      '    try {\n' +
+      "      state = JSON.parse(await readFile(filePath, 'utf8'))\n" +
+      '    } catch (error) {\n' +
+      "      if (error?.code !== 'ENOENT') throw error\n" +
+      '    }\n' +
+      '    return new PersistentLeaseQueue(filePath, state, { clock, leaseMs })\n' +
+      '  }\n' +
+      '\n' +
+      '  async persist() {\n' +
+      '    await mkdir(dirname(this.filePath), { recursive: true })\n' +
+      '    await writeFile(this.filePath, JSON.stringify(this.state, null, 2))\n' +
+      '  }\n' +
+      '\n' +
+      '  async enqueue({ id, payload }) {\n' +
+      "    this.state.items.push({ id, payload, status: 'queued', attempt: 0 })\n" +
+      '    this.state.seenIds.push(id)\n' +
+      '    await this.persist()\n' +
+      '  }\n' +
+      '\n' +
+      '  async claim(owner) {\n' +
+      "    const item = this.state.items.find((entry) => entry.status === 'queued')\n" +
+      '    if (!item) return null\n' +
+      "    item.status = 'claimed'\n" +
+      '    item.owner = owner\n' +
+      '    item.attempt += 1\n' +
+      '    item.leaseUntil = this.clock() + this.leaseMs\n' +
+      '    await this.persist()\n' +
+      '    return { id: item.id, payload: item.payload, attempt: item.attempt, leaseUntil: item.leaseUntil }\n' +
+      '  }\n' +
+      '\n' +
+      '  async ack(owner, id) {\n' +
+      '    const item = this.state.items.find((entry) => entry.id === id)\n' +
+      '    if (!item || item.owner !== owner) return false\n' +
+      "    item.status = 'done'\n" +
+      '    await this.persist()\n' +
+      '    return true\n' +
+      '  }\n' +
+      '\n' +
+      '  async fail(owner, id) {\n' +
+      '    const item = this.state.items.find((entry) => entry.id === id)\n' +
+      '    if (!item || item.owner !== owner) return false\n' +
+      "    item.status = 'queued'\n" +
+      '    await this.persist()\n' +
+      '    return true\n' +
+      '  }\n' +
+      '\n' +
+      '  snapshot() {\n' +
+      '    return this.state\n' +
+      '  }\n' +
+      '}\n' +
+      '\n' +
+      'export { DuplicateIdError, PersistentLeaseQueue }\n'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+  actual: |-
+    import { mkdir, readFile, writeFile } from 'node:fs/promises'
+    import { dirname } from 'node:path'
+    
+    class DuplicateIdError extends Error {}
+    
+    class PersistentLeaseQueue {
+      constructor(filePath, state, options) {
+        this.filePath = filePath
+        this.state = state
+        this.clock = options.clock
+        this.leaseMs = options.leaseMs
+      }
+    
+      static async open(filePath, { clock = Date.now, leaseMs = 30000 } = {}) {
+        let state = { version: 1, items: [], seenIds: [] }
+        try {
+          state = JSON.parse(await readFile(filePath, 'utf8'))
+        } catch (error) {
+          if (error?.code !== 'ENOENT') throw error
+        }
+        return new PersistentLeaseQueue(filePath, state, { clock, leaseMs })
+      }
+    
+      async persist() {
+        await mkdir(dirname(this.filePath), { recursive: true })
+        await writeFile(this.filePath, JSON.stringify(this.state, null, 2))
+      }
+    
+      async enqueue({ id, payload }) {
+        this.state.items.push({ id, payload, status: 'queued', attempt: 0 })
+        this.state.seenIds.push(id)
+        await this.persist()
+      }
+    
+      async claim(owner) {
+        const item = this.state.items.find((entry) => entry.status === 'queued')
+        if (!item) return null
+        item.status = 'claimed'
+        item.owner = owner
+        item.attempt += 1
+        item.leaseUntil = this.clock() + this.leaseMs
+        await this.persist()
+        return { id: item.id, payload: item.payload, attempt: item.attempt, leaseUntil: item.leaseUntil }
+      }
+    
+      async ack(owner, id) {
+        const item = this.state.items.find((entry) => entry.id === id)
+        if (!item || item.owner !== owner) return false
+        item.status = 'done'
+        await this.persist()
+        return true
+      }
+    
+      async fail(owner, id) {
+        const item = this.state.items.find((entry) => entry.id === id)
+        if (!item || item.owner !== owner) return false
+        item.status = 'queued'
+        await this.persist()
+        return true
+      }
+    
+      snapshot() {
+        return this.state
+      }
+    }
+    
+    export { DuplicateIdError, PersistentLeaseQueue }
+    
+  operator: 'match'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/medium.hidden.test.mjs:116:10)
+    async Test.run (node:internal/test_runner/test:1389:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 4
+# fail 8
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 55.795041
+

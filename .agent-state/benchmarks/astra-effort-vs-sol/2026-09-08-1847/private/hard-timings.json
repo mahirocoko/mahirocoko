@@ -1,0 +1,30 @@
+{
+  "candidate-a": {
+    "startedAt": "2026-09-08T13:38:32Z",
+    "endedAt": "2026-09-08T13:42:06Z",
+    "elapsedMs": 214007,
+    "status": "completed",
+    "usage": { "context_used_tokens_approx": 39300 }
+  },
+  "candidate-b": {
+    "startedAt": "2026-09-08T13:39:02Z",
+    "endedAt": "2026-09-08T13:41:54Z",
+    "elapsedMs": 172570,
+    "status": "completed",
+    "usage": { "context_used_tokens_approx": 33600 }
+  },
+  "candidate-c": {
+    "startedAt": "2026-09-08T13:39:32Z",
+    "endedAt": "2026-09-08T13:40:59Z",
+    "elapsedMs": 86791,
+    "status": "completed",
+    "usage": { "context_used_tokens_approx": 31500 }
+  },
+  "candidate-d": {
+    "startedAt": "2026-09-08T13:40:02Z",
+    "endedAt": "2026-09-08T13:42:22Z",
+    "elapsedMs": 140007,
+    "status": "completed",
+    "usage": { "context_used_tokens_approx": 32000 }
+  }
+}

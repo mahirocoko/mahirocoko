@@ -1,0 +1,125 @@
+TAP version 13
+# Subtest: normalizes legacy failure
+ok 1 - normalizes legacy failure
+  ---
+  duration_ms: 0.715958
+  type: 'test'
+  ...
+# Subtest: wrapper metadata overrides payload transport and preserves lease
+ok 2 - wrapper metadata overrides payload transport and preserves lease
+  ---
+  duration_ms: 0.083125
+  type: 'test'
+  ...
+# Subtest: normalization returns a fresh value without mutating its input
+not ok 3 - normalization returns a fresh value without mutating its input
+  ---
+  duration_ms: 0.693458
+  type: 'test'
+  location: '/Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/hard.hidden.test.mjs:51:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly deep-equal:
+    + actual - expected
+    
+      {
+        outcome: {
+          data: {
+    +       value: 99
+    -       value: 1
+          },
+          status: 'ok'
+        },
+        requestId: 'fresh',
+        schemaVersion: 2,
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    schemaVersion: 2
+    requestId: 'fresh'
+    outcome:
+      status: 'ok'
+      data:
+        value: 1
+    transport:
+      attempt: 1
+      receivedAt: ~
+  actual:
+    schemaVersion: 2
+    requestId: 'fresh'
+    outcome:
+      status: 'ok'
+      data:
+        value: 99
+    transport:
+      attempt: 1
+      receivedAt: ~
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///Users/mahiro/Git/me/mahirocoko/.agent-state/benchmarks/astra-effort-vs-sol/2026-09-08-1847/hidden/hard.hidden.test.mjs:61:10)
+    Test.runInAsyncScope (node:async_hooks:226:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: consume trusts nested v2 outcome instead of stray top-level ok
+ok 4 - consume trusts nested v2 outcome instead of stray top-level ok
+  ---
+  duration_ms: 0.078958
+  type: 'test'
+  ...
+# Subtest: rejects invalid request, transport, outcome, and lease contracts
+ok 5 - rejects invalid request, transport, outcome, and lease contracts
+  ---
+  duration_ms: 0.18975
+  type: 'test'
+  ...
+# Subtest: dispatch produces canonical success and failure
+ok 6 - dispatch produces canonical success and failure
+  ---
+  duration_ms: 0.139666
+  type: 'test'
+  ...
+# Subtest: store is idempotent, detects conflicts, and returns detached values
+ok 7 - store is idempotent, detects conflicts, and returns detached values
+  ---
+  duration_ms: 3.533833
+  type: 'test'
+  ...
+# Subtest: store normalizes legacy records when reopening
+ok 8 - store normalizes legacy records when reopening
+  ---
+  duration_ms: 0.660375
+  type: 'test'
+  ...
+# Subtest: malformed store fails without overwrite
+ok 9 - malformed store fails without overwrite
+  ---
+  duration_ms: 0.639708
+  type: 'test'
+  ...
+# Subtest: atomic store persistence leaves no temporary files
+ok 10 - atomic store persistence leaves no temporary files
+  ---
+  duration_ms: 0.711584
+  type: 'test'
+  ...
+# Subtest: uses rename-based persistence and cleans its temp after failure
+ok 11 - uses rename-based persistence and cleans its temp after failure
+  ---
+  duration_ms: 1.001375
+  type: 'test'
+  ...
+1..11
+# tests 11
+# suites 0
+# pass 10
+# fail 1
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 54.999666
+

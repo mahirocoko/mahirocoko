@@ -1,0 +1,53 @@
+TAP version 13
+# Subtest: clips Thai text by UTF-8 bytes
+ok 1 - clips Thai text by UTF-8 bytes
+  ---
+  duration_ms: 0.682417
+  type: 'test'
+  ...
+# Subtest: never splits an emoji code point
+ok 2 - never splits an emoji code point
+  ---
+  duration_ms: 0.083292
+  type: 'test'
+  ...
+# Subtest: returns exact multibyte input unchanged
+ok 3 - returns exact multibyte input unchanged
+  ---
+  duration_ms: 0.044709
+  type: 'test'
+  ...
+# Subtest: fits the suffix itself by code point
+ok 4 - fits the suffix itself by code point
+  ---
+  duration_ms: 0.052541
+  type: 'test'
+  ...
+# Subtest: handles zero budget and empty suffix
+ok 5 - handles zero budget and empty suffix
+  ---
+  duration_ms: 0.060917
+  type: 'test'
+  ...
+# Subtest: validates string inputs
+ok 6 - validates string inputs
+  ---
+  duration_ms: 0.170333
+  type: 'test'
+  ...
+# Subtest: rejects non-integer and non-finite budgets
+ok 7 - rejects non-integer and non-finite budgets
+  ---
+  duration_ms: 0.063959
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 46.350958
+

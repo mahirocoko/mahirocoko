@@ -1,0 +1,33 @@
+{
+  "createdAt": "2026-09-08T13:15:36.341Z",
+  "tempRoot": "/var/folders/vy/8tl35jl50978n2j99_d2js5c0000gn/T/astra-effort-direct-rWYkGj",
+  "mapping": {
+    "candidate-a": {
+      "model": "gpt-6-astra",
+      "effort": "high"
+    },
+    "candidate-b": {
+      "model": "gpt-6-astra",
+      "effort": "medium"
+    },
+    "candidate-c": {
+      "model": "gpt-5.6-sol",
+      "effort": "high"
+    },
+    "candidate-d": {
+      "model": "gpt-6-astra",
+      "effort": "low"
+    }
+  },
+  "tasks": [
+    "easy",
+    "medium",
+    "hard"
+  ],
+  "candidates": [
+    "candidate-a",
+    "candidate-b",
+    "candidate-c",
+    "candidate-d"
+  ]
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "candidate": "candidate-d",
+    "model": "gpt-6-astra",
+    "effort": "low",
+    "weightedScore": 96.82,
+    "elapsedTotalMs": 328826,
+    "usage": {
+      "context_used_tokens_approx": 92200
+    },
+    "tasks": {
+      "easy": {
+        "score": 100,
+        "elapsedMs": 65833,
+        "usage": {
+          "context_used_tokens_approx": 29400
+        },
+        "exitCode": 0
+      },
+      "medium": {
+        "score": 100,
+        "elapsedMs": 122986,
+        "usage": {
+          "context_used_tokens_approx": 30800
+        },
+        "exitCode": 0
+      },
+      "hard": {
+        "score": 93.64,
+        "elapsedMs": 140007,
+        "usage": {
+          "context_used_tokens_approx": 32000
+        },
+        "exitCode": 0
+      }
+    }
+  },
+  {
+    "candidate": "candidate-b",
+    "model": "gpt-6-astra",
+    "effort": "medium",
+    "weightedScore": 96.82,
+    "elapsedTotalMs": 404161,
+    "usage": {
+      "context_used_tokens_approx": 100700
+    },
+    "tasks": {
+      "easy": {
+        "score": 100,
+        "elapsedMs": 98517,
+        "usage": {
+          "context_used_tokens_approx": 31700
+        },
+        "exitCode": 0
+      },
+      "medium": {
+        "score": 100,
+        "elapsedMs": 133074,
+        "usage": {
+          "context_used_tokens_approx": 35400
+        },
+        "exitCode": 0
+      },
+      "hard": {
+        "score": 93.64,
+        "elapsedMs": 172570,
+        "usage": {
+          "context_used_tokens_approx": 33600
+        },
+        "exitCode": 0
+      }
+    }
+  },
+  {
+    "candidate": "candidate-a",
+    "model": "gpt-6-astra",
+    "effort": "high",
+    "weightedScore": 96.82,
+    "elapsedTotalMs": 503625,
+    "usage": {
+      "context_used_tokens_approx": 109900
+    },
+    "tasks": {
+      "easy": {
+        "score": 100,
+        "elapsedMs": 82408,
+        "usage": {
+          "context_used_tokens_approx": 31200
+        },
+        "exitCode": 0
+      },
+      "medium": {
+        "score": 100,
+        "elapsedMs": 207210,
+        "usage": {
+          "context_used_tokens_approx": 39400
+        },
+        "exitCode": 0
+      },
+      "hard": {
+        "score": 93.64,
+        "elapsedMs": 214007,
+        "usage": {
+          "context_used_tokens_approx": 39300
+        },
+        "exitCode": 0
+      }
+    }
+  },
+  {
+    "candidate": "candidate-c",
+    "model": "gpt-5.6-sol",
+    "effort": "high",
+    "weightedScore": 44.18,
+    "elapsedTotalMs": 461817,
+    "usage": {
+      "context_used_tokens_approx": 101600
+    },
+    "tasks": {
+      "easy": {
+        "score": 100,
+        "elapsedMs": 216234,
+        "usage": {
+          "context_used_tokens_approx": 35100
+        },
+        "exitCode": 0
+      },
+      "medium": {
+        "score": 53.33,
+        "elapsedMs": 158792,
+        "usage": {
+          "context_used_tokens_approx": 35000
+        },
+        "exitCode": 0
+      },
+      "hard": {
+        "score": 16.36,
+        "elapsedMs": 86791,
+        "usage": {
+          "context_used_tokens_approx": 31500
+        },
+        "exitCode": 0
+      }
+    }
+  }
+]
