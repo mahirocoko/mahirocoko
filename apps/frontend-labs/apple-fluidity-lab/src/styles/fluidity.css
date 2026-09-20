@@ -1,0 +1,748 @@
+/* ==========================================================================
+   Apple Fluidity Lab — Design System, Materials & Optical Typography
+   WWDC Designing Fluid Interfaces (2018) + Principles of Great Design (2026)
+   ========================================================================== */
+
+:root {
+  /* Color Palette — Apple System Dark Foundation */
+  --bg-deep: #090a0f;
+  --bg-subtle: #12131a;
+  --surface-chrome: rgba(22, 24, 32, 0.75);
+  --surface-elevated: rgba(30, 32, 44, 0.78);
+  --surface-active: rgba(40, 44, 60, 0.85);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-specular: rgba(255, 255, 255, 0.18);
+  --border-highlight: rgba(255, 255, 255, 0.32);
+
+  --text-primary: #f5f5f7;
+  --text-secondary: #8e8e93;
+  --text-tertiary: #636366;
+  --text-dim: #48484a;
+
+  /* Apple System Accents */
+  --accent-blue: #0a84ff;
+  --accent-blue-dim: rgba(10, 132, 255, 0.18);
+  --accent-green: #30d158;
+  --accent-green-dim: rgba(48, 209, 88, 0.18);
+  --accent-orange: #ff9f0a;
+  --accent-orange-dim: rgba(255, 159, 10, 0.18);
+  --accent-purple: #bf5af2;
+  --accent-purple-dim: rgba(191, 90, 242, 0.18);
+  --accent-red: #ff453a;
+
+  /* Typography Scale */
+  --font-system: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+  --font-mono: "SF Mono", Menlo, Monaco, Consolas, "Courier New", monospace;
+
+  /* Elevations */
+  --shadow-resting: 0 12px 32px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-lifted: 0 24px 60px rgba(0, 0, 0, 0.65), 0 8px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15);
+
+  /* Optical Sizing Variables */
+  --tracking-display: -0.028em;
+  --tracking-headline: -0.018em;
+  --tracking-body: -0.005em;
+  --tracking-mono: 0.035em;
+  --leading-tight: 1.1;
+  --leading-normal: 1.55;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-system);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  touch-action: manipulation;
+}
+
+/* Scope user-select: none to actual controls, buttons, and drag surfaces */
+.stage-viewport,
+.fluid-slate,
+.snap-dock-anchor,
+.button-apple,
+.toggle-switch,
+.badge-tag {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* --------------------------------------------------------------------------
+   Layout Structure
+   -------------------------------------------------------------------------- */
+
+.lab-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 10%, #151828 0%, var(--bg-deep) 70%);
+}
+
+.lab-header {
+  padding: 24px 32px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-chrome);
+  backdrop-filter: blur(24px) saturate(180%);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.lab-title-group h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+}
+
+.lab-title-group p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  letter-spacing: var(--tracking-body);
+  margin-top: 4px;
+}
+
+.header-badges {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.badge-tag {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-mono);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.badge-tag.highlight {
+  background: var(--accent-blue-dim);
+  border-color: rgba(10, 132, 255, 0.35);
+  color: #70b4ff;
+}
+
+/* --------------------------------------------------------------------------
+   Main Interactive Layout
+   -------------------------------------------------------------------------- */
+
+.lab-workspace {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  flex: 1;
+  min-height: calc(100vh - 85px);
+}
+
+@media (max-width: 1024px) {
+  .lab-workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stage Area */
+.stage-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  background: radial-gradient(circle at center, rgba(30, 34, 52, 0.3) 0%, transparent 75%);
+}
+
+.stage-scaler-frame {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+@media (max-width: 600px) {
+  .stage-container {
+    padding: 16px 10px;
+  }
+
+  .lab-header {
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .header-badges {
+    flex-wrap: wrap;
+  }
+}
+
+.stage-viewport {
+  position: relative;
+  border-radius: 24px;
+  background: rgba(15, 17, 24, 0.6);
+  border: 1px solid var(--border-subtle);
+  border-top: 1px solid var(--border-specular);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+  touch-action: none;
+}
+
+.stage-viewport:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 3px;
+}
+
+/* Subtle Stage Grid Pattern */
+.stage-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Snap Stations (Spatial Docks)
+   -------------------------------------------------------------------------- */
+
+.snap-dock-anchor {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 96px;
+  border-radius: 16px;
+  border: 1.5px dashed rgba(255, 255, 255, 0.16);
+  background: rgba(26, 28, 38, 0.55);
+  backdrop-filter: blur(16px);
+  color: var(--text-primary);
+  font-family: var(--font-system);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px;
+  text-align: center;
+  outline: none;
+  transition: border-color 140ms ease, background-color 140ms ease, transform 140ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 140ms ease;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .snap-dock-anchor:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(35, 38, 52, 0.75);
+  }
+}
+
+.snap-dock-anchor:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+.snap-dock-anchor.active {
+  border-style: solid;
+  border-color: var(--station-color, var(--accent-blue));
+  background: rgba(10, 132, 255, 0.08);
+  box-shadow: 0 0 24px rgba(10, 132, 255, 0.15);
+}
+
+.snap-dock-anchor.projected-target {
+  border-style: solid;
+  border-color: var(--station-color, #ff9f0a);
+  background: rgba(255, 159, 10, 0.12);
+  transform: translate(-50%, -50%) scale(1.04);
+  box-shadow: 0 0 30px rgba(255, 159, 10, 0.25);
+}
+
+.dock-key-tag {
+  font-size: 0.65rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+}
+
+.dock-title {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: var(--tracking-headline);
+  color: var(--text-primary);
+}
+
+.dock-sub {
+  font-size: 0.68rem;
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-body);
+}
+
+/* --------------------------------------------------------------------------
+   Draggable Physical Tile ("Fluid Dynamic Slate")
+   -------------------------------------------------------------------------- */
+
+.fluid-slate {
+  position: absolute;
+  width: 170px;
+  height: 110px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, rgba(45, 48, 64, 0.88), rgba(24, 26, 36, 0.92));
+  backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid var(--border-subtle);
+  border-top: 1px solid var(--border-specular);
+  box-shadow: var(--shadow-resting);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 14px 16px;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+  z-index: 20;
+}
+
+.fluid-slate:active {
+  cursor: grabbing;
+}
+
+/* Immediate pointerdown feedback (Apple response principle) */
+.fluid-slate.pressing {
+  box-shadow: var(--shadow-lifted);
+}
+
+.fluid-slate.dragging {
+  cursor: grabbing;
+  box-shadow: var(--shadow-lifted);
+}
+
+.fluid-slate.settling {
+  /* No CSS transitions here; analytical spring rAF solver handles the physics directly */
+}
+
+.slate-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slate-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 10px rgba(48, 209, 88, 0.6);
+}
+
+.slate-status-dot.active-drag {
+  background: var(--accent-blue);
+  box-shadow: 0 0 10px rgba(10, 132, 255, 0.8);
+}
+
+.slate-status-dot.interrupted {
+  background: var(--accent-orange);
+  box-shadow: 0 0 10px rgba(255, 159, 10, 0.8);
+}
+
+.slate-id-label {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-mono);
+}
+
+.slate-content h3 {
+  font-size: 0.94rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-headline);
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.slate-content p {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.slate-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Velocity & Projection Vector Overlay */
+.vector-line {
+  position: absolute;
+  pointer-events: none;
+  z-index: 15;
+}
+
+/* --------------------------------------------------------------------------
+   Sidebar & Inspector Controls
+   -------------------------------------------------------------------------- */
+
+.lab-sidebar {
+  border-left: 1px solid var(--border-subtle);
+  background: var(--surface-chrome);
+  backdrop-filter: blur(28px) saturate(180%);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  max-height: calc(100vh - 85px);
+}
+
+.sidebar-section {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebar-heading {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Telemetry Grid */
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.telemetry-cell {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.telemetry-label {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: var(--text-tertiary);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+}
+
+.telemetry-value {
+  font-size: 0.95rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.telemetry-value.accent-blue {
+  color: var(--accent-blue);
+}
+
+.telemetry-value.accent-orange {
+  color: var(--accent-orange);
+}
+
+.telemetry-value.accent-green {
+  color: var(--accent-green);
+}
+
+/* Guided Experiment Cards */
+.experiment-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.experiment-item {
+  width: 100%;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  padding: 12px 14px;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .experiment-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--border-specular);
+  }
+}
+
+.experiment-item.active {
+  background: rgba(10, 132, 255, 0.08);
+  border-color: rgba(10, 132, 255, 0.35);
+}
+
+.exp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.exp-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: var(--tracking-headline);
+  color: var(--text-primary);
+}
+
+.exp-badge {
+  font-size: 0.65rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-secondary);
+}
+
+.exp-instruction {
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+
+/* Parameter Tuning Sliders */
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.slider-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.slider-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+
+.slider-label {
+  color: var(--text-secondary);
+}
+
+.slider-readout {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+  transition: box-shadow 120ms ease;
+}
+
+/* Visible focus treatment for range inputs */
+input[type="range"]:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+input[type="range"]:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 3px var(--accent-blue-dim), 0 0 0 5px var(--accent-blue);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 100ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+  }
+}
+
+/* Action Button Style */
+.button-apple {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color 100ms ease, transform 80ms ease-out, border-color 100ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button-apple:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: var(--border-specular);
+  }
+}
+
+.button-apple:active {
+  transform: scale(0.97);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.button-apple:focus-visible {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* Toggle Switches */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+.toggle-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  cursor: pointer;
+  border: none;
+  padding: 2px;
+  transition: background-color 150ms ease;
+}
+
+.toggle-switch[aria-checked="true"] {
+  background: var(--accent-green);
+}
+
+.toggle-thumb {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition: transform 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toggle-switch[aria-checked="true"] .toggle-thumb {
+  transform: translateX(20px);
+}
+
+/* --------------------------------------------------------------------------
+   Accessibility & Preference Overrides
+   -------------------------------------------------------------------------- */
+
+/* Prefers Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .fluid-slate {
+    /* Non-vestibular immediate position tracking with soft opacity cross-fade */
+    will-change: auto;
+  }
+  .snap-dock-anchor {
+    transition: none !important;
+  }
+}
+
+.lab-reduced-motion .fluid-slate {
+  will-change: auto;
+}
+
+/* Prefers Reduced Transparency Fallback */
+@media (prefers-reduced-transparency: reduce) {
+  .lab-header,
+  .lab-sidebar,
+  .stage-viewport,
+  .fluid-slate {
+    backdrop-filter: none !important;
+    background: #14161f !important;
+  }
+}
+
+.lab-reduced-transparency .lab-header,
+.lab-reduced-transparency .lab-sidebar,
+.lab-reduced-transparency .stage-viewport,
+.lab-reduced-transparency .fluid-slate {
+  backdrop-filter: none !important;
+  background: #14161f !important;
+}
+
+/* Prefers Contrast Fallback */
+@media (prefers-contrast: more) {
+  :root {
+    --border-subtle: rgba(255, 255, 255, 0.35);
+    --border-specular: rgba(255, 255, 255, 0.6);
+    --text-secondary: #c7c7cc;
+  }
+  .snap-dock-anchor {
+    border-width: 2px;
+  }
+  .fluid-slate {
+    border: 2px solid #ffffff !important;
+  }
+}
+
+.lab-increased-contrast {
+  --border-subtle: rgba(255, 255, 255, 0.35);
+  --border-specular: rgba(255, 255, 255, 0.6);
+  --text-secondary: #c7c7cc;
+}
+
+.lab-increased-contrast .fluid-slate {
+  border: 2px solid #ffffff !important;
+}
