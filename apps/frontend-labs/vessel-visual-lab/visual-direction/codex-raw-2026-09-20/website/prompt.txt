@@ -1,0 +1,42 @@
+A desktop 1440px width by 900px height modern product website viewport showing exclusively the top navigation bar and hero section for "Vessel", an ephemeral local pre-flight utility for macOS. Pristine, stark optical editorial aesthetic with extreme spatial restraint and macro whitespace.
+
+Canvas and Framing:
+Desktop browser viewport 1440x900 resolution, flat straight-on 2D web layout view, no 3D device mockup, no laptop frame, no angled perspective. Pure stark off-white background (#FBFBFD).
+
+Header Navigation:
+Slim 56px fixed navigation bar at the top with a subtle translucent frosted background and a 1px bottom hairline divider (#E5E5EA). 
+Left: Minimal wordmark "Vessel" set in clean medium geometric neo-grotesque sans-serif, accompanied by a small provisional tag "v0.1-alpha" in 10px uppercase monospaced type.
+Center: Minimal text navigation links "Inspect", "Architecture", "Specs" set in 13px neutral studio grey (#86868B) regular weight.
+Right: Keycap trigger "⌘K Search" in a faint pill container, and a high-contrast compact black pill button "Download" (#0A0A0C) with crisp white text.
+
+Hero Section Layout:
+Generous 120px vertical macro-spacing below the navigation bar.
+Top Category Badge: Centered 11px uppercase monospaced capsule badge with subtle 1px border reading "LOCAL SINGLE-ASSET PREFLIGHT".
+Display Headline: Centered commanding two-line display headline in 60px geometric neo-grotesque sans-serif with tight negative tracking (-0.035em), medium weight. Line 1: "The outgoing airlock" (with the word "airlock" styled in an optical silver-to-platinum gradient mask). Line 2: "for everything you share." in solid deep black (#1D1D1F).
+Subheadline: Centered 18px neutral studio grey (#86868B) paragraph with maximum width of 520px: "Inspect hidden metadata, verify color profiles, and stage clean derivative files before transmission. Originals remain untouched on disk."
+Action Buttons: Centered dual pill cluster. Left button: solid deep obsidian (#0A0A0C) pill "Get Vessel for Mac" in crisp white text; Right button: transparent pill with 1px neutral grey hairline border (#D1D1D6) and dark text "View Technical Specs".
+
+Central Hero Interactive Workbench Demonstration:
+Positioned 48px below the CTAs, a wide elevated optical workbench preview card (1040px width, 480px height, 20px rounded corners) with a pure white surface (#FFFFFF), an inner 1px hairline border (rgba(0,0,0,0.08)), and a soft diffuse dual-stage ambient occlusion shadow.
+Inside the card is a single high-resolution technical design asset undergoing preflight inspection, split vertically down the middle by the signature "Optic Blade":
+- Left Half (Source Inspection): Displays the raw asset with unobtrusive translucent telemetry tags: "SOURCE: ORIGINAL (UNTOUCHED)", "2560 × 1600 PX", "8.4 MB", "COLOR: DISPLAY P3", and an amber badge "12 METADATA TAGS DETECTED (EXIF / GPS / DEVICE)".
+- The Optic Blade: A razor-thin 1px solid white vertical hairline dividing line with a centered 28px circular frosted glass thumb grip featuring fine precision crosshair reticles. A micro-pill attached to the blade reads "P3 ➔ sRGB".
+- Right Half (Sanitized Derivative Preview): Displays the clean, sRGB-calibrated derivative state of the asset with calm emerald telemetry badges: "DERIVATIVE PREVIEW", "1.2 MB (-85%)", "COLOR: sRGB IEC61966", "METADATA: STRIPPED".
+
+Section Continuity Handoff:
+At the very bottom 100px of the canvas, the hero transitions smoothly into the next page section. A subtle centered vertical guide line and a crisp monospaced section indicator reading "01 / DIRECT METADATA AUDIT" are clipped cleanly at the bottom edge, creating natural vertical continuity and visual invitation to scroll.
+
+Typography Character:
+Contemporary geometric neo-grotesque sans-serif typography with tight tracking, optical kerning, restricted strictly to 400 Regular and 500 Medium weights. All telemetry, dimensions, byte figures, and coordinates are set in monospaced tabular figures with slashed zeros.
+
+Palette and Materials:
+Background canvas #FBFBFD, card surface pure white #FFFFFF, text primary deep obsidian #0A0A0C, text secondary studio grey #86868B, optic reticle precision cyan #0066CC, warning flag amber #FF9500, clean verification emerald #34C759. Frosted surfaces use diffuse translucent blur with 1px inner hairline strokes.
+
+Lighting:
+Clean, even, neutral Scandinavian architectural studio lighting. No colored backlights, no ambient light pollution, pure matte paper-like clarity.
+
+Fidelity Constraints:
+Ultra-high resolution 8K vector-level interface clarity, razor-sharp typographic edges, precise 1px micro-borders, zero blur or JPEG compression artifacts, perfect geometric alignment.
+
+Explicit Negatives:
+No Apple logo glyph, no SF Pro typography claim, no SF Symbols icons, no laptop hardware, no MacBook chassis, no external monitor frames, no desk surface, no hands or fingers, no generic SaaS purple-pink mesh gradients, no card-grid anatomy, no 3D isometric tilt, no cartoon illustrations, no floating bubbles, no claims of universal PII detection, no "100% unbreakable security" marketing claims, no batch multi-file lists.

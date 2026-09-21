@@ -1,0 +1,81 @@
+{
+  "experiment": "vessel-codex-border-edit-20260920213411",
+  "executor": "Codex native image_gen reference-edit tool",
+  "calls_submitted": 2,
+  "retries": 0,
+  "post_processing": false,
+  "results": [
+    {
+      "asset": "website",
+      "source_image": {
+        "path": "/Users/mahiro/Git/me/mahirocoko/apps/frontend-labs/vessel-visual-lab/visual-direction/codex-raw-2026-09-20/website/raw.png",
+        "sha256": "630e4d5ccacfc74160a93718faf37642ffd1fd657d5233c57869d4fffe93f92e"
+      },
+      "prompt": {
+        "path": "/tmp/vessel-website-less-borders.prompt.txt",
+        "sha256": "9ad51520c510f4b93567fbc94106372565e10bc4ea80a9074ba053b7b498a80e",
+        "submitted_unchanged": true
+      },
+      "direct_reference_attachment": {
+        "used": true,
+        "tool_argument": "referenced_image_paths",
+        "attached_path": "/Users/mahiro/Git/me/mahirocoko/apps/frontend-labs/vessel-visual-lab/visual-direction/codex-raw-2026-09-20/website/raw.png"
+      },
+      "provider_provenance": {
+        "tool": "Codex native image_gen",
+        "provider_returned_directory": "/Users/mahiro/.codex/generated_images/01a0bf3c-dc8e-7350-a202-5a540e4809a6",
+        "provider_returned_path": "/Users/mahiro/.codex/generated_images/01a0bf3c-dc8e-7350-a202-5a540e4809a6/exec-38a55e86-127d-4672-a051-bab05642ed8d.png",
+        "provider_artifact_identity": "exec-38a55e86-127d-4672-a051-bab05642ed8d.png"
+      },
+      "output": {
+        "path": "/tmp/vessel-codex-border-edit-output/website/raw.png",
+        "format": "PNG",
+        "mode": "RGB",
+        "width": 1586,
+        "height": 992,
+        "byte_size": 1616869,
+        "sha256": "9900fb1742de05a68cc14ce602771d043fc5e4cbbd53fb5199d5f7135e7c5eaf",
+        "byte_identical_to_provider_artifact": true
+      },
+      "provider_limitations": [
+        "The native tool exposed no explicit output-size or pixel-mode arguments for this call and returned 1586x992 RGB PNG output; the raw result was preserved without resizing or correction."
+      ]
+    },
+    {
+      "asset": "app",
+      "source_image": {
+        "path": "/Users/mahiro/Git/me/mahirocoko/apps/frontend-labs/vessel-visual-lab/visual-direction/codex-raw-2026-09-20/app/raw.png",
+        "sha256": "3c1970b31d03d1251023f2515f9d99ebcac6c62ee612af599b8a95aed390039b"
+      },
+      "prompt": {
+        "path": "/tmp/vessel-app-less-borders.prompt.txt",
+        "sha256": "be5300278b4399bcc1e936341a2cced54982bdfa188f21051cfa3cbe94a86be7",
+        "submitted_unchanged": true
+      },
+      "direct_reference_attachment": {
+        "used": true,
+        "tool_argument": "referenced_image_paths",
+        "attached_path": "/Users/mahiro/Git/me/mahirocoko/apps/frontend-labs/vessel-visual-lab/visual-direction/codex-raw-2026-09-20/app/raw.png"
+      },
+      "provider_provenance": {
+        "tool": "Codex native image_gen",
+        "provider_returned_directory": "/Users/mahiro/.codex/generated_images/01a0bf3c-dc8e-7350-a202-5a540e4809a6",
+        "provider_returned_path": "/Users/mahiro/.codex/generated_images/01a0bf3c-dc8e-7350-a202-5a540e4809a6/exec-13636a2c-13c5-4ed3-a00b-81a922aeec55.png",
+        "provider_artifact_identity": "exec-13636a2c-13c5-4ed3-a00b-81a922aeec55.png"
+      },
+      "output": {
+        "path": "/tmp/vessel-codex-border-edit-output/app/raw.png",
+        "format": "PNG",
+        "mode": "RGB",
+        "width": 1561,
+        "height": 1008,
+        "byte_size": 1644456,
+        "sha256": "1fe68d51c9c03fae90ce9d26397754e1736367c7b0677834ec7ef7063fbf9ff1",
+        "byte_identical_to_provider_artifact": true
+      },
+      "provider_limitations": [
+        "The native tool exposed no explicit output-size or pixel-mode arguments for this call and returned 1561x1008 RGB PNG output; the raw result was preserved without resizing or correction."
+      ]
+    }
+  ]
+}

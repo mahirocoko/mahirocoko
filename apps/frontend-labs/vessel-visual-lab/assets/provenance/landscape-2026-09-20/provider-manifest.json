@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "status": "ready",
+  "recorded_at_utc": "2026-09-20T15:05:14Z",
+  "execution": {
+    "provider_tool": "official Codex native image_gen",
+    "provider_call_count": 1,
+    "retry_count": 0,
+    "prompt_submitted_unchanged": true,
+    "direct_references_attached": true,
+    "post_processed": false
+  },
+  "prompt": {
+    "path": "/tmp/vessel-landscape-production.prompt.txt",
+    "sha256": "70fceae612dff43c5bafcc7d0f0ae8fc2854ddb220b711f37a5436b7f43e643b"
+  },
+  "references": [
+    {
+      "role": "composition/art-direction reference",
+      "path": "/Users/mahiro/Git/me/mahirocoko/apps/frontend-labs/vessel-visual-lab/visual-direction/codex-less-borders-2026-09-20/website/raw.png",
+      "sha256": "9900fb1742de05a68cc14ce602771d043fc5e4cbbd53fb5199d5f7135e7c5eaf"
+    },
+    {
+      "role": "composition/art-direction reference",
+      "path": "/Users/mahiro/Git/me/mahirocoko/apps/frontend-labs/vessel-visual-lab/visual-direction/codex-less-borders-2026-09-20/app/raw.png",
+      "sha256": "1fe68d51c9c03fae90ce9d26397754e1736367c7b0677834ec7ef7063fbf9ff1"
+    }
+  ],
+  "provider_artifact": {
+    "path": "/Users/mahiro/.codex/generated_images/01a0bf57-4498-7293-b029-1edb65a07af6/exec-273e0b59-3748-46cf-b379-e33327222a17.png",
+    "identity": "exec-273e0b59-3748-46cf-b379-e33327222a17.png",
+    "output_directory_identity": "01a0bf57-4498-7293-b029-1edb65a07af6",
+    "sha256": "e5ecf24e1aea11b25a31cdb36875427d9117ef7384a96d377849c205003fa72c"
+  },
+  "output": {
+    "path": "/tmp/vessel-landscape-codex-output/raw.png",
+    "format": "PNG",
+    "mode": "RGB",
+    "has_alpha": false,
+    "width_px": 1586,
+    "height_px": 992,
+    "byte_size": 2743942,
+    "sha256": "e5ecf24e1aea11b25a31cdb36875427d9117ef7384a96d377849c205003fa72c",
+    "byte_for_byte_copy_verified": true,
+    "cmp_exit_code": 0
+  },
+  "visual_inspection": {
+    "clean_underlying_landscape_asset_only": true,
+    "ui": false,
+    "text": false,
+    "border": false,
+    "badges": false,
+    "telemetry": false,
+    "reticle": false,
+    "split_line": false
+  }
+}

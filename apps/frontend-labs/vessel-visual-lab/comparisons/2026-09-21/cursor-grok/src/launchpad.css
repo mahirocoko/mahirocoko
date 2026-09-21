@@ -1,0 +1,83 @@
+.launchpad {
+  --paper: #f3f1eb;
+  --ink: #161513;
+  --muted: #6f6b64;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 32px 20px 48px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  color-scheme: light;
+}
+
+.launchpad__inner {
+  width: min(100%, 640px);
+}
+
+.launchpad__mark {
+  display: block;
+  width: min(100%, 280px);
+  height: 72px;
+  margin-bottom: 36px;
+  object-fit: cover;
+  object-position: 50% 42%;
+  border-radius: 4px;
+}
+
+.launchpad__kicker {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.launchpad h1 {
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+  font-weight: 650;
+}
+
+.launchpad__lede {
+  margin: 20px 0 40px;
+  max-width: 36ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.launchpad nav {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.launchpad nav a {
+  color: inherit;
+  text-decoration: none;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  letter-spacing: -0.03em;
+}
+
+.launchpad nav a:hover,
+.launchpad nav a:focus-visible {
+  color: #2a6f86;
+}
+
+.launchpad nav span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92rem;
+  letter-spacing: 0;
+}
+
+.launchpad__foot {
+  margin: 48px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
