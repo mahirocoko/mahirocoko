@@ -1,0 +1,25 @@
+A pristine, ultra-detailed medium-format landscape photograph of a rugged alpine mountain range and calm reflective glacial lake, captured from an elevated rocky vantage point.
+
+Foreground:
+Natural foreground shelf of textured weathered granite boulders, fractured alpine stone, and lichen, flanked by crisp, slender evergreen conifer pine and spruce trees rising naturally along the lower borders, framing the view without obstructing the center.
+
+Midground:
+A vast, glassy alpine lake stretching horizontally across the valley, with dark, dense coniferous forest along the water's edge. The still water surface creates crisp, mirror-like reflections of the sky and mountain peaks.
+
+Background:
+An expansive, dramatic panoramic ridge of razor-sharp, jagged granite peaks and serrated alpine summits with snow dusted across upper cirques and rocky fissures, standing majestic against an open alpine sky.
+
+Atmospheric Lighting and Tonal Gradient:
+A natural, continuous horizontal lighting transition across the entire vista:
+- Left quadrant: Bathed in radiant, low-angle golden hour sunlight with rich amber, warm honey, and apricot tones illuminating the atmosphere, creating glowing golden rim light along mountain ridges, warm foliage accents, and luminous warm reflections on the left water surface.
+- Transition zone: Smooth, seamless gradation through natural warm-neutral daylight across the center of the frame.
+- Right quadrant: Crisp, cool alpine twilight and clear mountain atmosphere with serene slate-blue sky, deep navy lake water, and cool neutral slate-gray shadows across the eastern rocky crags.
+
+Composition and Technical Framing:
+- Aspect Ratio: 16:10 wide landscape format.
+- Crop Resilience: Mountain range horizon is anchored cleanly across the upper third; the main jagged peak summits remain fully intact and visually balanced whether viewed in full 16:10 widescreen or cropped inwards to narrower 4:3 and mobile vertical center crops.
+- Central Seam Clearance: The central vertical axis is deliberately unobstructed by isolated foreground tree trunks, abrupt vertical cliffs, or distracting asymmetrical focal points, maintaining a clean, legible bilateral comparison space across the water and mountain horizon.
+- Optical Quality: Professional medium-format nature photography (Phase One / Hasselblad 100MP clarity), deep depth of field (f/11) with tack-sharp edge-to-edge detail from foreground rock texture to distant mountain crags, lifelike natural dynamic range, pristine color grading without artificial halos or clipping.
+
+Strict Negative Invariants:
+Zero text, zero watermarks, zero signatures, zero logos, zero UI overlays, zero telemetry, zero badges, zero labels, zero metadata text. Zero vertical divider lines, zero Optic Blade elements, zero comparison sliders, zero reticles, zero crosshairs, zero borders, zero device frames, zero browser chrome. No people, no hikers, no man-made structures, no buildings, no roads, no boats, no celestial fantasy planets, no surreal effects, no exaggerated oversaturated HDR glow. A pure, single, unedited natural photographic landscape.

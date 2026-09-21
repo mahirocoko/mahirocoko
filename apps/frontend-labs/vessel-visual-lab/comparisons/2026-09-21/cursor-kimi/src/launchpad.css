@@ -1,0 +1,126 @@
+/* Root launchpad — restrained off-white index of the two study surfaces. */
+
+:root {
+  --paper: #fbfbfd;
+  --ink: #141416;
+  --ink-2: #55565c;
+  --ink-3: #8b8c93;
+  --hairline: rgba(20, 20, 24, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.launchpad {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.launchpad__inner {
+  width: min(660px, 100% - 48px);
+  margin: 0 auto;
+  padding: 72px 0;
+}
+
+.launchpad__mark {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.launchpad__title {
+  margin: 0 0 14px;
+  font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.launchpad__lede {
+  margin: 0 0 40px;
+  max-width: 54ch;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+}
+
+.launchpad__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--hairline);
+}
+
+.launchpad__item + .launchpad__item {
+  border-top: 1px solid var(--hairline);
+}
+
+.launchpad__link {
+  display: block;
+  padding: 22px 4px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.launchpad__link:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.launchpad__link-title {
+  display: block;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+}
+
+.launchpad__link:hover .launchpad__link-title {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.launchpad__link-desc {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 52ch;
+}
+
+.launchpad__link-meta {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.launchpad__list {
+  border-bottom: 1px solid var(--hairline);
+}
+
+.launchpad__note {
+  margin: 28px 0 0;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}

@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:," />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Vessel — Visual Direction Review</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f4f4f1;
+        color: #171715;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+        background:
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.95), transparent 34rem),
+          #f4f4f1;
+      }
+
+      button,
+      a {
+        font: inherit;
+      }
+
+      .shell {
+        width: min(100%, 78rem);
+        margin: 0 auto;
+        padding: 1.25rem 1rem 4rem;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 3.5rem;
+      }
+
+      .brand {
+        display: flex;
+        align-items: baseline;
+        gap: 0.55rem;
+        font-weight: 680;
+        letter-spacing: -0.03em;
+      }
+
+      .status {
+        color: #77776f;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .badge {
+        border: 1px solid #d6d6cf;
+        border-radius: 999px;
+        padding: 0.38rem 0.65rem;
+        color: #63635d;
+        background: rgba(255, 255, 255, 0.64);
+        font-size: 0.72rem;
+        white-space: nowrap;
+      }
+
+      .intro {
+        max-width: 45rem;
+        margin-bottom: 2rem;
+      }
+
+      h1 {
+        max-width: 11ch;
+        margin: 0;
+        font-size: clamp(2.9rem, 9vw, 6.75rem);
+        font-weight: 650;
+        letter-spacing: -0.065em;
+        line-height: 0.9;
+      }
+
+      .intro p {
+        max-width: 38rem;
+        margin: 1.5rem 0 0;
+        color: #66665f;
+        font-size: clamp(1rem, 2.4vw, 1.2rem);
+        line-height: 1.55;
+      }
+
+      .switcher {
+        position: sticky;
+        top: 0.75rem;
+        z-index: 5;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.3rem;
+        width: min(100%, 28rem);
+        margin: 0 0 1.25rem;
+        padding: 0.3rem;
+        border: 1px solid rgba(20, 20, 18, 0.1);
+        border-radius: 999px;
+        background: rgba(246, 246, 242, 0.88);
+        box-shadow: 0 0.5rem 2rem rgba(20, 20, 16, 0.08);
+        backdrop-filter: blur(18px) saturate(140%);
+      }
+
+      .switcher button {
+        min-height: 2.7rem;
+        border: 0;
+        border-radius: 999px;
+        color: #6b6b64;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .switcher button[aria-selected="true"] {
+        color: white;
+        background: #161615;
+      }
+
+      .panel[hidden] {
+        display: none;
+      }
+
+      .version-switcher {
+        display: inline-flex;
+        gap: 0.25rem;
+        margin: 0 0 0.85rem;
+        padding: 0.25rem;
+        border-radius: 999px;
+        background: rgba(22, 22, 21, 0.07);
+      }
+
+      .version-switcher button {
+        min-height: 2.25rem;
+        border: 0;
+        border-radius: 999px;
+        padding: 0 0.85rem;
+        color: #686861;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      .version-switcher button[aria-pressed="true"] {
+        color: #171715;
+        background: white;
+        box-shadow: 0 0.25rem 1rem rgba(20, 20, 16, 0.08);
+      }
+
+      .candidate[hidden] {
+        display: none;
+      }
+
+      .card {
+        overflow: hidden;
+        border: 1px solid rgba(20, 20, 18, 0.09);
+        border-radius: 1.4rem;
+        background: white;
+        box-shadow: 0 1.25rem 4rem rgba(25, 25, 20, 0.1);
+      }
+
+      .artwork {
+        display: block;
+        width: 100%;
+        height: auto;
+        background: #ecece8;
+      }
+
+      .caption {
+        display: grid;
+        gap: 0.8rem;
+        padding: 1rem;
+      }
+
+      .caption h2 {
+        margin: 0;
+        font-size: 1rem;
+        letter-spacing: -0.02em;
+      }
+
+      .caption p {
+        margin: 0;
+        color: #72726b;
+        font-size: 0.87rem;
+        line-height: 1.5;
+      }
+
+      .open-raw {
+        display: inline-flex;
+        width: fit-content;
+        min-height: 2.65rem;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #d6d6cf;
+        border-radius: 999px;
+        padding: 0 1rem;
+        color: #171715;
+        background: #fafaf8;
+        text-decoration: none;
+      }
+
+      .notes {
+        display: grid;
+        gap: 0.75rem;
+        margin-top: 1.25rem;
+        padding: 1.1rem;
+        border: 1px solid rgba(20, 20, 18, 0.09);
+        border-radius: 1rem;
+        background: rgba(255, 255, 255, 0.56);
+      }
+
+      .notes strong {
+        font-size: 0.86rem;
+      }
+
+      .notes ul {
+        margin: 0;
+        padding-left: 1.15rem;
+        color: #696962;
+        font-size: 0.84rem;
+        line-height: 1.6;
+      }
+
+      footer {
+        margin-top: 3rem;
+        color: #85857d;
+        font-size: 0.78rem;
+        line-height: 1.5;
+      }
+
+      @media (min-width: 52rem) {
+        .shell {
+          padding: 2rem 2rem 5rem;
+        }
+
+        .caption {
+          grid-template-columns: 1fr auto;
+          align-items: center;
+          padding: 1.2rem 1.3rem;
+        }
+
+        .caption p {
+          grid-column: 1;
+        }
+
+        .open-raw {
+          grid-column: 2;
+          grid-row: 1 / span 2;
+        }
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .panel {
+          animation: reveal 180ms ease-out;
+        }
+
+        @keyframes reveal {
+          from {
+            opacity: 0;
+            transform: translateY(4px);
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div class="brand">Vessel <span class="status">visual gate</span></div>
+        <span class="badge">Codex raw · 4 calls</span>
+      </header>
+
+      <section class="intro">
+        <h1>Choose the direction.</h1>
+        <p>
+          ภาพดิบสำหรับตัดสิน composition และ visual language ก่อนเขียน frontend
+          แตะ “เปิดภาพเต็ม” เพื่อ pinch-zoom บนโทรศัพท์
+        </p>
+      </section>
+
+      <div class="switcher" role="tablist" aria-label="Visual direction">
+        <button id="website-tab" type="button" role="tab" aria-controls="website-panel" aria-selected="true">
+          Website
+        </button>
+        <button id="app-tab" type="button" role="tab" aria-controls="app-panel" aria-selected="false">
+          Mac app
+        </button>
+      </div>
+
+      <section id="website-panel" class="panel" role="tabpanel" aria-labelledby="website-tab">
+        <div class="version-switcher" data-version-switcher="website" aria-label="Website version">
+          <button type="button" data-version="revised" aria-pressed="true">Less borders</button>
+          <button type="button" data-version="original" aria-pressed="false">Original</button>
+        </div>
+        <div class="candidate" data-surface="website" data-version="revised">
+          <article class="card">
+            <img
+              class="artwork"
+              src="../visual-direction/codex-less-borders-2026-09-20/website/raw.png"
+              alt="Vessel website Header and Hero with reduced border density"
+            />
+            <div class="caption">
+              <h2>Header + Hero · Less borders</h2>
+              <p>Badge และ telemetry ใช้ tint/opacity แทน outline ที่ไม่จำเป็น</p>
+              <a
+                class="open-raw"
+                href="../visual-direction/codex-less-borders-2026-09-20/website/raw.png"
+                target="_blank"
+                rel="noreferrer"
+              >เปิดภาพเต็ม ↗</a>
+            </div>
+          </article>
+        </div>
+        <div class="candidate" data-surface="website" data-version="original" hidden>
+          <article class="card">
+            <img
+              class="artwork"
+              src="../visual-direction/codex-raw-2026-09-20/website/raw.png"
+              alt="Original Vessel website Header and Hero raw visual direction"
+            />
+            <div class="caption">
+              <h2>Header + Hero · Original</h2>
+              <p>ภาพแรกก่อนลด border density</p>
+              <a
+                class="open-raw"
+                href="../visual-direction/codex-raw-2026-09-20/website/raw.png"
+                target="_blank"
+                rel="noreferrer"
+              >เปิดภาพเต็ม ↗</a>
+            </div>
+          </article>
+        </div>
+        <aside class="notes">
+          <strong>เทียบอะไรในรอบนี้</strong>
+          <ul>
+            <li>category badge, search และ telemetry เบาลงพอหรือยัง</li>
+            <li>hierarchy ยังชัดโดยไม่ต้องพึ่งเส้นกรอบหรือไม่</li>
+            <li>workbench shell และ Optic Blade ยังเป็น structural owner ชัดหรือไม่</li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="app-panel" class="panel" role="tabpanel" aria-labelledby="app-tab" hidden>
+        <div class="version-switcher" data-version-switcher="app" aria-label="Mac app version">
+          <button type="button" data-version="revised" aria-pressed="true">Less borders</button>
+          <button type="button" data-version="original" aria-pressed="false">Original</button>
+        </div>
+        <div class="candidate" data-surface="app" data-version="revised">
+          <article class="card">
+            <img
+              class="artwork"
+              src="../visual-direction/codex-less-borders-2026-09-20/app/raw.png"
+              alt="Vessel macOS app workbench with reduced border density"
+            />
+            <div class="caption">
+              <h2>Primary workbench · Less borders</h2>
+              <p>Facts, status และ secondary action ใช้ spacing/tint แทนกรอบซ้ำ</p>
+              <a
+                class="open-raw"
+                href="../visual-direction/codex-less-borders-2026-09-20/app/raw.png"
+                target="_blank"
+                rel="noreferrer"
+              >เปิดภาพเต็ม ↗</a>
+            </div>
+          </article>
+        </div>
+        <div class="candidate" data-surface="app" data-version="original" hidden>
+          <article class="card">
+            <img
+              class="artwork"
+              src="../visual-direction/codex-raw-2026-09-20/app/raw.png"
+              alt="Original Vessel macOS app workbench raw visual direction"
+            />
+            <div class="caption">
+              <h2>Primary workbench · Original</h2>
+              <p>ภาพแรกก่อนลด border density</p>
+              <a
+                class="open-raw"
+                href="../visual-direction/codex-raw-2026-09-20/app/raw.png"
+                target="_blank"
+                rel="noreferrer"
+              >เปิดภาพเต็ม ↗</a>
+            </div>
+          </article>
+        </div>
+        <aside class="notes">
+          <strong>เทียบอะไรในรอบนี้</strong>
+          <ul>
+            <li>facts group และ privacy/status labels สงบขึ้นหรือยัง</li>
+            <li>Clear Deck แบบ unboxed อ่านเป็น secondary action พอดีหรือไม่</li>
+            <li>outer window, column divider และ action bar ยังแบ่งโครงสร้างชัดหรือไม่</li>
+          </ul>
+        </aside>
+      </section>
+
+      <footer>
+        Raw visual evidence only. Microcopy และ glyph เล็กๆ ยังไม่ใช่ production contract.
+      </footer>
+    </main>
+
+    <script>
+      const tabs = [...document.querySelectorAll('[role="tab"]')]
+      const panels = [...document.querySelectorAll('[role="tabpanel"]')]
+
+      const selectTab = (tab) => {
+        tabs.forEach((candidate) => {
+          const selected = candidate === tab
+          candidate.setAttribute('aria-selected', String(selected))
+          candidate.tabIndex = selected ? 0 : -1
+        })
+
+        panels.forEach((panel) => {
+          panel.hidden = panel.id !== tab.getAttribute('aria-controls')
+        })
+      }
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => selectTab(tab))
+        tab.addEventListener('keydown', (event) => {
+          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return
+          event.preventDefault()
+          const next = event.key === 'ArrowRight' ? (index + 1) % tabs.length : (index - 1 + tabs.length) % tabs.length
+          tabs[next].focus()
+          selectTab(tabs[next])
+        })
+      })
+
+      document.querySelectorAll('[data-version-switcher]').forEach((switcher) => {
+        const surface = switcher.dataset.versionSwitcher
+        const buttons = [...switcher.querySelectorAll('button')]
+        const candidates = [...document.querySelectorAll(`[data-surface="${surface}"]`)]
+
+        buttons.forEach((button) => {
+          button.addEventListener('click', () => {
+            buttons.forEach((candidate) => {
+              candidate.setAttribute('aria-pressed', String(candidate === button))
+            })
+
+            candidates.forEach((candidate) => {
+              candidate.hidden = candidate.dataset.version !== button.dataset.version
+            })
+          })
+        })
+      })
+    </script>
+  </body>
+</html>

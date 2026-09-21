@@ -1,0 +1,54 @@
+A primary macOS application workbench window composition for "Vessel", a local single-asset pre-flight airlock utility. A compact, floating precision instrument interface presenting an inspection workbench for a single image or PDF document. Clean, focused desktop product UI concept set against a deep neutral slate studio background.
+
+Canvas and Framing:
+Single compact macOS utility window (680px width by 440px height aspect ratio) centered horizontally and vertically on a neutral dark slate desktop surface (#121214). Straight-on 2D UI presentation, perfectly orthographic with no 3D tilt, no angled perspective, and no surrounding monitor bezel.
+
+Window Chrome and Topology:
+A floating HUD window with an 18px corner radius, built from a deep ebonite glass substrate (#16161A) featuring a subtle 1px inner perimeter highlight stroke (rgba(255, 255, 255, 0.12)) and casting a deep, soft ambient occlusion drop shadow (rgba(0, 0, 0, 0.45)).
+Top Title Bar (40px height):
+Left: Three authentic circular window controls (12px diameter) in muted graphite and charcoal tones (close dot active, minimize/zoom inactive).
+Center: Window title "Vessel — Preflight" in 12px medium geometric sans-serif (#E5E5EA), followed by a subtle monospaced badge "LOCAL ONLY".
+Right: Shortcut hint "⌥V to dismiss" in 11px muted grey (#71717A).
+
+Two-Column Workbench Layout:
+The main window body is divided into a structured telemetry sidebar on the left and an optical inspection canvas on the right.
+
+Left Column: Metadata X-Ray & Derivative Recipe (240px width, bordered on right by a 1px vertical divider rgba(255,255,255,0.08)):
+- Section 1: "SOURCE ASSET (READ-ONLY)" in 10px uppercase monospaced type (#A1A1AA).
+  - File identifier: "screenshot_export_p3.png" in 12px medium sans (#F4F4F5).
+  - Telemetry readouts in 11px monospaced tabular figures: "Dimensions: 2880 × 1800 px", "File Size: 8.4 MB", "Color Space: Display P3".
+  - Inspectable facts box: Subtle dark container listing detected metadata: "EXIF Geotag: 37.7749° N, 122.4194° W", "Device: Mac Studio", "Software: Screen Export". An amber pill indicator (#FF9F0A) highlights "3 Privacy Tags".
+- Section 2: "DERIVATIVE RECIPE" in 10px uppercase monospaced type (#A1A1AA).
+  - Interactive squircle checklist with user-selected transformation steps:
+    [✓] "Strip EXIF & Location Tags" (selected)
+    [✓] "Convert Gamut to sRGB" (selected)
+    [✓] "Lossless Re-encode (Oxipng)" (selected)
+  - Explicit guarantee notice in 10px muted grey (#71717A): "Original source file remains untouched on disk."
+
+Right Column: Optical Inspection Canvas & The Optic Blade (440px width):
+- Central staging area holding the preview of the loaded asset.
+- Signature Optic Blade: A razor-thin 1px solid white vertical hairline dividing line placed at 55% horizontal position across the preview.
+  - Center Reticle: A 28px circular frosted glass thumb grip centered on the blade line, featuring finely etched precision optical crosshairs.
+  - Top Blade Tag: Floating micro-capsule in monospaced type reading "1.0× OPTIC BLADE".
+  - Left Canvas Side (Source): Shows the raw unadjusted asset with a subtle amber badge "Display P3 (Wide Gamut)".
+  - Right Canvas Side (Derivative): Shows the sRGB-calibrated derivative with a subtle emerald badge "sRGB IEC61966-2.1".
+  - Bottom Canvas Telemetry Strip: A floating dark glass pill displaying live comparison metrics: "Derivative: 1.1 MB (Saved 87%) • 0 Metadata Tags".
+
+Bottom Action Bar (52px height, spans full window width with top 1px hairline border):
+- Left: Subtle ghost button "Clear Deck (Esc)" in 12px muted text (#A1A1AA).
+- Right: High-contrast solid pill action button (#F5F5F7 fill, #0A0A0C text) with clear directional arrow: "Drag Derivative to Destination ➔".
+
+Typography Character:
+Refined neo-grotesque sans-serif typography strictly using 400 Regular and 500 Medium weights for labels and buttons. All telemetry, dimensions, byte sizes, GPS coordinates, and file paths are set in monospaced tabular figures with slashed zeros.
+
+Palette and Materials:
+Deep ebonite background #16161A, telemetry panel #111114, canvas backing #0A0A0C, primary text #F5F5F7, secondary text #A1A1AA, muted telemetry #71717A, precision cyan reticle #2997FF, warning amber #FF9F0A, calibrated clean emerald #30D158. Frosted glass components utilize subtle backdrop blur with 1px inner hairline borders.
+
+Lighting:
+Dark-mode ambient self-luminance. Soft, even lighting across the window surface with crisp edge highlights along the 1px inner borders. Deep realistic drop shadow beneath the floating window.
+
+Fidelity Constraints:
+Pixel-perfect native macOS application interface fidelity. Razor-sharp 1px vector lines, clean monospaced data alignment, zero distortion, zero blur artifacts, crisp typography rendering.
+
+Explicit Negatives:
+No Apple logo glyph, no copyrighted SF Symbols, no SF Pro typography claim, no generic bright SaaS gradients, no claims of universal PII detection, no "100% safe" or "ironclad guarantee" badges, no multi-file batch queues, no destructive overwrite buttons, no browser URL bar or web chrome, no mobile frame, no skewed 3D perspective.

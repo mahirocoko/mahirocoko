@@ -1,0 +1,49 @@
+{
+  "experiment": "vessel-codex-imagegen-20260920183416",
+  "provider": "Codex native image_gen built-in tool",
+  "status": "complete",
+  "provider_call_count": 2,
+  "calls": [
+    {
+      "call_order": 1,
+      "asset": "website-header-hero",
+      "status": "terminal_success_persisted",
+      "prompt_path": "/tmp/vessel-website-header-hero.prompt.txt",
+      "prompt_sha256": "6e5d7da13cbbca1cc3726d44545e7e4bc71b81158cd53772cc65bc9e981a69dd",
+      "provider_returned_source_path": "/Users/mahiro/.codex/generated_images/01a0be97-9f4f-7f50-9089-0a96d661fa7d/exec-060b7121-fb9a-4617-b6a0-57678a2c4d96.png",
+      "provider_output_identity": {
+        "directory_identity": "01a0be97-9f4f-7f50-9089-0a96d661fa7d",
+        "file_identity": "exec-060b7121-fb9a-4617-b6a0-57678a2c4d96.png"
+      },
+      "provider_output_hint": "Generated images are saved to /Users/mahiro/.codex/generated_images/01a0be97-9f4f-7f50-9089-0a96d661fa7d as /Users/mahiro/.codex/generated_images/01a0be97-9f4f-7f50-9089-0a96d661fa7d/exec-060b7121-fb9a-4617-b6a0-57678a2c4d96.png by default.",
+      "persisted_path": "/tmp/vessel-codex-imagegen-output/website/raw.png",
+      "output_sha256": "630e4d5ccacfc74160a93718faf37642ffd1fd657d5233c57869d4fffe93f92e",
+      "width": 1586,
+      "height": 992,
+      "mode": "RGB",
+      "format": "PNG",
+      "bytes": 1557583
+    },
+    {
+      "call_order": 2,
+      "asset": "app-main-window",
+      "status": "terminal_success_persisted",
+      "prompt_path": "/tmp/vessel-app-main-window.prompt.txt",
+      "prompt_sha256": "4e1b851904ba27a0dd27a275da684fa735095dd09f492c4d49bec7464bec274a",
+      "provider_returned_source_path": "/Users/mahiro/.codex/generated_images/01a0be97-9f4f-7f50-9089-0a96d661fa7d/exec-e0994137-7c1a-4d20-885f-9b7adba9c369.png",
+      "provider_output_identity": {
+        "directory_identity": "01a0be97-9f4f-7f50-9089-0a96d661fa7d",
+        "file_identity": "exec-e0994137-7c1a-4d20-885f-9b7adba9c369.png"
+      },
+      "provider_output_hint": "Generated images are saved to /Users/mahiro/.codex/generated_images/01a0be97-9f4f-7f50-9089-0a96d661fa7d as /Users/mahiro/.codex/generated_images/01a0be97-9f4f-7f50-9089-0a96d661fa7d/exec-e0994137-7c1a-4d20-885f-9b7adba9c369.png by default.",
+      "persisted_path": "/tmp/vessel-codex-imagegen-output/app/raw.png",
+      "output_sha256": "3c1970b31d03d1251023f2515f9d99ebcac6c62ee612af599b8a95aed390039b",
+      "width": 1560,
+      "height": 1008,
+      "mode": "RGBA",
+      "format": "PNG",
+      "bytes": 1876647
+    }
+  ],
+  "provider_limitation": "The native tool returned each image inline plus an output_hint containing the exact saved path. It did not expose separate receipt, session, or result identifier fields; the provider-returned directory and filename identities are retained verbatim above."
+}

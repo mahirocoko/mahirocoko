@@ -15,6 +15,7 @@ Each lab owns its runtime, package manager files, assets, tests, and product-spe
 | [`chiang-mai-journal`](./chiang-mai-journal/) | Thai-first contemporary Chiang Mai culture journal, working brand `รอยเมือง` | Completed Home + Chapter 01 first slice |
 | [`nudge-gallery`](./nudge-gallery/) | Original interaction-study gallery with accessible previews and reduced-motion fallback | Initial working slice |
 | [`resonant-atlas`](./resonant-atlas/) | Original browser instrument coordinating DOM, Three.js, GSAP, Lenis, and opt-in Web Audio | Review candidate |
+| [`vessel-visual-lab`](./vessel-visual-lab/) | Provisional local single-asset image/PDF preflight utility with responsive website and interactive macOS workbench studies | Working lab |
 | [`whisperfield`](./whisperfield/) | VoiceOS anatomy study rebuilt with a fictional voice workflow, original copy, and authored assets | Review candidate |
 
 ## Current lab — Chiang Mai culture journal

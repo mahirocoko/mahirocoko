@@ -1,0 +1,33 @@
+Direct Reference Image: /Users/mahiro/Git/me/mahirocoko/apps/frontend-labs/vessel-visual-lab/visual-direction/codex-raw-2026-09-20/app/raw.png
+
+Perform a precise paint and material correction directly modifying the reference image. This is a border-density reduction pass to achieve Apple-like surface calmness; it is not a redesign. Maintain strict direct-reference fidelity to the input image.
+
+Protected Invariants (Strictly Frozen):
+- Canvas & Framing: Single compact macOS utility window (680px by 440px) centered orthographically on neutral dark slate studio background (#121214). Zero 3D tilt, no angled perspective, no monitor bezel.
+- Window Architecture & Chrome: Floating HUD window with 18px corner radius, deep ebonite glass substrate (#16161A), subtle 1px perimeter highlight stroke (rgba(255, 255, 255, 0.12)), deep ambient drop shadow, and three authentic circular window controls (close active, minimize/zoom inactive).
+- Layout Topology: Structured two-column workbench (240px telemetry sidebar left, 440px optical inspection canvas right) and 52px bottom action bar.
+- Exact Verbatim Copy: "Vessel — Preflight", "LOCAL ONLY", "⌥V to dismiss", "SOURCE ASSET (READ-ONLY)", "screenshot_export_p3.png", "Dimensions: 2880 × 1800 px", "File Size: 8.4 MB", "Color Space: Display P3", "EXIF Geotag: 37.7749° N, 122.4194° W", "Device: Mac Studio", "Software: Screen Export", "3 Privacy Tags", "DERIVATIVE RECIPE", "[✓] Strip EXIF & Location Tags", "[✓] Convert Gamut to sRGB", "[✓] Lossless Re-encode (Oxipng)", "Original source file remains untouched on disk.", "Display P3 (Wide Gamut)", "1.0× OPTIC BLADE", "sRGB IEC61966-2.1", "Derivative: 1.1 MB (Saved 87%) • 0 Metadata Tags", "Clear Deck (Esc)", "Drag Derivative to Destination ➔".
+- Typography Character: Neo-grotesque sans-serif strictly in 400 Regular and 500 Medium weights. All telemetry, dimensions, byte sizes, GPS coordinates, and file paths in monospaced tabular figures with slashed zeros.
+- Core Image Asset & Blade: Sunset mountain range and lake reflection inspection asset, 1px vertical Optic Blade hairline placed at 55% horizontal position, center 28px frosted circular thumb grip with precision cyan crosshair reticle.
+- Primary Action Button: Solid high-contrast pill action button (#F5F5F7 fill, #0A0A0C text) "Drag Derivative to Destination ➔" with rightward arrow.
+- Checklist Controls: Interactive squircle checkboxes with solid blue fill and crisp white checkmarks.
+
+Border Reductions & Surface Material Corrections:
+1. Title Bar Badge: Remove the 1px outline stroke from "LOCAL ONLY". Render as an unboxed monospaced tag or borderless soft translucent pill (rgba(255, 255, 255, 0.06) fill, zero stroke).
+2. Metadata Facts Container: Remove the 1px perimeter outline box around the inspectable facts block (EXIF Geotag, Device, Software). Group the facts purely through spacing or a borderless subtle tonal surface (#141418 fill without border stroke).
+3. Sidebar Privacy Badge: Remove the bright amber outline stroke from "3 Privacy Tags". Render as a borderless soft translucent amber wash pill (rgba(255, 159, 10, 0.16) fill with amber text, zero stroke).
+4. Canvas Source Badge: Remove the 1px amber border stroke from "Display P3 (Wide Gamut)". Render as a borderless dark translucent pill with subtle amber tint fill and amber text (zero outline stroke).
+5. Optic Blade Micro-Capsule: Remove the outline stroke from "1.0× OPTIC BLADE". Render as a borderless dark frosted glass micro-capsule.
+6. Canvas Derivative Badge: Remove the 1px emerald border stroke from "sRGB IEC61966-2.1". Render as a borderless dark translucent pill with subtle emerald tint fill and emerald text (zero outline stroke).
+7. Bottom Canvas Floating Telemetry Strip: Remove the 1px outline border stroke from "Derivative: 1.1 MB (Saved 87%) • 0 Metadata Tags". Render as a borderless dark frosted glass pill (rgba(16, 16, 20, 0.75) with backdrop blur and soft shadow, zero stroke).
+8. Secondary Action Button: Remove the rounded-rectangle outline stroke from "Clear Deck (Esc)". Render as an unboxed ghost button (plain muted text #A1A1AA, zero perimeter stroke).
+
+Structural Boundaries Retained:
+- Retain the 1px outer perimeter highlight stroke (rgba(255, 255, 255, 0.12)) and soft ambient shadow of the floating macOS window.
+- Retain the 1px vertical column divider (rgba(255, 255, 255, 0.08)) between the sidebar and inspection canvas.
+- Retain the 1px horizontal hairline divider above the bottom action bar.
+- Retain the razor-thin 1px vertical Optic Blade hairline.
+- Retain the squircle checkbox boundaries in the recipe checklist.
+
+Explicit Negatives:
+Forbid changing layout geometry, 2-column structure, copy, typography, color palette, or mountain lake preview image. Forbid modifying the primary CTA pill button or window title controls. Forbid adding new borders, container boxes, outlines, or decorative gradients. Forbid any 3D tilt, skewed perspective, or hardware chassis.

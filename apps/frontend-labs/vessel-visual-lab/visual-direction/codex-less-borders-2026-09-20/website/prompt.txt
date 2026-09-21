@@ -1,0 +1,29 @@
+Direct Reference Image: /Users/mahiro/Git/me/mahirocoko/apps/frontend-labs/vessel-visual-lab/visual-direction/codex-raw-2026-09-20/website/raw.png
+
+Perform a precise paint and material correction directly modifying the reference image. This is a border-density reduction pass to achieve Apple-like surface calmness; it is not a redesign. Maintain strict direct-reference fidelity to the input image.
+
+Protected Invariants (Strictly Frozen):
+- Canvas & Framing: Flat straight-on 2D desktop browser viewport at 1440x900 resolution. Stark off-white background (#FBFBFD). No 3D device mockup, no hardware frame, no perspective tilt.
+- Composition & Geometry: 56px fixed navigation bar, 120px macro-space hero, centered headline and paragraph, dual pill button cluster, 1040x480px elevated preview card with 20px rounded corners, and bottom section continuity handoff ("01 / DIRECT METADATA AUDIT").
+- Exact Verbatim Copy: "Vessel", "v0.1-ALPHA", "Inspect", "Architecture", "Specs", "⌘K Search", "Download", "LOCAL SINGLE-ASSET PREFLIGHT", "The outgoing airlock for everything you share.", "Inspect hidden metadata, verify color profiles, and stage clean derivative files before transmission. Originals remain untouched on disk.", "Get Vessel for Mac", "View Technical Specs", "SOURCE: ORIGINAL (UNTOUCHED)", "2560 × 1600 PX", "8.4 MB", "COLOR: DISPLAY P3", "12 METADATA TAGS DETECTED (EXIF / GPS / DEVICE)", "P3 ➔ sRGB", "DERIVATIVE PREVIEW", "1.2 MB (-85%)", "COLOR: sRGB IEC61966", "METADATA: STRIPPED", "01 / DIRECT METADATA AUDIT".
+- Typography Character: Geometric neo-grotesque sans-serif with tight negative tracking (-0.035em), restricted strictly to 400 Regular and 500 Medium weights. All telemetry, dimensions, byte figures, and coordinates set in monospaced tabular figures with slashed zeros.
+- Core Image Asset: The high-resolution mountain range and lake reflection technical asset undergoing inspection must remain identical in content, lighting, color, and vertical split alignment.
+- The Optic Blade: Razor-thin 1px vertical hairline dividing line, centered 28px circular frosted glass thumb grip with precision crosshair reticle.
+- Primary Action & Colors: Solid deep obsidian (#0A0A0C) "Download" and "Get Vessel for Mac" pill buttons. Color roles for text, warning amber, and verification emerald remain identical.
+
+Border Reductions & Surface Material Corrections:
+1. Category Badge: Remove the 1px outline stroke around "LOCAL SINGLE-ASSET PREFLIGHT". Render as an unboxed monospaced capsule or borderless soft neutral tint (zero outline rim stroke).
+2. Left Telemetry Badges ("SOURCE: ORIGINAL (UNTOUCHED)", "2560 × 1600 PX", "8.4 MB", "COLOR: DISPLAY P3"): Remove all 1px hairline outline border strokes. Render as borderless dark translucent frosted pills (soft dark fill with backdrop blur, zero stroke).
+3. Left Warning Badge ("12 METADATA TAGS DETECTED (EXIF / GPS / DEVICE)"): Remove the bright 1px amber border stroke. Render as a borderless soft translucent amber wash pill (rgba(255, 149, 0, 0.16)) with crisp amber text and zero outline stroke.
+4. Optic Blade Badge ("P3 ➔ sRGB"): Remove the hairline border stroke around the micro-pill. Render as a borderless frosted translucent glass micro-capsule.
+5. Right Telemetry Badges ("DERIVATIVE PREVIEW", "1.2 MB (-85%)", "COLOR: sRGB IEC61966", "METADATA: STRIPPED"): Remove all 1px emerald outline border strokes. Render as borderless calm emerald/mint translucent tinted pills (rgba(52, 199, 89, 0.14)) with crisp emerald text and zero stroke.
+6. Search Pill: Remove any visible hairline stroke on "⌘K Search"; render as a quiet borderless tinted container.
+
+Structural Boundaries Retained:
+- Retain the 1px hairline bottom divider (#E5E5EA) on the top navigation bar.
+- Retain the 1040x480 workbench preview card's outer perimeter hairline (rgba(0,0,0,0.08)) and soft ambient occlusion drop shadow.
+- Retain the 1px neutral hairline stroke on the secondary button control "View Technical Specs".
+- Retain the 1px vertical hairline of the Optic Blade.
+
+Explicit Negatives:
+Forbid changing layout, spacing, hierarchy, typography, copy, colors, or mountain lake asset. Forbid adding or removing features, buttons, or metadata. Forbid introducing card borders, drop shadows on badges, gradients, or 3D mockups.
