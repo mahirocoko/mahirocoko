@@ -1,0 +1,24 @@
+# Model weights and downloaded assets
+*.safetensors
+*.bin
+*.pt
+model-pinned/
+model-cache/
+
+# Environments and packages
+.venv/
+venv/
+env/
+*.egg-info/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Benchmark generated outputs (keep fixtures and docs tracked)
+reports/
+*.report.json
+*.report.md
+temp_*

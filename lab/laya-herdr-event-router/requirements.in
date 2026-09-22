@@ -1,0 +1,6 @@
+# Approved dependency floor for shadow-only Laya router lab
+# Main will copy/regenerate the audited hash lock (do not invent a lock here)
+laya==0.3.5
+transformers==5.17.0
+torch==2.14.0
+setuptools==84.0.0
