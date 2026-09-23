@@ -1,0 +1,212 @@
+[
+  {
+    "id": "doc_contract_check_consistency",
+    "path": "lab/laya-herdr-event-router/router/contract.py",
+    "symbol": "check_consistency",
+    "symbol_type": "function",
+    "description": "Validates cross-answer consistency rules for router decisions without rewriting model output."
+  },
+  {
+    "id": "doc_contract_decision_to_dict",
+    "path": "lab/laya-herdr-event-router/router/contract.py",
+    "symbol": "Decision.to_dict",
+    "symbol_type": "method",
+    "description": "Serializes Decision dataclass to a dictionary representation."
+  },
+  {
+    "id": "doc_baseline_classify",
+    "path": "lab/laya-herdr-event-router/router/baseline.py",
+    "symbol": "RuleBasedRouter.classify",
+    "symbol_type": "method",
+    "description": "Deterministic rule-based event router classifying messages using regular expressions."
+  },
+  {
+    "id": "doc_manifest_sha256",
+    "path": "lab/laya-herdr-event-router/router/manifest.py",
+    "symbol": "compute_sha256",
+    "symbol_type": "function",
+    "description": "Computes SHA-256 hex digest of a file in 64KB chunk blocks."
+  },
+  {
+    "id": "doc_manifest_verify",
+    "path": "lab/laya-herdr-event-router/router/manifest.py",
+    "symbol": "verify_manifest",
+    "symbol_type": "function",
+    "description": "Verifies local model directory against strict manifest and safetensors policies."
+  },
+  {
+    "id": "doc_metrics_per_class",
+    "path": "lab/laya-herdr-event-router/router/metrics.py",
+    "symbol": "calculate_per_class_metrics",
+    "symbol_type": "function",
+    "description": "Calculates precision recall and F1 metrics for classification labels."
+  },
+  {
+    "id": "doc_metrics_confusion_matrix",
+    "path": "lab/laya-herdr-event-router/router/metrics.py",
+    "symbol": "build_confusion_matrix",
+    "symbol_type": "function",
+    "description": "Builds a multi-class confusion matrix from actuals and predictions."
+  },
+  {
+    "id": "doc_metrics_compute_p95",
+    "path": "lab/laya-herdr-event-router/router/metrics.py",
+    "symbol": "compute_p95",
+    "symbol_type": "function",
+    "description": "Calculates the 95th percentile latency from an array of sample latencies."
+  },
+  {
+    "id": "doc_metrics_multiclass_brier",
+    "path": "lab/laya-herdr-event-router/router/metrics.py",
+    "symbol": "compute_multiclass_brier",
+    "symbol_type": "function",
+    "description": "Calculates multiclass Brier score measuring probabilistic forecast accuracy."
+  },
+  {
+    "id": "doc_metrics_binary_brier",
+    "path": "lab/laya-herdr-event-router/router/metrics.py",
+    "symbol": "compute_binary_brier",
+    "symbol_type": "function",
+    "description": "Calculates binary Brier score for two-class probability calibration."
+  },
+  {
+    "id": "doc_metrics_compute_ece",
+    "path": "lab/laya-herdr-event-router/router/metrics.py",
+    "symbol": "compute_ece",
+    "symbol_type": "function",
+    "description": "Computes Expected Calibration Error with equal-width confidence bins."
+  },
+  {
+    "id": "doc_metrics_check_probs",
+    "path": "lab/laya-herdr-event-router/router/metrics.py",
+    "symbol": "check_probabilities_available",
+    "symbol_type": "function",
+    "description": "Verifies that decisions contain complete probability distributions across question schemas."
+  },
+  {
+    "id": "doc_metrics_evaluate_run",
+    "path": "lab/laya-herdr-event-router/router/metrics.py",
+    "symbol": "evaluate_run",
+    "symbol_type": "function",
+    "description": "Aggregates comprehensive evaluation results including accuracy, Brier, and ECE."
+  },
+  {
+    "id": "doc_laya_val_prob_map",
+    "path": "lab/laya-herdr-event-router/router/laya_engine.py",
+    "symbol": "_validate_probability_map",
+    "symbol_type": "function",
+    "description": "Validates that a probability map contains finite floats summing to approximately 1.0."
+  },
+  {
+    "id": "doc_laya_val_selected_argmax",
+    "path": "lab/laya-herdr-event-router/router/laya_engine.py",
+    "symbol": "_validate_selected_argmax",
+    "symbol_type": "function",
+    "description": "Rejects selected answer choice if it disagrees with highest probability label."
+  },
+  {
+    "id": "doc_laya_verify_offline",
+    "path": "lab/laya-herdr-event-router/router/laya_engine.py",
+    "symbol": "verify_offline_environment",
+    "symbol_type": "function",
+    "description": "Verifies offline runtime isolation flags and checks that user site and tokens are disabled."
+  },
+  {
+    "id": "doc_laya_parse_output",
+    "path": "lab/laya-herdr-event-router/router/laya_engine.py",
+    "symbol": "parse_laya_output",
+    "symbol_type": "function",
+    "description": "Parses and strictly validates raw model dictionary into a normalized Decision object."
+  },
+  {
+    "id": "doc_laya_engine_init",
+    "path": "lab/laya-herdr-event-router/router/laya_engine.py",
+    "symbol": "LayaRouterEngine.__init__",
+    "symbol_type": "method",
+    "description": "Initializes LayaRouterEngine ensuring offline isolation and snapshot verification."
+  },
+  {
+    "id": "doc_laya_engine_set_offline",
+    "path": "lab/laya-herdr-event-router/router/laya_engine.py",
+    "symbol": "LayaRouterEngine._set_offline_environment",
+    "symbol_type": "method",
+    "description": "Sets offline environment variables and strips Hugging Face token variables."
+  },
+  {
+    "id": "doc_laya_engine_load_agent",
+    "path": "lab/laya-herdr-event-router/router/laya_engine.py",
+    "symbol": "LayaRouterEngine._load_agent",
+    "symbol_type": "method",
+    "description": "Loads Laya model and tokenizer from local weights directory."
+  },
+  {
+    "id": "doc_laya_engine_verify_snapshot",
+    "path": "lab/laya-herdr-event-router/router/laya_engine.py",
+    "symbol": "LayaRouterEngine._verify_model_snapshot",
+    "symbol_type": "method",
+    "description": "Executes manifest verification on the model directory before model load."
+  },
+  {
+    "id": "doc_laya_engine_classify",
+    "path": "lab/laya-herdr-event-router/router/laya_engine.py",
+    "symbol": "LayaRouterEngine.classify",
+    "symbol_type": "method",
+    "description": "Classifies event text through the neural network and returns validated Decision."
+  },
+  {
+    "id": "doc_bench_load_fixtures",
+    "path": "lab/laya-herdr-event-router/benchmark.py",
+    "symbol": "load_fixtures",
+    "symbol_type": "function",
+    "description": "Loads and parses JSONL benchmark test fixture records from disk."
+  },
+  {
+    "id": "doc_bench_get_package_versions",
+    "path": "lab/laya-herdr-event-router/benchmark.py",
+    "symbol": "get_package_versions",
+    "symbol_type": "function",
+    "description": "Safely inspects installed package versions via importlib metadata."
+  },
+  {
+    "id": "doc_bench_atomic_write",
+    "path": "lab/laya-herdr-event-router/benchmark.py",
+    "symbol": "atomic_write",
+    "symbol_type": "function",
+    "description": "Writes string content to target path atomically using a temporary file and atomic replace."
+  },
+  {
+    "id": "doc_bench_build_source_hashes",
+    "path": "lab/laya-herdr-event-router/benchmark.py",
+    "symbol": "build_source_hashes",
+    "symbol_type": "function",
+    "description": "Hashes executable benchmark source files for benchmark provenance tracking."
+  },
+  {
+    "id": "doc_bench_needs_laya_engine",
+    "path": "lab/laya-herdr-event-router/benchmark.py",
+    "symbol": "needs_laya_engine",
+    "symbol_type": "function",
+    "description": "Inspects command-line arguments to determine if the neural model engine is requested."
+  },
+  {
+    "id": "doc_bench_check_laya_env_ready",
+    "path": "lab/laya-herdr-event-router/benchmark.py",
+    "symbol": "check_laya_env_ready",
+    "symbol_type": "function",
+    "description": "Checks whether user site is disabled and offline environment variables are present."
+  },
+  {
+    "id": "doc_bench_bootstrap_laya_env",
+    "path": "lab/laya-herdr-event-router/benchmark.py",
+    "symbol": "bootstrap_laya_environment",
+    "symbol_type": "function",
+    "description": "Performs self-reexecution with python -s and offline variables when required."
+  },
+  {
+    "id": "doc_bench_gen_markdown_report",
+    "path": "lab/laya-herdr-event-router/benchmark.py",
+    "symbol": "generate_markdown_report",
+    "symbol_type": "function",
+    "description": "Renders benchmark execution results into a formatted GitHub markdown report."
+  }
+]
