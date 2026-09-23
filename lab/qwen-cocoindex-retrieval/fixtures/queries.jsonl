@@ -1,0 +1,38 @@
+{"id": "q_en_01", "category": "english_semantic", "query": "measure expected calibration error by grouping probability predictions into equal width bins", "relevant_doc_ids": ["doc_metrics_compute_ece"]}
+{"id": "q_en_02", "category": "english_semantic", "query": "verify cross field consistency between event classifications wake triggers and dispatcher actions", "relevant_doc_ids": ["doc_contract_check_consistency"]}
+{"id": "q_en_03", "category": "english_semantic", "query": "safely write string content to disk using a temporary file to avoid partial writes", "relevant_doc_ids": ["doc_bench_atomic_write"]}
+{"id": "q_en_04", "category": "english_semantic", "query": "calculate precision recall and f1 score for individual decision classes", "relevant_doc_ids": ["doc_metrics_per_class"]}
+{"id": "q_en_05", "category": "english_semantic", "query": "calculate the 95th percentile latency from an array of measured elapsed times", "relevant_doc_ids": ["doc_metrics_compute_p95"]}
+{"id": "q_en_06", "category": "english_semantic", "query": "serialize the frozen router outcome record into a plain key-value mapping structure", "relevant_doc_ids": ["doc_contract_decision_to_dict"]}
+{"id": "q_th_01", "category": "thai_semantic", "query": "ตรวจสอบความสอดคล้องของการตัดสินใจเพื่อไม่ให้เกิดการส่งสัญญาณปลุกที่ขัดแย้งกับแอ็กชัน", "relevant_doc_ids": ["doc_contract_check_consistency"]}
+{"id": "q_th_02", "category": "thai_semantic", "query": "คำนวณค่าแฮช SHA-256 ของไฟล์โดยอ่านข้อมูลทีละบล็อกขนาด 64KB", "relevant_doc_ids": ["doc_manifest_sha256"]}
+{"id": "q_th_03", "category": "thai_semantic", "query": "วัดความแม่นยำของการสอบเทียบความน่าจะเป็นของโมเดลด้วยการจัดกลุ่มตามช่วงความเชื่อมั่น", "relevant_doc_ids": ["doc_metrics_compute_ece"]}
+{"id": "q_th_04", "category": "thai_semantic", "query": "โหลดและแยกวิเคราะห์ชุดข้อมูลทดสอบแบบ JSONL จากดิสก์พร้อมตรวจสอบความถูกต้องทีละบรรทัด", "relevant_doc_ids": ["doc_bench_load_fixtures"]}
+{"id": "q_th_05", "category": "thai_semantic", "query": "บันทึกไฟล์รายงานลงดิสก์อย่างปลอดภัยโดยใช้ไฟล์ชั่วคราวก่อนสลับชื่อเพื่อป้องกันไฟล์เสียหาย", "relevant_doc_ids": ["doc_bench_atomic_write"]}
+{"id": "q_th_06", "category": "thai_semantic", "query": "แปลงข้อมูลผลลัพธ์ดิบที่ได้จากโมเดลให้เป็นโครงสร้างการตัดสินใจพร้อมตรวจสอบอย่างเข้มงวด", "relevant_doc_ids": ["doc_laya_parse_output"]}
+{"id": "q_id_01", "category": "exact_identifier", "query": "verify_manifest", "relevant_doc_ids": ["doc_manifest_verify"]}
+{"id": "q_id_02", "category": "exact_identifier", "query": "RuleBasedRouter.classify", "relevant_doc_ids": ["doc_baseline_classify"]}
+{"id": "q_id_03", "category": "exact_identifier", "query": "compute_binary_brier", "relevant_doc_ids": ["doc_metrics_binary_brier"]}
+{"id": "q_id_04", "category": "exact_identifier", "query": "build_confusion_matrix", "relevant_doc_ids": ["doc_metrics_confusion_matrix"]}
+{"id": "q_id_05", "category": "exact_identifier", "query": "bootstrap_laya_environment", "relevant_doc_ids": ["doc_bench_bootstrap_laya_env"]}
+{"id": "q_id_06", "category": "exact_identifier", "query": "check_probabilities_available", "relevant_doc_ids": ["doc_metrics_check_probs"]}
+{"id": "q_bp_01", "category": "behavior_paraphrase", "query": "ensure probability map values are finite floats between zero and one that sum to unit value", "relevant_doc_ids": ["doc_laya_val_prob_map"]}
+{"id": "q_bp_02", "category": "behavior_paraphrase", "query": "reject the selected classification label when its probability is less than the maximum probability score", "relevant_doc_ids": ["doc_laya_val_selected_argmax"]}
+{"id": "q_bp_03", "category": "behavior_paraphrase", "query": "compute cryptographic digests for benchmark scripts and router implementation files", "relevant_doc_ids": ["doc_bench_build_source_hashes"]}
+{"id": "q_bp_04", "category": "behavior_paraphrase", "query": "aggregate benchmark evaluation metrics confusion matrix and calibration scores across decisions", "relevant_doc_ids": ["doc_metrics_evaluate_run"]}
+{"id": "q_bp_05", "category": "behavior_paraphrase", "query": "check command line arguments for the neural engine flag", "relevant_doc_ids": ["doc_bench_needs_laya_engine"]}
+{"id": "q_bp_06", "category": "behavior_paraphrase", "query": "render markdown benchmark results table and executive summary", "relevant_doc_ids": ["doc_bench_gen_markdown_report"]}
+{"id": "q_sec_01", "category": "security_operational", "query": "verify that user site packages are disabled and Hugging Face tokens are stripped before model execution", "relevant_doc_ids": ["doc_laya_verify_offline", "doc_bench_check_laya_env_ready"]}
+{"id": "q_sec_02", "category": "security_operational", "query": "strictly verify local safetensors model weights directory against manifest checksums and forbid dangerous code extensions", "relevant_doc_ids": ["doc_manifest_verify"]}
+{"id": "q_sec_03", "category": "security_operational", "query": "detect and neutralize prompt injection attempts and handle unhandled crash patterns in incoming messages", "relevant_doc_ids": ["doc_baseline_classify"]}
+{"id": "q_sec_04", "category": "security_operational", "query": "re-execute the python process with the -s flag and offline flags when isolation requirements are not met", "relevant_doc_ids": ["doc_bench_bootstrap_laya_env"]}
+{"id": "q_sec_05", "category": "security_operational", "query": "strip Hugging Face authentication tokens and export offline environment variables before model initialization", "relevant_doc_ids": ["doc_laya_engine_set_offline", "doc_bench_bootstrap_laya_env"]}
+{"id": "q_sec_06", "category": "security_operational", "query": "ensure package versions are checked safely using importlib metadata without importing unsupported libraries", "relevant_doc_ids": ["doc_bench_get_package_versions"]}
+{"id": "q_adv_01", "category": "adversarial_semantic", "query": "A classifier returns an allowed label, but another field says a different option is most likely. Where should this response be rejected?", "relevant_doc_ids": ["doc_laya_val_selected_argmax"]}
+{"id": "q_adv_02", "category": "adversarial_semantic", "query": "คะแนนของแต่ละตัวอยู่ในช่วงที่ยอมรับได้ แต่เมื่อนำมารวมกันแล้วเกินหนึ่ง ระบบควรหยุดตรงไหน", "relevant_doc_ids": ["doc_laya_val_prob_map"]}
+{"id": "q_adv_03", "category": "adversarial_semantic", "query": "Keep a local checkpoint from being swapped while startup is crossing into the loader", "relevant_doc_ids": ["doc_laya_engine_load_agent", "doc_laya_engine_verify_snapshot"]}
+{"id": "q_adv_04", "category": "adversarial_semantic", "query": "อยากเห็นว่าคลาสจริงแต่ละตัวถูกทายสลับไปเป็นคลาสไหนบ้าง", "relevant_doc_ids": ["doc_metrics_confusion_matrix"]}
+{"id": "q_adv_05", "category": "adversarial_semantic", "query": "Skip importing heavyweight neural code when command arguments select the deterministic path", "relevant_doc_ids": ["doc_bench_needs_laya_engine", "doc_bench_bootstrap_laya_env"]}
+{"id": "q_adv_06", "category": "adversarial_semantic", "query": "เอาค่าความช้าทั้งชุดแล้วดูค่าบริเวณปลายบน ไม่ใช่ค่าเฉลี่ย", "relevant_doc_ids": ["doc_metrics_compute_p95"]}
+{"id": "q_adv_07", "category": "adversarial_semantic", "query": "Recover from an interrupted report write without leaving a partially replaced destination", "relevant_doc_ids": ["doc_bench_atomic_write"]}
+{"id": "q_adv_08", "category": "adversarial_semantic", "query": "ก่อนเริ่มโมเดล ต้องแน่ใจว่าไม่เห็นแพ็กเกจส่วนตัวและไม่มีข้อมูลยืนยันตัวตนของผู้ให้บริการ", "relevant_doc_ids": ["doc_laya_verify_offline", "doc_bench_check_laya_env_ready"]}
