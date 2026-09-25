@@ -1,0 +1,10 @@
+source: mascot-explore/A1/raw.png
+source_sha256: b3456fe673f32da6e1a3e8c4c0304c6198837790bfd25fab71cc002e73248571
+provider: built-in native image_gen reference edit
+result_identity: generated_images/01a0d3ae-8ffa-7353-952b-4f6077b10089/exec-55ea8577-0966-4347-8533-3f20d0e03341.png
+output: mascot-explore/A1-adapt-centered-3d/raw.png
+dimensions: 1254x1254
+mode: RGB
+output_sha256: 8746d37db47802ed2ed4ce84d2654231384e760e455bc6df83fb65a520ceb594
+call_count: 1
+byte_copy_check: identical to first returned raster

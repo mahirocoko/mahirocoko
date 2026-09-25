@@ -1,0 +1,13 @@
+Use case: logo-brand
+Asset type: raw identity exploration candidate M2 for Laya MLX Lab, a dark-mode-first private research and blog archive on Apple Silicon.
+Primary request: Create one isolated monogram-plus-wordmark identity concept for “Laya MLX Lab” using a single continuous letterform that hints at L, M, and a question mark through negative space, paired with a restrained wordmark.
+Scene/backdrop: almost-black warm charcoal canvas with a subtle muted plum-to-slate atmosphere, ample empty space.
+Subject: one centered horizontal lockup; a compact monogram icon on the left formed from one continuous folded ribbon or cut-paper stroke, followed by the exact wordmark “Laya MLX Lab”. The monogram must read as an abstract letterform, not an object.
+Style/medium: sculptural flat 2D identity study, folded-paper geometry translated into clean vector-like planes, sophisticated independent research imprint.
+Composition/framing: one isolated horizontal lockup, balanced icon and wordmark proportions, wide landscape canvas, clean silhouette at small size.
+Lighting/mood: inquisitive, warm, considered, slightly unconventional.
+Color palette: pale sand and soft lilac for the mark, cool white wordmark, one small coral accent; charcoal background.
+Materials/textures: subtle paper folds and matte cut edges, no literal paper sheet, no glossy 3D render.
+Text (verbatim): “Laya MLX Lab”
+Constraints: exactly one logo concept; preserve the abstract L/M/question negative-space idea; exploratory lettering only; no tagline, no extra text, no claims, no interface, no webpage, no product mockup.
+Avoid: Dino imagery, mascot character, brain, circuit board, neural network, robot, stock AI symbols, generic infinity mark, borrowed Interfaces.dev branding, watermark.

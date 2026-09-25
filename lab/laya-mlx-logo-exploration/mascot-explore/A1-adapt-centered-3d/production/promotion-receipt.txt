@@ -1,0 +1,12 @@
+status: human-approved production asset
+approved_at: 2026-09-24 22:02 Asia/Bangkok
+source_candidate: production/agy-clean-v2/subject.png
+source_sha256: 7c106ffb76cf28af8d85dc50d360bd251b6111f5a454960c83c80b44e1aa3758
+promoted_output: production/subject.png
+promoted_output_sha256: 7c106ffb76cf28af8d85dc50d360bd251b6111f5a454960c83c80b44e1aa3758
+byte_copy: identical
+format: RGBA PNG
+canvas: 1254x1254 square
+identity_owner: A1 centered subtle-3D Archive Sprout
+background: transparent
+human_gate: passed

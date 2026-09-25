@@ -1,0 +1,8 @@
+candidate: B2
+call_number: 4
+prompt_path: mascot-explore/B2/prompt.txt
+returned_artifact_identity: /Users/mahiro/.codex/generated_images/01a0d33d-de31-7351-b73c-0ec313e50b44/exec-8b71bc4a-1c8f-4192-b493-aded085c1476.png
+preserved_raster_path: mascot-explore/B2/raw.png
+dimensions: 1254x1254
+color_mode: RGB
+sha256: b1d3c93a2d2f635d5f5abd25d3f3b3a75c3019c62d2c4fbb0f4f056029b790f5

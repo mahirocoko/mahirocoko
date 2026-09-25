@@ -1,0 +1,14 @@
+Use case: logo-brand
+Asset type: light-surface logo variant
+Primary request: Edit Image 1, the supplied W1/raw.png logo, into a light-surface variant. Preserve the existing W1 icon geometry, proportions, horizontal lockup, relative spacing, alignment, and overall silhouette as closely as the provider allows. Change only the surface colors and background treatment needed for light-surface use: make the wordmark and all non-orange mark surfaces dark graphite/navy so they remain clearly legible on off-white and white backgrounds, while retaining the existing orange accent and its placement.
+Input images: Image 1: sole source reference and edit target; use no other reference.
+Scene/backdrop: genuinely transparent background with clean alpha; no filled backdrop.
+Subject: the same Laya MLX Lab logo from Image 1.
+Style/medium: faithful raster logo edit; preserve the original visual identity rather than inventing a new concept.
+Composition/framing: preserve the source canvas aspect ratio, horizontal lockup, geometry, proportions, spacing, and margins as closely as possible.
+Lighting/mood: flat, crisp logo surfaces with no lighting effects.
+Color palette: dark graphite/navy for the wordmark and non-orange mark surfaces; retain the original orange accent.
+Materials/textures: preserve the source mark and letterform surfaces; no glow or halo.
+Text (verbatim): "Laya MLX Lab"
+Constraints: change only colors/surface treatment and transparency; keep the icon geometry, proportions, horizontal lockup, exact wording, accent placement, and recognizable details unchanged; output a PNG with genuine transparency.
+Avoid: new logo concepts, redrawing, altered proportions, altered lockup, misspelled or changed text, mascot, extra text, watermark, glow, halo, shadow, dark backdrop, white/colored background, and any opaque pixels outside the logo.

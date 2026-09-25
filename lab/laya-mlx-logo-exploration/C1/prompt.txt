@@ -1,0 +1,13 @@
+Use case: logo-brand
+Asset type: raw identity exploration candidate C1 for Laya MLX Lab, a dark-mode-first private research and blog archive on Apple Silicon.
+Primary request: Create one isolated mascot-plus-wordmark logo concept for “Laya MLX Lab” featuring an independent character identity: a small nocturnal moth-like archivist with calm, curious eyes and simplified folded wings, paired with the exact wordmark.
+Scene/backdrop: deep ink-black and midnight blue canvas with a quiet pool of light behind the mark.
+Subject: one compact friendly moth-like mascot icon holding a tiny abstract page tab, beside or above the exact wordmark “Laya MLX Lab”; keep the character emblematic and logo-like, not a scene.
+Style/medium: original flat illustrated identity mark, clean rounded geometry, limited shapes, editorial natural-history charm, vector-friendly.
+Composition/framing: one isolated lockup with mascot and wordmark clearly readable, centered on a wide landscape canvas, enough empty space, legible at thumbnail scale.
+Lighting/mood: gentle, observant, curious, welcoming without becoming childish.
+Color palette: warm cream, muted saffron, and deep indigo with one pale mint accent; dark background.
+Materials/textures: matte ink and subtle paper grain, no glossy 3D, no photorealism.
+Text (verbatim): “Laya MLX Lab”
+Constraints: exactly one mascot logo concept; independent character identity; no secondary characters, no tagline, no extra text, no claims, no interface, no webpage, no product mockup.
+Avoid: dinosaurs or reptiles, brain, circuit board, neural network, robot, generic AI assistant, stock mascot, borrowed Interfaces.dev branding, watermark.

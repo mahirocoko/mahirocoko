@@ -1,0 +1,13 @@
+Use case: stylized-concept
+Asset type: one raw full-bleed 1:1 PNG character exploration
+Primary request: a calm, curious research companion designed to stay readable at 32x32
+Scene/backdrop: one solid deep blue background, no scenery
+Subject: Signal Pebble, a rounded pebble companion with one broad embedded trace ribbon as the defining feature; one complete character with a dominant continuous outer silhouette built from roughly 4–7 large soft shapes; two simple eyes and one tiny mouth only if useful; paired identifying features visible
+Style/medium: flat graphic raster illustration with thick rounded contours, compact proportions, soft cheeks, calm friendly posture, extremely subtle depth only
+Composition/framing: square canvas; place the character low and centered with generous open space above; full character visible; do not mirror any other composition mechanically
+Lighting/mood: calm, friendly, quietly inquisitive
+Color palette: broad stone cream character body with one electric blue trace ribbon on deep blue
+Materials/textures: clean untextured shapes, broad simple color regions, no glossy hotspots, no cast shadow
+Text (verbatim): none
+Constraints: solid background, one complete character, at most two broad internal character-color regions plus the defining trace ribbon, no transparency requirement, no logo, no wordmark, no app icon, no badge, no UI mockup, no webpage; preserve paired identifying features and readability at 32x32
+Avoid: dinosaurs, reptiles, moths, insects, brain, circuit board, neural network, robot, stock mascot, generic AI assistant, borrowed Interfaces.dev branding, text, watermark, scientific symbols, game-studio cues, thin fragile lines, sharp tips, tiny decoration, strong 3D rendering, scenery

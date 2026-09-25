@@ -1,0 +1,19 @@
+source: W1/light-variant/raw.png
+source sha256: aac280abbd811b7a38d7e0dba8322935d947e5ef758dd129644943c2541d76a8
+output: clean.png
+output sha256: e0e612305e2263d53c40df1dee7c390493208f875a4714fbaed845a962fbf455
+dimensions: 1649 x 300
+mode: RGBA
+alpha extrema: [0, 255]
+alpha corners: (0, 0, 0, 0)
+corners RGBA (TL, TR, BL, BR): [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]
+crop box: [263, 191, 1912, 491] (visible alpha bounds: y=[223, 458], x=[295, 1879], padding: 32px)
+preview-light: preview-light.png
+preview-light sha256: f1d275f8168afc123b7bd30fc3a718c2f065a48b14f9d12597a9addc5570803d
+preview-light background: off-white #f6f4ef (246, 244, 239)
+preview-dark: preview-dark.png
+preview-dark sha256: ba682457d858f5cc66f5e4292ae1f05a0bbb5a5141bdc15c27d5c016b6d4aefd
+preview-dark background: #0d0d0d (13, 13, 13)
+method: edge-aware local background projection matting with defringing
+description: Segmented core foreground (dark graphite/navy letterforms/surfaces and orange accent) from achromatic baked checkerboard background. Transition band pixels were solved by projecting local color vectors onto the local foreground-background contrast vector, recovering antialiased alpha and assigning pure unpolluted foreground chromaticity to eliminate checkerboard halos. Cropped to visible alpha bounds with 32px modest padding.
+status: cleanup candidate (preserves horizontal lockup, icon geometry, proportions, exact "Laya MLX Lab" wording, dark graphite/navy surfaces, orange accent, and antialiasing)

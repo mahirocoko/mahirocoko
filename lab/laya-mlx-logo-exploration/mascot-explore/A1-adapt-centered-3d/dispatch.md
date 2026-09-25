@@ -1,0 +1,3 @@
+# A1 centered subtle-3D adaptation
+
+Use `../A1/raw.png` as the direct image reference for the exact selected character. Execute exactly one native image-generation reference edit. Preserve the identity lock and apply only the approved centered subtle-3D adaptation direction. Save the exact prompt before submitting; preserve the first returned raster byte-for-byte; record provider/result identity, dimensions, mode, source/output hashes, and call count. No cleanup, crop, recolor, vectorization, reviewer, nested subagent, schedule, or product-repo edit. This remains a raw Adapt candidate until Mahiro accepts it.

@@ -1,0 +1,5 @@
+# Native Character IP Explore Dispatch
+
+Read `mascot-explore/brief.md` completely. Execute exactly six sequential native image_generation calls: A1, A2, B1, B2, C1, C2. These are three independent subject directions with two direction-owned compositions each. Do not use image references; do not chain outputs. Author one exact image prompt per candidate from the brief and persist it as UTF-8 in that candidate folder before submitting the call.
+
+Use the built-in native image generation tool through the current Codex lane. Report provider/model identity only when exposed; never guess. Preserve every first returned raster byte-for-byte in its assigned folder. Record candidate label, exact prompt path, call number, returned artifact identity/path, dimensions, color mode, and SHA-256 in `receipt.txt`. Create one `contact-sheet.png` derivative after all six raw files and a concise `report.md` with mechanical observations only. Do not crop, cleanup, recolor, upscale, vectorize, or declare a winner. Do not call reviewers, nested subagents, or scheduled follow-ups. Stop after the report. Work only in this personal lab folder; never edit the laya-mlx product repository.

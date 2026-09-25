@@ -1,0 +1,18 @@
+source: mascot-explore/A1-adapt-centered-3d/raw.png
+source_sha256: 8746d37db47802ed2ed4ce84d2654231384e760e455bc6df83fb65a520ceb594
+output: mascot-explore/A1-adapt-centered-3d/production/agy-clean/subject.png
+output_sha256: 4dfb148e88f561ccf803e3bf6743ddfcdb8289a2b936fde90bf2fad4ffc7b561
+dimensions: 1254x1254
+mode: RGBA
+alpha_extrema: min=0, max=255
+corners_alpha: TL=0, TR=0, BL=0, BR=0
+preview_light: mascot-explore/A1-adapt-centered-3d/production/agy-clean/preview-light.png
+preview_light_sha256: 07e317575766b4a35a3cf4f8002b092acddf06e9bf1058cbff2996a7871603b2
+preview_light_bg: #f6f4ef
+preview_dark: mascot-explore/A1-adapt-centered-3d/production/agy-clean/preview-dark.png
+preview_dark_sha256: ceb466d70ba714adf807270c04e5d7f6fba35f93e7d9beef9470bcd922f5e270
+preview_dark_bg: #0d0d0d
+preview_checker: mascot-explore/A1-adapt-centered-3d/production/agy-clean/preview-checker.png
+preview_checker_sha256: 8207623f5e0e38738315499ef79bce5ff35f7f0132dabf8ba4cdf2515e1a0cb9
+preview_checker_pattern: 32px alternating #ffffff/#e0e0e0
+method: edge-aware border-connected matte extraction (fitted 2D polynomial background model, 4-border flood-fill silhouette isolation, enclosed facial gap inspection, 2-layer ribbon color unmixing and antialiasing preservation)

@@ -1,0 +1,8 @@
+candidate: A1
+call_number: 1
+prompt_path: mascot-explore/A1/prompt.txt
+returned_artifact_identity: /Users/mahiro/.codex/generated_images/01a0d33d-de31-7351-b73c-0ec313e50b44/exec-37520e45-f21d-485b-8fbb-963864f22adf.png
+preserved_raster_path: mascot-explore/A1/raw.png
+dimensions: 1254x1254
+color_mode: RGB
+sha256: b3456fe673f32da6e1a3e8c4c0304c6198837790bfd25fab71cc002e73248571

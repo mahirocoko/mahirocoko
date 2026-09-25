@@ -1,0 +1,14 @@
+Use case: precise-object-edit
+Asset type: one raw full-bleed 1:1 PNG character exploration
+Input image: Image 1 — direct image reference and edit target, mascot-explore/A1/raw.png; use it as the exact identity reference for A1 Archive Sprout.
+Scene/backdrop: preserve the existing solid deep navy background with no scenery.
+Subject: preserve the exact A1 Archive Sprout identity from Image 1: cream rounded sprout silhouette, paired soft sage leaf/hood feature, simple oval eyes, small curved mouth, gentle cheek marks, muted sage and warm cream palette, green archive/book held in front with both hands, calm friendly expression, flat graphic treatment.
+Primary request: change only the assigned composition/scale axis. Make the referenced character a dominant 85–95% lower-left emergence inspired by the accepted Care composition language, with an intentional crop at the lower-left edge. Keep the face, green archive/book, both hands, and paired leaf/hood feature fully readable, with generous open negative space above and to the right.
+Style/medium: preserve the existing flat graphic raster illustration treatment, rounded contours, clean untextured shapes, and restrained subtle depth exactly as in Image 1.
+Composition/framing: square canvas; large character anchored in and emerging from the lower-left; character occupies approximately 85–95% of the canvas; intentional crop at the lower-left edge; face, book, both hands, and paired leaf/hood feature fully readable; generous open negative space above/right; never a small centered mascot.
+Lighting/mood: preserve the calm, friendly, quiet expression and mood.
+Color palette: preserve the existing muted sage and warm cream palette and deep navy background exactly.
+Materials/textures: preserve the existing clean flat graphic surfaces and material treatment exactly.
+Text (verbatim): none.
+Constraints: change only composition/scale. Preserve the exact character identity, anatomy, costume, prop, face, expression, palette, material, and flat graphic treatment from Image 1. Do not add or change anything else. One character only.
+Avoid: any new character, anatomy, costume, prop, face, expression, palette, material, text, logo, wordmark, badge, app-icon mockup, scenery, unrelated composition, centered small mascot, recolor, crop that hides the face/book/paired leaf feature, vectorization, watermark, or cleanup.
