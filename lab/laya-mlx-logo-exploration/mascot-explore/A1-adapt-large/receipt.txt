@@ -1,0 +1,9 @@
+source_path: mascot-explore/A1/raw.png
+source_sha256: b3456fe673f32da6e1a3e8c4c0304c6198837790bfd25fab71cc002e73248571
+provider: built-in image_gen
+result_identity: /Users/mahiro/.codex/generated_images/01a0d368-b598-7d80-bef9-57b31aceeb97/exec-69119b9f-35d3-4fa2-98d0-77e2831bbade.png
+preserved_raster_path: mascot-explore/A1-adapt-large/raw.png
+dimensions: 1254x1254
+mode: RGB
+output_sha256: 93626e9bbff909128f528b96b02aff3c1fd6d7b0fd0c6629668eae291f8de124
+call_count: 1

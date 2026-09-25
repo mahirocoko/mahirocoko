@@ -1,0 +1,10 @@
+call_number: 1
+label: W1
+native_tool: image_gen__imagegen (built-in native image_generation)
+provider/model: not exposed by native tool; GPT Image 2 was not explicitly exposed
+returned_artifact_identity: /Users/mahiro/.codex/generated_images/01a0d2d6-be3b-7bf0-993e-9ccc2536382b/exec-7928a503-1b8c-445c-8d1b-018438316379.png
+raw_native_path: W1/raw.png
+prompt_path: W1/prompt.txt
+dimensions: 2172x724
+color_mode: RGBA
+sha256: ba77add11208b79c4f40f063ea3287731101df275cb25e716242677ca36f415d

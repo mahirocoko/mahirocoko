@@ -1,0 +1,46 @@
+{
+  "source": "raw.png",
+  "source_sha256": "ba77add11208b79c4f40f063ea3287731101df275cb25e716242677ca36f415d",
+  "output": "clean-candidate.png",
+  "output_sha256": "ba5685dbe1f15c84a0da47e8041e6c62b658ba808419ee45e9320b5c4e7775f1",
+  "crop_box": [
+    65,
+    13,
+    1876,
+    682
+  ],
+  "dimensions": [
+    1811,
+    669
+  ],
+  "alpha_extrema": [
+    0,
+    255
+  ],
+  "corners": [
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0
+    ]
+  ]
+}

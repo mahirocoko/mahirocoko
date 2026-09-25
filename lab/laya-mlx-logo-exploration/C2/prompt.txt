@@ -1,0 +1,13 @@
+Use case: logo-brand
+Asset type: raw identity exploration candidate C2 for Laya MLX Lab, a dark-mode-first private research and blog archive on Apple Silicon.
+Primary request: Create one isolated mascot-plus-wordmark logo concept for “Laya MLX Lab” featuring an independent character identity: a compact pebble-like field hare scout with one oversized ear shaped like a bookmark, paired with the exact wordmark.
+Scene/backdrop: dark aubergine-black canvas with a soft slate vignette and plenty of negative space.
+Subject: one simplified friendly hare-like scout mascot in a seated emblem pose, holding a tiny circular evidence token, paired with the exact wordmark “Laya MLX Lab”; keep it as a single logo lockup, not a narrative scene.
+Style/medium: bold screenprint-inspired 2D illustration, chunky geometric silhouette, distinctive ears and feet, contemporary research zine character.
+Composition/framing: one isolated horizontal lockup with mascot on the left and wordmark on the right, centered on a wide landscape canvas, readable at thumbnail scale.
+Lighting/mood: grounded, playful, observant, quietly self-assured.
+Color palette: dusty rose, pale apricot, and cool gray-white against aubergine black, with one small chartreuse accent.
+Materials/textures: flat matte shapes with a hint of risograph grain, no glossy 3D and no photorealism.
+Text (verbatim): “Laya MLX Lab”
+Constraints: exactly one mascot logo concept; independent character identity from any other candidate; no secondary characters, no tagline, no extra text, no claims, no interface, no webpage, no product mockup.
+Avoid: dinosaurs or reptiles, moths, brain, circuit board, neural network, robot, generic AI assistant, stock mascot, borrowed Interfaces.dev branding, watermark.

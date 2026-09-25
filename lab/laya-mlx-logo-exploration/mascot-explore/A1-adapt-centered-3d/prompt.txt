@@ -1,0 +1,14 @@
+Use case: identity-preserve
+Asset type: raw mascot adaptation reference
+Primary request: Edit the supplied direct reference image into one centered identity master of the exact A1 Archive Sprout. Preserve the cream rounded sprout silhouette, paired sage leaf/hood feature, oval eyes, curved mouth, cheek marks, muted sage and warm cream palette, deep navy background, green archive/book held with both hands, calm expression, and all existing proportions. Apply only this approved adaptation: center the full character and make it large, fully visible at approximately 80–90% of the square canvas with safe breathing room on every side; add restrained soft modeled volume and gentle shading/occlusion to the existing flat forms so the same character reads with subtle depth. Keep the treatment calm and simple, with no glossy hotspot and no dramatic 3D rendering.
+Input images: Image 1 — direct edit reference, mascot-explore/A1/raw.png; use it as the exact identity source.
+Scene/backdrop: retain the deep navy background with no scenery.
+Subject: the same single A1 Archive Sprout, centered and fully visible, holding the same green archive/book with both hands.
+Style/medium: flat mascot illustration with restrained subtle 3D depth; soft modeled volume only.
+Composition/framing: square canvas; centered full silhouette; approximately 80–90% canvas height/area with safe breathing room; no lower-left crop and no side crop.
+Lighting/mood: gentle even shading and soft occlusion that supports existing forms; calm friendly mood; no dramatic lighting.
+Color palette: preserve the existing muted sage, warm cream, green book, and deep navy palette exactly.
+Materials/textures: preserve the existing simple matte flat forms; only a restrained modeled-volume effect; never glossy, clay-like, plush, or inflatable.
+Text (verbatim): ""
+Constraints: change only composition scale/centering and restrained subtle depth; preserve the exact character identity, anatomy, costume, prop, face, expression, palette, and proportions; preserve the book held with both hands; preserve the navy background; no added or removed elements.
+Avoid: any new character, anatomy, costume, prop, face, expression, palette, material redesign, identity drift, lower-corner crop, side crop, small mascot, dramatic 3D render, glossy plastic, clay, plush, inflatable, scenery, text, logo, badge, app-icon mockup, vectorization, or any unassigned composition.

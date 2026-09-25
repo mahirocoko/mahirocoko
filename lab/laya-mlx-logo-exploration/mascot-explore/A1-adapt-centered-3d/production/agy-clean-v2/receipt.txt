@@ -1,0 +1,18 @@
+source: mascot-explore/A1-adapt-centered-3d/raw.png
+source_sha256: 8746d37db47802ed2ed4ce84d2654231384e760e455bc6df83fb65a520ceb594
+output: mascot-explore/A1-adapt-centered-3d/production/agy-clean-v2/subject.png
+output_sha256: 7c106ffb76cf28af8d85dc50d360bd251b6111f5a454960c83c80b44e1aa3758
+dimensions: 1254x1254
+mode: RGBA
+alpha_extrema: min=0, max=255
+corners_alpha: TL=0, TR=0, BL=0, BR=0
+preview_light: mascot-explore/A1-adapt-centered-3d/production/agy-clean-v2/preview-light.png
+preview_light_sha256: b47334485ce5cdc1f646c150831e60a82b7a6fefbe88ea0ae1f3e682cda9250f
+preview_light_bg: #f6f4ef
+preview_dark: mascot-explore/A1-adapt-centered-3d/production/agy-clean-v2/preview-dark.png
+preview_dark_sha256: 1d6fd531c863be31cfb4e6db62e3c1ce4bb58791ae623a2e88c6c1faabb70bfa
+preview_dark_bg: #0d0d0d
+preview_checker: mascot-explore/A1-adapt-centered-3d/production/agy-clean-v2/preview-checker.png
+preview_checker_sha256: 0af0756b8cc16f6e7820b9b7fa7a765201a63c3ea4c2e747788bedd550ae49b4
+preview_checker_pattern: 32px alternating #ffffff/#e0e0e0
+method: edge-aware border-connected matte extraction v2 (fitted 2D polynomial background model, ambient shadow flood-fill isolation, facial dark feature protective bounding, local foreground/background adaptive sampling, continuous alpha matting, and conservative background unmixing defringe)

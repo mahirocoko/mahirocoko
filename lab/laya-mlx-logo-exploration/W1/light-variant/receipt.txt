@@ -1,0 +1,20 @@
+provider: built-in native image_gen
+operation: single source-referenced edit
+source reference: W1/raw.png
+result identity: generated_images/01a0d2f2-bcb7-7411-856d-84cffd2a9688/exec-08ac4a29-222e-4284-ae1d-295b7a5d9183.png
+provider model/version: not exposed by native tool
+saved artifact: W1/light-variant/raw.png
+format: PNG
+file size bytes: 2081066
+dimensions: 2172 x 724
+mode: RGB
+alpha channel: absent
+alpha extrema: N/A (no alpha channel)
+alpha corners: N/A (no alpha channel)
+RGB corner samples (top-left, top-right, bottom-left, bottom-right): (202,201,200), (199,199,196), (132,129,130), (200,199,197)
+transparency validation: BLOCKED; checkerboard transparency pattern is baked into RGB pixels
+sha256 (saved raw.png): aac280abbd811b7a38d7e0dba8322935d947e5ef758dd129644943c2541d76a8
+sha256 (provider source PNG): aac280abbd811b7a38d7e0dba8322935d947e5ef758dd129644943c2541d76a8
+prompt sha256: e777c5ddbeeca362eb27439d5d8c5707752149f344f3580cf9649849b0ffc0fe
+image_generation calls: 1
+second call: not made

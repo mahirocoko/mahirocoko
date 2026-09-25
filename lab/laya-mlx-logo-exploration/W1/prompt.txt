@@ -1,0 +1,13 @@
+Use case: logo-brand
+Asset type: raw identity exploration candidate W1 for Laya MLX Lab, a dark-mode-first private research and blog archive on Apple Silicon.
+Primary request: Create one isolated horizontal wordmark-led logo concept for “Laya MLX Lab”. Explore a calm editorial research identity built from custom geometric lettering and a restrained abstract symbol integrated into the wordmark, with a clear visual distinction from software product branding.
+Scene/backdrop: near-black charcoal canvas with a subtle deep graphite field, enough surrounding space to judge contrast.
+Subject: one centered horizontal wordmark reading exactly “Laya MLX Lab”, with a small abstract mark derived from layered pages, a question prompt, or a measured signal; do not depict a dinosaur.
+Style/medium: polished 2D identity concept, vector-friendly flat shapes with slight material depth, crisp edges, premium editorial research archive tone.
+Composition/framing: single centered mark, generous negative space, wide landscape canvas, readable at thumbnail scale.
+Lighting/mood: quiet, precise, curious, confident; soft restrained highlight only.
+Color palette: off-white lettering with one controlled accent in warm amber and a secondary muted blue-gray; high contrast on dark background.
+Materials/textures: clean matte ink-like surfaces, no glossy 3D mockup.
+Text (verbatim): “Laya MLX Lab”
+Constraints: exactly one logo concept on the canvas; keep the wordmark legible; treat lettering as exploratory concept evidence; no tagline, no extra text, no claims, no interface, no webpage, no product mockup.
+Avoid: Dino imagery, mascot character, brain, circuit board, neural network, robot, stock AI symbols, borrowed Interfaces.dev branding, gradients that reduce legibility, watermark.
