@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Bounded local retrieval benchmark comparing nomic_raw, qwen_raw, and qwen_instructed."""
+"""Bounded local retrieval benchmark comparing local Ollama embedding variants."""
 
 import argparse
 import datetime
@@ -36,24 +36,81 @@ QWEN_INSTRUCTION_PREFIX = (
     'Instruct: Given a developer code-search query, retrieve the source-code chunk '
     'that best implements or explains the requested behavior.\nQuery: '
 )
+NOMIC_V2_DOCUMENT_PREFIX = 'search_document: '
+NOMIC_V2_QUERY_PREFIX = 'search_query: '
+EMBEDDINGGEMMA_DOCUMENT_PREFIX = 'title: none | text: '
+EMBEDDINGGEMMA_QUERY_PREFIX = 'task: search result | query: '
+EMBEDDINGGEMMA_CODE_QUERY_PREFIX = 'task: code retrieval | query: '
 
 VARIANT_CONFIGS: Dict[str, Dict[str, Any]] = {
     'nomic_raw': {
         'model': 'nomic-embed-text:latest',
+        'document_format': 'raw',
         'query_format': 'raw',
         'description': 'nomic-embed-text with raw document code and raw queries',
     },
+    'nomic_v2_raw': {
+        'model': 'nomic-embed-text-v2-moe:latest',
+        'document_format': 'raw',
+        'query_format': 'raw',
+        'description': 'nomic-embed-text-v2-moe with raw document code and raw queries',
+    },
+    'nomic_v2_search': {
+        'model': 'nomic-embed-text-v2-moe:latest',
+        'document_format': 'nomic_search_document',
+        'query_format': 'nomic_search_query',
+        'description': (
+            'nomic-embed-text-v2-moe with recommended search_document and '
+            'search_query prefixes'
+        ),
+    },
+    'embeddinggemma_raw': {
+        'model': 'embeddinggemma:latest',
+        'document_format': 'raw',
+        'query_format': 'raw',
+        'description': 'embeddinggemma with raw document code and raw queries',
+    },
+    'embeddinggemma_retrieval': {
+        'model': 'embeddinggemma:latest',
+        'document_format': 'embeddinggemma_document',
+        'query_format': 'embeddinggemma_query',
+        'description': (
+            'embeddinggemma with the recommended retrieval document and query prompts'
+        ),
+    },
+    'embeddinggemma_code': {
+        'model': 'embeddinggemma:latest',
+        'document_format': 'embeddinggemma_document',
+        'query_format': 'embeddinggemma_code_query',
+        'description': (
+            'embeddinggemma with the recommended retrieval document prompt and '
+            'code-retrieval query prompt'
+        ),
+    },
     'qwen_raw': {
         'model': 'qwen3-embedding:0.6b',
+        'document_format': 'raw',
         'query_format': 'raw',
         'description': 'qwen3-embedding:0.6b with raw document code and raw queries',
     },
     'qwen_instructed': {
         'model': 'qwen3-embedding:0.6b',
+        'document_format': 'raw',
         'query_format': 'instructed',
         'description': 'qwen3-embedding:0.6b reusing raw document vectors with instructed queries',
     },
 }
+
+
+def format_document(raw_document: str, format_type: str) -> str:
+    """Format a document according to the variant specification."""
+    if format_type == 'raw':
+        return raw_document
+    if format_type == 'nomic_search_document':
+        return f'{NOMIC_V2_DOCUMENT_PREFIX}{raw_document}'
+    if format_type == 'embeddinggemma_document':
+        return f'{EMBEDDINGGEMMA_DOCUMENT_PREFIX}{raw_document}'
+    raise ValueError(f'Unknown document format_type: {format_type!r}')
 
 
 def format_query(raw_query: str, format_type: str) -> str:
@@ -62,6 +119,12 @@ def format_query(raw_query: str, format_type: str) -> str:
         return raw_query
     if format_type == 'instructed':
         return f'{QWEN_INSTRUCTION_PREFIX}{raw_query}'
+    if format_type == 'nomic_search_query':
+        return f'{NOMIC_V2_QUERY_PREFIX}{raw_query}'
+    if format_type == 'embeddinggemma_query':
+        return f'{EMBEDDINGGEMMA_QUERY_PREFIX}{raw_query}'
+    if format_type == 'embeddinggemma_code_query':
+        return f'{EMBEDDINGGEMMA_CODE_QUERY_PREFIX}{raw_query}'
     raise ValueError(f'Unknown query format_type: {format_type!r}')
 
 
@@ -182,9 +245,9 @@ def run_benchmark(
     doc_ids = sorted(documents.keys())
     doc_texts = [documents[did].extracted_source for did in doc_ids]
 
-    # Caches for embeddings to allow Qwen reuse
-    doc_embedding_cache: Dict[str, Dict[str, List[float]]] = {}
-    doc_latency_cache: Dict[str, float] = {}
+    # Cache documents only when both model and document formatting are identical.
+    doc_embedding_cache: Dict[Tuple[str, str], Dict[str, List[float]]] = {}
+    doc_latency_cache: Dict[Tuple[str, str], float] = {}
 
     variant_results: Dict[str, Any] = {}
 
@@ -194,23 +257,38 @@ def run_benchmark(
 
         config = VARIANT_CONFIGS[var_name]
         model = config['model']
+        document_fmt = config['document_format']
         query_fmt = config['query_format']
+        doc_cache_key = (model, document_fmt)
 
-        print(f"\n--- Running Variant: '{var_name}' (model: {model}, query: {query_fmt}) ---")
+        print(
+            f"\n--- Running Variant: '{var_name}' "
+            f"(model: {model}, document: {document_fmt}, query: {query_fmt}) ---"
+        )
 
-        # 1. Document embeddings (with strict reuse between Qwen variants)
+        # 1. Document embeddings (strict reuse only for identical model/format pairs)
         reused_docs = False
-        if model in doc_embedding_cache:
-            print(f"  Reusing cached document embeddings for model '{model}'...")
-            doc_vectors = doc_embedding_cache[model]
-            doc_latency = doc_latency_cache[model]
+        if doc_cache_key in doc_embedding_cache:
+            print(
+                f"  Reusing cached document embeddings for model '{model}' "
+                f"with format '{document_fmt}'..."
+            )
+            doc_vectors = doc_embedding_cache[doc_cache_key]
+            doc_latency = doc_latency_cache[doc_cache_key]
             reused_docs = True
         else:
             print(f"  Embedding {len(doc_texts)} documents with '{model}'...")
-            vectors, latency = client.embed_batch(model=model, texts=doc_texts, batch_size=batch_size)
+            formatted_doc_texts = [
+                format_document(document, document_fmt) for document in doc_texts
+            ]
+            vectors, latency = client.embed_batch(
+                model=model,
+                texts=formatted_doc_texts,
+                batch_size=batch_size,
+            )
             doc_vectors = {did: vec for did, vec in zip(doc_ids, vectors)}
-            doc_embedding_cache[model] = doc_vectors
-            doc_latency_cache[model] = latency
+            doc_embedding_cache[doc_cache_key] = doc_vectors
+            doc_latency_cache[doc_cache_key] = latency
             doc_latency = latency
             print(f'  Documents embedded in {latency:.1f} ms.')
 
@@ -275,6 +353,7 @@ def run_benchmark(
         variant_results[var_name] = {
             'model': model,
             'vector_dimension': vector_dim,
+            'document_formatting': document_fmt,
             'query_formatting': query_fmt,
             'doc_embeddings_reused': reused_docs,
             'document_embedding_latency_ms': round(doc_latency, 2),
@@ -349,7 +428,7 @@ def run_benchmark(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description='Local retrieval benchmark for Ollama /api/embed (nomic_raw, qwen_raw, qwen_instructed).'
+        description='Local retrieval benchmark for configured Ollama /api/embed variants.'
     )
     parser.add_argument(
         '--dry-run',
