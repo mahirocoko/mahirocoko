@@ -1,0 +1,87 @@
+[
+  {
+    "id": "thai_loopback_guard",
+    "category": "thai_semantic",
+    "query": "โค้ดที่ปฏิเสธ Ollama endpoint ซึ่งไม่ได้ชี้ไปที่ loopback localhost",
+    "expected_paths": ["lab/qwen-cocoindex-retrieval/retrieval/ollama_client.py"]
+  },
+  {
+    "id": "english_atomic_report",
+    "category": "english_semantic",
+    "query": "write a benchmark report through a temporary file, fsync it, then atomically replace the destination",
+    "expected_paths": [
+      "lab/qwen-cocoindex-retrieval/retrieval/reporting.py",
+      "lab/laya-herdr-event-router/benchmark.py"
+    ]
+  },
+  {
+    "id": "thai_duplicate_vectors",
+    "category": "thai_semantic",
+    "query": "ตรวจว่า query หลายอันได้ embedding vector ซ้ำกันโดยเก็บเฉพาะ hash ไม่เก็บค่าของ vector",
+    "expected_paths": ["lab/qwen-cocoindex-retrieval/benchmark.py"]
+  },
+  {
+    "id": "english_rebuild_rule",
+    "category": "english_semantic",
+    "query": "why changing an embedding model requires completely rebuilding every CocoIndex index",
+    "expected_paths": [
+      "lab/qwen-cocoindex-retrieval/README.md",
+      "lab/qwen-cocoindex-retrieval/RESULTS.md"
+    ]
+  },
+  {
+    "id": "thai_python_user_site",
+    "category": "thai_semantic",
+    "query": "เหตุผลที่ Laya runtime ต้องปิด user site packages และ re-exec ด้วย python -s ก่อนโหลดโมเดล",
+    "expected_paths": [
+      "lab/laya-herdr-event-router/README.md",
+      "lab/laya-herdr-event-router/benchmark.py",
+      "lab/laya-herdr-event-router/router/laya_engine.py"
+    ]
+  },
+  {
+    "id": "english_snapshot_manifest",
+    "category": "english_semantic",
+    "query": "verify every local model snapshot file against manifest hashes before loading the model",
+    "expected_paths": [
+      "lab/laya-herdr-event-router/router/manifest.py",
+      "lab/laya-herdr-event-router/router/laya_engine.py"
+    ]
+  },
+  {
+    "id": "thai_calibration_bins",
+    "category": "thai_semantic",
+    "query": "คำนวณ expected calibration error โดยแบ่งค่าความมั่นใจออกเป็นช่วง bin",
+    "expected_paths": ["lab/laya-herdr-event-router/router/metrics.py"]
+  },
+  {
+    "id": "english_direct_cli_receipts",
+    "category": "english_semantic",
+    "query": "pane-first direct CLI orchestration where completion requires a persisted callback receipt rather than process idleness",
+    "expected_paths": ["docs/direct-cli-playbook.md"]
+  },
+  {
+    "id": "thai_search_policy",
+    "category": "thai_semantic",
+    "query": "กฎของ agent ที่ให้ใช้ semantic search สำหรับแนวคิดและใช้ rg สำหรับข้อความหรือ symbol ที่ตรงตัว",
+    "expected_paths": ["AGENTS.md"]
+  },
+  {
+    "id": "english_embedding_memory",
+    "category": "english_semantic",
+    "query": "result where EmbeddingGemma used about seventy one percent less loaded memory than Qwen",
+    "expected_paths": ["lab/qwen-cocoindex-retrieval/RESULTS.md"]
+  },
+  {
+    "id": "exact_loopback_symbol",
+    "category": "exact_identifier",
+    "query": "validate_loopback_url",
+    "expected_paths": ["lab/qwen-cocoindex-retrieval/retrieval/ollama_client.py"]
+  },
+  {
+    "id": "exact_laya_offline_symbol",
+    "category": "exact_identifier",
+    "query": "LayaRouterEngine._set_offline_environment",
+    "expected_paths": ["lab/laya-herdr-event-router/router/laya_engine.py"]
+  }
+]

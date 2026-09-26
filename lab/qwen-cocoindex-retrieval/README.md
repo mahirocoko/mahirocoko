@@ -2,8 +2,13 @@
 
 Standalone, standard-library-only Python benchmark comparing local code-retrieval embedding variants via the Ollama `/api/embed` endpoint:
 1. `nomic_raw`: `nomic-embed-text:latest` with raw documents and raw queries.
-2. `qwen_raw`: `qwen3-embedding:0.6b` with raw documents and raw queries.
-3. `qwen_instructed`: `qwen3-embedding:0.6b` reusing raw document vectors with asymmetric instructed queries.
+2. `nomic_v2_raw`: `nomic-embed-text-v2-moe:latest` with raw documents and raw queries.
+3. `nomic_v2_search`: `nomic-embed-text-v2-moe:latest` with its recommended `search_document:` and `search_query:` prefixes.
+4. `embeddinggemma_raw`: `embeddinggemma:latest` with raw documents and raw queries.
+5. `embeddinggemma_retrieval`: `embeddinggemma:latest` with its recommended generic retrieval prompts.
+6. `embeddinggemma_code`: `embeddinggemma:latest` with its recommended document prompt and code-retrieval query prompt.
+7. `qwen_raw`: `qwen3-embedding:0.6b` with raw documents and raw queries.
+8. `qwen_instructed`: `qwen3-embedding:0.6b` reusing raw document vectors with asymmetric instructed queries.
 
 ---
 
@@ -22,6 +27,7 @@ lab/qwen-cocoindex-retrieval/
 │   ├── metrics.py                 # Cosine similarity, deterministic ranking, Hit@k, MRR@10, nDCG@10
 │   └── reporting.py               # Atomic report writer (JSON and readable Markdown)
 ├── fixtures/
+│   ├── ccc-pilot-queries.json      # Frozen 12-query path-level real CCC pilot set
 │   ├── documents.json             # Manifest of 30 allowlisted AST symbols from safe anchors
 │   └── queries.jsonl              # 38 labeled queries across 6 categories with leakage checks
 └── tests/
@@ -38,6 +44,11 @@ lab/qwen-cocoindex-retrieval/
 5. **Deterministic Ranking**: Ranked by cosine similarity with deterministic tie-breaking: `(-similarity_score, doc_id)`.
 6. **Asymmetric Query Formatting**:
    - `nomic_raw`: Raw query string.
+   - `nomic_v2_raw`: Raw documents and queries, retained only as a diagnostic baseline.
+   - `nomic_v2_search`: Prefixes documents with `search_document: ` and queries with `search_query: ` as recommended by the model owner.
+   - `embeddinggemma_raw`: Raw documents and queries, retained only as a diagnostic baseline.
+   - `embeddinggemma_retrieval`: Prefixes documents with `title: none | text: ` and queries with `task: search result | query: `.
+   - `embeddinggemma_code`: Reuses the retrieval document vectors while prefixing queries with `task: code retrieval | query: `.
    - `qwen_raw`: Raw query string.
    - `qwen_instructed`: Formats only the query string with the prompt:
      ```text
@@ -71,6 +82,11 @@ The testbed consists of **30 AST document chunks** (combining core functionality
 | `behavior_paraphrase` | 6 | Paraphrases of internal logic and constraints | Tests functional description matching |
 | `security_operational` | 6 | Process isolation, manifest checks, offline flags | Tests operational requirement matching |
 | `adversarial_semantic` | 8 | Less docstring-shaped English/Thai prompts, indirect intent, and multi-relevance cases | No exact target identifiers |
+
+The separate real CCC pilot uses 12 frozen Thai, English, and exact-identifier
+queries with expected repository paths. Those path labels measure whether any
+chunk from an expected file appears by rank 1/3/5/10; they do not claim that every
+chunk from that file is relevant.
 
 ---
 
@@ -111,7 +127,7 @@ python3 lab/qwen-cocoindex-retrieval/benchmark.py --dry-run
 ```bash
 python3 lab/qwen-cocoindex-retrieval/benchmark.py \
     --ollama-host http://127.0.0.1:11434 \
-    --variants nomic_raw,qwen_raw,qwen_instructed \
+    --variants nomic_raw,nomic_v2_raw,nomic_v2_search,embeddinggemma_raw,embeddinggemma_retrieval,embeddinggemma_code,qwen_raw,qwen_instructed \
     --output-dir lab/qwen-cocoindex-retrieval/reports \
     --batch-size 16 \
     --verbose
@@ -119,6 +135,8 @@ python3 lab/qwen-cocoindex-retrieval/benchmark.py \
 
 Expected local Ollama models:
 - `nomic-embed-text:latest`
+- `nomic-embed-text-v2-moe:latest`
+- `embeddinggemma:latest`
 - `qwen3-embedding:0.6b`
 
 ---
@@ -127,4 +145,6 @@ Expected local Ollama models:
 
 - **Curated AST Corpus**: The evaluation corpus is extracted from safe Python AST nodes in `lab/laya-herdr-event-router/`. It represents modular unit chunks, not an entire codebase tree or unstructured markdown documentation.
 - **Local Network Scope**: Latencies reflect local HTTP loopback transport and on-device model execution (Metal/CPU/CUDA), not cloud network latency.
-- **Bounded Result Only**: The live result establishes a directional winner on this curated corpus, not approval to change the global CCC model. A real initialized-project pilot with held-out queries remains required.
+- **Bounded Result Only**: The 30-document run remains a curated directional comparison. The later real CCC mirror pilot exercised actual CCC chunking and indexing but used only 12 path-labeled queries. Mahiro separately approved the global settings migration on 2026-09-26; that approval does not authorize rebuilding every initialized project automatically.
+- **CCC 0.2.41 Formatting Boundary**: The LiteLLM/Ollama path accepts raw text and cannot inject EmbeddingGemma's literal `title: none | text: ` / `task: code retrieval | query: ` prefixes. The real CCC pilot therefore compares raw Qwen against raw EmbeddingGemma; the prefixed variants remain bounded direct-Ollama evidence only.
+- **Safe Mirror Scope**: The source repo contains tracked symlinks that intentionally fail the portable CCC preflight. The real pilot used a disposable Git mirror with all 22 tracked symlink entries omitted, one secret-shaped historical benchmark record excluded by exact path, and the four in-progress lab files copied in. The mirror and its index were deleted after reports were preserved.

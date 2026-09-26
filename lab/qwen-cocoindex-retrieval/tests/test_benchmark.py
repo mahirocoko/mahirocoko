@@ -82,6 +82,7 @@ class TestFixturesAndManifest(unittest.TestCase):
     def setUp(self):
         self.manifest_path = LAB_DIR / 'fixtures' / 'documents.json'
         self.queries_path = LAB_DIR / 'fixtures' / 'queries.jsonl'
+        self.ccc_pilot_queries_path = LAB_DIR / 'fixtures' / 'ccc-pilot-queries.json'
 
     def test_documents_manifest_load_and_extract(self):
         self.assertTrue(self.manifest_path.is_file())
@@ -123,6 +124,23 @@ class TestFixturesAndManifest(unittest.TestCase):
             for did in q.relevant_doc_ids:
                 self.assertIn(did, documents)
 
+    def test_ccc_pilot_queries_are_frozen_against_existing_paths(self):
+        records = json.loads(self.ccc_pilot_queries_path.read_text())
+        self.assertEqual(len(records), 12)
+        self.assertEqual(len({record['id'] for record in records}), len(records))
+
+        for record in records:
+            self.assertIn(
+                record['category'],
+                {'thai_semantic', 'english_semantic', 'exact_identifier'},
+            )
+            self.assertTrue(record['query'].strip())
+            self.assertGreaterEqual(len(record['expected_paths']), 1)
+            for relative_path in record['expected_paths']:
+                self.assertFalse(Path(relative_path).is_absolute())
+                self.assertNotIn('..', Path(relative_path).parts)
+                self.assertTrue((REPO_ROOT / relative_path).is_file())
+
     def test_leakage_detection_catches_trivial_leaks(self):
         fake_docs = {
             'doc1': DocumentRecord(
@@ -146,6 +164,24 @@ class TestFixturesAndManifest(unittest.TestCase):
 class TestQueryInstructionAsymmetry(unittest.TestCase):
     """Verify that query instruction formatting is applied only where specified."""
 
+    def test_document_formatting(self):
+        raw_document = 'def verify_hash(): pass'
+        self.assertEqual(
+            benchmark.format_document(raw_document, 'raw'),
+            raw_document,
+        )
+        self.assertEqual(
+            benchmark.format_document(raw_document, 'nomic_search_document'),
+            f'search_document: {raw_document}',
+        )
+        self.assertEqual(
+            benchmark.format_document(raw_document, 'embeddinggemma_document'),
+            f'title: none | text: {raw_document}',
+        )
+
+        with self.assertRaises(ValueError):
+            benchmark.format_document(raw_document, 'unknown_format')
+
     def test_query_formatting(self):
         raw_query = 'search for hash verification'
         raw_res = benchmark.format_query(raw_query, 'raw')
@@ -154,6 +190,18 @@ class TestQueryInstructionAsymmetry(unittest.TestCase):
         instructed_res = benchmark.format_query(raw_query, 'instructed')
         self.assertTrue(instructed_res.startswith('Instruct: Given a developer code-search query'))
         self.assertTrue(instructed_res.endswith(f'Query: {raw_query}'))
+        self.assertEqual(
+            benchmark.format_query(raw_query, 'nomic_search_query'),
+            f'search_query: {raw_query}',
+        )
+        self.assertEqual(
+            benchmark.format_query(raw_query, 'embeddinggemma_query'),
+            f'task: search result | query: {raw_query}',
+        )
+        self.assertEqual(
+            benchmark.format_query(raw_query, 'embeddinggemma_code_query'),
+            f'task: code retrieval | query: {raw_query}',
+        )
 
         with self.assertRaises(ValueError):
             benchmark.format_query(raw_query, 'unknown_format')
