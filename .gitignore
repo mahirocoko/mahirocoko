@@ -108,3 +108,6 @@ lab/hrm-figma-prototype/
 
 .letta/
 .omo
+
+# Private Discord reply experiment (never publish in the skill bundle)
+/.agents/skills/replying-for-mahiro/
