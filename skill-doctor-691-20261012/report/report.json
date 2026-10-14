@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "evaluator": {
+    "independent": true,
+    "session": "agent-local-a52605f2-330e-40db-a087-ec4865b600c0/default"
+  },
+  "limitations": [
+    "Scope is exclusively agent-local-b1f7b85c-d49d-43ea-a7e3-6fa085ecd426, local-conv-691, through 2026-10-12T14:25:02Z.",
+    "The selected dataset contains 25 visible events, no normalized payload clipping, partial history beginning 2026-10-12T14:10:51.331Z, and unknown baseline. Reasoning and after-cutoff records are omitted.",
+    "Several preserved tool payloads themselves contain execution-time truncation; absence of normalized clipping does not restore those omitted excerpts.",
+    "User wire roles do not establish human authorship. The context-doctor injection is corroborated by its matching invocation/return sequence, not treated as direct human feedback.",
+    "Current memory excerpts establish stored instructions during this investigation, not historical provider input during the sampled incidents.",
+    "No runtime model, provider or reasoning-effort metadata for this evaluator is available in its supplied context. Labels in evaluated payloads do not establish evaluator identity.",
+    "Only approved manifest/events and the six authorized skill documents were inspected. Python parsing was used to recover long payloads truncated by Read presentation; no evaluated work was reenacted, no source or other transcripts were opened, and no external calls or nested agents were launched.",
+    "Artifact creation is blocked because ApplyPatch is unavailable and command -v apply_patch returned exit 1. This JSON is independently authored for Main to persist; no renderer was run."
+  ],
+  "axes": {
+    "efficiency": {
+      "label": "mostly_inefficient",
+      "score": 0.4,
+      "reason": "Three successive evidence collections produced oversized, internally truncated output: 11,494, 28,204 and 5,026 original tokens. Earlier schema mismatch and an unproductive conversations-help probe added small overhead; later targeted extraction recovered decisive evidence, but the repeated collection waste was avoidable under the already delivered context-doctor reference.",
+      "evidence": [
+        "ui-msg-2564",
+        "ui-msg-2566",
+        "ui-msg-2568",
+        "ui-msg-2570",
+        "ui-msg-2572",
+        "ui-msg-2574"
+      ]
+    },
+    "code_quality": {
+      "label": "insufficient_evidence",
+      "score": null,
+      "reason": "The visible committed artifact is a one-paragraph memory instruction repair, not a production-code change. Ad hoc inspection scripts and structural PASS output do not establish code quality against demonstrated repository conventions.",
+      "evidence": [
+        "ui-msg-2576",
+        "ui-msg-2578"
+      ]
+    },
+    "procedure_compliance": {
+      "label": "noncompliant",
+      "score": 0.2,
+      "reason": "The context-doctor reference visibly required compact inventories, selected reads and filtering after clipping; repeated oversized collections did not follow that significant evidence-handling requirement. Invocation, reference loading, source-local repair, targeted verification and candid structural-only reporting otherwise followed the visible workflow.",
+      "evidence": [
+        "ui-msg-2559",
+        "ui-msg-2560",
+        "ui-msg-2562",
+        "ui-msg-2570",
+        "ui-msg-2572",
+        "ui-msg-2574",
+        "ui-msg-2578",
+        "ui-msg-2579"
+      ]
+    },
+    "verbosity": {
+      "label": "proportionate",
+      "score": 1,
+      "reason": "Two brief updates and a compact final report communicate scope, the single repair, validation and limits. The final qualification explicitly says the structural check does not prove improved model behavior; oversized tool output is an efficiency/compliance issue, not prose verbosity.",
+      "evidence": [
+        "ui-msg-2563:assistant:1",
+        "ui-msg-2575",
+        "ui-msg-2579"
+      ]
+    }
+  },
+  "episodes": [
+    {
+      "id": "repeated-oversized-evidence",
+      "failed": true,
+      "axes": [
+        "efficiency",
+        "procedure_compliance"
+      ],
+      "evidence": [
+        "ui-msg-2562",
+        "ui-msg-2570",
+        "ui-msg-2572",
+        "ui-msg-2574"
+      ],
+      "positive": [
+        "ui-msg-2566",
+        "ui-msg-2574",
+        "ui-msg-2578"
+      ],
+      "counter": [
+        "ui-msg-2568",
+        "ui-msg-2574",
+        "ui-msg-2579"
+      ],
+      "explanation": "The delivered reference explicitly required compact projections and filtering saved results after clipping. Instead, a full memory dump was followed by broad search/transcript excerpts and another overflowing extraction. The investigator did adapt to the discovered transcript schema, eventually isolated the conflict, and completed the repair without repeated human correction; this was bounded rework rather than dominant looping.",
+      "cause": "ignored_existing_instruction",
+      "confidence": "high"
+    },
+    {
+      "id": "supported-structural-repair",
+      "failed": false,
+      "axes": [
+        "procedure_compliance",
+        "verbosity"
+      ],
+      "evidence": [
+        "ui-msg-2574",
+        "ui-msg-2576",
+        "ui-msg-2578",
+        "ui-msg-2579"
+      ],
+      "positive": [
+        "ui-msg-2574",
+        "ui-msg-2576",
+        "ui-msg-2578",
+        "ui-msg-2579"
+      ],
+      "counter": [
+        "ui-msg-2568",
+        "ui-msg-2574",
+        "ui-msg-2579"
+      ],
+      "explanation": "Current excerpts support a conflict between foreground-test advice and the headless override. The matching patch result confirms application, and the verification result records a one-file commit plus metadata/link/content checks. Embedded HTTP 500 and build-not-PASS evidence are historical failures, not successes merely because the enclosing tool returned successfully; the final report avoids claiming behavioral improvement or that current memory proves historical instruction availability.",
+      "cause": "insufficient_evidence",
+      "confidence": "low"
+    }
+  ],
+  "recommendations": [],
+  "abstention": "No-op: efficiency and procedure compliance fail, but the supported attribution is ignoring already delivered bounded-evidence instructions, not a missing or wrong instruction. Partial history and unknown baseline also prevent causal claims about skills available during the sampled historical failures. No qualifying missing/wrong-instruction episode supports a recommendation."
+}

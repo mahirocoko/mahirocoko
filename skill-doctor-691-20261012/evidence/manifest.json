@@ -1,0 +1,102 @@
+{
+  "schema": 1,
+  "scope": {
+    "agent": "agent-local-b1f7b85c-d49d-43ea-a7e3-6fa085ecd426",
+    "conversation": "local-conv-691",
+    "end": "2026-10-12T14:25:02Z",
+    "out": "/Users/mahiro/Git/me/mahirocoko/skill-doctor-691-20261012/evidence"
+  },
+  "source": "letta-cli",
+  "omissions": [
+    {
+      "id": "ui-msg-2563:reasoning:0",
+      "type": "reasoning_message",
+      "reason": "Non-visible, reasoning, system, summary or unsupported event type",
+      "sourceHash": "b8110002d8cf87123bf00dc59ee8691ca093bcd6a9da542f135da7a834ed040c"
+    },
+    {
+      "id": "ui-msg-2569:reasoning:0",
+      "type": "reasoning_message",
+      "reason": "Non-visible, reasoning, system, summary or unsupported event type",
+      "sourceHash": "7fd7787d2a313bd88c1499061e00dd9add4dad8378ebdddc47d8fa18e5ec0602"
+    },
+    {
+      "id": "ui-msg-2580",
+      "type": "user_message",
+      "reason": "After fixed collection cutoff",
+      "sourceHash": "42ac70f37242cd62193d036488ad1943ad3cd343153714e2086be653073e3f4b"
+    },
+    {
+      "id": "ui-msg-2581:reasoning:0",
+      "type": "reasoning_message",
+      "reason": "After fixed collection cutoff",
+      "sourceHash": "514e43d81156ba2f500b4546bf54016beb74f7bd4b6742ee4da117042f732986"
+    },
+    {
+      "id": "ui-msg-2581:assistant:1",
+      "type": "assistant_message",
+      "reason": "After fixed collection cutoff",
+      "sourceHash": "cbdb7e92ea629e17deedbfb55f0c908435a3b2c429dc524936d4621425d0b0e8"
+    },
+    {
+      "id": "ui-msg-2582",
+      "type": "user_message",
+      "reason": "After fixed collection cutoff",
+      "sourceHash": "b96aaa5b376be79e5dd4df02adcec00ad1ed51b341ac2d2db8f875fc622599e4"
+    },
+    {
+      "id": "ui-msg-2583:tool:call_8a313d6a8cd04e70a3c0c3a6d0255a31|fc_06f93a8d4622110d016acceec35c0087d088eb59123ea3b2f1:request",
+      "type": "approval_request_message",
+      "reason": "After fixed collection cutoff",
+      "sourceHash": "ac973ecd977f0d9445d79543344a6820e7822b1de3df5a1a32ba06ff0bddbc1e"
+    },
+    {
+      "id": "ui-msg-2584",
+      "type": "tool_return_message",
+      "reason": "After fixed collection cutoff",
+      "sourceHash": "aca8d6eb89b4d2b25444bd132acdb88d08f94f695d3f44a20daf5ca1ab4819fe"
+    },
+    {
+      "id": "ui-msg-2585:reasoning:0",
+      "type": "reasoning_message",
+      "reason": "After fixed collection cutoff",
+      "sourceHash": "9e8d6e1a5b42352f0031061d7444fc160be9764b803b55d614c43a5aab1d2674"
+    },
+    {
+      "id": "ui-msg-2585:assistant:1",
+      "type": "assistant_message",
+      "reason": "After fixed collection cutoff",
+      "sourceHash": "2fbd100746c4af18c5ab99b500a23f95af61d0d0396de3c79c991a6ee9b6e9ed"
+    },
+    {
+      "id": "ui-msg-2585:tool:call_1d58efc19dd74e0e9f157161e3655240|fc_06f93a8d4622110d016acceece813087d08b524a9a27ff2873:request",
+      "type": "approval_request_message",
+      "reason": "After fixed collection cutoff",
+      "sourceHash": "487a3436b7195240431fb4305838f9e9e460dcd5db0499b918f27d91fcd6282f"
+    }
+  ],
+  "pages": [
+    {
+      "index": 0,
+      "bytes": 170461,
+      "sha256": "1ab59083dfa9d2c00f7df33769a5d10cb727fbde8d5da91961c4b829885e548f",
+      "records": 36
+    }
+  ],
+  "limits": {
+    "records": 500,
+    "captures": 1,
+    "bytes": 8388608,
+    "eventBytes": 65536
+  },
+  "history": {
+    "partial": true,
+    "recordCapReached": false,
+    "start": "2026-10-12T14:10:51.331Z",
+    "end": "2026-10-12T14:25:02Z",
+    "stop": "fixed_end_reached",
+    "errors": [],
+    "details": "One bounded capture only, without cursor pagination. Reaching the record cap means possibly truncated history. Fewer records do not prove full history; earlier compaction, missing records and historical instructions may be unavailable. User wire roles do not establish human authorship.",
+    "baseline": "unknown"
+  }
+}

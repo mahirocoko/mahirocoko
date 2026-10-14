@@ -1,0 +1,38 @@
+T140 controller evidence — foundation candidate, 2026-10-13
+
+Source: ../dovel-commerce/src/components/system-builder.tsx; its builder-control
+rules in ../dovel-commerce/src/styles.css; product/span/finish data in src/data.ts.
+DOVEL is a candidate reference. The collection index calls it an accepted working
+lab, but that is NOT proof of whole-surface human acceptance or acceptance of this
+new composition. No exact human-accepted correction pairs were found by the scout.
+Missing before/after evidence remains missing.
+
+Adapted: warm bone/paper background and graphite control panel; numbered fieldset
+cadence; rail and finish choices; the three modules, concept USD prices and default
+120 cm / Graphite / Arc Dock + Pocket Tray ($427). Module labels remain flexible,
+selection leads, price has its own track, and one Details action trails each row.
+Native labelled selects replace the source's span buttons and finish radios. A
+long descriptive Pocket Tray label stress-tests wrapping. Small inline disclosures
+replace media previews; Reset replaces the commerce action. This is a compact
+local configuration study, not DOVEL fidelity, checkout, or an accepted design.
+
+Intended defect families (NOT injected):
+1. Section/child spacing: one section padding owner and one row gap owner, avoiding
+   doubled margins; verify the rendered cadence rather than assuming token names.
+2. Labelled-field alignment: sibling labels, shared select shell and label-to-shell
+   gap; inspect narrow wrapping, native open menus and focus, not just control height.
+3. Row space ownership: leading checkbox, flexible complete label, bounded price,
+   one trailing disclosure; inspect the long label at narrow width with details open.
+
+Applied guidance: parent's already-searched modern-web-guidance responsive advice
+(intrinsic sizing, reserved control geometry, bounded responsive type). No new
+package retrieval/install. mahiro-style shared-UI pain probes and evidence gates:
+local native controls are intentional; no speculative shared primitive layer.
+
+Gate: await Mahiro's exact live-foundation approval before hashes/freeze, defect
+injection, treatment arms, or any effectiveness claim. Browser/visual verification
+belongs to the parent's separately assigned lane. Static checks cannot approve
+geometry, keyboard operation in a real browser, screen-reader behavior or taste.
+No provider/imagegen, server, browser, dependencies, production edits or commits.
+Runtime model/reasoning-effort identity is not exposed through this worker's tools;
+do not infer it from the task assignment.
