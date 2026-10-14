@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rail configuration study</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <header class="intro">
+        <p class="overline">Local configuration study / 01</p>
+        <h1>Make the rail fit the work.</h1>
+        <p>Choose a span, finish, and the modules you need. This study does not place an order.</p>
+      </header>
+
+      <form id="configurator" class="configurator">
+        <fieldset class="section">
+          <legend><span>01</span> Build the base</legend>
+          <div class="fields">
+            <div class="field">
+              <label for="rail">Rail span</label>
+              <select id="rail" name="rail">
+                <option value="90" data-price="179">90 cm · Compact desk · $179</option>
+                <option value="120" data-price="219" selected>120 cm · Everyday desk · $219</option>
+                <option value="150" data-price="259">150 cm · Wide desk · $259</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="finish">Finish</label>
+              <select id="finish" name="finish" aria-describedby="finish-note">
+                <option value="graphite">Graphite</option>
+                <option value="silver">Warm silver</option>
+              </select>
+              <p id="finish-note" class="field-note">Quiet, low-reflection anodized aluminum</p>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="section modules">
+          <legend><span>02</span> Attach modules</legend>
+          <div class="module-row">
+            <input id="arc-dock" type="checkbox" name="modules" value="arc-dock" data-price="119" checked>
+            <label for="arc-dock"><strong>Arc Dock</strong><span>Rest + charge</span></label>
+            <span class="price">$119</span>
+            <button class="detail-toggle" type="button" aria-expanded="false" aria-controls="arc-detail" aria-label="Details for Arc Dock">Details</button>
+            <p id="arc-detail" class="module-detail" hidden>An angled landing place that keeps one screen visible. 92 × 74 × 118 mm. Compatible with all rail spans.</p>
+          </div>
+          <div class="module-row">
+            <input id="halo-light" type="checkbox" name="modules" value="halo-light" data-price="189">
+            <label for="halo-light"><strong>Halo Light</strong><span>Task light</span></label>
+            <span class="price">$189</span>
+            <button class="detail-toggle" type="button" aria-expanded="false" aria-controls="halo-detail" aria-label="Details for Halo Light">Details</button>
+            <p id="halo-detail" class="module-detail" hidden>A narrow, low-glare blade that turns with the work. 420 × 32 × 520 mm. Compatible with all rail spans.</p>
+          </div>
+          <div class="module-row">
+            <input id="pocket-tray" type="checkbox" name="modules" value="pocket-tray" data-price="89" checked>
+            <label for="pocket-tray"><strong>Pocket Tray — removable pale ash insert for everyday desk essentials</strong><span>Catch + keep</span></label>
+            <span class="price">$89</span>
+            <button class="detail-toggle" type="button" aria-expanded="false" aria-controls="pocket-detail" aria-label="Details for Pocket Tray">Details</button>
+            <p id="pocket-detail" class="module-detail" hidden>Pale ash nested in graphite aluminum for small objects. 210 × 112 × 28 mm. Compatible with all rail spans.</p>
+          </div>
+        </fieldset>
+
+        <footer class="summary">
+          <div class="summary-values" role="status" aria-atomic="true">
+            <p id="configuration-summary">120 cm · Graphite · 2 modules selected</p>
+            <div class="total"><span>Study total</span><strong id="total">$427</strong></div>
+          </div>
+          <button class="reset" type="reset">Reset configuration</button>
+          <p class="disclaimer">Concept prices in USD. Changes last only until this page is reloaded.</p>
+        </footer>
+      </form>
+      <noscript><p class="no-script">JavaScript is required for the live total and module details.</p></noscript>
+    </main>
+  </body>
+</html>
