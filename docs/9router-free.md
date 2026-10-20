@@ -1,5 +1,7 @@
 # 9Router Free-only Runbook
 
+> **Retired — 2026-10-16:** Mahiro requested removal of 9Router and a clean Pi installation. The local 9Router directory, credentials and isolated Pi runtime were removed; no matching Docker container, image, volume or port-20129 listener was found during removal. Pi is now globally installed as `@earendil-works/pi-coding-agent@1.3.0`, and the `pi` launcher points to the normal installation. Previous Pi state, pilot sessions and experimental outputs were backed up outside the active configuration. ChatGPT subscription login is pending. Everything below is historical evidence, not an active setup or an instruction to recreate it.
+
 เอกสารนี้อธิบาย 9Router instance ที่รันแยกไว้สำหรับใช้โมเดลฟรีและ free tier เท่านั้น เป้าหมายคือมี OpenAI-compatible endpoint สำหรับทดลองหรือเรียกใช้งานแบบ opt-in โดยไม่เปลี่ยน global config หรือเส้นทาง provider ที่ใช้อยู่เดิม
 
 ## ขอบเขต

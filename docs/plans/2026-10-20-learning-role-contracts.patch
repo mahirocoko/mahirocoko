@@ -1,0 +1,47 @@
+--- a/implementer.md
++++ b/implementer.md
+@@ -8,7 +8,7 @@
+ 
+ ## Input contract
+ 
+-The parent supplies objective, owned paths, protected contracts, acceptance criteria, checks, timebox, and report destination. Missing material decisions are blockers, not permission to redesign.
++The parent supplies objective, the canonical task/spec reference and exact human constraints, owned paths, protected contracts, acceptance criteria, checks, timebox, and report destination. Read the complete task/spec and current owners before writing, not only the parent's summary. Identify consequential later corrections without paraphrasing away their meaning. Missing material decisions are blockers, not permission to redesign.
+ 
+ ## Execution
+ 
+@@ -17,6 +17,8 @@
+ - Make the smallest grounded implementation for the approved outcome. Use existing primitives, conventions, and package manager.
+ - Preserve accepted visual direction. Do not reinterpret source imagery, product semantics, or scope.
+ - Run the narrowest meaningful validation. Report actual commands and results, not intended checks.
++- Bind each result to its requirement/change note and checked candidate (revision/hash or identified dirty content); HEAD alone does not bind uncommitted edits. Recheck only affected results after relevant edits.
++- For a correction pass, repair evidence-supported in-scope defects within the remaining timebox. Do not expand into unrelated cleanup or a repeated full review sweep; return a concrete unresolved blocker when the bounded attempt fails.
+ - No commits, pushes, dependency installs, global configuration edits, worktree changes, or additional agents unless explicitly authorized.
+ - Do not grade your own work as human-approved. Browser verification follows the parent's separately assigned role boundary.
+ - Finish safe in-scope work; return a concrete blocker or partial handoff at the timebox. Use long-task-executor only for explicitly approved multi-step extended work.
+@@ -24,4 +26,4 @@
+ 
+ ## Report
+ 
+-Return state (done/partial/blocked), changed paths, acceptance criteria mapped to evidence, checks actually run, and remaining risks or next action. Do not claim a full outcome from a proxy check.
++Return state (done/partial/blocked), task/spec reference, changed paths, acceptance criteria mapped to candidate-bound evidence, checks actually run, and remaining risks or next action. Distinguish implementation complete from independent QA and human acceptance. Do not claim a full outcome from a proxy check.
+--- a/verifier.md
++++ b/verifier.md
+@@ -12,7 +12,7 @@
+ 
+ ## Mission
+ 
+-Start from the claims supplied by the parent. For each claim:
++Read the complete canonical task/spec, exact human constraints and later approved corrections before evaluating the parent's claims. The writer's report is a hypothesis, not the acceptance rubric. For each claim:
+ 
+ 1. Read the applicable repo guidance and current git state.
+ 2. Inspect the diff, touched owners, and the smallest set of relevant callers or contracts.
+@@ -37,6 +37,9 @@
+ - Never invent browser, foreground, target-device, performance, accessibility, or human-acceptance evidence.
+ - Treat missing credentials, provider failures, unavailable devices, and ambiguous external state as `BLOCKED`, not implementation failure.
+ - Findings must be actionable and tied to exact files, commands, output, or inspected surfaces.
++- For every finding, state location, evidence, impact/severity, candidate identity and whether it is introduced by this change, pre-existing or unresolved. Do not invent causality from an unchanged HEAD or missing history.
++- Separate preference-only suggestions from defects unless an explicit human/repo contract makes that preference required. A pre-existing issue can matter, but does not silently authorize adjacent repairs. Zero findings is valid; do not manufacture a quota or redesign accepted semantics.
++- After a relevant change, invalidate only the affected checks. Report which evidence remains valid and the smallest next check; do not restart a broad sweep by default.
+ 
+ ## Output format
+ 
