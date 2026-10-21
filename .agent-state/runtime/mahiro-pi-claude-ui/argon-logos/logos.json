@@ -1,0 +1,266 @@
+[
+  {
+    "id": "01",
+    "name": "Pi-Walker",
+    "lines": [
+      "▄▄████████████▄▄",
+      "▀▀████▀▀▀▀████▀▀",
+      "  ██ ██████ ██  ",
+      "  ████████████  ",
+      "  ████    ████  ",
+      " ████▀    ▀████▄"
+    ],
+    "rationale": "Turns the Greek letter Pi into a sturdy, wide-brimmed companion whose twin pillars double as walking legs."
+  },
+  {
+    "id": "02",
+    "name": "Neko-Stack",
+    "lines": [
+      " ▄██▄    ▄██▄   ",
+      " ████████████   ",
+      "-██▄██████▄██-  ",
+      " ████████████  ▄",
+      " ████████████▄█▀",
+      " ▀▀████████▀▀▀  "
+    ],
+    "rationale": "A calm, loafing terminal cat with whisker ticks and a curled block tail that keeps quiet company beside a prompt."
+  },
+  {
+    "id": "03",
+    "name": "Nocturne-Owl",
+    "lines": [
+      "▄█▄        ▄█▄",
+      "████▄▄▄▄▄▄████",
+      "██ ▄▄ ██ ▄▄ ██",
+      "████▀▄██▄▀████",
+      " ████░░░░████ ",
+      "  ▀▀██▀▀██▀▀  "
+    ],
+    "rationale": "A vigilant night-shift owl with tufted brow horns and speckled chest feathers built for late-night debugging sessions."
+  },
+  {
+    "id": "04",
+    "name": "M-Ghost",
+    "lines": [
+      "  ▄████████▄  ",
+      " ████████████ ",
+      "▄██ ██████ ██▄",
+      "▀████████████▀",
+      " ████████████ ",
+      " ▀█▀ ▀██▀ ▀█▀ "
+    ],
+    "rationale": "A friendly background-daemon phantom with stubby side arms and a three-tail spectral hem representing persistent state."
+  },
+  {
+    "id": "05",
+    "name": "Axo-Bit",
+    "lines": [
+      "▀▄ ▄████████▄ ▄▀",
+      "▄▀████████████▀▄",
+      "▀▄██ ██████ ██▄▀",
+      "  ████▄▄▄▄████  ",
+      "  ▀██████████▀  ",
+      "   ▀▀█▄  ▄█▀▀   "
+    ],
+    "rationale": "A regenerative axolotl companion with triple gill fronds on each cheek, symbolizing resilient recovery from broken builds."
+  },
+  {
+    "id": "06",
+    "name": "Kitsune-M",
+    "lines": [
+      "██▄          ▄██",
+      "████▄      ▄████",
+      "██████▄▄▄▄██████",
+      "███▀████████▀███",
+      " ░░██████████░░ ",
+      "    ▀▀▄██▄▀▀    "
+    ],
+    "rationale": "Fuses an angular Mahiro M upper silhouette with a sharp-eared fox face and textured cheek ruffs."
+  },
+  {
+    "id": "07",
+    "name": "Crab-Claw",
+    "lines": [
+      "▄█▀          ▀█▄",
+      "███▄  █  █  ▄███",
+      " ▀████████████▀ ",
+      " ▄████████████▄ ",
+      "▄█▀██████████▀█▄",
+      "▀  ▀█▀    ▀█▀  ▀"
+    ],
+    "rationale": "A tenacious little terminal crab raising twin pincers with stalked eyes, ready to pinch bugs before they scuttle away."
+  },
+  {
+    "id": "08",
+    "name": "Moth-Loom",
+    "lines": [
+      "    ▀▄  ▄▀    ",
+      "▄▄████▄▄████▄▄",
+      "██░░██████░░██",
+      "▀████▀██▀████▀",
+      "  ███ ██ ███  ",
+      "  ▀█▀    ▀█▀  "
+    ],
+    "rationale": "Reclaims the classic Grace Hopper moth as a symmetrical luna-moth companion with wing eyespots and swallowtails."
+  },
+  {
+    "id": "09",
+    "name": "Robo-CRT",
+    "lines": [
+      "       ▄▀       ",
+      "  ▄▄████████▄▄  ",
+      " ███▀▀▀▀▀▀▀▀███ ",
+      " ███  █  █  ███ ",
+      " ███  ▄▄▄▄  ███ ",
+      "  ▀▀████████▀▀  ",
+      "   ▄▄██████▄▄   "
+    ],
+    "rationale": "A miniature vintage CRT monitor buddy with a tilted antenna and recessed phosphor screen that smiles back at the operator."
+  },
+  {
+    "id": "10",
+    "name": "Puffer-Orb",
+    "lines": [
+      "  ▄▀  ▄▄▄▄  ▀▄  ",
+      "  ▄██████████▄  ",
+      " ▀██ ██████ ██▀ ",
+      " ▄████████████▄ ",
+      "  ▀██████████▀  ",
+      "  ▀▄  ▀▀▀▀  ▄▀  "
+    ],
+    "rationale": "A round, spiky puffer companion that expands defensively around fragile code while keeping an approachable expression."
+  },
+  {
+    "id": "11",
+    "name": "Duck-Debug",
+    "lines": [
+      "    ▄████▄      ",
+      "   ██ ████▄     ",
+      " ▄▄████████     ",
+      "    ███████▄▄▄█▀",
+      "   ████████████ ",
+      " ~~▀▀▀▀▀▀▀▀▀▀▀▀~"
+    ],
+    "rationale": "The classic rubber-duck debugging partner rendered in side profile, floating calmly on terminal waterline ripples."
+  },
+  {
+    "id": "12",
+    "name": "Bonsai-Byte",
+    "lines": [
+      "    ▄█████▄     ",
+      " ▄███████████▄  ",
+      " ▀▀▀████▀▀████▀ ",
+      " ▄██▄███   ▀▀   ",
+      "  ▀▀ ███        ",
+      " ▄▄███████▄▄    ",
+      "  ▀███████▀     "
+    ],
+    "rationale": "A sculptural terminal bonsai in a stepped planter tray, representing patient cultivation and long-term memory growth."
+  },
+  {
+    "id": "13",
+    "name": "M-Pi-Monolith",
+    "lines": [
+      "███▄        ▄███",
+      "█████▄    ▄█████",
+      "████████████████",
+      "▀▀▀████▀▀████▀▀▀",
+      "   ████  ████   ",
+      "  ████▀  ▀████▄ "
+    ],
+    "rationale": "An architectural monogram whose upper twin peaks form Mahiro's M while the crossbar and pillars below resolve into Pi."
+  },
+  {
+    "id": "14",
+    "name": "Torii-Pi",
+    "lines": [
+      "▀▄▄██████████▄▄▀",
+      "  ▀▀███▀▀███▀▀  ",
+      " ▄▄██████████▄▄ ",
+      "   ███    ███   ",
+      "   ███    ███   ",
+      "  ████    ████  "
+    ],
+    "rationale": "Blends a curved Torii threshold gate with the geometry of Pi, marking the entrance to a focused coding workspace."
+  },
+  {
+    "id": "15",
+    "name": "Beacon-Lantern",
+    "lines": [
+      "     ▄██▄     ",
+      "  ▄▄██████▄▄  ",
+      " ▀▀█  ██  █▀▀ ",
+      "   █ ░██░ █   ",
+      "   █ ▒██▒ █   ",
+      "  ▄████████▄  ",
+      "   ▀▀▀▀▀▀▀▀   "
+    ],
+    "rationale": "A caged wayfinder lantern with a layered block-shaded flame core that stays lit across sessions."
+  },
+  {
+    "id": "16",
+    "name": "Polaris-Spark",
+    "lines": [
+      "       █       ",
+      "     ▄███▄     ",
+      "   ▄██▀ ▀██▄   ",
+      "▄▄███  █  ███▄▄",
+      "   ▀██▄ ▄██▀   ",
+      "     ▀███▀     ",
+      "       █       "
+    ],
+    "rationale": "A symmetrical cardinal compass star with a suspended center spark inside a hollow diamond chamber."
+  },
+  {
+    "id": "17",
+    "name": "Iso-Cube",
+    "lines": [
+      "    ▄▄████▄▄    ",
+      "  ▄██████████▄  ",
+      " █████▀▀▀▀█████ ",
+      " █████░░░░▒▒▒▒▒ ",
+      "  ▀███░░░░▒▒▒▀  ",
+      "    ▀▀████▀▀    "
+    ],
+    "rationale": "An isometric three-tone voxel cube with a recessed inner chamber representing modular, multi-dimensional context."
+  },
+  {
+    "id": "18",
+    "name": "Keycap-Pi",
+    "lines": [
+      " ▄▄██████████▄▄ ",
+      "███▀▀▀▀▀▀▀▀▀▀███",
+      "███  ██████  ███",
+      "███   █  █   ███",
+      "███▄▄▄█▄▄█▄▄▄███",
+      "░▀▀▀▀▀▀▀▀▀▀▀▀▀▀░"
+    ],
+    "rationale": "A sculpted mechanical keycap with a centered Pi legend, celebrating tactile craftsmanship at the command line."
+  },
+  {
+    "id": "19",
+    "name": "Astro-Jelly",
+    "lines": [
+      "   ▄▄████▄▄   ",
+      " ▄██░░░░░░██▄ ",
+      "███ ██████ ███",
+      "▀▀▀▀▀▀▀▀▀▀▀▀▀▀",
+      " █▀  █  █  ▀█ ",
+      " ▀▄  ▀  ▀  ▄▀ "
+    ],
+    "rationale": "A bioluminescent jellyfish drifting on four curled tentacles, evoking calm flow-state exploration through deep codebases."
+  },
+  {
+    "id": "20",
+    "name": "Crown-Slime",
+    "lines": [
+      "    ▄█▄██▄█▄    ",
+      "   ▄████████▄   ",
+      " ▄████████████▄ ",
+      "███ ████████ ███",
+      "██████▄▄▄▄██████",
+      " ▀▀██████████▀▀ "
+    ],
+    "rationale": "A cheerful droplet companion topped with a three-point M crown, blending RPG party loyalty with minimal terminal block art."
+  }
+]
