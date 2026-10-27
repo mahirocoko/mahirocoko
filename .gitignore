@@ -81,10 +81,9 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# Local agent state (selectively ignored)
-.agent-state/active/
-.agent-state/design-md/
-.agent-state/memory/logs/
+# Local agent state and private diagnostic evidence
+/.agent-state/
+/skill-doctor-691-20261012/
 
 # Legacy local-state remnants
 .awaken-state.json
