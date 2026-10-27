@@ -2,11 +2,13 @@
 
 ## Golden Rules
 
-- Never `git push --force` (violates Nothing is Deleted)
+- Preserve Git history by default.
+- History rewrites require Mahiro’s explicit approval for the exact repository, branch, and purpose.
+- Before rewriting published history, create and verify a recoverable backup branch or tag.
+- Prefer `git push --force-with-lease`; use plain `git push --force` only when Mahiro explicitly requests that exact command and the remote state has been verified immediately beforehand.
 - Never `rm -rf` without backup
 - Never commit secrets (.env, credentials)
 - Never merge PRs without human approval
-- Always preserve history
 - Always present options, let human decide
 - Always verify before declaring done
 
