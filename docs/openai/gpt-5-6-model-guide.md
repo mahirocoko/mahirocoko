@@ -1,5 +1,7 @@
 # คู่มือเลือกใช้ GPT-5.6 Sol, Terra และ Luna
 
+> For the dated November benchmark comparison and approved local routing trial, see [GPT benchmarks and subagent routing — 11 November 2026](../research/2026-11-11-gpt-benchmarks-and-subagent-routing.md). This guide records the July announcement; its launch prices and historical benchmark versions are not current measurements.
+
 เอกสารนี้สรุปประกาศ GPT-5.6 ของ OpenAI วันที่ 9 กรกฎาคม 2026 แล้วแปลงข้อมูลจากหน้าเปิดตัวให้เป็นแนวทางเลือกโมเดลสำหรับ ChatGPT Work, Codex และ OpenAI API
 
 แหล่งข้อมูลหลักคือ [GPT-5.6: Frontier intelligence that scales with your ambition](https://openai.com/index/gpt-5-6/) ข้อมูลสิทธิ์ใช้งาน ราคา และชื่อผลิตภัณฑ์ในเอกสารนี้อาจเปลี่ยนตามการ rollout จึงควรเช็กหน้า OpenAI อีกครั้งก่อนนำไปกำหนดนโยบายระยะยาว
